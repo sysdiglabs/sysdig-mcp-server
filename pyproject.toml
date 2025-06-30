@@ -10,7 +10,7 @@ dependencies = [
     "pyyaml==6.0.2",
     "sqlalchemy==2.0.36",
     "sqlmodel==0.0.22",
-    "sysdig-client==1.0.0",
+    "sysdig-sdk==1.0.0",
     "dask==2025.4.1",
     "oauthlib==3.2.2",
     "fastapi==0.115.12",
@@ -19,4 +19,4 @@ dependencies = [
 ]
 
 [tool.uv.sources]
-sysdig-client = { path = "./build/sysdig_client-1.0.0.tar.gz" }
+sysdig-sdk = { git = "https://github.com/sysdiglabs/sysdig-sdk-python", rev = "ccdf3effe27a339deaa04a7248b319443d20e5aa" }
