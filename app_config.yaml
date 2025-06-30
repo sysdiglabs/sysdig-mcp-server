@@ -3,13 +3,11 @@ app:
   host: "localhost"
   port: 8080
   log_level: "ERROR"
-  language: "en"
 
 sysdig:
   host: "https://secure.sysdig.com"
 
 mcp:
   transport: stdio
-  url: "http://localhost:8080/sysdig-mcp-server/mcp"
   host: "localhost"
   port: 8080

@@ -18,5 +18,18 @@ dependencies = [
     "requests",
 ]
 
+[tool.uv]
+dev-dependencies = [
+    "pytest-cov==6.2.1",
+    "pytest==8.4.1",
+    "ruff==0.12.1",
+]
+
 [tool.uv.sources]
 sysdig-sdk = { git = "https://github.com/sysdiglabs/sysdig-sdk-python", rev = "ccdf3effe27a339deaa04a7248b319443d20e5aa" }
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+    "integration",
+]
