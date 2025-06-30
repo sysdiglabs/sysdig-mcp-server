@@ -20,7 +20,9 @@ jobs:
 
       - name: Extract version
         id: extract_version
-        run: echo "VERSION=$(grep 'version =' pyproject.toml | sed -e 's/version = "\(.*\)"/\1/')-$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
+        run: |
+          VERSION=$(grep 'version =' pyproject.toml | sed -e 's/version = "\(.*\)"/\1/')-$(echo $GITHUB_SHA | cut -c1-7)
+          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
@@ -36,4 +38,4 @@ jobs:
           push: true
           tags: |
             ghcr.io/sysdiglabs/sysdig-mcp-server:latest
-            ghcr.io/sysdiglabs/sysdig-mcp-server:v${{ env.VERSION }}
+            ghcr.io/sysdiglabs/sysdig-mcp-server:v${{ steps.extract_version.outputs.VERSION }}
