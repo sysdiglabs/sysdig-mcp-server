@@ -9,8 +9,6 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-build/
-!build/sysdig_client-1.0.0.tar.gz
 develop-eggs/
 dist/
 downloads/
