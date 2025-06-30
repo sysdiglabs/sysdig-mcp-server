@@ -1,0 +1,22 @@
+[project]
+name = "sysdig-mcp-server"
+version = "0.1.0"
+description = "Sysdig MCP Server"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp[cli]==1.9.4",
+    "python-dotenv>=1.1.0",
+    "pyyaml==6.0.2",
+    "sqlalchemy==2.0.36",
+    "sqlmodel==0.0.22",
+    "sysdig-client==1.0.0",
+    "dask==2025.4.1",
+    "oauthlib==3.2.2",
+    "fastapi==0.115.12",
+    "fastmcp==2.5.1",
+    "requests",
+]
+
+[tool.uv.sources]
+sysdig-client = { path = "./build/sysdig_client-1.0.0.tar.gz" }
