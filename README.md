@@ -94,7 +94,7 @@ This file contains the main configuration for the application, including:
 The following environment variables are required for configuring the Sysdig SDK:
 
 - `SYSDIG_HOST`: The URL of your Sysdig Secure instance (e.g., `https://secure.sysdig.com`).
-- `SYSDIG_SECURE_API_TOKEN`: Your Sysdig Secure API token.
+- `SYSDIG_SECURE_TOKEN`: Your Sysdig Secure API token.
 
 You can find your API token in the Sysdig Secure UI under **Settings > Sysdig Secure API**. Make sure to copy the token as it will not be shown again.
 
@@ -120,13 +120,13 @@ docker build -t sysdig-mcp-server .
 Then, you can run the container, making sure to pass the required environment variables:
 
 ```bash
-docker run -e SYSDIG_HOST=<your_sysdig_host> -e SYSDIG_SECURE_API_TOKEN=<your_sysdig_secure_api_token> -p 8080:8080 sysdig-mcp-server
+docker run -e SYSDIG_HOST=<your_sysdig_host> -e SYSDIG_SECURE_TOKEN=<your_sysdig_secure_api_token> -p 8080:8080 sysdig-mcp-server
 ```
 
 By default, the server will run using the `stdio` transport. To use the `streamable-http` or `sse` transports, set the `MCP_TRANSPORT` environment variable to `streamable-http` or `sse`:
 
 ```bash
-docker run -e MCP_TRANSPORT=streamable-http -e SYSDIG_HOST=<your_sysdig_host> -e SYSDIG_SECURE_API_TOKEN=<your_sysdig_secure_api_token> -p 8080:8080 sysdig-mcp-server
+docker run -e MCP_TRANSPORT=streamable-http -e SYSDIG_HOST=<your_sysdig_host> -e SYSDIG_SECURE_TOKEN=<your_sysdig_secure_api_token> -p 8080:8080 sysdig-mcp-server
 ```
 
 ### UV
@@ -190,7 +190,7 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
             ],
           "env": {
             "SYSDIG_HOST": "<your_sysdig_host>",
-            "SYSDIG_SECURE_API_TOKEN": "<your_sysdig_secure_api_token>",
+            "SYSDIG_SECURE_TOKEN": "<your_sysdig_secure_api_token>",
             "MCP_TRANSPORT": "stdio"
           }
         }
@@ -219,7 +219,7 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
           ],
           "env": {
             "SYSDIG_HOST": "<your_sysdig_host>",
-            "SYSDIG_SECURE_API_TOKEN": "<your_sysdig_secure_api_token>",
+            "SYSDIG_SECURE_TOKEN": "<your_sysdig_secure_api_token>",
             "MCP_TRANSPORT": "stdio"
           }
         }
