@@ -33,7 +33,7 @@ def main():
     else:
         # Run MCP server over streamable HTTP by default
         run_http()
-    
+
 
 if __name__ == "__main__":
     main()

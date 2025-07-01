@@ -1,0 +1,39 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # required for actions/checkout
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "pip"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.7.17"
+
+      - name: Download dependencies
+        run: make init
+
+      - name: Run ruff
+        run: make lint
+
+      - name: Run Unit Tests
+        run: make test

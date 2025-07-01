@@ -4,12 +4,12 @@ repos:
       - id: ruff-format
         name: Ruff Format
         description: Format code with ruff.
-        entry: bash -c 'uvx ruff format --config ruff.toml'
+        entry: make fmt
         language: system
         stages: ["commit", "push"]
       - id: ruff-check
         name: Ruff Check
         description: Check code style with ruff.
-        entry: bash -c 'uvx ruff check --config ruff.toml'
+        entry: make lint
         language: system
         stages: ["commit", "push"]

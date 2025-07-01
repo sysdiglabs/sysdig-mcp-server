@@ -9,9 +9,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to publish'
+        description: "Version to publish"
         required: false
-        default: 'latest'
+        default: "latest"
         type: string
 
 jobs:
@@ -24,36 +24,6 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
-
-      - name: Setup python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-          cache: 'poetry'
-      
-      - name: Install dependencies
-        run: poetry install
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-        with:
-          version: "0.7.17"
-
-      - name: Download dependencies
-        run: |
-          uv sync
-
-      - name: Run ruff
-        run: |
-          uvx ruff check --fix --config ruff.toml
-
-      - name: Run Unit Tests
-        run: |
-          uv run pytest --capture=tee-sys --junitxml=pytest.xml
-
-      - name: Run Test Coverage
-        run: |
-          uv run pytest --cov=. --cov-report=xml
 
       - name: Extract version
         id: extract_version
@@ -76,41 +46,3 @@ jobs:
           tags: |
             ghcr.io/sysdiglabs/sysdig-mcp-server:latest
             ghcr.io/sysdiglabs/sysdig-mcp-server:v${{ steps.extract_version.outputs.VERSION }}
-
-      - name: "Check test reports exists"
-        if: always()
-        id: check-test-results-exists
-        uses: andstor/file-existence-action@v3
-        with:
-          files: "pytest.xml, coverage.xml"
-
-      - name: Create pack-wise pytest report
-        run: poetry run python .github/github_workflow_scripts/parse_junit_per_pack.py
-        if: |
-          always() && 
-          steps.check-test-results-exists.outputs.files_exists == 'true' && 
-          github.event.pull_request.head.repo.fork == false
-
-      - name: Upload junit & pack-wise pytest report
-        uses: PaloAltoNetworks/upload-secure-artifact@v1.0.5
-        if: |
-          always() && 
-          steps.check-test-results-exists.outputs.files_exists == 'true' && 
-          github.event.pull_request.head.repo.fork == false
-        with:
-          name: pytest
-          path: |
-            coverage.xml
-          if-no-files-found: error
-
-      - name: Pytest coverage comment
-        if: |
-          always() && 
-          steps.check-test-results-exists.outputs.files_exists == 'true' && 
-          steps.check-test-results-exists.outputs.files_exists == 'true' && 
-          ! github.event.pull_request.head.repo.fork
-        uses: MishaKav/pytest-coverage-comment@v1.1.54
-        continue-on-error: true  # may fail on output > 65k chars
-        with:
-          pytest-xml-coverage-path: coverage.xml
-          junitxml-path: coverage.xml
