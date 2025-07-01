@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "sysdig-mcp.fullname" . }}:{{ .Values.service.port }}/mcp-server/mcp']
+      args: ['{{ include "sysdig-mcp.fullname" . }}:{{ .Values.service.port }}/healthz']
   restartPolicy: Never

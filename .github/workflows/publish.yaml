@@ -1,3 +1,4 @@
+---
 name: Publish Docker image
 
 on:
@@ -7,17 +8,15 @@ on:
     paths:
       - pyproject.toml
       - Dockerfile
-      - *.py
+      - '*.py'
       - tests/**
       - tools/**
       - utils/**
   workflow_dispatch:
-    inputs:
-      version:
-        description: "Version to publish"
-        required: false
-        default: "latest"
-        type: string
+
+concurrency:
+  group: '${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
 
 jobs:
   tests:

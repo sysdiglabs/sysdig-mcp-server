@@ -1,3 +1,4 @@
+---
 name: Test
 
 on:
@@ -11,7 +12,7 @@ on:
     paths:
       - pyproject.toml
       - Dockerfile
-      - *.py
+      - '*.py'
       - tests/**
       - tools/**
       - utils/**
@@ -19,11 +20,15 @@ on:
     paths:
       - pyproject.toml
       - Dockerfile
-      - *.py
+      - '*.py'
       - tests/**
       - tools/**
       - utils/**
   workflow_call:
+
+concurrency:
+  group: '${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
 
 jobs:
   test:

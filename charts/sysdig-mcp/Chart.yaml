@@ -1,6 +1,11 @@
 apiVersion: v2
 name: sysdig-mcp
 description: A Helm chart to deploy the Sysdig MCP server
+maintainers:
+  - name: S3B4SZ17
+    email: sebastian.zumbado@sysdig.com
+  - name: alecron
+    email: alejandro.magallon@sysdig.com
 
 # A chart can be either an 'application' or a 'library' chart.
 #

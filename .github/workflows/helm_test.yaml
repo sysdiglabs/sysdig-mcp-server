@@ -1,0 +1,95 @@
+---
+name: Lint & Test helm chart
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+      - feature/**
+      - release/**
+      - hotfix/**
+    paths:
+    - 'charts/**'
+  push:
+    branches:
+      - main
+      - develop
+      - feature/**
+      - release/**
+      - hotfix/**
+    paths:
+    - 'charts/**'
+
+concurrency:
+  group: '${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  set-charts:
+    # Required permissions
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      charts: ${{ steps.charts.outputs.changes }}
+    name: "Set Charts"
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v2
+        id: charts
+        with:
+          base: ${{ github.ref_name }}
+          filters: |
+            sysdig-mcp:
+              - 'charts/sysdig-mcp/**'
+  lint-charts:
+    needs: set-charts
+    name: Lint new helm charts
+    runs-on: [ubuntu-latest]
+    strategy:
+      matrix:
+        chart: ${{ fromJSON(needs.set-charts.outputs.charts) }}
+      # When set to true, GitHub cancels all in-progress jobs if any matrix job fails.
+      fail-fast: false
+      # The maximum number of jobs that can run simultaneously
+      max-parallel: 3
+    steps:
+
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Helm
+      uses: azure/setup-helm@v4
+      with:
+        version: v3.5.0
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        check-latest: true
+
+    - name: Set up chart-testing
+      uses: helm/chart-testing-action@v2.6.1
+
+    - name: Run chart-testing (list-changed)
+      id: list-changed
+      run: |
+        changed=$(ct list-changed --target-branch ${{ github.event.repository.default_branch }} --chart-dirs charts)
+        if [[ -n "$changed" ]]; then
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+        fi
+
+    - name: Run chart-testing (lint)
+      if: steps.list-changed.outputs.changed == 'true'
+      run: ct lint --target-branch ${{ github.event.repository.default_branch }} --chart-dirs charts
+
+    - name: Create kind cluster
+      if: steps.list-changed.outputs.changed == 'true'
+      uses: helm/kind-action@v1.12.0
+
+    - name: Run chart-testing (install)
+      if: steps.list-changed.outputs.changed == 'true'
+      run: ct install --target-branch ${{ github.event.repository.default_branch }} --chart-dirs charts
