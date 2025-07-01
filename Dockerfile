@@ -17,7 +17,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --locked --no-editable --no-dev
 
 RUN uv build
-RUN mv ./dist/sysdig_mcp_server-*-py3-none-any.whl /tmp/sysdig_mcp_server-1.0.0-py3-none-any.whl
+RUN mv ./dist/sysdig_mcp_server-*.tar.gz /tmp/sysdig_mcp_server.tar.gz
 
 # Final image without uv
 FROM python:3.12-slim
@@ -28,9 +28,9 @@ WORKDIR /app
 
 RUN apt update && apt install -y git
 # Copy the application from the builder
-COPY --from=builder --chown=app:app /tmp/sysdig_mcp_server-1.0.0-py3-none-any.whl /app
+COPY --from=builder --chown=app:app /tmp/sysdig_mcp_server.tar.gz /app
 COPY --from=builder --chown=app:app /app/app_config.yaml /app
 
-RUN pip install /app/sysdig_mcp_server-1.0.0-py3-none-any.whl
+RUN pip install /app/sysdig_mcp_server.tar.gz
 
 ENTRYPOINT ["sysdig-mcp-server"]
