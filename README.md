@@ -198,6 +198,35 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
     }
     ```
 
+    Or, alternatively, if you want to use docker, you can add the following configuration:
+
+    ```json
+    {
+      "mcpServers": {
+        "sysdig-mcp-server": {
+          "command": "docker",
+          "args": [
+             "run",
+              "-i",
+              "--rm",
+              "-e",
+              "SYSDIG_HOST",
+              "-e",
+              "MCP_TRANSPORT",
+              "-e",
+              "SYSDIG_SECURE_TOKEN",
+              "ghcr.io/sysdiglabs/sysdig-mcp-server"
+          ],
+          "env": {
+            "SYSDIG_HOST": "<your_sysdig_host>",
+            "SYSDIG_SECURE_API_TOKEN": "<your_sysdig_secure_api_token>",
+            "MCP_TRANSPORT": "stdio"
+          }
+        }
+      }
+    }
+    ```
+
 3. **Replace the placeholders**:
     - Replace `<your_sysdig_host>` with your Sysdig Secure host URL.
     - Replace `<your_sysdig_secure_api_token>` with your Sysdig Secure API token.
