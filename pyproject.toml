@@ -1,6 +1,6 @@
 [project]
 name = "sysdig-mcp-server"
-version = "0.1.0"
+version = "0.1.1"
 description = "Sysdig MCP Server"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -10,7 +10,7 @@ dependencies = [
     "pyyaml==6.0.2",
     "sqlalchemy==2.0.36",
     "sqlmodel==0.0.22",
-    "sysdig-client==1.0.0",
+    "sysdig-sdk @ git+https://github.com/sysdiglabs/sysdig-sdk-python@ccdf3effe27a339deaa04a7248b319443d20e5aa",
     "dask==2025.4.1",
     "oauthlib==3.2.2",
     "fastapi==0.115.12",
@@ -18,5 +18,28 @@ dependencies = [
     "requests",
 ]
 
-[tool.uv.sources]
-sysdig-client = { path = "./build/sysdig_client-1.0.0.tar.gz" }
+[project.scripts]
+sysdig-mcp-server = "main:main"
+
+[tool.uv]
+dev-dependencies = [
+    "pytest-cov==6.2.1",
+    "pytest==8.4.1",
+    "ruff==0.12.1",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "setuptools-scm>=7"]
+build-backend = "setuptools.build_meta"
+
+
+[tool.setuptools]
+py-modules = ["main"]
+packages = ["utils", "tools"]
+
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+    "integration",
+]

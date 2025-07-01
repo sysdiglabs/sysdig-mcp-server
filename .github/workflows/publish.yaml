@@ -1,0 +1,63 @@
+name: Publish Docker image
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - pyproject.toml
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to publish"
+        required: false
+        default: "latest"
+        type: string
+
+jobs:
+  push_to_registry:
+    name: Push Docker image to GitHub Packages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # required for actions/checkout
+      packages: write # required for pushing to ghcr.io
+      id-token: write # required for signing with cosign
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Extract version
+        id: extract_version
+        run: |
+          VERSION=$(grep 'version =' pyproject.toml | sed -e 's/version = "\(.*\)"/\1/')-$(echo $GITHUB_SHA | cut -c1-7)
+          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@59acb6260d9c0ba8f4a2f9d9b48431a222b68e20 # v3.5.0
+        with:
+          cosign-release: 'v2.2.4'
+
+      - name: Build and push Docker image
+        id: build-and-push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/sysdiglabs/sysdig-mcp-server:latest
+            ghcr.io/sysdiglabs/sysdig-mcp-server:v${{ steps.extract_version.outputs.VERSION }}
+
+      - name: Sign the published Docker image
+        env:
+          TAGS: |
+            ghcr.io/sysdiglabs/sysdig-mcp-server:latest
+            ghcr.io/sysdiglabs/sysdig-mcp-server:v${{ steps.extract_version.outputs.VERSION }}
+          DIGEST: ${{ steps.build-and-push.outputs.digest }}
+        run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}

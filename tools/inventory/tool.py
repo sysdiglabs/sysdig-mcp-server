@@ -1,7 +1,10 @@
-'''
+"""
 This module provides tools for interacting with the Sysdig Secure Inventory API.
-'''
-import logging, os, time
+"""
+
+import logging
+import os
+import time
 from typing import Annotated
 from pydantic import Field
 from fastmcp.server.dependencies import get_http_request
@@ -16,13 +19,11 @@ from utils.query_helpers import create_standard_response
 
 # Configure logging
 log = logging.getLogger(__name__)
-logging.basicConfig(
-    format='%(asctime)s-%(process)d-%(levelname)s- %(message)s', 
-    level=os.environ.get("LOGLEVEL", "ERROR")
-)
+logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
 
 # Load app config (expects keys: mcp.host, mcp.port, mcp.transport)
 app_config = get_app_config()
+
 
 class InventoryTools:
     """
@@ -37,9 +38,10 @@ class InventoryTools:
         using the Sysdig Secure token and host from the environment variables.
         Args:
             config_tags (set[str]): The tags associated with the MCP server configuration, used to determine the transport mode.
+        Returns:
+            InventoryApi: An instance of the InventoryApi client.
         Raises:
             ValueError: If the SYSDIG_SECURE_TOKEN environment variable is not set.
-            RuntimeError: If the API client cannot be initialized from the http request state. Hence running in STDIO mode.
         """
         secure_events_api: InventoryApi = None
         if "streamable-http" in config_tags:
@@ -65,31 +67,20 @@ class InventoryTools:
         filter_exp: Annotated[
             str,
             Field(
-                description='Sysdig Secure filter expression for inventory resources, base filter: platform in ("GCP", "AWS", "Azure", "Kubernetes"), Examples: not isExposed exists; category in ("IAM") and isExposed exists; category in ("IAM","Audit & Monitoring")'
-            )
+                description=(
+                    """
+                    Sysdig Secure filter expression for inventory resources,
+                    base filter: platform in ("GCP", "AWS", "Azure", "Kubernetes"),
+                    Examples:
+                        not isExposed exists; category in ("IAM") and isExposed exists; category in ("IAM","Audit & Monitoring")
+                """
+                )
+            ),
         ] = 'platform in ("GCP", "AWS", "Azure", "Kubernetes")',
-        page_number: Annotated[
-            int,
-            Field(
-                ge=1,
-                description="Page number for pagination (1-based index)"
-            )
-        ] = 1,
-        page_size: Annotated[
-            int,
-            Field(
-                ge=1,
-                le=100,
-                default=20,
-                description="Number of items per page"
-            )
-        ] = 20,
+        page_number: Annotated[int, Field(ge=1, description="Page number for pagination (1-based index)")] = 1,
+        page_size: Annotated[int, Field(ge=1, le=100, default=20, description="Number of items per page")] = 20,
         with_enrich_containers: Annotated[
-            bool,
-            Field(
-                description="Whether to include enriched container details",
-                example=True
-            )
+            bool, Field(description="Whether to include enriched container details", example=True)
         ] = True,
     ) -> dict:
         """
@@ -107,26 +98,18 @@ class InventoryTools:
 
         Returns:
             InventoryResourceResponse: The API response containing inventory items.
-        Raises:
-            ApiException: If the API call to retrieve resources fails.
         """
         try:
             inventory_api = self.init_client(config_tags=ctx.fastmcp.tags)
             start_time = time.time()
 
             api_response = inventory_api.get_resources_without_preload_content(
-                filter=filter_exp,
-                page_number=page_number,
-                page_size=page_size,
-                with_enriched_containers=with_enrich_containers
+                filter=filter_exp, page_number=page_number, page_size=page_size, with_enriched_containers=with_enrich_containers
             )
-            
+
             execution_time = (time.time() - start_time) * 1000
 
-            response = create_standard_response(
-                results=api_response,
-                execution_time_ms=execution_time
-            )
+            response = create_standard_response(results=api_response, execution_time_ms=execution_time)
 
             return response
         except ApiException as e:
@@ -136,11 +119,8 @@ class InventoryTools:
     def tool_get_resource(
         self,
         ctx: Context,
-        resource_hash: Annotated[
-            str,
-            Field(description="The unique hash of the inventory resource to retrieve.")
-        ]
-    ) ->  dict:
+        resource_hash: Annotated[str, Field(description="The unique hash of the inventory resource to retrieve.")],
+    ) -> dict:
         """
         Fetch a specific inventory resource by hash.
 
@@ -158,10 +138,7 @@ class InventoryTools:
             api_response = inventory_api.get_resource_without_preload_content(hash=resource_hash)
             execution_time = (time.time() - start_time) * 1000
 
-            response = create_standard_response(
-                results=api_response,
-                execution_time_ms=execution_time
-            )
+            response = create_standard_response(results=api_response, execution_time_ms=execution_time)
 
             return response
         except ApiException as e:

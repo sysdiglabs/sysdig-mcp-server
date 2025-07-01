@@ -1,7 +1,10 @@
-'''
+"""
 Token-based authentication middleware
-'''
-import json, logging, os
+"""
+
+import json
+import logging
+import os
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 from starlette.requests import Request
 from starlette.responses import Response
@@ -12,20 +15,19 @@ from utils.app_config import get_app_config
 
 # Set up logging
 log = logging.getLogger(__name__)
-logging.basicConfig(
-    format='%(asctime)s-%(process)d-%(levelname)s- %(message)s',
-    level=os.environ.get("LOGLEVEL", "ERROR")
-)
+logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
 
 # Load app config (expects keys: mcp.host, mcp.port, mcp.transport)
 app_config = get_app_config()
 
+
 class CustomAuthMiddleware(BaseHTTPMiddleware):
-    '''
+    """
     Custom middleware for handling token-based authentication in the MCP server and initializing Sysdig API clients.
-    '''
+    """
+
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
-        '''
+        """
         Dispatch method to handle incoming requests, validate the Authorization header,
         and initialize the Sysdig API client with the provided token and base URL.
         Args:
@@ -33,17 +35,11 @@ class CustomAuthMiddleware(BaseHTTPMiddleware):
             call_next (RequestResponseEndpoint): The next middleware or endpoint to call.
         Returns:
             Response: The response from the next middleware or endpoint, or an error response if authentication fails.
-        Raises:
-            ValueError: If the Authorization header is missing or invalid.
-            RuntimeError: If the API client cannot be initialized from the HTTP request state, indicating STDIO mode.
-        '''
+        """
 
         auth_header = request.headers.get("Authorization")
         if not auth_header or not auth_header.startswith("Bearer "):
-            json_response = {
-                "error": "Unauthorized",
-                "message": "Missing or invalid Authorization header"
-            }
+            json_response = {"error": "Unauthorized", "message": "Missing or invalid Authorization header"}
             return Response(json.dumps(json_response), status_code=401)
         # set header to be used by the API client
 
