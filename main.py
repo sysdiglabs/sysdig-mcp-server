@@ -17,7 +17,8 @@ load_dotenv()
 
 app_config = get_app_config()
 
-if __name__ == "__main__":
+
+def main():
     # Choose transport: "stdio" or "sse" (HTTP/SSE)
     transport = os.environ.get("MCP_TRANSPORT", app_config["mcp"]["transport"]).lower()
     print("""
@@ -32,3 +33,7 @@ if __name__ == "__main__":
     else:
         # Run MCP server over streamable HTTP by default
         run_http()
+    
+
+if __name__ == "__main__":
+    main()
