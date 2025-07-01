@@ -14,4 +14,3 @@ README.md
 __pycache__/*
 lib/
 .python-version
-*.yaml
