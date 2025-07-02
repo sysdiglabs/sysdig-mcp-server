@@ -9,8 +9,8 @@ import pandas as pd
 from tools.inventory.tool import tool_list_resources
 
 # Configure logging
-log = logging.getLogger(__name__)
 logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
+log = logging.getLogger(__name__)
 
 
 def list_all_resources(filter_exp: str = 'platform in ("GCP")') -> dd.DataFrame:

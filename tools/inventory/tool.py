@@ -18,8 +18,8 @@ from utils.sysdig.api import initialize_api_client
 from utils.query_helpers import create_standard_response
 
 # Configure logging
-log = logging.getLogger(__name__)
 logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
+log = logging.getLogger(__name__)
 
 # Load app config (expects keys: mcp.host, mcp.port, mcp.transport)
 app_config = get_app_config()
@@ -113,7 +113,7 @@ class InventoryTools:
 
             return response
         except ApiException as e:
-            logging.error("Exception when calling InventoryApi->get_resources: %s\n" % e)
+            log.error(f"Exception when calling InventoryApi->get_resources: {e}")
             raise e
 
     def tool_get_resource(

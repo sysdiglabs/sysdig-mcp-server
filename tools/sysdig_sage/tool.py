@@ -17,8 +17,8 @@ from utils.app_config import get_app_config
 from utils.sysdig.api import initialize_api_client
 from utils.query_helpers import create_standard_response
 
-log = logging.getLogger(__name__)
 logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
+log = logging.getLogger(__name__)
 
 app_config = get_app_config()
 

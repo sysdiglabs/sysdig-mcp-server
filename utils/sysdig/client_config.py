@@ -8,8 +8,8 @@ import logging
 import re
 
 # Set up logging
-log = logging.getLogger(__name__)
 logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
+log = logging.getLogger(__name__)
 
 
 # Lazy-load the Sysdig client configuration

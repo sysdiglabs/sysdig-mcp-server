@@ -33,4 +33,6 @@ COPY --from=builder --chown=app:app /app/app_config.yaml /app
 
 RUN pip install /app/sysdig_mcp_server.tar.gz
 
+USER 1001:1001
+
 ENTRYPOINT ["sysdig-mcp-server"]
