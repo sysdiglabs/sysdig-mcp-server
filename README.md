@@ -5,6 +5,7 @@
 - [MCP Server](#mcp-server)
   - [Table of contents](#table-of-contents)
   - [Description](#description)
+  - [Quickstart Guide](#quickstart-guide)
   - [Available Tools](#available-tools)
   - [Requirements](#requirements)
     - [UV Setup](#uv-setup)
@@ -24,6 +25,56 @@
 ## Description
 
 This is an implementation of an [MCP (Model Context Protocol) Server](https://modelcontextprotocol.io/quickstart/server) to allow different LLMs to query information from Sysdig Secure platform. **It is still in early development and not yet ready for production use.** New endpoints and functionalities will be added over time. The goal is to provide a simple and easy-to-use interface for querying information from Sysdig Secure platform using LLMs.
+
+## Quickstart Guide
+
+Get up and running with the Sysdig MCP Server quickly using our pre-built Docker image.
+
+1. **Get your API Token**:
+    Go to your Sysdig Secure instance and navigate to **Settings > Sysdig Secure API**. Here, you can generate or copy your API token. This token is required to authenticate requests to the Sysdig Secure platform (See the [Configuration](#configuration) section for more details).
+
+2. **Pull the image**:
+
+    Pull the latest Sysdig MCP Server image from the GitHub Container Registry:
+
+    ```bash
+    docker pull ghcr.io/sysdiglabs/sysdig-mcp-server:latest
+    ```
+
+3. **Configure your client**:
+
+    For example, you can configure Claude Desktop app to use the Sysdig MCP Server by editing the `claude_desktop_config.json` file. This is useful for running the server locally with the `stdio` transport. You can apply this configuration to any other client that supports MCP (For more details, see the [Client Configuration](#client-configuration) section).
+
+    Substitute the following placeholders with your actual values:
+    - `<your_sysdig_host>`: The hostname of your Sysdig Secure instance (e.g., `https://us2.app.sysdig.com` or `https://eu1.app.sysdig.com`)
+    - `<your_sysdig_secure_api_token>`: Your Sysdig Secure API token
+
+    ```json
+      {
+        "mcpServers": {
+          "sysdig-mcp-server": {
+            "command": "docker",
+            "args": [
+              "run",
+                "-i",
+                "--rm",
+                "-e",
+                "SYSDIG_HOST",
+                "-e",
+                "MCP_TRANSPORT",
+                "-e",
+                "SYSDIG_SECURE_TOKEN",
+                "ghcr.io/sysdiglabs/sysdig-mcp-server:latest"
+            ],
+            "env": {
+              "SYSDIG_HOST": "<your_sysdig_host>",
+              "SYSDIG_SECURE_TOKEN": "<your_sysdig_secure_api_token>",
+              "MCP_TRANSPORT": "stdio"
+            }
+          }
+        }
+      }
+      ```
 
 ## Available Tools
 
