@@ -1,17 +1,11 @@
+"""
+Module for general utilities and fixtures used in tests.
+"""
+
 import json
 import pytest
 import os
 from unittest.mock import patch
-from fastmcp import Context
-from fastmcp import FastMCP
-
-
-class MockMCP(FastMCP):
-    """
-    Mock class for FastMCP
-    """
-
-    pass
 
 
 def util_load_json(path):
@@ -41,21 +35,6 @@ def mock_success_response():
         mock_request.return_value = mock_resp
         yield mock_request
         patch.stopall()
-
-
-@pytest.fixture
-def mock_ctx():
-    """
-    Fixture to create a mock Context object with 'fastmcp' tags.
-    Returns:
-        Context: A mocked Context object with 'fastmcp' tags.
-    """
-
-    fastmcp: MockMCP = MockMCP(
-        tags=["sysdig", "mcp", "stdio"],
-    )
-    ctx = Context(fastmcp=fastmcp)
-    return ctx
 
 
 @pytest.fixture

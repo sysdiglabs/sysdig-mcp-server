@@ -260,7 +260,7 @@ def add_tools(mcp: FastMCP, allowed_tools: list, transport_type: Literal["stdio"
         log.info("Adding Sysdig Sage Tools...")
         sysdig_sage_tools = SageTools()
         mcp.add_tool(
-            sysdig_sage_tools.tool_sysdig_sage,
+            sysdig_sage_tools.tool_sage_to_sysql,
             name="sysdig_sysql_sage_query",
             description=(
                 """

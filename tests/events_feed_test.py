@@ -8,8 +8,6 @@ from .conftest import util_load_json
 from unittest.mock import MagicMock, AsyncMock
 import os
 
-from fastmcp import Context
-
 # Get the absolute path of the current module file
 module_path = os.path.abspath(__file__)
 
@@ -19,11 +17,11 @@ module_directory = os.path.dirname(module_path)
 EVENT_INFO_RESPONSE = util_load_json(f"{module_directory}/test_data/events_feed/event_info_response.json")
 
 
-def test_get_event_info(mock_success_response: MagicMock | AsyncMock, mock_ctx: Context, mock_creds) -> None:
+def test_get_event_info(mock_success_response: MagicMock | AsyncMock, mock_creds) -> None:
     """Test the get_event_info tool method.
     Args:
         mock_success_response (MagicMock | AsyncMock): Mocked response object.
-        mock_ctx (Context): Mocked Context object.
+        mock_creds: Mocked credentials.
     """
 
     # Successful response
@@ -32,7 +30,7 @@ def test_get_event_info(mock_success_response: MagicMock | AsyncMock, mock_ctx: 
 
     tools_client = EventsFeedTools()
     # Pass the mocked Context object
-    result: dict = tools_client.tool_get_event_info("12345", mock_ctx)
+    result: dict = tools_client.tool_get_event_info("12345")
     results: dict = result["results"]
 
     assert result.get("status_code") == HTTPStatus.OK

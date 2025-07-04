@@ -11,7 +11,6 @@ import time
 from datetime import datetime
 from typing import Optional, Annotated, Any, Dict
 from pydantic import Field
-from fastmcp import Context
 from sysdig_client import ApiException
 from fastmcp.prompts.prompt import PromptMessage, TextContent
 from fastmcp.exceptions import ToolError
@@ -38,13 +37,13 @@ class EventsFeedTools:
     This class provides methods to retrieve event information and list runtime events.
     """
 
-    def init_client(self, config_tags: set[str], old_api: bool = False) -> SecureEventsApi | OldSysdigApi:
+    def init_client(self, old_api: bool = False) -> SecureEventsApi | OldSysdigApi:
         """
         Initializes the SecureEventsApi client from the request state.
         If the request does not have the API client initialized, it will create a new instance
         using the Sysdig Secure token and host from the environment variables.
         Args:
-            config_tags (set[str]): The tags associated with the MCP server configuration, used to determine the transport mode.
+            old_api (bool): If True, initializes the OldSysdigApi client instead of SecureEventsApi.
         Returns:
             SecureEventsApi | OldSysdigApi: An instance of the SecureEventsApi or OldSysdigApi client.
         Raises:
@@ -52,7 +51,7 @@ class EventsFeedTools:
         """
         secure_events_api: SecureEventsApi = None
         old_sysdig_api: OldSysdigApi = None
-        if "streamable-http" in config_tags:
+        if app_config.get("mcp", {}).get("transport", "") == "streamable-http":
             # Try to get the HTTP request
             log.debug("Attempting to get the HTTP request to initialize the Sysdig API client.")
             request: Request = get_http_request()
@@ -77,7 +76,7 @@ class EventsFeedTools:
             return old_sysdig_api
         return secure_events_api
 
-    def tool_get_event_info(self, event_id: str, ctx: Context) -> dict:
+    def tool_get_event_info(self, event_id: str) -> dict:
         """
         Retrieves detailed information for a specific security event.
 
@@ -88,7 +87,7 @@ class EventsFeedTools:
             Event: The Event object containing detailed information about the specified event.
         """
         # Init of the sysdig client
-        secure_events_api = self.init_client(config_tags=ctx.fastmcp.tags)
+        secure_events_api = self.init_client()
         try:
             # Get the HTTP request
             start_time = time.time()
@@ -106,7 +105,6 @@ class EventsFeedTools:
 
     def tool_list_runtime_events(
         self,
-        ctx: Context,
         cursor: Optional[str] = None,
         scope_hours: int = 1,
         limit: int = 50,
@@ -148,15 +146,15 @@ class EventsFeedTools:
             cursor (Optional[str]): Cursor for pagination.
             scope_hours (int): Number of hours back from now to include events. Defaults to 1.
             severity_level (Optional[str]): One of "info", "low", "medium", "high". If provided, filters by that severity.
-            If None, includes all severities.
+                If None, includes all severities.
             cluster_name (Optional[str]): Name of the Kubernetes cluster to filter events. If None, includes all clusters.
             limit (int): Maximum number of events to return. Defaults to 50.
             filter_expr (Optional[str]): An optional filter expression to further narrow down events.
 
         Returns:
-            List[Event]: A list of Event objects matching the criteria.
+            dict: A dictionary containing the results of the runtime events query, including pagination information.
         """
-        secure_events_api = self.init_client(config_tags=ctx.fastmcp.tags)
+        secure_events_api = self.init_client()
         start_time = time.time()
         # Compute time window
         now_ns = time.time_ns()
@@ -188,13 +186,12 @@ class EventsFeedTools:
 
     # A tool to retrieve all the process-tree information for a specific event.Add commentMore actions
 
-    def tool_get_event_process_tree(self, ctx: Context, event_id: str) -> Dict[str, Any]:
+    def tool_get_event_process_tree(self, event_id: str) -> dict:
         """
         Retrieves the process tree for a specific security event.
         Not every event has a process tree, so this may return an empty tree.
 
         Args:
-            ctx (Context): The context object containing request-specific information.
             event_id (str): The unique identifier of the security event.
 
         Returns:
@@ -203,7 +200,7 @@ class EventsFeedTools:
         try:
             start_time = time.time()
             # Get process tree branches
-            old_api_client = self.init_client(config_tags=ctx.fastmcp.tags, old_api=True)
+            old_api_client = self.init_client(old_api=True)
             branches = old_api_client.request_process_tree_branches(event_id)
             # Get process tree
             tree = old_api_client.request_process_tree_trees(event_id)
