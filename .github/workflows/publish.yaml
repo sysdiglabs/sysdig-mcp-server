@@ -6,7 +6,9 @@ on:
     branches:
       - main
       - beta
+      - feat/cli-scanner-tool
     paths:
+      - '.github/workflows/**'
       - pyproject.toml
       - Dockerfile
       - '*.py'
