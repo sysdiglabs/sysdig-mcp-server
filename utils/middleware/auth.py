@@ -14,8 +14,8 @@ from utils.sysdig.old_sysdig_api import OldSysdigApi
 from utils.app_config import get_app_config
 
 # Set up logging
-log = logging.getLogger(__name__)
 logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
+log = logging.getLogger(__name__)
 
 # Load app config (expects keys: mcp.host, mcp.port, mcp.transport)
 app_config = get_app_config()

@@ -6,6 +6,14 @@ from fastmcp import Context
 from fastmcp import FastMCP
 
 
+class MockMCP(FastMCP):
+    """
+    Mock class for FastMCP
+    """
+
+    pass
+
+
 def util_load_json(path):
     """
     Utility function to load a JSON file from the given path.
@@ -42,8 +50,8 @@ def mock_ctx():
     Returns:
         Context: A mocked Context object with 'fastmcp' tags.
     """
-    fastmcp: FastMCP = FastMCP(
-        name="Test",
+
+    fastmcp: MockMCP = MockMCP(
         tags=["sysdig", "mcp", "stdio"],
     )
     ctx = Context(fastmcp=fastmcp)

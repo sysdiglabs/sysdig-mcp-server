@@ -5,6 +5,7 @@ It includes endpoints for Sysdig Secure Events Feed, Inventory, Vulnerability Ma
 
 import logging
 import os
+import asyncio
 from typing import Optional
 import uvicorn
 from starlette.requests import Request
@@ -23,11 +24,11 @@ from tools.sysdig_sage.tool import SageTools
 from utils.app_config import get_app_config
 
 # Set up logging
-log = logging.getLogger(__name__)
 logging.basicConfig(
     format="%(asctime)s-%(process)d-%(levelname)s- %(message)s",
     level=os.environ.get("LOGLEVEL", "ERROR"),
 )
+log = logging.getLogger(__name__)
 
 # Load app config (expects keys: mcp.host, mcp.port, mcp.transport)
 app_config = get_app_config()
@@ -67,7 +68,7 @@ def get_mcp() -> FastMCP:
     return _mcp_instance
 
 
-async def run_stdio():
+def run_stdio():
     """
     Run the MCP server using STDIO transport.
     """
@@ -76,7 +77,14 @@ async def run_stdio():
     add_tools(mcp)
     # Add resources to the MCP server
     add_resources(mcp)
-    await mcp.run_stdio_async()
+    try:
+        asyncio.run(mcp.run_stdio_async())
+    except KeyboardInterrupt:
+        log.info("Keyboard interrupt received, forcing immediate exit")
+        os._exit(0)
+    except Exception as e:
+        log.error(f"Exception received, forcing immediate exit: {str(e)}")
+        os._exit(1)
 
 
 def run_http():
@@ -105,13 +113,27 @@ def run_http():
         """
         return JSONResponse({"status": "ok"})
 
-    print(f"Starting {mcp.name} at http://{app_config['app']['host']}:{app_config['app']['port']}/sysdig-mcp-server/mcp")
-    uvicorn.run(
+    log.info(f"Starting {mcp.name} at http://{app_config['app']['host']}:{app_config['app']['port']}/sysdig-mcp-server/mcp")
+    # Use Uvicorn's Config and Server classes for more control
+    config = uvicorn.Config(
         app,
-        port=app_config["app"]["port"],
         host=app_config["app"]["host"],
+        port=app_config["app"]["port"],
+        timeout_graceful_shutdown=1,
         log_level=os.environ.get("LOGLEVEL", app_config["app"]["log_level"]).lower(),
     )
+    server = uvicorn.Server(config)
+
+    # Override the default behavior
+    server.force_exit = True  # This makes Ctrl+C force exit
+    try:
+        asyncio.run(server.serve())
+    except KeyboardInterrupt:
+        log.info("Keyboard interrupt received, forcing immediate exit")
+        os._exit(0)
+    except Exception as e:
+        log.error(f"Exception received, forcing immediate exit: {str(e)}")
+        os._exit(1)
 
 
 def add_tools(mcp: FastMCP) -> None:
@@ -269,16 +291,13 @@ def add_resources(mcp: FastMCP) -> None:
                 - `contains` and `startsWith` to check partial values of attributes
                 - `exists` to check if a field exists and not empty
 
-            Examples:
-                - zone in ("zone1") and machineImage = "ami-0b22b359fdfabe1b5"
-                - (projectId = "1235495521" or projectId = "987654321") and vuln.severity in ("Critical")
-                - vuln.name in ("CVE-2023-0049")
-                - vuln.cvssScore >= "3"
-                - asset.type = "host"
-                - cloudProvider = "gcp" and gcp.project.id = "my-project"
             Note:
                 The supported fields are going to depend on the API endpoint you are querying.
-                Chek the description of each tool for the supported fields.
+                Check the description of each tool for the supported fields.
+            
+            Examples:
+                - <field1> in ("example") and <field2> = "example2"
+                - <field3> >= "3"
             """
         ),
         tags=["query-language", "documentation"],
