@@ -5,12 +5,14 @@ It includes endpoints for Sysdig Secure Events Feed, Inventory, Vulnerability Ma
 
 import logging
 import os
+import asyncio
 from typing import Optional
 import uvicorn
 from starlette.requests import Request
 from starlette.responses import JSONResponse, Response
 from fastapi import FastAPI
 from fastmcp import FastMCP
+from fastmcp.resources import HttpResource, TextResource
 from utils.middleware.auth import CustomAuthMiddleware
 from starlette.middleware import Middleware
 from tools.events_feed.tool import EventsFeedTools
@@ -22,11 +24,11 @@ from tools.sysdig_sage.tool import SageTools
 from utils.app_config import get_app_config
 
 # Set up logging
-log = logging.getLogger(__name__)
 logging.basicConfig(
     format="%(asctime)s-%(process)d-%(levelname)s- %(message)s",
     level=os.environ.get("LOGLEVEL", "ERROR"),
 )
+log = logging.getLogger(__name__)
 
 # Load app config (expects keys: mcp.host, mcp.port, mcp.transport)
 app_config = get_app_config()
@@ -66,14 +68,23 @@ def get_mcp() -> FastMCP:
     return _mcp_instance
 
 
-async def run_stdio():
+def run_stdio():
     """
     Run the MCP server using STDIO transport.
     """
     mcp = get_mcp()
     # Add tools to the MCP server
     add_tools(mcp)
-    await mcp.run_stdio_async()
+    # Add resources to the MCP server
+    add_resources(mcp)
+    try:
+        asyncio.run(mcp.run_stdio_async())
+    except KeyboardInterrupt:
+        log.info("Keyboard interrupt received, forcing immediate exit")
+        os._exit(0)
+    except Exception as e:
+        log.error(f"Exception received, forcing immediate exit: {str(e)}")
+        os._exit(1)
 
 
 def run_http():
@@ -81,6 +92,8 @@ def run_http():
     mcp = get_mcp()
     # Add tools to the MCP server
     add_tools(mcp)
+    # Add resources to the MCP server
+    add_resources(mcp)
     # Mount the MCP HTTP/SSE app at '/sysdig-mcp-server'
     mcp_app = mcp.http_app(
         path="/mcp", transport=os.environ.get("MCP_TRANSPORT", app_config["mcp"]["transport"]).lower(), middleware=middlewares
@@ -100,13 +113,27 @@ def run_http():
         """
         return JSONResponse({"status": "ok"})
 
-    print(f"Starting {mcp.name} at http://{app_config['app']['host']}:{app_config['app']['port']}/sysdig-mcp-server/mcp")
-    uvicorn.run(
+    log.info(f"Starting {mcp.name} at http://{app_config['app']['host']}:{app_config['app']['port']}/sysdig-mcp-server/mcp")
+    # Use Uvicorn's Config and Server classes for more control
+    config = uvicorn.Config(
         app,
-        port=app_config["app"]["port"],
         host=app_config["app"]["host"],
+        port=app_config["app"]["port"],
+        timeout_graceful_shutdown=1,
         log_level=os.environ.get("LOGLEVEL", app_config["app"]["log_level"]).lower(),
     )
+    server = uvicorn.Server(config)
+
+    # Override the default behavior
+    server.force_exit = True  # This makes Ctrl+C force exit
+    try:
+        asyncio.run(server.serve())
+    except KeyboardInterrupt:
+        log.info("Keyboard interrupt received, forcing immediate exit")
+        os._exit(0)
+    except Exception as e:
+        log.error(f"Exception received, forcing immediate exit: {str(e)}")
+        os._exit(1)
 
 
 def add_tools(mcp: FastMCP) -> None:
@@ -152,10 +179,6 @@ def add_tools(mcp: FastMCP) -> None:
         description=(
             """
             List inventory resources based on a Sysdig Secure query filter expression with optional pagination.'
-            Example filters: not isExposed exists; category in ("IAM") and isExposed exists;
-                     category in ("IAM","Audit & Monitoring");
-                     vuln.hasFix exists and vuln.hasExploit exists and isExposed exists and package.inUse exists and
-                     validatedExposure exists and control.failed in ("Contains AI Package");
             """
         ),
     )
@@ -233,3 +256,51 @@ def add_tools(mcp: FastMCP) -> None:
             """
         ),
     )
+
+
+def add_resources(mcp: FastMCP) -> None:
+    """
+    Add resources to the MCP server.
+    Args:
+        mcp (FastMCP): The FastMCP server instance.
+    """
+    vm_docs = HttpResource(
+        name="Sysdig Secure Vulnerability Management Overview",
+        description="Sysdig Secure Vulnerability Management documentation.",
+        uri="resource://sysdig-secure-vulnerability-management",
+        url="https://docs.sysdig.com/en/sysdig-secure/vulnerability-management/",
+        tags=["documentation"],
+    )
+    filter_query_language = TextResource(
+        name="Sysdig Filter Query Language",
+        description=(
+            "Sysdig Filter Query Language documentation. "
+            "Learn how to filter resources in Sysdig using the Filter Query Language for the API calls."
+        ),
+        uri="resource://filter-query-language",
+        text=(
+            """
+            Query language expressions for filtering results.
+            The query language allows you to filter resources based on their attributes.
+            You can use the following operators and functions to build your queries:
+
+            Operators:
+                - `and` and `not` logical operators
+                - `=`, `!=`
+                - `in`
+                - `contains` and `startsWith` to check partial values of attributes
+                - `exists` to check if a field exists and not empty
+
+            Note:
+                The supported fields are going to depend on the API endpoint you are querying.
+                Check the description of each tool for the supported fields.
+            
+            Examples:
+                - <field1> in ("example") and <field2> = "example2"
+                - <field3> >= "3"
+            """
+        ),
+        tags=["query-language", "documentation"],
+    )
+    mcp.add_resource(vm_docs)
+    mcp.add_resource(filter_query_language)

@@ -14,6 +14,7 @@ from pydantic import Field
 from fastmcp import Context
 from sysdig_client import ApiException
 from fastmcp.prompts.prompt import PromptMessage, TextContent
+from fastmcp.exceptions import ToolError
 from starlette.requests import Request
 from sysdig_client.api import SecureEventsApi
 from utils.sysdig.old_sysdig_api import OldSysdigApi
@@ -99,7 +100,7 @@ class EventsFeedTools:
             response = create_standard_response(results=raw, execution_time_ms=execution_time)
 
             return response
-        except ApiException as e:
+        except ToolError as e:
             logging.error("Exception when calling SecureEventsApi->get_event_v1: %s\n" % e)
             raise e
 
@@ -181,7 +182,7 @@ class EventsFeedTools:
                 execution_time_ms=duration_ms,
             )
             return response
-        except ApiException as e:
+        except ToolError as e:
             log.error(f"Exception when calling SecureEventsApi->get_events_v1: {e}\n")
             raise e
 
@@ -225,7 +226,7 @@ class EventsFeedTools:
             )
 
             return response
-        except ApiException as e:
+        except ToolError as e:
             log.error(f"Exception when calling Sysdig Sage API to get process tree: {e}")
             raise e
 

@@ -66,11 +66,11 @@ jobs:
     permissions:
       contents: write # required for creating a tag
     steps:
-      - name: Check out the repo
+      - name: Check out repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}   # checkout the correct branch name
-          fetch-depth: 0   
+          ref: ${{ github.sha }} # required for better experience using pre-releases
+          fetch-depth: '0' # Required due to the way Git works, without it this action won't be able to find any or the correct tags
 
       - name: Extract current version
         id: pyproject_version
@@ -80,15 +80,15 @@ jobs:
 
       - name: Get tag version
         id: semantic_release
-        uses: anothrNick/github-tag-action@1.73.0
+        uses: anothrNick/github-tag-action@1.71.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: "patch"
-          TAG_CONTEXT: ${{ (github.base_ref != 'main') && 'branch' || 'repo' }}
+          TAG_CONTEXT: 'repo'
+          WITH_V: true
           PRERELEASE_SUFFIX: "beta"
           PRERELEASE: ${{ (github.base_ref != 'main') && 'true' || 'false' }}
           DRY_RUN: true
-          INITIAL_VERSION: ${{ steps.pyproject_version.outputs.TAG }}
 
       - name: Compare versions
         run: |
