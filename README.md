@@ -1,5 +1,11 @@
 # MCP Server
 
+| App Test | Helm Test |
+|------|---------|
+| [![App Test](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/publish.yaml/badge.svg?branch=main)](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/publish.yaml) | [![Helm Test](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/helm_test.yaml/badge.svg?branch=main)](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/helm_test.yaml) |
+
+---
+
 ## Table of contents
 
 - [MCP Server](#mcp-server)
