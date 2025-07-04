@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: '${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  group: 'publish-${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
   cancel-in-progress: true
 
 jobs:
@@ -100,10 +100,19 @@ jobs:
           TAG_CONTEXT: 'repo'
           WITH_V: true
           PRERELEASE_SUFFIX: "beta"
-          PRERELEASE: ${{ (github.base_ref != 'main') && 'true' || 'false' }}
+          PRERELEASE: ${{ (github.base_ref == 'beta') && 'true' || (github.base_ref == 'main') && 'false' || (github.base_ref == 'integration') && 'false' || 'true' }}
 
       - name: Summary
         run: |
           echo "## Release Summary
           - Tag: ${{ steps.semantic_release.outputs.tag }}
           - Docker Image: ghcr.io/sysdiglabs/sysdig-mcp-server:v${{ needs.push_to_registry.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+
+  test_helm_chart:
+    name: Test Helm Chart
+    needs: push_to_registry
+    permissions:
+      contents: read # required for actions/checkout
+      pull-requests: write # required for creating a PR with the chart changes
+    uses: ./.github/workflows/helm_test.yaml
+    secrets: inherit

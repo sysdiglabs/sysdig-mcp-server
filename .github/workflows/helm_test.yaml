@@ -5,24 +5,20 @@ on:
   pull_request:
     branches:
       - main
-      - develop
-      - feature/**
-      - release/**
-      - hotfix/**
+      - beta
     paths:
     - 'charts/**'
   push:
     branches:
       - main
-      - develop
-      - feature/**
-      - release/**
-      - hotfix/**
+      - beta
     paths:
     - 'charts/**'
+  workflow_call:
+  workflow_dispatch:
 
 concurrency:
-  group: '${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  group: 'helm-test-${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
   cancel-in-progress: true
 
 jobs:
