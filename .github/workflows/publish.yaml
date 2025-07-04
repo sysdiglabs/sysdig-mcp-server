@@ -102,7 +102,7 @@ jobs:
           TAG_CONTEXT: 'repo'
           WITH_V: true
           PRERELEASE_SUFFIX: "beta"
-          PRERELEASE: ${{ (github.ref_name == 'beta') && 'true' || (github.ref_name == 'main') && 'false' || (github.ref_name == 'feat/cli-scanner-tool') && 'false' || 'true' }}
+          PRERELEASE: ${{ (github.base_ref || github.ref_name == 'beta') && 'true' || (github.base_ref || github.ref_name == 'main') && 'false' || (github.base_ref || github.ref_name == 'feat/cli-scanner-tool') && 'false' || 'true' }}
 
       - name: Summary
         run: |
