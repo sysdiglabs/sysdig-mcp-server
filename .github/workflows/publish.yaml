@@ -1,27 +1,43 @@
+---
 name: Publish Docker image
 
 on:
   push:
     branches:
       - main
+      - beta
     paths:
       - pyproject.toml
+      - Dockerfile
+      - '*.py'
+      - tests/**
+      - tools/**
+      - utils/**
   workflow_dispatch:
-    inputs:
-      version:
-        description: "Version to publish"
-        required: false
-        default: "latest"
-        type: string
+
+concurrency:
+  group: 'publish-${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
 
 jobs:
+  tests:
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: write
+    uses: ./.github/workflows/test.yaml
+    secrets: inherit
   push_to_registry:
     name: Push Docker image to GitHub Packages
     runs-on: ubuntu-latest
+    needs: tests
     permissions:
       contents: read # required for actions/checkout
       packages: write # required for pushing to ghcr.io
       id-token: write # required for signing with cosign
+    outputs:
+      version: ${{ steps.extract_version.outputs.VERSION }}
+      tag: ${{ steps.extract_version.outputs.TAG }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -29,8 +45,10 @@ jobs:
       - name: Extract version
         id: extract_version
         run: |
-          VERSION=$(grep 'version =' pyproject.toml | sed -e 's/version = "\(.*\)"/\1/')-$(echo $GITHUB_SHA | cut -c1-7)
+          VERSION=$(grep 'version =' pyproject.toml | sed -e 's/version = "\(.*\)"/\1/')
           echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+          TAG=v$(grep 'version =' pyproject.toml | sed -e 's/version = "\(.*\)"/\1/')
+          echo "TAG=$TAG" >> "$GITHUB_OUTPUT"
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
@@ -61,3 +79,40 @@ jobs:
             ghcr.io/sysdiglabs/sysdig-mcp-server:v${{ steps.extract_version.outputs.VERSION }}
           DIGEST: ${{ steps.build-and-push.outputs.digest }}
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+
+  tag_release:
+    name: Tag Release
+    runs-on: ubuntu-latest
+    needs: push_to_registry
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }} # required for better experience using pre-releases
+          fetch-depth: '0' # Required due to the way Git works, without it this action won't be able to find any or the correct tags
+
+      - name: Get tag version
+        id: semantic_release
+        uses: anothrNick/github-tag-action@1.71.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: "patch"
+          TAG_CONTEXT: 'repo'
+          WITH_V: true
+          PRERELEASE_SUFFIX: "beta"
+          PRERELEASE: ${{ (github.base_ref == 'beta') && 'true' || (github.base_ref == 'main') && 'false' || (github.base_ref == 'integration') && 'false' || 'true' }}
+
+      - name: Summary
+        run: |
+          echo "## Release Summary
+          - Tag: ${{ steps.semantic_release.outputs.tag }}
+          - Docker Image: ghcr.io/sysdiglabs/sysdig-mcp-server:v${{ needs.push_to_registry.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+
+  test_helm_chart:
+    name: Test Helm Chart
+    needs: push_to_registry
+    permissions:
+      contents: read # required for actions/checkout
+      pull-requests: write # required for creating a PR with the chart changes
+    uses: ./.github/workflows/helm_test.yaml
+    secrets: inherit

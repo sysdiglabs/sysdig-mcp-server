@@ -9,6 +9,7 @@ import os
 import time
 from typing import Any, Dict
 from fastmcp import Context
+from fastmcp.exceptions import ToolError
 from utils.sysdig.old_sysdig_api import OldSysdigApi
 from starlette.requests import Request
 from fastmcp.server.dependencies import get_http_request
@@ -74,7 +75,7 @@ class SageTools:
             Dict: JSON-decoded response of the executed SysQL query, or an error object.
 
         Raises:
-            Exception: If the SysQL query generation or execution fails.
+            ToolError: If the SysQL query generation or execution fails.
 
         Examples:
             # tool_sysdig_sage(question="Match Cloud Resource affected by Critical Vulnerability")
@@ -87,8 +88,8 @@ class SageTools:
             old_sysdig_api = self.init_client(config_tags=ctx.fastmcp.tags)
             sysql_response = await old_sysdig_api.generate_sysql_query(question)
             if sysql_response.status > 299:
-                raise Exception(f"Sysdig Sage returned an error: {sysql_response.status} - {sysql_response.data}")
-        except Exception as e:
+                raise ToolError(f"Sysdig Sage returned an error: {sysql_response.status} - {sysql_response.data}")
+        except ToolError as e:
             log.error(f"Failed to generate SysQL query: {e}")
             raise e
         json_resp = sysql_response.json() if sysql_response.data else {}
@@ -107,6 +108,6 @@ class SageTools:
             )
 
             return response
-        except Exception as e:
+        except ToolError as e:
             log.error(f"Failed to execute SysQL query: {e}")
             raise e

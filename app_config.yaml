@@ -5,7 +5,7 @@ app:
   log_level: "ERROR"
 
 sysdig:
-  host: "https://secure.sysdig.com"
+  host: "https://us2.app.sysdig.com"
 
 mcp:
   transport: stdio

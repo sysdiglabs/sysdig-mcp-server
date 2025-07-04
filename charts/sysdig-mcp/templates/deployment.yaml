@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "sysdig-mcp.fullname" . }}
+  labels:
+    {{- include "sysdig-mcp.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "sysdig-mcp.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "sysdig-mcp.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "sysdig-mcp.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: SYSDIG_HOST
+            value: {{ .Values.sysdig.host | quote }}
+          {{- if .Values.sysdig.secrets.create }}
+          - name: SYSDIG_SECURE_API_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: "{{ include "sysdig-mcp.fullname" . }}-sysdig-secrets"
+                key: SYSDIG_SECURE_API_TOKEN
+          {{- end }}
+          {{- if .Values.oauth.secrets.create }}
+          - name: MCP_OAUTH_OAUTH_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: "{{ include "sysdig-mcp.fullname" . }}-oauth-secrets"
+                key: clientId
+          - name: MCP_OAUTH_OAUTH_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: "{{ include "sysdig-mcp.fullname" . }}-oauth-secrets"
+                key: clientSecret
+          {{- end }}
+          - name: MCP_TRANSPORT
+            value: {{ .Values.sysdig.mcp.transport | quote }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 60
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: config
+              mountPath: "/app/app_config.yaml"
+              subPath: "app_config.yaml"
+            {{- with .Values.volumeMounts }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+      volumes:
+        - name: config
+          configMap:
+            # Provide the name of the ConfigMap you want to mount.
+            name: {{ include "sysdig-mcp.fullname" . }}-config
+      {{- with .Values.volumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

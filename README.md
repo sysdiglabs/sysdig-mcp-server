@@ -1,8 +1,81 @@
 # MCP Server
 
+## Table of contents
+
+- [MCP Server](#mcp-server)
+  - [Table of contents](#table-of-contents)
+  - [Description](#description)
+  - [Quickstart Guide](#quickstart-guide)
+  - [Available Tools](#available-tools)
+    - [Available Resources](#available-resources)
+  - [Requirements](#requirements)
+    - [UV Setup](#uv-setup)
+  - [Configuration](#configuration)
+    - [`app_config.yaml`](#app_configyaml)
+    - [Environment Variables](#environment-variables)
+  - [Running the Server](#running-the-server)
+    - [Docker](#docker)
+    - [K8s Deployment](#k8s-deployment)
+    - [UV](#uv)
+  - [Client Configuration](#client-configuration)
+    - [Authentication](#authentication)
+    - [URL](#url)
+    - [Claude Desktop App](#claude-desktop-app)
+    - [MCP Inspector](#mcp-inspector)
+
 ## Description
 
 This is an implementation of an [MCP (Model Context Protocol) Server](https://modelcontextprotocol.io/quickstart/server) to allow different LLMs to query information from Sysdig Secure platform. **It is still in early development and not yet ready for production use.** New endpoints and functionalities will be added over time. The goal is to provide a simple and easy-to-use interface for querying information from Sysdig Secure platform using LLMs.
+
+## Quickstart Guide
+
+Get up and running with the Sysdig MCP Server quickly using our pre-built Docker image.
+
+1. **Get your API Token**:
+    Go to your Sysdig Secure instance and navigate to **Settings > Sysdig Secure API**. Here, you can generate or copy your API token. This token is required to authenticate requests to the Sysdig Secure platform (See the [Configuration](#configuration) section for more details).
+
+2. **Pull the image**:
+
+    Pull the latest Sysdig MCP Server image from the GitHub Container Registry:
+
+    ```bash
+    docker pull ghcr.io/sysdiglabs/sysdig-mcp-server:latest
+    ```
+
+3. **Configure your client**:
+
+    For example, you can configure Claude Desktop app to use the Sysdig MCP Server by editing the `claude_desktop_config.json` file. This is useful for running the server locally with the `stdio` transport. You can apply this configuration to any other client that supports MCP (For more details, see the [Client Configuration](#client-configuration) section).
+
+    Substitute the following placeholders with your actual values:
+    - `<your_sysdig_host>`: The hostname of your Sysdig Secure instance (e.g., `https://us2.app.sysdig.com` or `https://eu1.app.sysdig.com`)
+    - `<your_sysdig_secure_api_token>`: Your Sysdig Secure API token
+
+    ```json
+      {
+        "mcpServers": {
+          "sysdig-mcp-server": {
+            "command": "docker",
+            "args": [
+              "run",
+                "-i",
+                "--rm",
+                "-e",
+                "SYSDIG_HOST",
+                "-e",
+                "MCP_TRANSPORT",
+                "-e",
+                "SYSDIG_SECURE_TOKEN",
+                "ghcr.io/sysdiglabs/sysdig-mcp-server:latest"
+            ],
+            "env": {
+              "SYSDIG_HOST": "<your_sysdig_host>",
+              "SYSDIG_SECURE_TOKEN": "<your_sysdig_secure_api_token>",
+              "MCP_TRANSPORT": "stdio"
+            }
+          }
+        }
+      }
+      ```
 
 ## Available Tools
 
@@ -52,6 +125,13 @@ This is an implementation of an [MCP (Model Context Protocol) Server](https://mo
 
 </details>
 
+### Available Resources
+
+- Sysdig Secure Vulnerability Management Overview:
+  - VM documentation based on the following [url](https://docs.sysdig.com/en/sysdig-secure/vulnerability-management/)
+- Sysdig Filter Query Language Instructions:
+  - Sysdig Filter Query Language for different API endpoint filters
+
 ## Requirements
 
 ### UV Setup
@@ -73,10 +153,6 @@ source .venv/bin/activate
 
 This will create a virtual environment using `uv` and install the required dependencies.
 
-### Sysdig SDK
-
-You will need the Sysdig-SDK. You can find it in the `build` directory as a `.tar.gz` file that will be used by UV to install the package.
-
 ## Configuration
 
 The application can be configured via the `app_config.yaml` file and environment variables.
@@ -93,7 +169,7 @@ This file contains the main configuration for the application, including:
 
 The following environment variables are required for configuring the Sysdig SDK:
 
-- `SYSDIG_HOST`: The URL of your Sysdig Secure instance (e.g., `https://secure.sysdig.com`).
+- `SYSDIG_HOST`: The URL of your Sysdig Secure instance (e.g., `https://us2.app.sysdig.com`).
 - `SYSDIG_SECURE_TOKEN`: Your Sysdig Secure API token.
 
 You can find your API token in the Sysdig Secure UI under **Settings > Sysdig Secure API**. Make sure to copy the token as it will not be shown again.
@@ -105,9 +181,11 @@ You can set these variables in your shell or in a `.env` file.
 
 You can also use `MCP_TRANSPORT` to override the transport protocol set in `app_config.yaml`.
 
+> All of this env variables have precedence over the fields configured in the app_config.yaml.
+
 ## Running the Server
 
-You can run the MCP server using either Docker or `uv`.
+You can run the MCP server using either Docker, `uv` or install it in your K8s cluster with helm.
 
 ### Docker
 
@@ -127,6 +205,51 @@ By default, the server will run using the `stdio` transport. To use the `streama
 
 ```bash
 docker run -e MCP_TRANSPORT=streamable-http -e SYSDIG_HOST=<your_sysdig_host> -e SYSDIG_SECURE_TOKEN=<your_sysdig_secure_api_token> -p 8080:8080 sysdig-mcp-server
+```
+
+### K8s Deployment
+
+If you want to run the Sysdig MCP server in a K8s cluster you can use the helm chart provided in the `charts/sysdig-mcp` path
+
+Modify the `values.yaml`
+
+```yaml
+# Example values.yaml
+---
+sysdig:
+  secrets:
+    create: true
+    # If enabled, the secrets will be mounted as environment variables
+    secureAPIToken: "<your_sysdig_secure_api_token>"
+  mcp:
+    transport: "streamable-http"
+  # You can set the Sysdig Tenant URL at this level or below in the app_config configmap
+  host: "https://us2.app.sysdig.com" # <your_sysdig_host> "https://eu1.app.sysdig.com"
+
+configMap:
+  enabled: true
+  app_config: |
+    # Sysdig MCP Server Configuration
+    # This file is used to configure the Sysdig MCP server.
+    # You can add your custom configuration here.
+    app:
+      host: "0.0.0.0"
+      port: 8080
+      log_level: "error"
+
+    sysdig:
+      host: "https://us2.app.sysdig.com" # <your_sysdig_host> "https://eu1.app.sysdig.com"
+
+    mcp:
+      transport: streamable-http
+      host: "0.0.0.0"
+      port: 8080
+```
+
+Install the chart
+
+```bash,copy
+helm upgrade --install sysdig-mcp ./charts/sysdig-mcp/ -n sysdig-mcp -f charts/sysdig-mcp/values.yaml
 ```
 
 ### UV
@@ -233,3 +356,11 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
     - Replace `<path_to_your_sysdig_mcp_server_directory>` with the absolute path to the `sysdig-mcp-server` directory.
 
 4. **Save the file** and restart the Claude Desktop app for the changes to take effect.
+
+### MCP Inspector
+
+1. Run the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) locally
+2. Select the transport type and have the Sysdig MCP server running accordingly.
+3. Pass the Authorization header if using "streamable-http" or the SYSDIG_SECURE_API_TOKEN env var if using "stdio"
+
+![mcp-inspector](./docs/assets/mcp-inspector.png)
