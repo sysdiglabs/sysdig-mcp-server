@@ -36,11 +36,10 @@ class CLIScannerTool:
     ]
 
     exit_code_explained: str = """
-        Exit codes:
-            0: Scan evaluation "pass"
-            1: Scan evaluation "fail"
-            2: Invalid parameters
-            3: Internal error
+        0: Scan evaluation "pass"
+        1: Scan evaluation "fail"
+        2: Invalid parameters
+        3: Internal error
         """
 
     def check_sysdig_cli_installed(self) -> None:
@@ -53,7 +52,7 @@ class CLIScannerTool:
             log.info(f"Sysdig CLI Scanner is installed: {result.stdout.strip()}")
         except subprocess.CalledProcessError as e:
             error: dict = {
-                "error": "Sysdig CLI Scanner is not installed. Check the docs to install it here: https://docs.sysdig.com/en/sysdig-secure/install-vulnerability-cli-scanner/#deployment"
+                "error": "Sysdig CLI Scanner is not installed or not in the $PATH. Check the docs to install it here: https://docs.sysdig.com/en/sysdig-secure/install-vulnerability-cli-scanner/#deployment"
             }
             e.output = error
             raise e
@@ -78,16 +77,42 @@ class CLIScannerTool:
     def run_sysdig_cli_scanner(
         self,
         image: Optional[str] = None,
-        directory_path: Optional[str] = None,
         mode: Literal["vulnerability", "iac"] = "vulnerability",
+        standalone: Optional[bool] = False,
+        offline_analyser: Optional[bool] = False,
+        full_vulnerability_table: Optional[bool] = False,
+        separate_by_layer: Optional[bool] = False,
+        separate_by_image: Optional[bool] = False,
+        detailed_policies_evaluation: Optional[bool] = False,
+        path_to_scan: Optional[str] = None,
+        iac_group_by: Optional[Literal["policy", "resource", "violation"]] = "policy",
+        iac_recursive: Optional[bool] = True,
+        iac_severity_threshold: Optional[Literal["never", "high", "medium", "low"]] = "high",
+        iac_list_unsupported_resources: Optional[bool] = False,
     ) -> dict:
         """
         Analyzes a Container image for vulnerabilities using the Sysdig CLI Scanner.
         Args:
             image (str): The name of the container image to analyze.
-            directory_path (str): The path to the directory containing IaC files to analyze.
             mode ["vulnerability", "iac"]: The mode of analysis, either "vulnerability" or "iac".
                 Defaults to "vulnerability".
+            standalone (bool): In vulnerability mode, run the scan in standalone mode.
+                Not dependent on Sysdig backend.
+            offline_analyser (bool): In vulnerability mode, does not perform calls to the Sysdig backend.
+            full_vulnerability_table (bool): In vulnerability mode, generates a table with all the vulnerabilities,
+                not just the most important ones.
+            separate_by_layer (bool): In vulnerability mode, separates vulnerabilities by layer.
+            separate_by_image (bool): In vulnerability mode, separates vulnerabilities by image.
+            detailed_policies_evaluation (bool): In vulnerability mode, evaluates policies in detail.
+            path_to_scan (str): The path to the directory/file to scan in IaC mode.
+            iac_group_by (str): In IaC mode, groups the results by the specified field.
+                Options are "policy", "resource", or "violation". Defaults to "policy".
+            iac_recursive (bool): In IaC mode, scans the directory recursively. Defaults to True.
+            iac_severity_threshold (str): In IaC mode, sets the severity threshold for vulnerabilities.
+                Options are "never", "high", "medium", or "low". Defaults to "high".
+            iac_list_unsupported_resources (bool): In IaC mode, lists unsupported resources.
+                Defaults to False.
+
         Returns:
             dict: A dictionary containing the output of the analysis of vulnerabilities.
         Raises:
@@ -100,11 +125,28 @@ class CLIScannerTool:
         # Prepare the command based on the mode
         if mode == "iac":
             log.info("Running Sysdig CLI Scanner in IaC mode.")
-            cmd = [self.cmd] + self.default_args + self.iac_default_args + [directory_path]
+            extra_iac_args = [
+                f"--group-by={iac_group_by}",
+                f"--severity-threshold={iac_severity_threshold}",
+                "--recursive" if iac_recursive else "",
+                "--list-unsupported-resources" if iac_list_unsupported_resources else "",
+            ]
+            # Remove empty strings from the list
+            extra_iac_args = [arg for arg in extra_iac_args if arg]
+            cmd = [self.cmd] + self.default_args + self.iac_default_args + extra_iac_args + [path_to_scan]
         else:
             log.info("Running Sysdig CLI Scanner in vulnerability mode.")
             # Default to vulnerability mode
-            cmd = [self.cmd] + self.default_args + [image]
+            extra_args = [
+                "--standalone" if standalone else "",
+                "--offline-analyzer" if offline_analyser and standalone else "",
+                "--full-vulns-table" if full_vulnerability_table else "",
+                "--separate-by-layer" if separate_by_layer else "",
+                "--separate-by-image" if separate_by_image else "",
+                "--detailed-policies-eval" if detailed_policies_evaluation else "",
+            ]
+            extra_args = [arg for arg in extra_args if arg]  # Remove empty strings from the list
+            cmd = [self.cmd] + self.default_args + extra_args + [image]
 
         try:
             # Run the command
@@ -114,7 +156,7 @@ class CLIScannerTool:
                 output_file.close()
                 return {
                     "exit_code": result.returncode,
-                    "output": output_result,
+                    "output": output_result + result.stderr.strip(),
                     "exit_codes_explained": self.exit_code_explained,
                 }
         # Handle non-zero exit codes speically exit code 1
