@@ -9,6 +9,7 @@ from typing import Annotated
 from pydantic import Field
 from fastmcp.server.dependencies import get_http_request
 from fastmcp import Context
+from fastmcp.exceptions import ToolError
 from starlette.requests import Request
 from sysdig_client import ApiException
 from sysdig_client.api import InventoryApi
@@ -18,8 +19,8 @@ from utils.sysdig.api import initialize_api_client
 from utils.query_helpers import create_standard_response
 
 # Configure logging
-log = logging.getLogger(__name__)
 logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
+log = logging.getLogger(__name__)
 
 # Load app config (expects keys: mcp.host, mcp.port, mcp.transport)
 app_config = get_app_config()
@@ -69,12 +70,78 @@ class InventoryTools:
             Field(
                 description=(
                     """
-                    Sysdig Secure filter expression for inventory resources,
-                    base filter: platform in ("GCP", "AWS", "Azure", "Kubernetes"),
-                    Examples:
-                        not isExposed exists; category in ("IAM") and isExposed exists; category in ("IAM","Audit & Monitoring")
+                    Sysdig Secure query filter expression to filter inventory resources.
+
+                    Use the resource://filter-query-language to get the expected filter expression format.
+               
+                    List of supported fields:
+                    - accountName
+                    - accountId
+                    - cluster
+                    - externalDNS
+                    - distribution
+                    - integrationName
+                    - labels
+                    - location
+                    - name
+                    - namespace
+                    - nodeType
+                    - osName
+                    - osImage
+                    - organization
+                    - platform
+                    - control.accepted
+                    - policy
+                    - control.severity
+                    - control.failed
+                    - policy.failed
+                    - policy.passed
+                    - projectName
+                    - projectId
+                    - region
+                    - repository
+                    - resourceOrigin
+                    - type
+                    - subscriptionName
+                    - subscriptionId
+                    - sourceType
+                    - version
+                    - zone
+                    - category
+                    - isExposed
+                    - validatedExposure
+                    - arn
+                    - resourceId
+                    - container.name
+                    - architecture
+                    - baseOS
+                    - digest
+                    - imageId
+                    - os
+                    - container.imageName
+                    - image.registry
+                    - image.tag
+                    - package.inUse
+                    - package.info
+                    - package.path
+                    - package.type
+                    - vuln.cvssScore
+                    - vuln.hasExploit
+                    - vuln.hasFix
+                    - vuln.name
+                    - vuln.severity
+                    - machineImage
                 """
-                )
+                ),
+                examples=[
+                    'zone in ("zone1") and machineImage = "ami-0b22b359fdfabe1b5"',
+                    '(projectId = "1235495521" or projectId = "987654321") and vuln.severity in ("Critical")',
+                    'vuln.name in ("CVE-2023-0049")',
+                    'vuln.cvssScore >= "3"',
+                    'container.name in ("sysdig-container") and not labels exists',
+                    'imageId in ("sha256:3768ff6176e29a35ce1354622977a1e5c013045cbc4f30754ef3459218be8ac")',
+                    'platform in ("GCP", "AWS", "Azure", "Kubernetes") and isExposed exists',
+                ],
             ),
         ] = 'platform in ("GCP", "AWS", "Azure", "Kubernetes")',
         page_number: Annotated[int, Field(ge=1, description="Page number for pagination (1-based index)")] = 1,
@@ -112,7 +179,7 @@ class InventoryTools:
             response = create_standard_response(results=api_response, execution_time_ms=execution_time)
 
             return response
-        except ApiException as e:
+        except ToolError as e:
             logging.error("Exception when calling InventoryApi->get_resources: %s\n" % e)
             raise e
 
@@ -141,6 +208,6 @@ class InventoryTools:
             response = create_standard_response(results=api_response, execution_time_ms=execution_time)
 
             return response
-        except ApiException as e:
+        except ToolError as e:
             log.error(f"Exception when calling InventoryApi->get_resource: {e}")
             raise e

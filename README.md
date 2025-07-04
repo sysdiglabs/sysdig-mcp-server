@@ -7,6 +7,7 @@
   - [Description](#description)
   - [Quickstart Guide](#quickstart-guide)
   - [Available Tools](#available-tools)
+    - [Available Resources](#available-resources)
   - [Requirements](#requirements)
     - [UV Setup](#uv-setup)
   - [Configuration](#configuration)
@@ -123,6 +124,13 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
 | `sysdig_sysql_sage_query` | Generate and run a SysQL query using natural language | "List top 10 pods by memory usage in the last hour" |
 
 </details>
+
+### Available Resources
+
+- Sysdig Secure Vulnerability Management Overview:
+  - VM documentation based on the following [url](https://docs.sysdig.com/en/sysdig-secure/vulnerability-management/)
+- Sysdig Filter Query Language Instructions:
+  - Sysdig Filter Query Language for different API endpoint filters
 
 ## Requirements
 
