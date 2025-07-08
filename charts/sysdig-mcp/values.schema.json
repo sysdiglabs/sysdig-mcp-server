@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Values",
+  "type": "object",
+  "properties": {
+    "sysdig": {
+      "$ref": "#/$defs/SysdigConfig"
+    },
+    "oauth": {
+      "$ref": "#/$defs/OauthConfig"
+    }
+  },
+  "required": [
+    "configMap",
+    "sysdig"
+  ],
+  "$defs": {
+    "SysdigConfig": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": [ "string", "null" ],
+          "description": "Sysdig Tenant Host",
+          "examples": [
+            "https://us2.app.sysdig.com",
+            "https://eu1.app.sysdig.com"
+          ]
+        },
+        "mcp": {
+          "type": "object",
+          "properties": {
+            "transport": {
+              "type": "string",
+              "enum": [
+                "streamable-http",
+                "sse",
+                "stdio"
+              ],
+              "description": "The transport protocol for the Sysdig MCP"
+            }
+          },
+          "required": [
+            "transport"
+          ]
+        },
+        "secrets": {
+          "type": "object",
+          "properties": {
+            "create": {
+              "type": "boolean",
+              "description": "Whether to create the secret"
+            },
+            "secureAPIToken": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "The API Token to access Sysdig Secure",
+              "examples": [
+                "12345678-1234-1234-1234-123456789012"
+              ]
+            }
+          },
+          "required": [
+            "create",
+            "secureAPIToken"
+          ]
+        }
+      },
+      "required": [
+        "host",
+        "mcp",
+        "secrets"
+      ],
+      "additionalProperties": false
+    },
+    "OauthConfig": {
+      "type": "object",
+      "properties": {
+        "secrets": {
+          "type": "object",
+          "properties": {
+            "create": {
+              "type": "boolean",
+              "description": "Whether to create the secret"
+            },
+            "clientId": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "The Client ID for the OAuth application",
+              "examples": [
+                "my-client-id"
+              ]
+            },
+            "clientSecret": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "The Client Secret for the OAuth application",
+              "examples": [
+                "my-client-secret"
+              ]
+            }
+          },
+          "required": [
+            "create",
+            "clientId",
+            "clientSecret"
+          ]
+        }
+      },
+      "required": [
+        "secrets"
+      ],
+      "additionalProperties": false
+    },
+    "AppConfig": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+            "description": "Whether to create the application configuration"
+        },
+        "app_config": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The application configuration in YAML format"
+        }
+      },
+      "required": [
+        "secrets"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
