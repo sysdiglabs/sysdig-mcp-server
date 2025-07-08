@@ -6,7 +6,7 @@ import logging
 import os
 import dask.dataframe as dd
 import pandas as pd
-from tools.inventory.tool import InventoryTools, FastMCP
+from tools.inventory.tool import InventoryTools
 
 # Configure logging
 logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
