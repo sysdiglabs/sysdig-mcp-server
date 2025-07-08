@@ -37,12 +37,10 @@ class SageTools:
         using the Sysdig Secure token and host from the environment variables.
         Returns:
             OldSysdigApi: An instance of the OldSysdigApi client.
-
-        Raises:
-            ValueError: If the SYSDIG_SECURE_TOKEN environment variable is not set.
         """
         old_sysdig_api: OldSysdigApi = None
-        if app_config.get("mcp", {}).get("transport", "") == "streamable-http":
+        transport = os.environ.get("MCP_TRANSPORT", app_config["mcp"]["transport"]).lower()
+        if transport in ["streamable-http", "sse"]:
             # Try to get the HTTP request
             log.debug("Attempting to get the HTTP request to initialize the Sysdig API client.")
             request: Request = get_http_request()
@@ -50,12 +48,7 @@ class SageTools:
         else:
             # If running in STDIO mode, we need to initialize the API client from environment variables
             log.debug("Running in STDIO mode, initializing the Sysdig API client from environment variables.")
-            SYSDIG_SECURE_TOKEN = os.environ.get("SYSDIG_SECURE_TOKEN", "")
-            if not SYSDIG_SECURE_TOKEN:
-                raise ValueError("Can not initialize client, SYSDIG_SECURE_TOKEN environment variable is not set.")
-
-            SYSDIG_HOST = os.environ.get("SYSDIG_HOST", app_config["sysdig"]["host"])
-            cfg = get_configuration(SYSDIG_SECURE_TOKEN, SYSDIG_HOST, old_api=True)
+            cfg = get_configuration(old_api=True)
             api_client = initialize_api_client(cfg)
             old_sysdig_api = OldSysdigApi(api_client)
         return old_sysdig_api

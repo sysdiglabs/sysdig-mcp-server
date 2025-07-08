@@ -38,26 +38,21 @@ class InventoryTools:
         using the Sysdig Secure token and host from the environment variables.
         Returns:
             InventoryApi: An instance of the InventoryApi client.
-        Raises:
-            ValueError: If the SYSDIG_SECURE_TOKEN environment variable is not set.
         """
-        secure_events_api: InventoryApi = None
-        if app_config.get("mcp", {}).get("transport", "") == "streamable-http":
+        inventory_api: InventoryApi = None
+        transport = os.environ.get("MCP_TRANSPORT", app_config["mcp"]["transport"]).lower()
+        if transport in ["streamable-http", "sse"]:
             # Try to get the HTTP request
             log.debug("Attempting to get the HTTP request to initialize the Sysdig API client.")
             request: Request = get_http_request()
-            secure_events_api = request.state.api_instances["inventory"]
+            inventory_api = request.state.api_instances["inventory"]
         else:
             # If running in STDIO mode, we need to initialize the API client from environment variables
             log.debug("Running in STDIO mode, initializing the Sysdig API client from environment variables.")
-            SYSDIG_SECURE_TOKEN = os.environ.get("SYSDIG_SECURE_TOKEN", "")
-            if not SYSDIG_SECURE_TOKEN:
-                raise ValueError("Can not initialize client, SYSDIG_SECURE_TOKEN environment variable is not set.")
-            SYSDIG_HOST = os.environ.get("SYSDIG_HOST", app_config["sysdig"]["host"])
-            cfg = get_configuration(SYSDIG_SECURE_TOKEN, SYSDIG_HOST)
+            cfg = get_configuration()
             api_client = initialize_api_client(cfg)
-            secure_events_api = InventoryApi(api_client)
-        return secure_events_api
+            inventory_api = InventoryApi(api_client)
+        return inventory_api
 
     def tool_list_resources(
         self,

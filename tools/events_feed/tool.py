@@ -24,7 +24,6 @@ from utils.app_config import get_app_config
 from utils.sysdig.api import initialize_api_client
 
 logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
-
 log = logging.getLogger(__name__)
 
 # Load app config (expects keys: mcp.host, mcp.port, mcp.transport)
@@ -46,12 +45,11 @@ class EventsFeedTools:
             old_api (bool): If True, initializes the OldSysdigApi client instead of SecureEventsApi.
         Returns:
             SecureEventsApi | OldSysdigApi: An instance of the SecureEventsApi or OldSysdigApi client.
-        Raises:
-            ValueError: If the SYSDIG_SECURE_TOKEN environment variable is not set.
         """
         secure_events_api: SecureEventsApi = None
         old_sysdig_api: OldSysdigApi = None
-        if app_config.get("mcp", {}).get("transport", "") == "streamable-http":
+        transport = os.environ.get("MCP_TRANSPORT", app_config["mcp"]["transport"]).lower()
+        if transport in ["streamable-http", "sse"]:
             # Try to get the HTTP request
             log.debug("Attempting to get the HTTP request to initialize the Sysdig API client.")
             request: Request = get_http_request()
@@ -60,15 +58,11 @@ class EventsFeedTools:
         else:
             # If running in STDIO mode, we need to initialize the API client from environment variables
             log.debug("Running in STDIO mode, initializing the Sysdig API client from environment variables.")
-            SYSDIG_SECURE_TOKEN = os.environ.get("SYSDIG_SECURE_TOKEN", "")
-            if not SYSDIG_SECURE_TOKEN:
-                raise ValueError("Can not initialize client, SYSDIG_SECURE_TOKEN environment variable is not set.")
-            SYSDIG_HOST = os.environ.get("SYSDIG_HOST", app_config["sysdig"]["host"])
-            cfg = get_configuration(SYSDIG_SECURE_TOKEN, SYSDIG_HOST)
+            cfg = get_configuration()
             api_client = initialize_api_client(cfg)
             secure_events_api = SecureEventsApi(api_client)
             # Initialize the old Sysdig API client for process tree requests
-            old_cfg = get_configuration(SYSDIG_SECURE_TOKEN, SYSDIG_HOST, old_api=True)
+            old_cfg = get_configuration(old_api=True)
             old_sysdig_api = initialize_api_client(old_cfg)
             old_sysdig_api = OldSysdigApi(old_sysdig_api)
 

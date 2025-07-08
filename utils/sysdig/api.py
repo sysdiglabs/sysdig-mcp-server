@@ -20,7 +20,7 @@ def get_api_client(config: Configuration) -> ApiClient:
     return api_client_instance
 
 
-def initialize_api_client(config: Configuration) -> ApiClient:
+def initialize_api_client(config: Configuration = None) -> ApiClient:
     """
     Initializes the Sysdig API client with the provided token and host.
     This function creates a new ApiClient instance and returns a dictionary of API instances

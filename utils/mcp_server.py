@@ -39,6 +39,8 @@ _mcp_instance: Optional[FastMCP] = None
 
 middlewares = [Middleware(CustomAuthMiddleware)]
 
+MCP_MOUNT_PATH = "/sysdig-mcp-server"
+
 
 def create_simple_mcp_server() -> FastMCP:
     """
@@ -52,7 +54,6 @@ def create_simple_mcp_server() -> FastMCP:
         instructions="Provides Sysdig Secure tools and resources.",
         host=app_config["mcp"]["host"],
         port=app_config["mcp"]["port"],
-        debug=True,
         tags=["sysdig", "mcp", os.environ.get("MCP_TRANSPORT", app_config["mcp"]["transport"]).lower()],
     )
 
@@ -96,12 +97,12 @@ def run_http():
     add_tools(mcp=mcp, allowed_tools=app_config["mcp"]["allowed_tools"], transport_type=app_config["mcp"]["transport"])
     # Add resources to the MCP server
     add_resources(mcp)
-    # Mount the MCP HTTP/SSE app at '/sysdig-mcp-server'
-    mcp_app = mcp.http_app(
-        path="/mcp", transport=os.environ.get("MCP_TRANSPORT", app_config["mcp"]["transport"]).lower(), middleware=middlewares
-    )
+    # Mount the MCP HTTP/SSE app at 'MCP_MOUNT_PATH'
+    transport = os.environ.get("MCP_TRANSPORT", app_config["mcp"]["transport"]).lower()
+    mcp_app = mcp.http_app(transport=transport, middleware=middlewares)
+    suffix_path = mcp.settings.streamable_http_path if transport == "streamable-http" else mcp.settings.sse_path
     app = FastAPI(lifespan=mcp_app.lifespan)
-    app.mount("/sysdig-mcp-server", mcp_app)
+    app.mount(MCP_MOUNT_PATH, mcp_app)
 
     @app.get("/healthz", response_class=Response)
     async def health_check(request: Request) -> Response:
@@ -115,7 +116,9 @@ def run_http():
         """
         return JSONResponse({"status": "ok"})
 
-    log.info(f"Starting {mcp.name} at http://{app_config['app']['host']}:{app_config['app']['port']}/sysdig-mcp-server/mcp")
+    log.info(
+        f"Starting {mcp.name} at http://{app_config['app']['host']}:{app_config['app']['port']}{MCP_MOUNT_PATH}{suffix_path}"
+    )
     # Use Uvicorn's Config and Server classes for more control
     config = uvicorn.Config(
         app,
@@ -270,7 +273,7 @@ def add_tools(mcp: FastMCP, allowed_tools: list, transport_type: Literal["stdio"
             ),
         )
 
-    if transport_type == "stdio" and "sysdig-cli-scanner" in allowed_tools:
+    if "sysdig-cli-scanner" in allowed_tools:
         # Register the tools for STDIO transport
         cli_scanner_tool = CLIScannerTool()
         log.info("Adding Sysdig CLI Scanner Tool...")
