@@ -79,7 +79,7 @@ def _get_public_api_url(base_url: str) -> str:
     # This assumes the region is a subdomain that starts with 2 lowercase letters and ends with a digit
     pattern = re.search(r"https://(?:(?P<region1>[a-z]{2}\d)\.app|app\.(?P<region2>[a-z]{2}\d))\.sysdig\.com", base_url)
     if pattern:
-        region = pattern.group(1)  # Extract the region
+        region = pattern.group("region1") or pattern.group("region2")  # Extract the region
         return f"https://api.{region}.sysdig.com"
     else:
         # Edge case for the secure API URL that is us1
