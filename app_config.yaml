@@ -11,3 +11,9 @@ mcp:
   transport: stdio
   host: "localhost"
   port: 8080
+  allowed_tools:
+    - "events-feed"
+    - "sysdig-cli-scanner" # Only available in stdio local transport mode
+    - "vulnerability-management"
+    - "inventory"
+    - "sysdig-sage"

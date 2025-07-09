@@ -6,14 +6,17 @@ import sysdig_client
 import os
 import logging
 import re
+from typing import Optional
 
 # Set up logging
-log = logging.getLogger(__name__)
 logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
+log = logging.getLogger(__name__)
 
 
 # Lazy-load the Sysdig client configuration
-def get_configuration(token: str, sysdig_host_url: str, old_api: bool = False) -> sysdig_client.Configuration:
+def get_configuration(
+    token: Optional[str] = None, sysdig_host_url: Optional[str] = None, old_api: bool = False
+) -> sysdig_client.Configuration:
     """
     Returns a configured Sysdig client using environment variables.
 
@@ -24,6 +27,11 @@ def get_configuration(token: str, sysdig_host_url: str, old_api: bool = False) -
     Returns:
         sysdig_client.Configuration: A configured Sysdig client instance.
     """
+    # Check if the token and sysdig_host_url are provided, otherwise fetch from environment variables
+    if not token and not sysdig_host_url:
+        env_vars = get_api_env_vars()
+        token = env_vars["SYSDIG_SECURE_TOKEN"]
+        sysdig_host_url = env_vars["SYSDIG_HOST"]
     if not old_api:
         sysdig_host_url = _get_public_api_url(sysdig_host_url)
         log.info(f"Using public API URL: {sysdig_host_url}")
@@ -33,6 +41,28 @@ def get_configuration(token: str, sysdig_host_url: str, old_api: bool = False) -
         host=sysdig_host_url,
     )
     return configuration
+
+
+def get_api_env_vars() -> dict:
+    """
+    Get the necessary environment variables for the Sysdig API client.
+
+    Returns:
+        dict: A dictionary containing the required environment variables.
+    Raises:
+        ValueError: If any of the required environment variables are not set.
+    """
+    required_vars = ["SYSDIG_SECURE_TOKEN", "SYSDIG_HOST"]
+    env_vars = {}
+    for var in required_vars:
+        value = os.environ.get(var)
+        if not value:
+            log.error(f"Missing required environment variable: {var}")
+            raise ValueError(f"Environment variable {var} is not set. Please set it before running the application.")
+        env_vars[var] = value
+    log.info("All required environment variables are set.")
+
+    return env_vars
 
 
 def _get_public_api_url(base_url: str) -> str:

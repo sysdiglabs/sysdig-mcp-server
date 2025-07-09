@@ -8,7 +8,7 @@ image:
   repository: ghcr.io/sysdiglabs/sysdig-mcp-server
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.1.2-beta.0-3d30346"
+  tag: "v0.1.3-beta.0"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -126,3 +126,9 @@ configMap:
       transport: streamable-http
       host: "0.0.0.0"
       port: 8080
+      allowed_tools:
+      - "events-feed"
+      - "sysdig-cli-scanner" # You need the sysdig-cli-scanner binary installed in your server to use this tool
+      - "vulnerability-management"
+      - "inventory"
+      - "sysdig-sage"

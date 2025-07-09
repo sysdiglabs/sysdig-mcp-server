@@ -8,7 +8,6 @@ import logging
 import os
 import time
 from typing import Any, Dict
-from fastmcp import Context
 from fastmcp.exceptions import ToolError
 from utils.sysdig.old_sysdig_api import OldSysdigApi
 from starlette.requests import Request
@@ -18,8 +17,8 @@ from utils.app_config import get_app_config
 from utils.sysdig.api import initialize_api_client
 from utils.query_helpers import create_standard_response
 
-log = logging.getLogger(__name__)
 logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
+log = logging.getLogger(__name__)
 
 app_config = get_app_config()
 
@@ -31,21 +30,17 @@ class SageTools:
     language questions and execute them against the Sysdig API.
     """
 
-    def init_client(self, config_tags: set[str]) -> OldSysdigApi:
+    def init_client(self) -> OldSysdigApi:
         """
         Initializes the OldSysdigApi client from the request state.
         If the request does not have the API client initialized, it will create a new instance
         using the Sysdig Secure token and host from the environment variables.
-        Args:
-            config_tags (set[str]): The tags associated with the MCP server configuration, used to determine the transport mode.
         Returns:
             OldSysdigApi: An instance of the OldSysdigApi client.
-
-        Raises:
-            ValueError: If the SYSDIG_SECURE_TOKEN environment variable is not set.
         """
         old_sysdig_api: OldSysdigApi = None
-        if "streamable-http" in config_tags:
+        transport = os.environ.get("MCP_TRANSPORT", app_config["mcp"]["transport"]).lower()
+        if transport in ["streamable-http", "sse"]:
             # Try to get the HTTP request
             log.debug("Attempting to get the HTTP request to initialize the Sysdig API client.")
             request: Request = get_http_request()
@@ -53,17 +48,12 @@ class SageTools:
         else:
             # If running in STDIO mode, we need to initialize the API client from environment variables
             log.debug("Running in STDIO mode, initializing the Sysdig API client from environment variables.")
-            SYSDIG_SECURE_TOKEN = os.environ.get("SYSDIG_SECURE_TOKEN", "")
-            if not SYSDIG_SECURE_TOKEN:
-                raise ValueError("Can not initialize client, SYSDIG_SECURE_TOKEN environment variable is not set.")
-
-            SYSDIG_HOST = os.environ.get("SYSDIG_HOST", app_config["sysdig"]["host"])
-            cfg = get_configuration(SYSDIG_SECURE_TOKEN, SYSDIG_HOST, old_api=True)
+            cfg = get_configuration(old_api=True)
             api_client = initialize_api_client(cfg)
             old_sysdig_api = OldSysdigApi(api_client)
         return old_sysdig_api
 
-    async def tool_sysdig_sage(self, ctx: Context, question: str) -> Dict[str, Any]:
+    async def tool_sage_to_sysql(self, question: str) -> dict:
         """
         Queries Sysdig Sage with a natural language question, retrieves a SysQL query,
         executes it against the Sysdig API, and returns the results.
@@ -72,20 +62,20 @@ class SageTools:
             question (str): A natural language question to send to Sage.
 
         Returns:
-            Dict: JSON-decoded response of the executed SysQL query, or an error object.
+            dict: A dictionary containing the results of the SysQL query execution and the query text.
 
         Raises:
             ToolError: If the SysQL query generation or execution fails.
 
         Examples:
-            # tool_sysdig_sage(question="Match Cloud Resource affected by Critical Vulnerability")
-            # tool_sysdig_sage(question="Match Kubernetes Workload affected by Critical Vulnerability")
-            # tool_sysdig_sage(question="Match AWS EC2 Instance that violates control 'EC2 - Instances should use IMDSv2'")
+            # tool_sage_to_sysql(question="Match Cloud Resource affected by Critical Vulnerability")
+            # tool_sage_to_sysql(question="Match Kubernetes Workload affected by Critical Vulnerability")
+            # tool_sage_to_sysql(question="Match AWS EC2 Instance that violates control 'EC2 - Instances should use IMDSv2'")
         """
         # 1) Generate SysQL query
         try:
             start_time = time.time()
-            old_sysdig_api = self.init_client(config_tags=ctx.fastmcp.tags)
+            old_sysdig_api = self.init_client()
             sysql_response = await old_sysdig_api.generate_sysql_query(question)
             if sysql_response.status > 299:
                 raise ToolError(f"Sysdig Sage returned an error: {sysql_response.status} - {sysql_response.data}")

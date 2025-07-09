@@ -25,6 +25,7 @@ def create_standard_response(results: RESTResponseType, execution_time_ms: str, 
         raise ApiException(
             status=results.status,
             reason=results.reason,
+            data=results.data,
         )
     else:
         response = results.json() if results.data else {}
