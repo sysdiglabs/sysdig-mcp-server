@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - main
-      - beta
     paths:
       - '.github/workflows/**'
       - pyproject.toml
@@ -99,8 +98,6 @@ jobs:
           DEFAULT_BUMP: "patch"
           TAG_CONTEXT: 'repo'
           WITH_V: true
-          PRERELEASE_SUFFIX: "beta"
-          PRERELEASE: ${{ (github.base_ref || github.ref_name == 'beta') && 'true' || ((github.base_ref || github.ref_name == 'main') && 'false' || 'true') }}
 
       - name: Summary
         run: |

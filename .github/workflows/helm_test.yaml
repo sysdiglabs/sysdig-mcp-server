@@ -4,14 +4,12 @@ name: Lint & Test helm chart
 on:
   pull_request:
     branches:
-      - beta
       - main
     paths:
     - 'charts/**'
   push:
     branches:
       - main
-      - beta
     paths:
     - 'charts/**'
   workflow_call:
