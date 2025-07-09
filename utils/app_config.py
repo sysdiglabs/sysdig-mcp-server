@@ -9,8 +9,8 @@ import os
 from typing import Optional
 
 # Set up logging
-log = logging.getLogger(__name__)
 logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
+log = logging.getLogger(__name__)
 
 # app_config singleton
 _app_config: Optional[dict] = None
@@ -61,9 +61,11 @@ def load_app_config() -> dict:
 def get_app_config() -> dict:
     """
     Get the the overall app config
+    This function uses a singleton pattern to ensure the config is loaded only once.
+    If the config is already loaded, it returns the existing config.
 
     Returns:
-        dict: The app config loaded from the YAML file, or an empty dict if the file
+        dict: The app config loaded from the YAML file, or an empty dict if the file does not exist or is invalid.
     """
     global _app_config
     if _app_config is None:

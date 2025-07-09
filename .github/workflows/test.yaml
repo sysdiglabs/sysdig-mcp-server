@@ -65,6 +65,13 @@ jobs:
           TAG=v$(grep 'version =' pyproject.toml | sed -e 's/version = "\(.*\)"/\1/')
           echo "TAG=$TAG" >> "$GITHUB_OUTPUT"
 
+      - name: Get branch ref name
+        id: branch_ref
+        run: |
+          BRANCH_NAME=${{ github.base_ref || github.ref_name }}
+          echo "$BRANCH_NAME"
+          echo "BRANCH_NAME=$BRANCH_NAME" >> "$GITHUB_OUTPUT"
+
       - name: Get tag version
         id: semantic_release
         uses: anothrNick/github-tag-action@1.71.0
@@ -73,8 +80,6 @@ jobs:
           DEFAULT_BUMP: "patch"
           TAG_CONTEXT: 'repo'
           WITH_V: true
-          PRERELEASE_SUFFIX: "beta"
-          PRERELEASE: ${{ (github.base_ref == 'beta') && 'true' || (github.base_ref == 'main') && 'false' || (github.base_ref == 'integration') && 'false' || 'true' }}
           DRY_RUN: true
 
       - name: Compare versions

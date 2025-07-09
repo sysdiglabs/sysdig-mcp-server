@@ -1,4 +1,3 @@
----
 {{- if .Values.configMap.enabled -}}
 apiVersion: v1
 kind: ConfigMap

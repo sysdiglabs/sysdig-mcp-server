@@ -1,5 +1,11 @@
 # MCP Server
 
+| App Test | Helm Test |
+|------|---------|
+| [![App Test](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/publish.yaml/badge.svg?branch=main)](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/publish.yaml) | [![Helm Test](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/helm_test.yaml/badge.svg?branch=main)](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/helm_test.yaml) |
+
+---
+
 ## Table of contents
 
 - [MCP Server](#mcp-server)
@@ -79,6 +85,21 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
 
 ## Available Tools
 
+You can select what group of tools to add when running the server by adding/removing them from the `mcp.allowed_tools` list in the app_config.yaml file
+
+```yaml
+...
+mcp:
+  transport: stdio
+  ...
+  allowed_tools:
+    - "events-feed"
+    - "inventory"
+    - "vulnerability-management"
+    - "sysdig-sage"
+    - "sysdig-cli-scanner" # Only available in stdio local transport mode
+```
+
 <details>
 <summary><strong>Events Feed</strong></summary>
 
@@ -125,6 +146,15 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
 
 </details>
 
+<details>
+<summary><strong>Sysdig CLI scanner</strong></summary>
+
+| Tool Name | Description | Sample Prompt |
+|-----------|-------------|----------------|
+| `run_sysdig_cli_scanner` | Run the Sysdig CLI Scanner to analyze a container image or IaC files for vulnerabilities and posture and misconfigurations. | "Scan this image ubuntu:latest for vulnerabilities" |
+
+</details>
+
 ### Available Resources
 
 - Sysdig Secure Vulnerability Management Overview:
@@ -164,6 +194,8 @@ This file contains the main configuration for the application, including:
 - **app**: Host, port, and log level for the MCP server.
 - **sysdig**: The Sysdig Secure host to connect to.
 - **mcp**: Transport protocol (stdio, sse, streamable-http), URL, host, and port for the MCP server.
+
+> You can set the path for the app_config.yaml using the `APP_CONFIG_FILE=/path/to/app_config.yaml` env var. By default the app will search the file in the root of the app.
 
 ### Environment Variables
 
@@ -244,6 +276,12 @@ configMap:
       transport: streamable-http
       host: "0.0.0.0"
       port: 8080
+      allowed_tools:
+        - "events-feed"
+        - "inventory"
+        - "vulnerability-management"
+        - "sysdig-sage"
+        - "sysdig-cli-scanner" # You need the sysdig-cli-scanner binary installed in your server to use this tool
 ```
 
 Install the chart

@@ -56,7 +56,7 @@ class OldSysdigApi:
             process_id (str): The ID of the process to retrieve branches for.
 
         Returns:
-            Dict[str, Any]: The JSON-decoded response containing the process tree branches.
+            dict: The JSON-decoded response containing the process tree branches.
         """
         url = f"{self.base}/process-tree/v1/process-branches/{process_id}"
         resp = self.api_client.call_api("GET", url, header_params=self.headers)

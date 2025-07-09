@@ -5,15 +5,14 @@ on:
   push:
     branches:
       - main
-      - beta
     paths:
+      - '.github/workflows/**'
       - pyproject.toml
       - Dockerfile
       - '*.py'
       - tests/**
       - tools/**
       - utils/**
-  workflow_dispatch:
 
 concurrency:
   group: 'publish-${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
@@ -99,8 +98,6 @@ jobs:
           DEFAULT_BUMP: "patch"
           TAG_CONTEXT: 'repo'
           WITH_V: true
-          PRERELEASE_SUFFIX: "beta"
-          PRERELEASE: ${{ (github.base_ref == 'beta') && 'true' || (github.base_ref == 'main') && 'false' || (github.base_ref == 'integration') && 'false' || 'true' }}
 
       - name: Summary
         run: |
