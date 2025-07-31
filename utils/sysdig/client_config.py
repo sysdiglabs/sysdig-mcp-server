@@ -67,20 +67,30 @@ def get_api_env_vars() -> dict:
 
 def _get_public_api_url(base_url: str) -> str:
     """
-    Get the public API URL from the base URL.
+    Maps a Sysdig base URL to its corresponding public API URL.
+    This function extracts the region from the base URL and constructs the public API URL in the format
+    https://api.{region}.sysdig.com.
+
+    If the base URL does not match any known patterns, it returns the original base URL.
 
     Args:
         base_url: The base URL of the Sysdig API
 
     Returns:
-        str: The public API URL in the format https://api.<region>.sysdig.com
+        str: The public API URL in the format https://api.{region}.sysdig.com
     """
-    # Regex to capture the region pattern (like us2, us3, au1, etc.)
-    # This assumes the region is a subdomain that starts with 2 lowercase letters and ends with a digit
-    pattern = re.search(r"https://(?:(?P<region1>[a-z]{2}\d)\.app|app\.(?P<region2>[a-z]{2}\d))\.sysdig\.com", base_url)
-    if pattern:
-        region = pattern.group("region1") or pattern.group("region2")  # Extract the region
-        return f"https://api.{region}.sysdig.com"
-    else:
-        # Edge case for the secure API URL that is us1
-        return "https://api.us1.sysdig.com"
+
+    patterns = [
+        (r"^https://secure\.sysdig\.com$", lambda m: "us1"),
+        (r"^https://([a-z]{2}\d)\.app\.sysdig\.com$", lambda m: m.group(1)),
+        (r"^https://app\.([a-z]{2}\d)\.sysdig\.com$", lambda m: m.group(1)),
+    ]
+
+    for pattern, region_fn in patterns:
+        match = re.match(pattern, base_url)
+        if match:
+            region = region_fn(match)
+            return f"https://api.{region}.sysdig.com"
+
+    log.warning("A not recognized Sysdig URL was provided, returning the same URL. This may lead to unexpected behavior.")
+    return base_url

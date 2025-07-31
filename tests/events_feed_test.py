@@ -23,7 +23,8 @@ def test_get_event_info(mock_success_response: MagicMock | AsyncMock, mock_creds
         mock_success_response (MagicMock | AsyncMock): Mocked response object.
         mock_creds: Mocked credentials.
     """
-
+    # Override the environment variable for MCP transport
+    os.environ["MCP_TRANSPORT"] = "stdio"
     # Successful response
     mock_success_response.return_value.json.return_value = EVENT_INFO_RESPONSE
     mock_success_response.return_value.status_code = HTTPStatus.OK
