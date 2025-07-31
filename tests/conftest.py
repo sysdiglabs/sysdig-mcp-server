@@ -43,4 +43,4 @@ def mock_creds():
     Fixture to set up mocked credentials.
     """
     os.environ["SYSDIG_SECURE_TOKEN"] = "mocked_token"
-    os.environ["SYSDIG_HOST"] = "https://mocked.secure"
+    os.environ["SYSDIG_HOST"] = "https://us2.app.sysdig.com"

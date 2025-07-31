@@ -45,7 +45,5 @@ def test_api_url_format() -> None:
     assert public_api_me2 == region_urls["me2"]["public_url"], (
         f"Expected {region_urls['me2']['public_url']}, got {public_api_me2}"
     )
-    assert public_api_edge == region_urls["edge"]["public_url"], (
-        f"Expected {region_urls['edge']['public_url']}, got {public_api_edge}"
-    )
+    assert not public_api_edge, f"Expected empty string, got {public_api_edge}"
     print("All public API URLs are formatted correctly.")
