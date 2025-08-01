@@ -8,9 +8,14 @@ import logging
 import re
 from typing import Optional
 
+# Application config loader
+from utils.app_config import get_app_config
+
 # Set up logging
 logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
 log = logging.getLogger(__name__)
+
+app_config = get_app_config()
 
 
 # Lazy-load the Sysdig client configuration
@@ -22,10 +27,14 @@ def get_configuration(
 
     Args:
         token (str): The Sysdig Secure token.
-        sysdig_host_url (str): The base URL of the Sysdig API.
-        old_api (bool): If True, uses the old Sysdig API URL format. Defaults to False.
+        sysdig_host_url (str): The base URL of the Sysdig API,
+            refer to the docs https://docs.sysdig.com/en/administration/saas-regions-and-ip-ranges/#sysdig-platform-regions.
+        old_api (bool): If True, uses the old Sysdig API URL format.
+            Defaults to False using the public API URL format https://api.{region}.sysdig.com.
     Returns:
         sysdig_client.Configuration: A configured Sysdig client instance.
+    Raises:
+        ValueError: If the Sysdig host URL is not provided or is invalid.
     """
     # Check if the token and sysdig_host_url are provided, otherwise fetch from environment variables
     if not token and not sysdig_host_url:
@@ -33,7 +42,21 @@ def get_configuration(
         token = env_vars["SYSDIG_SECURE_TOKEN"]
         sysdig_host_url = env_vars["SYSDIG_HOST"]
     if not old_api:
+        """
+        Client expecting the public API URL in the format https://api.{region}.sysdig.com. We will check the following:
+        - A valid Sysdig host URL is provided by matching the expected patterns with a regex.
+        - If not, we will try to fetch the public API URL from the app config yaml 'sysdig.public_api_url'.
+        - If neither is available, we will raise an error.
+        """
         sysdig_host_url = _get_public_api_url(sysdig_host_url)
+        if not sysdig_host_url:
+            sysdig_host_url = app_config.get("sysdig", {}).get("public_api_url")
+            if not sysdig_host_url:
+                raise ValueError(
+                    "No valid Sysdig public API URL found. Please check your Sysdig host URL or"
+                    "explicitly set the public API URL in the app config 'sysdig.public_api_url'."
+                    "The expected format is https://api.{region}.sysdig.com."
+                )
         log.info(f"Using public API URL: {sysdig_host_url}")
 
     configuration = sysdig_client.Configuration(
@@ -67,20 +90,30 @@ def get_api_env_vars() -> dict:
 
 def _get_public_api_url(base_url: str) -> str:
     """
-    Get the public API URL from the base URL.
+    Maps a Sysdig base URL to its corresponding public API URL.
+    This function extracts the region from the base URL and constructs the public API URL in the format
+    https://api.{region}.sysdig.com.
+
+    If the base URL does not match any known patterns, it returns an empty string.
 
     Args:
         base_url: The base URL of the Sysdig API
 
     Returns:
-        str: The public API URL in the format https://api.<region>.sysdig.com
+        str: The public API URL in the format https://api.{region}.sysdig.com
     """
-    # Regex to capture the region pattern (like us2, us3, au1, etc.)
-    # This assumes the region is a subdomain that starts with 2 lowercase letters and ends with a digit
-    pattern = re.search(r"https://(?:(?P<region1>[a-z]{2}\d)\.app|app\.(?P<region2>[a-z]{2}\d))\.sysdig\.com", base_url)
-    if pattern:
-        region = pattern.group("region1") or pattern.group("region2")  # Extract the region
-        return f"https://api.{region}.sysdig.com"
-    else:
-        # Edge case for the secure API URL that is us1
-        return "https://api.us1.sysdig.com"
+
+    patterns = [
+        (r"^https://secure\.sysdig\.com$", lambda m: "us1"),
+        (r"^https://([a-z]{2}\d)\.app\.sysdig\.com$", lambda m: m.group(1)),
+        (r"^https://app\.([a-z]{2}\d)\.sysdig\.com$", lambda m: m.group(1)),
+    ]
+
+    for pattern, region_fn in patterns:
+        match = re.match(pattern, base_url)
+        if match:
+            region = region_fn(match)
+            return f"https://api.{region}.sysdig.com"
+
+    log.warning("A not recognized Sysdig URL was provided, returning an empty string. This may lead to unexpected behavior.")
+    return ""

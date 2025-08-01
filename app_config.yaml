@@ -6,6 +6,7 @@ app:
 
 sysdig:
   host: "https://us2.app.sysdig.com"
+  # public_api_url: "https://<YOUR_CUSTOM_PUBLIC_API_URL>"
 
 mcp:
   transport: stdio
