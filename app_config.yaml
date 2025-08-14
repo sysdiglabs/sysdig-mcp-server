@@ -10,11 +10,9 @@ sysdig:
 
 mcp:
   transport: stdio
-  host: "localhost"
-  port: 8080
   allowed_tools:
-    - "events-feed"
-    - "sysdig-cli-scanner" # Only available in stdio local transport mode
-    - "vulnerability-management"
+    - "threat-detection"
+    - "cli-scanner" # You need the sysdig-cli-scanner binary installed in your server to use this tool
+    - "vulnerability"
     - "inventory"
-    - "sysdig-sage"
+    - "sage"

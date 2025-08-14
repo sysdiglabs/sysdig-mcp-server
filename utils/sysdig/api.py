@@ -3,7 +3,7 @@ This module provides functions to initialize and manage Sysdig API clients.
 """
 
 from sysdig_client import ApiClient, SecureEventsApi, VulnerabilityManagementApi, InventoryApi
-from utils.sysdig.old_sysdig_api import OldSysdigApi
+from utils.sysdig.legacy_sysdig_api import LegacySysdigApi
 from sysdig_client.configuration import Configuration
 
 
@@ -47,5 +47,5 @@ def get_sysdig_api_instances(api_client: ApiClient) -> dict:
         "secure_events": SecureEventsApi(api_client),
         "vulnerability_management": VulnerabilityManagementApi(api_client),
         "inventory": InventoryApi(api_client),
-        "old_sysdig_api": OldSysdigApi(api_client),
+        "legacy_sysdig_api": LegacySysdigApi(api_client),
     }

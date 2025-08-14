@@ -41,7 +41,7 @@ def main():
     # Choose transport: "stdio" or "sse" (HTTP/SSE)
     handle_signals()
     transport = os.environ.get("MCP_TRANSPORT", app_config["mcp"]["transport"]).lower()
-    log.info("""
+    print("""
     ▄▖     ▌▘    ▖  ▖▄▖▄▖  ▄▖
     ▚ ▌▌▛▘▛▌▌▛▌  ▛▖▞▌▌ ▙▌  ▚ █▌▛▘▌▌█▌▛▘
     ▄▌▙▌▄▌▙▌▌▙▌  ▌▝ ▌▙▖▌   ▄▌▙▖▌ ▚▘▙▖▌

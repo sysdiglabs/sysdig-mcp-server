@@ -7,6 +7,8 @@ from tools.events_feed.tool import EventsFeedTools
 from .conftest import util_load_json
 from unittest.mock import MagicMock, AsyncMock
 import os
+from fastmcp.server.context import Context
+from fastmcp.server import FastMCP
 
 # Get the absolute path of the current module file
 module_path = os.path.abspath(__file__)
@@ -25,13 +27,14 @@ def test_get_event_info(mock_success_response: MagicMock | AsyncMock, mock_creds
     """
     # Override the environment variable for MCP transport
     os.environ["MCP_TRANSPORT"] = "stdio"
+    ctx = Context(FastMCP())  # Mocking FastMCP context
     # Successful response
     mock_success_response.return_value.json.return_value = EVENT_INFO_RESPONSE
     mock_success_response.return_value.status_code = HTTPStatus.OK
 
     tools_client = EventsFeedTools()
     # Pass the mocked Context object
-    result: dict = tools_client.tool_get_event_info("12345")
+    result: dict = tools_client.tool_get_event_info(ctx=ctx, event_id="12345")
     results: dict = result["results"]
 
     assert result.get("status_code") == HTTPStatus.OK
@@ -39,3 +42,4 @@ def test_get_event_info(mock_success_response: MagicMock | AsyncMock, mock_creds
     assert results.get("results").get("content", {}).get("ruleName") == "Fileless execution via memfd_create"
     assert results.get("results").get("id") == "123456789012"
     assert results.get("results").get("content", {}).get("type") == "workloadRuntimeDetection"
+    print("Event info retrieved successfully.")

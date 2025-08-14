@@ -10,7 +10,7 @@ from pydantic import Field
 from fastmcp.server.dependencies import get_http_request
 from fastmcp.exceptions import ToolError
 from starlette.requests import Request
-from sysdig_client import ApiException
+from fastmcp.server.context import Context
 from sysdig_client.api import InventoryApi
 from utils.sysdig.client_config import get_configuration
 from utils.app_config import get_app_config
@@ -31,7 +31,7 @@ class InventoryTools:
     This class provides methods to list resources and retrieve a single resource by its hash.
     """
 
-    def init_client(self) -> InventoryApi:
+    def init_client(self, transport: str) -> InventoryApi:
         """
         Initializes the InventoryApi client from the request state.
         If the request does not have the API client initialized, it will create a new instance
@@ -48,7 +48,7 @@ class InventoryTools:
             inventory_api = request.state.api_instances["inventory"]
         else:
             # If running in STDIO mode, we need to initialize the API client from environment variables
-            log.debug("Running in STDIO mode, initializing the Sysdig API client from environment variables.")
+            log.debug("Trying to init the Sysdig API client from environment variables.")
             cfg = get_configuration()
             api_client = initialize_api_client(cfg)
             inventory_api = InventoryApi(api_client)
@@ -56,6 +56,7 @@ class InventoryTools:
 
     def tool_list_resources(
         self,
+        ctx: Context,
         filter_exp: Annotated[
             str,
             Field(
@@ -64,7 +65,7 @@ class InventoryTools:
                     Sysdig Secure query filter expression to filter inventory resources.
 
                     Use the resource://filter-query-language to get the expected filter expression format.
-               
+
                     List of supported fields:
                     - accountName
                     - accountId
@@ -166,7 +167,7 @@ class InventoryTools:
             Or a dict containing an error message if the call fails.
         """
         try:
-            inventory_api = self.init_client()
+            inventory_api = self.init_client(ctx.get_state("transport_method"))
             start_time = time.time()
 
             api_response = inventory_api.get_resources_without_preload_content(
@@ -184,6 +185,7 @@ class InventoryTools:
 
     def tool_get_resource(
         self,
+        ctx: Context,
         resource_hash: Annotated[str, Field(description="The unique hash of the inventory resource to retrieve.")],
     ) -> dict:
         """
@@ -196,7 +198,7 @@ class InventoryTools:
             dict: A dictionary containing the details of the requested inventory resource.
         """
         try:
-            inventory_api = self.init_client()
+            inventory_api = self.init_client(ctx.get_state("transport_method"))
             start_time = time.time()
 
             api_response = inventory_api.get_resource_without_preload_content(hash=resource_hash)
