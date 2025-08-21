@@ -14,14 +14,10 @@ from pydantic import Field
 from fastmcp.prompts.prompt import PromptMessage, TextContent
 from fastmcp.exceptions import ToolError
 from fastmcp.server.context import Context
-from starlette.requests import Request
 from sysdig_client.api import SecureEventsApi
 from utils.sysdig.legacy_sysdig_api import LegacySysdigApi
-from fastmcp.server.dependencies import get_http_request
 from utils.query_helpers import create_standard_response
-from utils.sysdig.client_config import get_configuration
 from utils.app_config import get_app_config
-from utils.sysdig.api import initialize_api_client
 
 logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
 log = logging.getLogger(__name__)
@@ -36,39 +32,6 @@ class EventsFeedTools:
     This class provides methods to retrieve event information and list runtime events.
     """
 
-    def init_client(self, transport: str, old_api: bool = False) -> SecureEventsApi | LegacySysdigApi:
-        """
-        Initializes the SecureEventsApi client from the request state.
-        If the request does not have the API client initialized, it will create a new instance
-        using the Sysdig Secure token and host from the environment variables.
-        Args:
-            old_api (bool): If True, initializes the LegacySysdigApi client instead of SecureEventsApi.
-        Returns:
-            SecureEventsApi | LegacySysdigApi: An instance of the SecureEventsApi or LegacySysdigApi client.
-        """
-        secure_events_api: SecureEventsApi = None
-        legacy_sysdig_api: LegacySysdigApi = None
-        if transport in ["streamable-http", "sse"]:
-            # Try to get the HTTP request
-            log.debug("Attempting to get the HTTP request to initialize the Sysdig API client.")
-            request: Request = get_http_request()
-            secure_events_api = request.state.api_instances["secure_events"]
-            legacy_sysdig_api = request.state.api_instances["legacy_sysdig_api"]
-        else:
-            # If running in STDIO mode, we need to initialize the API client from environment variables
-            log.debug("Trying to init the Sysdig API client from environment variables.")
-            # Initialize the old Sysdig API client for process tree requests
-            if old_api:
-                old_cfg = get_configuration(old_api=True)
-                legacy_sysdig_api = initialize_api_client(old_cfg)
-                legacy_sysdig_api = LegacySysdigApi(legacy_sysdig_api)
-            else:
-                cfg = get_configuration()
-                api_client = initialize_api_client(cfg)
-                secure_events_api = SecureEventsApi(api_client)
-
-        return legacy_sysdig_api if old_api else secure_events_api
-
     def tool_get_event_info(self, ctx: Context, event_id: str) -> dict:
         """
         Retrieves detailed information for a specific security event.
@@ -80,7 +43,8 @@ class EventsFeedTools:
             Event: The Event object containing detailed information about the specified event.
         """
         # Init of the sysdig client
-        secure_events_api = self.init_client(ctx.get_state("transport_method"))
+        api_instances: dict = ctx.get_state("api_instances")
+        secure_events_api: SecureEventsApi = api_instances.get("secure_events")
         try:
             # Get the HTTP request
             start_time = time.time()
@@ -148,7 +112,9 @@ class EventsFeedTools:
         Returns:
             dict: A dictionary containing the results of the runtime events query, including pagination information.
         """
-        secure_events_api = self.init_client(ctx.get_state("transport_method"))
+        api_instances: dict = ctx.get_state("api_instances")
+        secure_events_api: SecureEventsApi = api_instances.get("secure_events")
+
         start_time = time.time()
         # Compute time window
         now_ns = time.time_ns()
@@ -192,12 +158,14 @@ class EventsFeedTools:
             dict: A dictionary containing the process tree information for the specified event.
         """
         try:
+            api_instances: dict = ctx.get_state("api_instances")
+            legacy_api_client: LegacySysdigApi = api_instances.get("legacy_sysdig_api")
+
             start_time = time.time()
             # Get process tree branches
-            old_api_client = self.init_client(transport=ctx.get_state("transport_method"), old_api=True)
-            branches = old_api_client.request_process_tree_branches(event_id)
+            branches = legacy_api_client.request_process_tree_branches(event_id)
             # Get process tree
-            tree = old_api_client.request_process_tree_trees(event_id)
+            tree = legacy_api_client.request_process_tree_trees(event_id)
 
             # Parse the response
             branches = create_standard_response(results=branches, execution_time_ms=(time.time() - start_time) * 1000)

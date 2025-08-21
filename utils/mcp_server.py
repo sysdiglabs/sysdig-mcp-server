@@ -16,7 +16,8 @@ from fastmcp import FastMCP
 from fastmcp.prompts import Prompt
 from fastmcp.settings import Settings
 from fastmcp.resources import HttpResource, TextResource
-from utils.middleware.auth import CustomMiddleware
+from utils.auth.middleware.auth import CustomMiddleware
+from utils.auth.auth_config import remote_auth_provider
 from tools.events_feed.tool import EventsFeedTools
 from tools.inventory.tool import InventoryTools
 from tools.vulnerability_management.tool import VulnerabilityManagementTools
@@ -55,6 +56,7 @@ def create_simple_mcp_server() -> FastMCP:
         instructions="Provides Sysdig Secure tools and resources.",
         include_tags=["sysdig_secure"],
         middleware=middlewares,
+        auth=remote_auth_provider,
     )
 
 
@@ -109,7 +111,6 @@ def run_http():
     async def health_check(request: Request) -> Response:
         """
         Health check endpoint.
-
         Args:
             request (Request): The incoming HTTP request.
         Returns:

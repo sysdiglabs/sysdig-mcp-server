@@ -8,7 +8,7 @@ image:
   repository: ghcr.io/sysdiglabs/sysdig-mcp-server
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.1.5"
+  tag: "v0.2.0"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -131,3 +131,13 @@ configMap:
         - "vulnerability"
         - "inventory"
         - "sage"
+
+    oauth:
+      enabled: false
+      jwks_uri: "https://auth.yourcompany.com/.well-known/jwks.json"
+      issuer: "https://auth.yourcompany.com"
+      audience: "mcp-production-api"
+      resource_server_url: "https://mcp.ingress.com" # or http://localhost:8080
+      required_scopes:
+        - "read:users"
+        - "read:orgs"

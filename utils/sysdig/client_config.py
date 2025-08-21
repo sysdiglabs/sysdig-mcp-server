@@ -7,6 +7,8 @@ import os
 import logging
 import re
 from typing import Optional
+from sysdig_client import ApiClient, SecureEventsApi, VulnerabilityManagementApi, InventoryApi
+from sysdig_client.configuration import Configuration
 
 # Application config loader
 from utils.app_config import get_app_config
@@ -16,6 +18,35 @@ logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s",
 log = logging.getLogger(__name__)
 
 app_config = get_app_config()
+
+
+def initialize_api_client(config: Configuration = None) -> ApiClient:
+    """
+    Initializes the Sysdig API client with the provided configuration.
+
+    Args:
+        config (Configuration): The Sysdig client configuration containing the access token and host URL.
+    Returns:
+        ApiClient: An instance of ApiClient configured with the provided settings.
+    """
+    api_client = ApiClient(config)
+    return api_client
+
+
+def get_sysdig_api_instances(api_client: ApiClient) -> dict:
+    """
+    Returns a dictionary of Sysdig API instances using the provided ApiClient.
+
+    Args:
+        api_client (ApiClient): The ApiClient instance to use for creating API instances.
+    Returns:
+        dict: A dictionary containing instances of multiple Sysdig API classes.
+    """
+    return {
+        "secure_events": SecureEventsApi(api_client),
+        "vulnerability_management": VulnerabilityManagementApi(api_client),
+        "inventory": InventoryApi(api_client),
+    }
 
 
 # Lazy-load the Sysdig client configuration
@@ -57,7 +88,6 @@ def get_configuration(
                     "explicitly set the public API URL in the app config 'sysdig.public_api_url'."
                     "The expected format is https://api.{region}.sysdig.com."
                 )
-        log.info(f"Using public API URL: {sysdig_host_url}")
 
     configuration = sysdig_client.Configuration(
         access_token=token,
@@ -78,7 +108,10 @@ def get_api_env_vars() -> dict:
     required_vars = ["SYSDIG_SECURE_TOKEN", "SYSDIG_HOST"]
     env_vars = {}
     for var in required_vars:
-        value = os.environ.get(var)
+        if var == "SYSDIG_HOST":
+            value = app_config["sysdig"].get("host", "") or os.environ.get(var)
+        else:
+            value = os.environ.get(var)
         if not value:
             log.error(f"Missing required environment variable: {var}")
             raise ValueError(f"Environment variable {var} is not set. Please set it before running the application.")

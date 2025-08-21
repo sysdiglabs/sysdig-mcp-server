@@ -1,6 +1,6 @@
 [project]
 name = "sysdig-mcp-server"
-version = "0.1.5"
+version = "0.2.0"
 description = "Sysdig MCP Server"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -10,7 +10,7 @@ dependencies = [
     "pyyaml==6.0.2",
     "sqlalchemy==2.0.36",
     "sqlmodel==0.0.22",
-    "sysdig-sdk-python @ git+https://github.com/sysdiglabs/sysdig-sdk-python@15d2c6bd92d9cb26b8ca19c6eef3be991b8e43d2",
+    "sysdig-sdk-python @ git+https://github.com/sysdiglabs/sysdig-sdk-python@597285143188019cd0e86fde43f94b1139f5441d",
     "dask==2025.4.1",
     "oauthlib==3.2.2",
     "fastapi==0.115.12",

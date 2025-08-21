@@ -16,3 +16,13 @@ mcp:
     - "vulnerability"
     - "inventory"
     - "sage"
+
+oauth:
+  enabled: false
+  jwks_uri: "https://auth.yourcompany.com/.well-known/jwks.json"
+  issuer: "https://auth.yourcompany.com"
+  audience: "mcp-production-api"
+  resource_server_url: "https://mcp.ingress.com" # or http://localhost:8080
+  required_scopes:
+    - "read:users"
+    - "read:orgs"

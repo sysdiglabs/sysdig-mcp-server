@@ -1217,7 +1217,7 @@ wheels = [
 
 [[package]]
 name = "sysdig-mcp-server"
-version = "0.1.5"
+version = "0.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "dask" },
@@ -1252,7 +1252,7 @@ requires-dist = [
     { name = "requests" },
     { name = "sqlalchemy", specifier = "==2.0.36" },
     { name = "sqlmodel", specifier = "==0.0.22" },
-    { name = "sysdig-sdk-python", git = "https://github.com/sysdiglabs/sysdig-sdk-python?rev=15d2c6bd92d9cb26b8ca19c6eef3be991b8e43d2" },
+    { name = "sysdig-sdk-python", git = "https://github.com/sysdiglabs/sysdig-sdk-python?rev=597285143188019cd0e86fde43f94b1139f5441d" },
 ]
 
 [package.metadata.requires-dev]
@@ -1265,7 +1265,7 @@ dev = [
 [[package]]
 name = "sysdig-sdk-python"
 version = "0.19.1"
-source = { git = "https://github.com/sysdiglabs/sysdig-sdk-python?rev=15d2c6bd92d9cb26b8ca19c6eef3be991b8e43d2#15d2c6bd92d9cb26b8ca19c6eef3be991b8e43d2" }
+source = { git = "https://github.com/sysdiglabs/sysdig-sdk-python?rev=597285143188019cd0e86fde43f94b1139f5441d#597285143188019cd0e86fde43f94b1139f5441d" }
 dependencies = [
     { name = "pydantic" },
     { name = "python-dateutil" },
