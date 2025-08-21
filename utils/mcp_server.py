@@ -119,7 +119,7 @@ def run_http():
         return JSONResponse({"status": "ok"})
 
     log.info(
-        f"Starting {mcp.name} at http://{app_config.sysdig_endpoint()}:{app_config['app']['port']}{MCP_MOUNT_PATH}{suffix_path}"
+        f"Starting {mcp.name} at http://{app_config.sysdig_endpoint()}:{app_config.port()}{MCP_MOUNT_PATH}{suffix_path}"
     )
     # Use Uvicorn's Config and Server classes for more control
     config = uvicorn.Config(
