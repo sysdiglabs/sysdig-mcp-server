@@ -8,23 +8,25 @@ import os
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 from starlette.requests import Request
 from starlette.responses import Response
+from starlette.types import ASGIApp
+
 from utils.sysdig.api import initialize_api_client, get_sysdig_api_instances
 from utils.sysdig.client_config import get_configuration
 from utils.sysdig.old_sysdig_api import OldSysdigApi
-from utils.app_config import get_app_config
-
-# Set up logging
-logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
-log = logging.getLogger(__name__)
-
-# Load app config (expects keys: mcp.host, mcp.port, mcp.transport)
-app_config = get_app_config()
+from utils.app_config import AppConfig
 
 
 class CustomAuthMiddleware(BaseHTTPMiddleware):
     """
     Custom middleware for handling token-based authentication in the MCP server and initializing Sysdig API clients.
     """
+
+    def __init__(self, app: ASGIApp, app_config: AppConfig):
+        super().__init__(app)
+        self.app_config = app_config
+        # Set up logging
+        logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=self.app_config.log_level())
+        self.log = logging.getLogger(__name__)
 
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
         """
@@ -46,9 +48,9 @@ class CustomAuthMiddleware(BaseHTTPMiddleware):
         # Extract releavant information from the request headers
         token = auth_header.removeprefix("Bearer ").strip()
         session_id = request.headers.get("mcp-session-id", "")
-        base_url = request.headers.get("X-Sysdig-Host", app_config["sysdig"]["host"]) or str(request.base_url)
-        log.info(f"Received request with session ID: {session_id}")
-        log.info(f"Using Sysdig API base URL: {base_url}")
+        base_url = request.headers.get("X-Sysdig-Host", self.app_config.sysdig_endpoint()) or str(request.base_url)
+        self.log.info(f"Received request with session ID: {session_id}")
+        self.log.info(f"Using Sysdig API base URL: {base_url}")
 
         # Initialize the API client with the token and base URL
         cfg = get_configuration(token, base_url)
@@ -66,3 +68,21 @@ class CustomAuthMiddleware(BaseHTTPMiddleware):
             return response
         except Exception as e:
             return Response(f"Internal server error: {str(e)}", status_code=500)
+
+
+def create_auth_middleware(app_config: AppConfig):
+    """
+    Factory function to create the CustomAuthMiddleware with injected app_config.
+
+    Args:
+        app_config (AppConfig): The application configuration object
+
+    Returns:
+        A middleware class that can be instantiated by Starlette
+    """
+
+    class ConfiguredAuthMiddleware(CustomAuthMiddleware):
+        def __init__(self, app: ASGIApp):
+            super().__init__(app, app_config)
+
+    return ConfiguredAuthMiddleware

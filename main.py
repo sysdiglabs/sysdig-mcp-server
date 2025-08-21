@@ -14,17 +14,19 @@ from utils.app_config import get_app_config
 # Register all tools so they attach to the MCP server
 from utils.mcp_server import run_stdio, run_http
 
-# Set up logging
-logging.basicConfig(
-    format="%(asctime)s-%(process)d-%(levelname)s- %(message)s",
-    level=os.environ.get("LOGLEVEL", "ERROR"),
-)
-log = logging.getLogger(__name__)
-
 # Load environment variables from .env
 load_dotenv()
 
 app_config = get_app_config()
+
+# Set up logging
+logging.basicConfig(
+    format="%(asctime)s-%(process)d-%(levelname)s- %(message)s",
+    level=app_config.log_level(),
+)
+log = logging.getLogger(__name__)
+
+
 
 
 def handle_signals():
@@ -40,7 +42,7 @@ def handle_signals():
 def main():
     # Choose transport: "stdio" or "sse" (HTTP/SSE)
     handle_signals()
-    transport = os.environ.get("MCP_TRANSPORT", app_config["mcp"]["transport"]).lower()
+    transport = os.environ.get("MCP_TRANSPORT", app_config.transport())
     log.info("""
     ▄▖     ▌▘    ▖  ▖▄▖▄▖  ▄▖
     ▚ ▌▌▛▘▛▌▌▛▌  ▛▖▞▌▌ ▙▌  ▚ █▌▛▘▌▌█▌▛▘

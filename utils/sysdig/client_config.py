@@ -11,11 +11,11 @@ from typing import Optional
 # Application config loader
 from utils.app_config import get_app_config
 
-# Set up logging
-logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
-log = logging.getLogger(__name__)
-
 app_config = get_app_config()
+
+# Set up logging
+logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=app_config.log_level())
+log = logging.getLogger(__name__)
 
 
 # Lazy-load the Sysdig client configuration

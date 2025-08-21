@@ -20,14 +20,8 @@ from utils.sysdig.old_sysdig_api import OldSysdigApi
 from fastmcp.server.dependencies import get_http_request
 from utils.query_helpers import create_standard_response
 from utils.sysdig.client_config import get_configuration
-from utils.app_config import get_app_config
+from utils.app_config import AppConfig
 from utils.sysdig.api import initialize_api_client
-
-logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
-log = logging.getLogger(__name__)
-
-# Load app config (expects keys: mcp.host, mcp.port, mcp.transport)
-app_config = get_app_config()
 
 
 class EventsFeedTools:
@@ -35,6 +29,11 @@ class EventsFeedTools:
     A class to encapsulate the tools for interacting with the Sysdig Secure Events Feed API.
     This class provides methods to retrieve event information and list runtime events.
     """
+
+    def __init__(self, app_config: AppConfig):
+        self.app_config = app_config
+        logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=self.app_config.log_level())
+        self.log = logging.getLogger(__name__)
 
     def init_client(self, old_api: bool = False) -> SecureEventsApi | OldSysdigApi:
         """
@@ -48,16 +47,16 @@ class EventsFeedTools:
         """
         secure_events_api: SecureEventsApi = None
         old_sysdig_api: OldSysdigApi = None
-        transport = os.environ.get("MCP_TRANSPORT", app_config["mcp"]["transport"]).lower()
+        transport = self.app_config.transport()
         if transport in ["streamable-http", "sse"]:
             # Try to get the HTTP request
-            log.debug("Attempting to get the HTTP request to initialize the Sysdig API client.")
+            self.log.debug("Attempting to get the HTTP request to initialize the Sysdig API client.")
             request: Request = get_http_request()
             secure_events_api = request.state.api_instances["secure_events"]
             old_sysdig_api = request.state.api_instances["old_sysdig_api"]
         else:
             # If running in STDIO mode, we need to initialize the API client from environment variables
-            log.debug("Running in STDIO mode, initializing the Sysdig API client from environment variables.")
+            self.log.debug("Running in STDIO mode, initializing the Sysdig API client from environment variables.")
             cfg = get_configuration()
             api_client = initialize_api_client(cfg)
             secure_events_api = SecureEventsApi(api_client)
@@ -167,7 +166,7 @@ class EventsFeedTools:
                 to=to_ts, var_from=from_ts, filter=filter_expr, limit=limit, cursor=cursor
             )
             duration_ms = (time.time() - start_time) * 1000
-            log.debug(f"Execution time: {duration_ms:.2f} ms")
+            self.log.debug(f"Execution time: {duration_ms:.2f} ms")
 
             response = create_standard_response(
                 results=api_response,
@@ -175,7 +174,7 @@ class EventsFeedTools:
             )
             return response
         except ToolError as e:
-            log.error(f"Exception when calling SecureEventsApi->get_events_v1: {e}\n")
+            self.log.error(f"Exception when calling SecureEventsApi->get_events_v1: {e}\n")
             raise e
 
     # A tool to retrieve all the process-tree information for a specific event.Add commentMore actions
@@ -199,26 +198,39 @@ class EventsFeedTools:
             # Get process tree
             tree = old_api_client.request_process_tree_trees(event_id)
 
-            # Parse the response
-            branches = create_standard_response(results=branches, execution_time_ms=(time.time() - start_time) * 1000)
-            tree = create_standard_response(results=tree, execution_time_ms=(time.time() - start_time) * 1000)
+            # Parse the response (tolerates empty bodies)
+            branches_std = create_standard_response(results=branches, execution_time_ms=(time.time() - start_time) * 1000)
+            tree_std = create_standard_response(results=tree, execution_time_ms=(time.time() - start_time) * 1000)
 
             execution_time = (time.time() - start_time) * 1000
 
-            response = (
-                {
-                    "branches": branches.get("results", []),
-                    "tree": tree.get("results", []),
-                    "metadata": {
-                        "execution_time_ms": execution_time,
-                        "timestamp": datetime.utcnow().isoformat() + "Z",
-                    },
+            response = {
+                "branches": branches_std.get("results", {}),
+                "tree": tree_std.get("results", {}),
+                "metadata": {
+                    "execution_time_ms": execution_time,
+                    "timestamp": datetime.utcnow().isoformat() + "Z",
                 },
-            )
+            }
 
             return response
+        except ApiException as e:
+            if e.status == 404:
+                # Process tree not available for this event
+                return {
+                    "branches": {},
+                    "tree": {},
+                    "metadata": {
+                        "execution_time_ms": (time.time() - start_time) * 1000,
+                        "timestamp": datetime.utcnow().isoformat() + "Z",
+                        "note": "Process tree not available for this event"
+                    },
+                }
+            else:
+                self.log.error(f"Exception when calling process tree API: {e}")
+                raise ToolError(f"Failed to get process tree: {e}")
         except ToolError as e:
-            log.error(f"Exception when calling Sysdig Sage API to get process tree: {e}")
+            self.log.error(f"Exception when calling Sysdig Sage API to get process tree: {e}")
             raise e
 
     # Prompts

@@ -17,6 +17,40 @@ _app_config: Optional[dict] = None
 APP_CONFIG_FILE: str = os.getenv("APP_CONFIG_FILE", "./app_config.yaml")
 
 
+class AppConfig:
+    """
+    A class to encapsulate the application configuration.
+    """
+
+    def __init__(self, config: dict):
+        self.app_config = config
+
+    def sysdig_endpoint(self) -> str:
+        """
+        Get the Sysdig endpoint from the app config
+        """
+        return self.app_config["sysdig"]["host"]
+
+    def transport(self) -> str:
+        """
+        Get the transport protocol (lower case) from the app config
+        """
+        return os.environ.get("MCP_TRANSPORT", self.app_config["mcp"]["transport"]).lower()
+
+    @staticmethod
+    def log_level() -> str:
+        """
+        Get the log level from the app config
+        """
+        return os.environ.get("LOGLEVEL", "ERROR")
+
+    def port(self) -> int:
+        """
+        Get the port from the app config
+        """
+        return self.app_config["mcp"]["port"]
+
+
 def env_constructor(loader, node):
     return os.environ[node.value[0:]]
 
@@ -36,7 +70,7 @@ def check_config_file_exists() -> bool:
         return False
 
 
-def load_app_config() -> dict:
+def load_app_config() -> AppConfig:
     """
     Load the app config from the YAML file
 
@@ -55,10 +89,11 @@ def load_app_config() -> dict:
             app_config: dict = yaml.safe_load(file)
         except Exception as exc:
             logging.error(exc)
-    return app_config
+
+    return AppConfig(app_config)
 
 
-def get_app_config() -> dict:
+def get_app_config() -> AppConfig:
     """
     Get the the overall app config
     This function uses a singleton pattern to ensure the config is loaded only once.

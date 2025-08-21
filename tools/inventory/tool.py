@@ -3,26 +3,17 @@ This module provides tools for interacting with the Sysdig Secure Inventory API.
 """
 
 import logging
-import os
 import time
 from typing import Annotated
 from pydantic import Field
 from fastmcp.server.dependencies import get_http_request
 from fastmcp.exceptions import ToolError
 from starlette.requests import Request
-from sysdig_client import ApiException
 from sysdig_client.api import InventoryApi
 from utils.sysdig.client_config import get_configuration
-from utils.app_config import get_app_config
+from utils.app_config import AppConfig
 from utils.sysdig.api import initialize_api_client
 from utils.query_helpers import create_standard_response
-
-# Configure logging
-logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
-log = logging.getLogger(__name__)
-
-# Load app config (expects keys: mcp.host, mcp.port, mcp.transport)
-app_config = get_app_config()
 
 
 class InventoryTools:
@@ -30,6 +21,11 @@ class InventoryTools:
     A class to encapsulate the tools for interacting with the Sysdig Secure Inventory API.
     This class provides methods to list resources and retrieve a single resource by its hash.
     """
+    def __init__(self, app_config: AppConfig):
+        self.app_config = app_config
+        # Configure logging
+        logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=self.app_config.log_level())
+        self.log = logging.getLogger(__name__)
 
     def init_client(self) -> InventoryApi:
         """
@@ -40,15 +36,15 @@ class InventoryTools:
             InventoryApi: An instance of the InventoryApi client.
         """
         inventory_api: InventoryApi = None
-        transport = os.environ.get("MCP_TRANSPORT", app_config["mcp"]["transport"]).lower()
+        transport = self.app_config.transport()
         if transport in ["streamable-http", "sse"]:
             # Try to get the HTTP request
-            log.debug("Attempting to get the HTTP request to initialize the Sysdig API client.")
+            self.log.debug("Attempting to get the HTTP request to initialize the Sysdig API client.")
             request: Request = get_http_request()
             inventory_api = request.state.api_instances["inventory"]
         else:
             # If running in STDIO mode, we need to initialize the API client from environment variables
-            log.debug("Running in STDIO mode, initializing the Sysdig API client from environment variables.")
+            self.log.debug("Running in STDIO mode, initializing the Sysdig API client from environment variables.")
             cfg = get_configuration()
             api_client = initialize_api_client(cfg)
             inventory_api = InventoryApi(api_client)
@@ -206,5 +202,5 @@ class InventoryTools:
 
             return response
         except ToolError as e:
-            log.error(f"Exception when calling InventoryApi->get_resource: {e}")
+            self.log.error(f"Exception when calling InventoryApi->get_resource: {e}")
             raise e

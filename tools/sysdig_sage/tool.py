@@ -13,14 +13,9 @@ from utils.sysdig.old_sysdig_api import OldSysdigApi
 from starlette.requests import Request
 from fastmcp.server.dependencies import get_http_request
 from utils.sysdig.client_config import get_configuration
-from utils.app_config import get_app_config
+from utils.app_config import AppConfig
 from utils.sysdig.api import initialize_api_client
 from utils.query_helpers import create_standard_response
-
-logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
-log = logging.getLogger(__name__)
-
-app_config = get_app_config()
 
 
 class SageTools:
@@ -29,6 +24,10 @@ class SageTools:
     This class provides methods to generate SysQL queries based on natural
     language questions and execute them against the Sysdig API.
     """
+    def __init__(self, app_config: AppConfig):
+        self.app_config = app_config
+        logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=self.app_config.log_level())
+        self.log = logging.getLogger(__name__)
 
     def init_client(self) -> OldSysdigApi:
         """
@@ -39,15 +38,15 @@ class SageTools:
             OldSysdigApi: An instance of the OldSysdigApi client.
         """
         old_sysdig_api: OldSysdigApi = None
-        transport = os.environ.get("MCP_TRANSPORT", app_config["mcp"]["transport"]).lower()
+        transport = self.app_config.transport()
         if transport in ["streamable-http", "sse"]:
             # Try to get the HTTP request
-            log.debug("Attempting to get the HTTP request to initialize the Sysdig API client.")
+            self.log.debug("Attempting to get the HTTP request to initialize the Sysdig API client.")
             request: Request = get_http_request()
             old_sysdig_api = request.state.api_instances["old_sysdig_api"]
         else:
             # If running in STDIO mode, we need to initialize the API client from environment variables
-            log.debug("Running in STDIO mode, initializing the Sysdig API client from environment variables.")
+            self.log.debug("Running in STDIO mode, initializing the Sysdig API client from environment variables.")
             cfg = get_configuration(old_api=True)
             api_client = initialize_api_client(cfg)
             old_sysdig_api = OldSysdigApi(api_client)
@@ -80,24 +79,24 @@ class SageTools:
             if sysql_response.status > 299:
                 raise ToolError(f"Sysdig Sage returned an error: {sysql_response.status} - {sysql_response.data}")
         except ToolError as e:
-            log.error(f"Failed to generate SysQL query: {e}")
+            self.log.error(f"Failed to generate SysQL query: {e}")
             raise e
         json_resp = sysql_response.json() if sysql_response.data else {}
-        syslq_query: str = json_resp.get("text", "")
-        if not syslq_query:
+        sysql_query: str = json_resp.get("text", "")
+        if not sysql_query:
             return {"error": "Sysdig Sage did not return a query"}
 
         # 2) Execute generated SysQL query
         try:
-            log.debug(f"Executing SysQL query: {syslq_query}")
-            results = old_sysdig_api.execute_sysql_query(syslq_query)
+            self.log.debug(f"Executing SysQL query: {sysql_query}")
+            results = old_sysdig_api.execute_sysql_query(sysql_query)
             execution_time = (time.time() - start_time) * 1000
-            log.debug(f"SysQL query executed in {execution_time} ms")
+            self.log.debug(f"SysQL query executed in {execution_time} ms")
             response = create_standard_response(
-                results=results, execution_time_ms=execution_time, metadata_kwargs={"question": question, "sysql": syslq_query}
+                results=results, execution_time_ms=execution_time, metadata_kwargs={"question": question, "sysql": sysql_query}
             )
 
             return response
         except ToolError as e:
-            log.error(f"Failed to execute SysQL query: {e}")
+            self.log.error(f"Failed to execute SysQL query: {e}")
             raise e
