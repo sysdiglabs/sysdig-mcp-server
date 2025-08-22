@@ -12,7 +12,9 @@ log = logging.getLogger(__name__)
 
 def _parse_response_to_obj(results: RESTResponseType | dict | list | str | bytes) -> dict | list:
     """Best-effort conversion of various response types into a Python object.
-    Returns {} on empty/non-JSON bodies.
+
+    Returns:
+        dict | list: Parsed JSON-compatible object. Returns {} on empty or non-JSON bodies.
     """
     # Already a Python structure
     if results is None:
@@ -69,10 +71,18 @@ def _parse_response_to_obj(results: RESTResponseType | dict | list | str | bytes
     return {}
 
 
-def create_standard_response(results: RESTResponseType, execution_time_ms: float, **metadata_kwargs) -> dict:
+def create_standard_response(results: RESTResponseType, execution_time_ms: float | str, **metadata_kwargs) -> dict:
     """
     Creates a standard response format for API calls. Tolerates empty/non-JSON bodies.
-    Raises ApiException if the HTTP status is >= 300 (when available).
+
+    Returns:
+        dict: A dictionary with keys:
+            - results: parsed body as dict or list (possibly empty {})
+            - metadata: includes execution_time_ms (float) and ISO8601 UTC timestamp
+            - status_code: HTTP status code (int)
+
+    Raises:
+        ApiException: If the HTTP status is >= 300 when status information is available.
     """
     status = getattr(results, "status", 200)
     reason = getattr(results, "reason", "")

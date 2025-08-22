@@ -189,6 +189,9 @@ class EventsFeedTools:
 
         Returns:
             dict: A dictionary containing the process tree information for the specified event.
+
+        Raises:
+            ToolError: If there is an error constructing or processing the response.
         """
         try:
             start_time = time.time()

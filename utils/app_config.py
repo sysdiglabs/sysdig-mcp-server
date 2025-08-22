@@ -28,27 +28,38 @@ class AppConfig:
     def sysdig_endpoint(self) -> str:
         """
         Get the Sysdig endpoint from the app config
+
+        Returns:
+            str: The Sysdig API host (e.g., "https://us2.app.sysdig.com").
         """
-        return self.app_config["sysdig"]["host"]
+        return os.environ.get("SYSDIG_HOST", self.app_config["sysdig"]["host"])
 
     def transport(self) -> str:
         """
         Get the transport protocol (lower case) from the app config
+
+        Returns:
+            str: The transport protocol (e.g., "stdio", "streamable-http", or "sse").
         """
         return os.environ.get("MCP_TRANSPORT", self.app_config["mcp"]["transport"]).lower()
 
-    @staticmethod
-    def log_level() -> str:
+    def log_level(self) -> str:
         """
-        Get the log level from the app config
+        Get the log level from the environment or defaults.
+
+        Returns:
+            str: The log level string (e.g., "DEBUG", "INFO", "WARNING", "ERROR").
         """
         return os.environ.get("LOGLEVEL", "ERROR")
 
     def port(self) -> int:
         """
         Get the port from the app config
+
+        Returns:
+            int: The MCP server port.
         """
-        return self.app_config["mcp"]["port"]
+        return os.environ.get("SYSDIG_MCP_PORT", self.app_config["mcp"]["port"])
 
 
 def env_constructor(loader, node):
@@ -75,7 +86,7 @@ def load_app_config() -> AppConfig:
     Load the app config from the YAML file
 
     Returns:
-        dict: The app config loaded from the YAML file
+        AppConfig: The loaded application configuration wrapper.
     """
     if not check_config_file_exists():
         log.error("Config file does not exist")
@@ -100,7 +111,7 @@ def get_app_config() -> AppConfig:
     If the config is already loaded, it returns the existing config.
 
     Returns:
-        dict: The app config loaded from the YAML file, or an empty dict if the file does not exist or is invalid.
+        AppConfig: The singleton application configuration wrapper.
     """
     global _app_config
     if _app_config is None:
