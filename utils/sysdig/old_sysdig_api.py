@@ -10,7 +10,7 @@ from sysdig_client import ApiClient
 
 class OldSysdigApi:
     """
-    Wrapper for Old non public Sysdig API.
+    Wrapper for Old non-public Sysdig API.
     """
 
     def __init__(self, api_client: ApiClient):

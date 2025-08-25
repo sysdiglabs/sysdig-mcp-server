@@ -3,110 +3,107 @@ Utility functions to load and manage the application configuration from a YAML f
 It will load a singleton configuration object that can be accessed throughout the application.
 """
 
-import yaml
-import logging
 import os
 from typing import Optional
 
-# Set up logging
-logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
-log = logging.getLogger(__name__)
-
 # app_config singleton
 _app_config: Optional[dict] = None
-APP_CONFIG_FILE: str = os.getenv("APP_CONFIG_FILE", "./app_config.yaml")
-
 
 class AppConfig:
     """
     A class to encapsulate the application configuration.
     """
 
-    def __init__(self, config: dict):
-        self.app_config = config
-
     def sysdig_endpoint(self) -> str:
         """
-        Get the Sysdig endpoint from the app config
+        Get the Sysdig endpoint.
 
+        Raises:
+            RuntimeError: If no SYSDIG_HOST environment variable is set.
         Returns:
             str: The Sysdig API host (e.g., "https://us2.app.sysdig.com").
         """
-        return os.environ.get("SYSDIG_HOST", self.app_config["sysdig"]["host"])
+        if "SYSDIG_HOST" not in os.environ:
+            raise RuntimeError("Variable `SYSDIG_HOST` must be defined.")
 
+        return os.environ.get("SYSDIG_HOST")
+
+    def sysdig_secure_token(self) -> str:
+        """
+        Get the Sysdig secure token.
+
+        Raises:
+             RuntimeError: If no SYSDIG_SECURE_TOKEN environment variable is set.
+        Returns:
+            str: The Sysdig secure token.
+        """
+        if "SYSDIG_SECURE_TOKEN" not in os.environ:
+            raise RuntimeError("Variable `SYSDIG_SECURE_TOKEN` must be defined.")
+
+        return os.environ.get("SYSDIG_SECURE_TOKEN")
+
+    # MCP Config Vars
     def transport(self) -> str:
         """
-        Get the transport protocol (lower case) from the app config
+        Get the transport protocol (lower case).
+        Valid values are: "stdio", "streamable-http", or "sse".
+        Defaults to "stdio".
 
+        Raises:
+            ValueError: If no transport protocol environment variable is set.
         Returns:
             str: The transport protocol (e.g., "stdio", "streamable-http", or "sse").
         """
-        return os.environ.get("MCP_TRANSPORT", self.app_config["mcp"]["transport"]).lower()
+        transport = os.environ.get("SYSDIG_TRANSPORT", "stdio").lower()
+
+        if transport not in ("stdio", "streamable-http", "sse"):
+            raise ValueError("Invalid transport protocol. Valid values are: stdio, streamable-http, sse.")
+
+        return transport
 
     def log_level(self) -> str:
         """
-        Get the log level from the environment or defaults.
+        Get the log level from the environment or defaults to INFO.
 
         Returns:
             str: The log level string (e.g., "DEBUG", "INFO", "WARNING", "ERROR").
         """
-        return os.environ.get("LOGLEVEL", "ERROR")
+        return os.environ.get("LOGLEVEL", "INFO")
 
     def port(self) -> int:
         """
-        Get the port from the app config
+        Get the port for the remote MCP Server Deployment ("streamable-http", or "sse" transports).
+        Defaults to `8080`.
 
         Returns:
             int: The MCP server port.
         """
-        return os.environ.get("SYSDIG_MCP_PORT", self.app_config["mcp"]["port"])
+        return os.environ.get("SYSDIG_MCP_LISTENING_PORT", "8080")
 
+    #
+    def host(self) -> str:
+        """
+        Get the host for the remote MCP Server deployment ("streamable-http", or "sse" transports).
+        Defaults to "localhost".
 
-def env_constructor(loader, node):
-    return os.environ[node.value[0:]]
+        Returns:
+            str: The host string (e.g., "localhost").
+        """
+        return os.environ.get("SYSDIG_MCP_LISTENING_HOST", "localhost")
 
+    def mcp_mount_path(self) -> str:
+        """
+        Get the string value for the remote MCP Mount Path.
 
-def check_config_file_exists() -> bool:
-    """
-    Check if the config file exists
-
-    Returns:
-        bool: True if the config file exists, False otherwise
-    """
-    if os.path.exists(APP_CONFIG_FILE):
-        log.debug("Config file exists")
-        return True
-    else:
-        log.error("Config file does not exist")
-        return False
-
-
-def load_app_config() -> AppConfig:
-    """
-    Load the app config from the YAML file
-
-    Returns:
-        AppConfig: The loaded application configuration wrapper.
-    """
-    if not check_config_file_exists():
-        log.error("Config file does not exist")
-        return {}
-    # Load the config file
-    app_config: dict = {}
-    log.debug(f"Loading app config from YAML file: {APP_CONFIG_FILE}")
-    with open(APP_CONFIG_FILE, "r", encoding="utf8") as file:
-        try:
-            yaml.add_constructor("!env", env_constructor, Loader=yaml.SafeLoader)
-            app_config: dict = yaml.safe_load(file)
-        except Exception as exc:
-            logging.error(exc)
-
-    return AppConfig(app_config)
+        Returns:
+            str: The MCP mount path.
+        """
+        return os.environ.get("MCP_MOUNT_PATH", "/sysdig-mcp-server")
 
 
 def get_app_config() -> AppConfig:
     """
-    Get the the overall app config
+    Get the overall app config
     This function uses a singleton pattern to ensure the config is loaded only once.
     If the config is already loaded, it returns the existing config.
 
@@ -115,5 +112,5 @@ def get_app_config() -> AppConfig:
     """
     global _app_config
     if _app_config is None:
-        _app_config = load_app_config()
+        _app_config = AppConfig()
     return _app_config

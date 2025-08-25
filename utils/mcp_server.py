@@ -39,8 +39,6 @@ _mcp_instance: Optional[FastMCP] = None
 
 middlewares = [Middleware(create_auth_middleware(app_config))]
 
-MCP_MOUNT_PATH = "/sysdig-mcp-server"
-
 
 def create_simple_mcp_server() -> FastMCP:
     """
@@ -52,7 +50,7 @@ def create_simple_mcp_server() -> FastMCP:
     return FastMCP(
         name="Sysdig MCP Server",
         instructions="Provides Sysdig Secure tools and resources.",
-        host=app_config.sysdig_endpoint(),
+        host=app_config.host(),
         port=app_config.port(),
         tags=["sysdig", "mcp", app_config.transport()],
     )
@@ -100,11 +98,11 @@ def run_http():
     # Add resources to the MCP server
     add_resources(mcp)
 
-    # Mount the MCP HTTP/SSE app at 'MCP_MOUNT_PATH'
+    # Mount the MCP HTTP/SSE app
     mcp_app = mcp.http_app(transport=transport, middleware=middlewares)
     suffix_path = mcp.settings.streamable_http_path if transport == "streamable-http" else mcp.settings.sse_path
     app = FastAPI(lifespan=mcp_app.lifespan)
-    app.mount(MCP_MOUNT_PATH, mcp_app)
+    app.mount(app_config.mcp_mount_path(), mcp_app)
 
     @app.get("/healthz", response_class=Response)
     async def health_check(request: Request) -> Response:
@@ -119,7 +117,7 @@ def run_http():
         return JSONResponse({"status": "ok"})
 
     log.info(
-        f"Starting {mcp.name} at http://{app_config.sysdig_endpoint()}:{app_config.port()}{MCP_MOUNT_PATH}{suffix_path}"
+        f"Starting {mcp.name} at http://{app_config.host()}:{app_config.port()}{app_config.mcp_mount_path()}{suffix_path}"
     )
     # Use Uvicorn's Config and Server classes for more control
     config = uvicorn.Config(
@@ -145,11 +143,10 @@ def run_http():
 
 def add_tools(mcp: FastMCP) -> None:
     """
-    Add tools to the MCP server based on the allowed tools and transport type.
+    Registers the tools to the MCP Server.
+
     Args:
         mcp (FastMCP): The FastMCP server instance.
-        allowed_tools (list): List of tools to register.
-        transport_type (Literal["stdio", "streamable-http"]): The transport type for the MCP server.
     """
     # Register the events feed tools
     events_feed_tools = EventsFeedTools(app_config)

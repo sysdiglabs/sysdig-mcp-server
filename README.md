@@ -17,7 +17,6 @@
   - [Requirements](#requirements)
     - [UV Setup](#uv-setup)
   - [Configuration](#configuration)
-    - [`app_config.yaml`](#app_configyaml)
     - [Environment Variables](#environment-variables)
   - [Running the Server](#running-the-server)
     - [Docker](#docker)
@@ -84,21 +83,6 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
       ```
 
 ## Available Tools
-
-You can select what group of tools to add when running the server by adding/removing them from the `mcp.allowed_tools` list in the app_config.yaml file
-
-```yaml
-...
-mcp:
-  transport: stdio
-  ...
-  allowed_tools:
-    - "events-feed"
-    - "inventory"
-    - "vulnerability-management"
-    - "sysdig-sage"
-    - "sysdig-cli-scanner" # Only available in stdio local transport mode
-```
 
 <details>
 <summary><strong>Events Feed</strong></summary>
@@ -168,13 +152,9 @@ mcp:
 
 You can use [uv](https://github.com/astral-sh/uv) as a drop-in replacement for pip to create the virtual environment and install dependencies.
 
-If you don't have `uv` installed, you can install it via (Linux and MacOS users):
+If you don't have `uv` installed, you can install it following the instructions that you can find on the `README` of the project.
 
-```bash
-curl -Ls https://astral.sh/uv/install.sh | sh
-```
-
-To set up the environment:
+If you want to develop, set up the environment using:
 
 ```bash
 uv venv
@@ -185,24 +165,18 @@ This will create a virtual environment using `uv` and install the required depen
 
 ## Configuration
 
-The application can be configured via the `app_config.yaml` file and environment variables.
-
-### `app_config.yaml`
-
-This file contains the main configuration for the application, including:
-
-- **app**: Host, port, and log level for the MCP server.
-- **sysdig**: The Sysdig Secure host to connect to.
-- **mcp**: Transport protocol (stdio, sse, streamable-http), URL, host, and port for the MCP server.
-
-> You can set the path for the app_config.yaml using the `APP_CONFIG_FILE=/path/to/app_config.yaml` env var. By default the app will search the file in the root of the app.
-
-### Environment Variables
-
-The following environment variables are required for configuring the Sysdig SDK:
+The following environment variables are **required** for configuring the Sysdig SDK:
 
 - `SYSDIG_HOST`: The URL of your Sysdig Secure instance (e.g., `https://us2.app.sysdig.com`).
 - `SYSDIG_SECURE_TOKEN`: Your Sysdig Secure API token.
+
+You can also set the following variables to override the default configuration:
+
+- `SYSDIG_MCP_TRANSPORT`: The transport protocol for the MCP Server (`stdio`, `streamable-http`, `sse`). Defaults to: `stdio`.
+- `SYSDIG_MCP_MOUNT_PATH`:  The URL prefix for the Streamable-http/sse deployment. Defaults to: `/sysdig-mcp-server`
+- `LOGLEVEL`: Log Level of the application (`DEBUG`, `INFO`, `WARNING`, `ERROR`). Defaults to: `INFO`
+- `SYSDIG_MCP_LISTENING_PORT`: The port for the server when it is deployed using remote protocols (`steamable-http`, `sse`). Defaults to: `8080`
+- `SYSDIG_MCP_LISTENING_HOST`: The host for the server when it is deployed using remote protocols (`steamable-http`, `sse`). Defaults to: `localhost`
 
 You can find your API token in the Sysdig Secure UI under **Settings > Sysdig Secure API**. Make sure to copy the token as it will not be shown again.
 
@@ -210,10 +184,6 @@ You can find your API token in the Sysdig Secure UI under **Settings > Sysdig Se
 ![API_TOKEN_SETTINGS](./docs/assets/api-token-copy.png)
 
 You can set these variables in your shell or in a `.env` file.
-
-You can also use `MCP_TRANSPORT` to override the transport protocol set in `app_config.yaml`.
-
-> All of this env variables have precedence over the fields configured in the app_config.yaml.
 
 ## Running the Server
 
@@ -255,7 +225,6 @@ sysdig:
     secureAPIToken: "<your_sysdig_secure_api_token>"
   mcp:
     transport: "streamable-http"
-  # You can set the Sysdig Tenant URL at this level or below in the app_config configmap
   host: "https://us2.app.sysdig.com" # <your_sysdig_host> "https://eu1.app.sysdig.com"
 
 configMap:
@@ -312,7 +281,7 @@ To use the MCP server with a client like Claude or Cursor, you need to provide t
 
 When using the `sse` or `streamable-http` transport, the server requires a Bearer token for authentication. The token is passed in the `Authorization` header of the HTTP request.
 
-Additionally, you can specify the Sysdig Secure host by providing the `X-Sysdig-Host` header. If this header is not present, the server will use the value from `app_config.yaml`.
+Additionally, you can specify the Sysdig Secure host by providing the `X-Sysdig-Host` header. If this header is not present, the server will use the value from the env variable.
 
 Example headers:
 
@@ -323,7 +292,7 @@ X-Sysdig-Host: <your_sysdig_host>
 
 ### URL
 
-If you are running the server with the `sse` or `streamable-http` transport, the URL will be `http://<host>:<port>/sysdig-mcp-server/mcp`, where `<host>` and `<port>` are the values configured in `app_config.yaml` or the Docker run command.
+If you are running the server with the `sse` or `streamable-http` transport, the URL will be `http://<host>:<port>/sysdig-mcp-server/mcp`.
 
 For example, if you are running the server locally on port 8080, the URL will be `http://localhost:8080/sysdig-mcp-server/mcp`.
 

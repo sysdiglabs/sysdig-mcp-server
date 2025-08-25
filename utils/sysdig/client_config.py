@@ -37,10 +37,10 @@ def get_configuration(
         ValueError: If the Sysdig host URL is not provided or is invalid.
     """
     # Check if the token and sysdig_host_url are provided, otherwise fetch from environment variables
-    if not token and not sysdig_host_url:
-        env_vars = get_api_env_vars()
-        token = env_vars["SYSDIG_SECURE_TOKEN"]
-        sysdig_host_url = env_vars["SYSDIG_HOST"]
+    if not token:
+        token = app_config.sysdig_secure_token()
+    if not sysdig_host_url:
+        sysdig_host_url = app_config.sysdig_endpoint()
     if not old_api:
         """
         Client expecting the public API URL in the format https://api.{region}.sysdig.com. We will check the following:
@@ -50,13 +50,11 @@ def get_configuration(
         """
         sysdig_host_url = _get_public_api_url(sysdig_host_url)
         if not sysdig_host_url:
-            sysdig_host_url = app_config.get("sysdig", {}).get("public_api_url")
-            if not sysdig_host_url:
-                raise ValueError(
-                    "No valid Sysdig public API URL found. Please check your Sysdig host URL or"
-                    "explicitly set the public API URL in the app config 'sysdig.public_api_url'."
-                    "The expected format is https://api.{region}.sysdig.com."
-                )
+            raise ValueError(
+                "No valid Sysdig public API URL found. Please check your Sysdig host URL or"
+                "explicitly set the public API URL in the app config 'sysdig.public_api_url'."
+                "The expected format is https://api.{region}.sysdig.com."
+            )
         log.info(f"Using public API URL: {sysdig_host_url}")
 
     configuration = sysdig_client.Configuration(
@@ -64,28 +62,6 @@ def get_configuration(
         host=sysdig_host_url,
     )
     return configuration
-
-
-def get_api_env_vars() -> dict:
-    """
-    Get the necessary environment variables for the Sysdig API client.
-
-    Returns:
-        dict: A dictionary containing the required environment variables.
-    Raises:
-        ValueError: If any of the required environment variables are not set.
-    """
-    required_vars = ["SYSDIG_SECURE_TOKEN", "SYSDIG_HOST"]
-    env_vars = {}
-    for var in required_vars:
-        value = os.environ.get(var)
-        if not value:
-            log.error(f"Missing required environment variable: {var}")
-            raise ValueError(f"Environment variable {var} is not set. Please set it before running the application.")
-        env_vars[var] = value
-    log.info("All required environment variables are set.")
-
-    return env_vars
 
 
 def _get_public_api_url(base_url: str) -> str:

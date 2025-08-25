@@ -138,9 +138,6 @@ class EventsFeedTools:
         Args:
             cursor (Optional[str]): Cursor for pagination.
             scope_hours (int): Number of hours back from now to include events. Defaults to 1.
-            severity_level (Optional[str]): One of "info", "low", "medium", "high". If provided, filters by that severity.
-                If None, includes all severities.
-            cluster_name (Optional[str]): Name of the Kubernetes cluster to filter events. If None, includes all clusters.
             limit (int): Maximum number of events to return. Defaults to 50.
             filter_expr (Optional[str]): An optional filter expression to further narrow down events.
 

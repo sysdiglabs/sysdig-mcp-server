@@ -11,9 +11,6 @@ from typing import Literal, Optional
 
 from utils.app_config import AppConfig
 
-
-
-
 class CLIScannerTool:
     """
     A class to encapsulate the tools for interacting with the Sysdig CLI Scanner.
@@ -62,8 +59,8 @@ class CLIScannerTool:
         Raises:
             EnvironmentError: If the SYSDIG_SECURE_TOKEN or SYSDIG_HOST environment variables are not set.
         """
-        sysdig_secure_token = os.environ.get("SYSDIG_SECURE_TOKEN")
-        sysdig_host = os.environ.get("SYSDIG_HOST", self.app_config.sysdig_endpoint())
+        sysdig_secure_token = self.app_config.sysdig_secure_token()
+        sysdig_host = self.app_config.sysdig_endpoint()
         if not sysdig_secure_token:
             self.log.error("SYSDIG_SECURE_TOKEN environment variable is not set.")
             raise EnvironmentError("SYSDIG_SECURE_TOKEN environment variable is not set.")
@@ -158,7 +155,7 @@ class CLIScannerTool:
                     "output": output_result + result.stderr.strip(),
                     "exit_codes_explained": self.exit_code_explained,
                 }
-        # Handle non-zero exit codes speically exit code 1
+        # Handle non-zero exit codes specially exit code 1
         except subprocess.CalledProcessError as e:
             self.log.warning(f"Sysdig CLI Scanner returned non-zero exit code: {e.returncode}")
             if e.returncode in [2, 3]:
