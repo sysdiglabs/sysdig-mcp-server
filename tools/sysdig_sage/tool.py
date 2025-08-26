@@ -5,16 +5,12 @@ generate SysQL queries based on natural language questions and execute them agai
 """
 
 import logging
-import os
 import time
-from typing import Any, Dict
+
+from fastmcp.server.context import Context
 from fastmcp.exceptions import ToolError
-from utils.sysdig.old_sysdig_api import OldSysdigApi
-from starlette.requests import Request
-from fastmcp.server.dependencies import get_http_request
-from utils.sysdig.client_config import get_configuration
+from utils.sysdig.legacy_sysdig_api import LegacySysdigApi
 from utils.app_config import AppConfig
-from utils.sysdig.api import initialize_api_client
 from utils.query_helpers import create_standard_response
 
 
@@ -26,38 +22,15 @@ class SageTools:
     """
     def __init__(self, app_config: AppConfig):
         self.app_config = app_config
-        logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=self.app_config.log_level())
         self.log = logging.getLogger(__name__)
 
-    def init_client(self) -> OldSysdigApi:
-        """
-        Initializes the OldSysdigApi client from the request state.
-        If the request does not have the API client initialized, it will create a new instance
-        using the Sysdig Secure token and host from the environment variables.
-        Returns:
-            OldSysdigApi: An instance of the OldSysdigApi client.
-        """
-        old_sysdig_api: OldSysdigApi = None
-        transport = self.app_config.transport()
-        if transport in ["streamable-http", "sse"]:
-            # Try to get the HTTP request
-            self.log.debug("Attempting to get the HTTP request to initialize the Sysdig API client.")
-            request: Request = get_http_request()
-            old_sysdig_api = request.state.api_instances["old_sysdig_api"]
-        else:
-            # If running in STDIO mode, we need to initialize the API client from environment variables
-            self.log.debug("Running in STDIO mode, initializing the Sysdig API client from environment variables.")
-            cfg = get_configuration(old_api=True)
-            api_client = initialize_api_client(cfg)
-            old_sysdig_api = OldSysdigApi(api_client)
-        return old_sysdig_api
-
-    async def tool_sage_to_sysql(self, question: str) -> dict:
+    async def tool_sage_to_sysql(self, ctx: Context, question: str) -> dict:
         """
         Queries Sysdig Sage with a natural language question, retrieves a SysQL query,
         executes it against the Sysdig API, and returns the results.
 
         Args:
+            ctx (Context): A context object containing configuration information.
             question (str): A natural language question to send to Sage.
 
         Returns:
@@ -74,8 +47,10 @@ class SageTools:
         # 1) Generate SysQL query
         try:
             start_time = time.time()
-            old_sysdig_api = self.init_client()
-            sysql_response = await old_sysdig_api.generate_sysql_query(question)
+            api_instances: dict = ctx.get_state("api_instances")
+            legacy_api_client: LegacySysdigApi = api_instances.get("legacy_sysdig_api")
+
+            sysql_response = await legacy_api_client.generate_sysql_query(question)
             if sysql_response.status > 299:
                 raise ToolError(f"Sysdig Sage returned an error: {sysql_response.status} - {sysql_response.data}")
         except ToolError as e:
@@ -89,7 +64,7 @@ class SageTools:
         # 2) Execute generated SysQL query
         try:
             self.log.debug(f"Executing SysQL query: {sysql_query}")
-            results = old_sysdig_api.execute_sysql_query(sysql_query)
+            results = legacy_api_client.execute_sysql_query(sysql_query)
             execution_time = (time.time() - start_time) * 1000
             self.log.debug(f"SysQL query executed in {execution_time} ms")
             response = create_standard_response(

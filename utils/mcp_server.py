@@ -8,13 +8,16 @@ import os
 import asyncio
 from typing import Optional
 import uvicorn
+from fastmcp.prompts import Prompt
 from starlette.requests import Request
 from starlette.responses import JSONResponse, Response
 from typing_extensions import Literal
 from fastapi import FastAPI
-from fastmcp import FastMCP
+from fastmcp import FastMCP, Settings
 from fastmcp.resources import HttpResource, TextResource
-from utils.middleware.auth import create_auth_middleware
+
+from utils.auth.auth_config import obtain_remote_auth_provider
+from utils.auth.middleware.auth import CustomMiddleware
 from starlette.middleware import Middleware
 from tools.events_feed.tool import EventsFeedTools
 from tools.inventory.tool import InventoryTools
@@ -30,18 +33,16 @@ class SysdigMCPServer:
     def __init__(self, app_config: AppConfig):
         self.app_config = app_config
         # Set up logging
-        logging.basicConfig(
-            format="%(asctime)s-%(process)d-%(levelname)s- %(message)s",
-            level=self.app_config.log_level(),
-        )
         self.log = logging.getLogger(__name__)
-        self.middlewares = [Middleware(create_auth_middleware(app_config))]
+
+        middlewares = [CustomMiddleware(app_config)]
+
         self.mcp_instance: Optional[FastMCP] = FastMCP(
             name="Sysdig MCP Server",
             instructions="Provides Sysdig Secure tools and resources.",
-            host=app_config.host(),
-            port=app_config.port(),
-            tags=["sysdig", "mcp", app_config.transport()],
+            include_tags={"sysdig_secure"},
+            middleware=middlewares,
+            auth=obtain_remote_auth_provider(app_config)
         )
         # Add tools to the MCP server
         self.add_tools()
@@ -68,11 +69,13 @@ class SysdigMCPServer:
         # Add tools to the MCP server
         transport = self.app_config.transport()
 
+        settings = Settings()
+
         # Mount the MCP HTTP/SSE app
-        mcp_app = self.mcp_instance.http_app(transport=transport, middleware=self.middlewares)
+        mcp_app = self.mcp_instance.http_app(transport=transport)
         suffix_path = (
-            self.mcp_instance.settings.streamable_http_path if transport == "streamable-http"
-            else self.mcp_instance.settings.sse_path)
+            settings.streamable_http_path if transport == "streamable-http"
+            else settings.sse_path)
         app = FastAPI(lifespan=mcp_app.lifespan)
         app.mount(self.app_config.mcp_mount_path(), mcp_app)
 
@@ -123,25 +126,29 @@ class SysdigMCPServer:
         # Register the events feed tools
         events_feed_tools = EventsFeedTools(self.app_config)
         self.log.info("Adding Events Feed Tools...")
-        self.mcp_instance.add_tool(
-            events_feed_tools.tool_get_event_info,
+        self.mcp_instance.tool(
+            name_or_fn=events_feed_tools.tool_get_event_info,
             name="get_event_info",
             description="Retrieve detailed information for a specific security event by its ID",
+            tags={"threat-detection", "sysdig_secure"}
         )
-        self.mcp_instance.add_tool(
-            events_feed_tools.tool_list_runtime_events,
+        self.mcp_instance.tool(
+            name_or_fn=events_feed_tools.tool_list_runtime_events,
             name="list_runtime_events",
             description="List runtime security events from the last given hours, optionally filtered by severity level.",
+            tags={"threat-detection", "sysdig_secure"}
         )
 
         self.mcp_instance.add_prompt(
-            events_feed_tools.investigate_event_prompt,
-            name="investigate_event",
-            description="Prompt to investigate a security event based on its severity and time range.",
-            tags={"analysis", "secure_feeds"},
+            Prompt.from_function(
+                fn=events_feed_tools.investigate_event_prompt,
+                name="investigate_event",
+                description="Prompt to investigate a security event based on its severity and time range.",
+                tags={"analysis", "sysdig_secure", "threat_detection"},
+            )
         )
-        self.mcp_instance.add_tool(
-            events_feed_tools.tool_get_event_process_tree,
+        self.mcp_instance.tool(
+            name_or_fn=events_feed_tools.tool_get_event_process_tree,
             name="get_event_process_tree",
             description=(
                 """
@@ -149,31 +156,34 @@ class SysdigMCPServer:
                 so this may return an empty tree.
             """
             ),
+            tags={"threat-detection", "sysdig_secure"}
         )
 
         # Register the Sysdig Inventory tools
         self.log.info("Adding Sysdig Inventory Tools...")
         inventory_tools = InventoryTools(self.app_config)
-        self.mcp_instance.add_tool(
-            inventory_tools.tool_list_resources,
+        self.mcp_instance.tool(
+            name_or_fn=inventory_tools.tool_list_resources,
             name="list_resources",
             description=(
                 """
                 List inventory resources based on Sysdig Filter Query Language expression with optional pagination.'
                 """
             ),
+            tags={"inventory", "sysdig_secure"}
         )
-        self.mcp_instance.add_tool(
-            inventory_tools.tool_get_resource,
+        self.mcp_instance.tool(
+            name_or_fn=inventory_tools.tool_get_resource,
             name="get_resource",
             description="Retrieve a single inventory resource by its unique hash identifier.",
+            tags={"inventory", "sysdig_secure"}
         )
 
         # Register the Sysdig Vulnerability Management tools
         self.log.info("Adding Sysdig Vulnerability Management Tools...")
         vulnerability_tools = VulnerabilityManagementTools(self.app_config)
-        self.mcp_instance.add_tool(
-            vulnerability_tools.tool_list_runtime_vulnerabilities,
+        self.mcp_instance.tool(
+            name_or_fn=vulnerability_tools.tool_list_runtime_vulnerabilities,
             name="list_runtime_vulnerabilities",
             description=(
                 """
@@ -181,54 +191,64 @@ class SysdigMCPServer:
                 (Supports pagination using cursor).
                 """
             ),
+            tags={"vulnerability", "sysdig_secure"}
         )
-        self.mcp_instance.add_tool(
-            vulnerability_tools.tool_list_accepted_risks,
+        self.mcp_instance.tool(
+            name_or_fn=vulnerability_tools.tool_list_accepted_risks,
             name="list_accepted_risks",
             description="List all accepted risks. Supports filtering and pagination.",
+            tags={"vulnerability", "sysdig_secure"}
         )
-        self.mcp_instance.add_tool(
-            vulnerability_tools.tool_get_accepted_risk,
+        self.mcp_instance.tool(
+            name_or_fn=vulnerability_tools.tool_get_accepted_risk,
             name="get_accepted_risk",
             description="Retrieve a specific accepted risk by its ID.",
+            tags={"vulnerability", "sysdig_secure"}
         )
-        self.mcp_instance.add_tool(
-            vulnerability_tools.tool_list_registry_scan_results,
+        self.mcp_instance.tool(
+            name_or_fn=vulnerability_tools.tool_list_registry_scan_results,
             name="list_registry_scan_results",
             description="List registry scan results. Supports filtering and pagination.",
+            tags={"vulnerability", "sysdig_secure"}
         )
-        self.mcp_instance.add_tool(
-            vulnerability_tools.tool_get_vulnerability_policy,
+        self.mcp_instance.tool(
+            name_or_fn=vulnerability_tools.tool_get_vulnerability_policy,
             name="get_vulnerability_policy_by_id",
             description="Retrieve a specific vulnerability policy by its ID.",
+            tags={"vulnerability", "sysdig_secure"}
         )
-        self.mcp_instance.add_tool(
-            vulnerability_tools.tool_list_vulnerability_policies,
+        self.mcp_instance.tool(
+            name_or_fn=vulnerability_tools.tool_list_vulnerability_policies,
             name="list_vulnerability_policies",
             description="List all vulnerability policies. Supports filtering, pagination, and sorting.",
+            tags={"vulnerability", "sysdig_secure"}
         )
-        self.mcp_instance.add_tool(
-            vulnerability_tools.tool_list_pipeline_scan_results,
+        self.mcp_instance.tool(
+            name_or_fn=vulnerability_tools.tool_list_pipeline_scan_results,
             name="list_pipeline_scan_results",
             description="List pipeline scan results (e.g., built images). Supports pagination and filtering.",
+            tags={"vulnerability", "sysdig_secure"}
         )
-        self.mcp_instance.add_tool(
-            vulnerability_tools.tool_get_scan_result,
+        self.mcp_instance.tool(
+            name_or_fn=vulnerability_tools.tool_get_scan_result,
             name="get_scan_result",
             description="Retrieve a specific scan result (registry/runtime/pipeline).",
+            tags={"vulnerability", "sysdig_secure"}
         )
         self.mcp_instance.add_prompt(
-            vulnerability_tools.explore_vulnerabilities_prompt,
-            name="explore_vulnerabilities",
-            description="Prompt to explore vulnerabilities based on filters",
-            tags={"vulnerability", "exploration"},
+            Prompt.from_function(
+                fn=vulnerability_tools.explore_vulnerabilities_prompt,
+                name="explore_vulnerabilities",
+                description="Prompt to explore vulnerabilities based on filters",
+                tags={"vulnerability", "exploration", "sysdig_secure"},
+            )
         )
 
         # Register the Sysdig Sage tools
         self.log.info("Adding Sysdig Sage Tools...")
         sysdig_sage_tools = SageTools(self.app_config)
-        self.mcp_instance.add_tool(
-            sysdig_sage_tools.tool_sage_to_sysql,
+        self.mcp_instance.tool(
+            name_or_fn=sysdig_sage_tools.tool_sage_to_sysql,
             name="sysdig_sysql_sage_query",
             description=(
                 """
@@ -236,14 +256,15 @@ class SysdigMCPServer:
                 execute it against the Sysdig API, and return the results.
                 """
             ),
+            tags={"sage", "sysdig_secure"}
         )
 
         if self.app_config.transport() == "stdio":
             # Register the tools for STDIO transport
             cli_scanner_tool = CLIScannerTool(self.app_config)
             self.log.info("Adding Sysdig CLI Scanner Tool...")
-            self.mcp_instance.add_tool(
-                cli_scanner_tool.run_sysdig_cli_scanner,
+            self.mcp_instance.tool(
+                name_or_fn=cli_scanner_tool.run_sysdig_cli_scanner,
                 name="run_sysdig_cli_scanner",
                 description=(
                     """
@@ -251,14 +272,13 @@ class SysdigMCPServer:
                     and posture and misconfigurations.
                     """
                 ),
+                tags={"cli-scanner", "sysdig_secure"},
             )
 
 
     def add_resources(self) -> None:
         """
         Add resources to the MCP server.
-        Args:
-            mcp (FastMCP): The FastMCP server instance.
         """
         vm_docs = HttpResource(
             name="Sysdig Secure Vulnerability Management Overview",

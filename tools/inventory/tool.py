@@ -5,14 +5,12 @@ This module provides tools for interacting with the Sysdig Secure Inventory API.
 import logging
 import time
 from typing import Annotated
+
+from fastmcp import Context
 from pydantic import Field
-from fastmcp.server.dependencies import get_http_request
 from fastmcp.exceptions import ToolError
-from starlette.requests import Request
 from sysdig_client.api import InventoryApi
-from utils.sysdig.client_config import get_configuration
 from utils.app_config import AppConfig
-from utils.sysdig.api import initialize_api_client
 from utils.query_helpers import create_standard_response
 
 
@@ -24,34 +22,11 @@ class InventoryTools:
     def __init__(self, app_config: AppConfig):
         self.app_config = app_config
         # Configure logging
-        logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=self.app_config.log_level())
         self.log = logging.getLogger(__name__)
-
-    def init_client(self) -> InventoryApi:
-        """
-        Initializes the InventoryApi client from the request state.
-        If the request does not have the API client initialized, it will create a new instance
-        using the Sysdig Secure token and host from the environment variables.
-        Returns:
-            InventoryApi: An instance of the InventoryApi client.
-        """
-        inventory_api: InventoryApi = None
-        transport = self.app_config.transport()
-        if transport in ["streamable-http", "sse"]:
-            # Try to get the HTTP request
-            self.log.debug("Attempting to get the HTTP request to initialize the Sysdig API client.")
-            request: Request = get_http_request()
-            inventory_api = request.state.api_instances["inventory"]
-        else:
-            # If running in STDIO mode, we need to initialize the API client from environment variables
-            self.log.debug("Running in STDIO mode, initializing the Sysdig API client from environment variables.")
-            cfg = get_configuration()
-            api_client = initialize_api_client(cfg)
-            inventory_api = InventoryApi(api_client)
-        return inventory_api
 
     def tool_list_resources(
         self,
+        ctx: Context,
         filter_exp: Annotated[
             str,
             Field(
@@ -141,6 +116,7 @@ class InventoryTools:
         List inventory items based on a filter expression, with optional pagination.
 
         Args:
+            ctx (Context): A context object containing configuration information.
             filter_exp (str): Sysdig query filter expression to filter inventory resources.
                 Use the resource://filter-query-language to get the expected filter expression format.
                 Supports operators: =, !=, in, exists, contains, startsWith.
@@ -162,7 +138,9 @@ class InventoryTools:
             Or a dict containing an error message if the call fails.
         """
         try:
-            inventory_api = self.init_client()
+            api_instances: dict = ctx.get_state("api_instances")
+            inventory_api: InventoryApi = api_instances.get("inventory")
+
             start_time = time.time()
 
             api_response = inventory_api.get_resources_without_preload_content(
@@ -180,19 +158,23 @@ class InventoryTools:
 
     def tool_get_resource(
         self,
+        ctx: Context,
         resource_hash: Annotated[str, Field(description="The unique hash of the inventory resource to retrieve.")],
     ) -> dict:
         """
         Fetch a specific inventory resource by hash.
 
         Args:
+            ctx (Context): A context object containing configuration information.
             resource_hash (str): The hash identifier of the resource.
 
         Returns:
             dict: A dictionary containing the details of the requested inventory resource.
         """
         try:
-            inventory_api = self.init_client()
+            api_instances: dict = ctx.get_state("api_instances")
+            inventory_api: InventoryApi = api_instances.get("inventory")
+
             start_time = time.time()
 
             api_response = inventory_api.get_resource_without_preload_content(hash=resource_hash)

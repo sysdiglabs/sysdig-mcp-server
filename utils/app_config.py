@@ -1,10 +1,10 @@
 """
-Utility functions to load and manage the application configuration from a YAML file.
-It will load a singleton configuration object that can be accessed throughout the application.
+Utility functions to load and manage the application configuration.
+It will load a single configuration class object that can be accessed throughout the application.
 """
 
 import os
-from typing import Optional
+from typing import Optional, List
 
 # app_config singleton
 _app_config: Optional[dict] = None
@@ -54,7 +54,7 @@ class AppConfig:
         Returns:
             str: The transport protocol (e.g., "stdio", "streamable-http", or "sse").
         """
-        transport = os.environ.get("SYSDIG_TRANSPORT", "stdio").lower()
+        transport = os.environ.get("MCP_TRANSPORT", "stdio").lower()
 
         if transport not in ("stdio", "streamable-http", "sse"):
             raise ValueError("Invalid transport protocol. Valid values are: stdio, streamable-http, sse.")
@@ -78,7 +78,7 @@ class AppConfig:
         Returns:
             int: The MCP server port.
         """
-        return os.environ.get("SYSDIG_MCP_LISTENING_PORT", "8080")
+        return int(os.environ.get("SYSDIG_MCP_LISTENING_PORT", "8080"))
 
     #
     def host(self) -> str:
@@ -100,6 +100,57 @@ class AppConfig:
         """
         return os.environ.get("MCP_MOUNT_PATH", "/sysdig-mcp-server")
 
+    def oauth_jwks_uri(self) -> str:
+        """
+        Get the string value for the remote OAuth JWKS URI.
+        Returns:
+            str: The OAuth JWKS URI.
+        """
+        return os.environ.get("OAUTH_JWKS_URI", "")
+
+    def oauth_issuer(self) -> str:
+        """
+        Get the string value for the remote OAuth Issuer.
+        Returns:
+            str: The OAuth Issuer.
+        """
+        return os.environ.get("OAUTH_ISSUER", "")
+
+    def oauth_audience(self) -> str:
+        """
+        Get the string value for the remote OAuth Audience.
+        Returns:
+            str: The OAuth Audience.
+        """
+        return os.environ.get("OAUTH_AUDIENCE", "")
+
+    def oauth_required_scopes(self) -> List[str]:
+        """
+        Get the list of required scopes for the remote OAuth.
+        Returns:
+            List[str]: The list of scopes.
+        """
+        raw = os.environ.get("OAUTH_REQUIRED_SCOPES", "")
+        if not raw:
+            return []
+        # Support comma-separated scopes in env var
+        return [s.strip() for s in raw.split(",") if s.strip()]
+
+    def oauth_enabled(self) -> bool:
+        """
+        Check to enable the remote OAuth.
+        Returns:
+            bool: Whether the remote OAuth should be enabled or not.
+        """
+        return os.environ.get("OAUTH_ENABLED", "false").lower() == "true"
+
+    def oauth_resource_server_uri(self) -> str:
+        """
+        Get the string value for the remote OAuth Server Resource URI.
+        Returns:
+            str: The OAuth Resource URI.
+        """
+        return os.environ.get("OAUTH_RESOURCE_SERVER_URI", "[]")
 
 def get_app_config() -> AppConfig:
     """

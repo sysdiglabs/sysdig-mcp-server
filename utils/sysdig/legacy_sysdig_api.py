@@ -1,5 +1,5 @@
 """
-Temporary wrapper for Old Sysdig API.
+Temporary wrapper for Legacy Sysdig API.
 Will be replaced with a proper implementation in the future
 """
 
@@ -8,9 +8,10 @@ from sysdig_client.rest import RESTResponseType
 from sysdig_client import ApiClient
 
 
-class OldSysdigApi:
+class LegacySysdigApi:
     """
-    Wrapper for Old non-public Sysdig API.
+    [Deprecated]
+    Wrapper for Legacy Sysdig API.
     """
 
     def __init__(self, api_client: ApiClient):
@@ -73,5 +74,15 @@ class OldSysdigApi:
 
         """
         url = f"{self.base}/process-tree/v1/process-trees/{process_id}"
+        resp = self.api_client.call_api("GET", url, header_params=self.headers)
+        return resp.response
+
+    def get_me_permissions(self) -> RESTResponseType:
+        """
+        Retrieves the permissions for the current user.
+        Returns:
+            RESTResponseType: The response from the Sysdig API containing the user's permissions.
+        """
+        url = f"{self.base}/users/me/permissions"
         resp = self.api_client.call_api("GET", url, header_params=self.headers)
         return resp.response

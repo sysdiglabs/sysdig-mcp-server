@@ -3,29 +3,57 @@ This module provides a function to configure the Sysdig client based on a config
 """
 
 import sysdig_client
-import os
 import logging
 import re
 from typing import Optional
 
 # Application config loader
-from utils.app_config import get_app_config
-
-app_config = get_app_config()
+from utils.app_config import AppConfig
+from sysdig_client.configuration import Configuration
+from sysdig_client import ApiClient, SecureEventsApi, VulnerabilityManagementApi, InventoryApi
 
 # Set up logging
-logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=app_config.log_level())
 log = logging.getLogger(__name__)
 
 
+def initialize_api_client(config: Configuration = None) -> ApiClient:
+    """
+    Initializes the Sysdig API client with the provided configuration.
+    Args:
+        config (Configuration): The Sysdig client configuration containing the access token and host URL.
+    Returns:
+        ApiClient: An instance of ApiClient configured with the provided settings.
+    """
+    api_client = ApiClient(config)
+    return api_client
+
+
+def get_sysdig_api_instances(api_client: ApiClient) -> dict:
+    """
+    Returns a dictionary of Sysdig API instances using the provided ApiClient.
+    Args:
+        api_client (ApiClient): The ApiClient instance to use for creating API instances.
+    Returns:
+        dict: A dictionary containing instances of multiple Sysdig API classes.
+    """
+    return {
+        "secure_events": SecureEventsApi(api_client),
+        "vulnerability_management": VulnerabilityManagementApi(api_client),
+        "inventory": InventoryApi(api_client),
+    }
+
 # Lazy-load the Sysdig client configuration
 def get_configuration(
-    token: Optional[str] = None, sysdig_host_url: Optional[str] = None, old_api: bool = False
+    app_config: AppConfig,
+    token: Optional[str] = None,
+    sysdig_host_url: Optional[str] = None,
+    old_api: bool = False
 ) -> sysdig_client.Configuration:
     """
     Returns a configured Sysdig client using environment variables.
 
     Args:
+        app_config (SysdigClient): MCP Server configuration.
         token (str): The Sysdig Secure token.
         sysdig_host_url (str): The base URL of the Sysdig API,
             refer to the docs https://docs.sysdig.com/en/administration/saas-regions-and-ip-ranges/#sysdig-platform-regions.
@@ -55,7 +83,6 @@ def get_configuration(
                 "explicitly set the public API URL in the app config 'sysdig.public_api_url'."
                 "The expected format is https://api.{region}.sysdig.com."
             )
-        log.info(f"Using public API URL: {sysdig_host_url}")
 
     configuration = sysdig_client.Configuration(
         access_token=token,

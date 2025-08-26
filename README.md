@@ -172,8 +172,8 @@ The following environment variables are **required** for configuring the Sysdig 
 
 You can also set the following variables to override the default configuration:
 
-- `SYSDIG_MCP_TRANSPORT`: The transport protocol for the MCP Server (`stdio`, `streamable-http`, `sse`). Defaults to: `stdio`.
-- `SYSDIG_MCP_MOUNT_PATH`:  The URL prefix for the Streamable-http/sse deployment. Defaults to: `/sysdig-mcp-server`
+- `MCP_TRANSPORT`: The transport protocol for the MCP Server (`stdio`, `streamable-http`, `sse`). Defaults to: `stdio`.
+- `MCP_MOUNT_PATH`:  The URL prefix for the Streamable-http/sse deployment. Defaults to: `/sysdig-mcp-server`
 - `LOGLEVEL`: Log Level of the application (`DEBUG`, `INFO`, `WARNING`, `ERROR`). Defaults to: `INFO`
 - `SYSDIG_MCP_LISTENING_PORT`: The port for the server when it is deployed using remote protocols (`steamable-http`, `sse`). Defaults to: `8080`
 - `SYSDIG_MCP_LISTENING_HOST`: The host for the server when it is deployed using remote protocols (`steamable-http`, `sse`). Defaults to: `localhost`

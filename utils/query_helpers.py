@@ -2,7 +2,7 @@
 Utility functions for handling API response for the MCP server responses.
 """
 
-from datetime import datetime
+import datetime
 from sysdig_client.rest import RESTResponseType, ApiException
 import json
 import logging
@@ -101,7 +101,7 @@ def create_standard_response(results: RESTResponseType, execution_time_ms: float
         "results": parsed,
         "metadata": {
             "execution_time_ms": execution_time_ms,
-            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "timestamp": datetime.datetime.now(datetime.UTC).isoformat().replace("+00:00", "Z"),
             **metadata_kwargs,
         },
         "status_code": status,

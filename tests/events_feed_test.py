@@ -7,7 +7,10 @@ from tools.events_feed.tool import EventsFeedTools
 from utils.app_config import AppConfig
 from .conftest import util_load_json
 from unittest.mock import MagicMock, AsyncMock, create_autospec
+from sysdig_client.api import SecureEventsApi
 import os
+from fastmcp.server.context import Context
+from fastmcp.server import FastMCP
 
 # Get the absolute path of the current module file
 module_path = os.path.abspath(__file__)
@@ -40,8 +43,22 @@ def test_get_event_info(mock_success_response: MagicMock | AsyncMock, mock_creds
 
     tools_client = EventsFeedTools(app_config=mock_app_config())
 
+    ctx = Context(FastMCP())
+
+    # Seed FastMCP Context state with mocked API instances expected by the tools
+    secure_events_api = MagicMock(spec=SecureEventsApi)
+    # The tool returns whatever the SDK method returns; make it be our mocked HTTP response
+    secure_events_api.get_event_v1_without_preload_content.return_value = mock_success_response.return_value
+
+    api_instances = {
+        "secure_events": secure_events_api,
+        # Not used by this test, but present in real runtime; keep as empty mock to avoid KeyErrors elsewhere
+        "legacy_sysdig_api": MagicMock(),
+    }
+    ctx.set_state("api_instances", api_instances)
+
     # Pass the mocked Context object
-    result: dict = tools_client.tool_get_event_info("12345")
+    result: dict = tools_client.tool_get_event_info(ctx=ctx, event_id="12345")
     results: dict = result["results"]
 
     assert result.get("status_code") == HTTPStatus.OK
@@ -49,3 +66,4 @@ def test_get_event_info(mock_success_response: MagicMock | AsyncMock, mock_creds
     assert results.get("results").get("content", {}).get("ruleName") == "Fileless execution via memfd_create"
     assert results.get("results").get("id") == "123456789012"
     assert results.get("results").get("content", {}).get("type") == "workloadRuntimeDetection"
+    print("Event info retrieved successfully.")

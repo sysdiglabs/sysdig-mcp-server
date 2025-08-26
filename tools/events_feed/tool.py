@@ -8,20 +8,17 @@ including retrieving detailed information for a specific event and listing multi
 import logging
 import os
 import time
-from datetime import datetime
-from typing import Optional, Annotated, Any, Dict
+import datetime
+from typing import Optional, Annotated
 from pydantic import Field
-from sysdig_client import ApiException
 from fastmcp.prompts.prompt import PromptMessage, TextContent
 from fastmcp.exceptions import ToolError
-from starlette.requests import Request
+from fastmcp.server.context import Context
+from sysdig_client import ApiException
 from sysdig_client.api import SecureEventsApi
-from utils.sysdig.old_sysdig_api import OldSysdigApi
-from fastmcp.server.dependencies import get_http_request
+from utils.sysdig.legacy_sysdig_api import LegacySysdigApi
 from utils.query_helpers import create_standard_response
-from utils.sysdig.client_config import get_configuration
 from utils.app_config import AppConfig
-from utils.sysdig.api import initialize_api_client
 
 
 class EventsFeedTools:
@@ -32,55 +29,23 @@ class EventsFeedTools:
 
     def __init__(self, app_config: AppConfig):
         self.app_config = app_config
-        logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=self.app_config.log_level())
         self.log = logging.getLogger(__name__)
 
-    def init_client(self, old_api: bool = False) -> SecureEventsApi | OldSysdigApi:
-        """
-        Initializes the SecureEventsApi client from the request state.
-        If the request does not have the API client initialized, it will create a new instance
-        using the Sysdig Secure token and host from the environment variables.
-        Args:
-            old_api (bool): If True, initializes the OldSysdigApi client instead of SecureEventsApi.
-        Returns:
-            SecureEventsApi | OldSysdigApi: An instance of the SecureEventsApi or OldSysdigApi client.
-        """
-        secure_events_api: SecureEventsApi = None
-        old_sysdig_api: OldSysdigApi = None
-        transport = self.app_config.transport()
-        if transport in ["streamable-http", "sse"]:
-            # Try to get the HTTP request
-            self.log.debug("Attempting to get the HTTP request to initialize the Sysdig API client.")
-            request: Request = get_http_request()
-            secure_events_api = request.state.api_instances["secure_events"]
-            old_sysdig_api = request.state.api_instances["old_sysdig_api"]
-        else:
-            # If running in STDIO mode, we need to initialize the API client from environment variables
-            self.log.debug("Running in STDIO mode, initializing the Sysdig API client from environment variables.")
-            cfg = get_configuration()
-            api_client = initialize_api_client(cfg)
-            secure_events_api = SecureEventsApi(api_client)
-            # Initialize the old Sysdig API client for process tree requests
-            old_cfg = get_configuration(old_api=True)
-            old_sysdig_api = initialize_api_client(old_cfg)
-            old_sysdig_api = OldSysdigApi(old_sysdig_api)
-
-        if old_api:
-            return old_sysdig_api
-        return secure_events_api
-
-    def tool_get_event_info(self, event_id: str) -> dict:
+    def tool_get_event_info(self, ctx: Context, event_id: str) -> dict:
         """
         Retrieves detailed information for a specific security event.
 
         Args:
+            ctx (Context): Context to use.
             event_id (str): The unique identifier of the security event.
 
         Returns:
             Event: The Event object containing detailed information about the specified event.
         """
         # Init of the sysdig client
-        secure_events_api = self.init_client()
+        api_instances: dict = ctx.get_state("api_instances")
+        secure_events_api: SecureEventsApi = api_instances.get("secure_events")
+
         try:
             # Get the HTTP request
             start_time = time.time()
@@ -98,6 +63,7 @@ class EventsFeedTools:
 
     def tool_list_runtime_events(
         self,
+        ctx: Context,
         cursor: Optional[str] = None,
         scope_hours: int = 1,
         limit: int = 50,
@@ -136,6 +102,7 @@ class EventsFeedTools:
         cluster name, or an optional filter expression.
 
         Args:
+            ctx (Context): Context to use.
             cursor (Optional[str]): Cursor for pagination.
             scope_hours (int): Number of hours back from now to include events. Defaults to 1.
             limit (int): Maximum number of events to return. Defaults to 50.
@@ -144,7 +111,9 @@ class EventsFeedTools:
         Returns:
             dict: A dictionary containing the results of the runtime events query, including pagination information.
         """
-        secure_events_api = self.init_client()
+        api_instances: dict = ctx.get_state("api_instances")
+        secure_events_api: SecureEventsApi = api_instances.get("secure_events")
+
         start_time = time.time()
         # Compute time window
         now_ns = time.time_ns()
@@ -176,7 +145,7 @@ class EventsFeedTools:
 
     # A tool to retrieve all the process-tree information for a specific event.Add commentMore actions
 
-    def tool_get_event_process_tree(self, event_id: str) -> dict:
+    def tool_get_event_process_tree(self, ctx: Context, event_id: str) -> dict:
         """
         Retrieves the process tree for a specific security event.
         Not every event has a process tree, so this may return an empty tree.
@@ -191,12 +160,14 @@ class EventsFeedTools:
             ToolError: If there is an error constructing or processing the response.
         """
         try:
+            api_instances: dict = ctx.get_state("api_instances")
+            legacy_api_client: LegacySysdigApi = api_instances.get("legacy_sysdig_api")
+
             start_time = time.time()
             # Get process tree branches
-            old_api_client = self.init_client(old_api=True)
-            branches = old_api_client.request_process_tree_branches(event_id)
+            branches = legacy_api_client.request_process_tree_branches(event_id)
             # Get process tree
-            tree = old_api_client.request_process_tree_trees(event_id)
+            tree = legacy_api_client.request_process_tree_trees(event_id)
 
             # Parse the response (tolerates empty bodies)
             branches_std = create_standard_response(results=branches, execution_time_ms=(time.time() - start_time) * 1000)
@@ -209,7 +180,7 @@ class EventsFeedTools:
                 "tree": tree_std.get("results", {}),
                 "metadata": {
                     "execution_time_ms": execution_time,
-                    "timestamp": datetime.utcnow().isoformat() + "Z",
+                    "timestamp": datetime.datetime.now(datetime.UTC).isoformat().replace("+00:00", "Z"),
                 },
             }
 
@@ -222,7 +193,7 @@ class EventsFeedTools:
                     "tree": {},
                     "metadata": {
                         "execution_time_ms": (time.time() - start_time) * 1000,
-                        "timestamp": datetime.utcnow().isoformat() + "Z",
+                        "timestamp": datetime.datetime.now(datetime.UTC).isoformat().replace("+00:00", "Z"),
                         "note": "Process tree not available for this event"
                     },
                 }
