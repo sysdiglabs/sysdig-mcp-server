@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 from utils.app_config import get_app_config
 
 # Register all tools so they attach to the MCP server
-from utils.mcp_server import run_stdio, run_http
+from utils.mcp_server import SysdigMCPServer
 
 # Load environment variables from .env
 load_dotenv()
@@ -49,12 +49,15 @@ def main():
     ▄▌▙▌▄▌▙▌▌▙▌  ▌▝ ▌▙▖▌   ▄▌▙▖▌ ▚▘▙▖▌
       ▄▌     ▄▌
     """)
+
+    mcp_server = SysdigMCPServer(app_config=app_config)
+
     if transport == "stdio":
         # Run MCP server over STDIO (local)
-        run_stdio()
+        mcp_server.run_stdio()
     else:
         # Run MCP server over streamable HTTP by default
-        run_http()
+        mcp_server.run_http()
 
 
 if __name__ == "__main__":
