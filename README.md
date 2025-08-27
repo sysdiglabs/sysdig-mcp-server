@@ -17,7 +17,6 @@
   - [Requirements](#requirements)
     - [UV Setup](#uv-setup)
   - [Configuration](#configuration)
-    - [Environment Variables](#environment-variables)
   - [Running the Server](#running-the-server)
     - [Docker](#docker)
     - [K8s Deployment](#k8s-deployment)
@@ -27,6 +26,7 @@
     - [URL](#url)
     - [Claude Desktop App](#claude-desktop-app)
     - [MCP Inspector](#mcp-inspector)
+    - [Goose Agent](#goose-agent)
 
 ## Description
 
@@ -65,17 +65,17 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
                 "-i",
                 "--rm",
                 "-e",
-                "SYSDIG_HOST",
+                "SYSDIG_MCP_API_HOST",
                 "-e",
-                "MCP_TRANSPORT",
+                "SYSDIG_MCP_TRANSPORT",
                 "-e",
-                "SYSDIG_SECURE_TOKEN",
+                "SYSDIG_MCP_API_SECURE_TOKEN",
                 "ghcr.io/sysdiglabs/sysdig-mcp-server:latest"
             ],
             "env": {
-              "SYSDIG_HOST": "<your_sysdig_host>",
-              "SYSDIG_SECURE_TOKEN": "<your_sysdig_secure_api_token>",
-              "MCP_TRANSPORT": "stdio"
+              "SYSDIG_MCP_API_HOST": "<your_sysdig_host>",
+              "SYSDIG_MCP_API_SECURE_TOKEN": "<your_sysdig_secure_api_token>",
+              "SYSDIG_MCP_TRANSPORT": "stdio"
             }
           }
         }
@@ -167,14 +167,14 @@ This will create a virtual environment using `uv` and install the required depen
 
 The following environment variables are **required** for configuring the Sysdig SDK:
 
-- `SYSDIG_HOST`: The URL of your Sysdig Secure instance (e.g., `https://us2.app.sysdig.com`).
-- `SYSDIG_SECURE_TOKEN`: Your Sysdig Secure API token.
+- `SYSDIG_MCP_API_HOST`: The URL of your Sysdig Secure instance (e.g., `https://us2.app.sysdig.com`).
+- `SYSDIG_MCP_API_SECURE_TOKEN`: Your Sysdig Secure API token.
 
 You can also set the following variables to override the default configuration:
 
-- `MCP_TRANSPORT`: The transport protocol for the MCP Server (`stdio`, `streamable-http`, `sse`). Defaults to: `stdio`.
-- `MCP_MOUNT_PATH`:  The URL prefix for the Streamable-http/sse deployment. Defaults to: `/sysdig-mcp-server`
-- `LOGLEVEL`: Log Level of the application (`DEBUG`, `INFO`, `WARNING`, `ERROR`). Defaults to: `INFO`
+- `SYSDIG_MCP_TRANSPORT`: The transport protocol for the MCP Server (`stdio`, `streamable-http`, `sse`). Defaults to: `stdio`.
+- `SYSDIG_MCP_MOUNT_PATH`:  The URL prefix for the Streamable-http/sse deployment. Defaults to: `/sysdig-mcp-server`
+- `SYSDIG_MCP_LOGLEVEL`: Log Level of the application (`DEBUG`, `INFO`, `WARNING`, `ERROR`). Defaults to: `INFO`
 - `SYSDIG_MCP_LISTENING_PORT`: The port for the server when it is deployed using remote protocols (`steamable-http`, `sse`). Defaults to: `8080`
 - `SYSDIG_MCP_LISTENING_HOST`: The host for the server when it is deployed using remote protocols (`steamable-http`, `sse`). Defaults to: `localhost`
 
@@ -203,7 +203,7 @@ Then, you can run the container, making sure to pass the required environment va
 docker run -e SYSDIG_HOST=<your_sysdig_host> -e SYSDIG_SECURE_TOKEN=<your_sysdig_secure_api_token> -p 8080:8080 sysdig-mcp-server
 ```
 
-By default, the server will run using the `stdio` transport. To use the `streamable-http` or `sse` transports, set the `MCP_TRANSPORT` environment variable to `streamable-http` or `sse`:
+By default, the server will run using the `stdio` transport. To use the `streamable-http` or `sse` transports, set the `SYSDIG_MCP_TRANSPORT` environment variable to `streamable-http` or `sse`:
 
 ```bash
 docker run -e MCP_TRANSPORT=streamable-http -e SYSDIG_HOST=<your_sysdig_host> -e SYSDIG_SECURE_TOKEN=<your_sysdig_secure_api_token> -p 8080:8080 sysdig-mcp-server
@@ -267,7 +267,7 @@ To run the server using `uv`, first set up the environment as described in the [
 uv run main.py
 ```
 
-By default, the server will run using the `stdio` transport. To use the `streamable-http` or `sse` transports, set the `MCP_TRANSPORT` environment variable to `streamable-http` or `sse`:
+By default, the server will run using the `stdio` transport. To use the `streamable-http` or `sse` transports, set the `SYSDIG_MCP_TRANSPORT` environment variable to `streamable-http` or `sse`:
 
 ```bash
 MCP_TRANSPORT=streamable-http uv run main.py
@@ -279,9 +279,9 @@ To use the MCP server with a client like Claude or Cursor, you need to provide t
 
 ### Authentication
 
-When using the `sse` or `streamable-http` transport, the server requires a Bearer token for authentication. The token is passed in the `Authorization` header of the HTTP request.
+When using the `sse` or `streamable-http` transport, the server requires a Bearer token for authentication. The token is passed in the `X-Sysdig-Token` or default to `Authorization` header of the HTTP request (i.e `Bearer SYSDIG_SECURE_API_TOKEN`).
 
-Additionally, you can specify the Sysdig Secure host by providing the `X-Sysdig-Host` header. If this header is not present, the server will use the value from the env variable.
+Additionally, you can specify the Sysdig Secure host by providing the `X-Sysdig-Host` header. If this header is not present, the server will use the value from the env variable `SYSDIG_MCP_API_HOST`.
 
 Example headers:
 
@@ -319,9 +319,9 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
             "main.py"
             ],
           "env": {
-            "SYSDIG_HOST": "<your_sysdig_host>",
-            "SYSDIG_SECURE_TOKEN": "<your_sysdig_secure_api_token>",
-            "MCP_TRANSPORT": "stdio"
+            "SYSDIG_MCP_API_HOST": "<your_sysdig_host>",
+            "SYSDIG_MCP_API_SECURE_TOKEN": "<your_sysdig_secure_api_token>",
+            "SYSDIG_MCP_TRANSPORT": "stdio"
           }
         }
       }
@@ -340,17 +340,17 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
               "-i",
               "--rm",
               "-e",
-              "SYSDIG_HOST",
+              "SYSDIG_MCP_API_HOST",
               "-e",
-              "MCP_TRANSPORT",
+              "SYSDIG_MCP_TRANSPORT",
               "-e",
-              "SYSDIG_SECURE_TOKEN",
+              "SYSDIG_MCP_API_SECURE_TOKEN",
               "ghcr.io/sysdiglabs/sysdig-mcp-server"
           ],
           "env": {
-            "SYSDIG_HOST": "<your_sysdig_host>",
-            "SYSDIG_SECURE_TOKEN": "<your_sysdig_secure_api_token>",
-            "MCP_TRANSPORT": "stdio"
+            "SYSDIG_MCP_API_HOST": "<your_sysdig_host>",
+            "SYSDIG_MCP_API_SECURE_TOKEN": "<your_sysdig_secure_api_token>",
+            "SYSDIG_MCP_TRANSPORT": "stdio"
           }
         }
       }
@@ -371,3 +371,32 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
 3. Pass the Authorization header if using "streamable-http" or the SYSDIG_SECURE_API_TOKEN env var if using "stdio"
 
 ![mcp-inspector](./docs/assets/mcp-inspector.png)
+
+
+### Goose Agent
+
+1. In your terminal run `goose configure` and follow the steps to add the extension (more info on the [goose docs](https://block.github.io/goose/docs/getting-started/using-extensions/)), again could be using docker or uv as shown in the above examples.
+2. Your `~/.config/goose/config.yaml` config file should have one config like this one, check out the env vars
+
+  ```yaml
+  extensions:
+  ...
+    sysdig-mcp-server:
+      args: []
+      bundled: null
+      cmd: sysdig-mcp-server
+      description: Sysdig MCP server
+      enabled: true
+      env_keys:
+      - SYSDIG_MCP_TRANSPORT
+      - SYSDIG_MCP_API_HOST
+      - SYSDIG_MCP_API_SECURE_TOKEN
+      envs:
+        SYSDIG_MCP_TRANSPORT: stdio
+      name: sysdig-mcp-server
+      timeout: 300
+      type: stdio
+  ```
+3. Have fun
+
+![goose_results](./docs/assets/goose_results.png)

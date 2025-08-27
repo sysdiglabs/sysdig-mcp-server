@@ -137,11 +137,16 @@ class InventoryTools:
         Returns:
             dict: A dictionary containing the results of the inventory query, including pagination information.
             Or a dict containing an error message if the call fails.
+        Raises:
+            ToolError: If the API call fails or the response is invalid.
         """
         try:
             start_time = time.time()
             api_instances: dict = ctx.get_state("api_instances")
             inventory_api: InventoryApi = api_instances.get("inventory")
+            if not inventory_api:
+                self.log("InventoryApi instance not found")
+                raise ToolError("InventoryApi instance not found")
 
             api_response = inventory_api.get_resources_without_preload_content(
                 filter=filter_exp, page_number=page_number, page_size=page_size, with_enriched_containers=with_enrich_containers
@@ -153,7 +158,7 @@ class InventoryTools:
 
             return response
         except ToolError as e:
-            logging.error("Exception when calling InventoryApi->get_resources: %s\n" % e)
+            self.log.error("Exception when calling InventoryApi->get_resources: %s\n" % e)
             raise e
 
     def tool_get_resource(
@@ -170,11 +175,16 @@ class InventoryTools:
 
         Returns:
             dict: A dictionary containing the details of the requested inventory resource.
+        Raises:
+            ToolError: If the API call fails or the response is invalid.
         """
         try:
             start_time = time.time()
             api_instances: dict = ctx.get_state("api_instances")
             inventory_api: InventoryApi = api_instances.get("inventory")
+            if not inventory_api:
+                self.log("InventoryApi instance not found")
+                raise ToolError("InventoryApi instance not found")
 
             api_response = inventory_api.get_resource_without_preload_content(hash=resource_hash)
             execution_time = (time.time() - start_time) * 1000

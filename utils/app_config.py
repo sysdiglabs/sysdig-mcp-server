@@ -23,28 +23,28 @@ class AppConfig:
         Get the Sysdig endpoint.
 
         Raises:
-            RuntimeError: If no SYSDIG_MCP_HOST environment variable is set.
+            RuntimeError: If no SYSDIG_MCP_API_HOST environment variable is set.
         Returns:
             str: The Sysdig API host (e.g., "https://us2.app.sysdig.com").
         """
-        if f"{ENV_PREFIX}HOST" not in os.environ:
-            raise RuntimeError(f"Variable `{ENV_PREFIX}HOST` must be defined.")
+        if f"{ENV_PREFIX}API_HOST" not in os.environ:
+            raise RuntimeError(f"Variable `{ENV_PREFIX}API_HOST` must be defined.")
 
-        return os.environ.get(f"{ENV_PREFIX}HOST")
+        return os.environ[f"{ENV_PREFIX}API_HOST"]
 
     def sysdig_secure_token(self) -> str:
         """
         Get the Sysdig secure token.
 
         Raises:
-             RuntimeError: If no SYSDIG_MCP_SECURE_TOKEN environment variable is set.
+             RuntimeError: If no SYSDIG_MCP_API_SECURE_TOKEN environment variable is set.
         Returns:
             str: The Sysdig secure token.
         """
-        if f"{ENV_PREFIX}SECURE_TOKEN" not in os.environ:
-            raise RuntimeError(f"Variable `{ENV_PREFIX}SECURE_TOKEN` must be defined.")
+        if f"{ENV_PREFIX}API_SECURE_TOKEN" not in os.environ:
+            raise RuntimeError(f"Variable `{ENV_PREFIX}API_SECURE_TOKEN` must be defined.")
 
-        return os.environ.get(f"{ENV_PREFIX}SECURE_TOKEN")
+        return os.environ[f"{ENV_PREFIX}API_SECURE_TOKEN"]
 
     # MCP Config Vars
     def transport(self) -> str:

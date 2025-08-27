@@ -6,7 +6,6 @@ including retrieving detailed information for a specific event and listing multi
 """
 
 import logging
-import os
 import time
 import datetime
 from typing import Optional, Annotated
@@ -41,10 +40,15 @@ class EventsFeedTools:
 
         Returns:
             Event: The Event object containing detailed information about the specified event.
+        Raises:
+            ToolError: If the API call fails or the response is invalid.
         """
         # Init of the sysdig client
         api_instances: dict = ctx.get_state("api_instances")
         secure_events_api: SecureEventsApi = api_instances.get("secure_events")
+        if not secure_events_api:
+            self.log("SecureEventsApi instance not found")
+            raise ToolError("SecureEventsApi instance not found")
 
         try:
             # Get the HTTP request
@@ -58,7 +62,7 @@ class EventsFeedTools:
 
             return response
         except ToolError as e:
-            logging.error("Exception when calling SecureEventsApi->get_event_v1: %s\n" % e)
+            self.log("Exception when calling SecureEventsApi->get_event_v1: %s\n" % e)
             raise e
 
     def tool_list_runtime_events(
@@ -110,10 +114,15 @@ class EventsFeedTools:
 
         Returns:
             dict: A dictionary containing the results of the runtime events query, including pagination information.
+        Raises:
+            ToolError: If the API call fails or the response is invalid.
         """
         start_time = time.time()
         api_instances: dict = ctx.get_state("api_instances")
         secure_events_api: SecureEventsApi = api_instances.get("secure_events")
+        if not secure_events_api:
+            self.log("SecureEventsApi instance not found")
+            raise ToolError("SecureEventsApi instance not found")
 
         # Compute time window
         now_ns = time.time_ns()
@@ -163,6 +172,9 @@ class EventsFeedTools:
             start_time = time.time()
             api_instances: dict = ctx.get_state("api_instances")
             legacy_api_client: LegacySysdigApi = api_instances.get("legacy_sysdig_api")
+            if not legacy_api_client:
+                self.log("LegacySysdigApi instance not found")
+                raise ToolError("LegacySysdigApi instance not found")
 
             # Get process tree branches
             branches = legacy_api_client.request_process_tree_branches(event_id)

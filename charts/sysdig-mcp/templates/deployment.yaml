@@ -37,28 +37,28 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-          - name: SYSDIG_HOST
+          - name: SYSDIG_MCP_API_HOST
             value: {{ .Values.sysdig.host | quote }}
           {{- if .Values.sysdig.secrets.create }}
-          - name: SYSDIG_SECURE_API_TOKEN
+          - name: SYSDIG_MCP_API_SECURE_TOKEN
             valueFrom:
               secretKeyRef:
                 name: "{{ include "sysdig-mcp.fullname" . }}-sysdig-secrets"
-                key: SYSDIG_SECURE_API_TOKEN
+                key: SYSDIG_MCP_API_SECURE_TOKEN
           {{- end }}
           {{- if .Values.oauth.secrets.create }}
-          - name: MCP_OAUTH_OAUTH_CLIENT_ID
+          - name: SYSDIG_MCP_OAUTH_CLIENT_ID
             valueFrom:
               secretKeyRef:
                 name: "{{ include "sysdig-mcp.fullname" . }}-oauth-secrets"
                 key: clientId
-          - name: MCP_OAUTH_OAUTH_CLIENT_SECRET
+          - name: SYSDIG_MCP_OAUTH_CLIENT_SECRET
             valueFrom:
               secretKeyRef:
                 name: "{{ include "sysdig-mcp.fullname" . }}-oauth-secrets"
                 key: clientSecret
           {{- end }}
-          - name: MCP_TRANSPORT
+          - name: SYSDIG_MCP_TRANSPORT
             value: {{ .Values.sysdig.mcp.transport | quote }}
           ports:
             - name: http
@@ -77,17 +77,10 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            - name: config
-              mountPath: "/app/app_config.yaml"
-              subPath: "app_config.yaml"
             {{- with .Values.volumeMounts }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
       volumes:
-        - name: config
-          configMap:
-            # Provide the name of the ConfigMap you want to mount.
-            name: {{ include "sysdig-mcp.fullname" . }}-config
       {{- with .Values.volumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}

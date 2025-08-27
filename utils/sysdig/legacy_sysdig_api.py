@@ -82,6 +82,16 @@ class LegacySysdigApi:
         Retrieves the permissions for the current user.
         Returns:
             RESTResponseType: The response from the Sysdig API containing the user's permissions.
+        The response is typically a JSON object with a structure similar to:
+            {
+                "permissions": [
+                    "explore.read",
+                    "scanning.read",
+                    ...
+                ]
+            }
+        Each permission is a string representing an action the user is allowed to perform.
+        For a full list of possible permissions, refer to the Sysdig API documentation.
         """
         url = f"{self.base}/users/me/permissions"
         resp = self.api_client.call_api("GET", url, header_params=self.headers)

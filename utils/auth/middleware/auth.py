@@ -4,6 +4,7 @@ Custom middleware for access control and initialization of Sysdig API clients.
 
 import logging
 import os
+from http import HTTPStatus
 from starlette.requests import Request
 from fastmcp.server.middleware import Middleware, MiddlewareContext, CallNext
 from utils.sysdig.helpers import TOOL_PERMISSIONS
@@ -15,10 +16,12 @@ from utils.sysdig.legacy_sysdig_api import LegacySysdigApi
 from utils.app_config import AppConfig
 from utils.app_config import get_app_config
 
+app_config = get_app_config()
+
 # Set up logging
 logging.basicConfig(
     format="%(asctime)s-%(process)d-%(levelname)s- %(message)s",
-    level=get_app_config().log_level(),
+    level=app_config.log_level(),
 )
 log = logging.getLogger(__name__)
 
@@ -38,8 +41,8 @@ def _get_permissions(context: MiddlewareContext) -> None:
         api_instances: dict = context.fastmcp_context.get_state("api_instances")
         legacy_api_client: LegacySysdigApi = api_instances.get("legacy_sysdig_api")
         response = legacy_api_client.get_me_permissions()
-        if response.status != 200:
-            log.error(f"Error fetching permissions: Status {response.status} {legacy_api_client.api_client.configuration.host}")
+        if response.status != HTTPStatus.OK:
+            log.error(f"Error fetching permissions: Status {response.status}")
             raise Exception("Failed to fetch user permissions. Check your current Token and permissions.")
         context.fastmcp_context.set_state("permissions", response.json().get("permissions", []))
     except Exception as e:

@@ -47,8 +47,8 @@ def mock_creds():
     """
     Fixture to set up mocked credentials.
     """
-    os.environ["SYSDIG_MCP_SECURE_TOKEN"] = "mocked_token"
-    os.environ["SYSDIG_MCP_HOST"] = "https://us2.app.sysdig.com"
+    os.environ["SYSDIG_MCP_API_SECURE_TOKEN"] = "mocked_token"
+    os.environ["SYSDIG_MCP_API_HOST"] = "https://us2.app.sysdig.com"
 
 
 def mock_app_config() -> AppConfig:

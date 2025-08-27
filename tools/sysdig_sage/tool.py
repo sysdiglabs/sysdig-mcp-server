@@ -50,6 +50,9 @@ class SageTools:
             start_time = time.time()
             api_instances: dict = ctx.get_state("api_instances")
             legacy_api_client: LegacySysdigApi = api_instances.get("legacy_sysdig_api")
+            if not legacy_api_client:
+                self.log.error("LegacySysdigApi instance not found")
+                raise ToolError("LegacySysdigApi instance not found")
 
             sysql_response = await legacy_api_client.generate_sysql_query(question)
             if sysql_response.status > 299:
