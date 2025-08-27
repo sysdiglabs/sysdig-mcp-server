@@ -27,8 +27,6 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 
-
-
 def handle_signals():
     def signal_handler(sig, frame):
         log.info(f"Received signal {sig}, shutting down...")

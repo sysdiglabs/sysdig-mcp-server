@@ -42,12 +42,10 @@ def get_sysdig_api_instances(api_client: ApiClient) -> dict:
         "inventory": InventoryApi(api_client),
     }
 
+
 # Lazy-load the Sysdig client configuration
 def get_configuration(
-    app_config: AppConfig,
-    token: Optional[str] = None,
-    sysdig_host_url: Optional[str] = None,
-    old_api: bool = False
+    app_config: AppConfig, token: Optional[str] = None, sysdig_host_url: Optional[str] = None, old_api: bool = False
 ) -> sysdig_client.Configuration:
     """
     Returns a configured Sysdig client using environment variables.

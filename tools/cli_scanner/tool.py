@@ -11,6 +11,9 @@ from typing import Literal, Optional
 
 from utils.app_config import AppConfig
 
+TMP_OUTPUT_FILE = "/tmp/sysdig_cli_scanner_output.json"
+
+
 class CLIScannerTool:
     """
     A class to encapsulate the tools for interacting with the Sysdig CLI Scanner.
@@ -18,7 +21,6 @@ class CLIScannerTool:
 
     def __init__(self, app_config: AppConfig):
         self.app_config = app_config
-        logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=app_config.log_level())
         self.log = logging.getLogger(__name__)
         self.cmd: str = "sysdig-cli-scanner"
         self.default_args: list = [
@@ -146,7 +148,7 @@ class CLIScannerTool:
 
         try:
             # Run the command
-            with open("sysdig_cli_scanner_output.json", "w") as output_file:
+            with open(TMP_OUTPUT_FILE, "w") as output_file:
                 result = subprocess.run(cmd, text=True, check=True, stdout=output_file, stderr=subprocess.PIPE)
                 output_result = output_file.read()
                 output_file.close()
@@ -168,7 +170,7 @@ class CLIScannerTool:
                 }
                 raise Exception(result)
             else:
-                with open("sysdig_cli_scanner_output.json", "r") as output_file:
+                with open(TMP_OUTPUT_FILE, "r") as output_file:
                     output_result = output_file.read()
                 result: dict = {
                     "exit_code": e.returncode,
@@ -176,7 +178,7 @@ class CLIScannerTool:
                     "output": output_result,
                     "exit_codes_explained": self.exit_code_explained,
                 }
-                os.remove("sysdig_cli_scanner_output.json")
+                os.remove(TMP_OUTPUT_FILE)
                 return result
         # Handle any other exceptions that may occur and exit codes 2 and 3
         except Exception as e:

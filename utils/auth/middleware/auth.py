@@ -13,8 +13,13 @@ from utils.sysdig.client_config import initialize_api_client, get_sysdig_api_ins
 from utils.sysdig.client_config import get_configuration
 from utils.sysdig.legacy_sysdig_api import LegacySysdigApi
 from utils.app_config import AppConfig
+from utils.app_config import get_app_config
 
 # Set up logging
+logging.basicConfig(
+    format="%(asctime)s-%(process)d-%(levelname)s- %(message)s",
+    level=get_app_config().log_level(),
+)
 log = logging.getLogger(__name__)
 
 # TODO: Define the correct message notifications
@@ -78,10 +83,12 @@ async def _save_api_instances(context: MiddlewareContext, app_config: AppConfig)
 
     if context.fastmcp_context.get_state("transport_method") in ["streamable-http", "sse"]:
         request: Request = get_http_request()
-        # Check for the Authorization header
-        auth_header = request.headers.get("Authorization")
+        # TODO: Check for the custom Authorization header or use the default. Will be relevant with the Oauth provider config.
+        auth_header = request.headers.get("X-Sysdig-Token", request.headers.get("Authorization"))
         if not auth_header or not auth_header.startswith("Bearer "):
-            raise Exception("Missing or invalid Authorization header")
+            err = "Missing or invalid Authorization header"
+            log.error(err)
+            raise Exception(err)
 
         # Extract relevant information from the request headers
         token = auth_header.removeprefix("Bearer ").strip()
@@ -111,7 +118,7 @@ class CustomMiddleware(Middleware):
     Custom middleware for filtering tool listings and performing authentication.
     """
 
-    def  __init__(self, app_config: AppConfig):
+    def __init__(self, app_config: AppConfig):
         self.app_config = app_config
 
     # TODO: Evaluate if init the clients and perform auth only on the `notifications/initialized` event
@@ -153,5 +160,4 @@ class CustomMiddleware(Middleware):
         except Exception as e:
             log.error(f"Error filtering tools: {e}")
             raise
-        # Return modified list
         return filtered_tools

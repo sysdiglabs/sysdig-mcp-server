@@ -19,6 +19,7 @@ class InventoryTools:
     A class to encapsulate the tools for interacting with the Sysdig Secure Inventory API.
     This class provides methods to list resources and retrieve a single resource by its hash.
     """
+
     def __init__(self, app_config: AppConfig):
         self.app_config = app_config
         # Configure logging
@@ -35,7 +36,7 @@ class InventoryTools:
                     Sysdig Secure query filter expression to filter inventory resources.
 
                     Use the resource://filter-query-language to get the expected filter expression format.
-               
+
                     List of supported fields:
                     - accountName
                     - accountId
@@ -138,10 +139,9 @@ class InventoryTools:
             Or a dict containing an error message if the call fails.
         """
         try:
+            start_time = time.time()
             api_instances: dict = ctx.get_state("api_instances")
             inventory_api: InventoryApi = api_instances.get("inventory")
-
-            start_time = time.time()
 
             api_response = inventory_api.get_resources_without_preload_content(
                 filter=filter_exp, page_number=page_number, page_size=page_size, with_enriched_containers=with_enrich_containers
@@ -172,10 +172,9 @@ class InventoryTools:
             dict: A dictionary containing the details of the requested inventory resource.
         """
         try:
+            start_time = time.time()
             api_instances: dict = ctx.get_state("api_instances")
             inventory_api: InventoryApi = api_instances.get("inventory")
-
-            start_time = time.time()
 
             api_response = inventory_api.get_resource_without_preload_content(hash=resource_hash)
             execution_time = (time.time() - start_time) * 1000

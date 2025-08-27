@@ -111,10 +111,10 @@ class EventsFeedTools:
         Returns:
             dict: A dictionary containing the results of the runtime events query, including pagination information.
         """
+        start_time = time.time()
         api_instances: dict = ctx.get_state("api_instances")
         secure_events_api: SecureEventsApi = api_instances.get("secure_events")
 
-        start_time = time.time()
         # Compute time window
         now_ns = time.time_ns()
         from_ts = now_ns - scope_hours * 3600 * 1_000_000_000
@@ -160,10 +160,10 @@ class EventsFeedTools:
             ToolError: If there is an error constructing or processing the response.
         """
         try:
+            start_time = time.time()
             api_instances: dict = ctx.get_state("api_instances")
             legacy_api_client: LegacySysdigApi = api_instances.get("legacy_sysdig_api")
 
-            start_time = time.time()
             # Get process tree branches
             branches = legacy_api_client.request_process_tree_branches(event_id)
             # Get process tree
@@ -194,7 +194,7 @@ class EventsFeedTools:
                     "metadata": {
                         "execution_time_ms": (time.time() - start_time) * 1000,
                         "timestamp": datetime.datetime.now(datetime.UTC).isoformat().replace("+00:00", "Z"),
-                        "note": "Process tree not available for this event"
+                        "note": "Process tree not available for this event",
                     },
                 }
             else:

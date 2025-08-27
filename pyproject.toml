@@ -10,7 +10,7 @@ dependencies = [
     "pyyaml==6.0.2",
     "sqlalchemy==2.0.36",
     "sqlmodel==0.0.22",
-    "sysdig-sdk-python @ git+https://github.com/sysdiglabs/sysdig-sdk-python@597285143188019cd0e86fde43f94b1139f5441d",
+    "sysdig-sdk-python @ git+https://github.com/sysdiglabs/sysdig-sdk-python@852ee2ccad12a8b445dd4732e7f3bd44d78a37f7",
     "dask==2025.4.1",
     "oauthlib==3.2.2",
     "fastapi==0.116.1",

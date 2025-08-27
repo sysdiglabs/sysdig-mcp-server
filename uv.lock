@@ -236,7 +236,7 @@ version = "3.23.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "attrs" },
-    { name = "docstring-parser", marker = "python_full_version < '4.0'" },
+    { name = "docstring-parser", marker = "python_full_version < '4'" },
     { name = "rich" },
     { name = "rich-rst" },
 ]
@@ -1269,7 +1269,7 @@ requires-dist = [
     { name = "requests" },
     { name = "sqlalchemy", specifier = "==2.0.36" },
     { name = "sqlmodel", specifier = "==0.0.22" },
-    { name = "sysdig-sdk-python", git = "https://github.com/sysdiglabs/sysdig-sdk-python?rev=597285143188019cd0e86fde43f94b1139f5441d" },
+    { name = "sysdig-sdk-python", git = "https://github.com/sysdiglabs/sysdig-sdk-python?rev=852ee2ccad12a8b445dd4732e7f3bd44d78a37f7" },
 ]
 
 [package.metadata.requires-dev]
@@ -1282,7 +1282,7 @@ dev = [
 [[package]]
 name = "sysdig-sdk-python"
 version = "0.19.1"
-source = { git = "https://github.com/sysdiglabs/sysdig-sdk-python?rev=597285143188019cd0e86fde43f94b1139f5441d#597285143188019cd0e86fde43f94b1139f5441d" }
+source = { git = "https://github.com/sysdiglabs/sysdig-sdk-python?rev=852ee2ccad12a8b445dd4732e7f3bd44d78a37f7#852ee2ccad12a8b445dd4732e7f3bd44d78a37f7" }
 dependencies = [
     { name = "pydantic" },
     { name = "python-dateutil" },

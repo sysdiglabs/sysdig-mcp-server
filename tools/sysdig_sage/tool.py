@@ -20,6 +20,7 @@ class SageTools:
     This class provides methods to generate SysQL queries based on natural
     language questions and execute them against the Sysdig API.
     """
+
     def __init__(self, app_config: AppConfig):
         self.app_config = app_config
         self.log = logging.getLogger(__name__)

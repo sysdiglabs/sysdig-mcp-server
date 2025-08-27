@@ -2,15 +2,13 @@
 Events Feed Test Module
 """
 
+import os
 from http import HTTPStatus
 from tools.events_feed.tool import EventsFeedTools
-from utils.app_config import AppConfig
-from .conftest import util_load_json
-from unittest.mock import MagicMock, AsyncMock, create_autospec
-from sysdig_client.api import SecureEventsApi
-import os
+from unittest.mock import MagicMock, AsyncMock
 from fastmcp.server.context import Context
 from fastmcp.server import FastMCP
+from .conftest import util_load_json, mock_app_config
 
 # Get the absolute path of the current module file
 module_path = os.path.abspath(__file__)
@@ -20,18 +18,10 @@ module_directory = os.path.dirname(module_path)
 
 EVENT_INFO_RESPONSE = util_load_json(f"{module_directory}/test_data/events_feed/event_info_response.json")
 
+ctx = Context(MagicMock(spec=FastMCP))
 
-def mock_app_config() -> AppConfig:
-    mock_cfg = create_autospec(AppConfig, instance=True)
 
-    mock_cfg.sysdig_endpoint.return_value = "https://us2.app.sysdig.com"
-    mock_cfg.transport.return_value = "stdio"
-    mock_cfg.log_level.return_value = "DEBUG"
-    mock_cfg.port.return_value = 8080
-
-    return mock_cfg
-
-def test_get_event_info(mock_success_response: MagicMock | AsyncMock, mock_creds) -> None:
+def test_get_event_info(mock_success_response: MagicMock | AsyncMock, mock_creds, mock_context: Context) -> None:
     """Test the get_event_info tool method.
     Args:
         mock_success_response (MagicMock | AsyncMock): Mocked response object.
@@ -43,22 +33,8 @@ def test_get_event_info(mock_success_response: MagicMock | AsyncMock, mock_creds
 
     tools_client = EventsFeedTools(app_config=mock_app_config())
 
-    ctx = Context(FastMCP())
-
-    # Seed FastMCP Context state with mocked API instances expected by the tools
-    secure_events_api = MagicMock(spec=SecureEventsApi)
-    # The tool returns whatever the SDK method returns; make it be our mocked HTTP response
-    secure_events_api.get_event_v1_without_preload_content.return_value = mock_success_response.return_value
-
-    api_instances = {
-        "secure_events": secure_events_api,
-        # Not used by this test, but present in real runtime; keep as empty mock to avoid KeyErrors elsewhere
-        "legacy_sysdig_api": MagicMock(),
-    }
-    ctx.set_state("api_instances", api_instances)
-
     # Pass the mocked Context object
-    result: dict = tools_client.tool_get_event_info(ctx=ctx, event_id="12345")
+    result: dict = tools_client.tool_get_event_info(ctx=mock_context, event_id="12345")
     results: dict = result["results"]
 
     assert result.get("status_code") == HTTPStatus.OK
