@@ -350,3 +350,5 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
 3. Have fun
 
 ![goose_results](./docs/assets/goose_results.png)
+
+
