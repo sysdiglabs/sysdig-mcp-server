@@ -8,15 +8,9 @@ import logging
 import os
 import subprocess
 from typing import Literal, Optional
+from tempfile import NamedTemporaryFile
 
-from utils.app_config import get_app_config
-
-logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
-
-log = logging.getLogger(__name__)
-
-# Load app config (expects keys: mcp.host, mcp.port, mcp.transport)
-app_config = get_app_config()
+from utils.app_config import AppConfig
 
 
 class CLIScannerTool:
@@ -24,23 +18,26 @@ class CLIScannerTool:
     A class to encapsulate the tools for interacting with the Sysdig CLI Scanner.
     """
 
-    cmd: str = "sysdig-cli-scanner"
-    default_args: list = [
-        "--loglevel=err",
-        "--apiurl=" + app_config["sysdig"]["host"],
-    ]
-    iac_default_args: list = [
-        "--iac",
-        "--group-by=violation",
-        "--recursive",
-    ]
+    def __init__(self, app_config: AppConfig):
+        self.app_config = app_config
+        self.log = logging.getLogger(__name__)
+        self.cmd: str = "sysdig-cli-scanner"
+        self.default_args: list = [
+            "--loglevel=err",
+            "--apiurl=" + app_config.sysdig_endpoint(),
+        ]
+        self.iac_default_args: list = [
+            "--iac",
+            "--group-by=violation",
+            "--recursive",
+        ]
 
-    exit_code_explained: str = """
-        0: Scan evaluation "pass"
-        1: Scan evaluation "fail"
-        2: Invalid parameters
-        3: Internal error
-        """
+        self.exit_code_explained: str = """
+            0: Scan evaluation "pass"
+            1: Scan evaluation "fail"
+            2: Invalid parameters
+            3: Internal error
+            """
 
     def check_sysdig_cli_installed(self) -> None:
         """
@@ -49,7 +46,7 @@ class CLIScannerTool:
         try:
             # Attempt to run 'sysdig-cli-scanner --version' to check if it's installed
             result = subprocess.run([self.cmd, "--version"], capture_output=True, text=True, check=True)
-            log.info(f"Sysdig CLI Scanner is installed: {result.stdout.strip()}")
+            self.log.info(f"Sysdig CLI Scanner is installed: {result.stdout.strip()}")
         except subprocess.CalledProcessError as e:
             error: dict = {
                 "error": "Sysdig CLI Scanner is not installed or not in the $PATH. Check the docs to install it here: https://docs.sysdig.com/en/sysdig-secure/install-vulnerability-cli-scanner/#deployment"
@@ -63,15 +60,15 @@ class CLIScannerTool:
         Raises:
             EnvironmentError: If the SYSDIG_SECURE_TOKEN or SYSDIG_HOST environment variables are not set.
         """
-        sysdig_secure_token = os.environ.get("SYSDIG_SECURE_TOKEN")
-        sysdig_host = os.environ.get("SYSDIG_HOST", app_config["sysdig"]["host"])
+        sysdig_secure_token = self.app_config.sysdig_secure_token()
+        sysdig_host = self.app_config.sysdig_endpoint()
         if not sysdig_secure_token:
-            log.error("SYSDIG_SECURE_TOKEN environment variable is not set.")
+            self.log.error("SYSDIG_SECURE_TOKEN environment variable is not set.")
             raise EnvironmentError("SYSDIG_SECURE_TOKEN environment variable is not set.")
         else:
             os.environ["SECURE_API_TOKEN"] = sysdig_secure_token  # Ensure the token is set in the environment
         if not sysdig_host:
-            log.error("SYSDIG_HOST environment variable is not set.")
+            self.log.error("SYSDIG_HOST environment variable is not set.")
             raise EnvironmentError("SYSDIG_HOST environment variable is not set.")
 
     def run_sysdig_cli_scanner(
@@ -122,9 +119,10 @@ class CLIScannerTool:
         self.check_sysdig_cli_installed()
         self.check_env_credentials()
 
+        tmp_result_file = NamedTemporaryFile(suffix=".json", prefix="sysdig_cli_scanner_", delete_on_close=False)
         # Prepare the command based on the mode
         if mode == "iac":
-            log.info("Running Sysdig CLI Scanner in IaC mode.")
+            self.log.info("Running Sysdig CLI Scanner in IaC mode.")
             extra_iac_args = [
                 f"--group-by={iac_group_by}",
                 f"--severity-threshold={iac_severity_threshold}",
@@ -135,7 +133,7 @@ class CLIScannerTool:
             extra_iac_args = [arg for arg in extra_iac_args if arg]
             cmd = [self.cmd] + self.default_args + self.iac_default_args + extra_iac_args + [path_to_scan]
         else:
-            log.info("Running Sysdig CLI Scanner in vulnerability mode.")
+            self.log.info("Running Sysdig CLI Scanner in vulnerability mode.")
             # Default to vulnerability mode
             extra_args = [
                 "--standalone" if standalone else "",
@@ -150,7 +148,7 @@ class CLIScannerTool:
 
         try:
             # Run the command
-            with open("sysdig_cli_scanner_output.json", "w") as output_file:
+            with open(tmp_result_file.name, "w") as output_file:
                 result = subprocess.run(cmd, text=True, check=True, stdout=output_file, stderr=subprocess.PIPE)
                 output_result = output_file.read()
                 output_file.close()
@@ -159,11 +157,11 @@ class CLIScannerTool:
                     "output": output_result + result.stderr.strip(),
                     "exit_codes_explained": self.exit_code_explained,
                 }
-        # Handle non-zero exit codes speically exit code 1
+        # Handle non-zero exit codes specially exit code 1
         except subprocess.CalledProcessError as e:
-            log.warning(f"Sysdig CLI Scanner returned non-zero exit code: {e.returncode}")
+            self.log.warning(f"Sysdig CLI Scanner returned non-zero exit code: {e.returncode}")
             if e.returncode in [2, 3]:
-                log.error(f"Sysdig CLI Scanner encountered an error: {e.stderr.strip()}")
+                self.log.error(f"Sysdig CLI Scanner encountered an error: {e.stderr.strip()}")
                 result: dict = {
                     "error": "Error running Sysdig CLI Scanner",
                     "exit_code": e.returncode,
@@ -172,7 +170,7 @@ class CLIScannerTool:
                 }
                 raise Exception(result)
             else:
-                with open("sysdig_cli_scanner_output.json", "r") as output_file:
+                with open(tmp_result_file.name, "r") as output_file:
                     output_result = output_file.read()
                 result: dict = {
                     "exit_code": e.returncode,
@@ -180,8 +178,10 @@ class CLIScannerTool:
                     "output": output_result,
                     "exit_codes_explained": self.exit_code_explained,
                 }
-                os.remove("sysdig_cli_scanner_output.json")
                 return result
         # Handle any other exceptions that may occur and exit codes 2 and 3
         except Exception as e:
             raise e
+        finally:
+            if os.path.exists(tmp_result_file.name):
+                os.remove(tmp_result_file.name)

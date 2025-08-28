@@ -3,26 +3,15 @@ This module provides tools for interacting with the Sysdig Secure Inventory API.
 """
 
 import logging
-import os
 import time
 from typing import Annotated
+
+from fastmcp import Context
 from pydantic import Field
-from fastmcp.server.dependencies import get_http_request
 from fastmcp.exceptions import ToolError
-from starlette.requests import Request
-from sysdig_client import ApiException
 from sysdig_client.api import InventoryApi
-from utils.sysdig.client_config import get_configuration
-from utils.app_config import get_app_config
-from utils.sysdig.api import initialize_api_client
+from utils.app_config import AppConfig
 from utils.query_helpers import create_standard_response
-
-# Configure logging
-logging.basicConfig(format="%(asctime)s-%(process)d-%(levelname)s- %(message)s", level=os.environ.get("LOGLEVEL", "ERROR"))
-log = logging.getLogger(__name__)
-
-# Load app config (expects keys: mcp.host, mcp.port, mcp.transport)
-app_config = get_app_config()
 
 
 class InventoryTools:
@@ -31,31 +20,14 @@ class InventoryTools:
     This class provides methods to list resources and retrieve a single resource by its hash.
     """
 
-    def init_client(self) -> InventoryApi:
-        """
-        Initializes the InventoryApi client from the request state.
-        If the request does not have the API client initialized, it will create a new instance
-        using the Sysdig Secure token and host from the environment variables.
-        Returns:
-            InventoryApi: An instance of the InventoryApi client.
-        """
-        inventory_api: InventoryApi = None
-        transport = os.environ.get("MCP_TRANSPORT", app_config["mcp"]["transport"]).lower()
-        if transport in ["streamable-http", "sse"]:
-            # Try to get the HTTP request
-            log.debug("Attempting to get the HTTP request to initialize the Sysdig API client.")
-            request: Request = get_http_request()
-            inventory_api = request.state.api_instances["inventory"]
-        else:
-            # If running in STDIO mode, we need to initialize the API client from environment variables
-            log.debug("Running in STDIO mode, initializing the Sysdig API client from environment variables.")
-            cfg = get_configuration()
-            api_client = initialize_api_client(cfg)
-            inventory_api = InventoryApi(api_client)
-        return inventory_api
+    def __init__(self, app_config: AppConfig):
+        self.app_config = app_config
+        # Configure logging
+        self.log = logging.getLogger(__name__)
 
     def tool_list_resources(
         self,
+        ctx: Context,
         filter_exp: Annotated[
             str,
             Field(
@@ -64,7 +36,7 @@ class InventoryTools:
                     Sysdig Secure query filter expression to filter inventory resources.
 
                     Use the resource://filter-query-language to get the expected filter expression format.
-               
+
                     List of supported fields:
                     - accountName
                     - accountId
@@ -145,6 +117,7 @@ class InventoryTools:
         List inventory items based on a filter expression, with optional pagination.
 
         Args:
+            ctx (Context): A context object containing configuration information.
             filter_exp (str): Sysdig query filter expression to filter inventory resources.
                 Use the resource://filter-query-language to get the expected filter expression format.
                 Supports operators: =, !=, in, exists, contains, startsWith.
@@ -164,10 +137,16 @@ class InventoryTools:
         Returns:
             dict: A dictionary containing the results of the inventory query, including pagination information.
             Or a dict containing an error message if the call fails.
+        Raises:
+            ToolError: If the API call fails or the response is invalid.
         """
         try:
-            inventory_api = self.init_client()
             start_time = time.time()
+            api_instances: dict = ctx.get_state("api_instances")
+            inventory_api: InventoryApi = api_instances.get("inventory")
+            if not inventory_api:
+                self.log("InventoryApi instance not found")
+                raise ToolError("InventoryApi instance not found")
 
             api_response = inventory_api.get_resources_without_preload_content(
                 filter=filter_exp, page_number=page_number, page_size=page_size, with_enriched_containers=with_enrich_containers
@@ -179,25 +158,33 @@ class InventoryTools:
 
             return response
         except ToolError as e:
-            logging.error("Exception when calling InventoryApi->get_resources: %s\n" % e)
+            self.log.error("Exception when calling InventoryApi->get_resources: %s\n" % e)
             raise e
 
     def tool_get_resource(
         self,
+        ctx: Context,
         resource_hash: Annotated[str, Field(description="The unique hash of the inventory resource to retrieve.")],
     ) -> dict:
         """
         Fetch a specific inventory resource by hash.
 
         Args:
+            ctx (Context): A context object containing configuration information.
             resource_hash (str): The hash identifier of the resource.
 
         Returns:
             dict: A dictionary containing the details of the requested inventory resource.
+        Raises:
+            ToolError: If the API call fails or the response is invalid.
         """
         try:
-            inventory_api = self.init_client()
             start_time = time.time()
+            api_instances: dict = ctx.get_state("api_instances")
+            inventory_api: InventoryApi = api_instances.get("inventory")
+            if not inventory_api:
+                self.log("InventoryApi instance not found")
+                raise ToolError("InventoryApi instance not found")
 
             api_response = inventory_api.get_resource_without_preload_content(hash=resource_hash)
             execution_time = (time.time() - start_time) * 1000
@@ -206,5 +193,5 @@ class InventoryTools:
 
             return response
         except ToolError as e:
-            log.error(f"Exception when calling InventoryApi->get_resource: {e}")
+            self.log.error(f"Exception when calling InventoryApi->get_resource: {e}")
             raise e

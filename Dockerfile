@@ -29,7 +29,6 @@ WORKDIR /app
 RUN apt update && apt install -y git
 # Copy the application from the builder
 COPY --from=builder --chown=app:app /tmp/sysdig_mcp_server.tar.gz /app
-COPY --from=builder --chown=app:app /app/app_config.yaml /app
 
 RUN pip install /app/sysdig_mcp_server.tar.gz
 
