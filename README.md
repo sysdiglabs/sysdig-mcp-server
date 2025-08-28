@@ -209,56 +209,6 @@ By default, the server will run using the `stdio` transport. To use the `streama
 docker run -e MCP_TRANSPORT=streamable-http -e SYSDIG_HOST=<your_sysdig_host> -e SYSDIG_SECURE_TOKEN=<your_sysdig_secure_api_token> -p 8080:8080 sysdig-mcp-server
 ```
 
-### K8s Deployment
-
-If you want to run the Sysdig MCP server in a K8s cluster you can use the helm chart provided in the `charts/sysdig-mcp` path
-
-Modify the `values.yaml`
-
-```yaml
-# Example values.yaml
----
-sysdig:
-  secrets:
-    create: true
-    # If enabled, the secrets will be mounted as environment variables
-    secureAPIToken: "<your_sysdig_secure_api_token>"
-  mcp:
-    transport: "streamable-http"
-  host: "https://us2.app.sysdig.com" # <your_sysdig_host> "https://eu1.app.sysdig.com"
-
-configMap:
-  enabled: true
-  app_config: |
-    # Sysdig MCP Server Configuration
-    # This file is used to configure the Sysdig MCP server.
-    # You can add your custom configuration here.
-    app:
-      host: "0.0.0.0"
-      port: 8080
-      log_level: "error"
-
-    sysdig:
-      host: "https://us2.app.sysdig.com" # <your_sysdig_host> "https://eu1.app.sysdig.com"
-
-    mcp:
-      transport: streamable-http
-      host: "0.0.0.0"
-      port: 8080
-      allowed_tools:
-        - "events-feed"
-        - "inventory"
-        - "vulnerability-management"
-        - "sysdig-sage"
-        - "sysdig-cli-scanner" # You need the sysdig-cli-scanner binary installed in your server to use this tool
-```
-
-Install the chart
-
-```bash,copy
-helm upgrade --install sysdig-mcp ./charts/sysdig-mcp/ -n sysdig-mcp -f charts/sysdig-mcp/values.yaml
-```
-
 ### UV
 
 To run the server using `uv`, first set up the environment as described in the [UV Setup](#uv-setup) section. Then, run the `main.py` script:
