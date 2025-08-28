@@ -79,7 +79,7 @@ jobs:
           push: true
           tags: |
             ghcr.io/sysdiglabs/sysdig-mcp-server:latest
-            ghcr.io/sysdiglabs/sysdig-mcp-server:v${{ needs.get-newer-version.outputs.new_version }}
+            ghcr.io/sysdiglabs/sysdig-mcp-server:${{ needs.get-newer-version.outputs.new-version }}
 
   release:
     name: Create release at Github
