@@ -6,48 +6,63 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/**'
       - pyproject.toml
-      - Dockerfile
-      - '*.py'
-      - tests/**
-      - tools/**
-      - utils/**
 
 concurrency:
-  group: 'publish-${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
-  cancel-in-progress: true
+  group: 'publish-${{ github.workflow }}'
+  cancel-in-progress: false
 
 jobs:
-  tests:
-    permissions:
-      checks: write
-      pull-requests: write
-      contents: write
-    uses: ./.github/workflows/test.yaml
-    secrets: inherit
+  get-newer-version:
+    runs-on: ubuntu-latest
+    outputs:
+      new-version: ${{ steps.check.outputs.new_version }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-tags: true
+          fetch-depth: 0
+
+      - name: Extract version from pyproject.toml
+        id: extract
+        run: |
+          VERSION=$(grep -m1 '^version\s*=' pyproject.toml | sed -E 's/version\s*=\s*"([^"]+)".*/\1/')
+          echo "Extracted version: v$VERSION"
+          echo "version=v$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Get latest tag
+        id: latest
+        run: |
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "none")
+          echo "Latest tag: $LATEST_TAG"
+          echo "latest_tag=$LATEST_TAG" >> $GITHUB_OUTPUT
+
+      - name: Check if version is new
+        id: check
+        run: |
+          VERSION="${{ steps.extract.outputs.version }}"
+          LATEST="${{ steps.latest.outputs.latest_tag }}"
+          if [ "$VERSION" = "$LATEST" ]; then
+            echo "No new version detected."
+            echo "new_version=" >> $GITHUB_OUTPUT
+          else
+            echo "New version detected: $VERSION"
+            echo "new_version=$VERSION" >> $GITHUB_OUTPUT
+          fi
+
   push_to_registry:
     name: Push Docker image to GitHub Packages
     runs-on: ubuntu-latest
-    needs: tests
+    needs: [ get-newer-version ]
+    if: needs.get-newer-version.outputs.new-version != ''
     permissions:
       contents: read # required for actions/checkout
       packages: write # required for pushing to ghcr.io
       id-token: write # required for signing with cosign
-    outputs:
-      version: ${{ steps.extract_version.outputs.VERSION }}
-      tag: ${{ steps.extract_version.outputs.TAG }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
-
-      - name: Extract version
-        id: extract_version
-        run: |
-          VERSION=$(grep 'version =' pyproject.toml | sed -e 's/version = "\(.*\)"/\1/')
-          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
-          TAG=v$(grep 'version =' pyproject.toml | sed -e 's/version = "\(.*\)"/\1/')
-          echo "TAG=$TAG" >> "$GITHUB_OUTPUT"
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
@@ -55,11 +70,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Install cosign
-        uses: sigstore/cosign-installer@59acb6260d9c0ba8f4a2f9d9b48431a222b68e20 # v3.5.0
-        with:
-          cosign-release: 'v2.2.4'
 
       - name: Build and push Docker image
         id: build-and-push
@@ -69,47 +79,37 @@ jobs:
           push: true
           tags: |
             ghcr.io/sysdiglabs/sysdig-mcp-server:latest
-            ghcr.io/sysdiglabs/sysdig-mcp-server:v${{ steps.extract_version.outputs.VERSION }}
+            ghcr.io/sysdiglabs/sysdig-mcp-server:${{ needs.get-newer-version.outputs.new-version }}
 
-      - name: Sign the published Docker image
-        env:
-          TAGS: |
-            ghcr.io/sysdiglabs/sysdig-mcp-server:latest
-            ghcr.io/sysdiglabs/sysdig-mcp-server:v${{ steps.extract_version.outputs.VERSION }}
-          DIGEST: ${{ steps.build-and-push.outputs.digest }}
-        run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
-
-  tag_release:
-    name: Tag Release
+  release:
+    name: Create release at Github
+    needs: [ get-newer-version ]
+    if: needs.get-newer-version.outputs.new-version != ''
     runs-on: ubuntu-latest
-    needs: push_to_registry
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.sha }} # required for better experience using pre-releases
-          fetch-depth: '0' # Required due to the way Git works, without it this action won't be able to find any or the correct tags
-
-      - name: Get tag version
-        id: semantic_release
-        uses: anothrNick/github-tag-action@1.71.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: "patch"
-          TAG_CONTEXT: 'repo'
-          WITH_V: true
-
-      - name: Summary
-        run: |
-          echo "## Release Summary
-          - Tag: ${{ steps.semantic_release.outputs.tag }}
-          - Docker Image: ghcr.io/sysdiglabs/sysdig-mcp-server:v${{ needs.push_to_registry.outputs.version }}" >> $GITHUB_STEP_SUMMARY
-
-  test_helm_chart:
-    name: Test Helm Chart
-    needs: push_to_registry
     permissions:
-      contents: read # required for actions/checkout
-      pull-requests: write # required for creating a PR with the chart changes
-    uses: ./.github/workflows/helm_test.yaml
-    secrets: inherit
+      contents: write # Required for release creation
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Install git-chglog
+        run: nix profile install nixpkgs#git-chglog
+
+      - name: Tag with version ${{ needs.get-newer-version.outputs.new-version }}
+        run: git tag ${{ needs.get-newer-version.outputs.new-version }}
+
+      - name: Generate changelog
+        run: git-chglog -c .github/git-chglog/config.yml -o RELEASE_CHANGELOG.md $(git describe --tags $(git rev-list --tags --max-count=1))
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ needs.get-newer-version.outputs.new-version }}
+          tag_name: ${{ needs.get-newer-version.outputs.new-version }}
+          prerelease: false
+          body_path: RELEASE_CHANGELOG.md

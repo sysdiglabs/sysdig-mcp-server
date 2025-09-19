@@ -70,3 +70,8 @@ target/
 
 # VSCode
 .vscode/
+
+# Nix development
+.direnv/
+.secrets
+result

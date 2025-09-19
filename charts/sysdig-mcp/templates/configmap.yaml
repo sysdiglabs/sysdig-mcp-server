@@ -1,9 +1,0 @@
-{{- if .Values.configMap.enabled -}}
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ include "sysdig-mcp.fullname" . }}-config
-data:
-  app_config.yaml: |
-{{- (tpl .Values.configMap.app_config $) | nindent 4 }}
-{{- end }}
