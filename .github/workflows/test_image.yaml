@@ -52,6 +52,7 @@ jobs:
         uses: sysdiglabs/scan-action@v6
         with:
           image-tag: ghcr.io/sysdiglabs/sysdig-mcp-server:test
-          sysdig-secure-token: ${{ secrets.KUBELAB_SECURE_API_TOKEN }}
+          sysdig-secure-token: ${{ secrets.SECURE_ENV_MON_API_KEY }}
+          sysdig-secure-url: ${{ secrets.SECURE_ENV_MON_ENDPOINT }}
           stop-on-failed-policy-eval: true
           stop-on-processing-error: true
