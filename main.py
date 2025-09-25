@@ -41,7 +41,7 @@ def main():
     # Choose transport: "stdio" or "sse" (HTTP/SSE)
     handle_signals()
     transport = app_config.transport()
-    log.info("""
+    print("""
     ▄▖     ▌▘    ▖  ▖▄▖▄▖  ▄▖
     ▚ ▌▌▛▘▛▌▌▛▌  ▛▖▞▌▌ ▙▌  ▚ █▌▛▘▌▌█▌▛▘
     ▄▌▙▌▄▌▙▌▌▙▌  ▌▝ ▌▙▖▌   ▄▌▙▖▌ ▚▘▙▖▌

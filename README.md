@@ -1,8 +1,8 @@
 # MCP Server
 
-| App Test | Helm Test |
-|------|---------|
-| [![App Test](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/publish.yaml/badge.svg?branch=main)](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/publish.yaml) | [![Helm Test](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/helm_test.yaml/badge.svg?branch=main)](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/helm_test.yaml) |
+| Image Build | Image Scanning | Image Test |
+|------|---------|-----------|
+| [![Image Build](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/publish.yaml/badge.svg?branch=main)](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/publish.yaml) | [![Image Scanning](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/test_image.yaml/badge.svg?branch=main)](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/test_image.yaml) | [![Image Test](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/test.yaml/badge.svg?branch=main)](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/test.yaml) |
 
 ---
 
@@ -13,16 +13,18 @@
   - [Description](#description)
   - [Quickstart Guide](#quickstart-guide)
   - [Available Tools](#available-tools)
+    - [GA Tools](#ga-tools)
+    - [Beta Tools](#beta-tools)
     - [Available Resources](#available-resources)
   - [Requirements](#requirements)
     - [UV Setup](#uv-setup)
   - [Configuration](#configuration)
   - [Running the Server](#running-the-server)
     - [Docker](#docker)
-    - [K8s Deployment](#k8s-deployment)
     - [UV](#uv)
   - [Client Configuration](#client-configuration)
-    - [Authentication](#authentication)
+    - [Server Authentication](#server-authentication)
+    - [Sysdig API authentication](#sysdig-api-authentication)
     - [URL](#url)
     - [Claude Desktop App](#claude-desktop-app)
     - [MCP Inspector](#mcp-inspector)
@@ -82,7 +84,11 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
       }
       ```
 
+You can find a `mcp.json` file in the root of the project that you can tweak and add to your client.
+
 ## Available Tools
+
+### GA Tools
 
 <details>
 <summary><strong>Events Feed</strong></summary>
@@ -101,6 +107,36 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
 | Tool Name | Description | Sample Prompt |
 |-----------|-------------|----------------|
 | `list_resources` | List inventory resources using filters (e.g., platform or category) | "List all exposed IAM resources in AWS" |
+
+</details>
+
+
+<details>
+<summary><strong>Sysdig Sysql</strong></summary>
+
+| Tool Name | Description | Sample Prompt |
+|-----------|-------------|----------------|
+| `sysdig_sysql_execute_query` | Execute a Sysdig Sysql query against the Sysdig API and return the results | "MATCH CloudResource AFFECTED_BY Vulnerability WHERE Vulnerability.severity = 'Critical' RETURN DISTINCT CloudResource, Vulnerability LIMIT 50;" |
+
+</details>
+
+<details>
+<summary><strong>Sysdig CLI scanner</strong></summary>
+
+| Tool Name | Description | Sample Prompt |
+|-----------|-------------|----------------|
+| `run_sysdig_cli_scanner` | Run the Sysdig CLI Scanner to analyze a container image or IaC files for vulnerabilities and posture and misconfigurations. | "Scan this image ubuntu:latest for vulnerabilities" |
+
+Only in `stdio` transport mode. Make sure to have in your local $PATH the  `sysdig-cli-scanner` binary; more info in the [docs](https://docs.sysdig.com/en/sysdig-secure/install-vulnerability-cli-scanner/)
+</details>
+
+### Beta Tools
+
+<details>
+<summary><strong>Inventory</strong></summary>
+
+| Tool Name | Description | Sample Prompt |
+|-----------|-------------|----------------|
 | `get_resource` | Get detailed information about an inventory resource by its hash | "Get inventory details for hash abc123" |
 
 </details>
@@ -122,22 +158,18 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
 </details>
 
 <details>
-<summary><strong>Sysdig Sage</strong></summary>
+<summary><strong>Sysdig Sysql</strong></summary>
 
 | Tool Name | Description | Sample Prompt |
 |-----------|-------------|----------------|
-| `sysdig_sysql_sage_query` | Generate and run a SysQL query using natural language | "List top 10 pods by memory usage in the last hour" |
+| `sysdig_sysql_sage_query` | Get a Sysdig Sysql query through the help of Sysdig Sage based on a natural language question. | "List top 10 pods by memory usage in the last hour" |
 
 </details>
 
-<details>
-<summary><strong>Sysdig CLI scanner</strong></summary>
+---
 
-| Tool Name | Description | Sample Prompt |
-|-----------|-------------|----------------|
-| `run_sysdig_cli_scanner` | Run the Sysdig CLI Scanner to analyze a container image or IaC files for vulnerabilities and posture and misconfigurations. | "Scan this image ubuntu:latest for vulnerabilities" |
-
-</details>
+> [!IMPORTANT]
+> In order to enable the Beta tools, set the `SYSDIG_MCP_ENABLE_BETA_TOOLS` to `true`. Use the beta tools under your own responability since some Sysdig APIs are still on beta.
 
 ### Available Resources
 
@@ -174,7 +206,7 @@ You can also set the following variables to override the default configuration:
 
 - `SYSDIG_MCP_TRANSPORT`: The transport protocol for the MCP Server (`stdio`, `streamable-http`, `sse`). Defaults to: `stdio`.
 - `SYSDIG_MCP_MOUNT_PATH`:  The URL prefix for the Streamable-http/sse deployment. Defaults to: `/sysdig-mcp-server`
-- `SYSDIG_MCP_LOGLEVEL`: Log Level of the application (`DEBUG`, `INFO`, `WARNING`, `ERROR`). Defaults to: `INFO`
+- `SYSDIG_MCP_LOGLEVEL`: Log Level of the application (`DEBUG`, `INFO`, `WARNING`, `ERROR`). Defaults to: `ERROR`
 - `SYSDIG_MCP_LISTENING_PORT`: The port for the server when it is deployed using remote protocols (`steamable-http`, `sse`). Defaults to: `8080`
 - `SYSDIG_MCP_LISTENING_HOST`: The host for the server when it is deployed using remote protocols (`steamable-http`, `sse`). Defaults to: `localhost`
 
@@ -227,22 +259,67 @@ MCP_TRANSPORT=streamable-http uv run main.py
 
 To use the MCP server with a client like Claude or Cursor, you need to provide the server's URL and authentication details.
 
-### Authentication
+### Server Authentication
 
-When using the `sse` or `streamable-http` transport, the server requires a Bearer token for authentication. The token is passed in the `X-Sysdig-Token` or default to `Authorization` header of the HTTP request (i.e `Bearer SYSDIG_SECURE_API_TOKEN`).
+If you want to secure your MCP server with Oauth you can configure some environments variables to enable it. In this case we are going to use GitHub as the example provider but it also works for Google Oauth and the rest of the providers listed in the [authentication integrations](https://gofastmcp.com/integrations) list.
+
+In your `.env` file you will need to set the `FASTMCP_SERVER_AUTH_...` appropriate env vars depending on your Oauth provider.
+
+```bash
+export SYSDIG_MCP_...
+# Oauth config vars
+export FASTMCP_SERVER_AUTH="fastmcp.server.auth.providers.github.GitHubProvider"
+export FASTMCP_SERVER_AUTH_GITHUB_CLIENT_ID="bv2..."
+export FASTMCP_SERVER_AUTH_GITHUB_CLIENT_SECRET="ase2..."
+export FASTMCP_SERVER_AUTH_GITHUB_BASE_URL="http://localhost:8080"
+export FASTMCP_SERVER_AUTH_GITHUB_REDIRECT_PATH="/auth/callback"
+```
+
+Then if your MCP client supports the Oauth authentication method you will be able to connect to it. Here is an example client you can use to test it:
+
+```python
+from fastmcp import Client
+from fastmcp.client.transports import StreamableHttpTransport
+import asyncio
+import os
+
+async def main():
+    async with Client(
+        transport=StreamableHttpTransport(
+            url="http://localhost:8080/sysdig-mcp-server/mcp",
+            headers={"X-Sysdig-Token": f"Bearer {os.getenv("SYSDIG_MCP_API_SECURE_TOKEN")}"}
+            ),
+            auth="oauth"
+        ) as client:
+        print("✓ Authenticated with Oauth!")
+        tool_name = "list_runtime_events"
+        result = await client.call_tool(tool_name)
+        print(f"{tool_name} tool completed with status code: {result.structured_content.get('status_code')} with a total of: {result.data.get('results',{}).get('page', {}).get('total', 0)} runtime events.")
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+You can find the above client code here `tests/mcp_test_client.py`
+
+More information as an example of the Github Oauth config [here](https://gofastmcp.com/integrations/github)
+
+### Sysdig API authentication
+
+When using the `sse` or `streamable-http` transport, the server requires the `X-Sysdig-Token` header in the HTTP request (i.e `SYSDIG_SECURE_API_TOKEN`) to authenticate to the Sysdig API. This is different than the MCP server own authentication methods.
 
 Additionally, you can specify the Sysdig Secure host by providing the `X-Sysdig-Host` header. If this header is not present, the server will use the value from the env variable `SYSDIG_MCP_API_HOST`.
 
 Example headers:
 
 ```
-Authorization: Bearer <your_sysdig_secure_api_token>
+X-Sysdig-Token: Bearer <your_sysdig_secure_api_token>
 X-Sysdig-Host: <your_sysdig_host>
 ```
 
 ### URL
 
-If you are running the server with the `sse` or `streamable-http` transport, the URL will be `http://<host>:<port>/sysdig-mcp-server/mcp`.
+If you are running the server with the `sse` or `streamable-http` transport, the URL will be `http://<host>:<port>/sysdig-mcp-server/mcp`. You can configure the `SYSDIG_MCP_MOUNT_PATH` env variable to configure the mountpoint path, default to `/sysdig-mcp-server`
 
 For example, if you are running the server locally on port 8080, the URL will be `http://localhost:8080/sysdig-mcp-server/mcp`.
 
@@ -318,7 +395,7 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
 
 1. Run the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) locally
 2. Select the transport type and have the Sysdig MCP server running accordingly.
-3. Pass the Authorization header if using "streamable-http" or the SYSDIG_SECURE_API_TOKEN env var if using "stdio"
+3. Pass the `X-Sysdig-Token` authorization header if using "streamable-http" or the `SYSDIG_MCP_API_SECURE_TOKEN` env var if using "stdio"
 
 ![mcp-inspector](./docs/assets/mcp-inspector.png)
 
@@ -350,5 +427,3 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
 3. Have fun
 
 ![goose_results](./docs/assets/goose_results.png)
-
-

@@ -6,7 +6,7 @@ Helper functions for working with Sysdig API clients.
 TOOL_PERMISSIONS = {
     "inventory": ["explore.read"],
     "vulnerability": ["scanning.read", "secure.vm.scanresults.read"],
-    "sage": ["sage.exec", "sage.manage.exec"],
+    "sysql": ["sage.exec", "sage.manage.exec", "explore.read"],
     "cli-scanner": ["secure.vm.cli-scanner.exec"],
     "threat-detection": ["custom-events.read"],
 }

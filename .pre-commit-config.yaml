@@ -6,10 +6,10 @@ repos:
         description: Format code with ruff.
         entry: make fmt
         language: system
-        stages: ["commit", "push"]
+        stages: ["pre-commit", "pre-push"]
       - id: ruff-check
         name: Ruff Check
         description: Check code style with ruff.
         entry: make lint
         language: system
-        stages: ["commit", "push"]
+        stages: ["pre-commit", "pre-push"]
