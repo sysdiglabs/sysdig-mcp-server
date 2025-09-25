@@ -25,12 +25,12 @@ class LegacySysdigApi:
 
     async def generate_sysql_query(self, question: str) -> RESTResponseType:
         """
-        Sends a natural language question to Sysdig Sage and returns the generated SysQL query text.
+        Sends a natural language question to Sysdig and returns the generated SysQL query text.
 
         Args:
-            question (str): The natural language question to ask Sysdig Sage.
+            question (str): The natural language question to ask Sysdig.
         Returns:
-            RESTResponseType: The response from the Sysdig Sage API containing the generated SysQL query text.
+            RESTResponseType: The response from the Sysdig API containing the generated SysQL query text.
         """
         url = f"{self.base}/sage/sysql/generate?question={urllib.parse.quote(question)}"
         resp = self.api_client.call_api("GET", url, header_params=self.headers)
