@@ -4,6 +4,8 @@ Custom middleware for access control and initialization of Sysdig API clients.
 
 import logging
 import os
+from typing import Any
+import mcp.types as mt
 from http import HTTPStatus
 from starlette.requests import Request
 from fastmcp.server.middleware import Middleware, MiddlewareContext, CallNext
@@ -25,8 +27,7 @@ logging.basicConfig(
 )
 log = logging.getLogger(__name__)
 
-# TODO: Define the correct message notifications
-INIT_NOTIFICATIONS = ["notifications/initialized", "tools/list", "tools/call"]
+TOOLS_CALLS_NOTIFICATIONS = ["tools/list", "tools/call", "notifications/tools/list_changed"]
 
 
 def _get_permissions(context: MiddlewareContext) -> None:
@@ -43,7 +44,7 @@ def _get_permissions(context: MiddlewareContext) -> None:
         response = legacy_api_client.get_me_permissions()
         if response.status != HTTPStatus.OK:
             log.error(f"Error fetching permissions: Status {response.status}")
-            raise Exception("Failed to fetch user permissions. Check your current Token and permissions.")
+            raise Exception("Failed to fetch Sysdig user permissions. Check your current Token and permissions.")
         context.fastmcp_context.set_state("permissions", response.json().get("permissions", []))
     except Exception as e:
         log.error(f"Error fetching permissions: {e}")
@@ -86,10 +87,9 @@ async def _save_api_instances(context: MiddlewareContext, app_config: AppConfig)
 
     if context.fastmcp_context.get_state("transport_method") in ["streamable-http", "sse"]:
         request: Request = get_http_request()
-        # TODO: Check for the custom Authorization header or use the default. Will be relevant with the Oauth provider config.
-        auth_header = request.headers.get("X-Sysdig-Token", request.headers.get("Authorization"))
+        auth_header = request.headers.get("X-Sysdig-Token")
         if not auth_header or not auth_header.startswith("Bearer "):
-            err = "Missing or invalid Authorization header"
+            err = "Missing or invalid `X-Sysdig-Token` Authorization Bearer token header."
             log.error(err)
             raise Exception(err)
 
@@ -125,7 +125,11 @@ class CustomMiddleware(Middleware):
         self.app_config = app_config
 
     # TODO: Evaluate if init the clients and perform auth only on the `notifications/initialized` event
-    async def on_message(self, context: MiddlewareContext, call_next: CallNext) -> CallNext:
+    async def on_request(
+        self,
+        context: MiddlewareContext[mt.Request],
+        call_next: CallNext[mt.Request, Any],
+    ) -> Any:
         """
         Handle incoming messages and initialize the Sysdig API client if needed.
         Returns:
@@ -135,12 +139,13 @@ class CustomMiddleware(Middleware):
         """
         # Save transport method in context
         if not context.fastmcp_context.get_state("transport_method"):
-            transport_method = os.environ.get("MCP_TRANSPORT", self.app_config.transport()).lower()
+            transport_method = os.environ.get("SYSDIG_MCP_TRANSPORT", self.app_config.transport()).lower()
             context.fastmcp_context.set_state("transport_method", transport_method)
         try:
-            # TODO: Currently not able to get the notifications/initialized only that should be the method that initializes
-            # the API instances for the whole session, we need to check if its possible
-            if context.method in INIT_NOTIFICATIONS:
+            # TODO: Check if with the current protocol that persists a session between client and server
+            # there is an object where we can save the api_instances instead of initializing them on every request
+            # Currently we initialize the clients on every request that requires it and keep them in the context state
+            if context.method in TOOLS_CALLS_NOTIFICATIONS:
                 await _save_api_instances(context, self.app_config)
 
             return await call_next(context)

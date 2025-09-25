@@ -18,6 +18,11 @@ class AppConfig:
     A class to encapsulate the application configuration.
     """
 
+    def __init__(self):
+        # Automatically run validation on initialization
+        self.transport()
+        self.sysdig_endpoint()
+
     def sysdig_endpoint(self) -> str:
         """
         Get the Sysdig endpoint.
@@ -106,66 +111,6 @@ class AppConfig:
         """
         return os.environ.get(f"{ENV_PREFIX}MOUNT_PATH", "/sysdig-mcp-server")
 
-    def oauth_jwks_uri(self) -> str:
-        """
-        Get the string value for the remote OAuth JWKS URI.
-        Returns:
-            str: The OAuth JWKS URI.
-        """
-        return os.environ.get(f"{ENV_PREFIX}OAUTH_JWKS_URI", "")
-
-    def oauth_auth_endpoint(self) -> str:
-        """
-        Get the string value for the remote OAuth Auth Endpoint.
-        Returns:
-            str: The OAuth Auth Endpoint.
-        """
-        return os.environ.get(f"{ENV_PREFIX}OAUTH_AUTH_ENDPOINT", "")
-
-    def oauth_token_endpoint(self) -> str:
-        """
-        Get the string value for the remote OAuth Token Endpoint.
-        Returns:
-            str: The OAuth Token Endpoint.
-        """
-        return os.environ.get(f"{ENV_PREFIX}OAUTH_TOKEN_ENDPOINT", "")
-
-    def oauth_required_scopes(self) -> List[str]:
-        """
-        Get the list of required scopes for the remote OAuth.
-        Returns:
-            List[str]: The list of scopes.
-        """
-        raw = os.environ.get(f"{ENV_PREFIX}OAUTH_REQUIRED_SCOPES", "")
-        if not raw:
-            return []
-        # Support comma-separated scopes in env var
-        return [s.strip() for s in raw.split(",") if s.strip()]
-
-    def oauth_audience(self) -> str:
-        """
-        Get the string value for the remote OAuth Audience.
-        Returns:
-            str: The OAuth Audience.
-        """
-        return os.environ.get(f"{ENV_PREFIX}OAUTH_AUDIENCE", "")
-
-    def oauth_client_id(self) -> str:
-        """
-        Get the string value for the remote OAuth Client ID.
-        Returns:
-            str: The OAuth Client ID.
-        """
-        return os.environ.get(f"{ENV_PREFIX}OAUTH_CLIENT_ID", "")
-
-    def oauth_client_secret(self) -> str:
-        """
-        Get the string value for the remote OAuth Client Secret.
-        Returns:
-            str: The OAuth Client Secret.
-        """
-        return os.environ.get(f"{ENV_PREFIX}OAUTH_CLIENT_SECRET", "")
-
     def mcp_base_url(self) -> str:
         """
         Get the string value for the remote MCP Base URL.
@@ -174,41 +119,15 @@ class AppConfig:
         """
         return os.environ.get(f"{ENV_PREFIX}BASE_URL", "http://localhost:8080")
 
-    def oauth_redirect_path(self) -> str:
+    def use_beta_tools(self) -> bool:
         """
-        Get the string value for the remote OAuth Redirect Path.
-        Returns:
-            str: The OAuth Redirect Path.
-        """
-        return os.environ.get(f"{ENV_PREFIX}OAUTH_REDIRECT_PATH", "/auth/callback")
+        Check if beta tools should be enabled.
+        Defaults to False.
 
-    def oauth_allowed_client_redirect_uris(self) -> List[str]:
-        """
-        Get the list of allowed client redirect URIs for the remote OAuth.
         Returns:
-            List[str]: The list of allowed client redirect URIs.
+            bool: True if beta tools should be enabled, False otherwise.
         """
-        raw = os.environ.get(f"{ENV_PREFIX}OAUTH_ALLOWED_CLIENT_REDIRECT_URIS", "http://localhost:8080")
-        if not raw:
-            return []
-        # Support comma-separated URIs in env var
-        return [s.strip() for s in raw.split(",") if s.strip()]
-
-    def oauth_enabled(self) -> bool:
-        """
-        Check to enable the remote OAuth.
-        Returns:
-            bool: Whether the remote OAuth should be enabled or not.
-        """
-        return os.environ.get(f"{ENV_PREFIX}OAUTH_ENABLED", "false").lower() == "true"
-
-    def oauth_resource_server_uri(self) -> str:
-        """
-        Get the string value for the remote OAuth Server Resource URI.
-        Returns:
-            str: The OAuth Resource URI.
-        """
-        return os.environ.get(f"{ENV_PREFIX}OAUTH_RESOURCE_SERVER_URI", "[]")
+        return os.environ.get(f"{ENV_PREFIX}ENABLE_BETA_TOOLS", "false").lower() == "true"
 
 
 def get_app_config() -> AppConfig:

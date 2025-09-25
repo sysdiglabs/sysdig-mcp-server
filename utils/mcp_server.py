@@ -15,12 +15,11 @@ from fastapi import FastAPI
 from fastmcp import FastMCP, Settings
 from fastmcp.resources import HttpResource, TextResource
 
-from utils.auth.auth_config import obtain_remote_auth_provider
 from utils.auth.middleware.auth import CustomMiddleware
 from tools.events_feed.tool import EventsFeedTools
 from tools.inventory.tool import InventoryTools
 from tools.vulnerability_management.tool import VulnerabilityManagementTools
-from tools.sysdig_sage.tool import SageTools
+from tools.sysdig_sysql.tool import SysqlTools
 from tools.cli_scanner.tool import CLIScannerTool
 
 # Application config loader
@@ -37,10 +36,11 @@ class SysdigMCPServer:
 
         self.mcp_instance: Optional[FastMCP] = FastMCP(
             name="Sysdig MCP Server",
-            instructions="Provides Sysdig Secure tools and resources.",
-            include_tags={"sysdig_secure"},
+            instructions="Provides Sysdig Secure tools and resources to your AI apps.",
+            include_tags={"sysdig_secure"},  # Tags are used to enable tools
             middleware=middlewares,
-            auth=obtain_remote_auth_provider(app_config),
+            # Auth is handled through environment variables and middleware
+            # refer to https://gofastmcp.com/integrations/github#provider-selection
         )
         # Add tools to the MCP server
         self.add_tools()
@@ -170,7 +170,9 @@ class SysdigMCPServer:
             name_or_fn=inventory_tools.tool_get_resource,
             name="get_resource",
             description="Retrieve a single inventory resource by its unique hash identifier.",
-            tags={"inventory", "sysdig_secure"},
+            enabled=self.app_config.use_beta_tools(),
+            meta={"status": "beta feature, use with caution"},
+            tags={"inventory", "sysdig_secure", "CA"},
         )
 
         # Register the Sysdig Vulnerability Management tools
@@ -185,49 +187,65 @@ class SysdigMCPServer:
                 (Supports pagination using cursor).
                 """
             ),
-            tags={"vulnerability", "sysdig_secure"},
+            enabled=self.app_config.use_beta_tools(),
+            meta={"status": "beta feature, use with caution"},
+            tags={"vulnerability", "sysdig_secure", "CA"},
         )
         self.mcp_instance.tool(
             name_or_fn=vulnerability_tools.tool_list_accepted_risks,
             name="list_accepted_risks",
             description="List all accepted risks. Supports filtering and pagination.",
-            tags={"vulnerability", "sysdig_secure"},
+            enabled=self.app_config.use_beta_tools(),
+            meta={"status": "beta feature, use with caution"},
+            tags={"vulnerability", "sysdig_secure", "CA"},
         )
         self.mcp_instance.tool(
             name_or_fn=vulnerability_tools.tool_get_accepted_risk,
             name="get_accepted_risk",
             description="Retrieve a specific accepted risk by its ID.",
-            tags={"vulnerability", "sysdig_secure"},
+            enabled=self.app_config.use_beta_tools(),
+            meta={"status": "beta feature, use with caution"},
+            tags={"vulnerability", "sysdig_secure", "CA"},
         )
         self.mcp_instance.tool(
             name_or_fn=vulnerability_tools.tool_list_registry_scan_results,
             name="list_registry_scan_results",
             description="List registry scan results. Supports filtering and pagination.",
-            tags={"vulnerability", "sysdig_secure"},
+            enabled=self.app_config.use_beta_tools(),
+            meta={"status": "beta feature, use with caution"},
+            tags={"vulnerability", "sysdig_secure", "CA"},
         )
         self.mcp_instance.tool(
             name_or_fn=vulnerability_tools.tool_get_vulnerability_policy,
             name="get_vulnerability_policy_by_id",
             description="Retrieve a specific vulnerability policy by its ID.",
-            tags={"vulnerability", "sysdig_secure"},
+            enabled=self.app_config.use_beta_tools(),
+            meta={"status": "beta feature, use with caution"},
+            tags={"vulnerability", "sysdig_secure", "CA"},
         )
         self.mcp_instance.tool(
             name_or_fn=vulnerability_tools.tool_list_vulnerability_policies,
             name="list_vulnerability_policies",
             description="List all vulnerability policies. Supports filtering, pagination, and sorting.",
-            tags={"vulnerability", "sysdig_secure"},
+            enabled=self.app_config.use_beta_tools(),
+            meta={"status": "beta feature, use with caution"},
+            tags={"vulnerability", "sysdig_secure", "CA"},
         )
         self.mcp_instance.tool(
             name_or_fn=vulnerability_tools.tool_list_pipeline_scan_results,
             name="list_pipeline_scan_results",
             description="List pipeline scan results (e.g., built images). Supports pagination and filtering.",
-            tags={"vulnerability", "sysdig_secure"},
+            enabled=self.app_config.use_beta_tools(),
+            meta={"status": "beta feature, use with caution"},
+            tags={"vulnerability", "sysdig_secure", "CA"},
         )
         self.mcp_instance.tool(
             name_or_fn=vulnerability_tools.tool_get_scan_result,
             name="get_scan_result",
             description="Retrieve a specific scan result (registry/runtime/pipeline).",
-            tags={"vulnerability", "sysdig_secure"},
+            enabled=self.app_config.use_beta_tools(),
+            meta={"status": "beta feature, use with caution"},
+            tags={"vulnerability", "sysdig_secure", "CA"},
         )
         self.mcp_instance.add_prompt(
             Prompt.from_function(
@@ -238,19 +256,31 @@ class SysdigMCPServer:
             )
         )
 
-        # Register the Sysdig Sage tools
-        self.log.info("Adding Sysdig Sage Tools...")
-        sysdig_sage_tools = SageTools(self.app_config)
+        # Register the Sysdig Sysql tools
+        self.log.info("Adding Sysdig Sysql Tools...")
+        sysdig_sysql_tools = SysqlTools(self.app_config)
         self.mcp_instance.tool(
-            name_or_fn=sysdig_sage_tools.tool_sage_to_sysql,
+            name_or_fn=sysdig_sysql_tools.tool_sysql_sage_query,
             name="sysdig_sysql_sage_query",
             description=(
                 """
-                Query Sysdig Sage to generate a SysQL query based on a natural language question,
-                execute it against the Sysdig API, and return the results.
+                Get a Sysdig Sysql query through the help of Sysdig Sage based on a natural language question.
                 """
             ),
-            tags={"sage", "sysdig_secure"},
+            enabled=self.app_config.use_beta_tools(),
+            meta={"status": "beta feature, use with caution"},
+            tags={"sysql", "sysdig_secure", "CA"},
+        )
+
+        self.mcp_instance.tool(
+            name_or_fn=sysdig_sysql_tools.tool_sysql_execute_query,
+            name="sysdig_sysql_execute_query",
+            description=(
+                """
+                Execute a Sysdig Sysql query against the Sysdig API and return the results.
+                """
+            ),
+            tags={"sysql", "sysdig_secure"},
         )
 
         if self.app_config.transport() == "stdio":

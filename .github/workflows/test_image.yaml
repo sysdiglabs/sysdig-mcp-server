@@ -1,5 +1,5 @@
 ---
-name: Test Image Build
+name: Image Scan Vulns
 
 on:
   pull_request:

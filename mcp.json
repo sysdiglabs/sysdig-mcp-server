@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "sysdig-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+          "-i",
+          "--rm",
+          "-e",
+          "SYSDIG_MCP_API_HOST",
+          "-e",
+          "SYSDIG_MCP_TRANSPORT",
+          "-e",
+          "SYSDIG_MCP_API_SECURE_TOKEN",
+          "ghcr.io/sysdiglabs/sysdig-mcp-server:latest"
+      ],
+      "env": {
+        "SYSDIG_MCP_API_HOST": "<your_sysdig_host>",
+        "SYSDIG_MCP_API_SECURE_TOKEN": "<your_sysdig_secure_api_token>",
+        "SYSDIG_MCP_TRANSPORT": "stdio"
+      }
+    }
+  }
+}
