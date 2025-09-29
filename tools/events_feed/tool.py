@@ -213,7 +213,7 @@ class EventsFeedTools:
                 self.log.error(f"Exception when calling process tree API: {e}")
                 raise ToolError(f"Failed to get process tree: {e}")
         except ToolError as e:
-            self.log.error(f"Exception when calling Sysdig Sage API to get process tree: {e}")
+            self.log.error(f"Exception when calling Sysdig API to get process tree: {e}")
             raise e
 
     # Prompts
@@ -224,7 +224,7 @@ class EventsFeedTools:
             severity (str): The severity level of the security event (e.g., "high", "medium", "low").
             relative_time (str): The time range for the events to investigate (e.g., "last 24 hours").
         Returns:
-            PromptMessage: A message object containing the prompt for investigation.
+            PromptMessage: An object containing the prompt for investigation.
         """
         content = (
             f"Please investigate security events with severity '{severity}' of the last {relative_time}. "

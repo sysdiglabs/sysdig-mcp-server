@@ -8,7 +8,7 @@ import os
 from utils.app_config import AppConfig
 from unittest.mock import MagicMock, create_autospec, patch
 from fastmcp.server.context import Context
-from sysdig_client import SecureEventsApi, ApiClient, InventoryApi, VulnerabilityManagementApi
+from sysdig_client import SecureEventsApi, ApiClient
 from utils.sysdig.legacy_sysdig_api import LegacySysdigApi
 from fastmcp.server import FastMCP
 
@@ -79,8 +79,6 @@ def mock_context() -> Context:
 
     api_instances = {
         "secure_events": SecureEventsApi(ApiClient()),
-        "vulnerability_management": VulnerabilityManagementApi(ApiClient()),
-        "inventory": InventoryApi(ApiClient()),
         "legacy_sysdig_api": LegacySysdigApi(ApiClient()),
     }
     ctx.set_state("api_instances", api_instances)

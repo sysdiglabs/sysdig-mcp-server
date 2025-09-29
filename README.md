@@ -1,8 +1,8 @@
 # MCP Server
 
-| App Test | Helm Test |
-|------|---------|
-| [![App Test](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/publish.yaml/badge.svg?branch=main)](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/publish.yaml) | [![Helm Test](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/helm_test.yaml/badge.svg?branch=main)](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/helm_test.yaml) |
+| App Test |
+|------|
+| [![App Test](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/publish.yaml/badge.svg?branch=main)](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/publish.yaml) |
 
 ---
 
@@ -96,37 +96,11 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
 </details>
 
 <details>
-<summary><strong>Inventory</strong></summary>
+<summary><strong>Sysdig SysQL</strong></summary>
 
 | Tool Name | Description | Sample Prompt |
 |-----------|-------------|----------------|
-| `list_resources` | List inventory resources using filters (e.g., platform or category) | "List all exposed IAM resources in AWS" |
-| `get_resource` | Get detailed information about an inventory resource by its hash | "Get inventory details for hash abc123" |
-
-</details>
-
-<details>
-<summary><strong>Vulnerability Management</strong></summary>
-
-| Tool Name | Description | Sample Prompt |
-|-----------|-------------|----------------|
-| `list_runtime_vulnerabilities` | List runtime vulnerability scan results with filtering | "List running vulnerabilities in cluster1 sorted by severity" |
-| `list_accepted_risks` | List all accepted vulnerability risks | "Show me all accepted risks related to nginx containers" |
-| `get_accepted_risk` | Retrieve a specific accepted risk by ID | "Get details for accepted risk id abc123" |
-| `list_registry_scan_results` | List scan results for container registries | "List failed scans from harbor registry" |
-| `get_vulnerability_policy_by_id` | Get a specific vulnerability policy by ID | "Show policy ID 42" |
-| `list_vulnerability_policies` | List all vulnerability policies | "List all vulnerability policies for pipeline stage" |
-| `list_pipeline_scan_results` | List CI pipeline scan results | "Show me pipeline scans that failed for ubuntu images" |
-| `get_scan_result` | Retrieve detailed scan results by scan ID | "Get results for scan ID 456def" |
-
-</details>
-
-<details>
-<summary><strong>Sysdig Sage</strong></summary>
-
-| Tool Name | Description | Sample Prompt |
-|-----------|-------------|----------------|
-| `sysdig_sysql_sage_query` | Generate and run a SysQL query using natural language | "List top 10 pods by memory usage in the last hour" |
+| `generate_and_run_sysql` | Generate and run a SysQL query using natural language | "List top 10 pods by memory usage in the last hour" |
 
 </details>
 
@@ -141,8 +115,6 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
 
 ### Available Resources
 
-- Sysdig Secure Vulnerability Management Overview:
-  - VM documentation based on the following [url](https://docs.sysdig.com/en/sysdig-secure/vulnerability-management/)
 - Sysdig Filter Query Language Instructions:
   - Sysdig Filter Query Language for different API endpoint filters
 

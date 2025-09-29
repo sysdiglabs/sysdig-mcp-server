@@ -10,7 +10,7 @@ from typing import Optional
 # Application config loader
 from utils.app_config import AppConfig
 from sysdig_client.configuration import Configuration
-from sysdig_client import ApiClient, SecureEventsApi, VulnerabilityManagementApi, InventoryApi
+from sysdig_client import ApiClient, SecureEventsApi
 
 # Set up logging
 log = logging.getLogger(__name__)
@@ -38,8 +38,6 @@ def get_sysdig_api_instances(api_client: ApiClient) -> dict:
     """
     return {
         "secure_events": SecureEventsApi(api_client),
-        "vulnerability_management": VulnerabilityManagementApi(api_client),
-        "inventory": InventoryApi(api_client),
     }
 
 

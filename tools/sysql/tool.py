@@ -1,6 +1,6 @@
 """
-Sysdig Sage Tool
-This tool provides functionality to interact with Sysdig Sage, allowing users to
+Sysdig SysQL Tool
+This tool provides functionality to interact with Sysdig, allowing users to
 generate SysQL queries based on natural language questions and execute them against the Sysdig API.
 """
 
@@ -14,9 +14,9 @@ from utils.app_config import AppConfig
 from utils.query_helpers import create_standard_response
 
 
-class SageTools:
+class SysQLTools:
     """
-    A class to encapsulate the tools for interacting with Sysdig Sage.
+    A class to encapsulate the tools for interacting with Sysdig SysQL.
     This class provides methods to generate SysQL queries based on natural
     language questions and execute them against the Sysdig API.
     """
@@ -25,14 +25,14 @@ class SageTools:
         self.app_config = app_config
         self.log = logging.getLogger(__name__)
 
-    async def tool_sage_to_sysql(self, ctx: Context, question: str) -> dict:
+    async def tool_generate_and_run_sysql(self, ctx: Context, question: str) -> dict:
         """
-        Queries Sysdig Sage with a natural language question, retrieves a SysQL query,
+        Queries Sysdig with a natural language question, retrieves a SysQL query,
         executes it against the Sysdig API, and returns the results.
 
         Args:
             ctx (Context): A context object containing configuration information.
-            question (str): A natural language question to send to Sage.
+            question (str): A natural language question to send to Sysdig.
 
         Returns:
             dict: A dictionary containing the results of the SysQL query execution and the query text.
@@ -41,9 +41,11 @@ class SageTools:
             ToolError: If the SysQL query generation or execution fails.
 
         Examples:
-            # tool_sage_to_sysql(question="Match Cloud Resource affected by Critical Vulnerability")
-            # tool_sage_to_sysql(question="Match Kubernetes Workload affected by Critical Vulnerability")
-            # tool_sage_to_sysql(question="Match AWS EC2 Instance that violates control 'EC2 - Instances should use IMDSv2'")
+            # tool_generate_and_run_sysql(question="Match Cloud Resource affected by Critical Vulnerability")
+            # tool_generate_and_run_sysql(question="Match Kubernetes Workload affected by Critical Vulnerability")
+            # tool_generate_and_run_sysql(
+            #     question="Match AWS EC2 Instance that violates control 'EC2 - Instances should use IMDSv2'"
+            # )
         """
         # 1) Generate SysQL query
         try:
@@ -56,14 +58,14 @@ class SageTools:
 
             sysql_response = await legacy_api_client.generate_sysql_query(question)
             if sysql_response.status > 299:
-                raise ToolError(f"Sysdig Sage returned an error: {sysql_response.status} - {sysql_response.data}")
+                raise ToolError(f"Sysdig returned an error: {sysql_response.status} - {sysql_response.data}")
         except ToolError as e:
             self.log.error(f"Failed to generate SysQL query: {e}")
             raise e
         json_resp = sysql_response.json() if sysql_response.data else {}
         sysql_query: str = json_resp.get("text", "")
         if not sysql_query:
-            return {"error": "Sysdig Sage did not return a query"}
+            return {"error": "Sysdig did not return a query"}
 
         # 2) Execute generated SysQL query
         try:
