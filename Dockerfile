@@ -16,12 +16,12 @@ RUN uv build
 RUN mv ./dist/sysdig_mcp_server-*.tar.gz /tmp/sysdig_mcp_server.tar.gz
 
 # Final image with UBI
-FROM quay.io/sysdig/sysdig-ubi:1
+FROM quay.io/sysdig/sysdig-mini-ubi9:1
 
 # Install Python 3.12 and git
-RUN dnf update -y && \
-    dnf install -y python3.12 python3.12-pip git && \
-    dnf clean all
+RUN microdnf update -y && \
+    microdnf install -y python3.12 python3.12-pip git && \
+    microdnf clean all
 
 # Create a non-root user
 RUN useradd -u 1001 -m appuser
