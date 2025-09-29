@@ -43,7 +43,9 @@ class SysQLTools:
         Examples:
             # tool_generate_and_run_sysql(question="Match Cloud Resource affected by Critical Vulnerability")
             # tool_generate_and_run_sysql(question="Match Kubernetes Workload affected by Critical Vulnerability")
-            # tool_generate_and_run_sysql(question="Match AWS EC2 Instance that violates control 'EC2 - Instances should use IMDSv2'")
+            # tool_generate_and_run_sysql(
+            #     question="Match AWS EC2 Instance that violates control 'EC2 - Instances should use IMDSv2'"
+            # )
         """
         # 1) Generate SysQL query
         try:
