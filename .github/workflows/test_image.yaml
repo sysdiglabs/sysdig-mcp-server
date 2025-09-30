@@ -24,9 +24,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read # required for actions/checkout
+      packages: write # required for pushing the test image to ghcr.io
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.sha }} # required for better experience using pre-releases
           fetch-depth: "0" # Required due to the way Git works, without it this action won't be able to find any or the correct tags
@@ -38,13 +39,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Docker image
+      - name: Build Docker image and test push action
         id: build-to-test
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           load: true
-          push: false
+          push: true
           tags: |
             ghcr.io/sysdiglabs/sysdig-mcp-server:test
 
