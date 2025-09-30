@@ -24,6 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read # required for actions/checkout
+      packages: write # required for pushing the test image to ghcr.io
     steps:
       - name: Check out the repo
         uses: actions/checkout@v5
