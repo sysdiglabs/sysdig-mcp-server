@@ -1,11 +1,6 @@
 FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim AS builder
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
 
-# Disable Python downloads, because we want to use the system interpreter
-# across both images. If using a managed Python version, it needs to be
-# copied from the build image into the final image; see `standalone.Dockerfile`
-# for an example.
-
 WORKDIR /app
 COPY . /app
 RUN apt update && apt install -y git
@@ -16,22 +11,28 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --locked --no-editable --no-dev
 
+RUN rm -rf ./dist
 RUN uv build
 RUN mv ./dist/sysdig_mcp_server-*.tar.gz /tmp/sysdig_mcp_server.tar.gz
 
-# Final image without uv
-FROM python:3.12-slim
-# It is important to use the image that matches the builder, as the path to the
-# Python executable must be the same
+# Final image with UBI
+FROM quay.io/sysdig/sysdig-mini-ubi9:1
 
-WORKDIR /app
+# Install Python 3.12 and git
+RUN microdnf update -y && \
+    microdnf install -y python3.12 python3.12-pip git && \
+    microdnf clean all
 
-RUN apt update && apt install -y git
+# Create a non-root user
+RUN useradd -u 1001 -m appuser
+WORKDIR /home/appuser
+
 # Copy the application from the builder
-COPY --from=builder --chown=app:app /tmp/sysdig_mcp_server.tar.gz /app
+COPY --from=builder --chown=appuser:appuser /tmp/sysdig_mcp_server.tar.gz .
 
-RUN pip install /app/sysdig_mcp_server.tar.gz
+# Install the application
+RUN python3.12 -m pip install --no-cache-dir sysdig_mcp_server.tar.gz
 
-USER 1001:1001
+USER appuser
 
 ENTRYPOINT ["sysdig-mcp-server"]
