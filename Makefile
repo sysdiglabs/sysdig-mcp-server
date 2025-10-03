@@ -22,3 +22,7 @@ test:
 
 test-coverage:
 	uv run pytest --cov=. --cov-report=xml
+
+start-server-background:
+	uv run main.py &
+	sleep 5  # Wait for the server to start
