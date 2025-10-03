@@ -17,9 +17,9 @@
   - [Requirements](#requirements)
     - [UV Setup](#uv-setup)
   - [Configuration](#configuration)
+    - [API Permissions](#api-permissions)
   - [Running the Server](#running-the-server)
     - [Docker](#docker)
-    - [K8s Deployment](#k8s-deployment)
     - [UV](#uv)
   - [Client Configuration](#client-configuration)
     - [Authentication](#authentication)
@@ -156,6 +156,32 @@ You can find your API token in the Sysdig Secure UI under **Settings > Sysdig Se
 ![API_TOKEN_SETTINGS](./docs/assets/api-token-copy.png)
 
 You can set these variables in your shell or in a `.env` file.
+
+### API Permissions
+
+The minimum permissions needed for the tools to make the necessary API calls are the following:
+
+```bash
+"cli-scanner": ["secure.vm.cli-scanner.exec"],
+"threat-detection": ["policy-events.read"],
+"sysql": ["sage.exec","risks.read"],
+```
+
+We advise you to create a separate role for your MCP server ideally a SA. More information on the official [doc for roles-administration](https://docs.sysdig.com/en/administration/roles-administration/) and how to attach it to the SA and/or team user.
+
+The permissions needed for the Secure platform are:
+
+- Threats: "Policy Events" Read
+- Risks: "Access to risk feature" Read
+- Vulnerability Management: "CLI Execution" EXEC
+- Settings: "API Access Token" View, Read, Edit
+- Sage: "Use Sage chat" EXEC
+
+When selecting the above some other permissions dependent will be added.
+
+>[!IMPORTANT]
+> When using a SA token is expected that the `generate_and_run_sysql` will give a 500 error, to use that tool you should use a token assigned to a user for now.
+
 
 ## Running the Server
 
