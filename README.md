@@ -107,6 +107,8 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
 <details>
 <summary><strong>Sysdig CLI scanner</strong></summary>
 
+> **Note:** This tool is **only available when using `stdio` transport**. It is not available for `streamable-http` or `sse` transports.
+
 | Tool Name | Description | Sample Prompt |
 |-----------|-------------|----------------|
 | `run_sysdig_cli_scanner` | Run the Sysdig CLI Scanner to analyze a container image or IaC files for vulnerabilities and posture and misconfigurations. | "Scan this image ubuntu:latest for vulnerabilities" |
@@ -157,68 +159,90 @@ You can find your API token in the Sysdig Secure UI under **Settings > Sysdig Se
 
 You can set these variables in your shell or in a `.env` file.
 
-### API Permissions
-
-The minimum permissions needed for the tools to make the necessary API calls are the following:
+**Example `.env` file:**
 
 ```bash
-"cli-scanner": ["secure.vm.cli-scanner.exec"],
-"threat-detection": ["policy-events.read"],
-"sysql": ["sage.exec","risks.read"],
+# Required Configuration
+SYSDIG_MCP_API_HOST=https://us2.app.sysdig.com
+SYSDIG_MCP_API_SECURE_TOKEN=your-api-token-here
+
+# Optional Configuration (with defaults)
+SYSDIG_MCP_TRANSPORT=stdio
+SYSDIG_MCP_LOGLEVEL=INFO
+SYSDIG_MCP_LISTENING_PORT=8080
+SYSDIG_MCP_LISTENING_HOST=localhost
+SYSDIG_MCP_MOUNT_PATH=/sysdig-mcp-server
 ```
 
-We advise you to create a separate role for your MCP server ideally a SA. More information on the official [doc for roles-administration](https://docs.sysdig.com/en/administration/roles-administration/) and how to attach it to the SA and/or team user.
+### API Permissions
 
-The permissions needed for the Secure platform are:
+To use the MCP server tools, your API token needs specific permissions in Sysdig Secure. We recommend creating a dedicated Service Account (SA) with a custom role containing only the required permissions.
 
-- Threats: "Policy Events" Read
-- Risks: "Access to risk feature" Read
-- Vulnerability Management: "CLI Execution" EXEC
-- Settings: "API Access Token" View, Read, Edit
-- Sage: "Use Sage chat" EXEC
+**Minimum Required Permissions by Tool:**
 
-When selecting the above some other permissions dependent will be added.
+| Tool Category | Required Permissions | Sysdig UI Permission Names |
+|--------------|---------------------|---------------------------|
+| **CLI Scanner** | `secure.vm.cli-scanner.exec` | Vulnerability Management: "CLI Execution" (EXEC) |
+| **Threat Detection (Events Feed)** | `policy-events.read` | Threats: "Policy Events" (Read) |
+| **SysQL** | `sage.exec`, `risks.read` | Sage: "Use Sage chat" (EXEC) + Risks: "Access to risk feature" (Read) |
+
+**Additional Permissions:**
+
+- Settings: "API Access Token" - View, Read, Edit (required to generate and manage API tokens)
+
+**Setting up Permissions:**
+
+1. Go to **Settings > Users & Teams > Roles** in your Sysdig Secure instance
+2. Create a new role with the permissions listed above
+3. Assign this role to a Service Account or user
+4. Use the API token from that account with the MCP server
+
+> **Note:** When selecting permissions, some dependent permissions may be automatically added by Sysdig.
+
+For detailed instructions, see the official [Sysdig Roles Administration documentation](https://docs.sysdig.com/en/administration/roles-administration/).
 
 >[!IMPORTANT]
-> When using a SA token is expected that the `generate_and_run_sysql` will give a 500 error, to use that tool you should use a token assigned to a user for now.
+> **Service Account Limitation:** The `generate_and_run_sysql` tool currently does not work with Service Account tokens and will return a 500 error. For this tool, use an API token assigned to a regular user account.
 
 
 ## Running the Server
 
-You can run the MCP server using either Docker, `uv` or install it in your K8s cluster with helm.
+You can run the MCP server using Docker (recommended for production), `uv` (for development), or install it in your K8s cluster with helm.
 
-### Docker
+### Docker (Recommended)
 
-To run the server using Docker, you first need to build the image:
+The easiest way to run the server is using the pre-built Docker image from GitHub Container Registry (as shown in the [Quickstart Guide](#quickstart-guide)).
+
+If you need to build the image locally, you can do so with:
 
 ```bash
 docker build -t sysdig-mcp-server .
 ```
 
-Then, you can run the container, making sure to pass the required environment variables:
+Then, run the container with the required environment variables:
 
 ```bash
-docker run -e SYSDIG_HOST=<your_sysdig_host> -e SYSDIG_SECURE_TOKEN=<your_sysdig_secure_api_token> -p 8080:8080 sysdig-mcp-server
+docker run -e SYSDIG_MCP_API_HOST=<your_sysdig_host> -e SYSDIG_MCP_API_SECURE_TOKEN=<your_sysdig_secure_api_token> -e SYSDIG_MCP_TRANSPORT=stdio -p 8080:8080 sysdig-mcp-server
 ```
 
-By default, the server will run using the `stdio` transport. To use the `streamable-http` or `sse` transports, set the `SYSDIG_MCP_TRANSPORT` environment variable to `streamable-http` or `sse`:
+To use the `streamable-http` or `sse` transports (for remote MCP clients), set the `SYSDIG_MCP_TRANSPORT` environment variable accordingly:
 
 ```bash
-docker run -e MCP_TRANSPORT=streamable-http -e SYSDIG_HOST=<your_sysdig_host> -e SYSDIG_SECURE_TOKEN=<your_sysdig_secure_api_token> -p 8080:8080 sysdig-mcp-server
+docker run -e SYSDIG_MCP_TRANSPORT=streamable-http -e SYSDIG_MCP_API_HOST=<your_sysdig_host> -e SYSDIG_MCP_API_SECURE_TOKEN=<your_sysdig_secure_api_token> -p 8080:8080 sysdig-mcp-server
 ```
 
-### UV
+### UV (Development)
 
-To run the server using `uv`, first set up the environment as described in the [UV Setup](#uv-setup) section. Then, run the `main.py` script:
+For local development, you can run the server using `uv`. First set up the environment as described in the [UV Setup](#uv-setup) section, then run:
 
 ```bash
 uv run main.py
 ```
 
-By default, the server will run using the `stdio` transport. To use the `streamable-http` or `sse` transports, set the `SYSDIG_MCP_TRANSPORT` environment variable to `streamable-http` or `sse`:
+By default, the server will run using the `stdio` transport. To use the `streamable-http` or `sse` transports, set the `SYSDIG_MCP_TRANSPORT` environment variable:
 
 ```bash
-MCP_TRANSPORT=streamable-http uv run main.py
+SYSDIG_MCP_TRANSPORT=streamable-http uv run main.py
 ```
 
 ## Client Configuration
