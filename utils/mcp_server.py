@@ -165,6 +165,18 @@ class SysdigMCPServer:
             ),
             tags={"sysql", "sysdig_secure"},
         )
+        self.mcp_instance.tool(
+            name_or_fn=sysdig_sysql_tools.tool_run_sysql,
+            name="run_sysql",
+            description=(
+                """
+                Execute a pre-written SysQL query directly against the Sysdig API.
+                Use ONLY when the user provides an explicit SysQL query string.
+                For natural language questions, use generate_and_run_sysql instead.
+                """
+            ),
+            tags={"sysql", "sysdig_secure"},
+        )
 
         if self.app_config.transport() == "stdio":
             # Register the tools for STDIO transport

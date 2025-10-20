@@ -81,3 +81,54 @@ class SysQLTools:
         except ToolError as e:
             self.log.error(f"Failed to execute SysQL query: {e}")
             raise e
+
+
+    async def tool_run_sysql(self, ctx: Context, sysql_query: str) -> dict:
+        """
+        Executes a pre-written SysQL query directly against the Sysdig API and returns the results.
+
+        Use this tool ONLY when the user provides an explicit SysQL query. Do not improvise or
+        generate queries. For natural language questions, use generate_and_run_sysql instead.
+
+        Args:
+            ctx (Context): A context object containing configuration information.
+            sysql_query (str): A valid SysQL query string to execute directly.
+
+        Returns:
+            dict: A dictionary containing the results of the SysQL query execution with metadata.
+
+        Raises:
+            ToolError: If the SysQL query execution fails or if the query is invalid.
+
+        Examples:
+            # tool_run_sysql(sysql_query="MATCH Vulnerability WHERE severity = 'Critical' LIMIT 10")
+            # tool_run_sysql(sysql_query="MATCH KubeWorkload AS k AFFECTED_BY Vulnerability WHERE k.namespace = 'production'")
+            # tool_run_sysql(sysql_query="MATCH CloudResource WHERE type = 'aws_s3_bucket' RETURN *")
+            # tool_run_sysql(sysql_query="MATCH Vulnerability AS v WHERE v.name = 'CVE-2024-1234' RETURN v")
+        """
+        # Start timer
+        start_time = time.time()
+        # Get API instance
+        api_instances: dict = ctx.get_state("api_instances")
+        legacy_api_client: LegacySysdigApi = api_instances.get("legacy_sysdig_api")
+        if not legacy_api_client:
+            self.log.error("LegacySysdigApi instance not found")
+            raise ToolError("LegacySysdigApi instance not found")
+
+        if not sysql_query:
+            raise ToolError("No SysQL query provided. Please provide a valid SysQL query string.")
+
+        try:
+            self.log.debug(f"Executing SysQL query: {sysql_query}")
+            results = legacy_api_client.execute_sysql_query(sysql_query)
+            execution_time = (time.time() - start_time) * 1000
+            self.log.debug(f"SysQL query executed in {execution_time} ms")
+            response = create_standard_response(
+                results=results, execution_time_ms=execution_time,
+                metadata_kwargs={"sysql_query": sysql_query}
+            )
+
+            return response
+        except ToolError as e:
+            self.log.error(f"Failed to execute SysQL query: {e}")
+            raise e
