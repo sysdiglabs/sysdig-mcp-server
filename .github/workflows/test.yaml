@@ -23,6 +23,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read # required for actions/checkout
+    env:
+      SYSDIG_MCP_API_HOST: ${{ vars.SYSDIG_MCP_API_HOST }}
+      SYSDIG_MCP_TRANSPORT: ${{ vars.SYSDIG_MCP_TRANSPORT }}
+      SYSDIG_MCP_API_SECURE_TOKEN: ${{ secrets.SYSDIG_MCP_API_SECURE_TOKEN }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -43,5 +47,10 @@ jobs:
       - name: Run ruff
         run: make lint
 
-      - name: Run Unit Tests
-        run: make test
+      - name: Start MCP server in the background
+        run: |
+          make start-server-background
+
+      - name: Run MCP client
+        run: |
+          make test
