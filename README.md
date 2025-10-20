@@ -101,6 +101,7 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
 | Tool Name | Description | Sample Prompt |
 |-----------|-------------|----------------|
 | `generate_and_run_sysql` | Generate and run a SysQL query using natural language | "List top 10 pods by memory usage in the last hour" |
+| `run_sysql` | Execute a pre-written SysQL query directly (use only when user provides explicit query) | "Run this query: MATCH CloudResource WHERE type = 'aws_s3_bucket' LIMIT 10" |
 
 </details>
 
@@ -184,7 +185,7 @@ To use the MCP server tools, your API token needs specific permissions in Sysdig
 |--------------|---------------------|---------------------------|
 | **CLI Scanner** | `secure.vm.cli-scanner.exec` | Vulnerability Management: "CLI Execution" (EXEC) |
 | **Threat Detection (Events Feed)** | `policy-events.read` | Threats: "Policy Events" (Read) |
-| **SysQL** | `sage.exec`, `risks.read` | Sage: "Use Sage chat" (EXEC) + Risks: "Access to risk feature" (Read) |
+| **SysQL** | `sage.exec`, `risks.read` | SysQL: "AI Query Generation" (EXEC) + Risks: "Access to risk feature" (Read) |
 
 **Additional Permissions:**
 
