@@ -247,6 +247,7 @@ async def test_events_feed_tools_get_event_process_tree():
     await run_test("get_event_process_tree", {"event_id": event_id}, assert_process_tree)
 
 
+@pytest.mark.skip(reason="Sysdig Sage API endpoint is currently returning a 500 error")
 @pytest.mark.e2e
 async def test_sysql_tools_generate_and_run_sysql_query():
     """
