@@ -18,7 +18,7 @@ fmt:
 	uvx ruff format --config ruff.toml
 
 test:
-	uv run pytest --capture=tee-sys --junitxml=pytest.xml
+	uv run pytest --junitxml=pytest.xml
 
 test-coverage:
 	uv run pytest --cov=. --cov-report=xml
