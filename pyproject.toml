@@ -23,6 +23,7 @@ sysdig-mcp-server = "main:main"
 
 [tool.uv]
 dev-dependencies = [
+    "pytest-asyncio>=1.2.0",
     "pytest-cov~=6.2",
     "pytest~=8.4",
     "ruff~=0.12.1",
@@ -42,4 +43,8 @@ packages = ["utils", "tools"]
 testpaths = [
     "tests",
     "integration",
+]
+asyncio_mode = "auto"
+markers = [
+    "e2e: marks tests as end-to-end tests",
 ]

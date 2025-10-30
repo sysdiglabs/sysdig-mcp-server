@@ -21,21 +21,17 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: nix develop --command bash {0}
     permissions:
       contents: read # required for actions/checkout
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
 
-      - name: Setup python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-        with:
-          version: "0.7.17"
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@main
 
       - name: Download dependencies
         run: make init
@@ -45,3 +41,6 @@ jobs:
 
       - name: Run Unit Tests
         run: make test
+        env:
+          SYSDIG_MCP_API_HOST: ${{ vars.SYSDIG_MCP_API_HOST }}
+          SYSDIG_MCP_API_SECURE_TOKEN: ${{ secrets.SYSDIG_MCP_API_SECURE_TOKEN }}
