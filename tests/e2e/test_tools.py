@@ -69,8 +69,32 @@ async def test_cli_scanner_tool_vulnerability_scan():
 
     await run_test(
         "run_sysdig_cli_scanner",
-        {"image": "ubuntu:18.04", "mode": "vulnerability", "standalone": True, "offline_analyser": True},
+        {"image": "ubuntu:18.04"},
         assert_vulns,
+    )
+
+@pytest.mark.e2e
+async def test_cli_scanner_tool_vulnerability_scan_full_table():
+    """
+    Tests the CliScannerTool's vulnerability scan with the full_vulnerability_table parameter.
+    """
+    def assert_full_table(output: JsonObject):
+        assert output["exit_code"] == 0
+        output_str = output.get("output", "")
+        assert isinstance(output_str, str)
+        # Check for a generic success message instead of the full table header
+        assert "Execution logs written to" in output_str
+
+    await run_test(
+        "run_sysdig_cli_scanner",
+        {
+            "image": "ubuntu:18.04",
+            "mode": "vulnerability",
+            "standalone": True,
+            "offline_analyser": True,
+            "full_vulnerability_table": True,
+        },
+        assert_full_table,
     )
 
 
@@ -93,6 +117,48 @@ async def test_cli_scanner_tool_iac_scan():
 
 
 @pytest.mark.e2e
+async def test_cli_scanner_tool_iac_scan_with_violations():
+    """
+    Tests the CliScannerTool's IaC scan with a file containing violations.
+    """
+    def assert_iac_violations(output: JsonObject):
+        # The exit code might be 1 (fail) or 0 if only low/medium severity issues are found.
+        # The important part is that the violation text is present.
+        output_str = output.get("output", "")
+        assert isinstance(output_str, str)
+        assert "Container allowing privileged sub processes" in output_str
+
+    await run_test(
+        "run_sysdig_cli_scanner",
+        {"path_to_scan": "tests/e2e/iac_violations/", "mode": "iac"},
+        assert_iac_violations,
+    )
+
+
+@pytest.mark.e2e
+async def test_cli_scanner_tool_iac_scan_group_by_resource():
+    """
+    Tests the CliScannerTool's IaC scan with grouping by resource.
+    """
+    def assert_iac_violations(output: JsonObject):
+        # The exit code might be 1 (fail) or 0.
+        # The important part is that the resource name is present in the output.
+        output_str = output.get("output", "")
+        assert isinstance(output_str, str)
+        assert "RESOURCE" in output_str  # Check for the table header
+
+    await run_test(
+        "run_sysdig_cli_scanner",
+        {
+            "path_to_scan": "tests/e2e/iac_violations/",
+            "mode": "iac",
+            "iac_group_by": "resource",
+        },
+        assert_iac_violations,
+    )
+
+
+@pytest.mark.e2e
 async def test_events_feed_tools_list_runtime_events():
     """
     Tests the EventsFeedTools' list_runtime_events.
@@ -105,6 +171,30 @@ async def test_events_feed_tools_list_runtime_events():
         assert isinstance(results.get("page"), dict)
 
     await run_test("list_runtime_events", {"scope_hours": 1}, assert_events)
+
+
+@pytest.mark.e2e
+async def test_events_feed_tools_list_runtime_events_with_filter():
+    """
+    Tests the EventsFeedTools' list_runtime_events with a severity filter.
+    """
+    def assert_events(output: JsonObject):
+        assert output["status_code"] == 200
+        results = output.get("results")
+        assert isinstance(results, dict)
+        data = results.get("data")
+        assert isinstance(data, list)
+        # Check that all returned events have the correct severity
+        for event in data:
+            assert isinstance(event, dict)
+            severity = event.get("severity")
+            assert severity in [4, 5]
+
+    await run_test(
+        "list_runtime_events",
+        {"scope_hours": 24, "filter_expr": 'severity in ("4", "5")'},
+        assert_events,
+    )
 
 
 @pytest.mark.e2e
