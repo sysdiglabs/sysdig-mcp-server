@@ -23,6 +23,7 @@ sysdig-mcp-server = "main:main"
 
 [tool.uv]
 dev-dependencies = [
+    "pytest-asyncio>=1.2.0",
     "pytest-cov~=6.2",
     "pytest~=8.4",
     "ruff~=0.12.1",
