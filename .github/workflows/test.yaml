@@ -41,3 +41,6 @@ jobs:
 
       - name: Run Unit Tests
         run: make test
+        env:
+          SYSDIG_MCP_API_HOST: ${{ vars.SYSDIG_MCP_API_HOST }}
+          SYSDIG_MCP_API_SECURE_TOKEN: ${{ secrets.SYSDIG_MCP_API_SECURE_TOKEN }}
