@@ -43,3 +43,7 @@ testpaths = [
     "tests",
     "integration",
 ]
+asyncio_mode = "auto"
+markers = [
+    "e2e: marks tests as end-to-end tests",
+]

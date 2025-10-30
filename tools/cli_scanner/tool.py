@@ -150,8 +150,8 @@ class CLIScannerTool:
             # Run the command
             with open(tmp_result_file.name, "w") as output_file:
                 result = subprocess.run(cmd, text=True, check=True, stdout=output_file, stderr=subprocess.PIPE)
+            with open(tmp_result_file.name, "rt") as output_file:
                 output_result = output_file.read()
-                output_file.close()
                 return {
                     "exit_code": result.returncode,
                     "output": output_result + result.stderr.strip(),

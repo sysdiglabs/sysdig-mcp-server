@@ -118,6 +118,10 @@ class SysQLTools:
         if not sysql_query:
             raise ToolError("No SysQL query provided. Please provide a valid SysQL query string.")
 
+        # Ensure the query ends with a semicolon
+        if not sysql_query.strip().endswith(";"):
+            sysql_query += ";"
+
         try:
             self.log.debug(f"Executing SysQL query: {sysql_query}")
             results = legacy_api_client.execute_sysql_query(sysql_query)
