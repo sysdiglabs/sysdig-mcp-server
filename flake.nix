@@ -26,6 +26,7 @@
               uv
               ruff
               basedpyright
+              sysdig-cli-scanner
             ];
           };
 
