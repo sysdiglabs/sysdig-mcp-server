@@ -185,7 +185,7 @@ To use the MCP server tools, your API token needs specific permissions in Sysdig
 |--------------|---------------------|---------------------------|
 | **CLI Scanner** | `secure.vm.cli-scanner.exec` | Vulnerability Management: "CLI Execution" (EXEC) |
 | **Threat Detection (Events Feed)** | `policy-events.read` | Threats: "Policy Events" (Read) |
-| **SysQL** | `sage.exec`, `risks.read` | SysQL: "AI Query Generation" (EXEC) + Risks: "Access to risk feature" (Read) |
+| **Sage** | `sage.exec`, `risks.read` | Sage: "Use Sage chat" (EXEC) + Risks: "Access to risk feature" (Read) |
 
 **Additional Permissions:**
 
