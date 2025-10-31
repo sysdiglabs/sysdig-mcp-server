@@ -22,6 +22,9 @@
           with pkgs;
           mkShell {
             packages = [
+              go_1_25
+              ginkgo
+              mockgen
               python3
               uv
               ruff
