@@ -21,6 +21,7 @@ func main() {
 
 	handler := mcp.NewHandlerWithTools(
 		mcp.NewToolListRuntimeEvents(sysdigClient, systemClock),
+		mcp.NewToolGetEventInfo(sysdigClient),
 	)
 
 	if err := handler.ServeStdio(context.Background(), os.Stdin, os.Stdout); err != nil {
