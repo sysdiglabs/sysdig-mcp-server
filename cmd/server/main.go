@@ -12,7 +12,18 @@ import (
 )
 
 func main() {
-	sysdigClient, err := sysdig.NewSysdigClient(os.Getenv("SYSDIG_MCP_API_HOST"), os.Getenv("SYSDIG_MCP_API_SECURE_TOKEN"))
+	apiHost := os.Getenv("SYSDIG_MCP_API_HOST")
+	if apiHost == "" {
+		slog.Error("SYSDIG_MCP_API_HOST env var is empty or not set")
+		os.Exit(1)
+	}
+	apiToken := os.Getenv("SYSDIG_MCP_API_SECURE_TOKEN")
+	if apiHost == "" {
+		slog.Error("SYSDIG_MCP_API_SECURE_TOKEN env var is empty or not set")
+		os.Exit(1)
+	}
+
+	sysdigClient, err := sysdig.NewSysdigClient(apiHost, apiToken)
 	if err != nil {
 		slog.Error("error creating sysdig client", "error", err.Error())
 		os.Exit(1)
