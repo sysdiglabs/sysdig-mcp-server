@@ -19,7 +19,7 @@ import (
 
 var _ = Describe("ToolListRuntimeEvents", func() {
 	var (
-		mockClient *mocks.MockClientWithResponsesInterface
+		mockClient *mocks.MockExtendedClientWithResponsesInterface
 		mockClock  *mocks_clock.MockClock
 		tool       *ToolListRuntimeEvents
 		ctrl       *gomock.Controller
@@ -29,7 +29,7 @@ var _ = Describe("ToolListRuntimeEvents", func() {
 
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
-		mockClient = mocks.NewMockClientWithResponsesInterface(ctrl)
+		mockClient = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
 		mockClock = mocks_clock.NewMockClock(ctrl)
 		mockClock.EXPECT().Now().AnyTimes().Return(time.Date(2000, time.January, 1, 0, 0, 0, 0, time.UTC))
 		tool = NewToolListRuntimeEvents(mockClient, mockClock)

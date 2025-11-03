@@ -17,7 +17,7 @@ import (
 
 var _ = Describe("ToolGetEventInfo", func() {
 	var (
-		mockClient *mocks.MockClientWithResponsesInterface
+		mockClient *mocks.MockExtendedClientWithResponsesInterface
 		tool       *ToolGetEventInfo
 		ctrl       *gomock.Controller
 		handler    *Handler
@@ -26,7 +26,7 @@ var _ = Describe("ToolGetEventInfo", func() {
 
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
-		mockClient = mocks.NewMockClientWithResponsesInterface(ctrl)
+		mockClient = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
 		tool = NewToolGetEventInfo(mockClient)
 		handler = NewHandlerWithTools(tool)
 

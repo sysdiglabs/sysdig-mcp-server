@@ -1,14 +1,12 @@
 package sysdig
 
-//go:generate mockgen -source=client.gen.go -destination=./mocks/${GOFILE} -package=mocks
-
 import (
 	"context"
 	"errors"
 	"net/http"
 )
 
-func NewSysdigClient(apiEndpoint, apiToken string) (ClientWithResponsesInterface, error) {
+func NewSysdigClient(apiEndpoint, apiToken string) (ExtendedClientWithResponsesInterface, error) {
 	if apiEndpoint == "" {
 		return nil, errors.New("the api endpoint is empty")
 	}

@@ -3,7 +3,7 @@ module github.com/sysdiglabs/sysdig-mcp-server
 go 1.25.2
 
 require (
-	github.com/mark3labs/mcp-go v0.42.0
+	github.com/mark3labs/mcp-go v0.43.0
 	github.com/oapi-codegen/runtime v1.1.2
 	github.com/onsi/ginkgo/v2 v2.27.2
 	github.com/onsi/gomega v1.38.2
