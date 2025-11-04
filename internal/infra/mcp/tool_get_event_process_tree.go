@@ -18,17 +18,17 @@ func NewToolGetEventProcessTree(sysdigClient sysdig.ExtendedClientWithResponsesI
 }
 
 func (h *ToolGetEventProcessTree) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-	eventId := request.GetString("event_id", "")
-	if eventId == "" {
+	eventID := request.GetString("event_id", "")
+	if eventID == "" {
 		return mcp.NewToolResultErrorf("event_id is required"), nil
 	}
 
-	branchesResp, branchesErr := h.sysdigClient.GetProcessTreeBranchesWithResponse(ctx, eventId)
+	branchesResp, branchesErr := h.sysdigClient.GetProcessTreeBranchesWithResponse(ctx, eventID)
 	if branchesErr != nil && !errors.Is(branchesErr, sysdig.ErrNotFound) {
 		return mcp.NewToolResultErrorFromErr("error requesting process tree branches", branchesErr), nil
 	}
 
-	treesResp, treesErr := h.sysdigClient.GetProcessTreeTreesWithResponse(ctx, eventId)
+	treesResp, treesErr := h.sysdigClient.GetProcessTreeTreesWithResponse(ctx, eventID)
 	if treesErr != nil && !errors.Is(treesErr, sysdig.ErrNotFound) {
 		return mcp.NewToolResultErrorFromErr("error requesting process tree trees", treesErr), nil
 	}
