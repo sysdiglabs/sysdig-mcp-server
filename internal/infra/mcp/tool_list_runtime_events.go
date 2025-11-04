@@ -2,7 +2,6 @@ package mcp
 
 import (
 	"context"
-	"slices"
 	"time"
 
 	"github.com/mark3labs/mcp-go/mcp"
@@ -14,12 +13,17 @@ import (
 const baseFilter = `source != "audittrail" and not originator in ("benchmarks","compliance","cloudsec","scanning","hostscanning")`
 
 type ToolListRuntimeEvents struct {
-	sysdigClient sysdig.ExtendedClientWithResponsesInterface
-	clock        clock.Clock
+	sysdigClient    sysdig.ExtendedClientWithResponsesInterface
+	clock           clock.Clock
+	permissionChecker PermissionChecker
 }
 
-func NewToolListRuntimeEvents(client sysdig.ExtendedClientWithResponsesInterface, clock clock.Clock) *ToolListRuntimeEvents {
-	return &ToolListRuntimeEvents{sysdigClient: client, clock: clock}
+func NewToolListRuntimeEvents(client sysdig.ExtendedClientWithResponsesInterface, clock clock.Clock, checker PermissionChecker) *ToolListRuntimeEvents {
+	return &ToolListRuntimeEvents{
+		sysdigClient:    client,
+		clock:           clock,
+		permissionChecker: checker,
+	}
 }
 
 func (h *ToolListRuntimeEvents) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
@@ -103,10 +107,5 @@ You can specify the severity of the events based on the following cases:
 }
 
 func (h *ToolListRuntimeEvents) CanBeUsed() bool {
-	permissions, err := h.sysdigClient.GetMyPermissionsWithResponse(context.Background())
-	if err != nil {
-		return false
-	}
-
-	return slices.Contains(permissions.JSON200.Permissions, "policy-events.read")
+	return h.permissionChecker.HasPermission("policy-events.read")
 }

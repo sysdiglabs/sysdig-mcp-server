@@ -29,11 +29,12 @@ func main() {
 		os.Exit(1)
 	}
 	systemClock := clock.NewSystemClock()
+	permissionChecker := mcp.NewPermissionChecker(sysdigClient)
 
 	handler := mcp.NewHandlerWithTools(
-		mcp.NewToolListRuntimeEvents(sysdigClient, systemClock),
-		mcp.NewToolGetEventInfo(sysdigClient),
-		mcp.NewToolGetEventProcessTree(sysdigClient),
+		mcp.NewToolListRuntimeEvents(sysdigClient, systemClock, permissionChecker),
+		mcp.NewToolGetEventInfo(sysdigClient, permissionChecker),
+		mcp.NewToolGetEventProcessTree(sysdigClient, permissionChecker),
 	)
 
 	if err := handler.ServeStdio(context.Background(), os.Stdin, os.Stdout); err != nil {

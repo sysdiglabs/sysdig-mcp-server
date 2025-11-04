@@ -2,7 +2,6 @@ package mcp
 
 import (
 	"context"
-	"slices"
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
@@ -10,11 +9,15 @@ import (
 )
 
 type ToolGetEventInfo struct {
-	sysdigClient sysdig.ExtendedClientWithResponsesInterface
+	sysdigClient    sysdig.ExtendedClientWithResponsesInterface
+	permissionChecker PermissionChecker
 }
 
-func NewToolGetEventInfo(client sysdig.ExtendedClientWithResponsesInterface) *ToolGetEventInfo {
-	return &ToolGetEventInfo{sysdigClient: client}
+func NewToolGetEventInfo(client sysdig.ExtendedClientWithResponsesInterface, checker PermissionChecker) *ToolGetEventInfo {
+	return &ToolGetEventInfo{
+		sysdigClient:    client,
+		permissionChecker: checker,
+	}
 }
 
 func (h *ToolGetEventInfo) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
@@ -48,10 +51,5 @@ func (h *ToolGetEventInfo) RegisterInServer(s *server.MCPServer) {
 }
 
 func (h *ToolGetEventInfo) CanBeUsed() bool {
-	permissions, err := h.sysdigClient.GetMyPermissionsWithResponse(context.Background())
-	if err != nil {
-		return false
-	}
-
-	return slices.Contains(permissions.JSON200.Permissions, "policy-events.read")
+	return h.permissionChecker.HasPermission("policy-events.read")
 }

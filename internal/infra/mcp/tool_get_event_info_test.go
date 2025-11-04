@@ -22,11 +22,13 @@ var _ = Describe("ToolGetEventInfo", func() {
 		ctrl       *gomock.Controller
 		handler    *Handler
 		mcpClient  *client.Client
+		checker    PermissionChecker
 	)
 
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockClient = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
+		checker = NewPermissionChecker(mockClient)
 		mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any()).Return(&sysdig.GetMyPermissionsResponse{
 			HTTPResponse: &http.Response{
 				StatusCode: 200,
@@ -35,7 +37,7 @@ var _ = Describe("ToolGetEventInfo", func() {
 				Permissions: []string{"policy-events.read"},
 			},
 		}, nil)
-		tool = NewToolGetEventInfo(mockClient)
+		tool = NewToolGetEventInfo(mockClient, checker)
 		handler = NewHandlerWithTools(tool)
 
 		var err error
