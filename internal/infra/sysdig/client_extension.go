@@ -9,4 +9,5 @@ type ExtendedClientWithResponsesInterface interface {
 	ClientWithResponsesInterface
 	GetProcessTreeBranchesWithResponse(ctx context.Context, eventId string, reqEditors ...RequestEditorFn) (*GetProcessTreeBranchesResponse, error)
 	GetProcessTreeTreesWithResponse(ctx context.Context, eventId string, reqEditors ...RequestEditorFn) (*GetProcessTreeTreesResponse, error)
+	GetMyPermissionsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetMyPermissionsResponse, error)
 }
