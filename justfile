@@ -15,7 +15,7 @@ fmt:
 
 # Ejecutar tests
 test: generate
-    go test ./...
+    ginkgo -r -p
 
 # Generate code
 generate:

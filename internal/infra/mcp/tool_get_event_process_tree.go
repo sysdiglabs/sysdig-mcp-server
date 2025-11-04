@@ -71,9 +71,5 @@ func (h *ToolGetEventProcessTree) CanBeUsed() bool {
 		return false
 	}
 
-	if slices.Contains(permissions.JSON200.Permissions, "policy-events.read") {
-		return true
-	}
-
-	return false
+	return slices.Contains(permissions.JSON200.Permissions, "policy-events.read")
 }
