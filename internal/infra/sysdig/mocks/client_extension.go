@@ -4403,6 +4403,26 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetMonitorEvents
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMonitorEventsV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetMonitorEventsV1WithResponse), varargs...)
 }
 
+// GetMyPermissionsWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetMyPermissionsWithResponse(ctx context.Context, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetMyPermissionsResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetMyPermissionsWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetMyPermissionsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetMyPermissionsWithResponse indicates an expected call of GetMyPermissionsWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetMyPermissionsWithResponse(ctx any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMyPermissionsWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetMyPermissionsWithResponse), varargs...)
+}
+
 // GetNotificationChannelById mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) GetNotificationChannelById(ctx context.Context, notificationChannelID sysdig.NotificationChannelID, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()

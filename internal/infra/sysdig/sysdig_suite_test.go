@@ -1,4 +1,4 @@
-package mcp_test
+package sysdig_test
 
 import (
 	"testing"
@@ -7,7 +7,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-func TestMcp(t *testing.T) {
+func TestSysdig(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Mcp Suite")
+	RunSpecs(t, "Sysdig Client Integration Suite")
 }

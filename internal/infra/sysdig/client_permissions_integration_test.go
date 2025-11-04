@@ -1,4 +1,4 @@
-package mcp_test
+package sysdig_test
 
 import (
 	"context"
