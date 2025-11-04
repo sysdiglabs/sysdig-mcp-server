@@ -25,6 +25,7 @@
               go_1_25
               ginkgo
               mockgen
+              gofumpt
               python3
               uv
               ruff

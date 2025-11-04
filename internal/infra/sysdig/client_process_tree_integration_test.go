@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
 var _ = Describe("Sysdig Process Tree Client", func() {

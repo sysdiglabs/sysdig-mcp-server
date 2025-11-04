@@ -26,21 +26,21 @@ func ParseGetProcessTreeBranchesResponse(rsp *http.Response) (*GetProcessTreeBra
 		return nil, err
 	}
 
-	    response := &GetProcessTreeBranchesResponse{
-	        Body:         bodyBytes,
-	        HTTPResponse: rsp,
-	    }
-	
-	    switch rsp.StatusCode {
-	    case http.StatusOK:
-	        var dest map[string]any
-	        if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-	            return nil, err
-	        }
-	        response.JSON200 = &dest
-	    case http.StatusNotFound:
-	        return nil, ErrNotFound
-	    }
+	response := &GetProcessTreeBranchesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch rsp.StatusCode {
+	case http.StatusOK:
+		var dest map[string]any
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+	case http.StatusNotFound:
+		return nil, ErrNotFound
+	}
 	return response, nil
 }
 
