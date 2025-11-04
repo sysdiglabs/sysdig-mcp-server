@@ -231,7 +231,7 @@ func NewGetMyPermissionsRequest(server string) (*http.Request, error) {
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/users/me/permissions")
+	operationPath := "/api/users/me/permissions"
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
