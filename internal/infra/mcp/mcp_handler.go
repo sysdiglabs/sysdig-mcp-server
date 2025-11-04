@@ -14,6 +14,7 @@ type Handler struct {
 
 type mcpTool interface {
 	RegisterInServer(server *server.MCPServer)
+	CanBeUsed() bool
 }
 
 func NewHandler() *Handler {
@@ -36,7 +37,9 @@ func NewHandlerWithTools(tools ...mcpTool) *Handler {
 
 func (h *Handler) RegisterTools(tools ...mcpTool) {
 	for _, tool := range tools {
-		tool.RegisterInServer(h.server)
+		if tool.CanBeUsed() {
+			tool.RegisterInServer(h.server)
+		}
 	}
 }
 

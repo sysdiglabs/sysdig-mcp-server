@@ -30,6 +30,14 @@ var _ = Describe("ToolListRuntimeEvents", func() {
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockClient = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
+		mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any()).Return(&sysdig.GetMyPermissionsResponse{
+			HTTPResponse: &http.Response{
+				StatusCode: 200,
+			},
+			JSON200: &sysdig.UserPermissions{
+				Permissions: []string{"policy-events.read"},
+			},
+		}, nil)
 		mockClock = mocks_clock.NewMockClock(ctrl)
 		mockClock.EXPECT().Now().AnyTimes().Return(time.Date(2000, time.January, 1, 0, 0, 0, 0, time.UTC))
 		tool = NewToolListRuntimeEvents(mockClient, mockClock)

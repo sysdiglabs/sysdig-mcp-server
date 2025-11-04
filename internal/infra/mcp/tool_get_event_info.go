@@ -2,6 +2,7 @@ package mcp
 
 import (
 	"context"
+	"slices"
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
@@ -9,11 +10,11 @@ import (
 )
 
 type ToolGetEventInfo struct {
-	client sysdig.ClientWithResponsesInterface
+	sysdigClient sysdig.ExtendedClientWithResponsesInterface
 }
 
-func NewToolGetEventInfo(client sysdig.ClientWithResponsesInterface) *ToolGetEventInfo {
-	return &ToolGetEventInfo{client: client}
+func NewToolGetEventInfo(client sysdig.ExtendedClientWithResponsesInterface) *ToolGetEventInfo {
+	return &ToolGetEventInfo{sysdigClient: client}
 }
 
 func (h *ToolGetEventInfo) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
@@ -22,7 +23,7 @@ func (h *ToolGetEventInfo) handle(ctx context.Context, request mcp.CallToolReque
 		return mcp.NewToolResultErrorf("event_id is required"), nil
 	}
 
-	response, err := h.client.GetEventV1WithResponse(ctx, eventId)
+	response, err := h.sysdigClient.GetEventV1WithResponse(ctx, eventId)
 	if err != nil {
 		return mcp.NewToolResultErrorFromErr("error triggering request", err), nil
 	}
@@ -44,4 +45,17 @@ func (h *ToolGetEventInfo) RegisterInServer(s *server.MCPServer) {
 	)
 
 	s.AddTool(tool, h.handle)
+}
+
+func (h *ToolGetEventInfo) CanBeUsed() bool {
+	permissions, err := h.sysdigClient.GetMyPermissionsWithResponse(context.Background())
+	if err != nil {
+		return false
+	}
+
+	if slices.Contains(permissions.JSON200.Permissions, "policy-events.read") {
+		return true
+	}
+
+	return false
 }

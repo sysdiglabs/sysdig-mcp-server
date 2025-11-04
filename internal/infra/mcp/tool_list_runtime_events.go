@@ -2,6 +2,7 @@ package mcp
 
 import (
 	"context"
+	"slices"
 	"time"
 
 	"github.com/mark3labs/mcp-go/mcp"
@@ -13,18 +14,18 @@ import (
 const baseFilter = `source != "audittrail" and not originator in ("benchmarks","compliance","cloudsec","scanning","hostscanning")`
 
 type ToolListRuntimeEvents struct {
-	client sysdig.ClientWithResponsesInterface
-	clock  clock.Clock
+	sysdigClient sysdig.ExtendedClientWithResponsesInterface
+	clock        clock.Clock
 }
 
-func NewToolListRuntimeEvents(client sysdig.ClientWithResponsesInterface, clock clock.Clock) *ToolListRuntimeEvents {
-	return &ToolListRuntimeEvents{client: client, clock: clock}
+func NewToolListRuntimeEvents(client sysdig.ExtendedClientWithResponsesInterface, clock clock.Clock) *ToolListRuntimeEvents {
+	return &ToolListRuntimeEvents{sysdigClient: client, clock: clock}
 }
 
 func (h *ToolListRuntimeEvents) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
 	params := toolRequestToEventsV1Params(request, h.clock)
 
-	response, err := h.client.GetEventsV1WithResponse(ctx, params)
+	response, err := h.sysdigClient.GetEventsV1WithResponse(ctx, params)
 	if err != nil {
 		return mcp.NewToolResultErrorFromErr("error triggering request", err), nil
 	}
@@ -99,4 +100,17 @@ You can specify the severity of the events based on the following cases:
 	)
 
 	s.AddTool(tool, h.handle)
+}
+
+func (h *ToolListRuntimeEvents) CanBeUsed() bool {
+	permissions, err := h.sysdigClient.GetMyPermissionsWithResponse(context.Background())
+	if err != nil {
+		return false
+	}
+
+	if slices.Contains(permissions.JSON200.Permissions, "policy-events.read") {
+		return true
+	}
+
+	return false
 }

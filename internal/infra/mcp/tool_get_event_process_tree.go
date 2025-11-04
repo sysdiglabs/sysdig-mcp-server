@@ -3,6 +3,7 @@ package mcp
 import (
 	"context"
 	"errors"
+	"slices"
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
@@ -62,4 +63,17 @@ func (h *ToolGetEventProcessTree) RegisterInServer(s *server.MCPServer) {
 	)
 
 	s.AddTool(tool, h.handle)
+}
+
+func (h *ToolGetEventProcessTree) CanBeUsed() bool {
+	permissions, err := h.sysdigClient.GetMyPermissionsWithResponse(context.Background())
+	if err != nil {
+		return false
+	}
+
+	if slices.Contains(permissions.JSON200.Permissions, "policy-events.read") {
+		return true
+	}
+
+	return false
 }

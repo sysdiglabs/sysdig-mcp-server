@@ -27,6 +27,14 @@ var _ = Describe("ToolGetEventInfo", func() {
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockClient = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
+		mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any()).Return(&sysdig.GetMyPermissionsResponse{
+			HTTPResponse: &http.Response{
+				StatusCode: 200,
+			},
+			JSON200: &sysdig.UserPermissions{
+				Permissions: []string{"policy-events.read"},
+			},
+		}, nil)
 		tool = NewToolGetEventInfo(mockClient)
 		handler = NewHandlerWithTools(tool)
 

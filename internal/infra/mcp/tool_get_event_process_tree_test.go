@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"net/http"
 
 	"github.com/mark3labs/mcp-go/client"
 	"github.com/mark3labs/mcp-go/mcp"
@@ -27,6 +28,14 @@ var _ = Describe("ToolGetEventProcessTree", func() {
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockClient = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
+		mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any()).Return(&sysdig.GetMyPermissionsResponse{
+			HTTPResponse: &http.Response{
+				StatusCode: 200,
+			},
+			JSON200: &sysdig.UserPermissions{
+				Permissions: []string{"policy-events.read"},
+			},
+		}, nil)
 		tool = NewToolGetEventProcessTree(mockClient)
 		handler = NewHandlerWithTools(tool)
 
