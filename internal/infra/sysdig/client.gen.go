@@ -65,6 +65,18 @@ const (
 	AgentlessRuntimeDetectionContentPriorityWarning       AgentlessRuntimeDetectionContentPriority = "warning"
 )
 
+// Defines values for AlertsResponseV1DataAlertsState.
+const (
+	AlertsResponseV1DataAlertsStateFiring  AlertsResponseV1DataAlertsState = "firing"
+	AlertsResponseV1DataAlertsStatePending AlertsResponseV1DataAlertsState = "pending"
+)
+
+// Defines values for AlertsResponseV1Status.
+const (
+	AlertsResponseV1StatusError   AlertsResponseV1Status = "error"
+	AlertsResponseV1StatusSuccess AlertsResponseV1Status = "success"
+)
+
 // Defines values for AuditTrailContentRequestMethod.
 const (
 	DELETE AuditTrailContentRequestMethod = "DELETE"
@@ -368,12 +380,12 @@ const (
 
 // Defines values for EntityDefinitionDefinitionDefType.
 const (
-	Entity       EntityDefinitionDefinitionDefType = "Entity"
-	Field        EntityDefinitionDefinitionDefType = "Field"
-	Function     EntityDefinitionDefinitionDefType = "Function"
-	Query        EntityDefinitionDefinitionDefType = "Query"
-	Relationship EntityDefinitionDefinitionDefType = "Relationship"
-	Union        EntityDefinitionDefinitionDefType = "Union"
+	EntityDefinitionDefinitionDefTypeEntity       EntityDefinitionDefinitionDefType = "Entity"
+	EntityDefinitionDefinitionDefTypeField        EntityDefinitionDefinitionDefType = "Field"
+	EntityDefinitionDefinitionDefTypeFunction     EntityDefinitionDefinitionDefType = "Function"
+	EntityDefinitionDefinitionDefTypeQuery        EntityDefinitionDefinitionDefType = "Query"
+	EntityDefinitionDefinitionDefTypeRelationship EntityDefinitionDefinitionDefType = "Relationship"
+	EntityDefinitionDefinitionDefTypeUnion        EntityDefinitionDefinitionDefType = "Union"
 )
 
 // Defines values for EntityDefinitionDefinitionType.
@@ -536,6 +548,11 @@ const (
 // Defines values for ImageConfigLabelNotExistsType.
 const (
 	ImageConfigLabelNotExistsTypeImageConfigLabelNotExists ImageConfigLabelNotExistsType = "imageConfigLabelNotExists"
+)
+
+// Defines values for ImageConfigLabelWithValueAndLabelsExistType.
+const (
+	ImageConfigLabelWithValueAndLabelsExistTypeImageConfigLabelWithValueAndLabelsExist ImageConfigLabelWithValueAndLabelsExistType = "imageConfigLabelWithValueAndLabelsExist"
 )
 
 // Defines values for ImageConfigSensitiveInformationAndSecretsType.
@@ -827,6 +844,33 @@ const (
 	REGEXPMATCHES    LabelMatcherV1Operator = "REGEXP_MATCHES"
 )
 
+// Defines values for LabelValuesResponseV1Status.
+const (
+	LabelValuesResponseV1StatusError   LabelValuesResponseV1Status = "error"
+	LabelValuesResponseV1StatusSuccess LabelValuesResponseV1Status = "success"
+)
+
+// Defines values for LabelsResponseV1Status.
+const (
+	LabelsResponseV1StatusError   LabelsResponseV1Status = "error"
+	LabelsResponseV1StatusSuccess LabelsResponseV1Status = "success"
+)
+
+// Defines values for MetadataResponseV1DataType.
+const (
+	MetadataResponseV1DataTypeCounter   MetadataResponseV1DataType = "counter"
+	MetadataResponseV1DataTypeGauge     MetadataResponseV1DataType = "gauge"
+	MetadataResponseV1DataTypeHistogram MetadataResponseV1DataType = "histogram"
+	MetadataResponseV1DataTypeSummary   MetadataResponseV1DataType = "summary"
+	MetadataResponseV1DataTypeUnknown   MetadataResponseV1DataType = "unknown"
+)
+
+// Defines values for MetadataResponseV1Status.
+const (
+	MetadataResponseV1StatusError   MetadataResponseV1Status = "error"
+	MetadataResponseV1StatusSuccess MetadataResponseV1Status = "success"
+)
+
 // Defines values for NewRuleRuleType.
 const (
 	NewRuleRuleTypeImageConfigCreationDate                   NewRuleRuleType = "imageConfigCreationDate"
@@ -843,9 +887,10 @@ const (
 
 // Defines values for NewStageName.
 const (
-	NewStageNamePipeline NewStageName = "pipeline"
-	NewStageNameRegistry NewStageName = "registry"
-	NewStageNameRuntime  NewStageName = "runtime"
+	NewStageNameAdmissionControl NewStageName = "admission_control"
+	NewStageNamePipeline         NewStageName = "pipeline"
+	NewStageNameRegistry         NewStageName = "registry"
+	NewStageNameRuntime          NewStageName = "runtime"
 )
 
 // Defines values for NotificationChannelTypeV1.
@@ -962,12 +1007,31 @@ const (
 	ProductSecure  Product = "secure"
 )
 
+// Defines values for PrometheusErrorStatus.
+const (
+	PrometheusErrorStatusError PrometheusErrorStatus = "error"
+)
+
 // Defines values for PromqlMatcherOperator.
 const (
 	EQUAL         PromqlMatcherOperator = "EQUAL"
 	NOTEQUAL      PromqlMatcherOperator = "NOT_EQUAL"
 	REGEXMATCH    PromqlMatcherOperator = "REGEX_MATCH"
 	REGEXNOTMATCH PromqlMatcherOperator = "REGEX_NOT_MATCH"
+)
+
+// Defines values for QueryResponseV1DataResultType.
+const (
+	QueryResponseV1DataResultTypeMatrix QueryResponseV1DataResultType = "matrix"
+	QueryResponseV1DataResultTypeScalar QueryResponseV1DataResultType = "scalar"
+	QueryResponseV1DataResultTypeString QueryResponseV1DataResultType = "string"
+	QueryResponseV1DataResultTypeVector QueryResponseV1DataResultType = "vector"
+)
+
+// Defines values for QueryResponseV1Status.
+const (
+	QueryResponseV1StatusError   QueryResponseV1Status = "error"
+	QueryResponseV1StatusSuccess QueryResponseV1Status = "success"
 )
 
 // Defines values for ResponderType.
@@ -1033,6 +1097,24 @@ const (
 	RuleFailureTypePkgVulnFailure     RuleFailureType = "pkgVulnFailure"
 )
 
+// Defines values for RulesResponseV1DataGroupsRulesAlertsState.
+const (
+	RulesResponseV1DataGroupsRulesAlertsStateFiring  RulesResponseV1DataGroupsRulesAlertsState = "firing"
+	RulesResponseV1DataGroupsRulesAlertsStatePending RulesResponseV1DataGroupsRulesAlertsState = "pending"
+)
+
+// Defines values for RulesResponseV1DataGroupsRulesType.
+const (
+	Alerting  RulesResponseV1DataGroupsRulesType = "alerting"
+	Recording RulesResponseV1DataGroupsRulesType = "recording"
+)
+
+// Defines values for RulesResponseV1Status.
+const (
+	RulesResponseV1StatusError   RulesResponseV1Status = "error"
+	RulesResponseV1StatusSuccess RulesResponseV1Status = "success"
+)
+
 // Defines values for SbomResultResponseBomFormat.
 const (
 	CycloneDX SbomResultResponseBomFormat = "CycloneDX"
@@ -1040,10 +1122,10 @@ const (
 
 // Defines values for SbomResultResponseCompositionsAggregate.
 const (
-	Complete     SbomResultResponseCompositionsAggregate = "complete"
-	Incomplete   SbomResultResponseCompositionsAggregate = "incomplete"
-	NotSpecified SbomResultResponseCompositionsAggregate = "not_specified"
-	Unknown      SbomResultResponseCompositionsAggregate = "unknown"
+	SbomResultResponseCompositionsAggregateComplete     SbomResultResponseCompositionsAggregate = "complete"
+	SbomResultResponseCompositionsAggregateIncomplete   SbomResultResponseCompositionsAggregate = "incomplete"
+	SbomResultResponseCompositionsAggregateNotSpecified SbomResultResponseCompositionsAggregate = "not_specified"
+	SbomResultResponseCompositionsAggregateUnknown      SbomResultResponseCompositionsAggregate = "unknown"
 )
 
 // Defines values for SbomResultResponseMetadataLifecycle.
@@ -1072,6 +1154,12 @@ const (
 	HOSTCONTAINER         ScopeTypeV1 = "HOST_CONTAINER"
 	IBMPLATFORMMETRICS    ScopeTypeV1 = "IBM_PLATFORM_METRICS"
 	PROMETHEUSREMOTEWRITE ScopeTypeV1 = "PROMETHEUS_REMOTE_WRITE"
+)
+
+// Defines values for SeriesResponseV1Status.
+const (
+	SeriesResponseV1StatusError   SeriesResponseV1Status = "error"
+	SeriesResponseV1StatusSuccess SeriesResponseV1Status = "success"
 )
 
 // Defines values for ServicesServiceType.
@@ -1326,11 +1414,11 @@ const (
 
 // Defines values for VulnerabilitySeverity.
 const (
-	VulnerabilitySeverityCritical   VulnerabilitySeverity = "critical"
-	VulnerabilitySeverityHigh       VulnerabilitySeverity = "high"
-	VulnerabilitySeverityLow        VulnerabilitySeverity = "low"
-	VulnerabilitySeverityMedium     VulnerabilitySeverity = "medium"
-	VulnerabilitySeverityNegligible VulnerabilitySeverity = "negligible"
+	Critical   VulnerabilitySeverity = "critical"
+	High       VulnerabilitySeverity = "high"
+	Low        VulnerabilitySeverity = "low"
+	Medium     VulnerabilitySeverity = "medium"
+	Negligible VulnerabilitySeverity = "negligible"
 )
 
 // Defines values for RoleDisplayNamePath.
@@ -1399,6 +1487,11 @@ const (
 const (
 	UpdateGlobalSsoSettingsV1ParamsSsoProductIdMonitor UpdateGlobalSsoSettingsV1ParamsSsoProductId = "monitor"
 	UpdateGlobalSsoSettingsV1ParamsSsoProductIdSecure  UpdateGlobalSsoSettingsV1ParamsSsoProductId = "secure"
+)
+
+// Defines values for GetRulesV1ParamsType.
+const (
+	Alert GetRulesV1ParamsType = "alert"
 )
 
 // Defines values for GetSecureVulnerabilityV1PoliciesParamsStages.
@@ -1741,6 +1834,45 @@ type AgentlessRuntimeDetectionContentIntegrationType string
 
 // AgentlessRuntimeDetectionContentPriority Rule priority
 type AgentlessRuntimeDetectionContentPriority string
+
+// AlertsResponseV1 defines model for AlertsResponseV1.
+type AlertsResponseV1 struct {
+	// Data Response payload containing active alerts.
+	Data *struct {
+		// Alerts List of currently active alerts.
+		Alerts *[]struct {
+			// ActiveAt Timestamp when the alert became active.
+			ActiveAt time.Time `json:"activeAt"`
+
+			// Annotations Additional metadata about the alert.
+			Annotations map[string]string `json:"annotations"`
+
+			// Labels Key-value pairs identifying the alert.
+			Labels map[string]string `json:"labels"`
+
+			// State Current state of the alert.
+			State AlertsResponseV1DataAlertsState `json:"state"`
+
+			// Value The numerical value that triggered the alert.
+			Value string `json:"value"`
+		} `json:"alerts,omitempty"`
+	} `json:"data,omitempty"`
+
+	// Infos A set of information messages attached to the response.
+	Infos *[]string `json:"infos,omitempty"`
+
+	// Status Request status.
+	Status *AlertsResponseV1Status `json:"status,omitempty"`
+
+	// Warnings A set of warning messages attached to the response.
+	Warnings *[]string `json:"warnings,omitempty"`
+}
+
+// AlertsResponseV1DataAlertsState Current state of the alert.
+type AlertsResponseV1DataAlertsState string
+
+// AlertsResponseV1Status Request status.
+type AlertsResponseV1Status string
 
 // AllSsoSettingsResponseV1 defines model for AllSsoSettingsResponseV1.
 type AllSsoSettingsResponseV1 struct {
@@ -3598,6 +3730,9 @@ type DriftPreventedAction struct {
 	Type ActionType `json:"type"`
 }
 
+// Duration Time defined as a Golang-style duration type
+type Duration = string
+
 // EfoIntegrationResponseV1 Get Integration Response
 type EfoIntegrationResponseV1 struct {
 	union json.RawMessage
@@ -4724,6 +4859,24 @@ type ImageConfigLabelNotExists struct {
 // ImageConfigLabelNotExistsType defines model for ImageConfigLabelNotExists.Type.
 type ImageConfigLabelNotExistsType string
 
+// ImageConfigLabelWithValueAndLabelsExist Predicate expressing "The image has a label with a given value and multiple labels are present"
+type ImageConfigLabelWithValueAndLabelsExist struct {
+	Extra struct {
+		// Key Label key.
+		Key *string `json:"key,omitempty"`
+
+		// RequiredLabels List of labels that must be present.
+		RequiredLabels *[]string `json:"requiredLabels,omitempty"`
+
+		// Value Label value.
+		Value *string `json:"value,omitempty"`
+	} `json:"extra"`
+	Type ImageConfigLabelWithValueAndLabelsExistType `json:"type"`
+}
+
+// ImageConfigLabelWithValueAndLabelsExistType defines model for ImageConfigLabelWithValueAndLabelsExist.Type.
+type ImageConfigLabelWithValueAndLabelsExistType string
+
 // ImageConfigSensitiveInformationAndSecrets Predicate expressing "the image contains sensitive information and secrets".
 type ImageConfigSensitiveInformationAndSecrets struct {
 	Type ImageConfigSensitiveInformationAndSecretsType `json:"type"`
@@ -5708,6 +5861,42 @@ type LabelMatcherV1 struct {
 // LabelMatcherV1Operator Match operator.
 type LabelMatcherV1Operator string
 
+// LabelValuesResponseV1 defines model for LabelValuesResponseV1.
+type LabelValuesResponseV1 struct {
+	// Data List of values associated with the specified label.
+	Data *[]string `json:"data,omitempty"`
+
+	// Infos A set of information messages attached to the response.
+	Infos *[]string `json:"infos,omitempty"`
+
+	// Status Query status.
+	Status *LabelValuesResponseV1Status `json:"status,omitempty"`
+
+	// Warnings A set of warning messages attached to the response.
+	Warnings *[]string `json:"warnings,omitempty"`
+}
+
+// LabelValuesResponseV1Status Query status.
+type LabelValuesResponseV1Status string
+
+// LabelsResponseV1 defines model for LabelsResponseV1.
+type LabelsResponseV1 struct {
+	// Data List of label names.
+	Data *[]string `json:"data,omitempty"`
+
+	// Infos A set of information messages attached to the response.
+	Infos *[]string `json:"infos,omitempty"`
+
+	// Status Query status.
+	Status *LabelsResponseV1Status `json:"status,omitempty"`
+
+	// Warnings A set of warning messages attached to the response.
+	Warnings *[]string `json:"warnings,omitempty"`
+}
+
+// LabelsResponseV1Status Query status.
+type LabelsResponseV1Status string
+
 // Layer defines model for Layer.
 type Layer struct {
 	// BaseImagesRef base images refs
@@ -5838,6 +6027,36 @@ type MalwarePreventedAction struct {
 	// Type Action type.
 	Type ActionType `json:"type"`
 }
+
+// MetadataResponseV1 defines model for MetadataResponseV1.
+type MetadataResponseV1 struct {
+	// Data Metric metadata indexed by metric name.
+	Data *map[string][]struct {
+		// Help A brief description of the metric.
+		Help string `json:"help"`
+
+		// Type The type of the metric.
+		Type MetadataResponseV1DataType `json:"type"`
+
+		// Unit The unit of measurement for the metric.
+		Unit string `json:"unit"`
+	} `json:"data,omitempty"`
+
+	// Infos A set of information messages attached to the response.
+	Infos *[]string `json:"infos,omitempty"`
+
+	// Status Query status.
+	Status *MetadataResponseV1Status `json:"status,omitempty"`
+
+	// Warnings A set of warning messages attached to the response.
+	Warnings *[]string `json:"warnings,omitempty"`
+}
+
+// MetadataResponseV1DataType The type of the metric.
+type MetadataResponseV1DataType string
+
+// MetadataResponseV1Status Query status.
+type MetadataResponseV1Status string
 
 // MetricErrorV1 Get Disabled Metrics by Job name Response
 type MetricErrorV1 struct {
@@ -6460,6 +6679,21 @@ type Producer struct {
 // Product The Sysdig product
 type Product string
 
+// PrometheusError defines model for PrometheusError.
+type PrometheusError struct {
+	// Error Error message describing the issue.
+	Error *string `json:"error,omitempty"`
+
+	// ErrorType Type of error encountered.
+	ErrorType *string `json:"errorType,omitempty"`
+
+	// Status Indicates an error response.
+	Status *PrometheusErrorStatus `json:"status,omitempty"`
+}
+
+// PrometheusErrorStatus Indicates an error response.
+type PrometheusErrorStatus string
+
 // PrometheusLabel A valid Prometheus label name. Must match ^[a-zA-Z_][a-zA-Z0-9_]*$
 type PrometheusLabel = string
 
@@ -6510,6 +6744,63 @@ type QueryResponse_Entities struct {
 	AdditionalProperties map[string]interface{} `json:"-"`
 }
 
+// QueryResponseV1 defines model for QueryResponseV1.
+type QueryResponseV1 struct {
+	// Data The result of the query.
+	Data *struct {
+		Result *QueryResponseV1_Data_Result `json:"result,omitempty"`
+
+		// ResultType Type of the result set.
+		ResultType *QueryResponseV1DataResultType `json:"resultType,omitempty"`
+	} `json:"data,omitempty"`
+
+	// Infos A set of information messages attached to the response.
+	Infos *[]string `json:"infos,omitempty"`
+
+	// Status Query status.
+	Status *QueryResponseV1Status `json:"status,omitempty"`
+
+	// Warnings A set of warning messages attached to the response.
+	Warnings *[]string `json:"warnings,omitempty"`
+}
+
+// QueryResponseV1DataResult0 Scalar result
+type QueryResponseV1DataResult0 = []QueryResponseV1_Data_Result_0_Item
+
+// QueryResponseV1DataResult00 defines model for .
+type QueryResponseV1DataResult00 = float32
+
+// QueryResponseV1DataResult01 defines model for .
+type QueryResponseV1DataResult01 = string
+
+// QueryResponseV1_Data_Result_0_Item defines model for QueryResponseV1.data.result.0.Item.
+type QueryResponseV1_Data_Result_0_Item struct {
+	union json.RawMessage
+}
+
+// QueryResponseV1DataResult1 Vector result
+type QueryResponseV1DataResult1 = []struct {
+	Metric map[string]string `json:"metric"`
+	Value  []string          `json:"value"`
+}
+
+// QueryResponseV1DataResult2 Matrix result
+type QueryResponseV1DataResult2 = []struct {
+	Metric map[string]string `json:"metric"`
+	Values [][]string        `json:"values"`
+}
+
+// QueryResponseV1_Data_Result defines model for QueryResponseV1.Data.Result.
+type QueryResponseV1_Data_Result struct {
+	union json.RawMessage
+}
+
+// QueryResponseV1DataResultType Type of the result set.
+type QueryResponseV1DataResultType string
+
+// QueryResponseV1Status Query status.
+type QueryResponseV1Status string
+
 // QuerySummary Summary of query execution metrics and timing information.
 type QuerySummary struct {
 	// AvailableAfter Time taken for results to become available in milliseconds.
@@ -6521,6 +6812,17 @@ type QuerySummary struct {
 	// TotalTime Total query execution time in milliseconds.
 	TotalTime int64 `json:"total_time"`
 }
+
+// QueryTime Time defined as RFC3339 or a unix timestamp
+type QueryTime struct {
+	union json.RawMessage
+}
+
+// QueryTime0 defines model for .
+type QueryTime0 = time.Time
+
+// QueryTime1 defines model for .
+type QueryTime1 = int64
 
 // RawEventCategory The semantic category (area) of the event in the Sysdig product:
 // - `kspm` -  Kubernetes Security Posture Management events
@@ -6851,6 +7153,72 @@ type RuleTags = []string
 // - 13 - ML - AWS anomalous login
 // - 14 - ML - Okta anomalous login
 type RuleType = int32
+
+// RulesResponseV1 defines model for RulesResponseV1.
+type RulesResponseV1 struct {
+	// Data Response payload containing rule groups.
+	Data *struct {
+		// Groups List of rule groups.
+		Groups *[]struct {
+			// Interval Evaluation interval of the rule group.
+			Interval string `json:"interval"`
+
+			// Name Name of the rule group.
+			Name string `json:"name"`
+
+			// Rules List of rules in the group.
+			Rules []struct {
+				// Alerts List of active alerts for this rule (only for alerting rules).
+				Alerts *[]struct {
+					// ActiveAt Timestamp when the alert became active.
+					ActiveAt time.Time `json:"activeAt"`
+
+					// State Current state of the alert.
+					State RulesResponseV1DataGroupsRulesAlertsState `json:"state"`
+
+					// Value The numerical value that triggered the alert.
+					Value string `json:"value"`
+				} `json:"alerts,omitempty"`
+
+				// Annotations Annotations providing additional information about the rule.
+				Annotations *map[string]string `json:"annotations,omitempty"`
+
+				// Duration Duration for which the rule must be active before triggering.
+				Duration *string `json:"duration,omitempty"`
+
+				// Labels Labels assigned to the rule.
+				Labels *map[string]string `json:"labels,omitempty"`
+
+				// Name Name of the rule.
+				Name string `json:"name"`
+
+				// Query PromQL query associated with the rule.
+				Query string `json:"query"`
+
+				// Type Type of rule (alerting or recording).
+				Type RulesResponseV1DataGroupsRulesType `json:"type"`
+			} `json:"rules"`
+		} `json:"groups,omitempty"`
+	} `json:"data,omitempty"`
+
+	// Infos A set of information messages attached to the response.
+	Infos *[]string `json:"infos,omitempty"`
+
+	// Status Request status.
+	Status *RulesResponseV1Status `json:"status,omitempty"`
+
+	// Warnings A set of warning messages attached to the response.
+	Warnings *[]string `json:"warnings,omitempty"`
+}
+
+// RulesResponseV1DataGroupsRulesAlertsState Current state of the alert.
+type RulesResponseV1DataGroupsRulesAlertsState string
+
+// RulesResponseV1DataGroupsRulesType Type of rule (alerting or recording).
+type RulesResponseV1DataGroupsRulesType string
+
+// RulesResponseV1Status Request status.
+type RulesResponseV1Status string
 
 // RuntimeResult Runtime result
 type RuntimeResult struct {
@@ -7190,6 +7558,24 @@ type SequenceEvent struct {
 	SubIngestionId string `json:"subIngestionId"`
 }
 
+// SeriesResponseV1 defines model for SeriesResponseV1.
+type SeriesResponseV1 struct {
+	// Data List of matching time series, each represented as a set of labels.
+	Data *[]map[string]interface{} `json:"data,omitempty"`
+
+	// Infos A set of information messages attached to the response.
+	Infos *[]string `json:"infos,omitempty"`
+
+	// Status Query status.
+	Status *SeriesResponseV1Status `json:"status,omitempty"`
+
+	// Warnings A set of warning messages attached to the response.
+	Warnings *[]string `json:"warnings,omitempty"`
+}
+
+// SeriesResponseV1Status Query status.
+type SeriesResponseV1Status string
+
 // ServiceAccountResponseV1 defines model for ServiceAccountResponseV1.
 type ServiceAccountResponseV1 struct {
 	// DateCreated Date and time when the Service Account was created.
@@ -7429,9 +7815,22 @@ type Stage struct {
 
 // StageConfiguration defines model for StageConfiguration.
 type StageConfiguration struct {
+	// Behaviour Default behavior for the admission controller validator when no policy is matched.
+	// This value is ignored for other stages. Possible values are:
+	//   - warn: allow the deployment but log a warning
+	//   - reject: reject the deployment
+	Behaviour *string `json:"behaviour,omitempty"`
+
 	// Scope Scope to apply the policies for the given stage. An empty string or missing property implies the policies are always active.
 	// The scope is defined using a query language expression, which is a subset of the full metrics query language used in monitoring.
 	Scope *string `json:"scope,omitempty"`
+
+	// UnknownImageAction Action to take in the admission controller when an image is not found or has never been scanned before.
+	// This value is ignored for other stages. Possible values are:
+	//   - warn: allow the deployment but log a warning
+	//   - reject: reject the deployment
+	//   - rejectAndScan: reject the deployment and trigger a scan for the image
+	UnknownImageAction *string `json:"unknownImageAction,omitempty"`
 }
 
 // StatefulDetectionsContent defines model for StatefulDetectionsContent.
@@ -8376,6 +8775,8 @@ type UpdateUserRequestV1 struct {
 	FirstName *string `json:"firstName,omitempty"`
 
 	// IsAdmin **True** if the user has Administration permissions.
+	//
+	// When the admin permission is revoked (switched from True to False), the user will be removed from all teams except the default team(s) and assigned a default role in those team(s).
 	IsAdmin *bool `json:"isAdmin,omitempty"`
 
 	// IsEnabled When **True**, the user can bypass SSO enforcement.
@@ -9100,8 +9501,33 @@ type IntegrationID = UnlimitedLong
 // JobNamePath defines model for JobNamePath.
 type JobNamePath = string
 
+// LabelNamePath defines model for LabelNamePath.
+type LabelNamePath = string
+
 // Limit defines model for Limit.
 type Limit = int32
+
+type LimitLabelValues = UnlimitedLong
+
+type LimitMetrics = UnlimitedLong
+
+type LimitPerMetricUnsupported = UnlimitedLong
+
+type LimitQuery = UnlimitedLong
+
+type LimitSeries = UnlimitedLong
+
+// MatchLabelNames defines model for MatchLabelNames.
+type MatchLabelNames = []string
+
+// MatchLabelValues defines model for MatchLabelValues.
+type MatchLabelValues = []string
+
+// MatchSeries defines model for MatchSeries.
+type MatchSeries = []string
+
+// MetricName defines model for MetricName.
+type MetricName = string
 
 // MultiFilter defines model for MultiFilter.
 type MultiFilter = []string
@@ -9125,6 +9551,9 @@ type PermissionsFilter = string
 
 type PricingIdPath = UnlimitedLong
 
+// Query defines model for Query.
+type Query = string
+
 // RoleDisplayNamePath defines model for RoleDisplayNamePath.
 type RoleDisplayNamePath string
 
@@ -9137,7 +9566,36 @@ type SsoProductIdPath string
 
 type SsoSettingsIdPath = UnlimitedLong
 
+// Step defines model for Step.
+type Step struct {
+	union json.RawMessage
+}
+
 type TeamIdPath = UnlimitedLong
+
+// Time Time defined as RFC3339 or a unix timestamp
+type Time = QueryTime
+
+// TimeEndQuery Time defined as RFC3339 or a unix timestamp
+type TimeEndQuery = QueryTime
+
+// TimeEndSeries Time defined as RFC3339 or a unix timestamp
+type TimeEndSeries = QueryTime
+
+// TimeEndUnsupported Time defined as RFC3339 or a unix timestamp
+type TimeEndUnsupported = QueryTime
+
+// TimeStartQuery Time defined as RFC3339 or a unix timestamp
+type TimeStartQuery = QueryTime
+
+// TimeStartSeries Time defined as RFC3339 or a unix timestamp
+type TimeStartSeries = QueryTime
+
+// TimeStartUnsupported Time defined as RFC3339 or a unix timestamp
+type TimeStartUnsupported = QueryTime
+
+// Timeout Time defined as a Golang-style duration type
+type Timeout = Duration
 
 type UserIdPath = UnlimitedLong
 
@@ -9156,17 +9614,29 @@ type VulnerabilityFilter = string
 // BadRequest defines model for BadRequest.
 type BadRequest = Error
 
+// BadRequestPrometheus defines model for BadRequestPrometheus.
+type BadRequestPrometheus = PrometheusError
+
 // Conflict defines model for Conflict.
 type Conflict = Error
 
 // Forbidden defines model for Forbidden.
 type Forbidden = Error
 
+// GonePrometheus defines model for GonePrometheus.
+type GonePrometheus = PrometheusError
+
 // InternalServerError defines model for InternalServerError.
 type InternalServerError = Error
 
+// InternalServerErrorPrometheus defines model for InternalServerErrorPrometheus.
+type InternalServerErrorPrometheus = PrometheusError
+
 // NotFound defines model for NotFound.
 type NotFound = Error
+
+// NotFoundPrometheus Error message indicating that the requested page was not found.
+type NotFoundPrometheus = string
 
 // TooManyRequests defines model for TooManyRequests.
 type TooManyRequests = Error
@@ -9174,8 +9644,26 @@ type TooManyRequests = Error
 // Unauthorized defines model for Unauthorized.
 type Unauthorized = Error
 
+// UnauthorizedPrometheus defines model for UnauthorizedPrometheus.
+type UnauthorizedPrometheus struct {
+	// Error A human-readable error message.
+	Error string `json:"error"`
+
+	// Path The requested endpoint path that triggered the error.
+	Path string `json:"path"`
+
+	// Status HTTP status code of the response.
+	Status int32 `json:"status"`
+
+	// Timestamp Epoch timestamp (milliseconds) when the error occurred.
+	Timestamp int64 `json:"timestamp"`
+}
+
 // UnprocessableEntity defines model for UnprocessableEntity.
 type UnprocessableEntity = Error
+
+// UnprocessableEntityPrometheus defines model for UnprocessableEntityPrometheus.
+type UnprocessableEntityPrometheus = PrometheusError
 
 // UnsupportedMediaType defines model for UnsupportedMediaType.
 type UnsupportedMediaType = Error
@@ -9538,6 +10026,195 @@ type ListZonesV1Params struct {
 	// Multiple orderings can be applied by repeating the `orderby` parameter:\
 	// `&orderby=key1:direction1&orderby=key2:direction2`
 	Orderby *MultiOrderBy `form:"orderby,omitempty" json:"orderby,omitempty"`
+}
+
+// GetLabelValuesV1Params defines parameters for GetLabelValuesV1.
+type GetLabelValuesV1Params struct {
+	// Start <b>UNSUPPORTED</b> - This parameter is not supported due to the Sysdig's specific implementation.
+	Start *TimeStartUnsupported `form:"start,omitempty" json:"start,omitempty"`
+
+	// End <b>UNSUPPORTED</b> - Sysdig does not support this parameter.
+	End *TimeEndUnsupported `form:"end,omitempty" json:"end,omitempty"`
+
+	// Match A repeated series selector argument that specifies the series from which to read the label values.
+	Match *MatchLabelValues `form:"match[],omitempty" json:"match[],omitempty"`
+
+	// Limit The maximum number of returned labels. This is 5,000 by default. To disable the limit, set the value to 0.
+	Limit *LimitLabelValues `form:"limit,omitempty" json:"limit,omitempty"`
+}
+
+// GetLabelsV1Params defines parameters for GetLabelsV1.
+type GetLabelsV1Params struct {
+	// Start <b>UNSUPPORTED</b> - This parameter is not supported due to the Sysdig's specific implementation.
+	Start *TimeStartUnsupported `form:"start,omitempty" json:"start,omitempty"`
+
+	// End <b>UNSUPPORTED</b> - Sysdig does not support this parameter.
+	End *TimeEndUnsupported `form:"end,omitempty" json:"end,omitempty"`
+
+	// Match A repeated series selector argument that specifies the series from which to read the label names.
+	Match *MatchLabelNames `form:"match[],omitempty" json:"match[],omitempty"`
+
+	// Limit The maximum number of returned series. The limit is capped at 10,000. To disable the limit, set the value to 0.
+	Limit *LimitSeries `form:"limit,omitempty" json:"limit,omitempty"`
+}
+
+// PostLabelsV1Params defines parameters for PostLabelsV1.
+type PostLabelsV1Params struct {
+	// Start <b>UNSUPPORTED</b> - This parameter is not supported due to the Sysdig's specific implementation.
+	Start *TimeStartUnsupported `form:"start,omitempty" json:"start,omitempty"`
+
+	// End <b>UNSUPPORTED</b> - Sysdig does not support this parameter.
+	End *TimeEndUnsupported `form:"end,omitempty" json:"end,omitempty"`
+
+	// Match A repeated series selector argument that specifies the series from which to read the label names.
+	Match *MatchLabelNames `form:"match[],omitempty" json:"match[],omitempty"`
+
+	// Limit The maximum number of returned series. The limit is capped at 10,000. To disable the limit, set the value to 0.
+	Limit *LimitSeries `form:"limit,omitempty" json:"limit,omitempty"`
+}
+
+// GetMetadataV1Params defines parameters for GetMetadataV1.
+type GetMetadataV1Params struct {
+	// LimitPerMetric <b>UNSUPPORTED</b> - Sysdig does not support this parameter.
+	LimitPerMetric *LimitPerMetricUnsupported `form:"limit_per_metric,omitempty" json:"limit_per_metric,omitempty"`
+
+	// Limit The maximum number of metrics to return. To disable the limit, set the value to 0.
+	Limit *LimitMetrics `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Metric A specific metric name to filter metadata for. If omitted, metadata for all metrics is retrieved.
+	Metric *MetricName `form:"metric,omitempty" json:"metric,omitempty"`
+}
+
+// GetQueryV1Params defines parameters for GetQueryV1.
+type GetQueryV1Params struct {
+	// Query The Prometheus expression query string.
+	Query Query `form:"query" json:"query"`
+
+	// Time The evaluation timestamp as RFC3339 or a unix timestamp. If omitted, the current server time is used.
+	Time *Time `form:"time,omitempty" json:"time,omitempty"`
+
+	// Timeout The evaluation timeout. The default is 2 minutes.
+	Timeout *Timeout `form:"timeout,omitempty" json:"timeout,omitempty"`
+
+	// Limit The maximum number of returned series. To disable the limit, set the value to 0.
+	Limit *LimitQuery `form:"limit,omitempty" json:"limit,omitempty"`
+}
+
+// PostQueryV1Params defines parameters for PostQueryV1.
+type PostQueryV1Params struct {
+	// Query The Prometheus expression query string.
+	Query Query `form:"query" json:"query"`
+
+	// Time The evaluation timestamp as RFC3339 or a unix timestamp. If omitted, the current server time is used.
+	Time *Time `form:"time,omitempty" json:"time,omitempty"`
+
+	// Timeout The evaluation timeout. The default is 2 minutes.
+	Timeout *Timeout `form:"timeout,omitempty" json:"timeout,omitempty"`
+
+	// Limit The maximum number of returned series. To disable the limit, set the value to 0.
+	Limit *LimitQuery `form:"limit,omitempty" json:"limit,omitempty"`
+}
+
+// GetQueryRangeV1Params defines parameters for GetQueryRangeV1.
+type GetQueryRangeV1Params struct {
+	// Query The Prometheus expression query string.
+	Query Query `form:"query" json:"query"`
+
+	// Start The inclusive start timestamp of the query range as RFC3339 or a unix timestamp.
+	Start TimeStartQuery `form:"start" json:"start"`
+
+	// End The inclusive end timestamp of the query range as RFC3339 or a unix timestamp.
+	End TimeEndQuery `form:"end" json:"end"`
+
+	// Step The query resolution step width, specified as a duration or a floating-point number of seconds.
+	Step Step `form:"step" json:"step"`
+
+	// Timeout The evaluation timeout. The default is 2 minutes.
+	Timeout *Timeout `form:"timeout,omitempty" json:"timeout,omitempty"`
+
+	// Limit The maximum number of returned series. To disable the limit, set the value to 0.
+	Limit *LimitQuery `form:"limit,omitempty" json:"limit,omitempty"`
+}
+
+// PostQueryRangeV1Params defines parameters for PostQueryRangeV1.
+type PostQueryRangeV1Params struct {
+	// Query The Prometheus expression query string.
+	Query Query `form:"query" json:"query"`
+
+	// Start The inclusive start timestamp of the query range as RFC3339 or a unix timestamp.
+	Start TimeStartQuery `form:"start" json:"start"`
+
+	// End The inclusive end timestamp of the query range as RFC3339 or a unix timestamp.
+	End TimeEndQuery `form:"end" json:"end"`
+
+	// Step The query resolution step width, specified as a duration or a floating-point number of seconds.
+	Step Step `form:"step" json:"step"`
+
+	// Timeout The evaluation timeout. The default is 2 minutes.
+	Timeout *Timeout `form:"timeout,omitempty" json:"timeout,omitempty"`
+
+	// Limit The maximum number of returned series. To disable the limit, set the value to 0.
+	Limit *LimitQuery `form:"limit,omitempty" json:"limit,omitempty"`
+}
+
+// GetRulesV1Params defines parameters for GetRulesV1.
+type GetRulesV1Params struct {
+	// Type This endpoint only returns alerting rules (`type=alert`). When absent or empty, only alerting rules are returned.
+	Type *GetRulesV1ParamsType `form:"type,omitempty" json:"type,omitempty"`
+
+	// RuleName Only return rules with the given rule name. If repeated, rules with any of the provided names are returned.
+	RuleName *[]string `form:"rule_name[],omitempty" json:"rule_name[],omitempty"`
+
+	// RuleGroup Only return rules with the given rule group name. If repeated, rules with any of the provided group names are returned.
+	RuleGroup *[]string `form:"rule_group[],omitempty" json:"rule_group[],omitempty"`
+
+	// File <b>UNSUPPORTED</b> - Sysdig does not support this parameter.
+	File *[]string `form:"file[],omitempty" json:"file[],omitempty"`
+
+	// ExcludeAlerts This endpoint supports only returning alerting rules (`exclude_alerts=true`).
+	ExcludeAlerts *bool `form:"exclude_alerts,omitempty" json:"exclude_alerts,omitempty"`
+
+	// Match Only return rules with configured labels that satisfy the label selectors.
+	Match *[]string `form:"match[],omitempty" json:"match[],omitempty"`
+
+	// GroupLimit Limit the number of rule groups returned in a single response.
+	GroupLimit *UnlimitedLong `form:"group_limit,omitempty" json:"group_limit,omitempty"`
+
+	// GroupNextToken <b>UNSUPPORTED</b> - This parameter is not supported due to the Sysdig's specific implementation.
+	GroupNextToken *string `form:"group_next_token,omitempty" json:"group_next_token,omitempty"`
+}
+
+// GetRulesV1ParamsType defines parameters for GetRulesV1.
+type GetRulesV1ParamsType string
+
+// GetSeriesV1Params defines parameters for GetSeriesV1.
+type GetSeriesV1Params struct {
+	// Match A repeated series selector argument that specifies the series to return. You must provide at least one match[] parameter.
+	Match MatchSeries `form:"match[]" json:"match[]"`
+
+	// Start The inclusive start timestamp of the series query as RFC3339 or a unix timestamp.
+	Start *TimeStartSeries `form:"start,omitempty" json:"start,omitempty"`
+
+	// End The inclusive end timestamp of the series query as RFC3339 or a unix timestamp.
+	End *TimeEndSeries `form:"end,omitempty" json:"end,omitempty"`
+
+	// Limit The maximum number of returned series. The limit is capped at 10,000. To disable the limit, set the value to 0.
+	Limit *LimitSeries `form:"limit,omitempty" json:"limit,omitempty"`
+}
+
+// PostSeriesV1Params defines parameters for PostSeriesV1.
+type PostSeriesV1Params struct {
+	// Match A repeated series selector argument that specifies the series to return. You must provide at least one match[] parameter.
+	Match MatchSeries `form:"match[]" json:"match[]"`
+
+	// Start The inclusive start timestamp of the series query as RFC3339 or a unix timestamp.
+	Start *TimeStartSeries `form:"start,omitempty" json:"start,omitempty"`
+
+	// End The inclusive end timestamp of the series query as RFC3339 or a unix timestamp.
+	End *TimeEndSeries `form:"end,omitempty" json:"end,omitempty"`
+
+	// Limit The maximum number of returned series. The limit is capped at 10,000. To disable the limit, set the value to 0.
+	Limit *LimitSeries `form:"limit,omitempty" json:"limit,omitempty"`
 }
 
 // GetActivityAuditEntriesV1Params defines parameters for GetActivityAuditEntriesV1.
@@ -16272,12 +16949,250 @@ func (t *Predicates_Item) MergeImageConfigSensitiveInformationAndSecrets(v Image
 	return err
 }
 
+// AsImageConfigLabelWithValueAndLabelsExist returns the union data inside the Predicates_Item as a ImageConfigLabelWithValueAndLabelsExist
+func (t Predicates_Item) AsImageConfigLabelWithValueAndLabelsExist() (ImageConfigLabelWithValueAndLabelsExist, error) {
+	var body ImageConfigLabelWithValueAndLabelsExist
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromImageConfigLabelWithValueAndLabelsExist overwrites any union data inside the Predicates_Item as the provided ImageConfigLabelWithValueAndLabelsExist
+func (t *Predicates_Item) FromImageConfigLabelWithValueAndLabelsExist(v ImageConfigLabelWithValueAndLabelsExist) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeImageConfigLabelWithValueAndLabelsExist performs a merge with any union data inside the Predicates_Item, using the provided ImageConfigLabelWithValueAndLabelsExist
+func (t *Predicates_Item) MergeImageConfigLabelWithValueAndLabelsExist(v ImageConfigLabelWithValueAndLabelsExist) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 func (t Predicates_Item) MarshalJSON() ([]byte, error) {
 	b, err := t.union.MarshalJSON()
 	return b, err
 }
 
 func (t *Predicates_Item) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsQueryResponseV1DataResult00 returns the union data inside the QueryResponseV1_Data_Result_0_Item as a QueryResponseV1DataResult00
+func (t QueryResponseV1_Data_Result_0_Item) AsQueryResponseV1DataResult00() (QueryResponseV1DataResult00, error) {
+	var body QueryResponseV1DataResult00
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromQueryResponseV1DataResult00 overwrites any union data inside the QueryResponseV1_Data_Result_0_Item as the provided QueryResponseV1DataResult00
+func (t *QueryResponseV1_Data_Result_0_Item) FromQueryResponseV1DataResult00(v QueryResponseV1DataResult00) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeQueryResponseV1DataResult00 performs a merge with any union data inside the QueryResponseV1_Data_Result_0_Item, using the provided QueryResponseV1DataResult00
+func (t *QueryResponseV1_Data_Result_0_Item) MergeQueryResponseV1DataResult00(v QueryResponseV1DataResult00) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsQueryResponseV1DataResult01 returns the union data inside the QueryResponseV1_Data_Result_0_Item as a QueryResponseV1DataResult01
+func (t QueryResponseV1_Data_Result_0_Item) AsQueryResponseV1DataResult01() (QueryResponseV1DataResult01, error) {
+	var body QueryResponseV1DataResult01
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromQueryResponseV1DataResult01 overwrites any union data inside the QueryResponseV1_Data_Result_0_Item as the provided QueryResponseV1DataResult01
+func (t *QueryResponseV1_Data_Result_0_Item) FromQueryResponseV1DataResult01(v QueryResponseV1DataResult01) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeQueryResponseV1DataResult01 performs a merge with any union data inside the QueryResponseV1_Data_Result_0_Item, using the provided QueryResponseV1DataResult01
+func (t *QueryResponseV1_Data_Result_0_Item) MergeQueryResponseV1DataResult01(v QueryResponseV1DataResult01) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t QueryResponseV1_Data_Result_0_Item) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *QueryResponseV1_Data_Result_0_Item) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsQueryResponseV1DataResult0 returns the union data inside the QueryResponseV1_Data_Result as a QueryResponseV1DataResult0
+func (t QueryResponseV1_Data_Result) AsQueryResponseV1DataResult0() (QueryResponseV1DataResult0, error) {
+	var body QueryResponseV1DataResult0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromQueryResponseV1DataResult0 overwrites any union data inside the QueryResponseV1_Data_Result as the provided QueryResponseV1DataResult0
+func (t *QueryResponseV1_Data_Result) FromQueryResponseV1DataResult0(v QueryResponseV1DataResult0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeQueryResponseV1DataResult0 performs a merge with any union data inside the QueryResponseV1_Data_Result, using the provided QueryResponseV1DataResult0
+func (t *QueryResponseV1_Data_Result) MergeQueryResponseV1DataResult0(v QueryResponseV1DataResult0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsQueryResponseV1DataResult1 returns the union data inside the QueryResponseV1_Data_Result as a QueryResponseV1DataResult1
+func (t QueryResponseV1_Data_Result) AsQueryResponseV1DataResult1() (QueryResponseV1DataResult1, error) {
+	var body QueryResponseV1DataResult1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromQueryResponseV1DataResult1 overwrites any union data inside the QueryResponseV1_Data_Result as the provided QueryResponseV1DataResult1
+func (t *QueryResponseV1_Data_Result) FromQueryResponseV1DataResult1(v QueryResponseV1DataResult1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeQueryResponseV1DataResult1 performs a merge with any union data inside the QueryResponseV1_Data_Result, using the provided QueryResponseV1DataResult1
+func (t *QueryResponseV1_Data_Result) MergeQueryResponseV1DataResult1(v QueryResponseV1DataResult1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsQueryResponseV1DataResult2 returns the union data inside the QueryResponseV1_Data_Result as a QueryResponseV1DataResult2
+func (t QueryResponseV1_Data_Result) AsQueryResponseV1DataResult2() (QueryResponseV1DataResult2, error) {
+	var body QueryResponseV1DataResult2
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromQueryResponseV1DataResult2 overwrites any union data inside the QueryResponseV1_Data_Result as the provided QueryResponseV1DataResult2
+func (t *QueryResponseV1_Data_Result) FromQueryResponseV1DataResult2(v QueryResponseV1DataResult2) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeQueryResponseV1DataResult2 performs a merge with any union data inside the QueryResponseV1_Data_Result, using the provided QueryResponseV1DataResult2
+func (t *QueryResponseV1_Data_Result) MergeQueryResponseV1DataResult2(v QueryResponseV1DataResult2) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t QueryResponseV1_Data_Result) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *QueryResponseV1_Data_Result) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsQueryTime0 returns the union data inside the QueryTime as a QueryTime0
+func (t QueryTime) AsQueryTime0() (QueryTime0, error) {
+	var body QueryTime0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromQueryTime0 overwrites any union data inside the QueryTime as the provided QueryTime0
+func (t *QueryTime) FromQueryTime0(v QueryTime0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeQueryTime0 performs a merge with any union data inside the QueryTime, using the provided QueryTime0
+func (t *QueryTime) MergeQueryTime0(v QueryTime0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsQueryTime1 returns the union data inside the QueryTime as a QueryTime1
+func (t QueryTime) AsQueryTime1() (QueryTime1, error) {
+	var body QueryTime1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromQueryTime1 overwrites any union data inside the QueryTime as the provided QueryTime1
+func (t *QueryTime) FromQueryTime1(v QueryTime1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeQueryTime1 performs a merge with any union data inside the QueryTime, using the provided QueryTime1
+func (t *QueryTime) MergeQueryTime1(v QueryTime1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t QueryTime) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *QueryTime) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
 	return err
 }
@@ -17839,6 +18754,68 @@ func (t *UpdateKafkaIntegrationRequestV1_ConnectionInfo) UnmarshalJSON(b []byte)
 	return err
 }
 
+// AsDuration returns the union data inside the Step as a Duration
+func (t Step) AsDuration() (Duration, error) {
+	var body Duration
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromDuration overwrites any union data inside the Step as the provided Duration
+func (t *Step) FromDuration(v Duration) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeDuration performs a merge with any union data inside the Step, using the provided Duration
+func (t *Step) MergeDuration(v Duration) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsUnlimitedLong returns the union data inside the Step as a UnlimitedLong
+func (t Step) AsUnlimitedLong() (UnlimitedLong, error) {
+	var body UnlimitedLong
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUnlimitedLong overwrites any union data inside the Step as the provided UnlimitedLong
+func (t *Step) FromUnlimitedLong(v UnlimitedLong) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUnlimitedLong performs a merge with any union data inside the Step, using the provided UnlimitedLong
+func (t *Step) MergeUnlimitedLong(v UnlimitedLong) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t Step) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *Step) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
 // RequestEditorFn  is the function signature for the RequestEditor callback function
 type RequestEditorFn func(ctx context.Context, req *http.Request) error
 
@@ -18350,6 +19327,114 @@ type ClientInterface interface {
 	EditZoneV1WithBody(ctx context.Context, zoneId ZoneId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	EditZoneV1(ctx context.Context, zoneId ZoneId, body EditZoneV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAlertManagersV1 request
+	GetAlertManagersV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAdminTsdbCleanTombstonesV1 request
+	GetAdminTsdbCleanTombstonesV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PostAdminTsdbCleanTombstonesV1 request
+	PostAdminTsdbCleanTombstonesV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAdminTsdbDeleteSeriesV1 request
+	GetAdminTsdbDeleteSeriesV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PostAdminTsdbDeleteSeriesV1 request
+	PostAdminTsdbDeleteSeriesV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAdminTsdbSnapshotV1 request
+	GetAdminTsdbSnapshotV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PostAdminTsdbSnapshotV1 request
+	PostAdminTsdbSnapshotV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAlertsV1 request
+	GetAlertsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetFormatQueryV1 request
+	GetFormatQueryV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PostFormatQueryV1 request
+	PostFormatQueryV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetLabelValuesV1 request
+	GetLabelValuesV1(ctx context.Context, labelName LabelNamePath, params *GetLabelValuesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetLabelsV1 request
+	GetLabelsV1(ctx context.Context, params *GetLabelsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PostLabelsV1 request
+	PostLabelsV1(ctx context.Context, params *PostLabelsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetMetadataV1 request
+	GetMetadataV1(ctx context.Context, params *GetMetadataV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetNotificationsV1 request
+	GetNotificationsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetLiveNotificationsV1 request
+	GetLiveNotificationsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetParseQueryV1 request
+	GetParseQueryV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PostParseQueryV1 request
+	PostParseQueryV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetQueryV1 request
+	GetQueryV1(ctx context.Context, params *GetQueryV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PostQueryV1 request
+	PostQueryV1(ctx context.Context, params *PostQueryV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetExemplarsV1 request
+	GetExemplarsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PostExemplarsV1 request
+	PostExemplarsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetQueryRangeV1 request
+	GetQueryRangeV1(ctx context.Context, params *GetQueryRangeV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PostQueryRangeV1 request
+	PostQueryRangeV1(ctx context.Context, params *PostQueryRangeV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetRulesV1 request
+	GetRulesV1(ctx context.Context, params *GetRulesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetSeriesV1 request
+	GetSeriesV1(ctx context.Context, params *GetSeriesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PostSeriesV1 request
+	PostSeriesV1(ctx context.Context, params *PostSeriesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetStatusBuildInfoV1 request
+	GetStatusBuildInfoV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetStatusConfigV1 request
+	GetStatusConfigV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetStatusFlagsV1 request
+	GetStatusFlagsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetStatusRuntimeInfoV1 request
+	GetStatusRuntimeInfoV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetStatusTsdbV1 request
+	GetStatusTsdbV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetStatusWalReplayV1 request
+	GetStatusWalReplayV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetTargetsV1 request
+	GetTargetsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetTargetsMetadataV1 request
+	GetTargetsMetadataV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoteWriteV1WithBody request with any body
+	RemoteWriteV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetActivityAuditEntriesV1 request
 	GetActivityAuditEntriesV1(ctx context.Context, params *GetActivityAuditEntriesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -20468,6 +21553,438 @@ func (c *Client) EditZoneV1(ctx context.Context, zoneId ZoneId, body EditZoneV1J
 	return c.Client.Do(req)
 }
 
+func (c *Client) GetAlertManagersV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAlertManagersV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetAdminTsdbCleanTombstonesV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAdminTsdbCleanTombstonesV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostAdminTsdbCleanTombstonesV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostAdminTsdbCleanTombstonesV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetAdminTsdbDeleteSeriesV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAdminTsdbDeleteSeriesV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostAdminTsdbDeleteSeriesV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostAdminTsdbDeleteSeriesV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetAdminTsdbSnapshotV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAdminTsdbSnapshotV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostAdminTsdbSnapshotV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostAdminTsdbSnapshotV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetAlertsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAlertsV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetFormatQueryV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetFormatQueryV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostFormatQueryV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostFormatQueryV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetLabelValuesV1(ctx context.Context, labelName LabelNamePath, params *GetLabelValuesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetLabelValuesV1Request(c.Server, labelName, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetLabelsV1(ctx context.Context, params *GetLabelsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetLabelsV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostLabelsV1(ctx context.Context, params *PostLabelsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostLabelsV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetMetadataV1(ctx context.Context, params *GetMetadataV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetMetadataV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetNotificationsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetNotificationsV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetLiveNotificationsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetLiveNotificationsV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetParseQueryV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetParseQueryV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostParseQueryV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostParseQueryV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetQueryV1(ctx context.Context, params *GetQueryV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetQueryV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostQueryV1(ctx context.Context, params *PostQueryV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostQueryV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetExemplarsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetExemplarsV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostExemplarsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostExemplarsV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetQueryRangeV1(ctx context.Context, params *GetQueryRangeV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetQueryRangeV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostQueryRangeV1(ctx context.Context, params *PostQueryRangeV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostQueryRangeV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetRulesV1(ctx context.Context, params *GetRulesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRulesV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetSeriesV1(ctx context.Context, params *GetSeriesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetSeriesV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostSeriesV1(ctx context.Context, params *PostSeriesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostSeriesV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetStatusBuildInfoV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetStatusBuildInfoV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetStatusConfigV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetStatusConfigV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetStatusFlagsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetStatusFlagsV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetStatusRuntimeInfoV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetStatusRuntimeInfoV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetStatusTsdbV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetStatusTsdbV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetStatusWalReplayV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetStatusWalReplayV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetTargetsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetTargetsV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetTargetsMetadataV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetTargetsMetadataV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoteWriteV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoteWriteV1RequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) GetActivityAuditEntriesV1(ctx context.Context, params *GetActivityAuditEntriesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetActivityAuditEntriesV1Request(c.Server, params)
 	if err != nil {
@@ -21283,6 +22800,7 @@ func NewQuerySysqlGetRequest(server string, params *QuerySysqlGetParams) (*http.
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -21294,9 +22812,11 @@ func NewQuerySysqlGetRequest(server string, params *QuerySysqlGetParams) (*http.
 					}
 				}
 			}
+
 		}
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -21308,9 +22828,11 @@ func NewQuerySysqlGetRequest(server string, params *QuerySysqlGetParams) (*http.
 					}
 				}
 			}
+
 		}
 
 		if params.DeterministicOrder != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "deterministic_order", runtime.ParamLocationQuery, *params.DeterministicOrder); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -21322,6 +22844,7 @@ func NewQuerySysqlGetRequest(server string, params *QuerySysqlGetParams) (*http.
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -21425,6 +22948,7 @@ func NewGetInhibitionRulesRequest(server string, params *GetInhibitionRulesParam
 		queryValues := queryURL.Query()
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -21436,9 +22960,11 @@ func NewGetInhibitionRulesRequest(server string, params *GetInhibitionRulesParam
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -21450,6 +22976,7 @@ func NewGetInhibitionRulesRequest(server string, params *GetInhibitionRulesParam
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -21641,6 +23168,7 @@ func NewGetPricingV1Request(server string, params *GetPricingV1Params) (*http.Re
 		queryValues := queryURL.Query()
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -21652,9 +23180,11 @@ func NewGetPricingV1Request(server string, params *GetPricingV1Params) (*http.Re
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -21666,9 +23196,11 @@ func NewGetPricingV1Request(server string, params *GetPricingV1Params) (*http.Re
 					}
 				}
 			}
+
 		}
 
 		if params.ClusterName != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "clusterName", runtime.ParamLocationQuery, *params.ClusterName); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -21680,9 +23212,11 @@ func NewGetPricingV1Request(server string, params *GetPricingV1Params) (*http.Re
 					}
 				}
 			}
+
 		}
 
 		if params.Type != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "type", runtime.ParamLocationQuery, *params.Type); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -21694,6 +23228,7 @@ func NewGetPricingV1Request(server string, params *GetPricingV1Params) (*http.Re
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -21892,6 +23427,7 @@ func NewGetPricingProjectedCostsV1Request(server string, pricingId PricingIdPath
 		queryValues := queryURL.Query()
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -21903,9 +23439,11 @@ func NewGetPricingProjectedCostsV1Request(server string, pricingId PricingIdPath
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -21917,6 +23455,7 @@ func NewGetPricingProjectedCostsV1Request(server string, pricingId PricingIdPath
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -22073,6 +23612,7 @@ func NewGetMonitorEventsV1Request(server string, params *GetMonitorEventsV1Param
 		queryValues := queryURL.Query()
 
 		if params.From != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "from", runtime.ParamLocationQuery, *params.From); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -22084,9 +23624,11 @@ func NewGetMonitorEventsV1Request(server string, params *GetMonitorEventsV1Param
 					}
 				}
 			}
+
 		}
 
 		if params.To != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "to", runtime.ParamLocationQuery, *params.To); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -22098,9 +23640,11 @@ func NewGetMonitorEventsV1Request(server string, params *GetMonitorEventsV1Param
 					}
 				}
 			}
+
 		}
 
 		if params.Cursor != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cursor", runtime.ParamLocationQuery, *params.Cursor); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -22112,9 +23656,11 @@ func NewGetMonitorEventsV1Request(server string, params *GetMonitorEventsV1Param
 					}
 				}
 			}
+
 		}
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -22126,9 +23672,11 @@ func NewGetMonitorEventsV1Request(server string, params *GetMonitorEventsV1Param
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -22140,6 +23688,7 @@ func NewGetMonitorEventsV1Request(server string, params *GetMonitorEventsV1Param
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -22176,6 +23725,7 @@ func NewGetDisabledMetricsByJobV1Request(server string, params *GetDisabledMetri
 		queryValues := queryURL.Query()
 
 		if params.JobName != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "jobName", runtime.ParamLocationQuery, *params.JobName); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -22187,9 +23737,11 @@ func NewGetDisabledMetricsByJobV1Request(server string, params *GetDisabledMetri
 					}
 				}
 			}
+
 		}
 
 		if params.MetricName != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "metricName", runtime.ParamLocationQuery, *params.MetricName); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -22201,6 +23753,7 @@ func NewGetDisabledMetricsByJobV1Request(server string, params *GetDisabledMetri
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -22277,6 +23830,7 @@ func NewGetCustomPrometheusJobsV1Request(server string, params *GetCustomPrometh
 		queryValues := queryURL.Query()
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -22288,9 +23842,11 @@ func NewGetCustomPrometheusJobsV1Request(server string, params *GetCustomPrometh
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -22302,6 +23858,7 @@ func NewGetCustomPrometheusJobsV1Request(server string, params *GetCustomPrometh
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -22559,6 +24116,7 @@ func NewGetJiraIntegrationsV1Request(server string, params *GetJiraIntegrationsV
 		queryValues := queryURL.Query()
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -22570,9 +24128,11 @@ func NewGetJiraIntegrationsV1Request(server string, params *GetJiraIntegrationsV
 					}
 				}
 			}
+
 		}
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -22584,9 +24144,11 @@ func NewGetJiraIntegrationsV1Request(server string, params *GetJiraIntegrationsV
 					}
 				}
 			}
+
 		}
 
 		if params.Enabled != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "enabled", runtime.ParamLocationQuery, *params.Enabled); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -22598,6 +24160,7 @@ func NewGetJiraIntegrationsV1Request(server string, params *GetJiraIntegrationsV
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -23018,6 +24581,7 @@ func NewListJobsV1Request(server string, params *ListJobsV1Params) (*http.Reques
 		}
 
 		if params.ReportId != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "reportId", runtime.ParamLocationQuery, *params.ReportId); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -23029,9 +24593,11 @@ func NewListJobsV1Request(server string, params *ListJobsV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		if params.IsReportTemplate != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "isReportTemplate", runtime.ParamLocationQuery, *params.IsReportTemplate); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -23043,9 +24609,11 @@ func NewListJobsV1Request(server string, params *ListJobsV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		if params.CompletedOn != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "completedOn", runtime.ParamLocationQuery, *params.CompletedOn); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -23057,9 +24625,11 @@ func NewListJobsV1Request(server string, params *ListJobsV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		if params.JobType != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "jobType", runtime.ParamLocationQuery, *params.JobType); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -23071,9 +24641,11 @@ func NewListJobsV1Request(server string, params *ListJobsV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		if params.Status != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "status", runtime.ParamLocationQuery, *params.Status); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -23085,9 +24657,11 @@ func NewListJobsV1Request(server string, params *ListJobsV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		if params.Kind != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "kind", runtime.ParamLocationQuery, *params.Kind); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -23099,9 +24673,11 @@ func NewListJobsV1Request(server string, params *ListJobsV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		if params.Policies != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "policies", runtime.ParamLocationQuery, *params.Policies); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -23113,9 +24689,11 @@ func NewListJobsV1Request(server string, params *ListJobsV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		if params.Zones != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "zones", runtime.ParamLocationQuery, *params.Zones); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -23127,6 +24705,7 @@ func NewListJobsV1Request(server string, params *ListJobsV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -23190,6 +24769,7 @@ func NewGetAccessKeysV1Request(server string, params *GetAccessKeysV1Params) (*h
 		queryValues := queryURL.Query()
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -23201,9 +24781,11 @@ func NewGetAccessKeysV1Request(server string, params *GetAccessKeysV1Params) (*h
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -23215,9 +24797,11 @@ func NewGetAccessKeysV1Request(server string, params *GetAccessKeysV1Params) (*h
 					}
 				}
 			}
+
 		}
 
 		if params.Orderby != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "orderby", runtime.ParamLocationQuery, *params.Orderby); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -23229,9 +24813,11 @@ func NewGetAccessKeysV1Request(server string, params *GetAccessKeysV1Params) (*h
 					}
 				}
 			}
+
 		}
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -23243,6 +24829,7 @@ func NewGetAccessKeysV1Request(server string, params *GetAccessKeysV1Params) (*h
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -23683,6 +25270,7 @@ func NewGetGroupMappingsV1Request(server string, params *GetGroupMappingsV1Param
 		queryValues := queryURL.Query()
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -23694,9 +25282,11 @@ func NewGetGroupMappingsV1Request(server string, params *GetGroupMappingsV1Param
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -23708,9 +25298,11 @@ func NewGetGroupMappingsV1Request(server string, params *GetGroupMappingsV1Param
 					}
 				}
 			}
+
 		}
 
 		if params.Orderby != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "orderby", runtime.ParamLocationQuery, *params.Orderby); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -23722,9 +25314,11 @@ func NewGetGroupMappingsV1Request(server string, params *GetGroupMappingsV1Param
 					}
 				}
 			}
+
 		}
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -23736,6 +25330,7 @@ func NewGetGroupMappingsV1Request(server string, params *GetGroupMappingsV1Param
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -23994,6 +25589,7 @@ func NewGetIpFiltersV1Request(server string, params *GetIpFiltersV1Params) (*htt
 		queryValues := queryURL.Query()
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24005,9 +25601,11 @@ func NewGetIpFiltersV1Request(server string, params *GetIpFiltersV1Params) (*htt
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24019,9 +25617,11 @@ func NewGetIpFiltersV1Request(server string, params *GetIpFiltersV1Params) (*htt
 					}
 				}
 			}
+
 		}
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24033,6 +25633,7 @@ func NewGetIpFiltersV1Request(server string, params *GetIpFiltersV1Params) (*htt
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -24291,6 +25892,7 @@ func NewGetNotificationChannelsRequest(server string, params *GetNotificationCha
 		queryValues := queryURL.Query()
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24302,9 +25904,11 @@ func NewGetNotificationChannelsRequest(server string, params *GetNotificationCha
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24316,6 +25920,7 @@ func NewGetNotificationChannelsRequest(server string, params *GetNotificationCha
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -24507,6 +26112,7 @@ func NewGetPermissionsV1Request(server string, params *GetPermissionsV1Params) (
 		queryValues := queryURL.Query()
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24518,6 +26124,7 @@ func NewGetPermissionsV1Request(server string, params *GetPermissionsV1Params) (
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -24554,6 +26161,7 @@ func NewGetPlatformAuditEventsV1Request(server string, params *GetPlatformAuditE
 		queryValues := queryURL.Query()
 
 		if params.From != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "from", runtime.ParamLocationQuery, *params.From); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24565,9 +26173,11 @@ func NewGetPlatformAuditEventsV1Request(server string, params *GetPlatformAuditE
 					}
 				}
 			}
+
 		}
 
 		if params.To != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "to", runtime.ParamLocationQuery, *params.To); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24579,9 +26189,11 @@ func NewGetPlatformAuditEventsV1Request(server string, params *GetPlatformAuditE
 					}
 				}
 			}
+
 		}
 
 		if params.Cursor != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cursor", runtime.ParamLocationQuery, *params.Cursor); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24593,9 +26205,11 @@ func NewGetPlatformAuditEventsV1Request(server string, params *GetPlatformAuditE
 					}
 				}
 			}
+
 		}
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24607,9 +26221,11 @@ func NewGetPlatformAuditEventsV1Request(server string, params *GetPlatformAuditE
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24621,6 +26237,7 @@ func NewGetPlatformAuditEventsV1Request(server string, params *GetPlatformAuditE
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -24657,6 +26274,7 @@ func NewGetRolesV1Request(server string, params *GetRolesV1Params) (*http.Reques
 		queryValues := queryURL.Query()
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24668,9 +26286,11 @@ func NewGetRolesV1Request(server string, params *GetRolesV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24682,9 +26302,11 @@ func NewGetRolesV1Request(server string, params *GetRolesV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		if params.Orderby != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "orderby", runtime.ParamLocationQuery, *params.Orderby); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24696,9 +26318,11 @@ func NewGetRolesV1Request(server string, params *GetRolesV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24710,6 +26334,7 @@ func NewGetRolesV1Request(server string, params *GetRolesV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -24901,6 +26526,7 @@ func NewGetGlobalServiceAccountsV1Request(server string, params *GetGlobalServic
 		queryValues := queryURL.Query()
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24912,9 +26538,11 @@ func NewGetGlobalServiceAccountsV1Request(server string, params *GetGlobalServic
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24926,9 +26554,11 @@ func NewGetGlobalServiceAccountsV1Request(server string, params *GetGlobalServic
 					}
 				}
 			}
+
 		}
 
 		if params.Orderby != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "orderby", runtime.ParamLocationQuery, *params.Orderby); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24940,9 +26570,11 @@ func NewGetGlobalServiceAccountsV1Request(server string, params *GetGlobalServic
 					}
 				}
 			}
+
 		}
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -24954,6 +26586,7 @@ func NewGetGlobalServiceAccountsV1Request(server string, params *GetGlobalServic
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -25232,6 +26865,7 @@ func NewGetSsoSettingsV1Request(server string, params *GetSsoSettingsV1Params) (
 		queryValues := queryURL.Query()
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -25243,6 +26877,7 @@ func NewGetSsoSettingsV1Request(server string, params *GetSsoSettingsV1Params) (
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -25434,6 +27069,7 @@ func NewGetTeamsV1Request(server string, params *GetTeamsV1Params) (*http.Reques
 		queryValues := queryURL.Query()
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -25445,9 +27081,11 @@ func NewGetTeamsV1Request(server string, params *GetTeamsV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -25459,9 +27097,11 @@ func NewGetTeamsV1Request(server string, params *GetTeamsV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		if params.Orderby != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "orderby", runtime.ParamLocationQuery, *params.Orderby); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -25473,9 +27113,11 @@ func NewGetTeamsV1Request(server string, params *GetTeamsV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -25487,6 +27129,7 @@ func NewGetTeamsV1Request(server string, params *GetTeamsV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -25685,6 +27328,7 @@ func NewGetTeamServiceAccountsV1Request(server string, teamId TeamIdPath, params
 		queryValues := queryURL.Query()
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -25696,9 +27340,11 @@ func NewGetTeamServiceAccountsV1Request(server string, teamId TeamIdPath, params
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -25710,9 +27356,11 @@ func NewGetTeamServiceAccountsV1Request(server string, teamId TeamIdPath, params
 					}
 				}
 			}
+
 		}
 
 		if params.Orderby != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "orderby", runtime.ParamLocationQuery, *params.Orderby); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -25724,9 +27372,11 @@ func NewGetTeamServiceAccountsV1Request(server string, teamId TeamIdPath, params
 					}
 				}
 			}
+
 		}
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -25738,6 +27388,7 @@ func NewGetTeamServiceAccountsV1Request(server string, teamId TeamIdPath, params
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -26072,6 +27723,7 @@ func NewGetTeamUsersV1Request(server string, teamId TeamIdPath, params *GetTeamU
 		queryValues := queryURL.Query()
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26083,9 +27735,11 @@ func NewGetTeamUsersV1Request(server string, teamId TeamIdPath, params *GetTeamU
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26097,9 +27751,11 @@ func NewGetTeamUsersV1Request(server string, teamId TeamIdPath, params *GetTeamU
 					}
 				}
 			}
+
 		}
 
 		if params.WithAdminUsers != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "withAdminUsers", runtime.ParamLocationQuery, *params.WithAdminUsers); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26111,6 +27767,7 @@ func NewGetTeamUsersV1Request(server string, teamId TeamIdPath, params *GetTeamU
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -26283,6 +27940,7 @@ func NewGetUsersV1Request(server string, params *GetUsersV1Params) (*http.Reques
 		queryValues := queryURL.Query()
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26294,9 +27952,11 @@ func NewGetUsersV1Request(server string, params *GetUsersV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26308,9 +27968,11 @@ func NewGetUsersV1Request(server string, params *GetUsersV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		if params.Orderby != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "orderby", runtime.ParamLocationQuery, *params.Orderby); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26322,9 +27984,11 @@ func NewGetUsersV1Request(server string, params *GetUsersV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26336,6 +28000,7 @@ func NewGetUsersV1Request(server string, params *GetUsersV1Params) (*http.Reques
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -26383,6 +28048,7 @@ func NewCreateUserV1RequestWithBody(server string, params *CreateUserV1Params, c
 		queryValues := queryURL.Query()
 
 		if params.ActivationFlow != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "activationFlow", runtime.ParamLocationQuery, *params.ActivationFlow); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26394,6 +28060,7 @@ func NewCreateUserV1RequestWithBody(server string, params *CreateUserV1Params, c
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -26547,6 +28214,7 @@ func NewListZonesV1Request(server string, params *ListZonesV1Params) (*http.Requ
 		queryValues := queryURL.Query()
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26558,9 +28226,11 @@ func NewListZonesV1Request(server string, params *ListZonesV1Params) (*http.Requ
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26572,9 +28242,11 @@ func NewListZonesV1Request(server string, params *ListZonesV1Params) (*http.Requ
 					}
 				}
 			}
+
 		}
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26586,9 +28258,11 @@ func NewListZonesV1Request(server string, params *ListZonesV1Params) (*http.Requ
 					}
 				}
 			}
+
 		}
 
 		if params.Orderby != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "orderby", runtime.ParamLocationQuery, *params.Orderby); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26600,6 +28274,7 @@ func NewListZonesV1Request(server string, params *ListZonesV1Params) (*http.Requ
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -26768,6 +28443,1821 @@ func NewEditZoneV1RequestWithBody(server string, zoneId ZoneId, contentType stri
 	return req, nil
 }
 
+// NewGetAlertManagersV1Request generates requests for GetAlertManagersV1
+func NewGetAlertManagersV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1//alertmanagers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetAdminTsdbCleanTombstonesV1Request generates requests for GetAdminTsdbCleanTombstonesV1
+func NewGetAdminTsdbCleanTombstonesV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/admin/tsdb/clean_tombstones")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPostAdminTsdbCleanTombstonesV1Request generates requests for PostAdminTsdbCleanTombstonesV1
+func NewPostAdminTsdbCleanTombstonesV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/admin/tsdb/clean_tombstones")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetAdminTsdbDeleteSeriesV1Request generates requests for GetAdminTsdbDeleteSeriesV1
+func NewGetAdminTsdbDeleteSeriesV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/admin/tsdb/delete_series")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPostAdminTsdbDeleteSeriesV1Request generates requests for PostAdminTsdbDeleteSeriesV1
+func NewPostAdminTsdbDeleteSeriesV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/admin/tsdb/delete_series")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetAdminTsdbSnapshotV1Request generates requests for GetAdminTsdbSnapshotV1
+func NewGetAdminTsdbSnapshotV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/admin/tsdb/snapshot")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPostAdminTsdbSnapshotV1Request generates requests for PostAdminTsdbSnapshotV1
+func NewPostAdminTsdbSnapshotV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/admin/tsdb/snapshot")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetAlertsV1Request generates requests for GetAlertsV1
+func NewGetAlertsV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/alerts")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetFormatQueryV1Request generates requests for GetFormatQueryV1
+func NewGetFormatQueryV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/format_query")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPostFormatQueryV1Request generates requests for PostFormatQueryV1
+func NewPostFormatQueryV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/format_query")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetLabelValuesV1Request generates requests for GetLabelValuesV1
+func NewGetLabelValuesV1Request(server string, labelName LabelNamePath, params *GetLabelValuesV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "labelName", runtime.ParamLocationPath, labelName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/label/%s/values", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Start != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "start", runtime.ParamLocationQuery, *params.Start); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.End != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "end", runtime.ParamLocationQuery, *params.End); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Match != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "match[]", runtime.ParamLocationQuery, *params.Match); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetLabelsV1Request generates requests for GetLabelsV1
+func NewGetLabelsV1Request(server string, params *GetLabelsV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/labels")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Start != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "start", runtime.ParamLocationQuery, *params.Start); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.End != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "end", runtime.ParamLocationQuery, *params.End); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Match != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "match[]", runtime.ParamLocationQuery, *params.Match); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPostLabelsV1Request generates requests for PostLabelsV1
+func NewPostLabelsV1Request(server string, params *PostLabelsV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/labels")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Start != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "start", runtime.ParamLocationQuery, *params.Start); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.End != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "end", runtime.ParamLocationQuery, *params.End); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Match != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "match[]", runtime.ParamLocationQuery, *params.Match); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetMetadataV1Request generates requests for GetMetadataV1
+func NewGetMetadataV1Request(server string, params *GetMetadataV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/metadata")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.LimitPerMetric != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit_per_metric", runtime.ParamLocationQuery, *params.LimitPerMetric); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Metric != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "metric", runtime.ParamLocationQuery, *params.Metric); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetNotificationsV1Request generates requests for GetNotificationsV1
+func NewGetNotificationsV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/notifications")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetLiveNotificationsV1Request generates requests for GetLiveNotificationsV1
+func NewGetLiveNotificationsV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/notifications/live")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetParseQueryV1Request generates requests for GetParseQueryV1
+func NewGetParseQueryV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/parse_query")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPostParseQueryV1Request generates requests for PostParseQueryV1
+func NewPostParseQueryV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/parse_query")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetQueryV1Request generates requests for GetQueryV1
+func NewGetQueryV1Request(server string, params *GetQueryV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/query")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Time != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "time", runtime.ParamLocationQuery, *params.Time); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Timeout != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "timeout", runtime.ParamLocationQuery, *params.Timeout); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPostQueryV1Request generates requests for PostQueryV1
+func NewPostQueryV1Request(server string, params *PostQueryV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/query")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Time != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "time", runtime.ParamLocationQuery, *params.Time); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Timeout != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "timeout", runtime.ParamLocationQuery, *params.Timeout); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetExemplarsV1Request generates requests for GetExemplarsV1
+func NewGetExemplarsV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/query_exemplars")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPostExemplarsV1Request generates requests for PostExemplarsV1
+func NewPostExemplarsV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/query_exemplars")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetQueryRangeV1Request generates requests for GetQueryRangeV1
+func NewGetQueryRangeV1Request(server string, params *GetQueryRangeV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/query_range")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "start", runtime.ParamLocationQuery, params.Start); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "end", runtime.ParamLocationQuery, params.End); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "step", runtime.ParamLocationQuery, params.Step); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Timeout != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "timeout", runtime.ParamLocationQuery, *params.Timeout); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPostQueryRangeV1Request generates requests for PostQueryRangeV1
+func NewPostQueryRangeV1Request(server string, params *PostQueryRangeV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/query_range")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "start", runtime.ParamLocationQuery, params.Start); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "end", runtime.ParamLocationQuery, params.End); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "step", runtime.ParamLocationQuery, params.Step); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Timeout != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "timeout", runtime.ParamLocationQuery, *params.Timeout); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetRulesV1Request generates requests for GetRulesV1
+func NewGetRulesV1Request(server string, params *GetRulesV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/rules")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Type != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "type", runtime.ParamLocationQuery, *params.Type); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.RuleName != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rule_name[]", runtime.ParamLocationQuery, *params.RuleName); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.RuleGroup != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rule_group[]", runtime.ParamLocationQuery, *params.RuleGroup); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.File != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "file[]", runtime.ParamLocationQuery, *params.File); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.ExcludeAlerts != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "exclude_alerts", runtime.ParamLocationQuery, *params.ExcludeAlerts); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Match != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "match[]", runtime.ParamLocationQuery, *params.Match); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.GroupLimit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "group_limit", runtime.ParamLocationQuery, *params.GroupLimit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.GroupNextToken != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "group_next_token", runtime.ParamLocationQuery, *params.GroupNextToken); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetSeriesV1Request generates requests for GetSeriesV1
+func NewGetSeriesV1Request(server string, params *GetSeriesV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/series")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "match[]", runtime.ParamLocationQuery, params.Match); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Start != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "start", runtime.ParamLocationQuery, *params.Start); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.End != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "end", runtime.ParamLocationQuery, *params.End); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPostSeriesV1Request generates requests for PostSeriesV1
+func NewPostSeriesV1Request(server string, params *PostSeriesV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/series")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "match[]", runtime.ParamLocationQuery, params.Match); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Start != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "start", runtime.ParamLocationQuery, *params.Start); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.End != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "end", runtime.ParamLocationQuery, *params.End); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetStatusBuildInfoV1Request generates requests for GetStatusBuildInfoV1
+func NewGetStatusBuildInfoV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/status/buildinfo")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetStatusConfigV1Request generates requests for GetStatusConfigV1
+func NewGetStatusConfigV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/status/config")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetStatusFlagsV1Request generates requests for GetStatusFlagsV1
+func NewGetStatusFlagsV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/status/flags")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetStatusRuntimeInfoV1Request generates requests for GetStatusRuntimeInfoV1
+func NewGetStatusRuntimeInfoV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/status/runtimeinfo")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetStatusTsdbV1Request generates requests for GetStatusTsdbV1
+func NewGetStatusTsdbV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/status/tsdb")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetStatusWalReplayV1Request generates requests for GetStatusWalReplayV1
+func NewGetStatusWalReplayV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/status/walreplay")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetTargetsV1Request generates requests for GetTargetsV1
+func NewGetTargetsV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/targets")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetTargetsMetadataV1Request generates requests for GetTargetsMetadataV1
+func NewGetTargetsMetadataV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/targets/metadata")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoteWriteV1RequestWithBody generates requests for RemoteWriteV1 with any type of body
+func NewRemoteWriteV1RequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/prometheus/api/v1/write")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewGetActivityAuditEntriesV1Request generates requests for GetActivityAuditEntriesV1
 func NewGetActivityAuditEntriesV1Request(server string, params *GetActivityAuditEntriesV1Params) (*http.Request, error) {
 	var err error
@@ -26791,6 +30281,7 @@ func NewGetActivityAuditEntriesV1Request(server string, params *GetActivityAudit
 		queryValues := queryURL.Query()
 
 		if params.From != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "from", runtime.ParamLocationQuery, *params.From); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26802,9 +30293,11 @@ func NewGetActivityAuditEntriesV1Request(server string, params *GetActivityAudit
 					}
 				}
 			}
+
 		}
 
 		if params.To != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "to", runtime.ParamLocationQuery, *params.To); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26816,9 +30309,11 @@ func NewGetActivityAuditEntriesV1Request(server string, params *GetActivityAudit
 					}
 				}
 			}
+
 		}
 
 		if params.Cursor != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cursor", runtime.ParamLocationQuery, *params.Cursor); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26830,9 +30325,11 @@ func NewGetActivityAuditEntriesV1Request(server string, params *GetActivityAudit
 					}
 				}
 			}
+
 		}
 
 		if params.Zones != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "zones", runtime.ParamLocationQuery, *params.Zones); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26844,9 +30341,11 @@ func NewGetActivityAuditEntriesV1Request(server string, params *GetActivityAudit
 					}
 				}
 			}
+
 		}
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26858,9 +30357,11 @@ func NewGetActivityAuditEntriesV1Request(server string, params *GetActivityAudit
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26872,9 +30373,11 @@ func NewGetActivityAuditEntriesV1Request(server string, params *GetActivityAudit
 					}
 				}
 			}
+
 		}
 
 		if params.Types != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "types", runtime.ParamLocationQuery, *params.Types); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -26886,6 +30389,7 @@ func NewGetActivityAuditEntriesV1Request(server string, params *GetActivityAudit
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -27676,6 +31180,7 @@ func NewGetEventsV1Request(server string, params *GetEventsV1Params) (*http.Requ
 		queryValues := queryURL.Query()
 
 		if params.From != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "from", runtime.ParamLocationQuery, *params.From); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -27687,9 +31192,11 @@ func NewGetEventsV1Request(server string, params *GetEventsV1Params) (*http.Requ
 					}
 				}
 			}
+
 		}
 
 		if params.To != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "to", runtime.ParamLocationQuery, *params.To); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -27701,9 +31208,11 @@ func NewGetEventsV1Request(server string, params *GetEventsV1Params) (*http.Requ
 					}
 				}
 			}
+
 		}
 
 		if params.Cursor != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cursor", runtime.ParamLocationQuery, *params.Cursor); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -27715,9 +31224,11 @@ func NewGetEventsV1Request(server string, params *GetEventsV1Params) (*http.Requ
 					}
 				}
 			}
+
 		}
 
 		if params.Zones != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "zones", runtime.ParamLocationQuery, *params.Zones); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -27729,9 +31240,11 @@ func NewGetEventsV1Request(server string, params *GetEventsV1Params) (*http.Requ
 					}
 				}
 			}
+
 		}
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -27743,9 +31256,11 @@ func NewGetEventsV1Request(server string, params *GetEventsV1Params) (*http.Requ
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -27757,6 +31272,7 @@ func NewGetEventsV1Request(server string, params *GetEventsV1Params) (*http.Requ
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -27854,6 +31370,7 @@ func NewGetResourcesRequest(server string, params *GetResourcesParams) (*http.Re
 		queryValues := queryURL.Query()
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -27865,9 +31382,11 @@ func NewGetResourcesRequest(server string, params *GetResourcesParams) (*http.Re
 					}
 				}
 			}
+
 		}
 
 		if params.PageNumber != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "pageNumber", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -27879,9 +31398,11 @@ func NewGetResourcesRequest(server string, params *GetResourcesParams) (*http.Re
 					}
 				}
 			}
+
 		}
 
 		if params.PageSize != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "pageSize", runtime.ParamLocationQuery, *params.PageSize); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -27893,9 +31414,11 @@ func NewGetResourcesRequest(server string, params *GetResourcesParams) (*http.Re
 					}
 				}
 			}
+
 		}
 
 		if params.WithEnrichedContainers != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "withEnrichedContainers", runtime.ParamLocationQuery, *params.WithEnrichedContainers); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -27907,6 +31430,7 @@ func NewGetResourcesRequest(server string, params *GetResourcesParams) (*http.Re
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -27977,6 +31501,7 @@ func NewGetActionExecutionsv1Request(server string, params *GetActionExecutionsv
 		queryValues := queryURL.Query()
 
 		if params.CallerId != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "callerId", runtime.ParamLocationQuery, *params.CallerId); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -27988,9 +31513,11 @@ func NewGetActionExecutionsv1Request(server string, params *GetActionExecutionsv
 					}
 				}
 			}
+
 		}
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28002,9 +31529,11 @@ func NewGetActionExecutionsv1Request(server string, params *GetActionExecutionsv
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28016,9 +31545,11 @@ func NewGetActionExecutionsv1Request(server string, params *GetActionExecutionsv
 					}
 				}
 			}
+
 		}
 
 		if params.Offset != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28030,9 +31561,11 @@ func NewGetActionExecutionsv1Request(server string, params *GetActionExecutionsv
 					}
 				}
 			}
+
 		}
 
 		if params.From != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "from", runtime.ParamLocationQuery, *params.From); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28044,9 +31577,11 @@ func NewGetActionExecutionsv1Request(server string, params *GetActionExecutionsv
 					}
 				}
 			}
+
 		}
 
 		if params.To != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "to", runtime.ParamLocationQuery, *params.To); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28058,6 +31593,7 @@ func NewGetActionExecutionsv1Request(server string, params *GetActionExecutionsv
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -28141,6 +31677,7 @@ func NewUndoActionExecutionV1Request(server string, actionExecutionId ActionExec
 		queryValues := queryURL.Query()
 
 		if params.CallerId != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "callerId", runtime.ParamLocationQuery, *params.CallerId); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28152,6 +31689,7 @@ func NewUndoActionExecutionV1Request(server string, actionExecutionId ActionExec
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -28256,6 +31794,7 @@ func NewGetActionsV1Request(server string, params *GetActionsV1Params) (*http.Re
 		queryValues := queryURL.Query()
 
 		if params.Context != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "context", runtime.ParamLocationQuery, *params.Context); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28267,6 +31806,7 @@ func NewGetActionsV1Request(server string, params *GetActionsV1Params) (*http.Re
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -28303,6 +31843,7 @@ func NewGetSecureVulnerabilityV1BundlesRequest(server string, params *GetSecureV
 		queryValues := queryURL.Query()
 
 		if params.Cursor != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cursor", runtime.ParamLocationQuery, *params.Cursor); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28314,9 +31855,11 @@ func NewGetSecureVulnerabilityV1BundlesRequest(server string, params *GetSecureV
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28328,6 +31871,7 @@ func NewGetSecureVulnerabilityV1BundlesRequest(server string, params *GetSecureV
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -28519,6 +32063,7 @@ func NewGetSecureVulnerabilityV1PipelineResultsRequest(server string, params *Ge
 		queryValues := queryURL.Query()
 
 		if params.Cursor != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cursor", runtime.ParamLocationQuery, *params.Cursor); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28530,9 +32075,11 @@ func NewGetSecureVulnerabilityV1PipelineResultsRequest(server string, params *Ge
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28544,9 +32091,11 @@ func NewGetSecureVulnerabilityV1PipelineResultsRequest(server string, params *Ge
 					}
 				}
 			}
+
 		}
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28558,6 +32107,7 @@ func NewGetSecureVulnerabilityV1PipelineResultsRequest(server string, params *Ge
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -28594,6 +32144,7 @@ func NewGetSecureVulnerabilityV1PoliciesRequest(server string, params *GetSecure
 		queryValues := queryURL.Query()
 
 		if params.Cursor != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cursor", runtime.ParamLocationQuery, *params.Cursor); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28605,9 +32156,11 @@ func NewGetSecureVulnerabilityV1PoliciesRequest(server string, params *GetSecure
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28619,9 +32172,11 @@ func NewGetSecureVulnerabilityV1PoliciesRequest(server string, params *GetSecure
 					}
 				}
 			}
+
 		}
 
 		if params.Name != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, *params.Name); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28633,9 +32188,11 @@ func NewGetSecureVulnerabilityV1PoliciesRequest(server string, params *GetSecure
 					}
 				}
 			}
+
 		}
 
 		if params.Stages != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "stages", runtime.ParamLocationQuery, *params.Stages); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28647,6 +32204,7 @@ func NewGetSecureVulnerabilityV1PoliciesRequest(server string, params *GetSecure
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -28838,6 +32396,7 @@ func NewScannerAPIServiceListRegistryResultsRequest(server string, params *Scann
 		queryValues := queryURL.Query()
 
 		if params.Cursor != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cursor", runtime.ParamLocationQuery, *params.Cursor); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28849,9 +32408,11 @@ func NewScannerAPIServiceListRegistryResultsRequest(server string, params *Scann
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28863,9 +32424,11 @@ func NewScannerAPIServiceListRegistryResultsRequest(server string, params *Scann
 					}
 				}
 			}
+
 		}
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28877,6 +32440,7 @@ func NewScannerAPIServiceListRegistryResultsRequest(server string, params *Scann
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -28947,6 +32511,7 @@ func NewScannerAPIServiceListRuntimeResultsRequest(server string, params *Scanne
 		queryValues := queryURL.Query()
 
 		if params.Cursor != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cursor", runtime.ParamLocationQuery, *params.Cursor); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28958,9 +32523,11 @@ func NewScannerAPIServiceListRuntimeResultsRequest(server string, params *Scanne
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28972,9 +32539,11 @@ func NewScannerAPIServiceListRuntimeResultsRequest(server string, params *Scanne
 					}
 				}
 			}
+
 		}
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -28986,9 +32555,11 @@ func NewScannerAPIServiceListRuntimeResultsRequest(server string, params *Scanne
 					}
 				}
 			}
+
 		}
 
 		if params.Sort != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -29000,9 +32571,11 @@ func NewScannerAPIServiceListRuntimeResultsRequest(server string, params *Scanne
 					}
 				}
 			}
+
 		}
 
 		if params.Order != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "order", runtime.ParamLocationQuery, *params.Order); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -29014,6 +32587,7 @@ func NewScannerAPIServiceListRuntimeResultsRequest(server string, params *Scanne
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -29050,6 +32624,7 @@ func NewGetAcceptedRisksV1Request(server string, params *GetAcceptedRisksV1Param
 		queryValues := queryURL.Query()
 
 		if params.Filter != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -29061,9 +32636,11 @@ func NewGetAcceptedRisksV1Request(server string, params *GetAcceptedRisksV1Param
 					}
 				}
 			}
+
 		}
 
 		if params.Order != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "order", runtime.ParamLocationQuery, *params.Order); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -29075,9 +32652,11 @@ func NewGetAcceptedRisksV1Request(server string, params *GetAcceptedRisksV1Param
 					}
 				}
 			}
+
 		}
 
 		if params.Cursor != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cursor", runtime.ParamLocationQuery, *params.Cursor); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -29089,9 +32668,11 @@ func NewGetAcceptedRisksV1Request(server string, params *GetAcceptedRisksV1Param
 					}
 				}
 			}
+
 		}
 
 		if params.Limit != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -29103,9 +32684,11 @@ func NewGetAcceptedRisksV1Request(server string, params *GetAcceptedRisksV1Param
 					}
 				}
 			}
+
 		}
 
 		if params.Sort != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -29117,6 +32700,7 @@ func NewGetAcceptedRisksV1Request(server string, params *GetAcceptedRisksV1Param
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -29308,6 +32892,7 @@ func NewGetSBOMV1beta1Request(server string, params *GetSBOMV1beta1Params) (*htt
 		queryValues := queryURL.Query()
 
 		if params.AssetId != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "assetId", runtime.ParamLocationQuery, *params.AssetId); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -29319,9 +32904,11 @@ func NewGetSBOMV1beta1Request(server string, params *GetSBOMV1beta1Params) (*htt
 					}
 				}
 			}
+
 		}
 
 		if params.AssetType != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "assetType", runtime.ParamLocationQuery, *params.AssetType); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -29333,9 +32920,11 @@ func NewGetSBOMV1beta1Request(server string, params *GetSBOMV1beta1Params) (*htt
 					}
 				}
 			}
+
 		}
 
 		if params.BomIdentifier != nil {
+
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "bomIdentifier", runtime.ParamLocationQuery, *params.BomIdentifier); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -29347,6 +32936,7 @@ func NewGetSBOMV1beta1Request(server string, params *GetSBOMV1beta1Params) (*htt
 					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -29841,6 +33431,114 @@ type ClientWithResponsesInterface interface {
 	EditZoneV1WithBodyWithResponse(ctx context.Context, zoneId ZoneId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EditZoneV1Response, error)
 
 	EditZoneV1WithResponse(ctx context.Context, zoneId ZoneId, body EditZoneV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EditZoneV1Response, error)
+
+	// GetAlertManagersV1WithResponse request
+	GetAlertManagersV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetAlertManagersV1Response, error)
+
+	// GetAdminTsdbCleanTombstonesV1WithResponse request
+	GetAdminTsdbCleanTombstonesV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetAdminTsdbCleanTombstonesV1Response, error)
+
+	// PostAdminTsdbCleanTombstonesV1WithResponse request
+	PostAdminTsdbCleanTombstonesV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostAdminTsdbCleanTombstonesV1Response, error)
+
+	// GetAdminTsdbDeleteSeriesV1WithResponse request
+	GetAdminTsdbDeleteSeriesV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetAdminTsdbDeleteSeriesV1Response, error)
+
+	// PostAdminTsdbDeleteSeriesV1WithResponse request
+	PostAdminTsdbDeleteSeriesV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostAdminTsdbDeleteSeriesV1Response, error)
+
+	// GetAdminTsdbSnapshotV1WithResponse request
+	GetAdminTsdbSnapshotV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetAdminTsdbSnapshotV1Response, error)
+
+	// PostAdminTsdbSnapshotV1WithResponse request
+	PostAdminTsdbSnapshotV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostAdminTsdbSnapshotV1Response, error)
+
+	// GetAlertsV1WithResponse request
+	GetAlertsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetAlertsV1Response, error)
+
+	// GetFormatQueryV1WithResponse request
+	GetFormatQueryV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetFormatQueryV1Response, error)
+
+	// PostFormatQueryV1WithResponse request
+	PostFormatQueryV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostFormatQueryV1Response, error)
+
+	// GetLabelValuesV1WithResponse request
+	GetLabelValuesV1WithResponse(ctx context.Context, labelName LabelNamePath, params *GetLabelValuesV1Params, reqEditors ...RequestEditorFn) (*GetLabelValuesV1Response, error)
+
+	// GetLabelsV1WithResponse request
+	GetLabelsV1WithResponse(ctx context.Context, params *GetLabelsV1Params, reqEditors ...RequestEditorFn) (*GetLabelsV1Response, error)
+
+	// PostLabelsV1WithResponse request
+	PostLabelsV1WithResponse(ctx context.Context, params *PostLabelsV1Params, reqEditors ...RequestEditorFn) (*PostLabelsV1Response, error)
+
+	// GetMetadataV1WithResponse request
+	GetMetadataV1WithResponse(ctx context.Context, params *GetMetadataV1Params, reqEditors ...RequestEditorFn) (*GetMetadataV1Response, error)
+
+	// GetNotificationsV1WithResponse request
+	GetNotificationsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetNotificationsV1Response, error)
+
+	// GetLiveNotificationsV1WithResponse request
+	GetLiveNotificationsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetLiveNotificationsV1Response, error)
+
+	// GetParseQueryV1WithResponse request
+	GetParseQueryV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetParseQueryV1Response, error)
+
+	// PostParseQueryV1WithResponse request
+	PostParseQueryV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostParseQueryV1Response, error)
+
+	// GetQueryV1WithResponse request
+	GetQueryV1WithResponse(ctx context.Context, params *GetQueryV1Params, reqEditors ...RequestEditorFn) (*GetQueryV1Response, error)
+
+	// PostQueryV1WithResponse request
+	PostQueryV1WithResponse(ctx context.Context, params *PostQueryV1Params, reqEditors ...RequestEditorFn) (*PostQueryV1Response, error)
+
+	// GetExemplarsV1WithResponse request
+	GetExemplarsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetExemplarsV1Response, error)
+
+	// PostExemplarsV1WithResponse request
+	PostExemplarsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostExemplarsV1Response, error)
+
+	// GetQueryRangeV1WithResponse request
+	GetQueryRangeV1WithResponse(ctx context.Context, params *GetQueryRangeV1Params, reqEditors ...RequestEditorFn) (*GetQueryRangeV1Response, error)
+
+	// PostQueryRangeV1WithResponse request
+	PostQueryRangeV1WithResponse(ctx context.Context, params *PostQueryRangeV1Params, reqEditors ...RequestEditorFn) (*PostQueryRangeV1Response, error)
+
+	// GetRulesV1WithResponse request
+	GetRulesV1WithResponse(ctx context.Context, params *GetRulesV1Params, reqEditors ...RequestEditorFn) (*GetRulesV1Response, error)
+
+	// GetSeriesV1WithResponse request
+	GetSeriesV1WithResponse(ctx context.Context, params *GetSeriesV1Params, reqEditors ...RequestEditorFn) (*GetSeriesV1Response, error)
+
+	// PostSeriesV1WithResponse request
+	PostSeriesV1WithResponse(ctx context.Context, params *PostSeriesV1Params, reqEditors ...RequestEditorFn) (*PostSeriesV1Response, error)
+
+	// GetStatusBuildInfoV1WithResponse request
+	GetStatusBuildInfoV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetStatusBuildInfoV1Response, error)
+
+	// GetStatusConfigV1WithResponse request
+	GetStatusConfigV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetStatusConfigV1Response, error)
+
+	// GetStatusFlagsV1WithResponse request
+	GetStatusFlagsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetStatusFlagsV1Response, error)
+
+	// GetStatusRuntimeInfoV1WithResponse request
+	GetStatusRuntimeInfoV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetStatusRuntimeInfoV1Response, error)
+
+	// GetStatusTsdbV1WithResponse request
+	GetStatusTsdbV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetStatusTsdbV1Response, error)
+
+	// GetStatusWalReplayV1WithResponse request
+	GetStatusWalReplayV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetStatusWalReplayV1Response, error)
+
+	// GetTargetsV1WithResponse request
+	GetTargetsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetTargetsV1Response, error)
+
+	// GetTargetsMetadataV1WithResponse request
+	GetTargetsMetadataV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetTargetsMetadataV1Response, error)
+
+	// RemoteWriteV1WithBodyWithResponse request with any body
+	RemoteWriteV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RemoteWriteV1Response, error)
 
 	// GetActivityAuditEntriesV1WithResponse request
 	GetActivityAuditEntriesV1WithResponse(ctx context.Context, params *GetActivityAuditEntriesV1Params, reqEditors ...RequestEditorFn) (*GetActivityAuditEntriesV1Response, error)
@@ -33268,6 +36966,866 @@ func (r EditZoneV1Response) StatusCode() int {
 	return 0
 }
 
+type GetAlertManagersV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAlertManagersV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAlertManagersV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetAdminTsdbCleanTombstonesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAdminTsdbCleanTombstonesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAdminTsdbCleanTombstonesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PostAdminTsdbCleanTombstonesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r PostAdminTsdbCleanTombstonesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PostAdminTsdbCleanTombstonesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetAdminTsdbDeleteSeriesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAdminTsdbDeleteSeriesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAdminTsdbDeleteSeriesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PostAdminTsdbDeleteSeriesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r PostAdminTsdbDeleteSeriesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PostAdminTsdbDeleteSeriesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetAdminTsdbSnapshotV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAdminTsdbSnapshotV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAdminTsdbSnapshotV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PostAdminTsdbSnapshotV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r PostAdminTsdbSnapshotV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PostAdminTsdbSnapshotV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetAlertsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *AlertsResponseV1
+	JSON400      *BadRequestPrometheus
+	JSON401      *UnauthorizedPrometheus
+	JSON404      *NotFoundPrometheus
+	JSON429      *TooManyRequests
+	JSON500      *InternalServerErrorPrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAlertsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAlertsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetFormatQueryV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetFormatQueryV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetFormatQueryV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PostFormatQueryV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r PostFormatQueryV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PostFormatQueryV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetLabelValuesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LabelValuesResponseV1
+	JSON400      *BadRequestPrometheus
+	JSON401      *UnauthorizedPrometheus
+	JSON404      *NotFoundPrometheus
+	JSON429      *TooManyRequests
+	JSON500      *InternalServerErrorPrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetLabelValuesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetLabelValuesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetLabelsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LabelsResponseV1
+	JSON400      *BadRequestPrometheus
+	JSON401      *UnauthorizedPrometheus
+	JSON404      *NotFoundPrometheus
+	JSON429      *TooManyRequests
+	JSON500      *InternalServerErrorPrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetLabelsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetLabelsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PostLabelsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LabelsResponseV1
+	JSON400      *BadRequestPrometheus
+	JSON401      *UnauthorizedPrometheus
+	JSON404      *NotFoundPrometheus
+	JSON429      *TooManyRequests
+	JSON500      *InternalServerErrorPrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r PostLabelsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PostLabelsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetMetadataV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *MetadataResponseV1
+	JSON400      *BadRequestPrometheus
+	JSON401      *UnauthorizedPrometheus
+	JSON404      *NotFoundPrometheus
+	JSON429      *TooManyRequests
+	JSON500      *InternalServerErrorPrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetMetadataV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetMetadataV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetNotificationsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetNotificationsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetNotificationsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetLiveNotificationsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetLiveNotificationsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetLiveNotificationsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetParseQueryV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetParseQueryV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetParseQueryV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PostParseQueryV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r PostParseQueryV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PostParseQueryV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetQueryV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *QueryResponseV1
+	JSON400      *BadRequestPrometheus
+	JSON401      *UnauthorizedPrometheus
+	JSON404      *NotFoundPrometheus
+	JSON429      *TooManyRequests
+	JSON500      *InternalServerErrorPrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetQueryV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetQueryV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PostQueryV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *QueryResponseV1
+	JSON400      *BadRequestPrometheus
+	JSON401      *UnauthorizedPrometheus
+	JSON404      *NotFoundPrometheus
+	JSON429      *TooManyRequests
+	JSON500      *InternalServerErrorPrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r PostQueryV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PostQueryV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetExemplarsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetExemplarsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetExemplarsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PostExemplarsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r PostExemplarsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PostExemplarsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetQueryRangeV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *QueryResponseV1
+	JSON400      *BadRequestPrometheus
+	JSON401      *UnauthorizedPrometheus
+	JSON404      *NotFoundPrometheus
+	JSON422      *UnprocessableEntityPrometheus
+	JSON429      *TooManyRequests
+	JSON500      *InternalServerErrorPrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetQueryRangeV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetQueryRangeV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PostQueryRangeV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *QueryResponseV1
+	JSON400      *BadRequestPrometheus
+	JSON401      *UnauthorizedPrometheus
+	JSON404      *NotFoundPrometheus
+	JSON422      *UnprocessableEntityPrometheus
+	JSON429      *TooManyRequests
+	JSON500      *InternalServerErrorPrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r PostQueryRangeV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PostQueryRangeV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetRulesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *RulesResponseV1
+	JSON400      *BadRequestPrometheus
+	JSON401      *UnauthorizedPrometheus
+	JSON404      *NotFoundPrometheus
+	JSON429      *TooManyRequests
+	JSON500      *InternalServerErrorPrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetRulesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetRulesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetSeriesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *SeriesResponseV1
+	JSON400      *BadRequestPrometheus
+	JSON401      *UnauthorizedPrometheus
+	JSON404      *NotFoundPrometheus
+	JSON422      *UnprocessableEntityPrometheus
+	JSON429      *TooManyRequests
+	JSON500      *InternalServerErrorPrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetSeriesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetSeriesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PostSeriesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *SeriesResponseV1
+	JSON400      *BadRequestPrometheus
+	JSON401      *UnauthorizedPrometheus
+	JSON404      *NotFoundPrometheus
+	JSON422      *UnprocessableEntityPrometheus
+	JSON429      *TooManyRequests
+	JSON500      *InternalServerErrorPrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r PostSeriesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PostSeriesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetStatusBuildInfoV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetStatusBuildInfoV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetStatusBuildInfoV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetStatusConfigV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetStatusConfigV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetStatusConfigV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetStatusFlagsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetStatusFlagsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetStatusFlagsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetStatusRuntimeInfoV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetStatusRuntimeInfoV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetStatusRuntimeInfoV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetStatusTsdbV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetStatusTsdbV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetStatusTsdbV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetStatusWalReplayV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetStatusWalReplayV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetStatusWalReplayV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetTargetsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetTargetsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetTargetsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetTargetsMetadataV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON410      *GonePrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r GetTargetsMetadataV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetTargetsMetadataV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoteWriteV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON400      *BadRequestPrometheus
+	JSON401      *UnauthorizedPrometheus
+	JSON404      *NotFoundPrometheus
+	JSON429      *TooManyRequests
+	JSON500      *InternalServerErrorPrometheus
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoteWriteV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoteWriteV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type GetActivityAuditEntriesV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -33392,10 +37950,8 @@ type UploadCertificateV1Response struct {
 	JSON429 *TooManyRequests
 	JSON500 *InternalServerError
 }
-type (
-	UploadCertificateV1400Message string
-	UploadCertificateV1400Type    string
-)
+type UploadCertificateV1400Message string
+type UploadCertificateV1400Type string
 
 // Status returns HTTPResponse.Status
 func (r UploadCertificateV1Response) Status() string {
@@ -34041,10 +38597,8 @@ type GetActionExecutionsv1Response struct {
 	JSON429 *TooManyRequests
 	JSON500 *InternalServerError
 }
-type (
-	GetActionExecutionsv1400Message string
-	GetActionExecutionsv1400Type    string
-)
+type GetActionExecutionsv1400Message string
+type GetActionExecutionsv1400Type string
 
 // Status returns HTTPResponse.Status
 func (r GetActionExecutionsv1Response) Status() string {
@@ -36158,6 +40712,330 @@ func (c *ClientWithResponses) EditZoneV1WithResponse(ctx context.Context, zoneId
 		return nil, err
 	}
 	return ParseEditZoneV1Response(rsp)
+}
+
+// GetAlertManagersV1WithResponse request returning *GetAlertManagersV1Response
+func (c *ClientWithResponses) GetAlertManagersV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetAlertManagersV1Response, error) {
+	rsp, err := c.GetAlertManagersV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAlertManagersV1Response(rsp)
+}
+
+// GetAdminTsdbCleanTombstonesV1WithResponse request returning *GetAdminTsdbCleanTombstonesV1Response
+func (c *ClientWithResponses) GetAdminTsdbCleanTombstonesV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetAdminTsdbCleanTombstonesV1Response, error) {
+	rsp, err := c.GetAdminTsdbCleanTombstonesV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAdminTsdbCleanTombstonesV1Response(rsp)
+}
+
+// PostAdminTsdbCleanTombstonesV1WithResponse request returning *PostAdminTsdbCleanTombstonesV1Response
+func (c *ClientWithResponses) PostAdminTsdbCleanTombstonesV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostAdminTsdbCleanTombstonesV1Response, error) {
+	rsp, err := c.PostAdminTsdbCleanTombstonesV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostAdminTsdbCleanTombstonesV1Response(rsp)
+}
+
+// GetAdminTsdbDeleteSeriesV1WithResponse request returning *GetAdminTsdbDeleteSeriesV1Response
+func (c *ClientWithResponses) GetAdminTsdbDeleteSeriesV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetAdminTsdbDeleteSeriesV1Response, error) {
+	rsp, err := c.GetAdminTsdbDeleteSeriesV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAdminTsdbDeleteSeriesV1Response(rsp)
+}
+
+// PostAdminTsdbDeleteSeriesV1WithResponse request returning *PostAdminTsdbDeleteSeriesV1Response
+func (c *ClientWithResponses) PostAdminTsdbDeleteSeriesV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostAdminTsdbDeleteSeriesV1Response, error) {
+	rsp, err := c.PostAdminTsdbDeleteSeriesV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostAdminTsdbDeleteSeriesV1Response(rsp)
+}
+
+// GetAdminTsdbSnapshotV1WithResponse request returning *GetAdminTsdbSnapshotV1Response
+func (c *ClientWithResponses) GetAdminTsdbSnapshotV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetAdminTsdbSnapshotV1Response, error) {
+	rsp, err := c.GetAdminTsdbSnapshotV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAdminTsdbSnapshotV1Response(rsp)
+}
+
+// PostAdminTsdbSnapshotV1WithResponse request returning *PostAdminTsdbSnapshotV1Response
+func (c *ClientWithResponses) PostAdminTsdbSnapshotV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostAdminTsdbSnapshotV1Response, error) {
+	rsp, err := c.PostAdminTsdbSnapshotV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostAdminTsdbSnapshotV1Response(rsp)
+}
+
+// GetAlertsV1WithResponse request returning *GetAlertsV1Response
+func (c *ClientWithResponses) GetAlertsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetAlertsV1Response, error) {
+	rsp, err := c.GetAlertsV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAlertsV1Response(rsp)
+}
+
+// GetFormatQueryV1WithResponse request returning *GetFormatQueryV1Response
+func (c *ClientWithResponses) GetFormatQueryV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetFormatQueryV1Response, error) {
+	rsp, err := c.GetFormatQueryV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetFormatQueryV1Response(rsp)
+}
+
+// PostFormatQueryV1WithResponse request returning *PostFormatQueryV1Response
+func (c *ClientWithResponses) PostFormatQueryV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostFormatQueryV1Response, error) {
+	rsp, err := c.PostFormatQueryV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostFormatQueryV1Response(rsp)
+}
+
+// GetLabelValuesV1WithResponse request returning *GetLabelValuesV1Response
+func (c *ClientWithResponses) GetLabelValuesV1WithResponse(ctx context.Context, labelName LabelNamePath, params *GetLabelValuesV1Params, reqEditors ...RequestEditorFn) (*GetLabelValuesV1Response, error) {
+	rsp, err := c.GetLabelValuesV1(ctx, labelName, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetLabelValuesV1Response(rsp)
+}
+
+// GetLabelsV1WithResponse request returning *GetLabelsV1Response
+func (c *ClientWithResponses) GetLabelsV1WithResponse(ctx context.Context, params *GetLabelsV1Params, reqEditors ...RequestEditorFn) (*GetLabelsV1Response, error) {
+	rsp, err := c.GetLabelsV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetLabelsV1Response(rsp)
+}
+
+// PostLabelsV1WithResponse request returning *PostLabelsV1Response
+func (c *ClientWithResponses) PostLabelsV1WithResponse(ctx context.Context, params *PostLabelsV1Params, reqEditors ...RequestEditorFn) (*PostLabelsV1Response, error) {
+	rsp, err := c.PostLabelsV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostLabelsV1Response(rsp)
+}
+
+// GetMetadataV1WithResponse request returning *GetMetadataV1Response
+func (c *ClientWithResponses) GetMetadataV1WithResponse(ctx context.Context, params *GetMetadataV1Params, reqEditors ...RequestEditorFn) (*GetMetadataV1Response, error) {
+	rsp, err := c.GetMetadataV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetMetadataV1Response(rsp)
+}
+
+// GetNotificationsV1WithResponse request returning *GetNotificationsV1Response
+func (c *ClientWithResponses) GetNotificationsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetNotificationsV1Response, error) {
+	rsp, err := c.GetNotificationsV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetNotificationsV1Response(rsp)
+}
+
+// GetLiveNotificationsV1WithResponse request returning *GetLiveNotificationsV1Response
+func (c *ClientWithResponses) GetLiveNotificationsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetLiveNotificationsV1Response, error) {
+	rsp, err := c.GetLiveNotificationsV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetLiveNotificationsV1Response(rsp)
+}
+
+// GetParseQueryV1WithResponse request returning *GetParseQueryV1Response
+func (c *ClientWithResponses) GetParseQueryV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetParseQueryV1Response, error) {
+	rsp, err := c.GetParseQueryV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetParseQueryV1Response(rsp)
+}
+
+// PostParseQueryV1WithResponse request returning *PostParseQueryV1Response
+func (c *ClientWithResponses) PostParseQueryV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostParseQueryV1Response, error) {
+	rsp, err := c.PostParseQueryV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostParseQueryV1Response(rsp)
+}
+
+// GetQueryV1WithResponse request returning *GetQueryV1Response
+func (c *ClientWithResponses) GetQueryV1WithResponse(ctx context.Context, params *GetQueryV1Params, reqEditors ...RequestEditorFn) (*GetQueryV1Response, error) {
+	rsp, err := c.GetQueryV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetQueryV1Response(rsp)
+}
+
+// PostQueryV1WithResponse request returning *PostQueryV1Response
+func (c *ClientWithResponses) PostQueryV1WithResponse(ctx context.Context, params *PostQueryV1Params, reqEditors ...RequestEditorFn) (*PostQueryV1Response, error) {
+	rsp, err := c.PostQueryV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostQueryV1Response(rsp)
+}
+
+// GetExemplarsV1WithResponse request returning *GetExemplarsV1Response
+func (c *ClientWithResponses) GetExemplarsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetExemplarsV1Response, error) {
+	rsp, err := c.GetExemplarsV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetExemplarsV1Response(rsp)
+}
+
+// PostExemplarsV1WithResponse request returning *PostExemplarsV1Response
+func (c *ClientWithResponses) PostExemplarsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostExemplarsV1Response, error) {
+	rsp, err := c.PostExemplarsV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostExemplarsV1Response(rsp)
+}
+
+// GetQueryRangeV1WithResponse request returning *GetQueryRangeV1Response
+func (c *ClientWithResponses) GetQueryRangeV1WithResponse(ctx context.Context, params *GetQueryRangeV1Params, reqEditors ...RequestEditorFn) (*GetQueryRangeV1Response, error) {
+	rsp, err := c.GetQueryRangeV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetQueryRangeV1Response(rsp)
+}
+
+// PostQueryRangeV1WithResponse request returning *PostQueryRangeV1Response
+func (c *ClientWithResponses) PostQueryRangeV1WithResponse(ctx context.Context, params *PostQueryRangeV1Params, reqEditors ...RequestEditorFn) (*PostQueryRangeV1Response, error) {
+	rsp, err := c.PostQueryRangeV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostQueryRangeV1Response(rsp)
+}
+
+// GetRulesV1WithResponse request returning *GetRulesV1Response
+func (c *ClientWithResponses) GetRulesV1WithResponse(ctx context.Context, params *GetRulesV1Params, reqEditors ...RequestEditorFn) (*GetRulesV1Response, error) {
+	rsp, err := c.GetRulesV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetRulesV1Response(rsp)
+}
+
+// GetSeriesV1WithResponse request returning *GetSeriesV1Response
+func (c *ClientWithResponses) GetSeriesV1WithResponse(ctx context.Context, params *GetSeriesV1Params, reqEditors ...RequestEditorFn) (*GetSeriesV1Response, error) {
+	rsp, err := c.GetSeriesV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetSeriesV1Response(rsp)
+}
+
+// PostSeriesV1WithResponse request returning *PostSeriesV1Response
+func (c *ClientWithResponses) PostSeriesV1WithResponse(ctx context.Context, params *PostSeriesV1Params, reqEditors ...RequestEditorFn) (*PostSeriesV1Response, error) {
+	rsp, err := c.PostSeriesV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostSeriesV1Response(rsp)
+}
+
+// GetStatusBuildInfoV1WithResponse request returning *GetStatusBuildInfoV1Response
+func (c *ClientWithResponses) GetStatusBuildInfoV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetStatusBuildInfoV1Response, error) {
+	rsp, err := c.GetStatusBuildInfoV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetStatusBuildInfoV1Response(rsp)
+}
+
+// GetStatusConfigV1WithResponse request returning *GetStatusConfigV1Response
+func (c *ClientWithResponses) GetStatusConfigV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetStatusConfigV1Response, error) {
+	rsp, err := c.GetStatusConfigV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetStatusConfigV1Response(rsp)
+}
+
+// GetStatusFlagsV1WithResponse request returning *GetStatusFlagsV1Response
+func (c *ClientWithResponses) GetStatusFlagsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetStatusFlagsV1Response, error) {
+	rsp, err := c.GetStatusFlagsV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetStatusFlagsV1Response(rsp)
+}
+
+// GetStatusRuntimeInfoV1WithResponse request returning *GetStatusRuntimeInfoV1Response
+func (c *ClientWithResponses) GetStatusRuntimeInfoV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetStatusRuntimeInfoV1Response, error) {
+	rsp, err := c.GetStatusRuntimeInfoV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetStatusRuntimeInfoV1Response(rsp)
+}
+
+// GetStatusTsdbV1WithResponse request returning *GetStatusTsdbV1Response
+func (c *ClientWithResponses) GetStatusTsdbV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetStatusTsdbV1Response, error) {
+	rsp, err := c.GetStatusTsdbV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetStatusTsdbV1Response(rsp)
+}
+
+// GetStatusWalReplayV1WithResponse request returning *GetStatusWalReplayV1Response
+func (c *ClientWithResponses) GetStatusWalReplayV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetStatusWalReplayV1Response, error) {
+	rsp, err := c.GetStatusWalReplayV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetStatusWalReplayV1Response(rsp)
+}
+
+// GetTargetsV1WithResponse request returning *GetTargetsV1Response
+func (c *ClientWithResponses) GetTargetsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetTargetsV1Response, error) {
+	rsp, err := c.GetTargetsV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetTargetsV1Response(rsp)
+}
+
+// GetTargetsMetadataV1WithResponse request returning *GetTargetsMetadataV1Response
+func (c *ClientWithResponses) GetTargetsMetadataV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetTargetsMetadataV1Response, error) {
+	rsp, err := c.GetTargetsMetadataV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetTargetsMetadataV1Response(rsp)
+}
+
+// RemoteWriteV1WithBodyWithResponse request with arbitrary body returning *RemoteWriteV1Response
+func (c *ClientWithResponses) RemoteWriteV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RemoteWriteV1Response, error) {
+	rsp, err := c.RemoteWriteV1WithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoteWriteV1Response(rsp)
 }
 
 // GetActivityAuditEntriesV1WithResponse request returning *GetActivityAuditEntriesV1Response
@@ -44435,6 +49313,1418 @@ func ParseEditZoneV1Response(rsp *http.Response) (*EditZoneV1Response, error) {
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest InternalServerError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetAlertManagersV1Response parses an HTTP response from a GetAlertManagersV1WithResponse call
+func ParseGetAlertManagersV1Response(rsp *http.Response) (*GetAlertManagersV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAlertManagersV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetAdminTsdbCleanTombstonesV1Response parses an HTTP response from a GetAdminTsdbCleanTombstonesV1WithResponse call
+func ParseGetAdminTsdbCleanTombstonesV1Response(rsp *http.Response) (*GetAdminTsdbCleanTombstonesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAdminTsdbCleanTombstonesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePostAdminTsdbCleanTombstonesV1Response parses an HTTP response from a PostAdminTsdbCleanTombstonesV1WithResponse call
+func ParsePostAdminTsdbCleanTombstonesV1Response(rsp *http.Response) (*PostAdminTsdbCleanTombstonesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PostAdminTsdbCleanTombstonesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetAdminTsdbDeleteSeriesV1Response parses an HTTP response from a GetAdminTsdbDeleteSeriesV1WithResponse call
+func ParseGetAdminTsdbDeleteSeriesV1Response(rsp *http.Response) (*GetAdminTsdbDeleteSeriesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAdminTsdbDeleteSeriesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePostAdminTsdbDeleteSeriesV1Response parses an HTTP response from a PostAdminTsdbDeleteSeriesV1WithResponse call
+func ParsePostAdminTsdbDeleteSeriesV1Response(rsp *http.Response) (*PostAdminTsdbDeleteSeriesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PostAdminTsdbDeleteSeriesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetAdminTsdbSnapshotV1Response parses an HTTP response from a GetAdminTsdbSnapshotV1WithResponse call
+func ParseGetAdminTsdbSnapshotV1Response(rsp *http.Response) (*GetAdminTsdbSnapshotV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAdminTsdbSnapshotV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePostAdminTsdbSnapshotV1Response parses an HTTP response from a PostAdminTsdbSnapshotV1WithResponse call
+func ParsePostAdminTsdbSnapshotV1Response(rsp *http.Response) (*PostAdminTsdbSnapshotV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PostAdminTsdbSnapshotV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetAlertsV1Response parses an HTTP response from a GetAlertsV1WithResponse call
+func ParseGetAlertsV1Response(rsp *http.Response) (*GetAlertsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAlertsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertsResponseV1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequests
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetFormatQueryV1Response parses an HTTP response from a GetFormatQueryV1WithResponse call
+func ParseGetFormatQueryV1Response(rsp *http.Response) (*GetFormatQueryV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetFormatQueryV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePostFormatQueryV1Response parses an HTTP response from a PostFormatQueryV1WithResponse call
+func ParsePostFormatQueryV1Response(rsp *http.Response) (*PostFormatQueryV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PostFormatQueryV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetLabelValuesV1Response parses an HTTP response from a GetLabelValuesV1WithResponse call
+func ParseGetLabelValuesV1Response(rsp *http.Response) (*GetLabelValuesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetLabelValuesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LabelValuesResponseV1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequests
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetLabelsV1Response parses an HTTP response from a GetLabelsV1WithResponse call
+func ParseGetLabelsV1Response(rsp *http.Response) (*GetLabelsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetLabelsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LabelsResponseV1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequests
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePostLabelsV1Response parses an HTTP response from a PostLabelsV1WithResponse call
+func ParsePostLabelsV1Response(rsp *http.Response) (*PostLabelsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PostLabelsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LabelsResponseV1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequests
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetMetadataV1Response parses an HTTP response from a GetMetadataV1WithResponse call
+func ParseGetMetadataV1Response(rsp *http.Response) (*GetMetadataV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetMetadataV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest MetadataResponseV1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequests
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetNotificationsV1Response parses an HTTP response from a GetNotificationsV1WithResponse call
+func ParseGetNotificationsV1Response(rsp *http.Response) (*GetNotificationsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetNotificationsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetLiveNotificationsV1Response parses an HTTP response from a GetLiveNotificationsV1WithResponse call
+func ParseGetLiveNotificationsV1Response(rsp *http.Response) (*GetLiveNotificationsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetLiveNotificationsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetParseQueryV1Response parses an HTTP response from a GetParseQueryV1WithResponse call
+func ParseGetParseQueryV1Response(rsp *http.Response) (*GetParseQueryV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetParseQueryV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePostParseQueryV1Response parses an HTTP response from a PostParseQueryV1WithResponse call
+func ParsePostParseQueryV1Response(rsp *http.Response) (*PostParseQueryV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PostParseQueryV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetQueryV1Response parses an HTTP response from a GetQueryV1WithResponse call
+func ParseGetQueryV1Response(rsp *http.Response) (*GetQueryV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetQueryV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest QueryResponseV1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequests
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePostQueryV1Response parses an HTTP response from a PostQueryV1WithResponse call
+func ParsePostQueryV1Response(rsp *http.Response) (*PostQueryV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PostQueryV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest QueryResponseV1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequests
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetExemplarsV1Response parses an HTTP response from a GetExemplarsV1WithResponse call
+func ParseGetExemplarsV1Response(rsp *http.Response) (*GetExemplarsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetExemplarsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePostExemplarsV1Response parses an HTTP response from a PostExemplarsV1WithResponse call
+func ParsePostExemplarsV1Response(rsp *http.Response) (*PostExemplarsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PostExemplarsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetQueryRangeV1Response parses an HTTP response from a GetQueryRangeV1WithResponse call
+func ParseGetQueryRangeV1Response(rsp *http.Response) (*GetQueryRangeV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetQueryRangeV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest QueryResponseV1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntityPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequests
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePostQueryRangeV1Response parses an HTTP response from a PostQueryRangeV1WithResponse call
+func ParsePostQueryRangeV1Response(rsp *http.Response) (*PostQueryRangeV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PostQueryRangeV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest QueryResponseV1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntityPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequests
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetRulesV1Response parses an HTTP response from a GetRulesV1WithResponse call
+func ParseGetRulesV1Response(rsp *http.Response) (*GetRulesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetRulesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RulesResponseV1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequests
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetSeriesV1Response parses an HTTP response from a GetSeriesV1WithResponse call
+func ParseGetSeriesV1Response(rsp *http.Response) (*GetSeriesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetSeriesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest SeriesResponseV1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntityPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequests
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePostSeriesV1Response parses an HTTP response from a PostSeriesV1WithResponse call
+func ParsePostSeriesV1Response(rsp *http.Response) (*PostSeriesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PostSeriesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest SeriesResponseV1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntityPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequests
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetStatusBuildInfoV1Response parses an HTTP response from a GetStatusBuildInfoV1WithResponse call
+func ParseGetStatusBuildInfoV1Response(rsp *http.Response) (*GetStatusBuildInfoV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetStatusBuildInfoV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetStatusConfigV1Response parses an HTTP response from a GetStatusConfigV1WithResponse call
+func ParseGetStatusConfigV1Response(rsp *http.Response) (*GetStatusConfigV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetStatusConfigV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetStatusFlagsV1Response parses an HTTP response from a GetStatusFlagsV1WithResponse call
+func ParseGetStatusFlagsV1Response(rsp *http.Response) (*GetStatusFlagsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetStatusFlagsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetStatusRuntimeInfoV1Response parses an HTTP response from a GetStatusRuntimeInfoV1WithResponse call
+func ParseGetStatusRuntimeInfoV1Response(rsp *http.Response) (*GetStatusRuntimeInfoV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetStatusRuntimeInfoV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetStatusTsdbV1Response parses an HTTP response from a GetStatusTsdbV1WithResponse call
+func ParseGetStatusTsdbV1Response(rsp *http.Response) (*GetStatusTsdbV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetStatusTsdbV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetStatusWalReplayV1Response parses an HTTP response from a GetStatusWalReplayV1WithResponse call
+func ParseGetStatusWalReplayV1Response(rsp *http.Response) (*GetStatusWalReplayV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetStatusWalReplayV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetTargetsV1Response parses an HTTP response from a GetTargetsV1WithResponse call
+func ParseGetTargetsV1Response(rsp *http.Response) (*GetTargetsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetTargetsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetTargetsMetadataV1Response parses an HTTP response from a GetTargetsMetadataV1WithResponse call
+func ParseGetTargetsMetadataV1Response(rsp *http.Response) (*GetTargetsMetadataV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetTargetsMetadataV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 410:
+		var dest GonePrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON410 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoteWriteV1Response parses an HTTP response from a RemoteWriteV1WithResponse call
+func ParseRemoteWriteV1Response(rsp *http.Response) (*RemoteWriteV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoteWriteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundPrometheus
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequests
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorPrometheus
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
