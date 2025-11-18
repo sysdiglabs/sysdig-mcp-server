@@ -7,16 +7,38 @@ import (
 	"os"
 	"strings"
 
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/config"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
 func main() {
-	logLevel := os.Getenv("SYSDIG_MCP_LOGLEVEL")
-	if logLevel == "" {
-		logLevel = "INFO"
+	if err := run(); err != nil {
+		slog.Error("application failed", "error", err)
+		os.Exit(1)
 	}
+}
+
+func run() error {
+	cfg, err := config.Load()
+	if err != nil {
+		return fmt.Errorf("error loading configuration: %w", err)
+	}
+
+	setupLogger(cfg.LogLevel)
+
+	sysdigClient, err := setupSysdigClient(cfg)
+	if err != nil {
+		return err
+	}
+
+	handler := setupHandler(sysdigClient)
+
+	return startServer(cfg, handler)
+}
+
+func setupLogger(logLevel string) {
 	var level slog.Level
 	switch strings.ToUpper(logLevel) {
 	case "DEBUG":
@@ -32,83 +54,48 @@ func main() {
 	}
 	logger := slog.New(slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: level}))
 	slog.SetDefault(logger)
+}
 
-	apiHost := os.Getenv("SYSDIG_MCP_API_HOST")
-	if apiHost == "" {
-		slog.Error("SYSDIG_MCP_API_HOST env var is empty or not set")
-		os.Exit(1)
-	}
-	apiToken := os.Getenv("SYSDIG_MCP_API_SECURE_TOKEN")
-	if apiToken == "" {
-		slog.Error("SYSDIG_MCP_API_SECURE_TOKEN env var is empty or not set")
-		os.Exit(1)
-	}
-
-	sysdigClient, err := sysdig.NewSysdigClient(apiHost, apiToken)
+func setupSysdigClient(cfg *config.Config) (sysdig.ExtendedClientWithResponsesInterface, error) {
+	sysdigClient, err := sysdig.NewSysdigClient(cfg.APIHost, cfg.APIToken)
 	if err != nil {
-		slog.Error("error creating sysdig client", "error", err.Error())
-		os.Exit(1)
+		return nil, fmt.Errorf("error creating sysdig client: %w", err)
 	}
+	return sysdigClient, nil
+}
+
+func setupHandler(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *mcp.Handler {
 	systemClock := clock.NewSystemClock()
 	permissionChecker := mcp.NewPermissionChecker(sysdigClient)
 
-	handler := mcp.NewHandlerWithTools(
+	return mcp.NewHandlerWithTools(
 		mcp.NewToolListRuntimeEvents(sysdigClient, systemClock, permissionChecker),
 		mcp.NewToolGetEventInfo(sysdigClient, permissionChecker),
 		mcp.NewToolGetEventProcessTree(sysdigClient, permissionChecker),
 		mcp.NewToolRunSysql(sysdigClient, permissionChecker),
 		mcp.NewToolGenerateSysql(sysdigClient, permissionChecker),
 	)
+}
 
-	if err := handler.ServeStdio(context.Background(), os.Stdin, os.Stdout); err != nil {
-		fmt.Printf("Server error: %v\n", err)
-	}
-
-	transport := os.Getenv("SYSDIG_MCP_TRANSPORT")
-	if transport == "" {
-		transport = "stdio"
-	}
-
-	switch transport {
+func startServer(cfg *config.Config, handler *mcp.Handler) error {
+	switch cfg.Transport {
 	case "stdio":
 		if err := handler.ServeStdio(context.Background(), os.Stdin, os.Stdout); err != nil {
+			// Stdio server errors are not fatal for the process, just print them
 			fmt.Printf("Server error: %v\n", err)
 		}
 	case "streamable-http":
-		host := os.Getenv("SYSDIG_MCP_LISTENING_HOST")
-		if host == "" {
-			host = "localhost"
-		}
-		port := os.Getenv("SYSDIG_MCP_LISTENING_PORT")
-		if port == "" {
-			port = "8080"
-		}
-		mountPath := os.Getenv("SYSDIG_MCP_MOUNT_PATH")
-		if mountPath == "" {
-			mountPath = "/sysdig-mcp-server"
-		}
-		addr := fmt.Sprintf("%s:%s", host, port)
-		if err := handler.ServeStreamableHTTP(addr, mountPath); err != nil {
-			slog.Error("error serving streamable http", "error", err.Error())
-			os.Exit(1)
+		addr := fmt.Sprintf("%s:%s", cfg.ListeningHost, cfg.ListeningPort)
+		if err := handler.ServeStreamableHTTP(addr, cfg.MountPath); err != nil {
+			return fmt.Errorf("error serving streamable http: %w", err)
 		}
 	case "sse":
-		host := os.Getenv("SYSDIG_MCP_LISTENING_HOST")
-		if host == "" {
-			host = "localhost"
+		addr := fmt.Sprintf("%s:%s", cfg.ListeningHost, cfg.ListeningPort)
+		if err := handler.ServeSSE(addr, cfg.MountPath); err != nil {
+			return fmt.Errorf("error serving sse: %w", err)
 		}
-		port := os.Getenv("SYSDIG_MCP_LISTENING_PORT")
-		if port == "" {
-			port = "8080"
-		}
-		mountPath := os.Getenv("SYSDIG_MCP_MOUNT_PATH")
-		if mountPath == "" {
-			mountPath = "/sysdig-mcp-server"
-		}
-		addr := fmt.Sprintf("%s:%s", host, port)
-		if err := handler.ServeSSE(addr, mountPath); err != nil {
-			slog.Error("error serving sse", "error", err.Error())
-			os.Exit(1)
-		}
+	default:
+		return fmt.Errorf("unknown transport: %s", cfg.Transport)
 	}
+	return nil
 }
