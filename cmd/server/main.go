@@ -18,7 +18,7 @@ func main() {
 		os.Exit(1)
 	}
 	apiToken := os.Getenv("SYSDIG_MCP_API_SECURE_TOKEN")
-	if apiHost == "" {
+	if apiToken == "" {
 		slog.Error("SYSDIG_MCP_API_SECURE_TOKEN env var is empty or not set")
 		os.Exit(1)
 	}
@@ -41,5 +41,45 @@ func main() {
 
 	if err := handler.ServeStdio(context.Background(), os.Stdin, os.Stdout); err != nil {
 		fmt.Printf("Server error: %v\n", err)
+	}
+
+	transport := os.Getenv("SYSDIG_MCP_TRANSPORT")
+	if transport == "" {
+		transport = "stdio"
+	}
+
+	switch transport {
+	case "stdio":
+		if err := handler.ServeStdio(context.Background(), os.Stdin, os.Stdout); err != nil {
+			fmt.Printf("Server error: %v\n", err)
+		}
+	case "streamable-http":
+		host := os.Getenv("SYSDIG_MCP_LISTENING_HOST")
+		if host == "" {
+			host = "localhost"
+		}
+		port := os.Getenv("SYSDIG_MCP_LISTENING_PORT")
+		if port == "" {
+			port = "8080"
+		}
+		addr := fmt.Sprintf("%s:%s", host, port)
+		if err := handler.ServeStreamableHTTP(addr); err != nil {
+			slog.Error("error serving streamable http", "error", err.Error())
+			os.Exit(1)
+		}
+	case "sse":
+		host := os.Getenv("SYSDIG_MCP_LISTENING_HOST")
+		if host == "" {
+			host = "localhost"
+		}
+		port := os.Getenv("SYSDIG_MCP_LISTENING_PORT")
+		if port == "" {
+			port = "8080"
+		}
+		addr := fmt.Sprintf("%s:%s", host, port)
+		if err := handler.ServeSSE(addr); err != nil {
+			slog.Error("error serving sse", "error", err.Error())
+			os.Exit(1)
+		}
 	}
 }

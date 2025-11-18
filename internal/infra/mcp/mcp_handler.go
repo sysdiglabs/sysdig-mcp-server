@@ -2,7 +2,9 @@ package mcp
 
 import (
 	"context"
+	"fmt"
 	"io"
+	"net/http"
 
 	"github.com/mark3labs/mcp-go/client"
 	"github.com/mark3labs/mcp-go/server"
@@ -45,6 +47,20 @@ func (h *Handler) RegisterTools(tools ...mcpTool) {
 
 func (h *Handler) ServeStdio(ctx context.Context, stdin io.Reader, stdout io.Writer) error {
 	return server.NewStdioServer(h.server).Listen(ctx, stdin, stdout)
+}
+
+func (h *Handler) ServeStreamableHTTP(addr string) error {
+	httpServer := server.NewStreamableHTTPServer(h.server)
+	http.Handle("/mcp", httpServer)
+	fmt.Printf("MCP Server listening on %s\n", addr)
+	return http.ListenAndServe(addr, nil)
+}
+
+func (h *Handler) ServeSSE(addr string) error {
+	sseServer := server.NewSSEServer(h.server)
+	http.Handle("/mcp", sseServer)
+	fmt.Printf("MCP Server listening on %s\n", addr)
+	return http.ListenAndServe(addr, nil)
 }
 
 func (h *Handler) ServeInProcessClient() (*client.Client, error) {
