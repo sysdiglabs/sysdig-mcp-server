@@ -62,8 +62,12 @@ func main() {
 		if port == "" {
 			port = "8080"
 		}
+		mountPath := os.Getenv("SYSDIG_MCP_MOUNT_PATH")
+		if mountPath == "" {
+			mountPath = "/sysdig-mcp-server"
+		}
 		addr := fmt.Sprintf("%s:%s", host, port)
-		if err := handler.ServeStreamableHTTP(addr); err != nil {
+		if err := handler.ServeStreamableHTTP(addr, mountPath); err != nil {
 			slog.Error("error serving streamable http", "error", err.Error())
 			os.Exit(1)
 		}
@@ -76,8 +80,12 @@ func main() {
 		if port == "" {
 			port = "8080"
 		}
+		mountPath := os.Getenv("SYSDIG_MCP_MOUNT_PATH")
+		if mountPath == "" {
+			mountPath = "/sysdig-mcp-server"
+		}
 		addr := fmt.Sprintf("%s:%s", host, port)
-		if err := handler.ServeSSE(addr); err != nil {
+		if err := handler.ServeSSE(addr, mountPath); err != nil {
 			slog.Error("error serving sse", "error", err.Error())
 			os.Exit(1)
 		}

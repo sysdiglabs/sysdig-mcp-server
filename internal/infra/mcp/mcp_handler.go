@@ -49,17 +49,17 @@ func (h *Handler) ServeStdio(ctx context.Context, stdin io.Reader, stdout io.Wri
 	return server.NewStdioServer(h.server).Listen(ctx, stdin, stdout)
 }
 
-func (h *Handler) ServeStreamableHTTP(addr string) error {
+func (h *Handler) ServeStreamableHTTP(addr, mountPath string) error {
 	httpServer := server.NewStreamableHTTPServer(h.server)
-	http.Handle("/mcp", httpServer)
-	fmt.Printf("MCP Server listening on %s\n", addr)
+	http.Handle(mountPath, httpServer)
+	fmt.Printf("MCP Server listening on %s%s\n", addr, mountPath)
 	return http.ListenAndServe(addr, nil)
 }
 
-func (h *Handler) ServeSSE(addr string) error {
-	sseServer := server.NewSSEServer(h.server)
-	http.Handle("/mcp", sseServer)
-	fmt.Printf("MCP Server listening on %s\n", addr)
+func (h *Handler) ServeSSE(addr, mountPath string) error {
+	sseServer := server.NewSSEServer(h.server, server.WithStaticBasePath(mountPath))
+	http.Handle(mountPath, sseServer)
+	fmt.Printf("MCP Server listening on %s%s\n", addr, mountPath)
 	return http.ListenAndServe(addr, nil)
 }
 
