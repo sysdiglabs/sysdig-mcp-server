@@ -2723,6 +2723,26 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) EditZoneV1WithRe
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "EditZoneV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).EditZoneV1WithResponse), varargs...)
 }
 
+// GenerateSysqlWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GenerateSysqlWithResponse(ctx context.Context, question string, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GenerateSysqlResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, question}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GenerateSysqlWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GenerateSysqlResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GenerateSysqlWithResponse indicates an expected call of GenerateSysqlWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GenerateSysqlWithResponse(ctx, question any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, question}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GenerateSysqlWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GenerateSysqlWithResponse), varargs...)
+}
+
 // GetAcceptedRiskV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) GetAcceptedRiskV1(ctx context.Context, acceptedRiskID sysdig.AcceptedRiskID, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()

@@ -36,6 +36,7 @@ func main() {
 		mcp.NewToolGetEventInfo(sysdigClient, permissionChecker),
 		mcp.NewToolGetEventProcessTree(sysdigClient, permissionChecker),
 		mcp.NewToolRunSysql(sysdigClient, permissionChecker),
+		mcp.NewToolGenerateSysql(sysdigClient, permissionChecker),
 	)
 
 	if err := handler.ServeStdio(context.Background(), os.Stdin, os.Stdout); err != nil {

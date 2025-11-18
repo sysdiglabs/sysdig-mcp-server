@@ -78,11 +78,11 @@ func ParseGetProcessTreeTreesResponse(rsp *http.Response) (*GetProcessTreeTreesR
 }
 
 // NewGetProcessTreeBranchesRequest generates requests for GetProcessTreeBranches
-func NewGetProcessTreeBranchesRequest(server string, eventId string) (*http.Request, error) {
+func NewGetProcessTreeBranchesRequest(server string, eventID string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "eventId", runtime.ParamLocationPath, eventId)
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "eventId", runtime.ParamLocationPath, eventID)
 	if err != nil {
 		return nil, err
 	}
@@ -111,11 +111,11 @@ func NewGetProcessTreeBranchesRequest(server string, eventId string) (*http.Requ
 }
 
 // NewGetProcessTreeTreesRequest generates requests for GetProcessTreeTrees
-func NewGetProcessTreeTreesRequest(server string, eventId string) (*http.Request, error) {
+func NewGetProcessTreeTreesRequest(server string, eventID string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "eventId", runtime.ParamLocationPath, eventId)
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "eventId", runtime.ParamLocationPath, eventID)
 	if err != nil {
 		return nil, err
 	}
@@ -143,8 +143,8 @@ func NewGetProcessTreeTreesRequest(server string, eventId string) (*http.Request
 	return req, nil
 }
 
-func (c *Client) GetProcessTreeBranches(ctx context.Context, eventId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetProcessTreeBranchesRequest(c.Server, eventId)
+func (c *Client) GetProcessTreeBranches(ctx context.Context, eventID string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetProcessTreeBranchesRequest(c.Server, eventID)
 	if err != nil {
 		return nil, err
 	}
@@ -155,8 +155,8 @@ func (c *Client) GetProcessTreeBranches(ctx context.Context, eventId string, req
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetProcessTreeTrees(ctx context.Context, eventId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetProcessTreeTreesRequest(c.Server, eventId)
+func (c *Client) GetProcessTreeTrees(ctx context.Context, eventID string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetProcessTreeTreesRequest(c.Server, eventID)
 	if err != nil {
 		return nil, err
 	}
@@ -167,16 +167,16 @@ func (c *Client) GetProcessTreeTrees(ctx context.Context, eventId string, reqEdi
 	return c.Client.Do(req)
 }
 
-func (c *ClientWithResponses) GetProcessTreeBranchesWithResponse(ctx context.Context, eventId string, reqEditors ...RequestEditorFn) (*GetProcessTreeBranchesResponse, error) {
-	rsp, err := c.ClientInterface.(*Client).GetProcessTreeBranches(ctx, eventId, reqEditors...)
+func (c *ClientWithResponses) GetProcessTreeBranchesWithResponse(ctx context.Context, eventID string, reqEditors ...RequestEditorFn) (*GetProcessTreeBranchesResponse, error) {
+	rsp, err := c.ClientInterface.(*Client).GetProcessTreeBranches(ctx, eventID, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetProcessTreeBranchesResponse(rsp)
 }
 
-func (c *ClientWithResponses) GetProcessTreeTreesWithResponse(ctx context.Context, eventId string, reqEditors ...RequestEditorFn) (*GetProcessTreeTreesResponse, error) {
-	rsp, err := c.ClientInterface.(*Client).GetProcessTreeTrees(ctx, eventId, reqEditors...)
+func (c *ClientWithResponses) GetProcessTreeTreesWithResponse(ctx context.Context, eventID string, reqEditors ...RequestEditorFn) (*GetProcessTreeTreesResponse, error) {
+	rsp, err := c.ClientInterface.(*Client).GetProcessTreeTrees(ctx, eventID, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -185,9 +185,9 @@ func (c *ClientWithResponses) GetProcessTreeTreesWithResponse(ctx context.Contex
 
 // UserPermissions defines model for user permissions.
 type UserPermissions struct {
-	CustomerId  int      `json:"customerId"`
-	UserId      int      `json:"userId"`
-	TeamId      int      `json:"teamId"`
+	CustomerID  int      `json:"customerId"`
+	UserID      int      `json:"userId"`
+	TeamID      int      `json:"teamId"`
 	Permissions []string `json:"permissions"`
 }
 

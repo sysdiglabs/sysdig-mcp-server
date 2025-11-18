@@ -38,7 +38,6 @@ func (h *ToolRunSysql) handle(ctx context.Context, request mcp.CallToolRequest) 
 	}
 
 	response, err := h.sysdigClient.QuerySysqlPostWithResponse(ctx, body)
-
 	if err != nil {
 		return mcp.NewToolResultErrorFromErr("error triggering request", err), nil
 	}
@@ -51,7 +50,7 @@ func (h *ToolRunSysql) handle(ctx context.Context, request mcp.CallToolRequest) 
 
 func (h *ToolRunSysql) RegisterInServer(s *server.MCPServer) {
 	tool := mcp.NewTool("run_sysql",
-		mcp.WithDescription(`Execute a SysQL query directly against the Sysdig API. The query will automatically have a semicolon appended if not present.`),
+		mcp.WithDescription(`Execute a SysQL query directly against the Sysdig API. You should try generating a SysQL query first to ensure that it's valid.`),
 		mcp.WithString("sysql_query",
 			mcp.Description("A valid SysQL query string to execute directly."),
 			mcp.Required(),

@@ -7,7 +7,8 @@ import "context"
 type ExtendedClientWithResponsesInterface interface {
 	ClientInterface
 	ClientWithResponsesInterface
-	GetProcessTreeBranchesWithResponse(ctx context.Context, eventId string, reqEditors ...RequestEditorFn) (*GetProcessTreeBranchesResponse, error)
-	GetProcessTreeTreesWithResponse(ctx context.Context, eventId string, reqEditors ...RequestEditorFn) (*GetProcessTreeTreesResponse, error)
+	GetProcessTreeBranchesWithResponse(ctx context.Context, eventID string, reqEditors ...RequestEditorFn) (*GetProcessTreeBranchesResponse, error)
+	GetProcessTreeTreesWithResponse(ctx context.Context, eventID string, reqEditors ...RequestEditorFn) (*GetProcessTreeTreesResponse, error)
 	GetMyPermissionsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetMyPermissionsResponse, error)
+	GenerateSysqlWithResponse(ctx context.Context, question string, reqEditors ...RequestEditorFn) (*GenerateSysqlResponse, error)
 }

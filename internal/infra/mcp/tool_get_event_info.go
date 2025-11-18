@@ -9,24 +9,24 @@ import (
 )
 
 type ToolGetEventInfo struct {
-	sysdigClient    sysdig.ExtendedClientWithResponsesInterface
+	sysdigClient      sysdig.ExtendedClientWithResponsesInterface
 	permissionChecker PermissionChecker
 }
 
 func NewToolGetEventInfo(client sysdig.ExtendedClientWithResponsesInterface, checker PermissionChecker) *ToolGetEventInfo {
 	return &ToolGetEventInfo{
-		sysdigClient:    client,
+		sysdigClient:      client,
 		permissionChecker: checker,
 	}
 }
 
 func (h *ToolGetEventInfo) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-	eventId := request.GetString("event_id", "")
-	if eventId == "" {
+	eventID := request.GetString("event_id", "")
+	if eventID == "" {
 		return mcp.NewToolResultErrorf("event_id is required"), nil
 	}
 
-	response, err := h.sysdigClient.GetEventV1WithResponse(ctx, eventId)
+	response, err := h.sysdigClient.GetEventV1WithResponse(ctx, eventID)
 	if err != nil {
 		return mcp.NewToolResultErrorFromErr("error triggering request", err), nil
 	}
