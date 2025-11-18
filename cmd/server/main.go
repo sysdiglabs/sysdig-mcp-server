@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log/slog"
 	"os"
+	"strings"
 
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp"
@@ -12,6 +13,26 @@ import (
 )
 
 func main() {
+	logLevel := os.Getenv("SYSDIG_MCP_LOGLEVEL")
+	if logLevel == "" {
+		logLevel = "INFO"
+	}
+	var level slog.Level
+	switch strings.ToUpper(logLevel) {
+	case "DEBUG":
+		level = slog.LevelDebug
+	case "INFO":
+		level = slog.LevelInfo
+	case "WARNING":
+		level = slog.LevelWarn
+	case "ERROR":
+		level = slog.LevelError
+	default:
+		level = slog.LevelInfo
+	}
+	logger := slog.New(slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: level}))
+	slog.SetDefault(logger)
+
 	apiHost := os.Getenv("SYSDIG_MCP_API_HOST")
 	if apiHost == "" {
 		slog.Error("SYSDIG_MCP_API_HOST env var is empty or not set")
