@@ -11,7 +11,7 @@
     }:
     let
       overlays.default = final: prev: {
-        sysdig-mcp-server = prev.callPackage ./package.nix { };
+        sysdig-mcp-server = prev.pkgsStatic.callPackage ./package.nix { };
       };
       flake = flake-utils.lib.eachDefaultSystem (
         system:

@@ -8,7 +8,6 @@ examples/
 .gitignore
 CONTRIBUTING.md
 flake8.ini
-flake.nix
 LICENSE.*
 README.md
 __pycache__/*
