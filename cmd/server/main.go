@@ -57,7 +57,12 @@ func setupLogger(logLevel string) {
 }
 
 func setupSysdigClient(cfg *config.Config) (sysdig.ExtendedClientWithResponsesInterface, error) {
-	sysdigClient, err := sysdig.NewSysdigClient(cfg.APIHost, cfg.APIToken)
+	sysdigClient, err := sysdig.NewSysdigClient(
+		sysdig.WithFallbackAuthentication(
+			sysdig.WithHostAndTokenFromContext(),
+			sysdig.WithFixedHostAndToken(cfg.APIHost, cfg.APIToken),
+		),
+	)
 	if err != nil {
 		return nil, fmt.Errorf("error creating sysdig client: %w", err)
 	}
@@ -66,15 +71,15 @@ func setupSysdigClient(cfg *config.Config) (sysdig.ExtendedClientWithResponsesIn
 
 func setupHandler(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *mcp.Handler {
 	systemClock := clock.NewSystemClock()
-	permissionChecker := mcp.NewPermissionChecker(sysdigClient)
-
-	return mcp.NewHandlerWithTools(
-		mcp.NewToolListRuntimeEvents(sysdigClient, systemClock, permissionChecker),
-		mcp.NewToolGetEventInfo(sysdigClient, permissionChecker),
-		mcp.NewToolGetEventProcessTree(sysdigClient, permissionChecker),
-		mcp.NewToolRunSysql(sysdigClient, permissionChecker),
-		mcp.NewToolGenerateSysql(sysdigClient, permissionChecker),
+	handler := mcp.NewHandler(sysdigClient)
+	handler.RegisterTools(
+		mcp.NewToolListRuntimeEvents(sysdigClient, systemClock),
+		mcp.NewToolGetEventInfo(sysdigClient),
+		mcp.NewToolGetEventProcessTree(sysdigClient),
+		mcp.NewToolRunSysql(sysdigClient),
+		mcp.NewToolGenerateSysql(sysdigClient),
 	)
+	return handler
 }
 
 func startServer(cfg *config.Config, handler *mcp.Handler) error {

@@ -10,14 +10,12 @@ import (
 )
 
 type ToolRunSysql struct {
-	sysdigClient      sysdig.ExtendedClientWithResponsesInterface
-	PermissionChecker PermissionChecker
+	sysdigClient sysdig.ExtendedClientWithResponsesInterface
 }
 
-func NewToolRunSysql(client sysdig.ExtendedClientWithResponsesInterface, checker PermissionChecker) *ToolRunSysql {
+func NewToolRunSysql(client sysdig.ExtendedClientWithResponsesInterface) *ToolRunSysql {
 	return &ToolRunSysql{
-		sysdigClient:      client,
-		PermissionChecker: checker,
+		sysdigClient: client,
 	}
 }
 
@@ -62,10 +60,7 @@ func (h *ToolRunSysql) RegisterInServer(s *server.MCPServer) {
 			),
 		),
 		mcp.WithOutputSchema[map[string]any](),
+		WithRequiredPermissions("sage.exec", "risks.read"),
 	)
 	s.AddTool(tool, h.handle)
-}
-
-func (h *ToolRunSysql) CanBeUsed() bool {
-	return h.PermissionChecker.HasPermission("sage.exec") && h.PermissionChecker.HasPermission("risks.read")
 }

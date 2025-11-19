@@ -9,14 +9,12 @@ import (
 )
 
 type ToolGetEventInfo struct {
-	sysdigClient      sysdig.ExtendedClientWithResponsesInterface
-	permissionChecker PermissionChecker
+	sysdigClient sysdig.ExtendedClientWithResponsesInterface
 }
 
-func NewToolGetEventInfo(client sysdig.ExtendedClientWithResponsesInterface, checker PermissionChecker) *ToolGetEventInfo {
+func NewToolGetEventInfo(client sysdig.ExtendedClientWithResponsesInterface) *ToolGetEventInfo {
 	return &ToolGetEventInfo{
-		sysdigClient:      client,
-		permissionChecker: checker,
+		sysdigClient: client,
 	}
 }
 
@@ -45,11 +43,8 @@ func (h *ToolGetEventInfo) RegisterInServer(s *server.MCPServer) {
 			mcp.Required(),
 		),
 		mcp.WithOutputSchema[map[string]any](),
+		WithRequiredPermissions("policy-events.read"),
 	)
 
 	s.AddTool(tool, h.handle)
-}
-
-func (h *ToolGetEventInfo) CanBeUsed() bool {
-	return h.permissionChecker.HasPermission("policy-events.read")
 }

@@ -19,7 +19,7 @@ func (c *Config) Validate() error {
 	if c.APIHost == "" {
 		return fmt.Errorf("required configuration missing: SYSDIG_MCP_API_HOST")
 	}
-	if c.APIToken == "" {
+	if c.Transport == "stdio" && c.APIToken == "" {
 		return fmt.Errorf("required configuration missing: SYSDIG_MCP_API_SECURE_TOKEN")
 	}
 	return nil

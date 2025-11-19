@@ -10,14 +10,12 @@ import (
 )
 
 type ToolGetEventProcessTree struct {
-	sysdigClient    sysdig.ExtendedClientWithResponsesInterface
-	permissionChecker PermissionChecker
+	sysdigClient sysdig.ExtendedClientWithResponsesInterface
 }
 
-func NewToolGetEventProcessTree(sysdigClient sysdig.ExtendedClientWithResponsesInterface, checker PermissionChecker) *ToolGetEventProcessTree {
+func NewToolGetEventProcessTree(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *ToolGetEventProcessTree {
 	return &ToolGetEventProcessTree{
-		sysdigClient:    sysdigClient,
-		permissionChecker: checker,
+		sysdigClient: sysdigClient,
 	}
 }
 
@@ -63,11 +61,8 @@ func (h *ToolGetEventProcessTree) RegisterInServer(s *server.MCPServer) {
 			mcp.Required(),
 		),
 		mcp.WithOutputSchema[map[string]any](),
+		WithRequiredPermissions("policy-events.read"),
 	)
 
 	s.AddTool(tool, h.handle)
-}
-
-func (h *ToolGetEventProcessTree) CanBeUsed() bool {
-	return h.permissionChecker.HasPermission("policy-events.read")
 }

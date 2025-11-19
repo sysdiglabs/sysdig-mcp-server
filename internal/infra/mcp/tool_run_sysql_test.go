@@ -22,23 +22,22 @@ var _ = Describe("ToolRunSysql", func() {
 		ctrl       *gomock.Controller
 		handler    *Handler
 		mcpClient  *client.Client
-		checker    PermissionChecker
 	)
 
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockClient = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		checker = NewPermissionChecker(mockClient)
-		mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any()).Return(&sysdig.GetMyPermissionsResponse{
+		mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any(), gomock.Any()).Return(&sysdig.GetMyPermissionsResponse{
 			HTTPResponse: &http.Response{
 				StatusCode: 200,
 			},
 			JSON200: &sysdig.UserPermissions{
 				Permissions: []string{"sage.exec", "risks.read"},
 			},
-		}, nil)
-		tool = NewToolRunSysql(mockClient, checker)
-		handler = NewHandlerWithTools(tool)
+		}, nil).AnyTimes()
+		tool = NewToolRunSysql(mockClient)
+		handler = NewHandler(mockClient)
+		handler.RegisterTools(tool)
 
 		var err error
 		mcpClient, err = handler.ServeInProcessClient()
@@ -64,7 +63,7 @@ var _ = Describe("ToolRunSysql", func() {
 				StatusCode: 200,
 			},
 			JSON200: &sysdig.QueryResponse{
-				Items: []map[string]interface{}{
+				Items: []map[string]any{
 					{"id": "vuln-1", "severity": "Critical"},
 				},
 			},
@@ -73,7 +72,7 @@ var _ = Describe("ToolRunSysql", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name: "run_sysql",
-				Arguments: map[string]interface{}{
+				Arguments: map[string]any{
 					"sysql_query": sysqlQuery,
 				},
 			},
@@ -112,7 +111,7 @@ var _ = Describe("ToolRunSysql", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name: "run_sysql",
-				Arguments: map[string]interface{}{
+				Arguments: map[string]any{
 					"sysql_query": sysqlQueryWithoutSemicolon,
 				},
 			},
@@ -135,7 +134,7 @@ var _ = Describe("ToolRunSysql", func() {
 				StatusCode: 200,
 			},
 			JSON200: &sysdig.QueryResponse{
-				Items: []map[string]interface{}{
+				Items: []map[string]any{
 					{"id": "vuln-1", "severity": "Critical"},
 				},
 			},
@@ -144,7 +143,7 @@ var _ = Describe("ToolRunSysql", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name: "run_sysql",
-				Arguments: map[string]interface{}{
+				Arguments: map[string]any{
 					"sysql_query": sysqlQueryWithWhitespace,
 				},
 			},
@@ -159,7 +158,7 @@ var _ = Describe("ToolRunSysql", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name:      "run_sysql",
-				Arguments: map[string]interface{}{},
+				Arguments: map[string]any{},
 			},
 		})
 
@@ -172,7 +171,7 @@ var _ = Describe("ToolRunSysql", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name: "run_sysql",
-				Arguments: map[string]interface{}{
+				Arguments: map[string]any{
 					"sysql_query": "",
 				},
 			},
@@ -195,7 +194,7 @@ var _ = Describe("ToolRunSysql", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name: "run_sysql",
-				Arguments: map[string]interface{}{
+				Arguments: map[string]any{
 					"sysql_query": sysqlQuery,
 				},
 			},
@@ -223,7 +222,7 @@ var _ = Describe("ToolRunSysql", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name: "run_sysql",
-				Arguments: map[string]interface{}{
+				Arguments: map[string]any{
 					"sysql_query": sysqlQuery,
 				},
 			},

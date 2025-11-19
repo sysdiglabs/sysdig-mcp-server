@@ -33,9 +33,18 @@ var _ = Describe("Config", func() {
 		})
 
 		Context("with a missing api token", func() {
-			It("should return an error", func() {
+			It("should not return an error if transport is not stdio", func() {
 				cfg := &config.Config{
 					APIHost: "host",
+				}
+				err := cfg.Validate()
+				Expect(err).ToNot(HaveOccurred())
+			})
+
+			It("should return an error if transport is stdio", func() {
+				cfg := &config.Config{
+					Transport: "stdio",
+					APIHost:   "host",
 				}
 				err := cfg.Validate()
 				Expect(err).To(HaveOccurred())
@@ -49,7 +58,7 @@ var _ = Describe("Config", func() {
 			os.Clearenv()
 		})
 
-		Context("with required env vars set", func() {
+		Context("with required env vars set for stdio", func() {
 			BeforeEach(func() {
 				_ = os.Setenv("SYSDIG_MCP_API_HOST", "host")
 				_ = os.Setenv("SYSDIG_MCP_API_SECURE_TOKEN", "token")
@@ -59,6 +68,23 @@ var _ = Describe("Config", func() {
 				cfg, err := config.Load()
 				Expect(err).NotTo(HaveOccurred())
 				Expect(cfg.Transport).To(Equal("stdio"))
+				Expect(cfg.ListeningHost).To(Equal("localhost"))
+				Expect(cfg.ListeningPort).To(Equal("8080"))
+				Expect(cfg.MountPath).To(Equal("/sysdig-mcp-server"))
+				Expect(cfg.LogLevel).To(Equal("INFO"))
+			})
+		})
+
+		Context("with required env vars set for http", func() {
+			BeforeEach(func() {
+				_ = os.Setenv("SYSDIG_MCP_API_HOST", "host")
+				_ = os.Setenv("SYSDIG_MCP_TRANSPORT", "streamable-http")
+			})
+
+			It("should load default values", func() {
+				cfg, err := config.Load()
+				Expect(err).NotTo(HaveOccurred())
+				Expect(cfg.Transport).To(Equal("streamable-http"))
 				Expect(cfg.ListeningHost).To(Equal("localhost"))
 				Expect(cfg.ListeningPort).To(Equal("8080"))
 				Expect(cfg.MountPath).To(Equal("/sysdig-mcp-server"))

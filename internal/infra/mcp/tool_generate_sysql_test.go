@@ -22,23 +22,22 @@ var _ = Describe("ToolGenerateSysql", func() {
 		ctrl       *gomock.Controller
 		handler    *Handler
 		mcpClient  *client.Client
-		checker    PermissionChecker
 	)
 
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockClient = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		checker = NewPermissionChecker(mockClient)
-		mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any()).Return(&sysdig.GetMyPermissionsResponse{
+		mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any(), gomock.Any()).Return(&sysdig.GetMyPermissionsResponse{
 			HTTPResponse: &http.Response{
 				StatusCode: 200,
 			},
 			JSON200: &sysdig.UserPermissions{
 				Permissions: []string{"sage.exec"},
 			},
-		}, nil)
-		tool = NewToolGenerateSysql(mockClient, checker)
-		handler = NewHandlerWithTools(tool)
+		}, nil).AnyTimes()
+		tool = NewToolGenerateSysql(mockClient)
+		handler = NewHandler(mockClient)
+		handler.RegisterTools(tool)
 
 		var err error
 		mcpClient, err = handler.ServeInProcessClient()
@@ -66,14 +65,14 @@ var _ = Describe("ToolGenerateSysql", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name: "generate_sysql",
-				Arguments: map[string]interface{}{
+				Arguments: map[string]any{
 					"question": question,
 				},
 			},
 		})
 
 		Expect(err).NotTo(HaveOccurred())
-		Expect(result.StructuredContent).To(Equal(map[string]interface{}{"text": "MATCH KubeWorkload AFFECTED_BY Vulnerability RETURN KubeWorkload, Vulnerability;\n"}))
+		Expect(result.StructuredContent).To(Equal(map[string]any{"text": "MATCH KubeWorkload AFFECTED_BY Vulnerability RETURN KubeWorkload, Vulnerability;\n"}))
 		Expect(result.IsError).To(BeFalse())
 	})
 
@@ -81,7 +80,7 @@ var _ = Describe("ToolGenerateSysql", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name:      "generate_sysql",
-				Arguments: map[string]interface{}{},
+				Arguments: map[string]any{},
 			},
 		})
 
@@ -97,7 +96,7 @@ var _ = Describe("ToolGenerateSysql", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name: "generate_sysql",
-				Arguments: map[string]interface{}{
+				Arguments: map[string]any{
 					"question": question,
 				},
 			},
@@ -120,7 +119,7 @@ var _ = Describe("ToolGenerateSysql", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name: "generate_sysql",
-				Arguments: map[string]interface{}{
+				Arguments: map[string]any{
 					"question": question,
 				},
 			},

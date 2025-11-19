@@ -22,23 +22,22 @@ var _ = Describe("ToolGetEventInfo", func() {
 		ctrl       *gomock.Controller
 		handler    *Handler
 		mcpClient  *client.Client
-		checker    PermissionChecker
 	)
 
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockClient = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		checker = NewPermissionChecker(mockClient)
-		mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any()).Return(&sysdig.GetMyPermissionsResponse{
+		mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any(), gomock.Any()).Return(&sysdig.GetMyPermissionsResponse{
 			HTTPResponse: &http.Response{
 				StatusCode: 200,
 			},
 			JSON200: &sysdig.UserPermissions{
 				Permissions: []string{"policy-events.read"},
 			},
-		}, nil)
-		tool = NewToolGetEventInfo(mockClient, checker)
-		handler = NewHandlerWithTools(tool)
+		}, nil).AnyTimes()
+		tool = NewToolGetEventInfo(mockClient)
+		handler = NewHandler(mockClient)
+		handler.RegisterTools(tool)
 
 		var err error
 		mcpClient, err = handler.ServeInProcessClient()
@@ -66,7 +65,7 @@ var _ = Describe("ToolGetEventInfo", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name: "get_event_info",
-				Arguments: map[string]interface{}{
+				Arguments: map[string]any{
 					"event_id": eventID,
 				},
 			},
@@ -81,7 +80,7 @@ var _ = Describe("ToolGetEventInfo", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name:      "get_event_info",
-				Arguments: map[string]interface{}{},
+				Arguments: map[string]any{},
 			},
 		})
 
@@ -97,7 +96,7 @@ var _ = Describe("ToolGetEventInfo", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name: "get_event_info",
-				Arguments: map[string]interface{}{
+				Arguments: map[string]any{
 					"event_id": eventID,
 				},
 			},
@@ -120,7 +119,7 @@ var _ = Describe("ToolGetEventInfo", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name: "get_event_info",
-				Arguments: map[string]interface{}{
+				Arguments: map[string]any{
 					"event_id": eventID,
 				},
 			},

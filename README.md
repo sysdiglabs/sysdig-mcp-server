@@ -115,7 +115,7 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
 The following environment variables are **required** for configuring the Sysdig SDK:
 
 - `SYSDIG_MCP_API_HOST`: The URL of your Sysdig Secure instance (e.g., `https://us2.app.sysdig.com`).
-- `SYSDIG_MCP_API_SECURE_TOKEN`: Your Sysdig Secure API token.
+- `SYSDIG_MCP_API_SECURE_TOKEN`: Your Sysdig Secure API token. **Required only when using `stdio` transport.**
 
 You can also set the following variables to override the default configuration:
 

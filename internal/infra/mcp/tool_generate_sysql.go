@@ -9,14 +9,12 @@ import (
 )
 
 type ToolGenerateSysql struct {
-	sysdigClient      sysdig.ExtendedClientWithResponsesInterface
-	PermissionChecker PermissionChecker
+	sysdigClient sysdig.ExtendedClientWithResponsesInterface
 }
 
-func NewToolGenerateSysql(client sysdig.ExtendedClientWithResponsesInterface, checker PermissionChecker) *ToolGenerateSysql {
+func NewToolGenerateSysql(client sysdig.ExtendedClientWithResponsesInterface) *ToolGenerateSysql {
 	return &ToolGenerateSysql{
-		sysdigClient:      client,
-		PermissionChecker: checker,
+		sysdigClient: client,
 	}
 }
 
@@ -55,10 +53,7 @@ func (h *ToolGenerateSysql) RegisterInServer(s *server.MCPServer) {
 			),
 		),
 		mcp.WithOutputSchema[map[string]any](),
+		WithRequiredPermissions("sage.exec"),
 	)
 	s.AddTool(tool, h.handle)
-}
-
-func (h *ToolGenerateSysql) CanBeUsed() bool {
-	return h.PermissionChecker.HasPermission("sage.exec")
 }

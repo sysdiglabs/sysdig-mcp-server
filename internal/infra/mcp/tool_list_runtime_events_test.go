@@ -25,25 +25,24 @@ var _ = Describe("ToolListRuntimeEvents", func() {
 		ctrl       *gomock.Controller
 		handler    *Handler
 		mcpClient  *client.Client
-		checker    PermissionChecker
 	)
 
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockClient = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		checker = NewPermissionChecker(mockClient)
-		mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any()).Return(&sysdig.GetMyPermissionsResponse{
+		mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any(), gomock.Any()).Return(&sysdig.GetMyPermissionsResponse{
 			HTTPResponse: &http.Response{
 				StatusCode: 200,
 			},
 			JSON200: &sysdig.UserPermissions{
 				Permissions: []string{"policy-events.read"},
 			},
-		}, nil)
+		}, nil).AnyTimes()
 		mockClock = mocks_clock.NewMockClock(ctrl)
 		mockClock.EXPECT().Now().AnyTimes().Return(time.Date(2000, time.January, 1, 0, 0, 0, 0, time.UTC))
-		tool = NewToolListRuntimeEvents(mockClient, mockClock, checker)
-		handler = NewHandlerWithTools(tool)
+		tool = NewToolListRuntimeEvents(mockClient, mockClock)
+		handler = NewHandler(mockClient)
+		handler.RegisterTools(tool)
 
 		var err error
 		mcpClient, err = handler.ServeInProcessClient()
@@ -77,7 +76,7 @@ var _ = Describe("ToolListRuntimeEvents", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name: "list_runtime_events",
-				Arguments: map[string]interface{}{
+				Arguments: map[string]any{
 					"limit":       10,
 					"scope_hours": 2,
 					"filter_expr": "severity = 4",
@@ -110,7 +109,7 @@ var _ = Describe("ToolListRuntimeEvents", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name:      "list_runtime_events",
-				Arguments: map[string]interface{}{},
+				Arguments: map[string]any{},
 			},
 		})
 
@@ -125,7 +124,7 @@ var _ = Describe("ToolListRuntimeEvents", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name:      "list_runtime_events",
-				Arguments: map[string]interface{}{},
+				Arguments: map[string]any{},
 			},
 		})
 
@@ -145,7 +144,7 @@ var _ = Describe("ToolListRuntimeEvents", func() {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
 				Name:      "list_runtime_events",
-				Arguments: map[string]interface{}{},
+				Arguments: map[string]any{},
 			},
 		})
 

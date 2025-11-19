@@ -13,16 +13,14 @@ import (
 const baseFilter = `source != "audittrail" and not originator in ("benchmarks","compliance","cloudsec","scanning","hostscanning")`
 
 type ToolListRuntimeEvents struct {
-	sysdigClient    sysdig.ExtendedClientWithResponsesInterface
-	clock           clock.Clock
-	permissionChecker PermissionChecker
+	sysdigClient sysdig.ExtendedClientWithResponsesInterface
+	clock        clock.Clock
 }
 
-func NewToolListRuntimeEvents(client sysdig.ExtendedClientWithResponsesInterface, clock clock.Clock, checker PermissionChecker) *ToolListRuntimeEvents {
+func NewToolListRuntimeEvents(client sysdig.ExtendedClientWithResponsesInterface, clock clock.Clock) *ToolListRuntimeEvents {
 	return &ToolListRuntimeEvents{
-		sysdigClient:    client,
-		clock:           clock,
-		permissionChecker: checker,
+		sysdigClient: client,
+		clock:        clock,
 	}
 }
 
@@ -101,11 +99,8 @@ You can specify the severity of the events based on the following cases:
 			),
 		),
 		mcp.WithOutputSchema[map[string]any](),
+		WithRequiredPermissions("policy-events.read"),
 	)
 
 	s.AddTool(tool, h.handle)
-}
-
-func (h *ToolListRuntimeEvents) CanBeUsed() bool {
-	return h.permissionChecker.HasPermission("policy-events.read")
 }
