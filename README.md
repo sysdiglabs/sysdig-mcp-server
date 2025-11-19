@@ -80,6 +80,8 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
 
 ## Available Tools
 
+The server dynamically filters the available tools based on the permissions associated with the API token used for the request. If the token lacks the required permissions for a tool, that tool will not be listed.
+
 - **`get_event_info`**
   - **Description**: Retrieve detailed information for a specific security event by its ID.
   - **Required Permission**: `policy-events.read`
@@ -114,7 +116,7 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
 
 The following environment variables are **required** for configuring the Sysdig SDK:
 
-- `SYSDIG_MCP_API_HOST`: The URL of your Sysdig Secure instance (e.g., `https://us2.app.sysdig.com`).
+- `SYSDIG_MCP_API_HOST`: The URL of your Sysdig Secure instance (e.g., `https://us2.app.sysdig.com`). **Required when using `stdio` transport.**
 - `SYSDIG_MCP_API_SECURE_TOKEN`: Your Sysdig Secure API token. **Required only when using `stdio` transport.**
 
 You can also set the following variables to override the default configuration:
@@ -131,16 +133,27 @@ You can find your API token in the Sysdig Secure UI under **Settings > Sysdig Se
 ![API_TOKEN_SETTINGS](./docs/assets/api-token-copy.png)
 
 
-**Example configuration:**
+**Example configuration (stdio):**
 
 ```bash
-# Required Configuration
+# Required
 SYSDIG_MCP_API_HOST=https://us2.app.sysdig.com
 SYSDIG_MCP_API_SECURE_TOKEN=your-api-token-here
 
-# Optional Configuration (with defaults)
+# Optional
 SYSDIG_MCP_TRANSPORT=stdio
 SYSDIG_MCP_LOGLEVEL=INFO
+```
+
+**Example configuration (streamable-http / sse):**
+
+```bash
+# Required
+SYSDIG_MCP_TRANSPORT=streamable-http
+
+# Optional (Host and Token can be provided via HTTP headers)
+# SYSDIG_MCP_API_HOST=https://us2.app.sysdig.com
+# SYSDIG_MCP_API_SECURE_TOKEN=your-api-token-here
 SYSDIG_MCP_LISTENING_PORT=8080
 SYSDIG_MCP_LISTENING_HOST=localhost
 SYSDIG_MCP_MOUNT_PATH=/sysdig-mcp-server
@@ -233,7 +246,9 @@ To use the MCP server with a client like Claude or Cursor, you need to provide t
 
 When using the `sse` or `streamable-http` transport, the server requires a Bearer token for authentication. The token is passed in the `X-Sysdig-Token` or default to `Authorization` header of the HTTP request (i.e `Bearer SYSDIG_SECURE_API_TOKEN`).
 
-Additionally, you can specify the Sysdig Secure host by providing the `X-Sysdig-Host` header. If this header is not present, the server will use the value from the env variable `SYSDIG_MCP_API_HOST`.
+Additionally, you can specify the Sysdig Secure host by providing the `X-Sysdig-Host` header.
+
+> **Note:** When provided, the authentication headers (`Authorization`, `X-Sysdig-Token`) and host header (`X-Sysdig-Host`) take precedence over the configured environment variables.
 
 Example headers:
 

@@ -16,7 +16,7 @@ type Config struct {
 }
 
 func (c *Config) Validate() error {
-	if c.APIHost == "" {
+	if c.Transport == "stdio" && c.APIHost == "" {
 		return fmt.Errorf("required configuration missing: SYSDIG_MCP_API_HOST")
 	}
 	if c.Transport == "stdio" && c.APIToken == "" {

@@ -22,13 +22,23 @@ var _ = Describe("Config", func() {
 		})
 
 		Context("with a missing api host", func() {
-			It("should return an error", func() {
+			It("should return an error if transport is stdio", func() {
 				cfg := &config.Config{
-					APIToken: "token",
+					Transport: "stdio",
+					APIToken:  "token",
 				}
 				err := cfg.Validate()
 				Expect(err).To(HaveOccurred())
 				Expect(err.Error()).To(ContainSubstring("SYSDIG_MCP_API_HOST"))
+			})
+
+			It("should not return an error if transport is not stdio", func() {
+				cfg := &config.Config{
+					Transport: "sse",
+					APIToken:  "token",
+				}
+				err := cfg.Validate()
+				Expect(err).ToNot(HaveOccurred())
 			})
 		})
 
