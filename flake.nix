@@ -31,6 +31,7 @@
             with pkgs;
             mkShell {
               packages = [
+                pre-commit
                 basedpyright
                 ginkgo
                 go_1_25
@@ -43,6 +44,9 @@
                 sysdig-cli-scanner
                 uv
               ];
+              shellHook = ''
+                pre-commit install
+              '';
             };
 
           formatter = pkgs.nixfmt-rfc-style;

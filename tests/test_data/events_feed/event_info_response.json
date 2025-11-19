@@ -44,7 +44,7 @@
     "rawEventOriginator": "linuxAgent",
     "severity": 0,
     "source": "syscall",
-    "sourceDetails": { 
+    "sourceDetails": {
       "subType": "host",
       "type": "workload"
     },

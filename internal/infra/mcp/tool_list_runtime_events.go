@@ -82,7 +82,7 @@ Combine with and/or/not.
 Key attributes include: severity (codes "0"-"7"), originator, sourceType, ruleName, rawEventCategory, kubernetes.cluster.name, host.hostName, container.imageName, aws.accountId, azure.subscriptionId, gcp.projectId, policyId, trigger.
 
 You can specify the severity of the events based on the following cases:
-- high-severity: 'severity in ("0","1","2","3")' 
+- high-severity: 'severity in ("0","1","2","3")'
 - medium: 'severity in ("4","5")'
 - low: 'severity in ("6")'
 - info: 'severity in ("7")'

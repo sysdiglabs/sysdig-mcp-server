@@ -82,7 +82,6 @@ class SysQLTools:
             self.log.error(f"Failed to execute SysQL query: {e}")
             raise e
 
-
     async def tool_run_sysql(self, ctx: Context, sysql_query: str) -> dict:
         """
         Executes a pre-written SysQL query directly against the Sysdig API and returns the results.
@@ -128,8 +127,7 @@ class SysQLTools:
             execution_time = (time.time() - start_time) * 1000
             self.log.debug(f"SysQL query executed in {execution_time} ms")
             response = create_standard_response(
-                results=results, execution_time_ms=execution_time,
-                metadata_kwargs={"sysql_query": sysql_query}
+                results=results, execution_time_ms=execution_time, metadata_kwargs={"sysql_query": sysql_query}
             )
 
             return response

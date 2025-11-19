@@ -3,7 +3,7 @@ buildGoModule (finalAttrs: {
   pname = "sysdig-mcp-server";
   version = "0.4.0";
   src = ./.;
-  vendorHash = "sha256-O7dPOQ8BvjF9mlI0A7/g4aOvvUIoQ+ODL2mlwECGMtI=";
+  vendorHash = "sha256-jf/px0p88XbfuSPMry/qZcfR0QPTF9IrPegg2CwAd6M=";
 
   subPackages = [
     "cmd/server"

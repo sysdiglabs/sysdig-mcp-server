@@ -61,6 +61,7 @@ async def test_cli_scanner_tool_vulnerability_scan():
     """
     Tests the CliScannerTool's vulnerability scan.
     """
+
     def assert_vulns(output: JsonObject):
         assert "exit_code" in output
         output_str = output.get("output", "")
@@ -73,11 +74,13 @@ async def test_cli_scanner_tool_vulnerability_scan():
         assert_vulns,
     )
 
+
 @pytest.mark.e2e
 async def test_cli_scanner_tool_vulnerability_scan_full_table():
     """
     Tests the CliScannerTool's vulnerability scan with the full_vulnerability_table parameter.
     """
+
     def assert_full_table(output: JsonObject):
         assert "exit_code" in output
         output_str = output.get("output", "")
@@ -103,6 +106,7 @@ async def test_cli_scanner_tool_iac_scan():
     """
     Tests the CliScannerTool's IaC scan.
     """
+
     def assert_iac(output: JsonObject):
         assert "exit_code" in output
         output_str = output.get("output", "")
@@ -121,6 +125,7 @@ async def test_cli_scanner_tool_iac_scan_with_violations():
     """
     Tests the CliScannerTool's IaC scan with a file containing violations.
     """
+
     def assert_iac_violations(output: JsonObject):
         # The exit code might be 1 (fail) or 0 if only low/medium severity issues are found.
         # The important part is that the violation text is present.
@@ -140,6 +145,7 @@ async def test_cli_scanner_tool_iac_scan_group_by_resource():
     """
     Tests the CliScannerTool's IaC scan with grouping by resource.
     """
+
     def assert_iac_violations(output: JsonObject):
         # The exit code might be 1 (fail) or 0.
         # The important part is that the resource name is present in the output.
@@ -163,6 +169,7 @@ async def test_events_feed_tools_list_runtime_events():
     """
     Tests the EventsFeedTools' list_runtime_events.
     """
+
     def assert_events(output: JsonObject):
         assert output["status_code"] == 200
         results = output.get("results")
@@ -178,6 +185,7 @@ async def test_events_feed_tools_list_runtime_events_with_filter():
     """
     Tests the EventsFeedTools' list_runtime_events with a severity filter.
     """
+
     def assert_events(output: JsonObject):
         assert output["status_code"] == 200
         results = output.get("results")
@@ -253,6 +261,7 @@ async def test_sysql_tools_generate_and_run_sysql_query():
     """
     Tests the SysQLTools' generate_and_run_sysql.
     """
+
     def assert_sysql(output: JsonObject):
         assert output["status_code"] == 200
         results = output.get("results")
@@ -282,6 +291,7 @@ async def test_sysql_tools_run_sysql_query():
     """
     Tests the SysQLTools' run_sysql.
     """
+
     def assert_sysql(output: JsonObject):
         assert output["status_code"] == 200
         results = output.get("results")

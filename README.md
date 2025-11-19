@@ -272,7 +272,7 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
     - Click on **Edit Config** to open the `claude_desktop_config.json` file.
 
 2. **Add the MCP server configuration**:
-    
+
     **Option A: Using Docker (Recommended)**
 
     ```json
@@ -367,4 +367,3 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
 3. Have fun
 
 ![goose_results](./docs/assets/goose_results.png)
-
