@@ -87,21 +87,21 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
 <details>
 <summary><strong>Events Feed</strong></summary>
 
-| Tool Name | Description | Sample Prompt |
-|-----------|-------------|----------------|
-| `get_event_info` | Retrieve detailed information for a specific security event by its ID | "Get full details for event ID 123abc" |
-| `list_runtime_events` | List runtime security events with optional filters | "Show me high severity events from the last 2 hours in cluster1" |
-| `get_event_process_tree` | Retrieve the process tree for a specific event (if available) | "Get the process tree for event ID abc123" |
+| Tool Name | Description | Required Permission | Sample Prompt |
+|-----------|-------------|---------------------|----------------|
+| `get_event_info` | Retrieve detailed information for a specific security event by its ID | `policy-events.read` | "Get full details for event ID 123abc" |
+| `list_runtime_events` | List runtime security events with optional filters | `policy-events.read` | "Show me high severity events from the last 2 hours in cluster1" |
+| `get_event_process_tree` | Retrieve the process tree for a specific event (if available) | `policy-events.read` | "Get the process tree for event ID abc123" |
 
 </details>
 
 <details>
 <summary><strong>Sysdig SysQL</strong></summary>
 
-| Tool Name | Description | Sample Prompt |
-|-----------|-------------|----------------|
-| `generate_and_run_sysql` | Generate and run a SysQL query using natural language | "List top 10 pods by memory usage in the last hour" |
-| `run_sysql` | Execute a pre-written SysQL query directly (use only when user provides explicit query) | "Run this query: MATCH CloudResource WHERE type = 'aws_s3_bucket' LIMIT 10" |
+| Tool Name | Description | Required Permission | Sample Prompt |
+|-----------|-------------|---------------------|----------------|
+| `generate_sysql` | Generates a SysQL query from a natural language question. | `sage.exec` | "List top 10 pods by memory usage in the last hour" |
+| `run_sysql` | Execute a pre-written SysQL query directly (use only when user provides explicit query) | `sage.exec`, `risks.read` | "Run this query: MATCH CloudResource WHERE type = 'aws_s3_bucket' LIMIT 10" |
 
 </details>
 
@@ -203,7 +203,7 @@ To use the MCP server tools, your API token needs specific permissions in Sysdig
 For detailed instructions, see the official [Sysdig Roles Administration documentation](https://docs.sysdig.com/en/administration/roles-administration/).
 
 >[!IMPORTANT]
-> **Service Account Limitation:** The `generate_and_run_sysql` tool currently does not work with Service Account tokens and will return a 500 error. For this tool, use an API token assigned to a regular user account.
+> **Service Account Limitation:** The `generate_sysql` tool currently does not work with Service Account tokens and will return a 500 error. For this tool, use an API token assigned to a regular user account.
 
 
 ## Running the Server
