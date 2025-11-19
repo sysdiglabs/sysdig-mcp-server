@@ -3,7 +3,7 @@ buildGoModule (finalAttrs: {
   pname = "sysdig-cli-scanner";
   version = "0.4.0";
   src = ./.;
-  vendorHash = "sha256-hZd6N3lPSLky7sJfD6zaj0xBr8irXRh2ckE/Lp9BmH4=";
+  vendorHash = "sha256-O7dPOQ8BvjF9mlI0A7/g4aOvvUIoQ+ODL2mlwECGMtI=";
 
   subPackages = [
     "cmd/server"
