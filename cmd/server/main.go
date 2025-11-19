@@ -2,12 +2,12 @@ package main
 
 import (
 	"context"
-	"flag"
 	"fmt"
 	"log/slog"
 	"os"
 	"strings"
 
+	"github.com/spf13/cobra"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/config"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp"
@@ -17,16 +17,19 @@ import (
 var Version = "dev"
 
 func main() {
-	versionFlag := flag.Bool("v", false, "Print version and exit")
-	flag.Parse()
-
-	if *versionFlag {
-		fmt.Println(Version)
-		os.Exit(0)
+	rootCmd := &cobra.Command{
+		Use:     "sysdig-mcp-server",
+		Short:   "Sysdig MCP Server",
+		Version: Version,
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return run()
+		},
+		SilenceUsage: true,
 	}
 
-	if err := run(); err != nil {
-		slog.Error("application failed", "error", err)
+	rootCmd.SetVersionTemplate("{{.Version}}\n")
+
+	if err := rootCmd.Execute(); err != nil {
 		os.Exit(1)
 	}
 }
