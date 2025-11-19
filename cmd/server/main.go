@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"log/slog"
 	"os"
@@ -13,7 +14,17 @@ import (
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
+var Version = "dev"
+
 func main() {
+	versionFlag := flag.Bool("v", false, "Print version and exit")
+	flag.Parse()
+
+	if *versionFlag {
+		fmt.Println(Version)
+		os.Exit(0)
+	}
+
 	if err := run(); err != nil {
 		slog.Error("application failed", "error", err)
 		os.Exit(1)

@@ -9,33 +9,45 @@
       nixpkgs,
       flake-utils,
     }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-      in
-      {
-        devShells.default =
-          with pkgs;
-          mkShell {
-            packages = [
-              go_1_25
-              ginkgo
-              mockgen
-              gofumpt
-              just
-              python3
-              uv
-              ruff
-              basedpyright
-              sysdig-cli-scanner
-            ];
+    let
+      overlays.default = final: prev: {
+        sysdig-mcp-server = prev.callPackage ./package.nix { };
+      };
+      flake = flake-utils.lib.eachDefaultSystem (
+        system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+            overlays = [ self.overlays.default ];
           };
+        in
+        {
+          packages = {
+            inherit (pkgs) sysdig-mcp-server;
+            default = pkgs.sysdig-mcp-server;
+          };
+          devShells.default =
+            with pkgs;
+            mkShell {
+              packages = [
+                basedpyright
+                ginkgo
+                go_1_25
+                gofumpt
+                just
+                mockgen
+                python3
+                ruff
+                sd
+                sysdig-cli-scanner
+                uv
+              ];
+            };
 
-        formatter = pkgs.nixfmt-rfc-style;
-      }
-    );
+          formatter = pkgs.nixfmt-rfc-style;
+        }
+      );
+    in
+    flake // { inherit overlays; };
 }

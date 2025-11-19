@@ -24,3 +24,13 @@ generate:
 # Run tests and generate coverage report
 test-coverage: generate
     go test -coverprofile=coverage.out ./...
+
+bump:
+	nix flake update
+	nix develop --command go get -u -t -v ./...
+	nix develop --command go mod tidy
+	nix develop --command just rehash-package-nix
+
+rehash-package-nix:
+	sd 'vendorHash = ".*";' 'vendorHash = "";' package.nix; h="$((nix build -L --no-link .#default || true) 2>&1 | sed -nE 's/.*got:[[:space:]]+([^ ]+).*/\1/p' | tail -1)"; [ -n "$h" ] && sd 'vendorHash = ".*";' "vendorHash = \"$h\";" package.nix && echo "vendorHash -> $h"
+
