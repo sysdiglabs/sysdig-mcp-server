@@ -88,17 +88,27 @@ func (h *Handler) ServeStdio(ctx context.Context, stdin io.Reader, stdout io.Wri
 }
 
 func (h *Handler) ServeStreamableHTTP(addr, mountPath string) error {
-	httpServer := server.NewStreamableHTTPServer(h.server)
-	http.Handle(mountPath, authMiddleware(httpServer))
 	fmt.Printf("MCP Server listening on %s%s\n", addr, mountPath)
-	return http.ListenAndServe(addr, nil)
+	return http.ListenAndServe(addr, h.AsStreamableHTTP(mountPath))
+}
+
+func (h *Handler) AsStreamableHTTP(mountPath string) http.Handler {
+	mux := http.NewServeMux()
+	httpServer := server.NewStreamableHTTPServer(h.server)
+	mux.Handle(mountPath, authMiddleware(httpServer))
+	return mux
 }
 
 func (h *Handler) ServeSSE(addr, mountPath string) error {
-	sseServer := server.NewSSEServer(h.server, server.WithStaticBasePath(mountPath))
-	http.Handle(mountPath, authMiddleware(sseServer))
 	fmt.Printf("MCP Server listening on %s%s\n", addr, mountPath)
-	return http.ListenAndServe(addr, nil)
+	return http.ListenAndServe(addr, h.AsSSE(mountPath))
+}
+
+func (h *Handler) AsSSE(mountPath string) http.Handler {
+	mux := http.NewServeMux()
+	sseServer := server.NewSSEServer(h.server, server.WithStaticBasePath(mountPath))
+	mux.Handle(mountPath, authMiddleware(sseServer))
+	return mux
 }
 
 func (h *Handler) ServeInProcessClient() (*client.Client, error) {
