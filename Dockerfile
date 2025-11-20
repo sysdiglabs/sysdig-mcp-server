@@ -9,16 +9,15 @@ COPY . /app
 # Build the default package from the flake
 # This will produce a 'result' symlink in the working directory
 RUN nix build .#default
-RUN cp ./result/bin/server /app/sysdig-mcp-server
 
 # Final image
 # quay.io/sysdig/sysdig-mini-ubi9:1
 FROM quay.io/sysdig/sysdig-mini-ubi9@sha256:dcef7a07dc6a8655cbee5e2f3ad7822dea5a0cf4929b1b9effa39e56ce928ca0
 
 # Copy the binary from the builder stage
-COPY --from=builder /app/sysdig-mcp-server /sysdig-mcp-server
+COPY --from=builder /app/result/bin/sysdig-mcp-server /usr/local/bin/sysdig-mcp-server
 
 # Run as non-root user (numeric ID)
 USER 1000
 
-ENTRYPOINT ["/sysdig-mcp-server"]
+ENTRYPOINT ["sysdig-mcp-server"]

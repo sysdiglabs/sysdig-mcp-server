@@ -1,4 +1,4 @@
-{ buildGoModule }:
+{ buildGoModule, versionCheckHook }:
 buildGoModule (finalAttrs: {
   pname = "sysdig-mcp-server";
   version = "0.4.0";
@@ -18,9 +18,16 @@ buildGoModule (finalAttrs: {
   doCheck = false;
   env.CGO_ENABLED = 0;
 
+  postInstall = ''
+    mv $out/bin/server $out/bin/sysdig-mcp-server
+  '';
+
+  nativeInstallCheckInputs = [ versionCheckHook ];
+  doInstallCheck = true;
+
   meta = {
     description = "Sysdig MCP Server";
     homepage = "https://github.com/sysdiglabs/sysdig-mcp-server";
-    mainProgram = "server";
+    mainProgram = "sysdig-mcp-server";
   };
 })

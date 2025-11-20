@@ -31,18 +31,14 @@
             with pkgs;
             mkShell {
               packages = [
-                pre-commit
-                basedpyright
                 ginkgo
                 go_1_25
                 gofumpt
+                golangci-lint
                 just
                 mockgen
-                python3
-                ruff
+                pre-commit
                 sd
-                sysdig-cli-scanner
-                uv
               ];
               shellHook = ''
                 pre-commit install
