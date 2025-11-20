@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
+	"net/http"
 	"os"
 	"strings"
 
@@ -100,17 +101,18 @@ func startServer(cfg *config.Config, handler *mcp.Handler) error {
 	switch cfg.Transport {
 	case "stdio":
 		if err := handler.ServeStdio(context.Background(), os.Stdin, os.Stdout); err != nil {
-			// Stdio server errors are not fatal for the process, just print them
-			fmt.Printf("Server error: %v\n", err)
+			slog.Error("server error", "err", err)
 		}
 	case "streamable-http":
 		addr := fmt.Sprintf("%s:%s", cfg.ListeningHost, cfg.ListeningPort)
-		if err := handler.ServeStreamableHTTP(addr, cfg.MountPath); err != nil {
+		slog.Info("MCP Server listening", "addr", addr, "mountPath", cfg.MountPath)
+		if err := http.ListenAndServe(addr, handler.AsStreamableHTTP(cfg.MountPath)); err != nil {
 			return fmt.Errorf("error serving streamable http: %w", err)
 		}
 	case "sse":
 		addr := fmt.Sprintf("%s:%s", cfg.ListeningHost, cfg.ListeningPort)
-		if err := handler.ServeSSE(addr, cfg.MountPath); err != nil {
+		slog.Info("MCP Server listening", "addr", addr, "mountPath", cfg.MountPath)
+		if err := http.ListenAndServe(addr, handler.AsSSE(cfg.MountPath)); err != nil {
 			return fmt.Errorf("error serving sse: %w", err)
 		}
 	default:

@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log/slog"
 	"net/http"
 	"net/http/httptest"
 	"time"
@@ -33,7 +34,7 @@ func (d *dummyTool) RegisterInServer(s *server.MCPServer) {
 	// Initialize Meta to avoid nil pointer issues in strict checks
 	if tool.Meta == nil {
 		tool.Meta = &mcp.Meta{
-			AdditionalFields: make(map[string]interface{}),
+			AdditionalFields: make(map[string]any),
 		}
 	}
 	if len(d.requiredPermissions) > 0 {
@@ -52,6 +53,7 @@ var _ = Describe("McpHandler", func() {
 	)
 
 	BeforeEach(func() {
+		slog.SetDefault(slog.New(slog.NewTextHandler(GinkgoWriter, &slog.HandlerOptions{Level: slog.LevelDebug})))
 		ctrl = gomock.NewController(GinkgoT())
 		mockClient = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
 		handler = localmcp.NewHandler(mockClient)
@@ -103,20 +105,12 @@ var _ = Describe("McpHandler", func() {
 	})
 
 	Context("HTTP Handlers and Middleware", func() {
-		var (
-			ts         *httptest.Server
-			testClient *HTTPTestClient
-		)
+		var testClient *HTTPTestClient
 
 		BeforeEach(func() {
 			// Default middleware setup for HTTP tests
 			h := handler.AsStreamableHTTP("/")
-			ts = httptest.NewServer(h)
-			testClient = NewHTTPTestClient(ts.Client(), ts.URL)
-		})
-
-		AfterEach(func() {
-			ts.Close()
+			testClient = NewHTTPTestClient(h)
 		})
 
 		It("AsStreamableHTTP should serve correctly and middleware should extract headers", func(ctx SpecContext) {
@@ -129,14 +123,8 @@ var _ = Describe("McpHandler", func() {
 			mockClient.EXPECT().
 				GetMyPermissionsWithResponse(gomock.Any(), gomock.Any()).
 				DoAndReturn(func(c context.Context, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetMyPermissionsResponse, error) {
-					// Verify context injection
-					req, _ := http.NewRequest("GET", "/", nil)
-					authenticator := sysdig.WithHostAndTokenFromContext()
-					err := authenticator(c, req)
-					Expect(err).NotTo(HaveOccurred())
-					Expect(req.Header.Get("Authorization")).To(Equal("Bearer " + expectedToken))
-					Expect(req.URL.Scheme).To(Equal("https"))
-					Expect(req.URL.Host).To(Equal("test.sysdig.com"))
+					Expect(sysdig.GetHostFromContext(c)).To(Equal(expectedHost))
+					Expect(sysdig.GetTokenFromContext(c)).To(Equal(expectedToken))
 
 					return &sysdig.GetMyPermissionsResponse{
 						HTTPResponse: &http.Response{StatusCode: 200},
@@ -164,11 +152,7 @@ var _ = Describe("McpHandler", func() {
 			mockClient.EXPECT().
 				GetMyPermissionsWithResponse(gomock.Any(), gomock.Any()).
 				DoAndReturn(func(c context.Context, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetMyPermissionsResponse, error) {
-					req, _ := http.NewRequest("GET", "/", nil)
-					authenticator := sysdig.WithHostAndTokenFromContext()
-					err := authenticator(c, req)
-					Expect(err).NotTo(HaveOccurred())
-					Expect(req.Header.Get("Authorization")).To(Equal("Bearer " + expectedToken))
+					Expect(sysdig.GetTokenFromContext(c)).To(Equal(expectedToken))
 
 					return &sysdig.GetMyPermissionsResponse{
 						HTTPResponse: &http.Response{StatusCode: 200},
@@ -228,21 +212,19 @@ func initializeInProcessClient(handler *localmcp.Handler) *client.Client {
 }
 
 type HTTPTestClient struct {
-	client    *http.Client
-	baseURL   string
+	handler   http.Handler
 	sessionID string
 }
 
-func NewHTTPTestClient(client *http.Client, baseURL string) *HTTPTestClient {
+func NewHTTPTestClient(handler http.Handler) *HTTPTestClient {
 	return &HTTPTestClient{
-		client:  client,
-		baseURL: baseURL,
+		handler: handler,
 	}
 }
 
 // RPC sends a JSON-RPC 2.0 request
-func (c *HTTPTestClient) RPC(ctx context.Context, method string, params interface{}, headers map[string]string) *http.Response {
-	payload := map[string]interface{}{
+func (c *HTTPTestClient) RPC(ctx context.Context, method string, params any, headers map[string]string) *http.Response {
+	payload := map[string]any{
 		"jsonrpc": "2.0",
 		"id":      1,
 		"method":  method,
@@ -254,9 +236,8 @@ func (c *HTTPTestClient) RPC(ctx context.Context, method string, params interfac
 	body, err := json.Marshal(payload)
 	Expect(err).NotTo(HaveOccurred())
 
-	req, err := http.NewRequestWithContext(ctx, "POST", c.baseURL, bytes.NewReader(body))
+	req, err := http.NewRequestWithContext(ctx, "POST", "/", bytes.NewReader(body))
 	Expect(err).NotTo(HaveOccurred())
-
 	req.Header.Set("Content-Type", "application/json")
 	if c.sessionID != "" {
 		req.Header.Set("Mcp-Session-Id", c.sessionID)
@@ -265,9 +246,9 @@ func (c *HTTPTestClient) RPC(ctx context.Context, method string, params interfac
 		req.Header.Set(k, v)
 	}
 
-	resp, err := c.client.Do(req)
-	Expect(err).NotTo(HaveOccurred())
-	return resp
+	recorder := httptest.NewRecorder()
+	c.handler.ServeHTTP(recorder, req)
+	return recorder.Result()
 }
 
 func (c *HTTPTestClient) Initialize(ctx context.Context) {

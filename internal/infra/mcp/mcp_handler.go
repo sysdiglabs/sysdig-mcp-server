@@ -2,7 +2,6 @@ package mcp
 
 import (
 	"context"
-	"fmt"
 	"io"
 	"log/slog"
 	"net/http"
@@ -87,21 +86,11 @@ func (h *Handler) ServeStdio(ctx context.Context, stdin io.Reader, stdout io.Wri
 	return server.NewStdioServer(h.server).Listen(ctx, stdin, stdout)
 }
 
-func (h *Handler) ServeStreamableHTTP(addr, mountPath string) error {
-	fmt.Printf("MCP Server listening on %s%s\n", addr, mountPath)
-	return http.ListenAndServe(addr, h.AsStreamableHTTP(mountPath))
-}
-
 func (h *Handler) AsStreamableHTTP(mountPath string) http.Handler {
 	mux := http.NewServeMux()
 	httpServer := server.NewStreamableHTTPServer(h.server)
 	mux.Handle(mountPath, authMiddleware(httpServer))
 	return mux
-}
-
-func (h *Handler) ServeSSE(addr, mountPath string) error {
-	fmt.Printf("MCP Server listening on %s%s\n", addr, mountPath)
-	return http.ListenAndServe(addr, h.AsSSE(mountPath))
 }
 
 func (h *Handler) AsSSE(mountPath string) http.Handler {
@@ -117,9 +106,11 @@ func (h *Handler) ServeInProcessClient() (*client.Client, error) {
 
 func authMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		slog.Debug("starting middleware", "headers", r.Header.Clone())
 		ctx := r.Context()
 
 		if host := r.Header.Get("X-Sysdig-Host"); host != "" {
+			slog.Debug("setting up host", "host", host)
 			ctx = sysdig.WrapContextWithHost(ctx, host)
 		}
 
@@ -137,9 +128,8 @@ func authMiddleware(next http.Handler) http.Handler {
 		}
 
 		if token != "" {
+			slog.Debug("setting up token", "token", token)
 			ctx = sysdig.WrapContextWithToken(ctx, token)
-			next.ServeHTTP(w, r.WithContext(ctx))
-			return
 		}
 
 		next.ServeHTTP(w, r.WithContext(ctx))

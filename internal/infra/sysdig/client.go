@@ -20,8 +20,16 @@ func WrapContextWithToken(ctx context.Context, token string) context.Context {
 	return context.WithValue(ctx, contextKeyToken, token)
 }
 
+func GetTokenFromContext(ctx context.Context) string {
+	return ctx.Value(contextKeyToken).(string)
+}
+
 func WrapContextWithHost(ctx context.Context, host string) context.Context {
 	return context.WithValue(ctx, contextKeyHost, host)
+}
+
+func GetHostFromContext(ctx context.Context) string {
+	return ctx.Value(contextKeyHost).(string)
 }
 
 func updateReqWithHostURL(req *http.Request, host string) error {
