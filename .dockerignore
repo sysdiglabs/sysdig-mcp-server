@@ -1,15 +1,11 @@
-
 examples/
-.venv/
 .github/
 .idea/
 .vscode/
 .env
 .gitignore
 CONTRIBUTING.md
-flake8.ini
 LICENSE.*
 README.md
-__pycache__/*
 lib/
-.python-version
+.secrets
