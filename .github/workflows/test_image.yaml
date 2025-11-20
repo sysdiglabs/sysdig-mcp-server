@@ -3,14 +3,9 @@ name: Test Image Build
 
 on:
   pull_request:
-    paths:
-      - pyproject.toml
-      - Dockerfile
-      - "*.py"
-      - tests/**
-      - tools/**
-      - utils/**
-      - .github/workflows/**
+    branches:
+      - main
+      - master
   workflow_call:
   workflow_dispatch:
 
@@ -32,22 +27,19 @@ jobs:
           ref: ${{ github.sha }} # required for better experience using pre-releases
           fetch-depth: "0" # Required due to the way Git works, without it this action won't be able to find any or the correct tags
 
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Build Docker image and test push action
         id: build-to-test
         uses: docker/build-push-action@v6
         with:
           context: .
           load: true
-          push: true
+          push: false
           tags: |
             ghcr.io/sysdiglabs/sysdig-mcp-server:test
+
+      - name: Test we can execute the docker image
+        run: |
+          docker run --rm ghcr.io/sysdiglabs/sysdig-mcp-server:test --help | grep "Sysdig MCP Server"
 
       - name: Scan Docker image
         uses: sysdiglabs/scan-action@v6

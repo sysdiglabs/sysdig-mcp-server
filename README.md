@@ -1,8 +1,6 @@
-# MCP Server
+# Sysdig MCP Server
 
-| App Test |
-|------|
-| [![App Test](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/publish.yaml/badge.svg?branch=main)](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/publish.yaml) |
+[![App Test](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/publish.yaml/badge.svg?branch=main)](https://github.com/sysdiglabs/sysdig-mcp-server/actions/workflows/publish.yaml)
 
 ---
 
@@ -13,14 +11,12 @@
   - [Description](#description)
   - [Quickstart Guide](#quickstart-guide)
   - [Available Tools](#available-tools)
-    - [Available Resources](#available-resources)
   - [Requirements](#requirements)
-    - [UV Setup](#uv-setup)
   - [Configuration](#configuration)
     - [API Permissions](#api-permissions)
   - [Running the Server](#running-the-server)
-    - [Docker](#docker)
-    - [UV](#uv)
+    - [Docker (Recommended)](#docker-recommended)
+    - [Go](#go)
   - [Client Configuration](#client-configuration)
     - [Authentication](#authentication)
     - [URL](#url)
@@ -37,7 +33,7 @@ This is an implementation of an [MCP (Model Context Protocol) Server](https://mo
 Get up and running with the Sysdig MCP Server quickly using our pre-built Docker image.
 
 1. **Get your API Token**:
-    Go to your Sysdig Secure instance and navigate to **Settings > Sysdig Secure API**. Here, you can generate or copy your API token. This token is required to authenticate requests to the Sysdig Secure platform (See the [Configuration](#configuration) section for more details).
+    Go to your Sysdig Secure instance and navigate to **Settings > Sysdig Secure API**. Here, you can generate or copy your API token. This token is required to authenticate requests to the Sysdig Platform (See the [Configuration](#configuration) section for more details).
 
 2. **Pull the image**:
 
@@ -84,92 +80,80 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
 
 ## Available Tools
 
-<details>
-<summary><strong>Events Feed</strong></summary>
+The server dynamically filters the available tools based on the permissions associated with the API token used for the request. If the token lacks the required permissions for a tool, that tool will not be listed.
 
-| Tool Name | Description | Sample Prompt |
-|-----------|-------------|----------------|
-| `get_event_info` | Retrieve detailed information for a specific security event by its ID | "Get full details for event ID 123abc" |
-| `list_runtime_events` | List runtime security events with optional filters | "Show me high severity events from the last 2 hours in cluster1" |
-| `get_event_process_tree` | Retrieve the process tree for a specific event (if available) | "Get the process tree for event ID abc123" |
+- **`get_event_info`**
+  - **Description**: Retrieve detailed information for a specific security event by its ID.
+  - **Required Permission**: `policy-events.read`
+  - **Sample Prompt**: "Get full details for event ID 123abc"
 
-</details>
+- **`list_runtime_events`**
+  - **Description**: List runtime security events from the last given hours, optionally filtered by severity level.
+  - **Required Permission**: `policy-events.read`
+  - **Sample Prompt**: "Show me high severity events from the last 2 hours in cluster1"
 
-<details>
-<summary><strong>Sysdig SysQL</strong></summary>
+- **`get_event_process_tree`**
+  - **Description**: Retrieve the process tree for a specific event (if available).
+  - **Required Permission**: `policy-events.read`
+  - **Sample Prompt**: "Get the process tree for event ID abc123"
 
-| Tool Name | Description | Sample Prompt |
-|-----------|-------------|----------------|
-| `generate_and_run_sysql` | Generate and run a SysQL query using natural language | "List top 10 pods by memory usage in the last hour" |
-| `run_sysql` | Execute a pre-written SysQL query directly (use only when user provides explicit query) | "Run this query: MATCH CloudResource WHERE type = 'aws_s3_bucket' LIMIT 10" |
+- **`generate_sysql`**
+  - **Description**: Generates a SysQL query from a natural language question.
+  - **Required Permission**: `sage.exec`
+  - **Sample Prompt**: "List top 10 pods by memory usage in the last hour"
+  - **Note**: The `generate_sysql` tool currently does not work with Service Account tokens and will return a 500 error. For this tool, use an API token assigned to a regular user account.
 
-</details>
-
-<details>
-<summary><strong>Sysdig CLI scanner</strong></summary>
-
-> **Note:** This tool is **only available when using `stdio` transport**. It is not available for `streamable-http` or `sse` transports.
-
-| Tool Name | Description | Sample Prompt |
-|-----------|-------------|----------------|
-| `run_sysdig_cli_scanner` | Run the Sysdig CLI Scanner to analyze a container image or IaC files for vulnerabilities and posture and misconfigurations. | "Scan this image ubuntu:latest for vulnerabilities" |
-
-</details>
-
-### Available Resources
-
-- Sysdig Filter Query Language Instructions:
-  - Sysdig Filter Query Language for different API endpoint filters
+- **`run_sysql`**
+  - **Description**: Execute a pre-written SysQL query directly (use only when user provides explicit query).
+  - **Required Permission**: `sage.exec`, `risks.read`
+  - **Sample Prompt**: "Run this query: MATCH CloudResource WHERE type = 'aws_s3_bucket' LIMIT 10"
 
 ## Requirements
 
-### UV Setup
-
-You can use [uv](https://github.com/astral-sh/uv) as a drop-in replacement for pip to create the virtual environment and install dependencies.
-
-If you don't have `uv` installed, you can install it following the instructions that you can find on the `README` of the project.
-
-If you want to develop, set up the environment using:
-
-```bash
-uv venv
-source .venv/bin/activate
-```
-
-This will create a virtual environment using `uv` and install the required dependencies.
+- [Go](https://go.dev/doc/install) 1.25 or higher (if running without Docker).
 
 ## Configuration
 
 The following environment variables are **required** for configuring the Sysdig SDK:
 
-- `SYSDIG_MCP_API_HOST`: The URL of your Sysdig Secure instance (e.g., `https://us2.app.sysdig.com`).
-- `SYSDIG_MCP_API_SECURE_TOKEN`: Your Sysdig Secure API token.
+- `SYSDIG_MCP_API_HOST`: The URL of your Sysdig Secure instance (e.g., `https://us2.app.sysdig.com`). **Required when using `stdio` transport.**
+- `SYSDIG_MCP_API_SECURE_TOKEN`: Your Sysdig Secure API token. **Required only when using `stdio` transport.**
 
 You can also set the following variables to override the default configuration:
 
 - `SYSDIG_MCP_TRANSPORT`: The transport protocol for the MCP Server (`stdio`, `streamable-http`, `sse`). Defaults to: `stdio`.
-- `SYSDIG_MCP_MOUNT_PATH`:  The URL prefix for the Streamable-http/sse deployment. Defaults to: `/sysdig-mcp-server`
+- `SYSDIG_MCP_MOUNT_PATH`:  The URL prefix for the streamable-http/sse deployment. Defaults to: `/sysdig-mcp-server`
 - `SYSDIG_MCP_LOGLEVEL`: Log Level of the application (`DEBUG`, `INFO`, `WARNING`, `ERROR`). Defaults to: `INFO`
-- `SYSDIG_MCP_LISTENING_PORT`: The port for the server when it is deployed using remote protocols (`steamable-http`, `sse`). Defaults to: `8080`
-- `SYSDIG_MCP_LISTENING_HOST`: The host for the server when it is deployed using remote protocols (`steamable-http`, `sse`). Defaults to: `localhost`
+- `SYSDIG_MCP_LISTENING_PORT`: The port for the server when it is deployed using remote protocols (`streamable-http`, `sse`). Defaults to: `8080`
+- `SYSDIG_MCP_LISTENING_HOST`: The host for the server when it is deployed using remote protocols (`streamable-http`, `sse`). Defaults to: `localhost`
 
 You can find your API token in the Sysdig Secure UI under **Settings > Sysdig Secure API**. Make sure to copy the token as it will not be shown again.
 
 ![API_TOKEN_CONFIG](./docs/assets/settings-config-token.png)
 ![API_TOKEN_SETTINGS](./docs/assets/api-token-copy.png)
 
-You can set these variables in your shell or in a `.env` file.
 
-**Example `.env` file:**
+**Example configuration (stdio):**
 
 ```bash
-# Required Configuration
+# Required
 SYSDIG_MCP_API_HOST=https://us2.app.sysdig.com
 SYSDIG_MCP_API_SECURE_TOKEN=your-api-token-here
 
-# Optional Configuration (with defaults)
+# Optional
 SYSDIG_MCP_TRANSPORT=stdio
 SYSDIG_MCP_LOGLEVEL=INFO
+```
+
+**Example configuration (streamable-http / sse):**
+
+```bash
+# Required
+SYSDIG_MCP_TRANSPORT=streamable-http
+
+# Optional (Host and Token can be provided via HTTP headers)
+# SYSDIG_MCP_API_HOST=https://us2.app.sysdig.com
+# SYSDIG_MCP_API_SECURE_TOKEN=your-api-token-here
 SYSDIG_MCP_LISTENING_PORT=8080
 SYSDIG_MCP_LISTENING_HOST=localhost
 SYSDIG_MCP_MOUNT_PATH=/sysdig-mcp-server
@@ -179,13 +163,13 @@ SYSDIG_MCP_MOUNT_PATH=/sysdig-mcp-server
 
 To use the MCP server tools, your API token needs specific permissions in Sysdig Secure. We recommend creating a dedicated Service Account (SA) with a custom role containing only the required permissions.
 
-**Minimum Required Permissions by Tool:**
+**Permissions Mapping:**
 
-| Tool Category | Required Permissions | Sysdig UI Permission Names |
-|--------------|---------------------|---------------------------|
-| **CLI Scanner** | `secure.vm.cli-scanner.exec` | Vulnerability Management: "CLI Execution" (EXEC) |
-| **Threat Detection (Events Feed)** | `policy-events.read` | Threats: "Policy Events" (Read) |
-| **SysQL** | `sage.exec`, `risks.read` | SysQL: "AI Query Generation" (EXEC) + Risks: "Access to risk feature" (Read) |
+| Permission | Sysdig UI Permission Name |
+|------------|---------------------------|
+| `policy-events.read` | Threats: "Policy Events" (Read) |
+| `sage.exec` | SysQL: "AI Query Generation" (EXEC) |
+| `risks.read` | Risks: "Access to risk feature" (Read) |
 
 **Additional Permissions:**
 
@@ -203,47 +187,55 @@ To use the MCP server tools, your API token needs specific permissions in Sysdig
 For detailed instructions, see the official [Sysdig Roles Administration documentation](https://docs.sysdig.com/en/administration/roles-administration/).
 
 >[!IMPORTANT]
-> **Service Account Limitation:** The `generate_and_run_sysql` tool currently does not work with Service Account tokens and will return a 500 error. For this tool, use an API token assigned to a regular user account.
+> **Service Account Limitation:** The `generate_sysql` tool currently does not work with Service Account tokens and will return a 500 error. For this tool, use an API token assigned to a regular user account.
 
 
 ## Running the Server
 
-You can run the MCP server using Docker (recommended for production), `uv` (for development), or install it in your K8s cluster with helm.
+You can run the MCP server using Docker (recommended for production) or directly with Go.
 
 ### Docker (Recommended)
 
 The easiest way to run the server is using the pre-built Docker image from GitHub Container Registry (as shown in the [Quickstart Guide](#quickstart-guide)).
 
-If you need to build the image locally, you can do so with:
-
 ```bash
-docker build -t sysdig-mcp-server .
-```
-
-Then, run the container with the required environment variables:
-
-```bash
-docker run -e SYSDIG_MCP_API_HOST=<your_sysdig_host> -e SYSDIG_MCP_API_SECURE_TOKEN=<your_sysdig_secure_api_token> -e SYSDIG_MCP_TRANSPORT=stdio -p 8080:8080 sysdig-mcp-server
+docker run -e SYSDIG_MCP_API_HOST=<your_sysdig_host> -e SYSDIG_MCP_API_SECURE_TOKEN=<your_sysdig_secure_api_token> -e SYSDIG_MCP_TRANSPORT=stdio -p 8080:8080 ghcr.io/sysdiglabs/sysdig-mcp-server:latest
 ```
 
 To use the `streamable-http` or `sse` transports (for remote MCP clients), set the `SYSDIG_MCP_TRANSPORT` environment variable accordingly:
 
 ```bash
-docker run -e SYSDIG_MCP_TRANSPORT=streamable-http -e SYSDIG_MCP_API_HOST=<your_sysdig_host> -e SYSDIG_MCP_API_SECURE_TOKEN=<your_sysdig_secure_api_token> -p 8080:8080 sysdig-mcp-server
+docker run -e SYSDIG_MCP_TRANSPORT=streamable-http -e SYSDIG_MCP_API_HOST=<your_sysdig_host> -e SYSDIG_MCP_API_SECURE_TOKEN=<your_sysdig_secure_api_token> -p 8080:8080 ghcr.io/sysdiglabs/sysdig-mcp-server:latest
 ```
 
-### UV (Development)
+### Go
 
-For local development, you can run the server using `uv`. First set up the environment as described in the [UV Setup](#uv-setup) section, then run:
+You can run the server directly using Go without cloning the repository:
 
 ```bash
-uv run main.py
+go run github.com/sysdiglabs/sysdig-mcp-server/cmd/server@latest
 ```
 
 By default, the server will run using the `stdio` transport. To use the `streamable-http` or `sse` transports, set the `SYSDIG_MCP_TRANSPORT` environment variable:
 
 ```bash
-SYSDIG_MCP_TRANSPORT=streamable-http uv run main.py
+SYSDIG_MCP_TRANSPORT=streamable-http go run github.com/sysdiglabs/sysdig-mcp-server/cmd/server@latest
+```
+
+## Local Development
+
+For local development, we provide a `flake.nix` file that sets up a reproducible environment with all necessary dependencies (Go, development tools, linters, etc.).
+
+If you have [Nix](https://nixos.org/) installed, you can enter the development shell:
+
+```bash
+nix develop
+```
+
+If you use [direnv](https://direnv.net/), simply run:
+
+```bash
+direnv allow
 ```
 
 ## Client Configuration
@@ -254,7 +246,9 @@ To use the MCP server with a client like Claude or Cursor, you need to provide t
 
 When using the `sse` or `streamable-http` transport, the server requires a Bearer token for authentication. The token is passed in the `X-Sysdig-Token` or default to `Authorization` header of the HTTP request (i.e `Bearer SYSDIG_SECURE_API_TOKEN`).
 
-Additionally, you can specify the Sysdig Secure host by providing the `X-Sysdig-Host` header. If this header is not present, the server will use the value from the env variable `SYSDIG_MCP_API_HOST`.
+Additionally, you can specify the Sysdig Secure host by providing the `X-Sysdig-Host` header.
+
+> **Note:** When provided, the authentication headers (`Authorization`, `X-Sysdig-Token`) and host header (`X-Sysdig-Host`) take precedence over the configured environment variables.
 
 Example headers:
 
@@ -271,37 +265,15 @@ For example, if you are running the server locally on port 8080, the URL will be
 
 ### Claude Desktop App
 
-For the Claude Desktop app, you can manually configure the MCP server by editing the `claude_desktop_config.json` file. This is useful for running the server locally with the `stdio` transport.
+For the Claude Desktop app, you can manually configure the MCP server by editing the `claude_desktop_config.json` file.
 
 1. **Open the configuration file**:
     - Go to **Settings > Developer** in the Claude Desktop app.
     - Click on **Edit Config** to open the `claude_desktop_config.json` file.
 
 2. **Add the MCP server configuration**:
-    - Add the following JSON object to the `mcpServers` section of the file.
 
-    ```json
-    {
-      "mcpServers": {
-        "sysdig-mcp-server": {
-          "command": "uv",
-          "args": [
-            "--directory",
-            "<path_to_your_sysdig_mcp_server_directory>",
-            "run",
-            "main.py"
-            ],
-          "env": {
-            "SYSDIG_MCP_API_HOST": "<your_sysdig_host>",
-            "SYSDIG_MCP_API_SECURE_TOKEN": "<your_sysdig_secure_api_token>",
-            "SYSDIG_MCP_TRANSPORT": "stdio"
-          }
-        }
-      }
-    }
-    ```
-
-    Or, alternatively, if you want to use docker, you can add the following configuration:
+    **Option A: Using Docker (Recommended)**
 
     ```json
     {
@@ -318,8 +290,29 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
               "SYSDIG_MCP_TRANSPORT",
               "-e",
               "SYSDIG_MCP_API_SECURE_TOKEN",
-              "ghcr.io/sysdiglabs/sysdig-mcp-server"
+              "ghcr.io/sysdiglabs/sysdig-mcp-server:latest"
           ],
+          "env": {
+            "SYSDIG_MCP_API_HOST": "<your_sysdig_host>",
+            "SYSDIG_MCP_API_SECURE_TOKEN": "<your_sysdig_secure_api_token>",
+            "SYSDIG_MCP_TRANSPORT": "stdio"
+          }
+        }
+      }
+    }
+    ```
+
+    **Option B: Using Go**
+
+    ```json
+    {
+      "mcpServers": {
+        "sysdig-mcp-server": {
+          "command": "go",
+          "args": [
+            "run",
+            "github.com/sysdiglabs/sysdig-mcp-server/cmd/server@latest"
+            ],
           "env": {
             "SYSDIG_MCP_API_HOST": "<your_sysdig_host>",
             "SYSDIG_MCP_API_SECURE_TOKEN": "<your_sysdig_secure_api_token>",
@@ -333,7 +326,6 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
 3. **Replace the placeholders**:
     - Replace `<your_sysdig_host>` with your Sysdig Secure host URL.
     - Replace `<your_sysdig_secure_api_token>` with your Sysdig Secure API token.
-    - Replace `<path_to_your_sysdig_mcp_server_directory>` with the absolute path to the `sysdig-mcp-server` directory.
 
 4. **Save the file** and restart the Claude Desktop app for the changes to take effect.
 
@@ -348,16 +340,18 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
 
 ### Goose Agent
 
-1. In your terminal run `goose configure` and follow the steps to add the extension (more info on the [goose docs](https://block.github.io/goose/docs/getting-started/using-extensions/)), again could be using docker or uv as shown in the above examples.
-2. Your `~/.config/goose/config.yaml` config file should have one config like this one, check out the env vars
+1. In your terminal run `goose configure` and follow the steps to add the extension (more info on the [goose docs](https://block.github.io/goose/docs/getting-started/using-extensions/)).
+2. Your `~/.config/goose/config.yaml` config file should have one config like this one, check out the env vars.
+
+  **Using Go:**
 
   ```yaml
   extensions:
   ...
     sysdig-mcp-server:
-      args: []
+      args: ["run", "github.com/sysdiglabs/sysdig-mcp-server/cmd/server@latest"]
       bundled: null
-      cmd: sysdig-mcp-server
+      cmd: go
       description: Sysdig MCP server
       enabled: true
       env_keys:
@@ -373,5 +367,3 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
 3. Have fun
 
 ![goose_results](./docs/assets/goose_results.png)
-
-

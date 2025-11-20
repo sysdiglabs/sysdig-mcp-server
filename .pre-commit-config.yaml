@@ -1,15 +1,25 @@
 repos:
-  - repo: local
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
     hooks:
-      - id: ruff-format
-        name: Ruff Format
-        description: Format code with ruff.
-        entry: make fmt
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-yaml
+    -   id: check-added-large-files
+-   repo: local
+    hooks:
+      - id: format
+        name: format files
+        entry: just fmt
         language: system
-        stages: ["pre-commit", "pre-push"]
-      - id: ruff-check
-        name: Ruff Check
-        description: Check code style with ruff.
-        entry: make lint
+        pass_filenames: false
+      - id: lint
+        name: run linter
+        entry: just lint
         language: system
-        stages: ["pre-commit", "pre-push"]
+        pass_filenames: false
+      - id: test
+        name: run tests
+        entry: just test
+        language: system
+        pass_filenames: false

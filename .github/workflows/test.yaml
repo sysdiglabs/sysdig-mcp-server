@@ -1,15 +1,10 @@
----
 name: Test
 
 on:
   pull_request:
-    paths:
-      - pyproject.toml
-      - Dockerfile
-      - "*.py"
-      - tests/**
-      - tools/**
-      - utils/**
+    branches:
+      - main
+      - master
   workflow_call:
   workflow_dispatch:
 
@@ -24,8 +19,6 @@ jobs:
     defaults:
       run:
         shell: nix develop --command bash {0}
-    permissions:
-      contents: read # required for actions/checkout
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -33,14 +26,23 @@ jobs:
       - name: Install nix
         uses: DeterminateSystems/nix-installer-action@main
 
-      - name: Download dependencies
-        run: make init
-
-      - name: Run ruff
-        run: make lint
-
-      - name: Run Unit Tests
-        run: make test
+      - name: Run Checks
+        run: just check
         env:
           SYSDIG_MCP_API_HOST: ${{ vars.SYSDIG_MCP_API_HOST }}
           SYSDIG_MCP_API_SECURE_TOKEN: ${{ secrets.SYSDIG_MCP_API_SECURE_TOKEN }}
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: nix develop --command bash {0}
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Build
+        run: go build ./...

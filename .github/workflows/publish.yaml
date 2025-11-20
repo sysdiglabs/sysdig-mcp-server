@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - pyproject.toml
+      - package.nix
 
 concurrency:
   group: 'publish-${{ github.workflow }}'
@@ -24,10 +24,10 @@ jobs:
           fetch-tags: true
           fetch-depth: 0
 
-      - name: Extract version from pyproject.toml
+      - name: Extract version from package.nix
         id: extract
         run: |
-          VERSION=$(grep -m1 '^version\s*=' pyproject.toml | sed -E 's/version\s*=\s*"([^"]+)".*/\1/')
+          VERSION=$(grep -m1 'version\s*=' package.nix | sed -E 's/.*version\s*=\s*"([^"]+)";.*/\1/')
           echo "Extracted version: v$VERSION"
           echo "version=v$VERSION" >> $GITHUB_OUTPUT
 
@@ -59,7 +59,6 @@ jobs:
     permissions:
       contents: read # required for actions/checkout
       packages: write # required for pushing to ghcr.io
-      id-token: write # required for signing with cosign
     steps:
       - name: Check out the repo
         uses: actions/checkout@v5

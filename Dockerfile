@@ -1,38 +1,23 @@
-FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim AS builder
-ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
+FROM nixos/nix:latest AS builder
+
+# Enable flakes
+RUN echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
 
 WORKDIR /app
 COPY . /app
-RUN apt update && apt install -y git
-RUN --mount=type=cache,target=/root/.cache/uv \
-    --mount=type=bind,source=uv.lock,target=uv.lock \
-    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    uv sync --locked --no-install-project --no-editable --no-dev
-RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --locked --no-editable --no-dev
 
-RUN rm -rf ./dist
-RUN uv build
-RUN mv ./dist/sysdig_mcp_server-*.tar.gz /tmp/sysdig_mcp_server.tar.gz
+# Build the default package from the flake
+# This will produce a 'result' symlink in the working directory
+RUN nix build .#default
 
-# Final image with UBI
-FROM quay.io/sysdig/sysdig-mini-ubi9:1
+# Final image
+# quay.io/sysdig/sysdig-mini-ubi9:1
+FROM quay.io/sysdig/sysdig-mini-ubi9@sha256:dcef7a07dc6a8655cbee5e2f3ad7822dea5a0cf4929b1b9effa39e56ce928ca0
 
-# Install Python 3.12 and git
-RUN microdnf update -y && \
-    microdnf install -y python3.12 python3.12-pip git && \
-    microdnf clean all
+# Copy the binary from the builder stage
+COPY --from=builder /app/result/bin/sysdig-mcp-server /usr/local/bin/sysdig-mcp-server
 
-# Create a non-root user
-RUN useradd -u 1001 -m appuser
-WORKDIR /home/appuser
-
-# Copy the application from the builder
-COPY --from=builder --chown=appuser:appuser /tmp/sysdig_mcp_server.tar.gz .
-
-# Install the application
-RUN python3.12 -m pip install --no-cache-dir sysdig_mcp_server.tar.gz
-
-USER appuser
+# Run as non-root user (numeric ID)
+USER 1000
 
 ENTRYPOINT ["sysdig-mcp-server"]
