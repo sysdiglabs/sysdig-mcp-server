@@ -36,7 +36,7 @@ var _ = Describe("ToolGetEventInfo", func() {
 			},
 		}, nil).AnyTimes()
 		tool = NewToolGetEventInfo(mockClient)
-		handler = NewHandler(mockClient)
+		handler = NewHandler("dev", mockClient)
 		handler.RegisterTools(tool)
 
 		var err error

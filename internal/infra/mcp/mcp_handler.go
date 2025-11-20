@@ -62,10 +62,10 @@ func toolPermissionFiltering(sysdigClient sysdig.ExtendedClientWithResponsesInte
 	}
 }
 
-func NewHandler(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *Handler {
+func NewHandler(version string, sysdigClient sysdig.ExtendedClientWithResponsesInterface) *Handler {
 	s := server.NewMCPServer(
 		"Sysdig MCP Server",
-		"1.0.0",
+		version,
 		server.WithInstructions("Provides Sysdig Secure tools and resources."),
 		server.WithToolCapabilities(true),
 		server.WithToolFilter(toolPermissionFiltering(sysdigClient)),

@@ -36,7 +36,7 @@ var _ = Describe("ToolRunSysql", func() {
 			},
 		}, nil).AnyTimes()
 		tool = NewToolRunSysql(mockClient)
-		handler = NewHandler(mockClient)
+		handler = NewHandler("dev", mockClient)
 		handler.RegisterTools(tool)
 
 		var err error

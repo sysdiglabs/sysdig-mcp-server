@@ -86,7 +86,7 @@ func setupSysdigClient(cfg *config.Config) (sysdig.ExtendedClientWithResponsesIn
 
 func setupHandler(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *mcp.Handler {
 	systemClock := clock.NewSystemClock()
-	handler := mcp.NewHandler(sysdigClient)
+	handler := mcp.NewHandler(Version, sysdigClient)
 	handler.RegisterTools(
 		mcp.NewToolListRuntimeEvents(sysdigClient, systemClock),
 		mcp.NewToolGetEventInfo(sysdigClient),

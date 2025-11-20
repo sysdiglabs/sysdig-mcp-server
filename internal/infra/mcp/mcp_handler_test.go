@@ -56,7 +56,7 @@ var _ = Describe("McpHandler", func() {
 		slog.SetDefault(slog.New(slog.NewTextHandler(GinkgoWriter, &slog.HandlerOptions{Level: slog.LevelDebug})))
 		ctrl = gomock.NewController(GinkgoT())
 		mockClient = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		handler = localmcp.NewHandler(mockClient)
+		handler = localmcp.NewHandler("dev", mockClient)
 	})
 
 	AfterEach(func() {

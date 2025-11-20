@@ -37,7 +37,7 @@ var _ = Describe("ToolGetEventProcessTree", func() {
 			},
 		}, nil).AnyTimes()
 		tool = NewToolGetEventProcessTree(mockClient)
-		handler = NewHandler(mockClient)
+		handler = NewHandler("dev", mockClient)
 		handler.RegisterTools(tool)
 
 		var err error

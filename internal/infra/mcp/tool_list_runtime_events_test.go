@@ -41,7 +41,7 @@ var _ = Describe("ToolListRuntimeEvents", func() {
 		mockClock = mocks_clock.NewMockClock(ctrl)
 		mockClock.EXPECT().Now().AnyTimes().Return(time.Date(2000, time.January, 1, 0, 0, 0, 0, time.UTC))
 		tool = NewToolListRuntimeEvents(mockClient, mockClock)
-		handler = NewHandler(mockClient)
+		handler = NewHandler("dev", mockClient)
 		handler.RegisterTools(tool)
 
 		var err error
