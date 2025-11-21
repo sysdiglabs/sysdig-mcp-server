@@ -12,6 +12,7 @@ import (
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/config"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp/tools"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
@@ -88,11 +89,11 @@ func setupHandler(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *mcp
 	systemClock := clock.NewSystemClock()
 	handler := mcp.NewHandler(Version, sysdigClient)
 	handler.RegisterTools(
-		mcp.NewToolListRuntimeEvents(sysdigClient, systemClock),
-		mcp.NewToolGetEventInfo(sysdigClient),
-		mcp.NewToolGetEventProcessTree(sysdigClient),
-		mcp.NewToolRunSysql(sysdigClient),
-		mcp.NewToolGenerateSysql(sysdigClient),
+		tools.NewToolListRuntimeEvents(sysdigClient, systemClock),
+		tools.NewToolGetEventInfo(sysdigClient),
+		tools.NewToolGetEventProcessTree(sysdigClient),
+		tools.NewToolRunSysql(sysdigClient),
+		tools.NewToolGenerateSysql(sysdigClient),
 	)
 	return handler
 }

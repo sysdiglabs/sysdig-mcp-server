@@ -1,4 +1,4 @@
-package mcp
+package tools_test
 
 import (
 	"context"
@@ -12,6 +12,8 @@ import (
 	. "github.com/onsi/gomega"
 	"go.uber.org/mock/gomock"
 
+	inframcp "github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp/tools"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig/mocks"
 )
@@ -19,9 +21,9 @@ import (
 var _ = Describe("ToolGetEventProcessTree", func() {
 	var (
 		mockClient *mocks.MockExtendedClientWithResponsesInterface
-		tool       *ToolGetEventProcessTree
+		tool       *tools.ToolGetEventProcessTree
 		ctrl       *gomock.Controller
-		handler    *Handler
+		handler    *inframcp.Handler
 		mcpClient  *client.Client
 	)
 
@@ -36,8 +38,8 @@ var _ = Describe("ToolGetEventProcessTree", func() {
 				Permissions: []string{"policy-events.read"},
 			},
 		}, nil).AnyTimes()
-		tool = NewToolGetEventProcessTree(mockClient)
-		handler = NewHandler("dev", mockClient)
+		tool = tools.NewToolGetEventProcessTree(mockClient)
+		handler = inframcp.NewHandler("dev", mockClient)
 		handler.RegisterTools(tool)
 
 		var err error

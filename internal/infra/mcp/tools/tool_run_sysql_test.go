@@ -1,4 +1,4 @@
-package mcp
+package tools_test
 
 import (
 	"context"
@@ -11,6 +11,8 @@ import (
 	. "github.com/onsi/gomega"
 	"go.uber.org/mock/gomock"
 
+	inframcp "github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp/tools"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig/mocks"
 )
@@ -18,9 +20,9 @@ import (
 var _ = Describe("ToolRunSysql", func() {
 	var (
 		mockClient *mocks.MockExtendedClientWithResponsesInterface
-		tool       *ToolRunSysql
+		tool       *tools.ToolRunSysql
 		ctrl       *gomock.Controller
-		handler    *Handler
+		handler    *inframcp.Handler
 		mcpClient  *client.Client
 	)
 
@@ -35,8 +37,8 @@ var _ = Describe("ToolRunSysql", func() {
 				Permissions: []string{"sage.exec", "risks.read"},
 			},
 		}, nil).AnyTimes()
-		tool = NewToolRunSysql(mockClient)
-		handler = NewHandler("dev", mockClient)
+		tool = tools.NewToolRunSysql(mockClient)
+		handler = inframcp.NewHandler("dev", mockClient)
 		handler.RegisterTools(tool)
 
 		var err error
