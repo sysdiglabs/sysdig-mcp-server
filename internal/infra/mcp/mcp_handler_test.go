@@ -19,6 +19,7 @@ import (
 	"go.uber.org/mock/gomock"
 
 	localmcp "github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp/tools"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig/mocks"
 )
@@ -38,7 +39,7 @@ func (d *dummyTool) RegisterInServer(s *server.MCPServer) {
 		}
 	}
 	if len(d.requiredPermissions) > 0 {
-		localmcp.WithRequiredPermissions(d.requiredPermissions...)(&tool)
+		tools.WithRequiredPermissions(d.requiredPermissions...)(&tool)
 	}
 	s.AddTool(tool, func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
 		return mcp.NewToolResultText("success"), nil

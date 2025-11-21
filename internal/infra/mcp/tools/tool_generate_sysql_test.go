@@ -1,4 +1,4 @@
-package mcp
+package tools_test
 
 import (
 	"context"
@@ -11,16 +11,18 @@ import (
 	. "github.com/onsi/gomega"
 	"go.uber.org/mock/gomock"
 
+	inframcp "github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp/tools"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig/mocks"
 )
 
-var _ = Describe("ToolGetEventInfo", func() {
+var _ = Describe("ToolGenerateSysql", func() {
 	var (
 		mockClient *mocks.MockExtendedClientWithResponsesInterface
-		tool       *ToolGetEventInfo
+		tool       *tools.ToolGenerateSysql
 		ctrl       *gomock.Controller
-		handler    *Handler
+		handler    *inframcp.Handler
 		mcpClient  *client.Client
 	)
 
@@ -32,11 +34,11 @@ var _ = Describe("ToolGetEventInfo", func() {
 				StatusCode: 200,
 			},
 			JSON200: &sysdig.UserPermissions{
-				Permissions: []string{"policy-events.read"},
+				Permissions: []string{"sage.exec"},
 			},
 		}, nil).AnyTimes()
-		tool = NewToolGetEventInfo(mockClient)
-		handler = NewHandler("dev", mockClient)
+		tool = tools.NewToolGenerateSysql(mockClient)
+		handler = inframcp.NewHandler("dev", mockClient)
 		handler.RegisterTools(tool)
 
 		var err error
@@ -52,64 +54,64 @@ var _ = Describe("ToolGetEventInfo", func() {
 	})
 
 	It("should handle a successful request", func(ctx SpecContext) {
-		eventID := "12345"
-		mockClient.EXPECT().GetEventV1WithResponse(gomock.Any(), eventID).Return(&sysdig.GetEventV1Response{
+		question := "all vulnerabilities across my workloads"
+		mockClient.EXPECT().GenerateSysqlWithResponse(gomock.Any(), question).Return(&sysdig.GenerateSysqlResponse{
 			HTTPResponse: &http.Response{
 				StatusCode: 200,
 			},
-			JSON200: &sysdig.Event{
-				Id: eventID,
+			JSON200: &sysdig.SysqlQuery{
+				Text: "MATCH KubeWorkload AFFECTED_BY Vulnerability RETURN KubeWorkload, Vulnerability;\n",
 			},
 		}, nil)
 
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
-				Name: "get_event_info",
+				Name: "generate_sysql",
 				Arguments: map[string]any{
-					"event_id": eventID,
+					"question": question,
 				},
 			},
 		})
 
 		Expect(err).NotTo(HaveOccurred())
-		Expect(result.Result).NotTo(BeNil())
+		Expect(result.StructuredContent).To(Equal(map[string]any{"text": "MATCH KubeWorkload AFFECTED_BY Vulnerability RETURN KubeWorkload, Vulnerability;\n"}))
 		Expect(result.IsError).To(BeFalse())
 	})
 
-	It("should return an error if event_id is missing", func(ctx SpecContext) {
+	It("should return an error if question is missing", func(ctx SpecContext) {
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
-				Name:      "get_event_info",
+				Name:      "generate_sysql",
 				Arguments: map[string]any{},
 			},
 		})
 
 		Expect(err).NotTo(HaveOccurred())
-		Expect(result.Result).NotTo(BeNil())
 		Expect(result.IsError).To(BeTrue())
+		Expect(result.Content[0]).To(Equal(mcp.TextContent{Type: "text", Text: "question is required"}))
 	})
 
 	It("should handle a client error", func(ctx SpecContext) {
-		eventID := "12345"
-		mockClient.EXPECT().GetEventV1WithResponse(gomock.Any(), eventID).Return(nil, fmt.Errorf("client error"))
+		question := "what is bash"
+		mockClient.EXPECT().GenerateSysqlWithResponse(gomock.Any(), question).Return(nil, fmt.Errorf("client error"))
 
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
-				Name: "get_event_info",
+				Name: "generate_sysql",
 				Arguments: map[string]any{
-					"event_id": eventID,
+					"question": question,
 				},
 			},
 		})
 
 		Expect(err).NotTo(HaveOccurred())
-		Expect(result.Result).NotTo(BeNil())
 		Expect(result.IsError).To(BeTrue())
+		Expect(result.Content[0]).To(Equal(mcp.TextContent{Type: "text", Text: "error triggering request: client error"}))
 	})
 
 	It("should handle a non-200 status code", func(ctx SpecContext) {
-		eventID := "12345"
-		mockClient.EXPECT().GetEventV1WithResponse(gomock.Any(), eventID).Return(&sysdig.GetEventV1Response{
+		question := "what is bash"
+		mockClient.EXPECT().GenerateSysqlWithResponse(gomock.Any(), question).Return(&sysdig.GenerateSysqlResponse{
 			HTTPResponse: &http.Response{
 				StatusCode: 404,
 			},
@@ -118,15 +120,15 @@ var _ = Describe("ToolGetEventInfo", func() {
 
 		result, err := mcpClient.CallTool(ctx, mcp.CallToolRequest{
 			Params: mcp.CallToolParams{
-				Name: "get_event_info",
+				Name: "generate_sysql",
 				Arguments: map[string]any{
-					"event_id": eventID,
+					"question": question,
 				},
 			},
 		})
 
 		Expect(err).NotTo(HaveOccurred())
-		Expect(result.Result).NotTo(BeNil())
 		Expect(result.IsError).To(BeTrue())
+		Expect(result.Content[0]).To(Equal(mcp.TextContent{Type: "text", Text: "error generating SysQL query, status code: 404, response: Not Found"}))
 	})
 })

@@ -11,6 +11,7 @@ import (
 	"github.com/mark3labs/mcp-go/client"
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp/tools"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
@@ -23,7 +24,7 @@ type mcpTool interface {
 }
 
 func toolPermissionFiltering(sysdigClient sysdig.ExtendedClientWithResponsesInterface) server.ToolFilterFunc {
-	return func(ctx context.Context, tools []mcp.Tool) []mcp.Tool {
+	return func(ctx context.Context, mcpTools []mcp.Tool) []mcp.Tool {
 		allowedTools := []mcp.Tool{}
 		slog.Debug("filtering tools")
 
@@ -47,8 +48,8 @@ func toolPermissionFiltering(sysdigClient sysdig.ExtendedClientWithResponsesInte
 			return true
 		}
 
-		for _, tool := range tools {
-			requiredPermissions := RequiredPermissionsFromTool(tool)
+		for _, tool := range mcpTools {
+			requiredPermissions := tools.RequiredPermissionsFromTool(tool)
 			if userHasAllRequiredPermissions(requiredPermissions...) {
 				slog.Debug("tool meets all the required permissions", "name", tool.Name)
 				allowedTools = append(allowedTools, tool)

@@ -1,4 +1,4 @@
-package mcp
+package tools_test
 
 import (
 	"context"
@@ -13,6 +13,8 @@ import (
 	"go.uber.org/mock/gomock"
 
 	mocks_clock "github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock/mocks"
+	inframcp "github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp/tools"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig/mocks"
 )
@@ -21,9 +23,9 @@ var _ = Describe("ToolListRuntimeEvents", func() {
 	var (
 		mockClient *mocks.MockExtendedClientWithResponsesInterface
 		mockClock  *mocks_clock.MockClock
-		tool       *ToolListRuntimeEvents
+		tool       *tools.ToolListRuntimeEvents
 		ctrl       *gomock.Controller
-		handler    *Handler
+		handler    *inframcp.Handler
 		mcpClient  *client.Client
 	)
 
@@ -40,8 +42,8 @@ var _ = Describe("ToolListRuntimeEvents", func() {
 		}, nil).AnyTimes()
 		mockClock = mocks_clock.NewMockClock(ctrl)
 		mockClock.EXPECT().Now().AnyTimes().Return(time.Date(2000, time.January, 1, 0, 0, 0, 0, time.UTC))
-		tool = NewToolListRuntimeEvents(mockClient, mockClock)
-		handler = NewHandler("dev", mockClient)
+		tool = tools.NewToolListRuntimeEvents(mockClient, mockClock)
+		handler = inframcp.NewHandler("dev", mockClient)
 		handler.RegisterTools(tool)
 
 		var err error
