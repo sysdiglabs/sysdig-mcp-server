@@ -25,7 +25,10 @@ func (t *KubernetesListClusters) RegisterInServer(s *server.MCPServer) {
 	tool := mcp.NewTool("kubernetes_list_clusters",
 		mcp.WithDescription("Lists the cluster information for all clusters or just the cluster specified."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
-		mcp.WithNumber("limit", mcp.Description("Maximum number of clusters to return.")),
+		mcp.WithNumber("limit",
+			mcp.Description("Maximum number of clusters to return."),
+			mcp.DefaultNumber(10),
+		),
 		mcp.WithOutputSchema[map[string]any](),
 	)
 	s.AddTool(tool, t.handle)

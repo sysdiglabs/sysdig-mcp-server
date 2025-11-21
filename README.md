@@ -108,6 +108,11 @@ The server dynamically filters the available tools based on the permissions asso
   - **Required Permission**: `sage.exec`, `risks.read`
   - **Sample Prompt**: "Run this query: MATCH CloudResource WHERE type = 'aws_s3_bucket' LIMIT 10"
 
+- **`kubernetes_list_clusters`**
+  - **Description**: Lists the cluster information for all clusters or just the cluster specified.
+  - **Required Permission**: None
+  - **Sample Prompt**: "List all kubernetes clusters" or "Show me info for cluster 'production-gke'"
+
 ## Requirements
 
 - [Go](https://go.dev/doc/install) 1.25 or higher (if running without Docker).
