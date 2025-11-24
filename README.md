@@ -110,7 +110,7 @@ The server dynamically filters the available tools based on the permissions asso
 
 - **`kubernetes_list_clusters`**
   - **Description**: Lists the cluster information for all clusters or just the cluster specified.
-  - **Required Permission**: None
+  - **Required Permission**: `promql.exec`
   - **Sample Prompt**: "List all kubernetes clusters" or "Show me info for cluster 'production-gke'"
 
 ## Requirements
