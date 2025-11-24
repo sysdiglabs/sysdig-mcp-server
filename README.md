@@ -143,6 +143,11 @@ The server dynamically filters the available tools based on the permissions asso
   - **Required Permission**: `promql.exec`
   - **Sample Prompt**: "Show the top 10 pods with the most container restarts in cluster 'production'"
 
+- **`troubleshoot_kubernetes_list_top_400_500_http_errors_in_pods`**
+  - **Description**: Lists the pods with the highest rate of HTTP 4xx and 5xx errors over a specified time interval, allowing filtering by cluster, namespace, workload type, and workload name.
+  - **Required Permission**: `promql.exec`
+  - **Sample Prompt**: "Show the top 20 pods with the most HTTP errors in cluster 'production'"
+
 ## Requirements
 
 - [Go](https://go.dev/doc/install) 1.25 or higher (if running without Docker).
