@@ -96,6 +96,7 @@ func setupHandler(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *mcp
 		tools.NewToolGenerateSysql(sysdigClient),
 
 		tools.NewKubernetesListClusters(sysdigClient),
+		tools.NewKubernetesListNodes(sysdigClient),
 	)
 	return handler
 }
