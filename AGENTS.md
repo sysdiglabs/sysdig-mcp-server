@@ -71,7 +71,7 @@ Note that if you add more tools you need to also update this file to reflect tha
 
 ## Troubleshooting & Tips
 
-- **Missing config:** `SYSDIG_MCP_API_HOST` and `SYSDIG_MCP_API_SECURE_TOKEN` are mandatory in `stdio`. Validation fails early in `internal/config/config.go`.
+- **Missing config:** `SYSDIG_MCP_API_HOST` and `SYSDIG_MCP_API_TOKEN` are mandatory in `stdio`. Validation fails early in `internal/config/config.go`.
 - **Token scope:** If a tool does not appear, verify the token’s permissions under **Settings > Users & Teams > Roles**. `generate_sysql` currently requires a regular user token, not a Service Account.
 - **Remote auth:** When using `streamable-http` or `sse`, pass `Authorization: Bearer <token>` and optionally `X-Sysdig-Host`. These values override env vars via the request context middleware.
 - **Environment drift:** Always run inside `nix develop`; lint/test expect binaries like `gofumpt`, `golangci-lint`, and `ginkgo` provided by the flake.

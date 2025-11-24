@@ -30,7 +30,7 @@ jobs:
         run: just check
         env:
           SYSDIG_MCP_API_HOST: ${{ vars.SYSDIG_MCP_API_HOST }}
-          SYSDIG_MCP_API_SECURE_TOKEN: ${{ secrets.SYSDIG_MCP_API_SECURE_TOKEN }}
+          SYSDIG_MCP_API_TOKEN: ${{ secrets.SYSDIG_MCP_API_SECURE_TOKEN }}
   build:
     name: Build
     runs-on: ubuntu-latest

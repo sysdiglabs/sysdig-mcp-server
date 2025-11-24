@@ -17,7 +17,7 @@ var _ = Describe("Sysdig Permissions Client", func() {
 
 	BeforeEach(func() {
 		sysdigURL = os.Getenv("SYSDIG_MCP_API_HOST")
-		sysdigToken = os.Getenv("SYSDIG_MCP_API_SECURE_TOKEN")
+		sysdigToken = os.Getenv("SYSDIG_MCP_API_TOKEN")
 	})
 
 	Context("when fetching user permissions", func() {

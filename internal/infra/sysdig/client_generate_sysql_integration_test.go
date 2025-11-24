@@ -15,7 +15,7 @@ var _ = Describe("Sysdig Generate Sysql Client", func() {
 
 	BeforeEach(func() {
 		sysdigURL := os.Getenv("SYSDIG_MCP_API_HOST")
-		sysdigToken := os.Getenv("SYSDIG_MCP_API_SECURE_TOKEN")
+		sysdigToken := os.Getenv("SYSDIG_MCP_API_TOKEN")
 
 		var err error
 		client, err = sysdig.NewSysdigClient(sysdig.WithFixedHostAndToken(sysdigURL, sysdigToken))

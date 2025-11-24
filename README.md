@@ -65,12 +65,12 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
                 "-e",
                 "SYSDIG_MCP_TRANSPORT",
                 "-e",
-                "SYSDIG_MCP_API_SECURE_TOKEN",
+                "SYSDIG_MCP_API_TOKEN",
                 "ghcr.io/sysdiglabs/sysdig-mcp-server:latest"
             ],
             "env": {
               "SYSDIG_MCP_API_HOST": "<your_sysdig_host>",
-              "SYSDIG_MCP_API_SECURE_TOKEN": "<your_sysdig_secure_api_token>",
+              "SYSDIG_MCP_API_TOKEN": "<your_sysdig_secure_api_token>",
               "SYSDIG_MCP_TRANSPORT": "stdio"
             }
           }
@@ -122,7 +122,7 @@ The server dynamically filters the available tools based on the permissions asso
 The following environment variables are **required** for configuring the Sysdig SDK:
 
 - `SYSDIG_MCP_API_HOST`: The URL of your Sysdig Secure instance (e.g., `https://us2.app.sysdig.com`). **Required when using `stdio` transport.**
-- `SYSDIG_MCP_API_SECURE_TOKEN`: Your Sysdig Secure API token. **Required only when using `stdio` transport.**
+- `SYSDIG_MCP_API_TOKEN`: Your Sysdig Secure API token. **Required only when using `stdio` transport.**
 
 You can also set the following variables to override the default configuration:
 
@@ -143,7 +143,7 @@ You can find your API token in the Sysdig Secure UI under **Settings > Sysdig Se
 ```bash
 # Required
 SYSDIG_MCP_API_HOST=https://us2.app.sysdig.com
-SYSDIG_MCP_API_SECURE_TOKEN=your-api-token-here
+SYSDIG_MCP_API_TOKEN=your-api-token-here
 
 # Optional
 SYSDIG_MCP_TRANSPORT=stdio
@@ -158,7 +158,7 @@ SYSDIG_MCP_TRANSPORT=streamable-http
 
 # Optional (Host and Token can be provided via HTTP headers)
 # SYSDIG_MCP_API_HOST=https://us2.app.sysdig.com
-# SYSDIG_MCP_API_SECURE_TOKEN=your-api-token-here
+# SYSDIG_MCP_API_TOKEN=your-api-token-here
 SYSDIG_MCP_LISTENING_PORT=8080
 SYSDIG_MCP_LISTENING_HOST=localhost
 SYSDIG_MCP_MOUNT_PATH=/sysdig-mcp-server
@@ -204,13 +204,13 @@ You can run the MCP server using Docker (recommended for production) or directly
 The easiest way to run the server is using the pre-built Docker image from GitHub Container Registry (as shown in the [Quickstart Guide](#quickstart-guide)).
 
 ```bash
-docker run -e SYSDIG_MCP_API_HOST=<your_sysdig_host> -e SYSDIG_MCP_API_SECURE_TOKEN=<your_sysdig_secure_api_token> -e SYSDIG_MCP_TRANSPORT=stdio -p 8080:8080 ghcr.io/sysdiglabs/sysdig-mcp-server:latest
+docker run -e SYSDIG_MCP_API_HOST=<your_sysdig_host> -e SYSDIG_MCP_API_TOKEN=<your_sysdig_secure_api_token> -e SYSDIG_MCP_TRANSPORT=stdio -p 8080:8080 ghcr.io/sysdiglabs/sysdig-mcp-server:latest
 ```
 
 To use the `streamable-http` or `sse` transports (for remote MCP clients), set the `SYSDIG_MCP_TRANSPORT` environment variable accordingly:
 
 ```bash
-docker run -e SYSDIG_MCP_TRANSPORT=streamable-http -e SYSDIG_MCP_API_HOST=<your_sysdig_host> -e SYSDIG_MCP_API_SECURE_TOKEN=<your_sysdig_secure_api_token> -p 8080:8080 ghcr.io/sysdiglabs/sysdig-mcp-server:latest
+docker run -e SYSDIG_MCP_TRANSPORT=streamable-http -e SYSDIG_MCP_API_HOST=<your_sysdig_host> -e SYSDIG_MCP_API_TOKEN=<your_sysdig_secure_api_token> -p 8080:8080 ghcr.io/sysdiglabs/sysdig-mcp-server:latest
 ```
 
 ### Go
@@ -294,12 +294,12 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
               "-e",
               "SYSDIG_MCP_TRANSPORT",
               "-e",
-              "SYSDIG_MCP_API_SECURE_TOKEN",
+              "SYSDIG_MCP_API_TOKEN",
               "ghcr.io/sysdiglabs/sysdig-mcp-server:latest"
           ],
           "env": {
             "SYSDIG_MCP_API_HOST": "<your_sysdig_host>",
-            "SYSDIG_MCP_API_SECURE_TOKEN": "<your_sysdig_secure_api_token>",
+            "SYSDIG_MCP_API_TOKEN": "<your_sysdig_secure_api_token>",
             "SYSDIG_MCP_TRANSPORT": "stdio"
           }
         }
@@ -320,7 +320,7 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
             ],
           "env": {
             "SYSDIG_MCP_API_HOST": "<your_sysdig_host>",
-            "SYSDIG_MCP_API_SECURE_TOKEN": "<your_sysdig_secure_api_token>",
+            "SYSDIG_MCP_API_TOKEN": "<your_sysdig_secure_api_token>",
             "SYSDIG_MCP_TRANSPORT": "stdio"
           }
         }
@@ -362,7 +362,7 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
       env_keys:
       - SYSDIG_MCP_TRANSPORT
       - SYSDIG_MCP_API_HOST
-      - SYSDIG_MCP_API_SECURE_TOKEN
+      - SYSDIG_MCP_API_TOKEN
       envs:
         SYSDIG_MCP_TRANSPORT: stdio
       name: sysdig-mcp-server
