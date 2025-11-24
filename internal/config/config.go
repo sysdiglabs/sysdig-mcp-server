@@ -20,7 +20,7 @@ func (c *Config) Validate() error {
 		return fmt.Errorf("required configuration missing: SYSDIG_MCP_API_HOST")
 	}
 	if c.Transport == "stdio" && c.APIToken == "" {
-		return fmt.Errorf("required configuration missing: SYSDIG_MCP_API_SECURE_TOKEN")
+		return fmt.Errorf("required configuration missing: SYSDIG_MCP_API_TOKEN")
 	}
 	return nil
 }
@@ -28,7 +28,7 @@ func (c *Config) Validate() error {
 func Load() (*Config, error) {
 	cfg := &Config{
 		APIHost:       getEnv("SYSDIG_MCP_API_HOST", ""),
-		APIToken:      getEnv("SYSDIG_MCP_API_SECURE_TOKEN", ""),
+		APIToken:      getEnv("SYSDIG_MCP_API_TOKEN", ""),
 		Transport:     getEnv("SYSDIG_MCP_TRANSPORT", "stdio"),
 		ListeningHost: getEnv("SYSDIG_MCP_LISTENING_HOST", "localhost"),
 		ListeningPort: getEnv("SYSDIG_MCP_LISTENING_PORT", "8080"),

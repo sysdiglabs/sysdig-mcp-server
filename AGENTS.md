@@ -49,6 +49,7 @@ The handler filters tools dynamically based on `GetMyPermissions` from Sysdig Se
 | `get_event_process_tree` | `tool_get_event_process_tree.go` | Retrieve the process tree for an event when available. | `policy-events.read` | “Show the process tree behind event `abc123`.” |
 | `run_sysql` | `tool_run_sysql.go` | Execute caller-supplied Sysdig SysQL queries safely. | `sage.exec`, `risks.read` | “Run the following SysQL…”. |
 | `generate_sysql` | `tool_generate_sysql.go` | Convert natural language to SysQL via Sysdig Sage. | `sage.exec` (does not work with Service Accounts) | “Create a SysQL to list S3 buckets.” |
+| `kubernetes_list_clusters` | `tool_kubernetes_list_clusters.go` | Lists Kubernetes cluster information. | None | "List all Kubernetes clusters" |
 
 Every tool has a companion `_test.go` file that exercises request validation, permission metadata, and Sysdig client calls through mocks.
 Note that if you add more tools you need to also update this file to reflect that.
@@ -70,7 +71,7 @@ Note that if you add more tools you need to also update this file to reflect tha
 
 ## Troubleshooting & Tips
 
-- **Missing config:** `SYSDIG_MCP_API_HOST` and `SYSDIG_MCP_API_SECURE_TOKEN` are mandatory in `stdio`. Validation fails early in `internal/config/config.go`.
+- **Missing config:** `SYSDIG_MCP_API_HOST` and `SYSDIG_MCP_API_TOKEN` are mandatory in `stdio`. Validation fails early in `internal/config/config.go`.
 - **Token scope:** If a tool does not appear, verify the token’s permissions under **Settings > Users & Teams > Roles**. `generate_sysql` currently requires a regular user token, not a Service Account.
 - **Remote auth:** When using `streamable-http` or `sse`, pass `Authorization: Bearer <token>` and optionally `X-Sysdig-Host`. These values override env vars via the request context middleware.
 - **Environment drift:** Always run inside `nix develop`; lint/test expect binaries like `gofumpt`, `golangci-lint`, and `ginkgo` provided by the flake.

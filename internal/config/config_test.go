@@ -58,7 +58,7 @@ var _ = Describe("Config", func() {
 				}
 				err := cfg.Validate()
 				Expect(err).To(HaveOccurred())
-				Expect(err.Error()).To(ContainSubstring("SYSDIG_MCP_API_SECURE_TOKEN"))
+				Expect(err.Error()).To(ContainSubstring("SYSDIG_MCP_API_TOKEN"))
 			})
 		})
 	})
@@ -71,7 +71,7 @@ var _ = Describe("Config", func() {
 		Context("with required env vars set for stdio", func() {
 			BeforeEach(func() {
 				_ = os.Setenv("SYSDIG_MCP_API_HOST", "host")
-				_ = os.Setenv("SYSDIG_MCP_API_SECURE_TOKEN", "token")
+				_ = os.Setenv("SYSDIG_MCP_API_TOKEN", "token")
 			})
 
 			It("should load default values", func() {
@@ -105,7 +105,7 @@ var _ = Describe("Config", func() {
 		Context("with all env vars set", func() {
 			BeforeEach(func() {
 				_ = os.Setenv("SYSDIG_MCP_API_HOST", "env-host")
-				_ = os.Setenv("SYSDIG_MCP_API_SECURE_TOKEN", "env-token")
+				_ = os.Setenv("SYSDIG_MCP_API_TOKEN", "env-token")
 				_ = os.Setenv("SYSDIG_MCP_TRANSPORT", "http")
 				_ = os.Setenv("SYSDIG_MCP_LISTENING_HOST", "0.0.0.0")
 				_ = os.Setenv("SYSDIG_MCP_LISTENING_PORT", "9090")
