@@ -104,6 +104,7 @@ func setupHandler(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *mcp
 		tools.NewTroubleshootKubernetesListTopRestartedPods(sysdigClient),
 		tools.NewTroubleshootKubernetesListTop400500HttpErrorsInPods(sysdigClient),
 		tools.NewTroubleshootKubernetesListTopNetworkErrorsInPods(sysdigClient),
+		tools.NewTroubleshootKubernetesListCountPodsPerCluster(sysdigClient),
 	)
 	return handler
 }
