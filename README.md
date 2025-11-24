@@ -183,6 +183,11 @@ The server dynamically filters the available tools based on the permissions asso
   - **Required Permission**: `promql.exec`
   - **Sample Prompt**: "Show the top 10 workloads consuming the most memory in cluster 'production'"
 
+- **`troubleshoot_kubernetes_list_top_memory_consumed_by_container`**
+  - **Description**: Lists memory-intensive containers.
+  - **Required Permission**: `promql.exec`
+  - **Sample Prompt**: "Show the top 10 containers consuming the most memory in cluster 'production'"
+
    ## Requirements
 - [Go](https://go.dev/doc/install) 1.25 or higher (if running without Docker).
 

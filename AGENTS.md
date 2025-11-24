@@ -64,6 +64,7 @@ The handler filters tools dynamically based on `GetMyPermissions` from Sysdig Se
 | `troubleshoot_kubernetes_list_top_cpu_consumed_by_workload` | `tool_troubleshoot_kubernetes_list_top_cpu_consumed_by_workload.go` | Identifies the Kubernetes workloads (all containers) consuming the most CPU (in cores). | `promql.exec` | "Show the top 10 workloads consuming the most CPU in cluster 'production'" |
 | `troubleshoot_kubernetes_list_top_cpu_consumed_by_container` | `tool_troubleshoot_kubernetes_list_top_cpu_consumed_by_container.go` | Identifies the Kubernetes containers consuming the most CPU (in cores). | `promql.exec` | "Show the top 10 containers consuming the most CPU in cluster 'production'" |
 | `troubleshoot_kubernetes_list_top_memory_consumed_by_workload` | `tool_troubleshoot_kubernetes_list_top_memory_consumed_by_workload.go` | Lists memory-intensive workloads (all containers). | `promql.exec` | "Show the top 10 workloads consuming the most memory in cluster 'production'" |
+| `troubleshoot_kubernetes_list_top_memory_consumed_by_container` | `tool_troubleshoot_kubernetes_list_top_memory_consumed_by_container.go` | Lists memory-intensive containers. | `promql.exec` | "Show the top 10 containers consuming the most memory in cluster 'production'" |
 
 Every tool has a companion `_test.go` file that exercises request validation, permission metadata, and Sysdig client calls through mocks.
 Note that if you add more tools you need to also update this file to reflect that.
