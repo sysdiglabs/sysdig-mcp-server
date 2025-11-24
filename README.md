@@ -113,6 +113,11 @@ The server dynamically filters the available tools based on the permissions asso
   - **Required Permission**: `promql.exec`
   - **Sample Prompt**: "List all kubernetes clusters" or "Show me info for cluster 'production-gke'"
 
+- **`kubernetes_list_nodes`**
+  - **Description**: Lists the node information for all nodes, all nodes from a cluster or just the node specified.
+  - **Required Permission**: `promql.exec`
+  - **Sample Prompt**: "List all kubernetes nodes in the cluster 'production-gke'" or "Show me info for node 'node-123'"
+
 ## Requirements
 
 - [Go](https://go.dev/doc/install) 1.25 or higher (if running without Docker).
