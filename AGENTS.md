@@ -57,6 +57,7 @@ The handler filters tools dynamically based on `GetMyPermissions` from Sysdig Se
 | `troubleshoot_kubernetes_list_top_unavailable_pods` | `tool_troubleshoot_kubernetes_list_top_unavailable_pods.go` | Shows the top N pods with the highest number of unavailable or unready replicas. | `promql.exec` | "Show the top 20 unavailable pods in cluster 'production'" |
 | `troubleshoot_kubernetes_list_top_restarted_pods` | `tool_troubleshoot_kubernetes_list_top_restarted_pods.go` | Lists the pods with the highest number of container restarts. | `promql.exec` | "Show the top 10 pods with the most container restarts in cluster 'production'" |
 | `troubleshoot_kubernetes_list_top_400_500_http_errors_in_pods` | `tool_troubleshoot_kubernetes_list_top_400_500_http_errors_in_pods.go` | Lists the pods with the highest rate of HTTP 4xx and 5xx errors over a specified time interval. | `promql.exec` | "Show the top 20 pods with the most HTTP errors in cluster 'production'" |
+| `troubleshoot_kubernetes_list_top_network_errors_in_pods` | `tool_troubleshoot_kubernetes_list_top_network_errors_in_pods.go` | Shows the top network errors by pod over a given interval. | `promql.exec` | "Show the top 10 pods with the most network errors in cluster 'production'" |
 
 Every tool has a companion `_test.go` file that exercises request validation, permission metadata, and Sysdig client calls through mocks.
 Note that if you add more tools you need to also update this file to reflect that.

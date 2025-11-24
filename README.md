@@ -148,6 +148,11 @@ The server dynamically filters the available tools based on the permissions asso
   - **Required Permission**: `promql.exec`
   - **Sample Prompt**: "Show the top 20 pods with the most HTTP errors in cluster 'production'"
 
+- **`troubleshoot_kubernetes_list_top_network_errors_in_pods`**
+  - **Description**: Shows the top network errors by pod over a given interval, aggregated by cluster, namespace, workload type, and workload name. The result is an average rate of network errors per second.
+  - **Required Permission**: `promql.exec`
+  - **Sample Prompt**: "Show the top 10 pods with the most network errors in cluster 'production'"
+
 ## Requirements
 
 - [Go](https://go.dev/doc/install) 1.25 or higher (if running without Docker).
