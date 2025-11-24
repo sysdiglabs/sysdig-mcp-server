@@ -138,6 +138,11 @@ The server dynamically filters the available tools based on the permissions asso
   - **Required Permission**: `promql.exec`
   - **Sample Prompt**: "Show the top 20 unavailable pods in cluster 'production'"
 
+- **`troubleshoot_kubernetes_list_top_restarted_pods`**
+  - **Description**: Lists the pods with the highest number of container restarts in the specified scope (cluster, namespace, workload, or individual pod). By default, it returns the top 10.
+  - **Required Permission**: `promql.exec`
+  - **Sample Prompt**: "Show the top 10 pods with the most container restarts in cluster 'production'"
+
 ## Requirements
 
 - [Go](https://go.dev/doc/install) 1.25 or higher (if running without Docker).
