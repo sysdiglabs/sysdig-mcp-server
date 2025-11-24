@@ -51,6 +51,7 @@ The handler filters tools dynamically based on `GetMyPermissions` from Sysdig Se
 | `generate_sysql` | `tool_generate_sysql.go` | Convert natural language to SysQL via Sysdig Sage. | `sage.exec` (does not work with Service Accounts) | “Create a SysQL to list S3 buckets.” |
 | `kubernetes_list_clusters` | `tool_kubernetes_list_clusters.go` | Lists Kubernetes cluster information. | `promql.exec` | "List all Kubernetes clusters" |
 | `kubernetes_list_nodes` | `tool_kubernetes_list_nodes.go` | Lists Kubernetes node information. | `promql.exec` | "List all Kubernetes nodes in the cluster 'production-gke'" |
+| `kubernetes_list_workloads` | `tool_kubernetes_list_workloads.go` | Lists Kubernetes workload information. | `promql.exec` | "List all desired workloads in the cluster 'production-gke' and namespace 'default'" |
 
 Every tool has a companion `_test.go` file that exercises request validation, permission metadata, and Sysdig client calls through mocks.
 Note that if you add more tools you need to also update this file to reflect that.

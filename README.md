@@ -118,6 +118,11 @@ The server dynamically filters the available tools based on the permissions asso
   - **Required Permission**: `promql.exec`
   - **Sample Prompt**: "List all kubernetes nodes in the cluster 'production-gke'" or "Show me info for node 'node-123'"
 
+- **`kubernetes_list_workloads`**
+  - **Description**: Lists all the workloads that are in a particular state, desired, ready, running or unavailable. The LLM can filter by cluster, namespace, workload name or type.
+  - **Required Permission**: `promql.exec`
+  - **Sample Prompt**: "List all desired workloads in the cluster 'production-gke' and namespace 'default'"
+
 ## Requirements
 
 - [Go](https://go.dev/doc/install) 1.25 or higher (if running without Docker).
