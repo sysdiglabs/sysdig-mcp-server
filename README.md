@@ -133,6 +133,11 @@ The server dynamically filters the available tools based on the permissions asso
   - **Required Permission**: `promql.exec`
   - **Sample Prompt**: "List all cronjobs in cluster 'prod' and namespace 'default'"
 
+- **`troubleshoot_kubernetes_list_top_unavailable_pods`**
+  - **Description**: Shows the top N pods with the highest number of unavailable or unready replicas in a Kubernetes cluster, ordered from highest to lowest.
+  - **Required Permission**: `promql.exec`
+  - **Sample Prompt**: "Show the top 20 unavailable pods in cluster 'production'"
+
 ## Requirements
 
 - [Go](https://go.dev/doc/install) 1.25 or higher (if running without Docker).
