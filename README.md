@@ -128,6 +128,11 @@ The server dynamically filters the available tools based on the permissions asso
   - **Required Permission**: `promql.exec`
   - **Sample Prompt**: "Show me info for pod 'my-pod' in cluster 'production-gke'"
 
+- **`kubernetes_list_cronjobs`**
+  - **Description**: Retrieves information from the cronjobs in the cluster.
+  - **Required Permission**: `promql.exec`
+  - **Sample Prompt**: "List all cronjobs in cluster 'prod' and namespace 'default'"
+
 ## Requirements
 
 - [Go](https://go.dev/doc/install) 1.25 or higher (if running without Docker).
