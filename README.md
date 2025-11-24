@@ -158,6 +158,11 @@ The server dynamically filters the available tools based on the permissions asso
   - **Required Permission**: `promql.exec`
   - **Sample Prompt**: "List the count of running Kubernetes Pods in cluster 'production'"
 
+- **`troubleshoot_kubernetes_list_underutilized_pods_by_cpu_quota`**
+  - **Description**: List Kubernetes pods with CPU usage below 25% of the quota limit.
+  - **Required Permission**: `promql.exec`
+  - **Sample Prompt**: "Show the top 10 underutilized pods by CPU quota in cluster 'production'"
+
 ## Requirements
 
 - [Go](https://go.dev/doc/install) 1.25 or higher (if running without Docker).

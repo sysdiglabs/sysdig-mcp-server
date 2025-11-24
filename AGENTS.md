@@ -59,6 +59,7 @@ The handler filters tools dynamically based on `GetMyPermissions` from Sysdig Se
 | `troubleshoot_kubernetes_list_top_400_500_http_errors_in_pods` | `tool_troubleshoot_kubernetes_list_top_400_500_http_errors_in_pods.go` | Lists the pods with the highest rate of HTTP 4xx and 5xx errors over a specified time interval. | `promql.exec` | "Show the top 20 pods with the most HTTP errors in cluster 'production'" |
 | `troubleshoot_kubernetes_list_top_network_errors_in_pods` | `tool_troubleshoot_kubernetes_list_top_network_errors_in_pods.go` | Shows the top network errors by pod over a given interval. | `promql.exec` | "Show the top 10 pods with the most network errors in cluster 'production'" |
 | `troubleshoot_kubernetes_list_count_pods_per_cluster` | `tool_troubleshoot_kubernetes_list_count_pods_per_cluster.go` | List the count of running Kubernetes Pods grouped by cluster and namespace. | `promql.exec` | "List the count of running Kubernetes Pods in cluster 'production'" |
+| `troubleshoot_kubernetes_list_underutilized_pods_by_cpu_quota` | `tool_troubleshoot_kubernetes_list_underutilized_pods_by_cpu_quota.go` | List Kubernetes pods with CPU usage below 25% of the quota limit. | `promql.exec` | "Show the top 10 underutilized pods by CPU quota in cluster 'production'" |
 
 Every tool has a companion `_test.go` file that exercises request validation, permission metadata, and Sysdig client calls through mocks.
 Note that if you add more tools you need to also update this file to reflect that.
