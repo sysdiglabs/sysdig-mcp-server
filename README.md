@@ -173,6 +173,11 @@ The server dynamically filters the available tools based on the permissions asso
     - **Required Permission**: `promql.exec`
     - **Sample Prompt**: "Show the top 10 workloads consuming the most CPU in cluster 'production'"
 
+  - **`troubleshoot_kubernetes_list_top_cpu_consumed_by_container`**
+    - **Description**: Identifies the Kubernetes containers consuming the most CPU (in cores).
+    - **Required Permission**: `promql.exec`
+    - **Sample Prompt**: "Show the top 10 containers consuming the most CPU in cluster 'production'"
+
    ## Requirements
 - [Go](https://go.dev/doc/install) 1.25 or higher (if running without Docker).
 
