@@ -153,6 +153,11 @@ The server dynamically filters the available tools based on the permissions asso
   - **Required Permission**: `promql.exec`
   - **Sample Prompt**: "Show the top 10 pods with the most network errors in cluster 'production'"
 
+- **`troubleshoot_kubernetes_list_count_pods_per_cluster`**
+  - **Description**: List the count of running Kubernetes Pods grouped by cluster and namespace.
+  - **Required Permission**: `promql.exec`
+  - **Sample Prompt**: "List the count of running Kubernetes Pods in cluster 'production'"
+
 ## Requirements
 
 - [Go](https://go.dev/doc/install) 1.25 or higher (if running without Docker).
