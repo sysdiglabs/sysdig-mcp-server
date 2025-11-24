@@ -49,8 +49,8 @@ The handler filters tools dynamically based on `GetMyPermissions` from Sysdig Se
 | `get_event_process_tree` | `tool_get_event_process_tree.go` | Retrieve the process tree for an event when available. | `policy-events.read` | “Show the process tree behind event `abc123`.” |
 | `run_sysql` | `tool_run_sysql.go` | Execute caller-supplied Sysdig SysQL queries safely. | `sage.exec`, `risks.read` | “Run the following SysQL…”. |
 | `generate_sysql` | `tool_generate_sysql.go` | Convert natural language to SysQL via Sysdig Sage. | `sage.exec` (does not work with Service Accounts) | “Create a SysQL to list S3 buckets.” |
-| `kubernetes_list_clusters` | `tool_kubernetes_list_clusters.go` | Lists Kubernetes cluster information. | None | "List all Kubernetes clusters" |
-| `kubernetes_list_nodes` | `tool_kubernetes_list_nodes.go` | Lists Kubernetes node information. | None | "List all Kubernetes nodes in the cluster 'production-gke'" |
+| `kubernetes_list_clusters` | `tool_kubernetes_list_clusters.go` | Lists Kubernetes cluster information. | `promql.exec` | "List all Kubernetes clusters" |
+| `kubernetes_list_nodes` | `tool_kubernetes_list_nodes.go` | Lists Kubernetes node information. | `promql.exec` | "List all Kubernetes nodes in the cluster 'production-gke'" |
 
 Every tool has a companion `_test.go` file that exercises request validation, permission metadata, and Sysdig client calls through mocks.
 Note that if you add more tools you need to also update this file to reflect that.
