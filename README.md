@@ -123,6 +123,11 @@ The server dynamically filters the available tools based on the permissions asso
   - **Required Permission**: `promql.exec`
   - **Sample Prompt**: "List all desired workloads in the cluster 'production-gke' and namespace 'default'"
 
+- **`kubernetes_list_pod_containers`**
+  - **Description**: Retrieves information from a particular pod and container.
+  - **Required Permission**: `promql.exec`
+  - **Sample Prompt**: "Show me info for pod 'my-pod' in cluster 'production-gke'"
+
 ## Requirements
 
 - [Go](https://go.dev/doc/install) 1.25 or higher (if running without Docker).

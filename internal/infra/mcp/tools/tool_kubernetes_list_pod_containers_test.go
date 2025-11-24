@@ -1,0 +1,208 @@
+package tools_test
+
+import (
+	"bytes"
+	"context"
+	"io"
+	"net/http"
+
+	"github.com/mark3labs/mcp-go/mcp"
+	"github.com/mark3labs/mcp-go/server"
+	. "github.com/onsi/ginkgo/v2"
+	. "github.com/onsi/gomega"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp/tools"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig/mocks"
+	"go.uber.org/mock/gomock"
+)
+
+var _ = Describe("KubernetesListPodContainers Tool", func() {
+	var (
+		tool       *tools.KubernetesListPodContainers
+		mockSysdig *mocks.MockExtendedClientWithResponsesInterface
+		mcpServer  *server.MCPServer
+		ctrl       *gomock.Controller
+	)
+
+	BeforeEach(func() {
+		ctrl = gomock.NewController(GinkgoT())
+		mockSysdig = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
+		tool = tools.NewKubernetesListPodContainers(mockSysdig)
+		mcpServer = server.NewMCPServer("test", "test")
+		tool.RegisterInServer(mcpServer)
+	})
+
+	It("should register successfully in the server", func() {
+		Expect(mcpServer.GetTool("kubernetes_list_pod_containers")).NotTo(BeNil())
+	})
+
+	When("listing pod containers", func() {
+		DescribeTable("it succeeds", func(ctx context.Context, toolName string, request mcp.CallToolRequest, expectedParamsRequested sysdig.GetQueryV1Params) {
+			mockSysdig.EXPECT().GetQueryV1(gomock.Any(), &expectedParamsRequested).Return(&http.Response{
+				StatusCode: http.StatusOK,
+				Body:       io.NopCloser(bytes.NewBufferString(`{"status":"success"}`)),
+			}, nil)
+
+			serverTool := mcpServer.GetTool(toolName)
+			result, err := serverTool.Handler(ctx, request)
+			Expect(err).NotTo(HaveOccurred())
+
+			resultData, ok := result.Content[0].(mcp.TextContent)
+			Expect(ok).To(BeTrue())
+			Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
+		},
+			Entry(nil,
+				"kubernetes_list_pod_containers",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name:      "kubernetes_list_pod_containers",
+						Arguments: map[string]any{},
+					},
+				},
+				sysdig.GetQueryV1Params{
+					Query: `kube_pod_container_info`,
+					Limit: asPtr(sysdig.LimitQuery(10)),
+				},
+			),
+			Entry(nil,
+				"kubernetes_list_pod_containers",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name:      "kubernetes_list_pod_containers",
+						Arguments: map[string]any{"limit": "20"},
+					},
+				},
+				sysdig.GetQueryV1Params{
+					Query: `kube_pod_container_info`,
+					Limit: asPtr(sysdig.LimitQuery(20)),
+				},
+			),
+			Entry(nil,
+				"kubernetes_list_pod_containers",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name:      "kubernetes_list_pod_containers",
+						Arguments: map[string]any{"cluster_name": "my_cluster"},
+					},
+				},
+				sysdig.GetQueryV1Params{
+					Query: `kube_pod_container_info{kube_cluster_name="my_cluster"}`,
+					Limit: asPtr(sysdig.LimitQuery(10)),
+				},
+			),
+			Entry(nil,
+				"kubernetes_list_pod_containers",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name:      "kubernetes_list_pod_containers",
+						Arguments: map[string]any{"namespace_name": "my_namespace"},
+					},
+				},
+				sysdig.GetQueryV1Params{
+					Query: `kube_pod_container_info{kube_namespace_name="my_namespace"}`,
+					Limit: asPtr(sysdig.LimitQuery(10)),
+				},
+			),
+			Entry(nil,
+				"kubernetes_list_pod_containers",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name:      "kubernetes_list_pod_containers",
+						Arguments: map[string]any{"workload_type": "my_workload_type"},
+					},
+				},
+				sysdig.GetQueryV1Params{
+					Query: `kube_pod_container_info{kube_workload_type="my_workload_type"}`,
+					Limit: asPtr(sysdig.LimitQuery(10)),
+				},
+			),
+			Entry(nil,
+				"kubernetes_list_pod_containers",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name:      "kubernetes_list_pod_containers",
+						Arguments: map[string]any{"workload_name": "my_workload_name"},
+					},
+				},
+				sysdig.GetQueryV1Params{
+					Query: `kube_pod_container_info{kube_workload_name="my_workload_name"}`,
+					Limit: asPtr(sysdig.LimitQuery(10)),
+				},
+			),
+			Entry(nil,
+				"kubernetes_list_pod_containers",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name:      "kubernetes_list_pod_containers",
+						Arguments: map[string]any{"pod_name": "my_pod_name"},
+					},
+				},
+				sysdig.GetQueryV1Params{
+					Query: `kube_pod_container_info{kube_pod_name="my_pod_name"}`,
+					Limit: asPtr(sysdig.LimitQuery(10)),
+				},
+			),
+			Entry(nil,
+				"kubernetes_list_pod_containers",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name:      "kubernetes_list_pod_containers",
+						Arguments: map[string]any{"container_name": "my_container_name"},
+					},
+				},
+				sysdig.GetQueryV1Params{
+					Query: `kube_pod_container_info{kube_pod_container_name="my_container_name"}`,
+					Limit: asPtr(sysdig.LimitQuery(10)),
+				},
+			),
+			Entry(nil,
+				"kubernetes_list_pod_containers",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name:      "kubernetes_list_pod_containers",
+						Arguments: map[string]any{"image_pullstring": "my_image"},
+					},
+				},
+				sysdig.GetQueryV1Params{
+					Query: `kube_pod_container_info{image="my_image"}`,
+					Limit: asPtr(sysdig.LimitQuery(10)),
+				},
+			),
+			Entry(nil,
+				"kubernetes_list_pod_containers",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name:      "kubernetes_list_pod_containers",
+						Arguments: map[string]any{"node_name": "my_node_name"},
+					},
+				},
+				sysdig.GetQueryV1Params{
+					Query: `kube_pod_container_info{kube_node_name="my_node_name"}`,
+					Limit: asPtr(sysdig.LimitQuery(10)),
+				},
+			),
+			Entry(nil,
+				"kubernetes_list_pod_containers",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name: "kubernetes_list_pod_containers",
+						Arguments: map[string]any{
+							"cluster_name":     "my_cluster",
+							"namespace_name":   "my_namespace",
+							"workload_type":    "my_workload_type",
+							"workload_name":    "my_workload_name",
+							"pod_name":         "my_pod_name",
+							"container_name":   "my_container_name",
+							"image_pullstring": "my_image",
+							"node_name":        "my_node_name",
+						},
+					},
+				},
+				sysdig.GetQueryV1Params{
+					Query: `kube_pod_container_info{kube_cluster_name="my_cluster",kube_namespace_name="my_namespace",kube_workload_type="my_workload_type",kube_workload_name="my_workload_name",kube_pod_name="my_pod_name",kube_pod_container_name="my_container_name",image="my_image",kube_node_name="my_node_name"}`,
+					Limit: asPtr(sysdig.LimitQuery(10)),
+				},
+			),
+		)
+	})
+})

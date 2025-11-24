@@ -52,6 +52,7 @@ The handler filters tools dynamically based on `GetMyPermissions` from Sysdig Se
 | `kubernetes_list_clusters` | `tool_kubernetes_list_clusters.go` | Lists Kubernetes cluster information. | `promql.exec` | "List all Kubernetes clusters" |
 | `kubernetes_list_nodes` | `tool_kubernetes_list_nodes.go` | Lists Kubernetes node information. | `promql.exec` | "List all Kubernetes nodes in the cluster 'production-gke'" |
 | `kubernetes_list_workloads` | `tool_kubernetes_list_workloads.go` | Lists Kubernetes workload information. | `promql.exec` | "List all desired workloads in the cluster 'production-gke' and namespace 'default'" |
+| `kubernetes_list_pod_containers` | `tool_kubernetes_list_pod_containers.go` | Retrieves information from a particular pod and container. | `promql.exec` | "Show me info for pod 'my-pod' in cluster 'production-gke'" |
 
 Every tool has a companion `_test.go` file that exercises request validation, permission metadata, and Sysdig client calls through mocks.
 Note that if you add more tools you need to also update this file to reflect that.
