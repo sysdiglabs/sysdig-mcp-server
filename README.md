@@ -166,10 +166,14 @@ The server dynamically filters the available tools based on the permissions asso
 - **`troubleshoot_kubernetes_list_underutilized_pods_by_memory_quota`**
   - **Description**: List Kubernetes pods with memory usage below 25% of the limit.
   - **Required Permission**: `promql.exec`
-  - **Sample Prompt**: "Show the top 10 underutilized pods by memory quota in cluster 'production'"
+    - **Sample Prompt**: "Show the top 10 underutilized pods by memory quota in cluster 'production'"
 
-## Requirements
+  - **`troubleshoot_kubernetes_list_top_cpu_consumed_by_workload`**
+    - **Description**: Identifies the Kubernetes workloads (all containers) consuming the most CPU (in cores).
+    - **Required Permission**: `promql.exec`
+    - **Sample Prompt**: "Show the top 10 workloads consuming the most CPU in cluster 'production'"
 
+   ## Requirements
 - [Go](https://go.dev/doc/install) 1.25 or higher (if running without Docker).
 
 ## Configuration
