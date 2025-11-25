@@ -1,46 +1,142 @@
-# Sysdig MCP Server – Agent Handbook
+# Sysdig MCP Server – Agent Developer Handbook
 
-This document is optimized for MCP coding agents. It highlights what matters most when you need to explore the repository, extend a tool, or run validation quickly.
+This document is a comprehensive guide for an AI agent tasked with developing and maintaining the Sysdig MCP Server. It covers everything from project setup and architecture to daily workflows and troubleshooting.
 
-## Quick Facts
+## 1. Project Overview
+
+**Sysdig MCP Server** is a Go-based Model Context Protocol (MCP) server that exposes Sysdig Secure platform capabilities to LLMs. It provides tools for querying runtime security events, Kubernetes metrics, and executing SysQL queries through multiple transport protocols (stdio, streamable-http, SSE).
+
+### 1.1. Quick Facts
 
 | Topic | Details |
 | --- | --- |
-| Purpose | Expose vetted Sysdig Secure workflows to LLMs through MCP tools |
-| Entry point | `cmd/server/main.go` (Cobra CLI that wires config, Sysdig client, handler, transports) |
-| Runtime | Go 1.25+, uses `mcp-go`, `cobra`, `ginkgo/gomega`, `golangci-lint` |
-| Dev shell | `nix develop` (check `IN_NIX_SHELL=1` before hacking or running commands) |
-| Key commands | `just fmt`, `just lint`, `just test`, `just check`, `just test-coverage` |
+| **Purpose** | Expose vetted Sysdig Secure workflows to LLMs through MCP tools. |
+| **Tech Stack** | Go 1.25+, `mcp-go`, Cobra CLI, Ginkgo/Gomega, `golangci-lint`, Nix. |
+| **Entry Point** | `cmd/server/main.go` (Cobra CLI that wires config, Sysdig client, etc.). |
+| **Dev Shell** | `nix develop` provides a consistent development environment. |
+| **Key Commands** | `just fmt`, `just lint`, `just test`, `just check`, `just bump`. |
 
-## Repository Layout
+## 2. Environment Setup
 
-| Path | Ownership Notes |
-| --- | --- |
-| `cmd/server` | Cobra CLI + transport bootstrap; `setupHandler` registers every MCP tool. |
-| `internal/config` | Loads environment variables (`SYSDIG_MCP_*`) and enforces validation (stdio requires host/token). |
-| `internal/infra/mcp` | Generic MCP handler, HTTP/SSE middlewares, permission filtering logic. |
-| `internal/infra/mcp/tools` | One file per tool + `_test.go`. Helpers live in `utils.go`. |
-| `internal/infra/sysdig` | Typed Sysdig Secure client plus auth helpers (`WrapContextWithHost/Token`). |
-| `docs/` | Assets referenced from the README (diagrams, screenshots). |
-| `justfile` | Canonical dev tasks (format, lint, generate, test, dependency bump). |
+### 2.1. Using Nix (Recommended)
 
-## Day-to-Day Workflow
+The repository uses a Nix flake to ensure a consistent development environment with all required tools.
 
-1. Assume you are in a Nix shell and you have all the available tools. Otherwise edit `flake.nix` to add any required tool you don't have in the PATH.
-2. Make focused changes (new MCP tool, bugfix, docs, etc.).
-3. Run the default quality gates:
-   ```bash
-   just fmt        # gofumpt -w .
-   just lint       # golangci-lint run
-   just test       # ginkgo -r -p (auto-runs `go generate ./...`)
-   ```
-4. Use `just check` to chain fmt+lint+test, and `just test-coverage` when you need coverage artifacts.
-5. Follow Conventional Commits when preparing PRs.
-6. In case you need to update or add more dependencies run `just bump`.
+```bash
+# Enter the development shell with all tools available
+nix develop
 
-## MCP Tools & Permissions
+# Or, if you use direnv, allow it to load the environment
+direnv allow
+```
 
-The handler filters tools dynamically based on `GetMyPermissions` from Sysdig Secure. Each tool declares mandatory permissions via `WithRequiredPermissions`. Current tools (`internal/infra/mcp/tools`):
+### 2.2. Required Environment Variables
+
+The server requires API credentials to connect to Sysdig Secure.
+
+- `SYSDIG_MCP_API_HOST`: Sysdig Secure instance URL (e.g., `https://us2.app.sysdig.com`).
+- `SYSDIG_MCP_API_TOKEN`: Sysdig Secure API token.
+
+For a full list of optional variables (e.g., for transport configuration), see the project's `README.md`.
+
+## 3. Architecture
+
+### 3.1. Repository Layout
+
+```
+cmd/server/              - CLI entry point, tool registration
+internal/
+  config/                - Environment variable loading and validation
+  infra/
+    clock/               - System clock abstraction (for testing)
+    mcp/                 - MCP server handler, transport setup, middleware
+      tools/             - Individual MCP tool implementations
+    sysdig/              - Sysdig API client (generated + extensions)
+docs/                    - Documentation assets
+justfile                 - Canonical development tasks (format, lint, test, generate, bump)
+flake.nix                - Defines the Nix development environment and its dependencies
+```
+
+### 3.2. Key Components & Flow
+
+1.  **Entry Point (`cmd/server/main.go`):**
+    - Cobra CLI that loads config, sets up Sysdig client, registers tools, and starts transport
+    - `setupHandler()` registers all MCP tools (line 88-114)
+    - `startServer()` handles stdio/streamable-http/sse transport switching (line 118-140)
+
+2.  **Configuration (`internal/config/config.go`):**
+    - Loads environment variables with `SYSDIG_MCP_*` prefix
+    - Validates required fields for stdio transport (API host and token mandatory)
+    - Supports remote transports where auth can come via HTTP headers
+
+3.  **MCP Handler (`internal/infra/mcp/mcp_handler.go`):**
+    - Wraps mcp-go server with permission filtering (`toolPermissionFiltering`, line 26-64)
+    - Dynamically filters tools based on Sysdig API token permissions
+    - HTTP middleware extracts `Authorization` and `X-Sysdig-Host` headers for remote transports (line 108-138)
+
+4.  **Sysdig Client (`internal/infra/sysdig/`):**
+    - `client.gen.go`: Generated OpenAPI client (**DO NOT EDIT**, regenerated via oapi-codegen)
+    - `client.go`: Authentication strategies with fallback support
+    - Context-based auth: `WrapContextWithToken()` and `WrapContextWithHost()` for remote transports
+    - Fixed auth: `WithFixedHostAndToken()` for stdio mode
+    - Custom extensions in `client_extension.go` and `client_*.go` files
+
+5.  **Tools (`internal/infra/mcp/tools/`):**
+    - Each tool has its own file: `tool_<name>.go` + `tool_<name>_test.go`
+    - Tools implement `RegisterInServer(server *server.MCPServer)`
+    - Use `WithRequiredPermissions()` from `utils.go` to declare Sysdig API permissions
+    - Permission filtering happens automatically in handler
+
+### 3.3. Authentication Flow
+
+1. **stdio transport**: Fixed host/token from env vars (`SYSDIG_MCP_API_HOST`, `SYSDIG_MCP_API_TOKEN`)
+2. **Remote transports**: Extract from HTTP headers (`Authorization: Bearer <token>`, `X-Sysdig-Host`)
+3. Fallback chain: Try context auth first, then fall back to env var auth
+4. Each request includes Bearer token in Authorization header to Sysdig APIs
+
+### 3.4. Tool Permission System
+
+- Each tool declares its required Sysdig API permissions using `WithRequiredPermissions("permission1", "permission2")`.
+- Before exposing tools to the LLM, the handler calls the Sysdig `GetMyPermissions` API.
+- The agent will only see tools for which the provided API token has **all** required permissions.
+- Common permissions: `policy-events.read`, `sage.exec`, `risks.read`, `promql.exec`
+
+## 4. Day-to-Day Workflow
+
+1.  **Enter the Dev Shell:** Always work inside the Nix shell (`nix develop` or `direnv allow`) to ensure all tools are available. You can assume the developer is already in a Nix shell.
+2.  **Make Focused Changes:** Implement a new tool, fix a bug, or improve documentation.
+3.  **Run Quality Gates:** Use `just` to run formatters, linters, and tests.
+4.  **Commit:** Follow the Conventional Commits specification. Keep the commit messages short, just title, no description. Pre-commit hooks will run quality gates automatically.
+
+### 4.1. Testing & Quality Gates
+
+The project enforces quality through a series of checks.
+
+```bash
+just fmt        # Format Go code with gofumpt.
+just lint       # Run the golangci-lint linter.
+just test       # Run the unit test suite (auto-runs `go generate` first).
+just check      # A convenient alias for fmt + lint + test.
+```
+
+### 4.2. Pre-commit Hooks
+
+This repository uses **pre-commit** to automate quality checks before each commit. The hooks are configured in `.pre-commit-config.yaml` to run `just fmt`, `just lint`, and `just test`.
+
+This means that every time you run `git commit`, your changes are automatically formatted, linted, and tested. If any of these checks fail, the commit is aborted, allowing you to fix the issues.
+
+If the hooks do not run automatically, you may need to install them first:
+```bash
+# Install the git hooks defined in the configuration
+pre-commit install
+
+# After installation, you can run all checks on all files
+pre-commit run -a
+```
+
+## 5. MCP Tools & Permissions
+
+The handler filters tools dynamically based on the Sysdig user's permissions. Each tool declares mandatory permissions via `WithRequiredPermissions`.
 
 | Tool | File | Capability | Required Permissions | Useful Prompts |
 | --- | --- | --- | --- | --- |
@@ -66,34 +162,108 @@ The handler filters tools dynamically based on `GetMyPermissions` from Sysdig Se
 | `troubleshoot_kubernetes_list_top_memory_consumed_by_workload` | `tool_troubleshoot_kubernetes_list_top_memory_consumed_by_workload.go` | Lists memory-intensive workloads (all containers). | `promql.exec` | "Show the top 10 workloads consuming the most memory in cluster 'production'" |
 | `troubleshoot_kubernetes_list_top_memory_consumed_by_container` | `tool_troubleshoot_kubernetes_list_top_memory_consumed_by_container.go` | Lists memory-intensive containers. | `promql.exec` | "Show the top 10 containers consuming the most memory in cluster 'production'" |
 
-Every tool has a companion `_test.go` file that exercises request validation, permission metadata, and Sysdig client calls through mocks.
-Note that if you add more tools you need to also update this file to reflect that.
+## 6. Adding a New Tool
 
-## Adding or Updating Tools
+1.  **Create Files:** Add `tool_<name>.go` and `tool_<name>_test.go` in `internal/infra/mcp/tools/`.
 
-1. Create a new file in `internal/infra/mcp/tools/tool_<name>.go` plus `_test.go`.
-2. Implement a struct with a `handle` method and `RegisterInServer`; reuse helpers from `utils.go` (`Examples`, `WithRequiredPermissions`, `toPtr`, etc.).
-3. Cover all branches with Ginkgo/Gomega tests. Use the `tools_suite_test.go` suite for shared setup.
-4. Register the tool in `cmd/server/main.go` inside `setupHandler`.
-5. Document required permissions and sample prompts in both the README and MCP metadata.
+2.  **Implement the Tool:**
+    *   Define a struct that holds the Sysdig client.
+    *   Implement the `handle` method, which contains the tool's core logic.
+    *   Implement the `RegisterInServer` method to define the tool's MCP schema, including its name, description, parameters, and required permissions. Use helpers from `utils.go`.
 
-## Testing & Quality Gates
+3.  **Write Tests:** Use Ginkgo/Gomega to write BDD-style tests. Mock the Sysdig client to cover:
+    - Parameter validation
+    - Permission metadata
+    - Sysdig API client interactions (mocked)
+    - Error handling
 
-- `just test` runs `go generate ./...` first, then executes the whole suite via Ginkgo (`-r -p` to parallelize). Avoid leaving focused specs (`FDescribe`, `FIt`) in committed code.
-- `just lint` runs `golangci-lint run` using the repo’s configuration (see `.golangci.yml` if adjustments are necessary).
-- `just test-coverage` emits `coverage.out`; open it with `go tool cover -func=coverage.out`.
-- For manual checks, `go test ./...` and `ginkgo ./path/to/package` work inside the Nix shell.
+4.  **Register the Tool:** Add the new tool to `setupHandler()` in `cmd/server/main.go` (line 88-114).
 
-## Troubleshooting & Tips
+5.  **Document:** Add the new tool to the README.md and the table in section 5 (MCP Tools & Permissions).
 
-- **Missing config:** `SYSDIG_MCP_API_HOST` and `SYSDIG_MCP_API_TOKEN` are mandatory in `stdio`. Validation fails early in `internal/config/config.go`.
-- **Token scope:** If a tool does not appear, verify the token’s permissions under **Settings > Users & Teams > Roles**. `generate_sysql` currently requires a regular user token, not a Service Account.
-- **Remote auth:** When using `streamable-http` or `sse`, pass `Authorization: Bearer <token>` and optionally `X-Sysdig-Host`. These values override env vars via the request context middleware.
-- **Environment drift:** Always run inside `nix develop`; lint/test expect binaries like `gofumpt`, `golangci-lint`, and `ginkgo` provided by the flake.
-- **Dependency refresh:** Use `just bump` (updates flake inputs, runs `go get -u`, `go mod tidy`, and rebuilds `package.nix`) when you truly need to refresh dependencies.
+### 6.1. Example Tool Structure
 
-## Reference Links
+```go
+type ToolMyFeature struct {
+    sysdigClient sysdig.ExtendedClientWithResponsesInterface
+}
 
-- `README.md` – comprehensive product docs, quickstart, and client configuration samples.
-- `pkg.go.dev/github.com/sysdiglabs/sysdig-mcp-server` – use when checking published module versions.
-- [Model Context Protocol](https://modelcontextprotocol.io/) – protocol reference for tool/transport behavior.
+func (h *ToolMyFeature) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+    param := request.GetString("param_name", "")
+    response, err := h.sysdigClient.SomeAPICall(ctx, param)
+    // Handle response...
+    return mcp.NewToolResultJSON(response.JSON200)
+}
+
+func (h *ToolMyFeature) RegisterInServer(s *server.MCPServer) {
+    tool := mcp.NewTool("my_feature",
+        mcp.WithDescription("What this tool does"),
+        mcp.WithString("param_name",
+            mcp.Required(),
+            mcp.Description("Parameter description"),
+        ),
+        mcp.WithReadOnlyHintAnnotation(true),
+        mcp.WithDestructiveHintAnnotation(false),
+        WithRequiredPermissions("permission.name"),
+    )
+    s.AddTool(tool, h.handle)
+}
+```
+
+### 6.2. Testing Philosophy
+
+- Use BDD-style tests with Ginkgo/Gomega
+- Each tool requires comprehensive test coverage for:
+  - Parameter validation
+  - Permission metadata
+  - Sysdig API client interactions (mocked using go-mock)
+  - Error handling
+- Integration tests marked with `_integration_test.go` suffix
+- No focused specs (`FDescribe`, `FIt`) should be committed
+
+## 7. Conventional Commits
+
+All commit messages must follow the [Conventional Commits](https://www.conventionalcommits.org/) specification. This is essential for automated versioning and changelog generation.
+
+- **Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `build`, `ci`.
+- **Format**: `<type>(<optional scope>): <imperative description>`
+
+## 8. Code Generation
+
+- `internal/infra/sysdig/client.gen.go` is auto-generated from OpenAPI spec via oapi-codegen.
+- Run `go generate ./...` (or `just generate`) to regenerate after spec changes.
+- Generated code includes all Sysdig Secure API types and client methods.
+- **DO NOT** manually edit `client.gen.go`. Extend functionality in separate files (e.g., `client_extension.go`).
+
+## 9. Important Constraints
+
+1. **Generated Code**: Never manually edit `client.gen.go`. Extend functionality in separate files like `client_extension.go`.
+
+2. **Service Account Limitation**: The `generate_sysql` tool does NOT work with Service Account tokens (returns 500). Use regular user API tokens for this tool.
+
+3. **Permission Filtering**: Tools are hidden if the API token lacks required permissions. Check user's Sysdig role if a tool is unexpectedly missing.
+
+4. **stdio Mode Requirements**: When using stdio transport, `SYSDIG_MCP_API_HOST` and `SYSDIG_MCP_API_TOKEN` MUST be set. Remote transports can receive these via HTTP headers instead.
+
+## 10. Troubleshooting
+
+**Problem**: Tool not appearing in MCP client
+- **Solution**: Check API token permissions match tool's `WithRequiredPermissions()`. Use Sysdig UI: **Settings > Users & Teams > Roles**. The token must have **all** permissions listed.
+
+**Problem**: "unable to authenticate with any method"
+- **Solution**: For `stdio`, verify `SYSDIG_MCP_API_HOST` and `SYSDIG_MCP_API_TOKEN` env vars are set correctly. For remote transports, check `Authorization: Bearer <token>` header format.
+
+**Problem**: Tests failing with "command not found"
+- **Solution**: Enter Nix shell with `nix develop` or `direnv allow`. All dev tools are provided by the flake.
+
+**Problem**: `generate_sysql` returning 500 error
+- **Solution**: This tool requires a regular user API token, not a Service Account token. Switch to a user-based token.
+
+**Problem**: Pre-commit hooks not running
+- **Solution**: Run `pre-commit install` to install git hooks, then `pre-commit run -a` to test all files.
+
+## 11. Reference Links
+
+- `README.md` – Comprehensive product docs, quickstart, and client configuration samples.
+- `CLAUDE.md` – Complementary guide with additional examples and command reference.
+- [Model Context Protocol](https://modelcontextprotocol.io/) – Protocol reference for tool/transport behavior.
