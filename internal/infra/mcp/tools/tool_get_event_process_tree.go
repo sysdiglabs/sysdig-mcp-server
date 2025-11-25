@@ -61,6 +61,7 @@ func (h *ToolGetEventProcessTree) RegisterInServer(s *server.MCPServer) {
 			mcp.Required(),
 		),
 		mcp.WithOutputSchema[map[string]any](),
+		mcp.WithReadOnlyHintAnnotation(true),
 		WithRequiredPermissions("policy-events.read"),
 	)
 

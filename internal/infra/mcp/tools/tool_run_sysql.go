@@ -60,6 +60,7 @@ func (h *ToolRunSysql) RegisterInServer(s *server.MCPServer) {
 			),
 		),
 		mcp.WithOutputSchema[map[string]any](),
+		mcp.WithReadOnlyHintAnnotation(true),
 		WithRequiredPermissions("sage.exec", "risks.read"),
 	)
 	s.AddTool(tool, h.handle)
