@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "sysdig": {
+      "type": "stdio",
+      "command": "go",
+      "args": [
+        "run",
+        "./cmd/server/"
+      ]
+    }
+  }
+}

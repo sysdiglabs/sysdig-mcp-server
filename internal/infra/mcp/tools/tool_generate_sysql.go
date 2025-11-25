@@ -53,6 +53,8 @@ func (h *ToolGenerateSysql) RegisterInServer(s *server.MCPServer) {
 			),
 		),
 		mcp.WithOutputSchema[map[string]any](),
+		mcp.WithReadOnlyHintAnnotation(true),
+		mcp.WithDestructiveHintAnnotation(false),
 		WithRequiredPermissions("sage.exec"),
 	)
 	s.AddTool(tool, h.handle)
