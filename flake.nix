@@ -32,7 +32,7 @@
             mkShell {
               packages = [
                 ginkgo
-                go_1_25
+                go
                 gofumpt
                 golangci-lint
                 just
