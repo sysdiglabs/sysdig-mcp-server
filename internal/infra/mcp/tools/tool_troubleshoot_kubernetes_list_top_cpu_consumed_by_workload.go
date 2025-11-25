@@ -35,6 +35,7 @@ func (t *TroubleshootKubernetesListTopCPUConsumedByWorkload) RegisterInServer(s 
 		),
 		mcp.WithOutputSchema[map[string]any](),
 		mcp.WithReadOnlyHintAnnotation(true),
+		mcp.WithDestructiveHintAnnotation(false),
 		WithRequiredPermissions(), // FIXME(fede): Add the required permissions. It should be `promql.exec` but somehow the token does not have that permission even if you are able to execute queries.
 	)
 	s.AddTool(tool, t.handle)

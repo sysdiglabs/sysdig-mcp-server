@@ -100,6 +100,7 @@ You can specify the severity of the events based on the following cases:
 		),
 		mcp.WithOutputSchema[map[string]any](),
 		mcp.WithReadOnlyHintAnnotation(true),
+		mcp.WithDestructiveHintAnnotation(false),
 		WithRequiredPermissions("policy-events.read"),
 	)
 
