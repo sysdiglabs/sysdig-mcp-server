@@ -25,6 +25,7 @@ generate:
 test-coverage: generate
     go test -coverprofile=coverage.out ./...
 
+# Bump all dependencies
 bump:
 	nix flake update
 	nix develop --command go get -u -t -v ./...
@@ -32,6 +33,6 @@ bump:
 	nix develop --command just rehash-package-nix
 	nix develop --command pre-commit autoupdate
 
-
+# Re-calculate the vendorHash from the package.nix
 rehash-package-nix:
 	sd 'vendorHash = ".*";' 'vendorHash = "";' package.nix; h="$((nix build -L --no-link .#default || true) 2>&1 | sed -nE 's/.*got:[[:space:]]+([^ ]+).*/\1/p' | tail -1)"; [ -n "$h" ] && sd 'vendorHash = ".*";' "vendorHash = \"$h\";" package.nix && echo "vendorHash -> $h"
