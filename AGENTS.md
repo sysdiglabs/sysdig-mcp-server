@@ -134,6 +134,10 @@ pre-commit install
 pre-commit run -a
 ```
 
+### 4.3 Updating all dependencies
+
+You need to keep the project dependencies fresh from time to time. The way to do so is automated with `just bump`. Keep in mind that for that command to work, you need to have `nix` installed and in the $PATH.
+
 ## 5. MCP Tools & Permissions
 
 The handler filters tools dynamically based on the Sysdig user's permissions. Each tool declares mandatory permissions via `WithRequiredPermissions`.
@@ -262,7 +266,27 @@ All commit messages must follow the [Conventional Commits](https://www.conventio
 **Problem**: Pre-commit hooks not running
 - **Solution**: Run `pre-commit install` to install git hooks, then `pre-commit run -a` to test all files.
 
-## 11. Reference Links
+## 11. Releasing
+
+The workflow in .github/workflows/publish.yaml will create a new release automatically when the version of the crate changes in package.nix in the default git branch.
+So, if you attempt to release a new version, you need to update this version. You should try releasing a new version when you do any meaningful change that the user can benefit from.
+The guidelines to follow would be:
+
+* New feature is implemented -> Release new version.
+* Bug fixes -> Release new version.
+* CI/Refactorings/Internal changes -> No need to release new version.
+* Documentation changes -> No need to release new version.
+
+The current version of the project is not stable yet, so you need to follow the [Semver spec](https://semver.org/spec/v2.0.0.html), with the following guidelines:
+
+* Unless specified, do not attempt to stabilize the version. That is, do not try to update the version to >=1.0.0. Versions for now should be <1.0.0.
+* For minor changes, update only the Y in 0.X.Y. For example: 0.5.2 -> 0.5.3
+* For major/feature changes, update the X in 0.X.Y and set the Y to 0. For example: 0.5.2 -> 0.6.0
+
+After the commit is merged into the default branch the workflow will cross-compile the project and create a GitHub release of that version.
+Check the workflow file in case of doubt.
+
+## 12. Reference Links
 
 - `README.md` – Comprehensive product docs, quickstart, and client configuration samples.
 - `CLAUDE.md` – Complementary guide with additional examples and command reference.
