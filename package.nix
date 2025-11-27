@@ -1,7 +1,7 @@
 { buildGoModule, versionCheckHook }:
 buildGoModule (finalAttrs: {
   pname = "sysdig-mcp-server";
-  version = "0.4.0";
+  version = "0.5.0";
   src = ./.;
   vendorHash = "sha256-jf/px0p88XbfuSPMry/qZcfR0QPTF9IrPegg2CwAd6M=";
 
