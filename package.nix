@@ -3,6 +3,7 @@ buildGoModule (finalAttrs: {
   pname = "sysdig-mcp-server";
   version = "0.5.0";
   src = ./.;
+  # This hash is automatically re-calculated with `just rehash-package-nix`. This is automatically called as well by `just bump`.
   vendorHash = "sha256-jf/px0p88XbfuSPMry/qZcfR0QPTF9IrPegg2CwAd6M=";
 
   subPackages = [
