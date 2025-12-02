@@ -108,82 +108,82 @@ The server dynamically filters the available tools based on the permissions asso
   - **Required Permission**: `sage.exec`, `risks.read`
   - **Sample Prompt**: "Run this query: MATCH CloudResource WHERE type = 'aws_s3_bucket' LIMIT 10"
 
-- **`kubernetes_list_clusters`**
+- **`k8s_list_clusters`**
   - **Description**: Lists the cluster information for all clusters or just the cluster specified.
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "List all kubernetes clusters" or "Show me info for cluster 'production-gke'"
 
-- **`kubernetes_list_nodes`**
+- **`k8s_list_nodes`**
   - **Description**: Lists the node information for all nodes, all nodes from a cluster or just the node specified.
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "List all kubernetes nodes in the cluster 'production-gke'" or "Show me info for node 'node-123'"
 
-- **`kubernetes_list_workloads`**
+- **`k8s_list_workloads`**
   - **Description**: Lists all the workloads that are in a particular state, desired, ready, running or unavailable. The LLM can filter by cluster, namespace, workload name or type.
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "List all desired workloads in the cluster 'production-gke' and namespace 'default'"
 
-- **`kubernetes_list_pod_containers`**
+- **`k8s_list_pod_containers`**
   - **Description**: Retrieves information from a particular pod and container.
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "Show me info for pod 'my-pod' in cluster 'production-gke'"
 
-- **`kubernetes_list_cronjobs`**
+- **`k8s_list_cronjobs`**
   - **Description**: Retrieves information from the cronjobs in the cluster.
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "List all cronjobs in cluster 'prod' and namespace 'default'"
 
-- **`troubleshoot_kubernetes_list_top_unavailable_pods`**
+- **`k8s_list_top_unavailable_pods`**
   - **Description**: Shows the top N pods with the highest number of unavailable or unready replicas in a Kubernetes cluster, ordered from highest to lowest.
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "Show the top 20 unavailable pods in cluster 'production'"
 
-- **`troubleshoot_kubernetes_list_top_restarted_pods`**
+- **`k8s_list_top_restarted_pods`**
   - **Description**: Lists the pods with the highest number of container restarts in the specified scope (cluster, namespace, workload, or individual pod). By default, it returns the top 10.
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "Show the top 10 pods with the most container restarts in cluster 'production'"
 
-- **`troubleshoot_kubernetes_list_top_400_500_http_errors_in_pods`**
+- **`k8s_list_top_http_errors_in_pods`**
   - **Description**: Lists the pods with the highest rate of HTTP 4xx and 5xx errors over a specified time interval, allowing filtering by cluster, namespace, workload type, and workload name.
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "Show the top 20 pods with the most HTTP errors in cluster 'production'"
 
-- **`troubleshoot_kubernetes_list_top_network_errors_in_pods`**
+- **`k8s_list_top_network_errors_in_pods`**
   - **Description**: Shows the top network errors by pod over a given interval, aggregated by cluster, namespace, workload type, and workload name. The result is an average rate of network errors per second.
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "Show the top 10 pods with the most network errors in cluster 'production'"
 
-- **`troubleshoot_kubernetes_list_count_pods_per_cluster`**
+- **`k8s_list_count_pods_per_cluster`**
   - **Description**: List the count of running Kubernetes Pods grouped by cluster and namespace.
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "List the count of running Kubernetes Pods in cluster 'production'"
 
-- **`troubleshoot_kubernetes_list_underutilized_pods_by_cpu_quota`**
+- **`k8s_list_underutilized_pods_cpu_quota`**
   - **Description**: List Kubernetes pods with CPU usage below 25% of the quota limit.
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "Show the top 10 underutilized pods by CPU quota in cluster 'production'"
 
-- **`troubleshoot_kubernetes_list_underutilized_pods_by_memory_quota`**
+- **`k8s_list_underutilized_pods_memory_quota`**
   - **Description**: List Kubernetes pods with memory usage below 25% of the limit.
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "Show the top 10 underutilized pods by memory quota in cluster 'production'"
 
-- **`troubleshoot_kubernetes_list_top_cpu_consumed_by_workload`**
+- **`k8s_list_top_cpu_consumed_workload`**
   - **Description**: Identifies the Kubernetes workloads (all containers) consuming the most CPU (in cores).
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "Show the top 10 workloads consuming the most CPU in cluster 'production'"
 
-- **`troubleshoot_kubernetes_list_top_cpu_consumed_by_container`**
+- **`k8s_list_top_cpu_consumed_container`**
   - **Description**: Identifies the Kubernetes containers consuming the most CPU (in cores).
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "Show the top 10 containers consuming the most CPU in cluster 'production'"
 
-- **`troubleshoot_kubernetes_list_top_memory_consumed_by_workload`**
+- **`k8s_list_top_memory_consumed_workload`**
   - **Description**: Lists memory-intensive workloads (all containers).
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "Show the top 10 workloads consuming the most memory in cluster 'production'"
 
-- **`troubleshoot_kubernetes_list_top_memory_consumed_by_container`**
+- **`k8s_list_top_memory_consumed_container`**
   - **Description**: Lists memory-intensive containers.
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "Show the top 10 containers consuming the most memory in cluster 'production'"
