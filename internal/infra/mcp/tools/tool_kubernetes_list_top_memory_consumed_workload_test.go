@@ -16,9 +16,9 @@ import (
 	"go.uber.org/mock/gomock"
 )
 
-var _ = Describe("TroubleshootKubernetesListTopMemoryConsumedByWorkload Tool", func() {
+var _ = Describe("KubernetesListTopMemoryConsumedWorkload Tool", func() {
 	var (
-		tool       *tools.TroubleshootKubernetesListTopMemoryConsumedByWorkload
+		tool       *tools.KubernetesListTopMemoryConsumedWorkload
 		mockSysdig *mocks.MockExtendedClientWithResponsesInterface
 		mcpServer  *server.MCPServer
 		ctrl       *gomock.Controller
@@ -27,13 +27,13 @@ var _ = Describe("TroubleshootKubernetesListTopMemoryConsumedByWorkload Tool", f
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockSysdig = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		tool = tools.NewTroubleshootKubernetesListTopMemoryConsumedByWorkload(mockSysdig)
+		tool = tools.NewKubernetesListTopMemoryConsumedWorkload(mockSysdig)
 		mcpServer = server.NewMCPServer("test", "test")
 		tool.RegisterInServer(mcpServer)
 	})
 
 	It("should register successfully in the server", func() {
-		Expect(mcpServer.GetTool("troubleshoot_kubernetes_list_top_memory_consumed_by_workload")).NotTo(BeNil())
+		Expect(mcpServer.GetTool("kubernetes_list_top_memory_consumed_workload")).NotTo(BeNil())
 	})
 
 	When("listing top memory consumed by workload", func() {
@@ -52,10 +52,10 @@ var _ = Describe("TroubleshootKubernetesListTopMemoryConsumedByWorkload Tool", f
 			Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
 		},
 			Entry(nil,
-				"troubleshoot_kubernetes_list_top_memory_consumed_by_workload",
+				"kubernetes_list_top_memory_consumed_workload",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_top_memory_consumed_by_workload",
+						Name:      "kubernetes_list_top_memory_consumed_workload",
 						Arguments: map[string]any{},
 					},
 				},
@@ -65,10 +65,10 @@ var _ = Describe("TroubleshootKubernetesListTopMemoryConsumedByWorkload Tool", f
 				},
 			),
 			Entry(nil,
-				"troubleshoot_kubernetes_list_top_memory_consumed_by_workload",
+				"kubernetes_list_top_memory_consumed_workload",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_top_memory_consumed_by_workload",
+						Name:      "kubernetes_list_top_memory_consumed_workload",
 						Arguments: map[string]any{"limit": "10"},
 					},
 				},
@@ -78,10 +78,10 @@ var _ = Describe("TroubleshootKubernetesListTopMemoryConsumedByWorkload Tool", f
 				},
 			),
 			Entry(nil,
-				"troubleshoot_kubernetes_list_top_memory_consumed_by_workload",
+				"kubernetes_list_top_memory_consumed_workload",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_top_memory_consumed_by_workload",
+						Name:      "kubernetes_list_top_memory_consumed_workload",
 						Arguments: map[string]any{"cluster_name": "my_cluster"},
 					},
 				},
@@ -91,10 +91,10 @@ var _ = Describe("TroubleshootKubernetesListTopMemoryConsumedByWorkload Tool", f
 				},
 			),
 			Entry(nil,
-				"troubleshoot_kubernetes_list_top_memory_consumed_by_workload",
+				"kubernetes_list_top_memory_consumed_workload",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_top_memory_consumed_by_workload",
+						Name:      "kubernetes_list_top_memory_consumed_workload",
 						Arguments: map[string]any{"cluster_name": "my_cluster", "namespace_name": "my_namespace"},
 					},
 				},
@@ -104,10 +104,10 @@ var _ = Describe("TroubleshootKubernetesListTopMemoryConsumedByWorkload Tool", f
 				},
 			),
 			Entry(nil,
-				"troubleshoot_kubernetes_list_top_memory_consumed_by_workload",
+				"kubernetes_list_top_memory_consumed_workload",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name: "troubleshoot_kubernetes_list_top_memory_consumed_by_workload",
+						Name: "kubernetes_list_top_memory_consumed_workload",
 						Arguments: map[string]any{
 							"cluster_name":   "my_cluster",
 							"namespace_name": "my_namespace",

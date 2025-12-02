@@ -12,18 +12,18 @@ import (
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
-type TroubleshootKubernetesListTopUnavailablePods struct {
+type KubernetesListTopUnavailablePods struct {
 	SysdigClient sysdig.ExtendedClientWithResponsesInterface
 }
 
-func NewTroubleshootKubernetesListTopUnavailablePods(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *TroubleshootKubernetesListTopUnavailablePods {
-	return &TroubleshootKubernetesListTopUnavailablePods{
+func NewKubernetesListTopUnavailablePods(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *KubernetesListTopUnavailablePods {
+	return &KubernetesListTopUnavailablePods{
 		SysdigClient: sysdigClient,
 	}
 }
 
-func (t *TroubleshootKubernetesListTopUnavailablePods) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("troubleshoot_kubernetes_list_top_unavailable_pods",
+func (t *KubernetesListTopUnavailablePods) RegisterInServer(s *server.MCPServer) {
+	tool := mcp.NewTool("kubernetes_list_top_unavailable_pods",
 		mcp.WithDescription("Shows the top N pods with the highest number of unavailable or unready replicas in a Kubernetes cluster, ordered from highest to lowest."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
@@ -41,7 +41,7 @@ func (t *TroubleshootKubernetesListTopUnavailablePods) RegisterInServer(s *serve
 	s.AddTool(tool, t.handle)
 }
 
-func (t *TroubleshootKubernetesListTopUnavailablePods) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+func (t *KubernetesListTopUnavailablePods) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
 	clusterName := mcp.ParseString(request, "cluster_name", "")
 	namespaceName := mcp.ParseString(request, "namespace_name", "")
 	workloadType := mcp.ParseString(request, "workload_type", "")

@@ -16,9 +16,9 @@ import (
 	"go.uber.org/mock/gomock"
 )
 
-var _ = Describe("TroubleshootKubernetesListTopMemoryConsumedByContainer Tool", func() {
+var _ = Describe("KubernetesListTopMemoryConsumedContainer Tool", func() {
 	var (
-		tool       *tools.TroubleshootKubernetesListTopMemoryConsumedByContainer
+		tool       *tools.KubernetesListTopMemoryConsumedContainer
 		mockSysdig *mocks.MockExtendedClientWithResponsesInterface
 		mcpServer  *server.MCPServer
 		ctrl       *gomock.Controller
@@ -27,13 +27,13 @@ var _ = Describe("TroubleshootKubernetesListTopMemoryConsumedByContainer Tool", 
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockSysdig = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		tool = tools.NewTroubleshootKubernetesListTopMemoryConsumedByContainer(mockSysdig)
+		tool = tools.NewKubernetesListTopMemoryConsumedContainer(mockSysdig)
 		mcpServer = server.NewMCPServer("test", "test")
 		tool.RegisterInServer(mcpServer)
 	})
 
 	It("should register successfully in the server", func() {
-		Expect(mcpServer.GetTool("troubleshoot_kubernetes_list_top_memory_consumed_by_container")).NotTo(BeNil())
+		Expect(mcpServer.GetTool("kubernetes_list_top_memory_consumed_container")).NotTo(BeNil())
 	})
 
 	When("listing top memory consumed by container", func() {
@@ -52,10 +52,10 @@ var _ = Describe("TroubleshootKubernetesListTopMemoryConsumedByContainer Tool", 
 			Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
 		},
 			Entry(nil,
-				"troubleshoot_kubernetes_list_top_memory_consumed_by_container",
+				"kubernetes_list_top_memory_consumed_container",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_top_memory_consumed_by_container",
+						Name:      "kubernetes_list_top_memory_consumed_container",
 						Arguments: map[string]any{},
 					},
 				},
@@ -65,10 +65,10 @@ var _ = Describe("TroubleshootKubernetesListTopMemoryConsumedByContainer Tool", 
 				},
 			),
 			Entry(nil,
-				"troubleshoot_kubernetes_list_top_memory_consumed_by_container",
+				"kubernetes_list_top_memory_consumed_container",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name: "troubleshoot_kubernetes_list_top_memory_consumed_by_container",
+						Name: "kubernetes_list_top_memory_consumed_container",
 						Arguments: map[string]any{
 							"cluster_name":   "prod",
 							"namespace_name": "default",
@@ -82,10 +82,10 @@ var _ = Describe("TroubleshootKubernetesListTopMemoryConsumedByContainer Tool", 
 				},
 			),
 			Entry(nil,
-				"troubleshoot_kubernetes_list_top_memory_consumed_by_container",
+				"kubernetes_list_top_memory_consumed_container",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name: "troubleshoot_kubernetes_list_top_memory_consumed_by_container",
+						Name: "kubernetes_list_top_memory_consumed_container",
 						Arguments: map[string]any{
 							"cluster_name":   "prod",
 							"namespace_name": "default",

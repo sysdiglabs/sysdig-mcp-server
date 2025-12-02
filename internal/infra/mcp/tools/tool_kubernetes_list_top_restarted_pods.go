@@ -12,18 +12,18 @@ import (
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
-type TroubleshootKubernetesListTopRestartedPods struct {
+type KubernetesListTopRestartedPods struct {
 	SysdigClient sysdig.ExtendedClientWithResponsesInterface
 }
 
-func NewTroubleshootKubernetesListTopRestartedPods(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *TroubleshootKubernetesListTopRestartedPods {
-	return &TroubleshootKubernetesListTopRestartedPods{
+func NewKubernetesListTopRestartedPods(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *KubernetesListTopRestartedPods {
+	return &KubernetesListTopRestartedPods{
 		SysdigClient: sysdigClient,
 	}
 }
 
-func (t *TroubleshootKubernetesListTopRestartedPods) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("troubleshoot_kubernetes_list_top_restarted_pods",
+func (t *KubernetesListTopRestartedPods) RegisterInServer(s *server.MCPServer) {
+	tool := mcp.NewTool("kubernetes_list_top_restarted_pods",
 		mcp.WithDescription("Lists the pods with the highest number of container restarts in the specified scope (cluster, namespace, workload, or individual pod). By default, it returns the top 10."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
@@ -42,7 +42,7 @@ func (t *TroubleshootKubernetesListTopRestartedPods) RegisterInServer(s *server.
 	s.AddTool(tool, t.handle)
 }
 
-func (t *TroubleshootKubernetesListTopRestartedPods) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+func (t *KubernetesListTopRestartedPods) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
 	clusterName := mcp.ParseString(request, "cluster_name", "")
 	namespaceName := mcp.ParseString(request, "namespace_name", "")
 	workloadType := mcp.ParseString(request, "workload_type", "")

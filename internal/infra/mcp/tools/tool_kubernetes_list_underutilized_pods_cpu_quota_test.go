@@ -16,9 +16,9 @@ import (
 	"go.uber.org/mock/gomock"
 )
 
-var _ = Describe("TroubleshootKubernetesListUnderutilizedPodsByCPUQuota Tool", func() {
+var _ = Describe("KubernetesListUnderutilizedPodsCPUQuota Tool", func() {
 	var (
-		tool       *tools.TroubleshootKubernetesListUnderutilizedPodsByCPUQuota
+		tool       *tools.KubernetesListUnderutilizedPodsCPUQuota
 		mockSysdig *mocks.MockExtendedClientWithResponsesInterface
 		mcpServer  *server.MCPServer
 		ctrl       *gomock.Controller
@@ -27,13 +27,13 @@ var _ = Describe("TroubleshootKubernetesListUnderutilizedPodsByCPUQuota Tool", f
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockSysdig = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		tool = tools.NewTroubleshootKubernetesListUnderutilizedPodsByCPUQuota(mockSysdig)
+		tool = tools.NewKubernetesListUnderutilizedPodsCPUQuota(mockSysdig)
 		mcpServer = server.NewMCPServer("test", "test")
 		tool.RegisterInServer(mcpServer)
 	})
 
 	It("should register successfully in the server", func() {
-		Expect(mcpServer.GetTool("troubleshoot_kubernetes_list_underutilized_pods_by_cpu_quota")).NotTo(BeNil())
+		Expect(mcpServer.GetTool("kubernetes_list_underutilized_pods_cpu_quota")).NotTo(BeNil())
 	})
 
 	When("listing underutilized pods", func() {
@@ -52,10 +52,10 @@ var _ = Describe("TroubleshootKubernetesListUnderutilizedPodsByCPUQuota Tool", f
 			Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
 		},
 			Entry(nil,
-				"troubleshoot_kubernetes_list_underutilized_pods_by_cpu_quota",
+				"kubernetes_list_underutilized_pods_cpu_quota",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_underutilized_pods_by_cpu_quota",
+						Name:      "kubernetes_list_underutilized_pods_cpu_quota",
 						Arguments: map[string]any{},
 					},
 				},
@@ -65,10 +65,10 @@ var _ = Describe("TroubleshootKubernetesListUnderutilizedPodsByCPUQuota Tool", f
 				},
 			),
 			Entry(nil,
-				"troubleshoot_kubernetes_list_underutilized_pods_by_cpu_quota",
+				"kubernetes_list_underutilized_pods_cpu_quota",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_underutilized_pods_by_cpu_quota",
+						Name:      "kubernetes_list_underutilized_pods_cpu_quota",
 						Arguments: map[string]any{"limit": "20"},
 					},
 				},
@@ -78,10 +78,10 @@ var _ = Describe("TroubleshootKubernetesListUnderutilizedPodsByCPUQuota Tool", f
 				},
 			),
 			Entry(nil,
-				"troubleshoot_kubernetes_list_underutilized_pods_by_cpu_quota",
+				"kubernetes_list_underutilized_pods_cpu_quota",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_underutilized_pods_by_cpu_quota",
+						Name:      "kubernetes_list_underutilized_pods_cpu_quota",
 						Arguments: map[string]any{"cluster_name": "my_cluster"},
 					},
 				},
@@ -91,10 +91,10 @@ var _ = Describe("TroubleshootKubernetesListUnderutilizedPodsByCPUQuota Tool", f
 				},
 			),
 			Entry(nil,
-				"troubleshoot_kubernetes_list_underutilized_pods_by_cpu_quota",
+				"kubernetes_list_underutilized_pods_cpu_quota",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_underutilized_pods_by_cpu_quota",
+						Name:      "kubernetes_list_underutilized_pods_cpu_quota",
 						Arguments: map[string]any{"namespace_name": "my_namespace"},
 					},
 				},
@@ -104,10 +104,10 @@ var _ = Describe("TroubleshootKubernetesListUnderutilizedPodsByCPUQuota Tool", f
 				},
 			),
 			Entry(nil,
-				"troubleshoot_kubernetes_list_underutilized_pods_by_cpu_quota",
+				"kubernetes_list_underutilized_pods_cpu_quota",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_underutilized_pods_by_cpu_quota",
+						Name:      "kubernetes_list_underutilized_pods_cpu_quota",
 						Arguments: map[string]any{"cluster_name": "my_cluster", "namespace_name": "my_namespace"},
 					},
 				},

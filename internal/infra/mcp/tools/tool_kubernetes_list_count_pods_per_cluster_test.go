@@ -16,9 +16,9 @@ import (
 	"go.uber.org/mock/gomock"
 )
 
-var _ = Describe("TroubleshootKubernetesListCountPodsPerCluster Tool", func() {
+var _ = Describe("KubernetesListCountPodsPerCluster Tool", func() {
 	var (
-		tool       *tools.TroubleshootKubernetesListCountPodsPerCluster
+		tool       *tools.KubernetesListCountPodsPerCluster
 		mockSysdig *mocks.MockExtendedClientWithResponsesInterface
 		mcpServer  *server.MCPServer
 		ctrl       *gomock.Controller
@@ -27,13 +27,13 @@ var _ = Describe("TroubleshootKubernetesListCountPodsPerCluster Tool", func() {
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockSysdig = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		tool = tools.NewTroubleshootKubernetesListCountPodsPerCluster(mockSysdig)
+		tool = tools.NewKubernetesListCountPodsPerCluster(mockSysdig)
 		mcpServer = server.NewMCPServer("test", "test")
 		tool.RegisterInServer(mcpServer)
 	})
 
 	It("should register successfully in the server", func() {
-		Expect(mcpServer.GetTool("troubleshoot_kubernetes_list_count_pods_per_cluster")).NotTo(BeNil())
+		Expect(mcpServer.GetTool("kubernetes_list_count_pods_per_cluster")).NotTo(BeNil())
 	})
 
 	When("counting pods", func() {
@@ -52,10 +52,10 @@ var _ = Describe("TroubleshootKubernetesListCountPodsPerCluster Tool", func() {
 			Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
 		},
 			Entry(nil,
-				"troubleshoot_kubernetes_list_count_pods_per_cluster",
+				"kubernetes_list_count_pods_per_cluster",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_count_pods_per_cluster",
+						Name:      "kubernetes_list_count_pods_per_cluster",
 						Arguments: map[string]any{},
 					},
 				},
@@ -65,10 +65,10 @@ var _ = Describe("TroubleshootKubernetesListCountPodsPerCluster Tool", func() {
 				},
 			),
 			Entry(nil,
-				"troubleshoot_kubernetes_list_count_pods_per_cluster",
+				"kubernetes_list_count_pods_per_cluster",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_count_pods_per_cluster",
+						Name:      "kubernetes_list_count_pods_per_cluster",
 						Arguments: map[string]any{"limit": "10"},
 					},
 				},
@@ -78,10 +78,10 @@ var _ = Describe("TroubleshootKubernetesListCountPodsPerCluster Tool", func() {
 				},
 			),
 			Entry(nil,
-				"troubleshoot_kubernetes_list_count_pods_per_cluster",
+				"kubernetes_list_count_pods_per_cluster",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_count_pods_per_cluster",
+						Name:      "kubernetes_list_count_pods_per_cluster",
 						Arguments: map[string]any{"cluster_name": "my_cluster"},
 					},
 				},
@@ -91,10 +91,10 @@ var _ = Describe("TroubleshootKubernetesListCountPodsPerCluster Tool", func() {
 				},
 			),
 			Entry(nil,
-				"troubleshoot_kubernetes_list_count_pods_per_cluster",
+				"kubernetes_list_count_pods_per_cluster",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_count_pods_per_cluster",
+						Name:      "kubernetes_list_count_pods_per_cluster",
 						Arguments: map[string]any{"namespace_name": "my_namespace"},
 					},
 				},
@@ -104,10 +104,10 @@ var _ = Describe("TroubleshootKubernetesListCountPodsPerCluster Tool", func() {
 				},
 			),
 			Entry(nil,
-				"troubleshoot_kubernetes_list_count_pods_per_cluster",
+				"kubernetes_list_count_pods_per_cluster",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_count_pods_per_cluster",
+						Name:      "kubernetes_list_count_pods_per_cluster",
 						Arguments: map[string]any{"cluster_name": "my_cluster", "namespace_name": "my_namespace"},
 					},
 				},

@@ -16,9 +16,9 @@ import (
 	"go.uber.org/mock/gomock"
 )
 
-var _ = Describe("TroubleshootKubernetesListTopCPUConsumedByContainer Tool", func() {
+var _ = Describe("KubernetesListTopCPUConsumedContainer Tool", func() {
 	var (
-		tool       *tools.TroubleshootKubernetesListTopCPUConsumedByContainer
+		tool       *tools.KubernetesListTopCPUConsumedContainer
 		mockSysdig *mocks.MockExtendedClientWithResponsesInterface
 		mcpServer  *server.MCPServer
 		ctrl       *gomock.Controller
@@ -27,13 +27,13 @@ var _ = Describe("TroubleshootKubernetesListTopCPUConsumedByContainer Tool", fun
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockSysdig = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		tool = tools.NewTroubleshootKubernetesListTopCPUConsumedByContainer(mockSysdig)
+		tool = tools.NewKubernetesListTopCPUConsumedContainer(mockSysdig)
 		mcpServer = server.NewMCPServer("test", "test")
 		tool.RegisterInServer(mcpServer)
 	})
 
 	It("should register successfully in the server", func() {
-		Expect(mcpServer.GetTool("troubleshoot_kubernetes_list_top_cpu_consumed_by_container")).NotTo(BeNil())
+		Expect(mcpServer.GetTool("kubernetes_list_top_cpu_consumed_container")).NotTo(BeNil())
 	})
 
 	When("listing top cpu consumed by container", func() {
@@ -51,10 +51,10 @@ var _ = Describe("TroubleshootKubernetesListTopCPUConsumedByContainer Tool", fun
 			Expect(ok).To(BeTrue())
 			Expect(resultData.Text).To(ContainSubstring(`"status":"success"`))
 		},
-			Entry("with no params", context.Background(), "troubleshoot_kubernetes_list_top_cpu_consumed_by_container",
+			Entry("with no params", context.Background(), "kubernetes_list_top_cpu_consumed_container",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_top_cpu_consumed_by_container",
+						Name:      "kubernetes_list_top_cpu_consumed_container",
 						Arguments: map[string]any{},
 					},
 				},
@@ -62,10 +62,10 @@ var _ = Describe("TroubleshootKubernetesListTopCPUConsumedByContainer Tool", fun
 					Query: `topk(20, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, container_label_io_kubernetes_container_name)(sysdig_container_cpu_cores_used))`,
 				},
 			),
-			Entry("with all params", context.Background(), "troubleshoot_kubernetes_list_top_cpu_consumed_by_container",
+			Entry("with all params", context.Background(), "kubernetes_list_top_cpu_consumed_container",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name: "troubleshoot_kubernetes_list_top_cpu_consumed_by_container",
+						Name: "kubernetes_list_top_cpu_consumed_container",
 						Arguments: map[string]any{
 							"cluster_name":   "test-cluster",
 							"namespace_name": "test-namespace",

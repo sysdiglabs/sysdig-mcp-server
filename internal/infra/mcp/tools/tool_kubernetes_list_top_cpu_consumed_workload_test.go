@@ -16,9 +16,9 @@ import (
 	"go.uber.org/mock/gomock"
 )
 
-var _ = Describe("TroubleshootKubernetesListUnderutilizedPodsByMemoryQuota Tool", func() {
+var _ = Describe("KubernetesListTopCPUConsumedWorkload Tool", func() {
 	var (
-		tool       *tools.TroubleshootKubernetesListUnderutilizedPodsByMemoryQuota
+		tool       *tools.KubernetesListTopCPUConsumedWorkload
 		mockSysdig *mocks.MockExtendedClientWithResponsesInterface
 		mcpServer  *server.MCPServer
 		ctrl       *gomock.Controller
@@ -27,16 +27,16 @@ var _ = Describe("TroubleshootKubernetesListUnderutilizedPodsByMemoryQuota Tool"
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockSysdig = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		tool = tools.NewTroubleshootKubernetesListUnderutilizedPodsByMemoryQuota(mockSysdig)
+		tool = tools.NewKubernetesListTopCPUConsumedWorkload(mockSysdig)
 		mcpServer = server.NewMCPServer("test", "test")
 		tool.RegisterInServer(mcpServer)
 	})
 
 	It("should register successfully in the server", func() {
-		Expect(mcpServer.GetTool("troubleshoot_kubernetes_list_underutilized_pods_by_memory_quota")).NotTo(BeNil())
+		Expect(mcpServer.GetTool("kubernetes_list_top_cpu_consumed_workload")).NotTo(BeNil())
 	})
 
-	When("listing underutilized pods", func() {
+	When("listing top cpu consumed by workload", func() {
 		DescribeTable("it succeeds", func(ctx context.Context, toolName string, request mcp.CallToolRequest, expectedParamsRequested sysdig.GetQueryV1Params) {
 			mockSysdig.EXPECT().GetQueryV1(gomock.Any(), &expectedParamsRequested).Return(&http.Response{
 				StatusCode: http.StatusOK,
@@ -52,33 +52,49 @@ var _ = Describe("TroubleshootKubernetesListUnderutilizedPodsByMemoryQuota Tool"
 			Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
 		},
 			Entry(nil,
-				"troubleshoot_kubernetes_list_underutilized_pods_by_memory_quota",
+				"kubernetes_list_top_cpu_consumed_workload",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_underutilized_pods_by_memory_quota",
+						Name:      "kubernetes_list_top_cpu_consumed_workload",
 						Arguments: map[string]any{},
 					},
 				},
 				sysdig.GetQueryV1Params{
-					Query: `sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_memory_used_bytes) / (sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_memory_limit_bytes) > 0) < 0.25`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Query: `topk(20, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name)(sysdig_container_cpu_cores_used))`,
 				},
 			),
 			Entry(nil,
-				"troubleshoot_kubernetes_list_underutilized_pods_by_memory_quota",
+				"kubernetes_list_top_cpu_consumed_workload",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name: "troubleshoot_kubernetes_list_underutilized_pods_by_memory_quota",
+						Name: "kubernetes_list_top_cpu_consumed_workload",
 						Arguments: map[string]any{
-							"cluster_name":   "test-cluster",
-							"namespace_name": "test-namespace",
-							"limit":          20,
+							"cluster_name":   "prod",
+							"namespace_name": "default",
+							"limit":          10,
 						},
 					},
 				},
 				sysdig.GetQueryV1Params{
-					Query: `sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_memory_used_bytes{kube_cluster_name="test-cluster",kube_namespace_name="test-namespace"}) / (sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_memory_limit_bytes{kube_cluster_name="test-cluster",kube_namespace_name="test-namespace"}) > 0) < 0.25`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Query: `topk(10, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name)(sysdig_container_cpu_cores_used{kube_cluster_name="prod",kube_namespace_name="default"}))`,
+				},
+			),
+			Entry(nil,
+				"kubernetes_list_top_cpu_consumed_workload",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name: "kubernetes_list_top_cpu_consumed_workload",
+						Arguments: map[string]any{
+							"cluster_name":   "prod",
+							"namespace_name": "default",
+							"workload_name":  "api",
+							"workload_type":  "deployment",
+							"limit":          5,
+						},
+					},
+				},
+				sysdig.GetQueryV1Params{
+					Query: `topk(5, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name)(sysdig_container_cpu_cores_used{kube_cluster_name="prod",kube_namespace_name="default",kube_workload_type="deployment",kube_workload_name="api"}))`,
 				},
 			),
 		)

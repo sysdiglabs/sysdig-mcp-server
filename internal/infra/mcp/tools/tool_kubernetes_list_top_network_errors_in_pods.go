@@ -13,19 +13,19 @@ import (
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
-type TroubleshootKubernetesListTop400500HttpErrorsInPods struct {
+type KubernetesListTopNetworkErrorsInPods struct {
 	SysdigClient sysdig.ExtendedClientWithResponsesInterface
 }
 
-func NewTroubleshootKubernetesListTop400500HttpErrorsInPods(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *TroubleshootKubernetesListTop400500HttpErrorsInPods {
-	return &TroubleshootKubernetesListTop400500HttpErrorsInPods{
+func NewKubernetesListTopNetworkErrorsInPods(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *KubernetesListTopNetworkErrorsInPods {
+	return &KubernetesListTopNetworkErrorsInPods{
 		SysdigClient: sysdigClient,
 	}
 }
 
-func (t *TroubleshootKubernetesListTop400500HttpErrorsInPods) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("troubleshoot_kubernetes_list_top_400_500_http_errors_in_pods",
-		mcp.WithDescription("Lists the pods with the highest rate of HTTP 4xx and 5xx errors over a specified time interval, allowing filtering by cluster, namespace, workload type, and workload name."),
+func (t *KubernetesListTopNetworkErrorsInPods) RegisterInServer(s *server.MCPServer) {
+	tool := mcp.NewTool("kubernetes_list_top_network_errors_in_pods",
+		mcp.WithDescription("Shows the top network errors by pod over a given interval, aggregated by cluster, namespace, workload type, and workload name. The result is an average rate of network errors per second."),
 		mcp.WithString("interval", mcp.Description("Time interval for the query (e.g. '1h', '30m'). Default is '1h'.")),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
@@ -43,7 +43,7 @@ func (t *TroubleshootKubernetesListTop400500HttpErrorsInPods) RegisterInServer(s
 	s.AddTool(tool, t.handle)
 }
 
-func (t *TroubleshootKubernetesListTop400500HttpErrorsInPods) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+func (t *KubernetesListTopNetworkErrorsInPods) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
 	interval := mcp.ParseString(request, "interval", "1h")
 	clusterName := mcp.ParseString(request, "cluster_name", "")
 	namespaceName := mcp.ParseString(request, "namespace_name", "")
@@ -51,7 +51,7 @@ func (t *TroubleshootKubernetesListTop400500HttpErrorsInPods) handle(ctx context
 	workloadName := mcp.ParseString(request, "workload_name", "")
 	limit := mcp.ParseInt(request, "limit", 20)
 
-	query, err := buildTopHttpErrorsQuery(interval, limit, clusterName, namespaceName, workloadType, workloadName)
+	query, err := buildTopNetworkErrorsQuery(interval, limit, clusterName, namespaceName, workloadType, workloadName)
 	if err != nil {
 		return mcp.NewToolResultErrorFromErr("failed to build query", err), nil
 	}
@@ -80,7 +80,7 @@ func (t *TroubleshootKubernetesListTop400500HttpErrorsInPods) handle(ctx context
 	return mcp.NewToolResultJSON(queryResponse)
 }
 
-func buildTopHttpErrorsQuery(interval string, limit int, clusterName, namespaceName, workloadType, workloadName string) (string, error) {
+func buildTopNetworkErrorsQuery(interval string, limit int, clusterName, namespaceName, workloadType, workloadName string) (string, error) {
 	duration, err := time.ParseDuration(interval)
 	if err != nil {
 		return "", fmt.Errorf("invalid interval format: %w", err)
@@ -106,7 +106,6 @@ func buildTopHttpErrorsQuery(interval string, limit int, clusterName, namespaceN
 		filterStr = strings.Join(filters, ",")
 	}
 
-	// topk(20,sum(sum_over_time(sysdig_container_net_http_error_count{kube_cluster_name=~"demo-kube-gke"}[1h])) by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, kube_pod_name)) / 3600
-	return fmt.Sprintf("topk(%d,sum(sum_over_time(sysdig_container_net_http_error_count{%s}[%s])) by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, kube_pod_name)) / %f",
+	return fmt.Sprintf("topk(%d,sum(sum_over_time(sysdig_container_net_error_count{%s}[%s])) by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, kube_pod_name)) / %f",
 		limit, filterStr, interval, seconds), nil
 }

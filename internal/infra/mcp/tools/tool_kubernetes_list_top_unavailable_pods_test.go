@@ -16,9 +16,9 @@ import (
 	"go.uber.org/mock/gomock"
 )
 
-var _ = Describe("TroubleshootKubernetesListTopUnavailablePods Tool", func() {
+var _ = Describe("KubernetesListTopUnavailablePods Tool", func() {
 	var (
-		tool       *tools.TroubleshootKubernetesListTopUnavailablePods
+		tool       *tools.KubernetesListTopUnavailablePods
 		mockSysdig *mocks.MockExtendedClientWithResponsesInterface
 		mcpServer  *server.MCPServer
 		ctrl       *gomock.Controller
@@ -27,13 +27,13 @@ var _ = Describe("TroubleshootKubernetesListTopUnavailablePods Tool", func() {
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockSysdig = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		tool = tools.NewTroubleshootKubernetesListTopUnavailablePods(mockSysdig)
+		tool = tools.NewKubernetesListTopUnavailablePods(mockSysdig)
 		mcpServer = server.NewMCPServer("test", "test")
 		tool.RegisterInServer(mcpServer)
 	})
 
 	It("should register successfully in the server", func() {
-		Expect(mcpServer.GetTool("troubleshoot_kubernetes_list_top_unavailable_pods")).NotTo(BeNil())
+		Expect(mcpServer.GetTool("kubernetes_list_top_unavailable_pods")).NotTo(BeNil())
 	})
 
 	When("querying top unavailable pods", func() {
@@ -52,10 +52,10 @@ var _ = Describe("TroubleshootKubernetesListTopUnavailablePods Tool", func() {
 			Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
 		},
 			Entry("default params",
-				"troubleshoot_kubernetes_list_top_unavailable_pods",
+				"kubernetes_list_top_unavailable_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_top_unavailable_pods",
+						Name:      "kubernetes_list_top_unavailable_pods",
 						Arguments: map[string]any{},
 					},
 				},
@@ -83,10 +83,10 @@ var _ = Describe("TroubleshootKubernetesListTopUnavailablePods Tool", func() {
 				},
 			),
 			Entry("with specific limit and cluster",
-				"troubleshoot_kubernetes_list_top_unavailable_pods",
+				"kubernetes_list_top_unavailable_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name: "troubleshoot_kubernetes_list_top_unavailable_pods",
+						Name: "kubernetes_list_top_unavailable_pods",
 						Arguments: map[string]any{
 							"limit":        5,
 							"cluster_name": "my-cluster",
@@ -117,10 +117,10 @@ var _ = Describe("TroubleshootKubernetesListTopUnavailablePods Tool", func() {
 				},
 			),
 			Entry("with all filters",
-				"troubleshoot_kubernetes_list_top_unavailable_pods",
+				"kubernetes_list_top_unavailable_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name: "troubleshoot_kubernetes_list_top_unavailable_pods",
+						Name: "kubernetes_list_top_unavailable_pods",
 						Arguments: map[string]any{
 							"limit":          10,
 							"cluster_name":   "my-cluster",

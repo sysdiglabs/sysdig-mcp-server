@@ -12,18 +12,18 @@ import (
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
-type TroubleshootKubernetesListUnderutilizedPodsByMemoryQuota struct {
+type KubernetesListUnderutilizedPodsMemoryQuota struct {
 	SysdigClient sysdig.ExtendedClientWithResponsesInterface
 }
 
-func NewTroubleshootKubernetesListUnderutilizedPodsByMemoryQuota(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *TroubleshootKubernetesListUnderutilizedPodsByMemoryQuota {
-	return &TroubleshootKubernetesListUnderutilizedPodsByMemoryQuota{
+func NewKubernetesListUnderutilizedPodsMemoryQuota(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *KubernetesListUnderutilizedPodsMemoryQuota {
+	return &KubernetesListUnderutilizedPodsMemoryQuota{
 		SysdigClient: sysdigClient,
 	}
 }
 
-func (t *TroubleshootKubernetesListUnderutilizedPodsByMemoryQuota) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("troubleshoot_kubernetes_list_underutilized_pods_by_memory_quota",
+func (t *KubernetesListUnderutilizedPodsMemoryQuota) RegisterInServer(s *server.MCPServer) {
+	tool := mcp.NewTool("kubernetes_list_underutilized_pods_memory_quota",
 		mcp.WithDescription("List Kubernetes pods with memory usage below 25% of the limit."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
@@ -39,7 +39,7 @@ func (t *TroubleshootKubernetesListUnderutilizedPodsByMemoryQuota) RegisterInSer
 	s.AddTool(tool, t.handle)
 }
 
-func (t *TroubleshootKubernetesListUnderutilizedPodsByMemoryQuota) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+func (t *KubernetesListUnderutilizedPodsMemoryQuota) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
 	clusterName := mcp.ParseString(request, "cluster_name", "")
 	namespaceName := mcp.ParseString(request, "namespace_name", "")
 	limit := mcp.ParseInt(request, "limit", 10)

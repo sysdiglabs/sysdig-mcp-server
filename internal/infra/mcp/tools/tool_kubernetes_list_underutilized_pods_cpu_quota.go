@@ -12,24 +12,24 @@ import (
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
-type TroubleshootKubernetesListCountPodsPerCluster struct {
+type KubernetesListUnderutilizedPodsCPUQuota struct {
 	SysdigClient sysdig.ExtendedClientWithResponsesInterface
 }
 
-func NewTroubleshootKubernetesListCountPodsPerCluster(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *TroubleshootKubernetesListCountPodsPerCluster {
-	return &TroubleshootKubernetesListCountPodsPerCluster{
+func NewKubernetesListUnderutilizedPodsCPUQuota(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *KubernetesListUnderutilizedPodsCPUQuota {
+	return &KubernetesListUnderutilizedPodsCPUQuota{
 		SysdigClient: sysdigClient,
 	}
 }
 
-func (t *TroubleshootKubernetesListCountPodsPerCluster) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("troubleshoot_kubernetes_list_count_pods_per_cluster",
-		mcp.WithDescription("List the count of running Kubernetes Pods grouped by cluster and namespace."),
+func (t *KubernetesListUnderutilizedPodsCPUQuota) RegisterInServer(s *server.MCPServer) {
+	tool := mcp.NewTool("kubernetes_list_underutilized_pods_cpu_quota",
+		mcp.WithDescription("List Kubernetes pods with CPU usage below 25% of the quota limit."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
 		mcp.WithNumber("limit",
-			mcp.Description("Maximum number of results to return."),
-			mcp.DefaultNumber(20),
+			mcp.Description("Maximum number of pods to return."),
+			mcp.DefaultNumber(10),
 		),
 		mcp.WithOutputSchema[map[string]any](),
 		mcp.WithReadOnlyHintAnnotation(true),
@@ -39,12 +39,12 @@ func (t *TroubleshootKubernetesListCountPodsPerCluster) RegisterInServer(s *serv
 	s.AddTool(tool, t.handle)
 }
 
-func (t *TroubleshootKubernetesListCountPodsPerCluster) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+func (t *KubernetesListUnderutilizedPodsCPUQuota) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
 	clusterName := mcp.ParseString(request, "cluster_name", "")
 	namespaceName := mcp.ParseString(request, "namespace_name", "")
-	limit := mcp.ParseInt(request, "limit", 20)
+	limit := mcp.ParseInt(request, "limit", 10)
 
-	query := buildKubePodCountQuery(clusterName, namespaceName)
+	query := buildUnderutilizedPodsQuery(clusterName, namespaceName)
 
 	limitQuery := sysdig.LimitQuery(limit)
 	params := &sysdig.GetQueryV1Params{
@@ -54,12 +54,12 @@ func (t *TroubleshootKubernetesListCountPodsPerCluster) handle(ctx context.Conte
 
 	httpResp, err := t.SysdigClient.GetQueryV1(ctx, params)
 	if err != nil {
-		return mcp.NewToolResultErrorFromErr("failed to get pod count", err), nil
+		return mcp.NewToolResultErrorFromErr("failed to get underutilized pod list", err), nil
 	}
 
 	if httpResp.StatusCode != 200 {
 		bodyBytes, _ := io.ReadAll(httpResp.Body)
-		return mcp.NewToolResultErrorf("failed to get pod count: status code %d, body: %s", httpResp.StatusCode, string(bodyBytes)), nil
+		return mcp.NewToolResultErrorf("failed to get underutilized pod list: status code %d, body: %s", httpResp.StatusCode, string(bodyBytes)), nil
 	}
 
 	var queryResponse sysdig.QueryResponseV1
@@ -70,7 +70,7 @@ func (t *TroubleshootKubernetesListCountPodsPerCluster) handle(ctx context.Conte
 	return mcp.NewToolResultJSON(queryResponse)
 }
 
-func buildKubePodCountQuery(clusterName, namespaceName string) string {
+func buildUnderutilizedPodsQuery(clusterName, namespaceName string) string {
 	filters := []string{}
 	if clusterName != "" {
 		filters = append(filters, fmt.Sprintf("kube_cluster_name=\"%s\"", clusterName))
@@ -84,5 +84,5 @@ func buildKubePodCountQuery(clusterName, namespaceName string) string {
 		filterString = fmt.Sprintf("{%s}", strings.Join(filters, ","))
 	}
 
-	return fmt.Sprintf("sum by (kube_cluster_name, kube_namespace_name) (kube_pod_info%s)", filterString)
+	return fmt.Sprintf("sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_cpu_cores_used%s) / (sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_cpu_cores_quota_limit%s) > 0) < 0.25", filterString, filterString)
 }

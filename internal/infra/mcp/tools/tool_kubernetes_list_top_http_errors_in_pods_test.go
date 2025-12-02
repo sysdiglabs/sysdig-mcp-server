@@ -16,9 +16,9 @@ import (
 	"go.uber.org/mock/gomock"
 )
 
-var _ = Describe("TroubleshootKubernetesListTop400500HttpErrorsInPods Tool", func() {
+var _ = Describe("KubernetesListTopHttpErrorsInPods Tool", func() {
 	var (
-		tool       *tools.TroubleshootKubernetesListTop400500HttpErrorsInPods
+		tool       *tools.KubernetesListTopHttpErrorsInPods
 		mockSysdig *mocks.MockExtendedClientWithResponsesInterface
 		mcpServer  *server.MCPServer
 		ctrl       *gomock.Controller
@@ -28,14 +28,14 @@ var _ = Describe("TroubleshootKubernetesListTop400500HttpErrorsInPods Tool", fun
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockSysdig = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		tool = tools.NewTroubleshootKubernetesListTop400500HttpErrorsInPods(mockSysdig)
+		tool = tools.NewKubernetesListTopHttpErrorsInPods(mockSysdig)
 		mcpServer = server.NewMCPServer("test", "test")
 		tool.RegisterInServer(mcpServer)
 		ctx = context.Background()
 	})
 
 	It("should register successfully in the server", func() {
-		Expect(mcpServer.GetTool("troubleshoot_kubernetes_list_top_400_500_http_errors_in_pods")).NotTo(BeNil())
+		Expect(mcpServer.GetTool("kubernetes_list_top_http_errors_in_pods")).NotTo(BeNil())
 	})
 
 	When("listing top http errors", func() {
@@ -54,10 +54,10 @@ var _ = Describe("TroubleshootKubernetesListTop400500HttpErrorsInPods Tool", fun
 			Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
 		},
 			Entry("default params",
-				"troubleshoot_kubernetes_list_top_400_500_http_errors_in_pods",
+				"kubernetes_list_top_http_errors_in_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_top_400_500_http_errors_in_pods",
+						Name:      "kubernetes_list_top_http_errors_in_pods",
 						Arguments: map[string]any{},
 					},
 				},
@@ -67,10 +67,10 @@ var _ = Describe("TroubleshootKubernetesListTop400500HttpErrorsInPods Tool", fun
 				},
 			),
 			Entry("with custom params",
-				"troubleshoot_kubernetes_list_top_400_500_http_errors_in_pods",
+				"kubernetes_list_top_http_errors_in_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name: "troubleshoot_kubernetes_list_top_400_500_http_errors_in_pods",
+						Name: "kubernetes_list_top_http_errors_in_pods",
 						Arguments: map[string]any{
 							"interval":       "30m",
 							"cluster_name":   "prod-cluster",
@@ -85,10 +85,10 @@ var _ = Describe("TroubleshootKubernetesListTop400500HttpErrorsInPods Tool", fun
 				},
 			),
 			Entry("with all params",
-				"troubleshoot_kubernetes_list_top_400_500_http_errors_in_pods",
+				"kubernetes_list_top_http_errors_in_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name: "troubleshoot_kubernetes_list_top_400_500_http_errors_in_pods",
+						Name: "kubernetes_list_top_http_errors_in_pods",
 						Arguments: map[string]any{
 							"interval":       "2h",
 							"cluster_name":   "dev",
@@ -107,10 +107,10 @@ var _ = Describe("TroubleshootKubernetesListTop400500HttpErrorsInPods Tool", fun
 		)
 
 		It("returns error for invalid interval", func() {
-			serverTool := mcpServer.GetTool("troubleshoot_kubernetes_list_top_400_500_http_errors_in_pods")
+			serverTool := mcpServer.GetTool("kubernetes_list_top_http_errors_in_pods")
 			request := mcp.CallToolRequest{
 				Params: mcp.CallToolParams{
-					Name:      "troubleshoot_kubernetes_list_top_400_500_http_errors_in_pods",
+					Name:      "kubernetes_list_top_http_errors_in_pods",
 					Arguments: map[string]any{"interval": "invalid"},
 				},
 			}

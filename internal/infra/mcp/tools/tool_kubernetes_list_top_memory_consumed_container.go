@@ -12,19 +12,19 @@ import (
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
-type TroubleshootKubernetesListTopCPUConsumedByContainer struct {
+type KubernetesListTopMemoryConsumedContainer struct {
 	SysdigClient sysdig.ExtendedClientWithResponsesInterface
 }
 
-func NewTroubleshootKubernetesListTopCPUConsumedByContainer(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *TroubleshootKubernetesListTopCPUConsumedByContainer {
-	return &TroubleshootKubernetesListTopCPUConsumedByContainer{
+func NewKubernetesListTopMemoryConsumedContainer(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *KubernetesListTopMemoryConsumedContainer {
+	return &KubernetesListTopMemoryConsumedContainer{
 		SysdigClient: sysdigClient,
 	}
 }
 
-func (t *TroubleshootKubernetesListTopCPUConsumedByContainer) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("troubleshoot_kubernetes_list_top_cpu_consumed_by_container",
-		mcp.WithDescription("Identifies the Kubernetes containers consuming the most CPU (in cores)."),
+func (t *KubernetesListTopMemoryConsumedContainer) RegisterInServer(s *server.MCPServer) {
+	tool := mcp.NewTool("kubernetes_list_top_memory_consumed_container",
+		mcp.WithDescription("Lists memory-intensive containers."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
 		mcp.WithString("workload_type", mcp.Description("The type of the workload to filter by.")),
@@ -41,27 +41,29 @@ func (t *TroubleshootKubernetesListTopCPUConsumedByContainer) RegisterInServer(s
 	s.AddTool(tool, t.handle)
 }
 
-func (t *TroubleshootKubernetesListTopCPUConsumedByContainer) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+func (t *KubernetesListTopMemoryConsumedContainer) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
 	clusterName := mcp.ParseString(request, "cluster_name", "")
 	namespaceName := mcp.ParseString(request, "namespace_name", "")
 	workloadType := mcp.ParseString(request, "workload_type", "")
 	workloadName := mcp.ParseString(request, "workload_name", "")
 	limit := mcp.ParseInt(request, "limit", 20)
 
-	query := buildTopCPUConsumedByContainerQuery(clusterName, namespaceName, workloadType, workloadName, limit)
+	query := buildTopMemoryConsumedByContainerQuery(clusterName, namespaceName, workloadType, workloadName, limit)
 
+	limitQuery := sysdig.LimitQuery(limit)
 	params := &sysdig.GetQueryV1Params{
 		Query: query,
+		Limit: &limitQuery,
 	}
 
 	httpResp, err := t.SysdigClient.GetQueryV1(ctx, params)
 	if err != nil {
-		return mcp.NewToolResultErrorFromErr("failed to get top cpu consumed by container", err), nil
+		return mcp.NewToolResultErrorFromErr("failed to get container list", err), nil
 	}
 
 	if httpResp.StatusCode != 200 {
 		bodyBytes, _ := io.ReadAll(httpResp.Body)
-		return mcp.NewToolResultErrorf("failed to get top cpu consumed by container: status code %d, body: %s", httpResp.StatusCode, string(bodyBytes)), nil
+		return mcp.NewToolResultErrorf("failed to get container list: status code %d, body: %s", httpResp.StatusCode, string(bodyBytes)), nil
 	}
 
 	var queryResponse sysdig.QueryResponseV1
@@ -72,7 +74,7 @@ func (t *TroubleshootKubernetesListTopCPUConsumedByContainer) handle(ctx context
 	return mcp.NewToolResultJSON(queryResponse)
 }
 
-func buildTopCPUConsumedByContainerQuery(clusterName, namespaceName, workloadType, workloadName string, limit int) string {
+func buildTopMemoryConsumedByContainerQuery(clusterName, namespaceName, workloadType, workloadName string, limit int) string {
 	filters := []string{}
 	if clusterName != "" {
 		filters = append(filters, fmt.Sprintf(`kube_cluster_name="%s"`, clusterName))
@@ -89,8 +91,8 @@ func buildTopCPUConsumedByContainerQuery(clusterName, namespaceName, workloadTyp
 
 	filterString := ""
 	if len(filters) > 0 {
-		filterString = fmt.Sprintf("{%s}", strings.Join(filters, ","))
+		filterString = "{" + strings.Join(filters, ", ") + "}"
 	}
 
-	return fmt.Sprintf("topk(%d, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, container_label_io_kubernetes_container_name)(sysdig_container_cpu_cores_used%s))", limit, filterString)
+	return fmt.Sprintf(`topk(%d, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, container_label_io_kubernetes_container_name) (sysdig_container_memory_used_bytes%s))`, limit, filterString)
 }

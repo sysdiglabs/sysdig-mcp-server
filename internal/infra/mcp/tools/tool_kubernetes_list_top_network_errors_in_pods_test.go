@@ -16,9 +16,9 @@ import (
 	"go.uber.org/mock/gomock"
 )
 
-var _ = Describe("TroubleshootKubernetesListTopNetworkErrorsInPods Tool", func() {
+var _ = Describe("KubernetesListTopNetworkErrorsInPods Tool", func() {
 	var (
-		tool       *tools.TroubleshootKubernetesListTopNetworkErrorsInPods
+		tool       *tools.KubernetesListTopNetworkErrorsInPods
 		mockSysdig *mocks.MockExtendedClientWithResponsesInterface
 		mcpServer  *server.MCPServer
 		ctrl       *gomock.Controller
@@ -28,14 +28,14 @@ var _ = Describe("TroubleshootKubernetesListTopNetworkErrorsInPods Tool", func()
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockSysdig = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		tool = tools.NewTroubleshootKubernetesListTopNetworkErrorsInPods(mockSysdig)
+		tool = tools.NewKubernetesListTopNetworkErrorsInPods(mockSysdig)
 		mcpServer = server.NewMCPServer("test", "test")
 		tool.RegisterInServer(mcpServer)
 		ctx = context.Background()
 	})
 
 	It("should register successfully in the server", func() {
-		Expect(mcpServer.GetTool("troubleshoot_kubernetes_list_top_network_errors_in_pods")).NotTo(BeNil())
+		Expect(mcpServer.GetTool("kubernetes_list_top_network_errors_in_pods")).NotTo(BeNil())
 	})
 
 	When("listing top network errors", func() {
@@ -54,10 +54,10 @@ var _ = Describe("TroubleshootKubernetesListTopNetworkErrorsInPods Tool", func()
 			Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
 		},
 			Entry("default params",
-				"troubleshoot_kubernetes_list_top_network_errors_in_pods",
+				"kubernetes_list_top_network_errors_in_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name:      "troubleshoot_kubernetes_list_top_network_errors_in_pods",
+						Name:      "kubernetes_list_top_network_errors_in_pods",
 						Arguments: map[string]any{},
 					},
 				},
@@ -67,10 +67,10 @@ var _ = Describe("TroubleshootKubernetesListTopNetworkErrorsInPods Tool", func()
 				},
 			),
 			Entry("with custom params",
-				"troubleshoot_kubernetes_list_top_network_errors_in_pods",
+				"kubernetes_list_top_network_errors_in_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name: "troubleshoot_kubernetes_list_top_network_errors_in_pods",
+						Name: "kubernetes_list_top_network_errors_in_pods",
 						Arguments: map[string]any{
 							"interval":       "30m",
 							"cluster_name":   "prod-cluster",
@@ -85,10 +85,10 @@ var _ = Describe("TroubleshootKubernetesListTopNetworkErrorsInPods Tool", func()
 				},
 			),
 			Entry("with all params",
-				"troubleshoot_kubernetes_list_top_network_errors_in_pods",
+				"kubernetes_list_top_network_errors_in_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
-						Name: "troubleshoot_kubernetes_list_top_network_errors_in_pods",
+						Name: "kubernetes_list_top_network_errors_in_pods",
 						Arguments: map[string]any{
 							"interval":       "2h",
 							"cluster_name":   "dev",
@@ -107,10 +107,10 @@ var _ = Describe("TroubleshootKubernetesListTopNetworkErrorsInPods Tool", func()
 		)
 
 		It("returns error for invalid interval", func() {
-			serverTool := mcpServer.GetTool("troubleshoot_kubernetes_list_top_network_errors_in_pods")
+			serverTool := mcpServer.GetTool("kubernetes_list_top_network_errors_in_pods")
 			request := mcp.CallToolRequest{
 				Params: mcp.CallToolParams{
-					Name:      "troubleshoot_kubernetes_list_top_network_errors_in_pods",
+					Name:      "kubernetes_list_top_network_errors_in_pods",
 					Arguments: map[string]any{"interval": "invalid"},
 				},
 			}
@@ -128,12 +128,12 @@ var _ = Describe("TroubleshootKubernetesListTopNetworkErrorsInPods Tool", func()
 
 			request := mcp.CallToolRequest{
 				Params: mcp.CallToolParams{
-					Name:      "troubleshoot_kubernetes_list_top_network_errors_in_pods",
+					Name:      "kubernetes_list_top_network_errors_in_pods",
 					Arguments: map[string]any{},
 				},
 			}
 
-			serverTool := mcpServer.GetTool("troubleshoot_kubernetes_list_top_network_errors_in_pods")
+			serverTool := mcpServer.GetTool("kubernetes_list_top_network_errors_in_pods")
 			res, err := serverTool.Handler(ctx, request)
 			Expect(err).ToNot(HaveOccurred())
 			Expect(res.IsError).To(BeTrue())
