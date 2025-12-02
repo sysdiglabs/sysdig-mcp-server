@@ -244,11 +244,12 @@ To use the MCP server tools, your API token needs specific permissions in Sysdig
 
 **Permissions Mapping:**
 
-| Permission | Sysdig UI Permission Name |
-|------------|---------------------------|
-| `policy-events.read` | Threats: "Policy Events" (Read) |
-| `sage.exec` | SysQL: "AI Query Generation" (EXEC) |
-| `risks.read` | Risks: "Access to risk feature" (Read) |
+| Permission           | Sysdig UI Permission Name                   |
+|----------------------|---------------------------------------------|
+| `metrics-data.read`  | Data Access Settings: "Metrics Data" (Read) |
+| `policy-events.read` | Threats: "Policy Events" (Read)             |
+| `risks.read`         | Risks: "Access to risk feature" (Read)      |
+| `sage.exec`          | SysQL: "AI Query Generation" (Exec)         |
 
 **Additional Permissions:**
 
