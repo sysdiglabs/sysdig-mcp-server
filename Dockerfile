@@ -12,7 +12,7 @@ RUN nix build .#default
 
 # Final image
 # quay.io/sysdig/sysdig-mini-ubi9:1
-FROM quay.io/sysdig/sysdig-mini-ubi9@sha256:dcef7a07dc6a8655cbee5e2f3ad7822dea5a0cf4929b1b9effa39e56ce928ca0
+FROM quay.io/sysdig/sysdig-mini-ubi9@sha256:fa959bec7353ce38ed2d35190d5ec4445b3c525f1d4ad00e26afca387360a253
 
 # Copy the binary from the builder stage
 COPY --from=builder /app/result/bin/sysdig-mcp-server /usr/local/bin/sysdig-mcp-server
