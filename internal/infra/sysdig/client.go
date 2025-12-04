@@ -3,11 +3,10 @@ package sysdig
 import (
 	"context"
 	"errors"
+	"fmt"
 	"net/http"
 	"net/url"
 )
-
-type SysdigAuthentication func(ctx context.Context, req *http.Request) error
 
 type contextKey string
 
@@ -46,7 +45,7 @@ func updateReqWithHostURL(req *http.Request, host string) error {
 	return nil
 }
 
-func WithFixedHostAndToken(host, apiToken string) SysdigAuthentication {
+func WithFixedHostAndToken(host, apiToken string) RequestEditorFn {
 	return func(ctx context.Context, req *http.Request) error {
 		if err := updateReqWithHostURL(req, host); err != nil {
 			return err
@@ -56,7 +55,7 @@ func WithFixedHostAndToken(host, apiToken string) SysdigAuthentication {
 	}
 }
 
-func WithHostAndTokenFromContext() SysdigAuthentication {
+func WithHostAndTokenFromContext() RequestEditorFn {
 	return func(ctx context.Context, req *http.Request) error {
 		if host, ok := ctx.Value(contextKeyHost).(string); ok && host != "" {
 			if err := updateReqWithHostURL(req, host); err != nil {
@@ -71,7 +70,7 @@ func WithHostAndTokenFromContext() SysdigAuthentication {
 	}
 }
 
-func WithFallbackAuthentication(auths ...SysdigAuthentication) SysdigAuthentication {
+func WithFallbackAuthentication(auths ...RequestEditorFn) RequestEditorFn {
 	return func(ctx context.Context, req *http.Request) error {
 		for _, auth := range auths {
 			if err := auth(ctx, req); err == nil {
@@ -82,10 +81,17 @@ func WithFallbackAuthentication(auths ...SysdigAuthentication) SysdigAuthenticat
 	}
 }
 
-func NewSysdigClient(requestEditors ...SysdigAuthentication) (ExtendedClientWithResponsesInterface, error) {
+func WithVersion(version string) RequestEditorFn {
+	return func(ctx context.Context, req *http.Request) error {
+		req.Header.Set("User-Agent", fmt.Sprintf("sysdig-mcp-server/%s", version))
+		return nil
+	}
+}
+
+func NewSysdigClient(requestEditors ...RequestEditorFn) (ExtendedClientWithResponsesInterface, error) {
 	editors := make([]ClientOption, len(requestEditors))
 	for i, e := range requestEditors {
-		editors[i] = WithRequestEditorFn(RequestEditorFn(e))
+		editors[i] = WithRequestEditorFn(e)
 	}
 
 	return NewClientWithResponses("", editors...)
