@@ -74,6 +74,7 @@ func setupLogger(logLevel string) {
 
 func setupSysdigClient(cfg *config.Config) (sysdig.ExtendedClientWithResponsesInterface, error) {
 	sysdigClient, err := sysdig.NewSysdigClient(
+		sysdig.WithVersion(Version),
 		sysdig.WithFallbackAuthentication(
 			sysdig.WithHostAndTokenFromContext(),
 			sysdig.WithFixedHostAndToken(cfg.APIHost, cfg.APIToken),
