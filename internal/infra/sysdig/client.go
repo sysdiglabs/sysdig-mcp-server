@@ -88,10 +88,22 @@ func WithVersion(version string) RequestEditorFn {
 	}
 }
 
-func NewSysdigClient(requestEditors ...RequestEditorFn) (ExtendedClientWithResponsesInterface, error) {
+type IntoClientOption interface {
+	AsClientOption() ClientOption
+}
+
+func (r RequestEditorFn) AsClientOption() ClientOption {
+	return WithRequestEditorFn(r)
+}
+
+func (c ClientOption) AsClientOption() ClientOption {
+	return c
+}
+
+func NewSysdigClient(requestEditors ...IntoClientOption) (ExtendedClientWithResponsesInterface, error) {
 	editors := make([]ClientOption, len(requestEditors))
 	for i, e := range requestEditors {
-		editors[i] = WithRequestEditorFn(e)
+		editors[i] = e.AsClientOption()
 	}
 
 	return NewClientWithResponses("", editors...)
