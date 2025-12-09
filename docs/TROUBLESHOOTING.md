@@ -6,6 +6,9 @@
 **Problem**: "unable to authenticate with any method"
 - **Solution**: For `stdio`, verify `SYSDIG_MCP_API_HOST` and `SYSDIG_MCP_API_TOKEN` env vars are set correctly. For remote transports, check `Authorization: Bearer <token>` header format.
 
+**Problem**: Connection failing with "certificate signed by unknown authority"
+- **Solution**: If using a self-signed certificate (e.g. on-prem), set `SYSDIG_MCP_API_SKIP_TLS_VERIFICATION=true`.
+
 **Problem**: Tests failing with "command not found"
 - **Solution**: Enter Nix shell with `nix develop` or `direnv allow`. All dev tools are provided by the flake.
 

@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
 	"fmt"
 	"log/slog"
 	"net/http"
@@ -82,13 +83,26 @@ func setupLogger(logLevel string) {
 }
 
 func setupSysdigClient(cfg *config.Config) (sysdig.ExtendedClientWithResponsesInterface, error) {
-	sysdigClient, err := sysdig.NewSysdigClient(
+	sysdigClientOptions := []sysdig.IntoClientOption{
 		sysdig.WithVersion(Version),
 		sysdig.WithFallbackAuthentication(
 			sysdig.WithHostAndTokenFromContext(),
 			sysdig.WithFixedHostAndToken(cfg.APIHost, cfg.APIToken),
 		),
-	)
+	}
+
+	if cfg.SkipTLSVerification {
+		transport := http.DefaultTransport.(*http.Transport).Clone()
+		if transport.TLSClientConfig == nil {
+			transport.TLSClientConfig = &tls.Config{}
+		}
+		transport.TLSClientConfig.InsecureSkipVerify = true
+		httpClient := &http.Client{Transport: transport}
+
+		sysdigClientOptions = append(sysdigClientOptions, sysdig.WithHTTPClient(httpClient))
+	}
+
+	sysdigClient, err := sysdig.NewSysdigClient(sysdigClientOptions...)
 	if err != nil {
 		return nil, fmt.Errorf("error creating sysdig client: %w", err)
 	}

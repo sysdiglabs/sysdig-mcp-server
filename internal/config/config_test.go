@@ -82,6 +82,7 @@ var _ = Describe("Config", func() {
 				Expect(cfg.ListeningPort).To(Equal("8080"))
 				Expect(cfg.MountPath).To(Equal("/sysdig-mcp-server"))
 				Expect(cfg.LogLevel).To(Equal("INFO"))
+				Expect(cfg.SkipTLSVerification).To(BeFalse())
 			})
 		})
 
@@ -106,6 +107,7 @@ var _ = Describe("Config", func() {
 			BeforeEach(func() {
 				_ = os.Setenv("SYSDIG_MCP_API_HOST", "env-host")
 				_ = os.Setenv("SYSDIG_MCP_API_TOKEN", "env-token")
+				_ = os.Setenv("SYSDIG_MCP_API_SKIP_TLS_VERIFICATION", "true")
 				_ = os.Setenv("SYSDIG_MCP_TRANSPORT", "http")
 				_ = os.Setenv("SYSDIG_MCP_LISTENING_HOST", "0.0.0.0")
 				_ = os.Setenv("SYSDIG_MCP_LISTENING_PORT", "9090")
@@ -118,11 +120,26 @@ var _ = Describe("Config", func() {
 				Expect(err).NotTo(HaveOccurred())
 				Expect(cfg.APIHost).To(Equal("env-host"))
 				Expect(cfg.APIToken).To(Equal("env-token"))
+				Expect(cfg.SkipTLSVerification).To(BeTrue())
 				Expect(cfg.Transport).To(Equal("http"))
 				Expect(cfg.ListeningHost).To(Equal("0.0.0.0"))
 				Expect(cfg.ListeningPort).To(Equal("9090"))
 				Expect(cfg.MountPath).To(Equal("/custom"))
 				Expect(cfg.LogLevel).To(Equal("DEBUG"))
+			})
+		})
+
+		Context("with invalid boolean env var", func() {
+			BeforeEach(func() {
+				_ = os.Setenv("SYSDIG_MCP_API_HOST", "host")
+				_ = os.Setenv("SYSDIG_MCP_API_TOKEN", "token")
+				_ = os.Setenv("SYSDIG_MCP_API_SKIP_TLS_VERIFICATION", "invalid-bool")
+			})
+
+			It("should fall back to default value", func() {
+				cfg, err := config.Load()
+				Expect(err).NotTo(HaveOccurred())
+				Expect(cfg.SkipTLSVerification).To(BeFalse())
 			})
 		})
 
