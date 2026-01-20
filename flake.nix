@@ -11,7 +11,11 @@
     }:
     let
       overlays.default = final: prev: {
-        sysdig-mcp-server = prev.pkgsStatic.callPackage ./package.nix { };
+        sysdig-mcp-server =
+          if prev.stdenv.isLinux then
+            prev.pkgsStatic.callPackage ./package.nix { }
+          else
+            prev.callPackage ./package.nix { };
       };
       flake = flake-utils.lib.eachDefaultSystem (
         system:
