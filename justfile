@@ -3,7 +3,11 @@ default:
     @just --list
 
 # Run all checks
-check: fmt lint test
+check: fmt check-vulnerabilities lint test
+
+# Check for vulnerabilities in the project
+check-vulnerabilities:
+    govulncheck -show verbose ./...
 
 # Lint and fix code
 lint:
@@ -25,8 +29,8 @@ generate:
 test-coverage: generate
     go test -coverprofile=coverage.out ./...
 
-# Bump all dependencies
-bump:
+# Update all dependencies
+update:
 	nix flake update
 	nix develop --command go get -u -t -v ./...
 	nix develop --command go mod tidy
