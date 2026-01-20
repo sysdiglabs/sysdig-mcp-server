@@ -14,7 +14,7 @@ This document is a comprehensive guide for an AI agent tasked with developing an
 | **Tech Stack** | Go 1.25+, `mcp-go`, Cobra CLI, Ginkgo/Gomega, `golangci-lint`, Nix. |
 | **Entry Point** | `cmd/server/main.go` (Cobra CLI that wires config, Sysdig client, etc.). |
 | **Dev Shell** | `nix develop` provides a consistent development environment. |
-| **Key Commands** | `just fmt`, `just lint`, `just test`, `just check`, `just bump`. |
+| **Key Commands** | `just fmt`, `just lint`, `just test`, `just check`, `just update`. |
 
 ## 2. Environment Setup
 
@@ -54,7 +54,7 @@ internal/
       tools/             - Individual MCP tool implementations
     sysdig/              - Sysdig API client (generated + extensions)
 docs/                    - Documentation assets
-justfile                 - Canonical development tasks (format, lint, test, generate, bump)
+justfile                 - Canonical development tasks (format, lint, test, generate, update)
 flake.nix                - Defines the Nix development environment and its dependencies
 package.nix              - Defines how the package is going to be built with Nix
 ```
@@ -94,7 +94,7 @@ package.nix              - Defines how the package is going to be built with Nix
 1.  **Enter the Dev Shell:** Always work inside the Nix shell (`nix develop` or `direnv allow`). You can assume the developer already did that.
 2.  **Make Focused Changes:** Implement a new tool, fix a bug, or improve documentation.
 3.  **Run Quality Gates:** Use `just` to run formatters, linters, and tests.
-4.  **Commit:** Follow the Conventional Commits specification.
+4.  **Commit:** Follow the Conventional Commits specification (see section 4.4).
 
 ### 4.1. Testing & Quality Gates
 
@@ -115,7 +115,23 @@ If any of the hooks fail, the commit will not be created.
 
 ### 4.3 Updating all dependencies
 
-Automated with `just bump`. Requires `nix` installed.
+Automated with `just update`. Requires `nix` installed.
+
+### 4.4 Commit Conventions
+
+Follow the [Conventional Commits](https://www.conventionalcommits.org/) specification with these guidelines:
+
+- **Title only:** Commits should have only a title, no description body.
+- **Large changes:** If the change is significant, add a description explaining the **why**, not what changed.
+- **Format:** `<type>(<scope>): <subject>` (scope is optional).
+- **Types:** `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `build`, `ci`.
+
+Examples:
+```
+feat(tools): add new runtime events tool
+fix: correct API endpoint URL
+chore: update dependencies
+```
 
 ## 5. Guides & Reference
 
