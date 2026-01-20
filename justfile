@@ -29,8 +29,8 @@ generate:
 test-coverage: generate
     go test -coverprofile=coverage.out ./...
 
-# Bump all dependencies
-bump:
+# Update all dependencies
+update:
 	nix flake update
 	nix develop --command go get -u -t -v ./...
 	nix develop --command go mod tidy
