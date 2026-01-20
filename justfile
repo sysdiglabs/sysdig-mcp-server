@@ -3,7 +3,11 @@ default:
     @just --list
 
 # Run all checks
-check: fmt lint test
+check: fmt check-vulnerabilities lint test
+
+# Check for vulnerabilities in the project
+check-vulnerabilities:
+    govulncheck -show verbose ./...
 
 # Lint and fix code
 lint:

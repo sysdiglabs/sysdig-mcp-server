@@ -37,6 +37,7 @@
               packages = [
                 ginkgo
                 go
+                govulncheck
                 gofumpt
                 golangci-lint
                 just
