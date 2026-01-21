@@ -26,7 +26,7 @@
 
 ## Description
 
-This is an implementation of an [MCP (Model Context Protocol) Server](https://modelcontextprotocol.io/quickstart/server) to allow different LLMs to query information from Sysdig Secure platform. **It is still in early development and not yet ready for production use.** New endpoints and functionalities will be added over time. The goal is to provide a simple and easy-to-use interface for querying information from Sysdig Secure platform using LLMs.
+This is an implementation of an [MCP (Model Context Protocol) Server](https://modelcontextprotocol.io/quickstart/server) to allow different LLMs to query information from Sysdig Secure platform. New tools and functionalities will be added over time following semantic versioning. The goal is to provide a simple and easy-to-use interface for querying information from Sysdig Secure platform using LLMs.
 
 ## Quickstart Guide
 
