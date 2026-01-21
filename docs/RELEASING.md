@@ -9,12 +9,12 @@ The guidelines to follow would be:
 * CI/Refactorings/Internal changes -> No need to release new version.
 * Documentation changes -> No need to release new version.
 
-The current version of the project is not stable yet, so you need to follow the [Semver spec](https://semver.org/spec/v2.0.0.html), with the following guidelines:
+The project follows the [Semver spec](https://semver.org/spec/v2.0.0.html) with these guidelines:
 
-* Unless specified, do not attempt to stabilize the version. That is, do not try to update the version to >=1.0.0. Versions for now should be <1.0.0.
-* For minor changes, update only the Y in 0.X.Y. For example: 0.5.2 -> 0.5.3
-* For major/feature changes, update the X in 0.X.Y and set the Y to 0. For example: 0.5.2 -> 0.6.0
-* Before choosing if the changes are minor or major, check all the commits since the last tag.
+* **MAJOR (X.0.0)**: Breaking changes that are not backward compatible.
+* **MINOR (1.X.0)**: New functionality that is backward compatible.
+* **PATCH (1.0.X)**: Bug fixes that are backward compatible.
+* Before choosing the version bump, check all the commits since the last tag.
 
 After the commit is merged into the default branch the workflow will cross-compile the project and create a GitHub release of that version.
 Check the workflow file in case of doubt.
