@@ -30,6 +30,8 @@
           packages = {
             inherit (pkgs) sysdig-mcp-server;
             default = pkgs.sysdig-mcp-server;
+            sysdig-mcp-server-image-amd64 = pkgs.pkgsCross.gnu64.callPackage ./docker.nix { };
+            sysdig-mcp-server-image-aarch64 = pkgs.pkgsCross.aarch64-multiplatform.callPackage ./docker.nix { };
           };
           devShells.default =
             with pkgs;
@@ -42,7 +44,9 @@
                 golangci-lint
                 just
                 mockgen
+                nix-prefetch-docker
                 pre-commit
+                skopeo
                 sd
               ];
               shellHook = ''
