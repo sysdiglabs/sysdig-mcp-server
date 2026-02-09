@@ -89,9 +89,9 @@ jobs:
         env:
           REGISTRY: ghcr.io/sysdiglabs/sysdig-mcp-server
         run: |
-          DIGEST=$(skopeo copy --digestfile /tmp/digest \
+          skopeo copy --digestfile /tmp/digest \
             docker-archive:result \
-            docker://$REGISTRY --format oci)
+            docker://$REGISTRY --format oci
 
           mkdir -p /tmp/digests
           cp /tmp/digest /tmp/digests/${{ matrix.arch }}
