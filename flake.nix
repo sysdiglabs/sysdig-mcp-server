@@ -16,7 +16,7 @@
             prev.pkgsStatic.callPackage ./package.nix { }
           else
             prev.callPackage ./package.nix { };
-        go = prev.go_1_24; # nixpkgs go version is still 1.25.5 which has vulns; this version 1.24.13 doesn't have any known yet
+        go = prev.go_1_24;
       };
       flake = flake-utils.lib.eachDefaultSystem (
         system:
