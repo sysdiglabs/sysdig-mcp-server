@@ -82,7 +82,7 @@ jobs:
         run: nix build .#${{ matrix.nix_package }} -o result
 
       - name: Log in to GitHub Container Registry
-        run: skopeo login ghcr.io -u ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }}
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | skopeo login ghcr.io -u "${{ github.actor }}" --password-stdin
 
       - name: Push image by digest
         id: push
