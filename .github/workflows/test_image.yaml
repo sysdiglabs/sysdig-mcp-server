@@ -17,9 +17,6 @@ jobs:
   test_build:
     name: Test Build (${{ matrix.arch }})
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: nix develop --command bash {0}
     permissions:
       contents: read # required for actions/checkout
     strategy:
