@@ -24,7 +24,7 @@ var _ = Describe("Sysdig Process Tree Client", func() {
 		client, err = sysdig.NewSysdigClient(sysdig.WithFixedHostAndToken(sysdigURL, sysdigToken))
 		Expect(err).ToNot(HaveOccurred())
 
-		eventID = "18748b13ef9d1deb89204bbc42d56b7d"
+		eventID = "1890fe2753b95afb04554c419d131851"
 	})
 
 	Context("when fetching the process tree for an event", func() {

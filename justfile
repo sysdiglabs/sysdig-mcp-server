@@ -36,7 +36,12 @@ update:
 	nix develop --command go mod tidy
 	nix develop --command just rehash-package-nix
 	nix develop --command pre-commit autoupdate
+	nix develop --command just update-base-images
 
 # Re-calculate the vendorHash from the package.nix
 rehash-package-nix:
 	sd 'vendorHash = ".*";' 'vendorHash = "";' package.nix; h="$((nix build -L --no-link .#default || true) 2>&1 | sed -nE 's/.*got:[[:space:]]+([^ ]+).*/\1/p' | tail -1)"; [ -n "$h" ] && sd 'vendorHash = ".*";' "vendorHash = \"$h\";" package.nix && echo "vendorHash -> $h"
+
+update-base-images:
+    nix-prefetch-docker --arch amd64 quay.io/sysdig/sysdig-mini-ubi9 1 > docker-base-amd64.nix
+    nix-prefetch-docker --arch arm64 quay.io/sysdig/sysdig-mini-ubi9 1 > docker-base-aarch64.nix

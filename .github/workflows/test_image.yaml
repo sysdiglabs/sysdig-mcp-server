@@ -15,36 +15,54 @@ concurrency:
 
 jobs:
   test_build:
-    name: Test Build
+    name: Test Build (${{ matrix.arch }})
     runs-on: ubuntu-latest
     permissions:
       contents: read # required for actions/checkout
-      packages: write # required for pushing the test image to ghcr.io
+    strategy:
+      max-parallel: 1
+      matrix:
+        include:
+          - arch: amd64
+            nix_package: sysdig-mcp-server-image-amd64
+          - arch: arm64
+            nix_package: sysdig-mcp-server-image-aarch64
     steps:
       - name: Check out the repo
         uses: actions/checkout@v5
         with:
-          ref: ${{ github.sha }} # required for better experience using pre-releases
-          fetch-depth: "0" # Required due to the way Git works, without it this action won't be able to find any or the correct tags
+          ref: ${{ github.sha }}
+          fetch-depth: "0"
 
-      - name: Build Docker image and test push action
-        id: build-to-test
-        uses: docker/build-push-action@v6
+      - name: Install Nix
+        # Pinned to v21 commit SHA for supply-chain safety.
+        # To update: git ls-remote https://github.com/DeterminateSystems/nix-installer-action.git <tag>
+        uses: DeterminateSystems/nix-installer-action@c5a866b6ab867e88becbed4467b93592bce69f8a # v21
+
+      - name: Enable Nix cache
+        # Pinned to v13 commit SHA for supply-chain safety.
+        # To update: git ls-remote https://github.com/DeterminateSystems/magic-nix-cache-action.git <tag>
+        uses: DeterminateSystems/magic-nix-cache-action@565684385bcd71bad329742eefe8d12f2e765b39 # v13
         with:
-          context: .
-          load: true
-          push: false
-          tags: |
-            ghcr.io/sysdiglabs/sysdig-mcp-server:test
+          use-flakehub: false
 
-      - name: Test we can execute the docker image
+      - name: Build image
+        run: nix build .#${{ matrix.nix_package }} -o result
+
+      - name: Load image
+        id: load
         run: |
-          docker run --rm ghcr.io/sysdiglabs/sysdig-mcp-server:test --help | grep "Sysdig MCP Server"
+          IMAGE_TAG=$(docker load < result | sed -n 's/Loaded image: //p')
+          echo "image_tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      - name: Test image
+        if: matrix.arch == 'amd64'
+        run: docker run --rm "${{ steps.load.outputs.image_tag }}" --help | grep "Sysdig MCP Server"
 
       - name: Scan Docker image
         uses: sysdiglabs/scan-action@v6
         with:
-          image-tag: ghcr.io/sysdiglabs/sysdig-mcp-server:test
+          image-tag: ${{ steps.load.outputs.image_tag }}
           sysdig-secure-token: ${{ secrets.SECURE_ENV_MON_API_KEY }}
           sysdig-secure-url: ${{ secrets.SECURE_ENV_MON_ENDPOINT }}
           stop-on-failed-policy-eval: true
