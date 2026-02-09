@@ -32,6 +32,8 @@ jobs:
         # Pinned to v13 commit SHA for supply-chain safety.
         # To update: git ls-remote https://github.com/DeterminateSystems/magic-nix-cache-action.git <tag>
         uses: DeterminateSystems/magic-nix-cache-action@565684385bcd71bad329742eefe8d12f2e765b39 # v13
+        with:
+          use-flakehub: false
 
       - name: Run Checks
         run: just check
@@ -57,6 +59,8 @@ jobs:
         # Pinned to v13 commit SHA for supply-chain safety.
         # To update: git ls-remote https://github.com/DeterminateSystems/magic-nix-cache-action.git <tag>
         uses: DeterminateSystems/magic-nix-cache-action@565684385bcd71bad329742eefe8d12f2e765b39 # v13
+        with:
+          use-flakehub: false
 
       - name: Build
         run: go build ./...
