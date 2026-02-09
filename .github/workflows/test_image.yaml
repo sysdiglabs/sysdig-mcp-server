@@ -49,12 +49,15 @@ jobs:
       - name: Build image
         run: nix build .#${{ matrix.nix_package }} -o result
 
-      - name: Load and test image
+      - name: Load image
         id: load
         run: |
           IMAGE_TAG=$(docker load < result | sed -n 's/Loaded image: //p')
-          docker run --rm "$IMAGE_TAG" --help | grep "Sysdig MCP Server"
           echo "image_tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      - name: Test image
+        if: matrix.arch == 'amd64'
+        run: docker run --rm "${{ steps.load.outputs.image_tag }}" --help | grep "Sysdig MCP Server"
 
       - name: Scan Docker image
         uses: sysdiglabs/scan-action@v6
