@@ -28,6 +28,11 @@ jobs:
         # To update: git ls-remote https://github.com/DeterminateSystems/nix-installer-action.git <tag>
         uses: DeterminateSystems/nix-installer-action@c5a866b6ab867e88becbed4467b93592bce69f8a # v21
 
+      - name: Enable Nix cache
+        # Pinned to v13 commit SHA for supply-chain safety.
+        # To update: git ls-remote https://github.com/DeterminateSystems/magic-nix-cache-action.git <tag>
+        uses: DeterminateSystems/magic-nix-cache-action@565684385bcd71bad329742eefe8d12f2e765b39 # v13
+
       - name: Run Checks
         run: just check
         env:
@@ -47,6 +52,11 @@ jobs:
         # Pinned to v21 commit SHA for supply-chain safety.
         # To update: git ls-remote https://github.com/DeterminateSystems/nix-installer-action.git <tag>
         uses: DeterminateSystems/nix-installer-action@c5a866b6ab867e88becbed4467b93592bce69f8a # v21
+
+      - name: Enable Nix cache
+        # Pinned to v13 commit SHA for supply-chain safety.
+        # To update: git ls-remote https://github.com/DeterminateSystems/magic-nix-cache-action.git <tag>
+        uses: DeterminateSystems/magic-nix-cache-action@565684385bcd71bad329742eefe8d12f2e765b39 # v13
 
       - name: Build
         run: go build ./...
