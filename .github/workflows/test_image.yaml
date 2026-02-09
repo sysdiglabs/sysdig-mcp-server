@@ -23,6 +23,7 @@ jobs:
     permissions:
       contents: read # required for actions/checkout
     strategy:
+      max-parallel: 1
       matrix:
         include:
           - arch: amd64
