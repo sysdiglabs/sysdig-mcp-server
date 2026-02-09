@@ -133,6 +133,16 @@ fix: correct API endpoint URL
 chore: update dependencies
 ```
 
+### 4.5. Known Flaky Integration Tests
+
+The process tree integration tests in `internal/infra/sysdig/client_process_tree_integration_test.go` use a **hardcoded event ID** that points to a real Sysdig event. Since Sysdig events have a retention period, this event will eventually be deleted and the tests will fail with a `not found` error.
+
+**How to fix it:**
+
+1. Use the `list_runtime_events` MCP tool (or the Sysdig API) to find a recent runtime event that originates from a **syscall/workload source** (not cloud/cloudtrail), as only these have process trees. Filter for `category = "runtime"` and `source = "syscall"`.
+2. Verify the event has a process tree by calling `get_event_process_tree` with the event ID.
+3. Update the `eventID` variable in the test's `BeforeEach` block with the new event ID.
+
 ## 5. Guides & Reference
 
 *   **Tools & New Tool Creation:** See `internal/infra/mcp/tools/README.md`
