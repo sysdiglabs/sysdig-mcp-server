@@ -107,7 +107,9 @@ jobs:
           stop-on-processing-error: true
 
       - name: Convert to OCI layout
-        run: skopeo copy docker-archive:result oci:/tmp/oci-image:latest
+        run: |
+          skopeo copy docker-archive:result oci:/tmp/oci-image:latest
+          echo "FROM base" > /tmp/Dockerfile.push
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -123,7 +125,7 @@ jobs:
         id: push
         uses: docker/build-push-action@v6
         with:
-          file: /dev/null
+          file: /tmp/Dockerfile.push
           build-contexts: |
             base=oci-layout:///tmp/oci-image
           platforms: ${{ matrix.platform }}
