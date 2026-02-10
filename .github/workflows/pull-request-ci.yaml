@@ -60,8 +60,10 @@ jobs:
       matrix:
         include:
           - arch: amd64
+            platform: linux/amd64
             nix_package: sysdig-mcp-server-image-amd64
           - arch: arm64
+            platform: linux/arm64
             nix_package: sysdig-mcp-server-image-aarch64
     steps:
       - name: Check out the repo
@@ -104,20 +106,34 @@ jobs:
           stop-on-failed-policy-eval: true
           stop-on-processing-error: true
 
+      - name: Convert to OCI layout
+        run: skopeo copy docker-archive:result oci:/tmp/oci-image:latest
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Log in to GitHub Container Registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | skopeo login ghcr.io -u "${{ github.actor }}" --password-stdin
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push image by digest
-        env:
-          REGISTRY: ghcr.io/sysdiglabs/sysdig-mcp-server
-        run: |
-          skopeo copy --digestfile /tmp/digest \
-            docker-archive:result \
-            docker://$REGISTRY --format oci
+        id: push
+        uses: docker/build-push-action@v6
+        with:
+          file: /dev/null
+          build-contexts: |
+            base=oci-layout:///tmp/oci-image
+          platforms: ${{ matrix.platform }}
+          outputs: type=image,name=ghcr.io/sysdiglabs/sysdig-mcp-server,push-by-digest=true,name-canonical=true,push=true
 
+      - name: Export digest
+        run: |
           mkdir -p /tmp/digests
-          cp /tmp/digest /tmp/digests/${{ matrix.arch }}
-          echo >> /tmp/digests/${{ matrix.arch }}
+          digest="${{ steps.push.outputs.digest }}"
+          touch "/tmp/digests/${digest#sha256:}"
 
       - name: Upload digest
         uses: actions/upload-artifact@v5
@@ -161,7 +177,7 @@ jobs:
         working-directory: /tmp/digests
         run: |
           docker buildx imagetools create --tag $REGISTRY:pr-${PR_NUMBER} \
-            $(printf "$REGISTRY@%s " $(cat *))
+            $(printf "$REGISTRY@sha256:%s " *)
 
       - name: Inspect image
         env:
