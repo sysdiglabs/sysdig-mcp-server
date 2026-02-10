@@ -63,6 +63,7 @@ jobs:
       contents: read
       packages: write
     strategy:
+      max-parallel: 1
       matrix:
         include:
           - arch: amd64
@@ -102,6 +103,7 @@ jobs:
 
           mkdir -p /tmp/digests
           cp /tmp/digest /tmp/digests/${{ matrix.arch }}
+          echo >> /tmp/digests/${{ matrix.arch }}
 
       - name: Upload digest
         uses: actions/upload-artifact@v5
