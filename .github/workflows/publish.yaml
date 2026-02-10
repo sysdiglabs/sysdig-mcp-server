@@ -114,6 +114,7 @@ jobs:
           build-contexts: |
             base=oci-layout:///tmp/oci-image
           platforms: ${{ matrix.platform }}
+          provenance: false
           outputs: type=image,name=ghcr.io/sysdiglabs/sysdig-mcp-server,push-by-digest=true,name-canonical=true,push=true
 
       - name: Export digest
