@@ -26,7 +26,7 @@
 
 ## Description
 
-This is an implementation of an [MCP (Model Context Protocol) Server](https://modelcontextprotocol.io/quickstart/server) to allow different LLMs to query information from Sysdig Secure platform. New tools and functionalities will be added over time following semantic versioning. The goal is to provide a simple and easy-to-use interface for querying information from Sysdig Secure platform using LLMs.
+This is an implementation of an [MCP (Model Context Protocol) Server](https://modelcontextprotocol.io/quickstart/server) to allow different LLMs to query information from the Sysdig platform (Monitor and Secure). New tools and functionalities will be added over time following semantic versioning. The goal is to provide a simple and easy-to-use interface for querying information from the Sysdig platform using LLMs.
 
 ## Quickstart Guide
 
@@ -82,31 +82,7 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
 
 The server dynamically filters the available tools based on the permissions associated with the API token used for the request. If the token lacks the required permissions for a tool, that tool will not be listed.
 
-- **`get_event_info`**
-  - **Description**: Retrieve detailed information for a specific security event by its ID.
-  - **Required Permission**: `policy-events.read`
-  - **Sample Prompt**: "Get full details for event ID 123abc"
-
-- **`list_runtime_events`**
-  - **Description**: List runtime security events from the last given hours, optionally filtered by severity level.
-  - **Required Permission**: `policy-events.read`
-  - **Sample Prompt**: "Show me high severity events from the last 2 hours in cluster1"
-
-- **`get_event_process_tree`**
-  - **Description**: Retrieve the process tree for a specific event (if available).
-  - **Required Permission**: `policy-events.read`
-  - **Sample Prompt**: "Get the process tree for event ID abc123"
-
-- **`generate_sysql`**
-  - **Description**: Generates a SysQL query from a natural language question.
-  - **Required Permission**: `sage.exec`
-  - **Sample Prompt**: "List top 10 pods by memory usage in the last hour"
-  - **Note**: The `generate_sysql` tool currently does not work with Service Account tokens and will return a 500 error. For this tool, use an API token assigned to a regular user account.
-
-- **`run_sysql`**
-  - **Description**: Execute a pre-written SysQL query directly (use only when user provides explicit query).
-  - **Required Permission**: `sage.exec`, `risks.read`
-  - **Sample Prompt**: "Run this query: MATCH CloudResource WHERE type = 'aws_s3_bucket' LIMIT 10"
+### Sysdig Monitor
 
 - **`k8s_list_clusters`**
   - **Description**: Lists the cluster information for all clusters or just the cluster specified.
@@ -133,6 +109,11 @@ The server dynamically filters the available tools based on the permissions asso
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "List all cronjobs in cluster 'prod' and namespace 'default'"
 
+- **`k8s_list_count_pods_per_cluster`**
+  - **Description**: List the count of running Kubernetes Pods grouped by cluster and namespace.
+  - **Required Permission**: `metrics-data.read`
+  - **Sample Prompt**: "List the count of running Kubernetes Pods in cluster 'production'"
+
 - **`k8s_list_top_unavailable_pods`**
   - **Description**: Shows the top N pods with the highest number of unavailable or unready replicas in a Kubernetes cluster, ordered from highest to lowest.
   - **Required Permission**: `metrics-data.read`
@@ -152,21 +133,6 @@ The server dynamically filters the available tools based on the permissions asso
   - **Description**: Shows the top network errors by pod over a given interval, aggregated by cluster, namespace, workload type, and workload name. The result is an average rate of network errors per second.
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "Show the top 10 pods with the most network errors in cluster 'production'"
-
-- **`k8s_list_count_pods_per_cluster`**
-  - **Description**: List the count of running Kubernetes Pods grouped by cluster and namespace.
-  - **Required Permission**: `metrics-data.read`
-  - **Sample Prompt**: "List the count of running Kubernetes Pods in cluster 'production'"
-
-- **`k8s_list_underutilized_pods_cpu_quota`**
-  - **Description**: List Kubernetes pods with CPU usage below 25% of the quota limit.
-  - **Required Permission**: `metrics-data.read`
-  - **Sample Prompt**: "Show the top 10 underutilized pods by CPU quota in cluster 'production'"
-
-- **`k8s_list_underutilized_pods_memory_quota`**
-  - **Description**: List Kubernetes pods with memory usage below 25% of the limit.
-  - **Required Permission**: `metrics-data.read`
-  - **Sample Prompt**: "Show the top 10 underutilized pods by memory quota in cluster 'production'"
 
 - **`k8s_list_top_cpu_consumed_workload`**
   - **Description**: Identifies the Kubernetes workloads (all containers) consuming the most CPU (in cores).
@@ -188,7 +154,47 @@ The server dynamically filters the available tools based on the permissions asso
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "Show the top 10 containers consuming the most memory in cluster 'production'"
 
-   ## Requirements
+- **`k8s_list_underutilized_pods_cpu_quota`**
+  - **Description**: List Kubernetes pods with CPU usage below 25% of the quota limit.
+  - **Required Permission**: `metrics-data.read`
+  - **Sample Prompt**: "Show the top 10 underutilized pods by CPU quota in cluster 'production'"
+
+- **`k8s_list_underutilized_pods_memory_quota`**
+  - **Description**: List Kubernetes pods with memory usage below 25% of the limit.
+  - **Required Permission**: `metrics-data.read`
+  - **Sample Prompt**: "Show the top 10 underutilized pods by memory quota in cluster 'production'"
+
+### Sysdig Secure
+
+- **`list_runtime_events`**
+  - **Description**: List runtime security events from the last given hours, optionally filtered by severity level.
+  - **Required Permission**: `policy-events.read`
+  - **Sample Prompt**: "Show me high severity events from the last 2 hours in cluster1"
+
+- **`get_event_info`**
+  - **Description**: Retrieve detailed information for a specific security event by its ID.
+  - **Required Permission**: `policy-events.read`
+  - **Sample Prompt**: "Get full details for event ID 123abc"
+
+- **`get_event_process_tree`**
+  - **Description**: Retrieve the process tree for a specific event (if available).
+  - **Required Permission**: `policy-events.read`
+  - **Sample Prompt**: "Get the process tree for event ID abc123"
+
+- **`run_sysql`**
+  - **Description**: Execute a pre-written SysQL query directly (use only when user provides explicit query).
+  - **Required Permission**: `sage.exec`, `risks.read`
+  - **Sample Prompt**: "Run this query: MATCH CloudResource WHERE type = 'aws_s3_bucket' LIMIT 10"
+
+### Sysdig Monitor & Sysdig Secure
+
+- **`generate_sysql`**
+  - **Description**: Generates a SysQL query from a natural language question.
+  - **Required Permission**: `sage.exec`
+  - **Sample Prompt**: "List top 10 pods by memory usage in the last hour"
+  - **Note**: The `generate_sysql` tool currently does not work with Service Account tokens and will return a 500 error. For this tool, use an API token assigned to a regular user account.
+
+## Requirements
 - [Go](https://go.dev/doc/install) 1.25 or higher (if running without Docker).
 
 ## Configuration
