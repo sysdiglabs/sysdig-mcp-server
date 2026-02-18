@@ -61,7 +61,7 @@ var _ = Describe("KubernetesListTopMemoryConsumedWorkload Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `topk(20, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name) (sysdig_container_memory_used_bytes))`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 			Entry(nil,
@@ -74,7 +74,7 @@ var _ = Describe("KubernetesListTopMemoryConsumedWorkload Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `topk(10, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name) (sysdig_container_memory_used_bytes))`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -87,7 +87,7 @@ var _ = Describe("KubernetesListTopMemoryConsumedWorkload Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `topk(20, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name) (sysdig_container_memory_used_bytes{kube_cluster_name="my_cluster"}))`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 			Entry(nil,
@@ -100,7 +100,7 @@ var _ = Describe("KubernetesListTopMemoryConsumedWorkload Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `topk(20, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name) (sysdig_container_memory_used_bytes{kube_cluster_name="my_cluster",kube_namespace_name="my_namespace"}))`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 			Entry(nil,
@@ -119,7 +119,7 @@ var _ = Describe("KubernetesListTopMemoryConsumedWorkload Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `topk(5, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name) (sysdig_container_memory_used_bytes{kube_cluster_name="my_cluster",kube_namespace_name="my_namespace",kube_workload_type="deployment",kube_workload_name="my_workload"}))`,
-					Limit: asPtr(sysdig.LimitQuery(5)),
+					Limit: new(sysdig.LimitQuery(5)),
 				},
 			),
 		)

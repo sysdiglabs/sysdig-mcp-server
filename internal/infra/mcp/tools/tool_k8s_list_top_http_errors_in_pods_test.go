@@ -63,7 +63,7 @@ var _ = Describe("KubernetesListTopHttpErrorsInPods Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `topk(20,sum(sum_over_time(sysdig_container_net_http_error_count{}[1h])) by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, kube_pod_name)) / 3600.000000`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 			Entry("with custom params",
@@ -81,7 +81,7 @@ var _ = Describe("KubernetesListTopHttpErrorsInPods Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `topk(5,sum(sum_over_time(sysdig_container_net_http_error_count{kube_cluster_name=~"prod-cluster",kube_namespace_name="backend"}[30m])) by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, kube_pod_name)) / 1800.000000`,
-					Limit: asPtr(sysdig.LimitQuery(5)),
+					Limit: new(sysdig.LimitQuery(5)),
 				},
 			),
 			Entry("with all params",
@@ -101,7 +101,7 @@ var _ = Describe("KubernetesListTopHttpErrorsInPods Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `topk(10,sum(sum_over_time(sysdig_container_net_http_error_count{kube_cluster_name=~"dev",kube_namespace_name="default",kube_workload_type="deployment",kube_workload_name="api"}[2h])) by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, kube_pod_name)) / 7200.000000`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 		)

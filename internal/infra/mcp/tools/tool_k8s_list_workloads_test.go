@@ -61,7 +61,7 @@ var _ = Describe("KubernetesListWorkloads Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_workload_status_desired`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -74,7 +74,7 @@ var _ = Describe("KubernetesListWorkloads Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_workload_status_ready`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 			Entry(nil,
@@ -87,7 +87,7 @@ var _ = Describe("KubernetesListWorkloads Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_workload_status_running{kube_cluster_name="my_cluster"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -100,7 +100,7 @@ var _ = Describe("KubernetesListWorkloads Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_workload_status_unavailable{kube_namespace_name="my_namespace"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -113,7 +113,7 @@ var _ = Describe("KubernetesListWorkloads Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_workload_status_desired{kube_workload_name="my_workload"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -126,7 +126,7 @@ var _ = Describe("KubernetesListWorkloads Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_workload_status_ready{kube_workload_type="deployment"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -145,7 +145,7 @@ var _ = Describe("KubernetesListWorkloads Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_workload_status_running{kube_cluster_name="my_cluster",kube_namespace_name="my_namespace",kube_workload_name="my_workload",kube_workload_type="statefulset"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 		)

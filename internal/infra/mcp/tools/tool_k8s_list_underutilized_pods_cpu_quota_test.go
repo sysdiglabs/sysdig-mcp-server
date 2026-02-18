@@ -61,7 +61,7 @@ var _ = Describe("KubernetesListUnderutilizedPodsCPUQuota Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_cpu_cores_used) / (sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_cpu_cores_quota_limit) > 0) < 0.25`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -74,7 +74,7 @@ var _ = Describe("KubernetesListUnderutilizedPodsCPUQuota Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_cpu_cores_used) / (sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_cpu_cores_quota_limit) > 0) < 0.25`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 			Entry(nil,
@@ -87,7 +87,7 @@ var _ = Describe("KubernetesListUnderutilizedPodsCPUQuota Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_cpu_cores_used{kube_cluster_name="my_cluster"}) / (sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_cpu_cores_quota_limit{kube_cluster_name="my_cluster"}) > 0) < 0.25`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -100,7 +100,7 @@ var _ = Describe("KubernetesListUnderutilizedPodsCPUQuota Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_cpu_cores_used{kube_namespace_name="my_namespace"}) / (sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_cpu_cores_quota_limit{kube_namespace_name="my_namespace"}) > 0) < 0.25`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -113,7 +113,7 @@ var _ = Describe("KubernetesListUnderutilizedPodsCPUQuota Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_cpu_cores_used{kube_cluster_name="my_cluster",kube_namespace_name="my_namespace"}) / (sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_cpu_cores_quota_limit{kube_cluster_name="my_cluster",kube_namespace_name="my_namespace"}) > 0) < 0.25`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 		)

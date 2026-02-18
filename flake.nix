@@ -16,7 +16,6 @@
             prev.pkgsStatic.callPackage ./package.nix { }
           else
             prev.callPackage ./package.nix { };
-        go = prev.go_1_24;
       };
       flake = flake-utils.lib.eachDefaultSystem (
         system:
@@ -39,7 +38,7 @@
             mkShell {
               packages = [
                 ginkgo
-                go
+                go_1_26
                 govulncheck
                 gofumpt
                 golangci-lint

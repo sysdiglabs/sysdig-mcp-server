@@ -61,7 +61,7 @@ var _ = Describe("KubernetesListCountPodsPerCluster Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `sum by (kube_cluster_name, kube_namespace_name) (kube_pod_info)`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 			Entry(nil,
@@ -74,7 +74,7 @@ var _ = Describe("KubernetesListCountPodsPerCluster Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `sum by (kube_cluster_name, kube_namespace_name) (kube_pod_info)`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -87,7 +87,7 @@ var _ = Describe("KubernetesListCountPodsPerCluster Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `sum by (kube_cluster_name, kube_namespace_name) (kube_pod_info{kube_cluster_name="my_cluster"})`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 			Entry(nil,
@@ -100,7 +100,7 @@ var _ = Describe("KubernetesListCountPodsPerCluster Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `sum by (kube_cluster_name, kube_namespace_name) (kube_pod_info{kube_namespace_name="my_namespace"})`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 			Entry(nil,
@@ -113,7 +113,7 @@ var _ = Describe("KubernetesListCountPodsPerCluster Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `sum by (kube_cluster_name, kube_namespace_name) (kube_pod_info{kube_cluster_name="my_cluster",kube_namespace_name="my_namespace"})`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 		)
