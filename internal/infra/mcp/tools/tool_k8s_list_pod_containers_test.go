@@ -61,7 +61,7 @@ var _ = Describe("KubernetesListPodContainers Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_pod_container_info`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -74,7 +74,7 @@ var _ = Describe("KubernetesListPodContainers Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_pod_container_info`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 			Entry(nil,
@@ -87,7 +87,7 @@ var _ = Describe("KubernetesListPodContainers Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_pod_container_info{kube_cluster_name="my_cluster"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -100,7 +100,7 @@ var _ = Describe("KubernetesListPodContainers Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_pod_container_info{kube_namespace_name="my_namespace"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -113,7 +113,7 @@ var _ = Describe("KubernetesListPodContainers Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_pod_container_info{kube_workload_type="my_workload_type"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -126,7 +126,7 @@ var _ = Describe("KubernetesListPodContainers Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_pod_container_info{kube_workload_name="my_workload_name"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -139,7 +139,7 @@ var _ = Describe("KubernetesListPodContainers Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_pod_container_info{kube_pod_name="my_pod_name"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -152,7 +152,7 @@ var _ = Describe("KubernetesListPodContainers Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_pod_container_info{kube_pod_container_name="my_container_name"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -165,7 +165,7 @@ var _ = Describe("KubernetesListPodContainers Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_pod_container_info{image="my_image"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -178,7 +178,7 @@ var _ = Describe("KubernetesListPodContainers Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_pod_container_info{kube_node_name="my_node_name"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -200,7 +200,7 @@ var _ = Describe("KubernetesListPodContainers Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_pod_container_info{kube_cluster_name="my_cluster",kube_namespace_name="my_namespace",kube_workload_type="my_workload_type",kube_workload_name="my_workload_name",kube_pod_name="my_pod_name",kube_pod_container_name="my_container_name",image="my_image",kube_node_name="my_node_name"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 		)

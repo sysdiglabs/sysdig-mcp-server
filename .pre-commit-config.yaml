@@ -18,6 +18,11 @@ repos:
         entry: just fmt
         language: system
         pass_filenames: false
+      - id: fix
+        name: fix files
+        entry: just fix
+        language: system
+        pass_filenames: false
       - id: lint
         name: run linter
         entry: just lint

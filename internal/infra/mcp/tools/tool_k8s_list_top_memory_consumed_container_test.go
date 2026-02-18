@@ -61,7 +61,7 @@ var _ = Describe("KubernetesListTopMemoryConsumedContainer Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `topk(20, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, container_label_io_kubernetes_container_name) (sysdig_container_memory_used_bytes))`,
-					Limit: toPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 			Entry(nil,
@@ -78,7 +78,7 @@ var _ = Describe("KubernetesListTopMemoryConsumedContainer Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `topk(10, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, container_label_io_kubernetes_container_name) (sysdig_container_memory_used_bytes{kube_cluster_name="prod", kube_namespace_name="default"}))`,
-					Limit: toPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -97,13 +97,9 @@ var _ = Describe("KubernetesListTopMemoryConsumedContainer Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `topk(5, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, container_label_io_kubernetes_container_name) (sysdig_container_memory_used_bytes{kube_cluster_name="prod", kube_namespace_name="default", kube_workload_type="deployment", kube_workload_name="api"}))`,
-					Limit: toPtr(sysdig.LimitQuery(5)),
+					Limit: new(sysdig.LimitQuery(5)),
 				},
 			),
 		)
 	})
 })
-
-func toPtr[T any](v T) *T {
-	return &v
-}

@@ -61,7 +61,7 @@ var _ = Describe("KubernetesListNodes Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_node_info`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -74,7 +74,7 @@ var _ = Describe("KubernetesListNodes Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_node_info`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 			Entry(nil,
@@ -87,7 +87,7 @@ var _ = Describe("KubernetesListNodes Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_node_info{cluster="my_cluster"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -100,7 +100,7 @@ var _ = Describe("KubernetesListNodes Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_node_info{kube_node_name="my_node"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -113,7 +113,7 @@ var _ = Describe("KubernetesListNodes Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_node_info{cluster="my_cluster",kube_node_name="my_node"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -126,7 +126,7 @@ var _ = Describe("KubernetesListNodes Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_node_info{cluster="my_cluster"}`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 		)

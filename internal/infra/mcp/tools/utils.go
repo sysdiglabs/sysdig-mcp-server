@@ -52,7 +52,3 @@ func RequiredPermissionsFromTool(tool mcp.Tool) []string {
 
 	return requiredPermissions
 }
-
-func toPtr[T any](val T) *T {
-	return &val
-}

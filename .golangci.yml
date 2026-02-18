@@ -1,0 +1,8 @@
+version: "2"
+
+linters:
+  settings:
+    staticcheck:
+      checks:
+        - "-SA4006" # Disabled: false positives with Go 1.26's new(value) syntax
+        - "-SA4017" # Disabled: false positives with Go 1.26's new(value) syntax

@@ -3,7 +3,7 @@ default:
     @just --list
 
 # Run all checks
-check: fmt check-vulnerabilities lint test
+check: fmt fix check-vulnerabilities lint test
 
 # Check for vulnerabilities in the project
 check-vulnerabilities:
@@ -12,6 +12,10 @@ check-vulnerabilities:
 # Lint and fix code
 lint:
     golangci-lint run
+
+# Fix code
+fix:
+    go fix ./...
 
 # Format code
 fmt:

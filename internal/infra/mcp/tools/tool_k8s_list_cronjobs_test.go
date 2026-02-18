@@ -61,7 +61,7 @@ var _ = Describe("KubernetesListCronjobs Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_cronjob_info`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -74,7 +74,7 @@ var _ = Describe("KubernetesListCronjobs Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_cronjob_info`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 			Entry(nil,
@@ -87,7 +87,7 @@ var _ = Describe("KubernetesListCronjobs Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_cronjob_info{kube_cluster_name="my_cluster"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -100,7 +100,7 @@ var _ = Describe("KubernetesListCronjobs Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_cronjob_info{kube_namespace_name="my_namespace"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -113,7 +113,7 @@ var _ = Describe("KubernetesListCronjobs Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_cronjob_info{kube_cronjob_name="my_cronjob"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -126,7 +126,7 @@ var _ = Describe("KubernetesListCronjobs Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_cronjob_info{kube_cluster_name="my_cluster",kube_namespace_name="my_namespace",kube_cronjob_name="my_cronjob"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 		)

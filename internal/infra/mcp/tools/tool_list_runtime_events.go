@@ -40,7 +40,7 @@ func (h *ToolListRuntimeEvents) handle(ctx context.Context, request mcp.CallTool
 
 func toolRequestToEventsV1Params(request mcp.CallToolRequest, clock clock.Clock) *sysdig.GetEventsV1Params {
 	params := &sysdig.GetEventsV1Params{
-		Limit: toPtr(int32(request.GetInt("limit", 50))),
+		Limit: new(int32(request.GetInt("limit", 50))),
 	}
 
 	if cursor := request.GetString("cursor", ""); cursor != "" {
@@ -49,13 +49,13 @@ func toolRequestToEventsV1Params(request mcp.CallToolRequest, clock clock.Clock)
 		scopeHours := request.GetInt("scope_hours", 1)
 		to := clock.Now()
 		from := to.Add(-time.Duration(scopeHours) * time.Hour)
-		params.To = toPtr(to.UnixNano())
-		params.From = toPtr(from.UnixNano())
+		params.To = new(to.UnixNano())
+		params.From = new(from.UnixNano())
 	}
 
-	params.Filter = toPtr(baseFilter)
+	params.Filter = new(baseFilter)
 	if filterExpr := request.GetString("filter_expr", ""); filterExpr != "" {
-		params.Filter = toPtr(baseFilter + " and " + filterExpr)
+		params.Filter = new(baseFilter + " and " + filterExpr)
 	}
 
 	return params

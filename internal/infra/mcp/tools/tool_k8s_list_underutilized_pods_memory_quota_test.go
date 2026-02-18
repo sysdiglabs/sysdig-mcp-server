@@ -61,7 +61,7 @@ var _ = Describe("KubernetesListUnderutilizedPodsMemoryQuota Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_memory_used_bytes) / (sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_memory_limit_bytes) > 0) < 0.25`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -78,7 +78,7 @@ var _ = Describe("KubernetesListUnderutilizedPodsMemoryQuota Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_memory_used_bytes{kube_cluster_name="test-cluster",kube_namespace_name="test-namespace"}) / (sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_memory_limit_bytes{kube_cluster_name="test-cluster",kube_namespace_name="test-namespace"}) > 0) < 0.25`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 		)

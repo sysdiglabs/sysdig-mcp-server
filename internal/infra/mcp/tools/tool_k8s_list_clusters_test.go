@@ -61,7 +61,7 @@ var _ = Describe("KubernetesListClusters Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_cluster_info`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -74,7 +74,7 @@ var _ = Describe("KubernetesListClusters Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_cluster_info`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 			Entry(nil,
@@ -87,7 +87,7 @@ var _ = Describe("KubernetesListClusters Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_cluster_info{cluster="my_cluster"}`,
-					Limit: asPtr(sysdig.LimitQuery(10)),
+					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
 			Entry(nil,
@@ -100,13 +100,9 @@ var _ = Describe("KubernetesListClusters Tool", func() {
 				},
 				sysdig.GetQueryV1Params{
 					Query: `kube_cluster_info{cluster="my_cluster"}`,
-					Limit: asPtr(sysdig.LimitQuery(20)),
+					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
 		)
 	})
 })
-
-func asPtr[T any](arg T) *T {
-	return &arg
-}
