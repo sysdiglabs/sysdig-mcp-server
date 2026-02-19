@@ -17,6 +17,7 @@
   - [Running the Server](#running-the-server)
     - [Docker (Recommended)](#docker-recommended)
     - [Go](#go)
+    - [Kubernetes](#kubernetes)
   - [Client Configuration](#client-configuration)
     - [Authentication](#authentication)
     - [URL](#url)
@@ -195,7 +196,7 @@ The server dynamically filters the available tools based on the permissions asso
   - **Note**: The `generate_sysql` tool currently does not work with Service Account tokens and will return a 500 error. For this tool, use an API token assigned to a regular user account.
 
 ## Requirements
-- [Go](https://go.dev/doc/install) 1.25 or higher (if running without Docker).
+- [Go](https://go.dev/doc/install) 1.26 or higher (if running without Docker).
 
 ## Configuration
 
@@ -309,6 +310,72 @@ By default, the server will run using the `stdio` transport. To use the `streama
 SYSDIG_MCP_TRANSPORT=streamable-http go run github.com/sysdiglabs/sysdig-mcp-server/cmd/server@latest
 ```
 
+### Kubernetes
+
+You can deploy the MCP server to a Kubernetes cluster and connect to it remotely from clients like Claude Desktop.
+
+**1. Create a Secret with your Sysdig credentials:**
+
+```bash
+kubectl create namespace mcp-server
+
+kubectl create secret generic mcp-server-secrets \
+  --namespace mcp-server \
+  --from-literal=SYSDIG_MCP_API_HOST=<your_sysdig_host> \
+  --from-literal=SYSDIG_MCP_API_TOKEN=<your_sysdig_secure_api_token>
+```
+
+**2. Deploy the server:**
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcp-server
+  namespace: mcp-server
+  labels:
+    app: mcp-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mcp-server
+  template:
+    metadata:
+      labels:
+        app: mcp-server
+    spec:
+      containers:
+      - name: mcp-server
+        image: ghcr.io/sysdiglabs/sysdig-mcp-server:latest
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+        env:
+          - name: SYSDIG_MCP_TRANSPORT
+            value: "streamable-http"
+          - name: SYSDIG_MCP_LISTENING_HOST
+            value: "0.0.0.0"
+        envFrom:
+        - secretRef:
+            name: mcp-server-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mcp-server
+  namespace: mcp-server
+spec:
+  type: ClusterIP
+  selector:
+    app: mcp-server
+  ports:
+  - port: 8080
+    targetPort: 8080
+```
+
+> **Note:** Expose the Service externally using a `NodePort`, `LoadBalancer`, or `Ingress` depending on your cluster setup. The examples in the [Client Configuration](#client-configuration) section assume the server is reachable at `http://<server-address>:<port>/sysdig-mcp-server`.
+
 ## Local Development
 
 For local development, we provide a `flake.nix` file that sets up a reproducible environment with all necessary dependencies (Go, development tools, linters, etc.).
@@ -346,9 +413,9 @@ X-Sysdig-Host: <your_sysdig_host>
 
 ### URL
 
-If you are running the server with the `sse` or `streamable-http` transport, the URL will be `http://<host>:<port>/sysdig-mcp-server/mcp`.
+If you are running the server with the `sse` or `streamable-http` transport, the URL will be `http://<host>:<port><mount_path>`, where `<mount_path>` is the value of `SYSDIG_MCP_MOUNT_PATH` (defaults to `/sysdig-mcp-server`). Do not include a trailing `/`.
 
-For example, if you are running the server locally on port 8080, the URL will be `http://localhost:8080/sysdig-mcp-server/mcp`.
+For example, if you are running the server locally on port 8080 with the default mount path, the URL will be `http://localhost:8080/sysdig-mcp-server`.
 
 ### Claude Desktop App
 
@@ -410,9 +477,32 @@ For the Claude Desktop app, you can manually configure the MCP server by editing
     }
     ```
 
+    **Option C: Connecting to a Remote Server**
+
+    If the MCP server is deployed remotely (e.g., in a [Kubernetes cluster](#kubernetes)), you can connect to it using [`mcp-remote`](https://www.npmjs.com/package/mcp-remote). This requires [Node.js](https://nodejs.org/) (v18+) installed on your machine.
+
+    ```json
+    {
+      "mcpServers": {
+        "sysdig-mcp-server": {
+          "command": "npx",
+          "args": [
+            "-y",
+            "mcp-remote",
+            "http://<server-address>:<port>/sysdig-mcp-server",
+            "--allow-http"
+          ]
+        }
+      }
+    }
+    ```
+
+    > **Note:** The `--allow-http` flag is required when connecting over plain HTTP. If your server is behind HTTPS (e.g., via an Ingress with TLS), you can omit it. No authentication headers or tokens are needed in the client configuration when the server has `SYSDIG_MCP_API_HOST` and `SYSDIG_MCP_API_TOKEN` set as environment variables.
+
 3. **Replace the placeholders**:
     - Replace `<your_sysdig_host>` with your Sysdig Secure host URL.
     - Replace `<your_sysdig_secure_api_token>` with your Sysdig Secure API token.
+    - Replace `<server-address>:<port>` with the address of your remote MCP server (Option C only).
 
 4. **Save the file** and restart the Claude Desktop app for the changes to take effect.
 
