@@ -413,9 +413,9 @@ X-Sysdig-Host: <your_sysdig_host>
 
 ### URL
 
-If you are running the server with the `sse` or `streamable-http` transport, the URL will be `http://<host>:<port>/sysdig-mcp-server`.
+If you are running the server with the `sse` or `streamable-http` transport, the URL will be `http://<host>:<port><mount_path>`, where `<mount_path>` is the value of `SYSDIG_MCP_MOUNT_PATH` (defaults to `/sysdig-mcp-server`). Do not include a trailing `/`.
 
-For example, if you are running the server locally on port 8080, the URL will be `http://localhost:8080/sysdig-mcp-server`.
+For example, if you are running the server locally on port 8080 with the default mount path, the URL will be `http://localhost:8080/sysdig-mcp-server`.
 
 ### Claude Desktop App
 
