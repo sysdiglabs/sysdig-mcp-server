@@ -94,7 +94,7 @@ var _ = Describe("ToolListRuntimeEvents", func() {
 	It("should use default values when no params are provided", func(ctx SpecContext) {
 		mockClient.EXPECT().GetEventsV1WithResponse(gomock.Any(), gomock.Any()).DoAndReturn(func(_ context.Context, params *sysdig.GetEventsV1Params, _ ...sysdig.RequestEditorFn) (*sysdig.GetEventsV1Response, error) {
 			Expect(*params.Limit).To(Equal(int32(50)))
-			Expect(*params.Filter).To(Equal(`source != "audittrail" and not originator in ("benchmarks","compliance","cloudsec","scanning","hostscanning")`))
+			Expect(*params.Filter).To(Equal(`source != "auditTrail" and not originator in ("benchmarks","compliance","cloudsec","scanning","hostscanning")`))
 			Expect(*params.To).To(Equal(int64(946684800000000000)))
 			Expect(*params.From).To(Equal(int64(946681200000000000)))
 

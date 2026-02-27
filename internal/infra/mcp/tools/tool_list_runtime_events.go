@@ -10,7 +10,7 @@ import (
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
-const baseFilter = `source != "audittrail" and not originator in ("benchmarks","compliance","cloudsec","scanning","hostscanning")`
+const baseFilter = `source != "auditTrail" and not originator in ("benchmarks","compliance","cloudsec","scanning","hostscanning")`
 
 type ToolListRuntimeEvents struct {
 	sysdigClient sysdig.ExtendedClientWithResponsesInterface
@@ -63,7 +63,7 @@ func toolRequestToEventsV1Params(request mcp.CallToolRequest, clock clock.Clock)
 
 func (h *ToolListRuntimeEvents) RegisterInServer(s *server.MCPServer) {
 	tool := mcp.NewTool("list_runtime_events",
-		mcp.WithDescription("List runtime security events from the last given hours, optionally filtered by severity level."),
+		mcp.WithDescription("List runtime security events from the last given hours, optionally filtered by severity level. Includes both Falco-based and machine learning (ML) detections such as crypto mining, anomalous logins, and other ML-detected threats."),
 		mcp.WithString("cursor",
 			mcp.Description("Cursor for pagination."),
 		),
@@ -79,7 +79,13 @@ func (h *ToolListRuntimeEvents) RegisterInServer(s *server.MCPServer) {
 			mcp.Description(`Logical filter expression to select runtime security events.
 Supports operators: =, !=, in, contains, startsWith, exists.
 Combine with and/or/not.
-Key attributes include: severity (codes "0"-"7"), originator, sourceType, ruleName, rawEventCategory, kubernetes.cluster.name, host.hostName, container.imageName, aws.accountId, azure.subscriptionId, gcp.projectId, policyId, trigger.
+Key attributes include: severity (codes "0"-"7"), originator, sourceType, ruleName, rawEventCategory, engine, source, category, kubernetes.cluster.name, host.hostName, container.imageName, aws.accountId, azure.subscriptionId, gcp.projectId, policyId, trigger.
+
+To find machine learning (ML) detections (e.g. crypto mining, anomalous logins), use engine or source filters:
+- All ML events: 'engine = "machineLearning"'
+- AWS ML detections: 'source = "agentless-aws-ml"'
+- Okta ML detections: 'source = "agentless-okta-ml"'
+- By category: 'category = "machine-learning"'
 
 You can specify the severity of the events based on the following cases:
 - high-severity: 'severity in ("0","1","2","3")'
@@ -96,6 +102,9 @@ You can specify the severity of the events based on the following cases:
 				`container.imageName = "nginx:latest" and originator = "hostscanning"`,
 				`aws.accountId = "123456789012"`,
 				`policyId = "CIS_Docker_Benchmark"`,
+				`engine = "machineLearning"`,
+				`source = "agentless-aws-ml"`,
+				`engine = "machineLearning" and aws.accountId = "123456789012"`,
 			),
 		),
 		mcp.WithOutputSchema[map[string]any](),
