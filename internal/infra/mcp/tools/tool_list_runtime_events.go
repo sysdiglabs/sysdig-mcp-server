@@ -10,7 +10,7 @@ import (
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
-const baseFilter = `source != "auditTrail" and not originator in ("benchmarks","compliance","cloudsec","scanning","hostscanning")`
+const baseFilter = `not originator in ("benchmarks","compliance","cloudsec","scanning","hostscanning")`
 
 type ToolListRuntimeEvents struct {
 	sysdigClient sysdig.ExtendedClientWithResponsesInterface
