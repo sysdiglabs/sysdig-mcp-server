@@ -72,7 +72,7 @@ func (h *ToolListRuntimeEvents) RegisterInServer(s *server.MCPServer) {
 			mcp.DefaultNumber(1),
 		),
 		mcp.WithNumber("limit",
-			mcp.Description("Maximum number of events to return."),
+			mcp.Description("Maximum number of events to return. Maximum allowed value is 200."),
 			mcp.DefaultNumber(50),
 		),
 		mcp.WithString("filter_expr",
