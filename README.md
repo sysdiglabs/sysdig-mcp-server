@@ -212,7 +212,7 @@ You can also set the following variables to override the default configuration:
 - `SYSDIG_MCP_MOUNT_PATH`:  The URL prefix for the streamable-http/sse deployment. Defaults to: `/sysdig-mcp-server`
 - `SYSDIG_MCP_LOGLEVEL`: Log Level of the application (`DEBUG`, `INFO`, `WARNING`, `ERROR`). Defaults to: `INFO`
 - `SYSDIG_MCP_LISTENING_PORT`: The port for the server when it is deployed using remote protocols (`streamable-http`, `sse`). Defaults to: `8080`
-- `SYSDIG_MCP_LISTENING_HOST`: The host for the server when it is deployed using remote protocols (`streamable-http`, `sse`). Defaults to: `localhost`
+- `SYSDIG_MCP_LISTENING_HOST`: The host for the server when it is deployed using remote protocols (`streamable-http`, `sse`). Defaults to all interfaces (`:port`). Set to `127.0.0.1` for local-only access.
 
 You can find your API token in the Sysdig Secure UI under **Settings > Sysdig Secure API**. Make sure to copy the token as it will not be shown again.
 
@@ -242,7 +242,7 @@ SYSDIG_MCP_TRANSPORT=streamable-http
 # SYSDIG_MCP_API_HOST=https://us2.app.sysdig.com
 # SYSDIG_MCP_API_TOKEN=your-api-token-here
 SYSDIG_MCP_LISTENING_PORT=8080
-SYSDIG_MCP_LISTENING_HOST=localhost
+SYSDIG_MCP_LISTENING_HOST=
 SYSDIG_MCP_MOUNT_PATH=/sysdig-mcp-server
 ```
 
@@ -354,8 +354,6 @@ spec:
         env:
           - name: SYSDIG_MCP_TRANSPORT
             value: "streamable-http"
-          - name: SYSDIG_MCP_LISTENING_HOST
-            value: "0.0.0.0"
         envFrom:
         - secretRef:
             name: mcp-server-secrets
