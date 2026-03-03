@@ -34,7 +34,7 @@ func Load() (*Config, error) {
 		APIToken:            getEnv("SYSDIG_MCP_API_TOKEN", ""),
 		SkipTLSVerification: getEnv("SYSDIG_MCP_API_SKIP_TLS_VERIFICATION", false),
 		Transport:           getEnv("SYSDIG_MCP_TRANSPORT", "stdio"),
-		ListeningHost:       getEnv("SYSDIG_MCP_LISTENING_HOST", "localhost"),
+		ListeningHost:       getEnv("SYSDIG_MCP_LISTENING_HOST", ""),
 		ListeningPort:       getEnv("SYSDIG_MCP_LISTENING_PORT", "8080"),
 		MountPath:           getEnv("SYSDIG_MCP_MOUNT_PATH", "/sysdig-mcp-server"),
 		LogLevel:            getEnv("SYSDIG_MCP_LOGLEVEL", "INFO"),
