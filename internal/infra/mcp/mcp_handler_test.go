@@ -110,7 +110,7 @@ var _ = Describe("McpHandler", func() {
 
 		BeforeEach(func() {
 			// Default middleware setup for HTTP tests
-			h := handler.AsStreamableHTTP("/")
+			h := handler.AsStreamableHTTP("/", false)
 			testClient = NewHTTPTestClient(h)
 		})
 
@@ -182,6 +182,24 @@ var _ = Describe("McpHandler", func() {
 			h := handler.AsSSE("/sse")
 			Expect(h).NotTo(BeNil())
 		})
+
+		It("AsStreamableHTTP with stateless should serve tools/list without initialize", func(ctx SpecContext) {
+			h := handler.AsStreamableHTTP("/", true)
+			statelessClient := NewHTTPTestClient(h)
+
+			handler.RegisterTools(&dummyTool{name: "tool1"})
+
+			mockClient.EXPECT().
+				GetMyPermissionsWithResponse(gomock.Any(), gomock.Any()).
+				Return(&sysdig.GetMyPermissionsResponse{
+					HTTPResponse: &http.Response{StatusCode: 200},
+					JSON200:      &sysdig.UserPermissions{Permissions: []string{}},
+				}, nil)
+
+			// Call tools/list directly without initialize — should work in stateless mode
+			resp := statelessClient.ListTools(ctx, nil)
+			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+		}, NodeTimeout(time.Second*5))
 	})
 
 	Context("Stdio", func() {

@@ -83,6 +83,7 @@ var _ = Describe("Config", func() {
 				Expect(cfg.MountPath).To(Equal("/sysdig-mcp-server"))
 				Expect(cfg.LogLevel).To(Equal("INFO"))
 				Expect(cfg.SkipTLSVerification).To(BeFalse())
+				Expect(cfg.Stateless).To(BeFalse())
 			})
 		})
 
@@ -113,6 +114,7 @@ var _ = Describe("Config", func() {
 				_ = os.Setenv("SYSDIG_MCP_LISTENING_PORT", "9090")
 				_ = os.Setenv("SYSDIG_MCP_MOUNT_PATH", "/custom")
 				_ = os.Setenv("SYSDIG_MCP_LOGLEVEL", "DEBUG")
+				_ = os.Setenv("SYSDIG_MCP_STATELESS", "true")
 			})
 
 			It("should load all values from the environment", func() {
@@ -126,6 +128,7 @@ var _ = Describe("Config", func() {
 				Expect(cfg.ListeningPort).To(Equal("9090"))
 				Expect(cfg.MountPath).To(Equal("/custom"))
 				Expect(cfg.LogLevel).To(Equal("DEBUG"))
+				Expect(cfg.Stateless).To(BeTrue())
 			})
 		})
 

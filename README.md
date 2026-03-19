@@ -213,6 +213,7 @@ You can also set the following variables to override the default configuration:
 - `SYSDIG_MCP_LOGLEVEL`: Log Level of the application (`DEBUG`, `INFO`, `WARNING`, `ERROR`). Defaults to: `INFO`
 - `SYSDIG_MCP_LISTENING_PORT`: The port for the server when it is deployed using remote protocols (`streamable-http`, `sse`). Defaults to: `8080`
 - `SYSDIG_MCP_LISTENING_HOST`: The host for the server when it is deployed using remote protocols (`streamable-http`, `sse`). Defaults to all interfaces (`:port`). Set to `127.0.0.1` for local-only access.
+- `SYSDIG_MCP_STATELESS`: Enable stateless mode for `streamable-http` transport, where each request is self-contained with no session tracking (useful for AWS Bedrock AgentCore). Defaults to: `false`.
 
 You can find your API token in the Sysdig Secure UI under **Settings > Sysdig Secure API**. Make sure to copy the token as it will not be shown again.
 

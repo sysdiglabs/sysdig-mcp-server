@@ -16,6 +16,7 @@ type Config struct {
 	ListeningPort       string
 	MountPath           string
 	LogLevel            string
+	Stateless           bool
 }
 
 func (c *Config) Validate() error {
@@ -38,6 +39,7 @@ func Load() (*Config, error) {
 		ListeningPort:       getEnv("SYSDIG_MCP_LISTENING_PORT", "8080"),
 		MountPath:           getEnv("SYSDIG_MCP_MOUNT_PATH", "/sysdig-mcp-server"),
 		LogLevel:            getEnv("SYSDIG_MCP_LOGLEVEL", "INFO"),
+		Stateless:           getEnv("SYSDIG_MCP_STATELESS", false),
 	}
 
 	if err := cfg.Validate(); err != nil {

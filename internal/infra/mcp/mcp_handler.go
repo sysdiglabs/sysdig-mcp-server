@@ -87,9 +87,15 @@ func (h *Handler) ServeStdio(ctx context.Context, stdin io.Reader, stdout io.Wri
 	return server.NewStdioServer(h.server).Listen(ctx, stdin, stdout)
 }
 
-func (h *Handler) AsStreamableHTTP(mountPath string) http.Handler {
+func (h *Handler) AsStreamableHTTP(mountPath string, stateless bool) http.Handler {
 	mux := http.NewServeMux()
-	httpServer := server.NewStreamableHTTPServer(h.server)
+
+	var opts []server.StreamableHTTPOption
+	if stateless {
+		opts = append(opts, server.WithStateLess(true))
+	}
+
+	httpServer := server.NewStreamableHTTPServer(h.server, opts...)
 	mux.Handle(mountPath, authMiddleware(httpServer))
 	return mux
 }
