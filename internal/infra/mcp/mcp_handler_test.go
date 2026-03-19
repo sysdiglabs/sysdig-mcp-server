@@ -199,6 +199,7 @@ var _ = Describe("McpHandler", func() {
 			// Call tools/list directly without initialize — should work in stateless mode
 			resp := statelessClient.ListTools(ctx, nil)
 			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+			Expect(resp.Header.Get("Mcp-Session-Id")).To(BeEmpty())
 		}, NodeTimeout(time.Second*5))
 	})
 
