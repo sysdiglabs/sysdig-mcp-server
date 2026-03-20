@@ -147,8 +147,8 @@ func startServer(cfg *config.Config, handler *mcp.Handler) error {
 		}
 	case "streamable-http":
 		addr := fmt.Sprintf("%s:%s", cfg.ListeningHost, cfg.ListeningPort)
-		slog.Info("MCP Server listening", "addr", addr, "mountPath", cfg.MountPath)
-		if err := http.ListenAndServe(addr, handler.AsStreamableHTTP(cfg.MountPath)); err != nil {
+		slog.Info("MCP Server listening", "addr", addr, "mountPath", cfg.MountPath, "stateless", cfg.Stateless)
+		if err := http.ListenAndServe(addr, handler.AsStreamableHTTP(cfg.MountPath, cfg.Stateless)); err != nil {
 			return fmt.Errorf("error serving streamable http: %w", err)
 		}
 	case "sse":
