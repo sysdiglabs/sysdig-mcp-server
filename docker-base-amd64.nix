@@ -1,7 +1,7 @@
 {
   imageName = "quay.io/sysdig/sysdig-mini-ubi9";
-  imageDigest = "sha256:39d40b40c28b784c9f50e74759eef17524b02c395a4fba6f5d625e0de2df3dd9";
-  hash = "sha256-2OwX3zig0K85FGETxBy3AapbwycUYGIC1fKXlcHAcO4=";
+  imageDigest = "sha256:339b8759c1b68fe92242f62fe400e9f3beabf5563d30b6a34fc9602a09c97d5f";
+  hash = "sha256-iglxgvoHj3lzaBO/GxLWwXPQqnZGfwkgmEf2qiO3kbw=";
   finalImageName = "quay.io/sysdig/sysdig-mini-ubi9";
   finalImageTag = "1";
 }
