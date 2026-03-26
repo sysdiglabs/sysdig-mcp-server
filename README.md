@@ -39,38 +39,11 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
 
 2. **Configure your MCP client**:
 
-    Add the following configuration to your MCP client (e.g., Claude Desktop's `claude_desktop_config.json`). The client will automatically pull the Docker image and start the server. You can apply this configuration to any other client that supports MCP (For more details, see the [Client Configuration](#client-configuration) section).
+    Add the server configuration to your MCP client (e.g., Claude Desktop's `claude_desktop_config.json`). Choose your preferred installation method from the [Server Setup](#server-setup) section. The [Docker](#docker) method is the easiest to get started with since it requires no local toolchain.
 
     Substitute the following placeholders with your actual values:
     - `<your_sysdig_host>`: The hostname of your Sysdig Secure instance (e.g., `https://us2.app.sysdig.com` or `https://eu1.app.sysdig.com`)
     - `<your_sysdig_secure_api_token>`: Your Sysdig Secure API token
-
-    ```json
-    {
-      "mcpServers": {
-        "sysdig-mcp-server": {
-          "command": "docker",
-          "args": [
-            "run",
-            "-i",
-            "--rm",
-            "-e",
-            "SYSDIG_MCP_API_HOST",
-            "-e",
-            "SYSDIG_MCP_TRANSPORT",
-            "-e",
-            "SYSDIG_MCP_API_TOKEN",
-            "ghcr.io/sysdiglabs/sysdig-mcp-server:latest"
-          ],
-          "env": {
-            "SYSDIG_MCP_API_HOST": "<your_sysdig_host>",
-            "SYSDIG_MCP_API_TOKEN": "<your_sysdig_secure_api_token>",
-            "SYSDIG_MCP_TRANSPORT": "stdio"
-          }
-        }
-      }
-    }
-    ```
 
 ## Available Tools
 
@@ -569,7 +542,7 @@ If the MCP server is deployed remotely (e.g., in a [Kubernetes cluster](#kuberne
 
 1. Run the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) locally.
 2. Select the transport type and configure the connection to the Sysdig MCP server.
-3. Pass the Authorization header if using `streamable-http` or the `SYSDIG_SECURE_API_TOKEN` env var if using `stdio`.
+3. Pass the Authorization header if using `streamable-http` or the `SYSDIG_MCP_API_TOKEN` env var if using `stdio`.
 
 ![mcp-inspector](./docs/assets/mcp-inspector.png)
 
