@@ -1,5 +1,5 @@
 ---
-name: Publish Docker image
+name: Publish
 
 on:
   push:
@@ -174,15 +174,74 @@ jobs:
           VERSION: ${{ needs.get-newer-version.outputs.new-version }}
         run: docker buildx imagetools inspect $REGISTRY:${VERSION}
 
+  build-binaries:
+    name: Build ${{ matrix.goos }}-${{ matrix.goarch }} binary
+    runs-on: ubuntu-latest
+    needs: [ get-newer-version ]
+    if: needs.get-newer-version.outputs.new-version != ''
+    defaults:
+      run:
+        shell: nix develop --command bash {0}
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        include:
+          - { goos: darwin, goarch: arm64, ext: tar.gz }
+          - { goos: darwin, goarch: amd64, ext: tar.gz }
+          - { goos: linux, goarch: arm64, ext: tar.gz }
+          - { goos: linux, goarch: amd64, ext: tar.gz }
+          - { goos: linux, goarch: "386", ext: tar.gz }
+          - { goos: windows, goarch: arm64, ext: zip }
+          - { goos: windows, goarch: amd64, ext: zip }
+          - { goos: windows, goarch: "386", ext: zip }
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v5
+
+      - name: Install Nix
+        # Pinned to v21 commit SHA for supply-chain safety.
+        # To update: git ls-remote https://github.com/DeterminateSystems/nix-installer-action.git <tag>
+        uses: DeterminateSystems/nix-installer-action@c5a866b6ab867e88becbed4467b93592bce69f8a # v21
+
+      - name: Enable Nix cache
+        # Pinned to v13 commit SHA for supply-chain safety.
+        # To update: git ls-remote https://github.com/DeterminateSystems/magic-nix-cache-action.git <tag>
+        uses: DeterminateSystems/magic-nix-cache-action@565684385bcd71bad329742eefe8d12f2e765b39 # v13
+        with:
+          use-flakehub: false
+
+      - name: Build and package binary
+        env:
+          VERSION: ${{ needs.get-newer-version.outputs.new-version }}
+          ARCHIVE: sysdig-mcp-server_${{ matrix.goos }}-${{ matrix.goarch }}
+          BINARY: sysdig-mcp-server${{ matrix.goos == 'windows' && '.exe' || '' }}
+        run: |
+          CGO_ENABLED=0 GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} \
+            go build -ldflags "-w -s -X main.Version=${VERSION}" -o "${BINARY}" ./cmd/server
+          if [ "${{ matrix.ext }}" = "tar.gz" ]; then
+            tar -czf "${ARCHIVE}.tar.gz" "${BINARY}"
+          else
+            zip "${ARCHIVE}.zip" "${BINARY}"
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: binary-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: sysdig-mcp-server_${{ matrix.goos }}-${{ matrix.goarch }}.${{ matrix.ext }}
+          if-no-files-found: error
+          retention-days: 1
+
   release:
     name: Create release at Github
-    needs: [ get-newer-version ]
+    needs: [ get-newer-version, push_to_registry, build-binaries ]
     if: needs.get-newer-version.outputs.new-version != ''
     runs-on: ubuntu-latest
     permissions:
       contents: write # Required for release creation
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
           fetch-tags: true
@@ -208,6 +267,17 @@ jobs:
       - name: Generate changelog
         run: git-chglog -c .github/git-chglog/config.yml -o RELEASE_CHANGELOG.md $(git describe --tags $(git rev-list --tags --max-count=1))
 
+      - name: Download binary artifacts
+        uses: actions/download-artifact@v6
+        with:
+          path: /tmp/binaries
+          pattern: binary-*
+          merge-multiple: true
+
+      - name: Generate checksums
+        working-directory: /tmp/binaries
+        run: sha256sum * > checksums.txt
+
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
@@ -215,3 +285,4 @@ jobs:
           tag_name: ${{ needs.get-newer-version.outputs.new-version }}
           prerelease: false
           body_path: RELEASE_CHANGELOG.md
+          files: /tmp/binaries/*
