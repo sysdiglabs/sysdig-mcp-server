@@ -4,7 +4,7 @@ buildGo126Module (finalAttrs: {
   version = "1.0.6";
   src = ./.;
   # This hash is automatically re-calculated with `just rehash-package-nix`. This is automatically called as well by `just update`.
-  vendorHash = "sha256-kYKEkSXdohQuIUwDIZMywhnarG7t4U1R8K1PaFkL1Vg=";
+  vendorHash = "sha256-RSsoCvQkkq4w5Oijex/4GHIo4mJvnffxGKPuBq6TzVc=";
 
   subPackages = [
     "cmd/server"
