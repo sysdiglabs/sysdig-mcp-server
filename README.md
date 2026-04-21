@@ -181,7 +181,7 @@ You can also set the following variables to override the default configuration:
 - `SYSDIG_MCP_LISTENING_HOST`: The host for the server when it is deployed using remote protocols (`streamable-http`, `sse`). Defaults to all interfaces (`:port`). Set to `127.0.0.1` for local-only access.
 - `SYSDIG_MCP_STATELESS`: Enable stateless mode for `streamable-http` transport, where each request is self-contained with no session tracking (useful for AWS Bedrock AgentCore). Defaults to: `false`.
 
-You can find your API token in the Sysdig Secure UI under **Settings > Sysdig Secure API**. Make sure to copy the token as it will not be shown again.
+You can find your API token in the Sysdig UI under **Settings > Sysdig Secure API** (or **Sysdig Monitor API**). Make sure to copy the token as it will not be shown again.
 
 ![API_TOKEN_CONFIG](./docs/assets/settings-config-token.png)
 ![API_TOKEN_SETTINGS](./docs/assets/api-token-copy.png)
@@ -487,9 +487,9 @@ To use the MCP server with a client like Claude or Cursor, you need to provide t
 
 ### Authentication
 
-When using the `sse` or `streamable-http` transport, the server requires a Bearer token for authentication. The token is passed in the `X-Sysdig-Token` or default to `Authorization` header of the HTTP request (i.e `Bearer SYSDIG_SECURE_API_TOKEN`).
+When using the `sse` or `streamable-http` transport, the server requires a Bearer token for authentication. The token is passed in the `X-Sysdig-Token` or default to `Authorization` header of the HTTP request (i.e `Bearer SYSDIG_MCP_API_TOKEN`).
 
-Additionally, you can specify the Sysdig Secure host by providing the `X-Sysdig-Host` header.
+Additionally, you can specify the Sysdig host by providing the `X-Sysdig-Host` header.
 
 > **Note:** When provided, the authentication headers (`Authorization`, `X-Sysdig-Token`) and host header (`X-Sysdig-Host`) take precedence over the configured environment variables.
 
