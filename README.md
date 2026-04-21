@@ -35,15 +35,15 @@ This is an implementation of an [MCP (Model Context Protocol) Server](https://mo
 Get up and running with the Sysdig MCP Server quickly using our pre-built Docker image.
 
 1. **Get your API Token**:
-    Go to your Sysdig Secure instance and navigate to **Settings > Sysdig Secure API**. Here, you can generate or copy your API token. This token is required to authenticate requests to the Sysdig Platform (See the [Configuration](#configuration) section for more details).
+    Go to your Sysdig instance and navigate to **Settings > Sysdig Secure API** (or **Sysdig Monitor API**). Either a Sysdig Secure or Sysdig Monitor API token works. This token is required to authenticate requests to the Sysdig Platform (See the [Configuration](#configuration) section for more details).
 
 2. **Configure your MCP client**:
 
     Add the server configuration to your MCP client (e.g., Claude Desktop's `claude_desktop_config.json`). Choose your preferred installation method from the [Server Setup](#server-setup) section. The [Docker](#docker) method is the easiest to get started with since it requires no local toolchain.
 
     Substitute the following placeholders with your actual values:
-    - `<your_sysdig_host>`: The hostname of your Sysdig Secure instance (e.g., `https://us2.app.sysdig.com` or `https://eu1.app.sysdig.com`)
-    - `<your_sysdig_secure_api_token>`: Your Sysdig Secure API token
+    - `<your_sysdig_host>`: The hostname of your Sysdig instance (e.g., `https://us2.app.sysdig.com` or `https://eu1.app.sysdig.com`)
+    - `<your_sysdig_api_token>`: Your Sysdig API token (Secure or Monitor)
 
 ## Available Tools
 
@@ -168,8 +168,8 @@ The server dynamically filters the available tools based on the permissions asso
 
 The following environment variables are **required** for configuring the Sysdig SDK:
 
-- `SYSDIG_MCP_API_HOST`: The URL of your Sysdig Secure instance (e.g., `https://us2.app.sysdig.com`). **Required when using `stdio` transport.**
-- `SYSDIG_MCP_API_TOKEN`: Your Sysdig Secure API token. **Required only when using `stdio` transport.**
+- `SYSDIG_MCP_API_HOST`: The URL of your Sysdig instance (e.g., `https://us2.app.sysdig.com`). **Required when using `stdio` transport.**
+- `SYSDIG_MCP_API_TOKEN`: Your Sysdig API token (Secure or Monitor). **Required only when using `stdio` transport.**
 
 You can also set the following variables to override the default configuration:
 
@@ -267,7 +267,7 @@ If you have Go installed, the MCP client can run the server directly without clo
       ],
       "env": {
         "SYSDIG_MCP_API_HOST": "<your_sysdig_host>",
-        "SYSDIG_MCP_API_TOKEN": "<your_sysdig_secure_api_token>",
+        "SYSDIG_MCP_API_TOKEN": "<your_sysdig_api_token>",
         "SYSDIG_MCP_TRANSPORT": "stdio"
       }
     }
@@ -281,21 +281,21 @@ Or using the CLI:
 # Claude Code
 claude mcp add --transport stdio \
   -e SYSDIG_MCP_API_HOST=<your_sysdig_host> \
-  -e SYSDIG_MCP_API_TOKEN=<your_sysdig_secure_api_token> \
+  -e SYSDIG_MCP_API_TOKEN=<your_sysdig_api_token> \
   -e SYSDIG_MCP_TRANSPORT=stdio \
   -- sysdig-mcp-server go run github.com/sysdiglabs/sysdig-mcp-server/cmd/server@latest
 
 # Gemini CLI
 gemini mcp add -t stdio \
   -e SYSDIG_MCP_API_HOST=<your_sysdig_host> \
-  -e SYSDIG_MCP_API_TOKEN=<your_sysdig_secure_api_token> \
+  -e SYSDIG_MCP_API_TOKEN=<your_sysdig_api_token> \
   -e SYSDIG_MCP_TRANSPORT=stdio \
   sysdig-mcp-server go run github.com/sysdiglabs/sysdig-mcp-server/cmd/server@latest
 
 # Codex CLI
 codex mcp add \
   --env SYSDIG_MCP_API_HOST=<your_sysdig_host> \
-  --env SYSDIG_MCP_API_TOKEN=<your_sysdig_secure_api_token> \
+  --env SYSDIG_MCP_API_TOKEN=<your_sysdig_api_token> \
   --env SYSDIG_MCP_TRANSPORT=stdio \
   -- sysdig-mcp-server go run github.com/sysdiglabs/sysdig-mcp-server/cmd/server@latest
 ```
@@ -329,7 +329,7 @@ Configure your client with:
       ],
       "env": {
         "SYSDIG_MCP_API_HOST": "<your_sysdig_host>",
-        "SYSDIG_MCP_API_TOKEN": "<your_sysdig_secure_api_token>",
+        "SYSDIG_MCP_API_TOKEN": "<your_sysdig_api_token>",
         "SYSDIG_MCP_TRANSPORT": "stdio"
       }
     }
@@ -368,7 +368,7 @@ Configure your client with:
       "command": "sysdig-mcp-server",
       "env": {
         "SYSDIG_MCP_API_HOST": "<your_sysdig_host>",
-        "SYSDIG_MCP_API_TOKEN": "<your_sysdig_secure_api_token>",
+        "SYSDIG_MCP_API_TOKEN": "<your_sysdig_api_token>",
         "SYSDIG_MCP_TRANSPORT": "stdio"
       }
     }
@@ -382,21 +382,21 @@ Or using the CLI:
 # Claude Code
 claude mcp add --transport stdio \
   -e SYSDIG_MCP_API_HOST=<your_sysdig_host> \
-  -e SYSDIG_MCP_API_TOKEN=<your_sysdig_secure_api_token> \
+  -e SYSDIG_MCP_API_TOKEN=<your_sysdig_api_token> \
   -e SYSDIG_MCP_TRANSPORT=stdio \
   -- sysdig-mcp-server sysdig-mcp-server
 
 # Gemini CLI
 gemini mcp add -t stdio \
   -e SYSDIG_MCP_API_HOST=<your_sysdig_host> \
-  -e SYSDIG_MCP_API_TOKEN=<your_sysdig_secure_api_token> \
+  -e SYSDIG_MCP_API_TOKEN=<your_sysdig_api_token> \
   -e SYSDIG_MCP_TRANSPORT=stdio \
   sysdig-mcp-server sysdig-mcp-server
 
 # Codex CLI
 codex mcp add \
   --env SYSDIG_MCP_API_HOST=<your_sysdig_host> \
-  --env SYSDIG_MCP_API_TOKEN=<your_sysdig_secure_api_token> \
+  --env SYSDIG_MCP_API_TOKEN=<your_sysdig_api_token> \
   --env SYSDIG_MCP_TRANSPORT=stdio \
   -- sysdig-mcp-server sysdig-mcp-server
 ```
@@ -413,7 +413,7 @@ kubectl create namespace mcp-server
 kubectl create secret generic mcp-server-secrets \
   --namespace mcp-server \
   --from-literal=SYSDIG_MCP_API_HOST=<your_sysdig_host> \
-  --from-literal=SYSDIG_MCP_API_TOKEN=<your_sysdig_secure_api_token>
+  --from-literal=SYSDIG_MCP_API_TOKEN=<your_sysdig_api_token>
 ```
 
 **2. Deploy the server:**
@@ -496,7 +496,7 @@ Additionally, you can specify the Sysdig Secure host by providing the `X-Sysdig-
 Example headers:
 
 ```
-Authorization: Bearer <your_sysdig_secure_api_token>
+Authorization: Bearer <your_sysdig_api_token>
 X-Sysdig-Host: <your_sysdig_host>
 ```
 
@@ -513,7 +513,7 @@ For the Claude Desktop app, configure the MCP server by editing the `claude_desk
 1. Go to **Settings > Developer** in the Claude Desktop app.
 2. Click on **Edit Config** to open the `claude_desktop_config.json` file.
 3. Add the JSON configuration from the [Server Setup](#server-setup) section that matches your installation method (Go, Docker, or Binary).
-4. Replace `<your_sysdig_host>` with your Sysdig Secure host URL and `<your_sysdig_secure_api_token>` with your API token.
+4. Replace `<your_sysdig_host>` with your Sysdig host URL and `<your_sysdig_api_token>` with your Sysdig Secure or Monitor API token.
 5. Save the file and restart the Claude Desktop app.
 
 **Connecting to a Remote Server:**
