@@ -9,22 +9,25 @@ import (
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
 type K8sListTopMemoryConsumedWorkload struct {
 	SysdigClient sysdig.ExtendedClientWithResponsesInterface
+	clock        clock.Clock
 }
 
-func NewK8sListTopMemoryConsumedWorkload(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *K8sListTopMemoryConsumedWorkload {
+func NewK8sListTopMemoryConsumedWorkload(sysdigClient sysdig.ExtendedClientWithResponsesInterface, clk clock.Clock) *K8sListTopMemoryConsumedWorkload {
 	return &K8sListTopMemoryConsumedWorkload{
 		SysdigClient: sysdigClient,
+		clock:        clk,
 	}
 }
 
 func (t *K8sListTopMemoryConsumedWorkload) RegisterInServer(s *server.MCPServer) {
 	tool := mcp.NewTool("k8s_list_top_memory_consumed_workload",
-		mcp.WithDescription("Lists memory-intensive workloads (all containers)."),
+		mcp.WithDescription("Lists memory-intensive workloads (all containers). Optionally pass start/end (RFC3339) to query a historical window (averaged over the window) instead of the current instant snapshot."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
 		mcp.WithString("workload_type", mcp.Description("The type of the workload to filter by.")),
@@ -33,6 +36,7 @@ func (t *K8sListTopMemoryConsumedWorkload) RegisterInServer(s *server.MCPServer)
 			mcp.Description("Maximum number of workloads to return."),
 			mcp.DefaultNumber(20),
 		),
+		WithTimeWindowParams(),
 		mcp.WithOutputSchema[map[string]any](),
 		mcp.WithReadOnlyHintAnnotation(true),
 		mcp.WithDestructiveHintAnnotation(false),
@@ -48,12 +52,26 @@ func (t *K8sListTopMemoryConsumedWorkload) handle(ctx context.Context, request m
 	workloadName := mcp.ParseString(request, "workload_name", "")
 	limit := mcp.ParseInt(request, "limit", 20)
 
-	query := buildTopMemoryConsumedByWorkloadQuery(clusterName, namespaceName, workloadType, workloadName, limit)
+	tw, err := ParseTimeWindow(request, t.clock)
+	if err != nil {
+		return mcp.NewToolResultErrorFromErr("invalid time window", err), nil
+	}
+	evalTime, err := tw.EvalTime()
+	if err != nil {
+		return mcp.NewToolResultErrorFromErr("failed to build eval time", err), nil
+	}
+
+	query := buildTopMemoryConsumedByWorkloadQuery(clusterName, namespaceName, workloadType, workloadName, limit, tw)
 
 	limitQuery := sysdig.LimitQuery(limit)
 	params := &sysdig.GetQueryV1Params{
 		Query: query,
 		Limit: &limitQuery,
+		Time:  evalTime,
+	}
+	if !tw.IsZero() {
+		timeout := sysdig.Timeout(windowedQueryTimeout)
+		params.Timeout = &timeout
 	}
 
 	httpResp, err := t.SysdigClient.GetQueryV1(ctx, params)
@@ -74,7 +92,7 @@ func (t *K8sListTopMemoryConsumedWorkload) handle(ctx context.Context, request m
 	return mcp.NewToolResultJSON(queryResponse)
 }
 
-func buildTopMemoryConsumedByWorkloadQuery(clusterName, namespaceName, workloadType, workloadName string, limit int) string {
+func buildTopMemoryConsumedByWorkloadQuery(clusterName, namespaceName, workloadType, workloadName string, limit int, tw TimeWindow) string {
 	filters := []string{}
 	if clusterName != "" {
 		filters = append(filters, fmt.Sprintf("kube_cluster_name=\"%s\"", clusterName))
@@ -94,6 +112,11 @@ func buildTopMemoryConsumedByWorkloadQuery(clusterName, namespaceName, workloadT
 		filterString = fmt.Sprintf("{%s}", strings.Join(filters, ","))
 	}
 
-	innerQuery := fmt.Sprintf("sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name) (sysdig_container_memory_used_bytes%s)", filterString)
+	metric := fmt.Sprintf("sysdig_container_memory_used_bytes%s", filterString)
+	if !tw.IsZero() {
+		metric = fmt.Sprintf("avg_over_time(%s%s)", metric, tw.RangeSelector())
+	}
+
+	innerQuery := fmt.Sprintf("sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name) (%s)", metric)
 	return fmt.Sprintf("topk(%d, %s)", limit, innerQuery)
 }

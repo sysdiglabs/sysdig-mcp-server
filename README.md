@@ -180,6 +180,20 @@ You can also set the following variables to override the default configuration:
 - `SYSDIG_MCP_LISTENING_PORT`: The port for the server when it is deployed using remote protocols (`streamable-http`, `sse`). Defaults to: `8080`
 - `SYSDIG_MCP_LISTENING_HOST`: The host for the server when it is deployed using remote protocols (`streamable-http`, `sse`). Defaults to all interfaces (`:port`). Set to `127.0.0.1` for local-only access.
 - `SYSDIG_MCP_STATELESS`: Enable stateless mode for `streamable-http` transport, where each request is self-contained with no session tracking (useful for AWS Bedrock AgentCore). Defaults to: `false`.
+- `SYSDIG_MCP_MAX_INTERVAL`: Maximum historical window accepted by the `k8s_list_*` Monitor tools when `start`/`end` are supplied. Go duration string (e.g. `24h`, `168h`). Defaults to: `168h` (7 days).
+
+### Historical range on Monitor tools
+
+All Sysdig Monitor `k8s_list_*` tools accept optional `start` / `end` RFC3339 parameters
+(e.g. `2026-04-16T00:00:00Z`). When omitted, tools return the current snapshot (unchanged
+behaviour). When provided, the underlying PromQL is wrapped in the aggregation appropriate
+for each tool (`avg_over_time`, `max_over_time`, `min_over_time`, `increase`, etc.) and
+evaluated at `end`. The window cannot exceed `SYSDIG_MCP_MAX_INTERVAL`. See
+[`internal/infra/mcp/tools/README.md`](./internal/infra/mcp/tools/README.md) for the
+per-tool aggregation table.
+
+The legacy `interval` parameter on `k8s_list_top_http_errors_in_pods` and
+`k8s_list_top_network_errors_in_pods` is deprecated; prefer `start`/`end`.
 
 You can find your API token in the Sysdig UI under **Settings > Sysdig Secure API** (or **Sysdig Monitor API**). Make sure to copy the token as it will not be shown again.
 

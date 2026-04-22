@@ -5,21 +5,25 @@ import (
 	"context"
 	"io"
 	"net/http"
+	"time"
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
+	"go.uber.org/mock/gomock"
+
+	mocks_clock "github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock/mocks"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp/tools"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig/mocks"
-	"go.uber.org/mock/gomock"
 )
 
 var _ = Describe("KubernetesListCountPodsPerCluster Tool", func() {
 	var (
 		tool       *tools.K8sListCountPodsPerCluster
 		mockSysdig *mocks.MockExtendedClientWithResponsesInterface
+		mockClock  *mocks_clock.MockClock
 		mcpServer  *server.MCPServer
 		ctrl       *gomock.Controller
 	)
@@ -27,7 +31,9 @@ var _ = Describe("KubernetesListCountPodsPerCluster Tool", func() {
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockSysdig = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		tool = tools.NewK8sListCountPodsPerCluster(mockSysdig)
+		mockClock = mocks_clock.NewMockClock(ctrl)
+		mockClock.EXPECT().Now().AnyTimes().Return(time.Date(2026, time.April, 16, 12, 0, 0, 0, time.UTC))
+		tool = tools.NewK8sListCountPodsPerCluster(mockSysdig, mockClock)
 		mcpServer = server.NewMCPServer("test", "test")
 		tool.RegisterInServer(mcpServer)
 	})
@@ -115,6 +121,22 @@ var _ = Describe("KubernetesListCountPodsPerCluster Tool", func() {
 					Query: `sum by (kube_cluster_name, kube_namespace_name) (kube_pod_info{kube_cluster_name="my_cluster",kube_namespace_name="my_namespace"})`,
 					Limit: new(sysdig.LimitQuery(20)),
 				},
+			),
+			Entry("windowed, both start and end",
+				"k8s_list_count_pods_per_cluster",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name: "k8s_list_count_pods_per_cluster",
+						Arguments: map[string]any{
+							"start": "2026-04-16T10:00:00Z",
+							"end":   "2026-04-16T11:00:00Z",
+						},
+					},
+				},
+				mergeLimit(newWindowedQueryParams(
+					`sum by (kube_cluster_name, kube_namespace_name) (avg_over_time(kube_pod_info[3600s]))`,
+					time.Date(2026, time.April, 16, 11, 0, 0, 0, time.UTC),
+				), 20),
 			),
 		)
 	})

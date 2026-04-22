@@ -9,22 +9,25 @@ import (
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
 type K8sListTopMemoryConsumedContainer struct {
 	SysdigClient sysdig.ExtendedClientWithResponsesInterface
+	clock        clock.Clock
 }
 
-func NewK8sListTopMemoryConsumedContainer(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *K8sListTopMemoryConsumedContainer {
+func NewK8sListTopMemoryConsumedContainer(sysdigClient sysdig.ExtendedClientWithResponsesInterface, clk clock.Clock) *K8sListTopMemoryConsumedContainer {
 	return &K8sListTopMemoryConsumedContainer{
 		SysdigClient: sysdigClient,
+		clock:        clk,
 	}
 }
 
 func (t *K8sListTopMemoryConsumedContainer) RegisterInServer(s *server.MCPServer) {
 	tool := mcp.NewTool("k8s_list_top_memory_consumed_container",
-		mcp.WithDescription("Lists memory-intensive containers."),
+		mcp.WithDescription("Lists memory-intensive containers. Optionally pass start/end (RFC3339) to query a historical window (averaged over the window) instead of the current instant snapshot."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
 		mcp.WithString("workload_type", mcp.Description("The type of the workload to filter by.")),
@@ -33,6 +36,7 @@ func (t *K8sListTopMemoryConsumedContainer) RegisterInServer(s *server.MCPServer
 			mcp.Description("Maximum number of containers to return."),
 			mcp.DefaultNumber(20),
 		),
+		WithTimeWindowParams(),
 		mcp.WithOutputSchema[map[string]any](),
 		mcp.WithReadOnlyHintAnnotation(true),
 		mcp.WithDestructiveHintAnnotation(false),
@@ -48,12 +52,26 @@ func (t *K8sListTopMemoryConsumedContainer) handle(ctx context.Context, request 
 	workloadName := mcp.ParseString(request, "workload_name", "")
 	limit := mcp.ParseInt(request, "limit", 20)
 
-	query := buildTopMemoryConsumedByContainerQuery(clusterName, namespaceName, workloadType, workloadName, limit)
+	tw, err := ParseTimeWindow(request, t.clock)
+	if err != nil {
+		return mcp.NewToolResultErrorFromErr("invalid time window", err), nil
+	}
+	evalTime, err := tw.EvalTime()
+	if err != nil {
+		return mcp.NewToolResultErrorFromErr("failed to build eval time", err), nil
+	}
+
+	query := buildTopMemoryConsumedByContainerQuery(clusterName, namespaceName, workloadType, workloadName, limit, tw)
 
 	limitQuery := sysdig.LimitQuery(limit)
 	params := &sysdig.GetQueryV1Params{
 		Query: query,
 		Limit: &limitQuery,
+		Time:  evalTime,
+	}
+	if !tw.IsZero() {
+		timeout := sysdig.Timeout(windowedQueryTimeout)
+		params.Timeout = &timeout
 	}
 
 	httpResp, err := t.SysdigClient.GetQueryV1(ctx, params)
@@ -74,7 +92,7 @@ func (t *K8sListTopMemoryConsumedContainer) handle(ctx context.Context, request 
 	return mcp.NewToolResultJSON(queryResponse)
 }
 
-func buildTopMemoryConsumedByContainerQuery(clusterName, namespaceName, workloadType, workloadName string, limit int) string {
+func buildTopMemoryConsumedByContainerQuery(clusterName, namespaceName, workloadType, workloadName string, limit int, tw TimeWindow) string {
 	filters := []string{}
 	if clusterName != "" {
 		filters = append(filters, fmt.Sprintf(`kube_cluster_name="%s"`, clusterName))
@@ -94,5 +112,10 @@ func buildTopMemoryConsumedByContainerQuery(clusterName, namespaceName, workload
 		filterString = "{" + strings.Join(filters, ", ") + "}"
 	}
 
-	return fmt.Sprintf(`topk(%d, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, container_label_io_kubernetes_container_name) (sysdig_container_memory_used_bytes%s))`, limit, filterString)
+	metric := fmt.Sprintf("sysdig_container_memory_used_bytes%s", filterString)
+	if !tw.IsZero() {
+		metric = fmt.Sprintf("avg_over_time(%s%s)", metric, tw.RangeSelector())
+	}
+
+	return fmt.Sprintf(`topk(%d, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, container_label_io_kubernetes_container_name) (%s))`, limit, metric)
 }
