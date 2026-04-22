@@ -5,21 +5,25 @@ import (
 	"context"
 	"io"
 	"net/http"
+	"time"
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
+	"go.uber.org/mock/gomock"
+
+	mocks_clock "github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock/mocks"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp/tools"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig/mocks"
-	"go.uber.org/mock/gomock"
 )
 
 var _ = Describe("KubernetesListTopHttpErrorsInPods Tool", func() {
 	var (
 		tool       *tools.K8sListTopHttpErrorsInPods
 		mockSysdig *mocks.MockExtendedClientWithResponsesInterface
+		mockClock  *mocks_clock.MockClock
 		mcpServer  *server.MCPServer
 		ctrl       *gomock.Controller
 		ctx        context.Context
@@ -28,7 +32,9 @@ var _ = Describe("KubernetesListTopHttpErrorsInPods Tool", func() {
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockSysdig = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		tool = tools.NewK8sListTopHttpErrorsInPods(mockSysdig)
+		mockClock = mocks_clock.NewMockClock(ctrl)
+		mockClock.EXPECT().Now().AnyTimes().Return(time.Date(2026, time.April, 16, 12, 0, 0, 0, time.UTC))
+		tool = tools.NewK8sListTopHttpErrorsInPods(mockSysdig, mockClock)
 		mcpServer = server.NewMCPServer("test", "test")
 		tool.RegisterInServer(mcpServer)
 		ctx = context.Background()
@@ -53,7 +59,7 @@ var _ = Describe("KubernetesListTopHttpErrorsInPods Tool", func() {
 			Expect(ok).To(BeTrue())
 			Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
 		},
-			Entry("default params",
+			Entry("default params (legacy path, no interval explicitly set)",
 				"k8s_list_top_http_errors_in_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -66,7 +72,7 @@ var _ = Describe("KubernetesListTopHttpErrorsInPods Tool", func() {
 					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
-			Entry("with custom params",
+			Entry("legacy path, explicit interval",
 				"k8s_list_top_http_errors_in_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -84,7 +90,7 @@ var _ = Describe("KubernetesListTopHttpErrorsInPods Tool", func() {
 					Limit: new(sysdig.LimitQuery(5)),
 				},
 			),
-			Entry("with all params",
+			Entry("legacy path, all filters",
 				"k8s_list_top_http_errors_in_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -103,6 +109,40 @@ var _ = Describe("KubernetesListTopHttpErrorsInPods Tool", func() {
 					Query: `topk(10,sum(sum_over_time(sysdig_container_net_http_error_count{kube_cluster_name=~"dev",kube_namespace_name="default",kube_workload_type="deployment",kube_workload_name="api"}[2h])) by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, kube_pod_name)) / 7200.000000`,
 					Limit: new(sysdig.LimitQuery(10)),
 				},
+			),
+			Entry("windowed path via start/end",
+				"k8s_list_top_http_errors_in_pods",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name: "k8s_list_top_http_errors_in_pods",
+						Arguments: map[string]any{
+							"start": "2026-04-16T10:00:00Z",
+							"end":   "2026-04-16T11:00:00Z",
+						},
+					},
+				},
+				mergeLimit(newWindowedQueryParams(
+					`topk(20,sum(sum_over_time(sysdig_container_net_http_error_count{}[3600s])) by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, kube_pod_name)) / 3600`,
+					time.Date(2026, time.April, 16, 11, 0, 0, 0, time.UTC),
+				), 20),
+			),
+			Entry("windowed path takes precedence over interval",
+				"k8s_list_top_http_errors_in_pods",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name: "k8s_list_top_http_errors_in_pods",
+						Arguments: map[string]any{
+							"interval":     "5m", // should be ignored
+							"cluster_name": "prod",
+							"start":        "2026-04-16T10:00:00Z",
+							"end":          "2026-04-16T11:00:00Z",
+						},
+					},
+				},
+				mergeLimit(newWindowedQueryParams(
+					`topk(20,sum(sum_over_time(sysdig_container_net_http_error_count{kube_cluster_name=~"prod"}[3600s])) by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, kube_pod_name)) / 3600`,
+					time.Date(2026, time.April, 16, 11, 0, 0, 0, time.UTC),
+				), 20),
 			),
 		)
 

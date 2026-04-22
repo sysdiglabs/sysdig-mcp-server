@@ -5,21 +5,25 @@ import (
 	"context"
 	"io"
 	"net/http"
+	"time"
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
+	"go.uber.org/mock/gomock"
+
+	mocks_clock "github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock/mocks"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp/tools"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig/mocks"
-	"go.uber.org/mock/gomock"
 )
 
 var _ = Describe("KubernetesListTopCPUConsumedContainer Tool", func() {
 	var (
 		tool       *tools.K8sListTopCPUConsumedContainer
 		mockSysdig *mocks.MockExtendedClientWithResponsesInterface
+		mockClock  *mocks_clock.MockClock
 		mcpServer  *server.MCPServer
 		ctrl       *gomock.Controller
 	)
@@ -27,7 +31,9 @@ var _ = Describe("KubernetesListTopCPUConsumedContainer Tool", func() {
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockSysdig = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		tool = tools.NewK8sListTopCPUConsumedContainer(mockSysdig)
+		mockClock = mocks_clock.NewMockClock(ctrl)
+		mockClock.EXPECT().Now().AnyTimes().Return(time.Date(2026, time.April, 16, 12, 0, 0, 0, time.UTC))
+		tool = tools.NewK8sListTopCPUConsumedContainer(mockSysdig, mockClock)
 		mcpServer = server.NewMCPServer("test", "test")
 		tool.RegisterInServer(mcpServer)
 	})
@@ -78,6 +84,21 @@ var _ = Describe("KubernetesListTopCPUConsumedContainer Tool", func() {
 				sysdig.GetQueryV1Params{
 					Query: `topk(10, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, container_label_io_kubernetes_container_name)(sysdig_container_cpu_cores_used{kube_cluster_name="test-cluster",kube_namespace_name="test-namespace",kube_workload_type="deployment",kube_workload_name="test-workload"}))`,
 				},
+			),
+			Entry("windowed, both start and end", context.Background(), "k8s_list_top_cpu_consumed_container",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name: "k8s_list_top_cpu_consumed_container",
+						Arguments: map[string]any{
+							"start": "2026-04-16T10:00:00Z",
+							"end":   "2026-04-16T11:00:00Z",
+						},
+					},
+				},
+				newWindowedQueryParams(
+					`topk(20, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, container_label_io_kubernetes_container_name)(avg_over_time(sysdig_container_cpu_cores_used[3600s])))`,
+					time.Date(2026, time.April, 16, 11, 0, 0, 0, time.UTC),
+				),
 			),
 		)
 	})

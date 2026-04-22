@@ -9,22 +9,25 @@ import (
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
 type K8sListCronjobs struct {
 	SysdigClient sysdig.ExtendedClientWithResponsesInterface
+	clock        clock.Clock
 }
 
-func NewK8sListCronjobs(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *K8sListCronjobs {
+func NewK8sListCronjobs(sysdigClient sysdig.ExtendedClientWithResponsesInterface, clk clock.Clock) *K8sListCronjobs {
 	return &K8sListCronjobs{
 		SysdigClient: sysdigClient,
+		clock:        clk,
 	}
 }
 
 func (t *K8sListCronjobs) RegisterInServer(s *server.MCPServer) {
 	tool := mcp.NewTool("k8s_list_cronjobs",
-		mcp.WithDescription("Retrieves information from the cronjobs in the cluster."),
+		mcp.WithDescription("Retrieves information from the cronjobs in the cluster. Optionally pass start/end (RFC3339) to list cronjobs that existed at any point in the window."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
 		mcp.WithString("cronjob_name", mcp.Description("The name of the cronjob to filter by.")),
@@ -32,6 +35,7 @@ func (t *K8sListCronjobs) RegisterInServer(s *server.MCPServer) {
 			mcp.Description("Maximum number of cronjobs to return."),
 			mcp.DefaultNumber(10),
 		),
+		WithTimeWindowParams(),
 		mcp.WithOutputSchema[map[string]any](),
 		mcp.WithReadOnlyHintAnnotation(true),
 		mcp.WithDestructiveHintAnnotation(false),
@@ -46,12 +50,26 @@ func (t *K8sListCronjobs) handle(ctx context.Context, request mcp.CallToolReques
 	cronjobName := mcp.ParseString(request, "cronjob_name", "")
 	limit := mcp.ParseInt(request, "limit", 10)
 
-	query := buildKubeCronjobInfoQuery(clusterName, namespaceName, cronjobName)
+	tw, err := ParseTimeWindow(request, t.clock)
+	if err != nil {
+		return mcp.NewToolResultErrorFromErr("invalid time window", err), nil
+	}
+	evalTime, err := tw.EvalTime()
+	if err != nil {
+		return mcp.NewToolResultErrorFromErr("failed to build eval time", err), nil
+	}
+
+	query := buildKubeCronjobInfoQuery(clusterName, namespaceName, cronjobName, tw)
 
 	limitQuery := sysdig.LimitQuery(limit)
 	params := &sysdig.GetQueryV1Params{
 		Query: query,
 		Limit: &limitQuery,
+		Time:  evalTime,
+	}
+	if !tw.IsZero() {
+		timeout := sysdig.Timeout(windowedQueryTimeout)
+		params.Timeout = &timeout
 	}
 
 	httpResp, err := t.SysdigClient.GetQueryV1(ctx, params)
@@ -72,7 +90,7 @@ func (t *K8sListCronjobs) handle(ctx context.Context, request mcp.CallToolReques
 	return mcp.NewToolResultJSON(queryResponse)
 }
 
-func buildKubeCronjobInfoQuery(clusterName, namespaceName, cronjobName string) string {
+func buildKubeCronjobInfoQuery(clusterName, namespaceName, cronjobName string, tw TimeWindow) string {
 	filters := []string{}
 	if clusterName != "" {
 		filters = append(filters, fmt.Sprintf("kube_cluster_name=\"%s\"", clusterName))
@@ -84,9 +102,12 @@ func buildKubeCronjobInfoQuery(clusterName, namespaceName, cronjobName string) s
 		filters = append(filters, fmt.Sprintf("kube_cronjob_name=\"%s\"", cronjobName))
 	}
 
-	if len(filters) == 0 {
-		return "kube_cronjob_info"
+	metric := "kube_cronjob_info"
+	if len(filters) > 0 {
+		metric = fmt.Sprintf("kube_cronjob_info{%s}", strings.Join(filters, ","))
 	}
-
-	return fmt.Sprintf("kube_cronjob_info{%s}", strings.Join(filters, ","))
+	if !tw.IsZero() {
+		return fmt.Sprintf("max_over_time(%s%s) > 0", metric, tw.RangeSelector())
+	}
+	return metric
 }

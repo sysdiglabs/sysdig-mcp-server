@@ -38,6 +38,41 @@ The handler filters tools dynamically based on the Sysdig user's permissions. Ea
 |---|---|---|---|---|
 | `generate_sysql` | `tool_generate_sysql.go` | Convert natural language to SysQL via Sysdig Sage. | `sage.exec` (does not work with Service Accounts) | "Create a SysQL to list S3 buckets." |
 
+## Historical range (start / end)
+
+All Sysdig Monitor `k8s_list_*` tools accept two optional parameters:
+
+- `start` — RFC3339 timestamp, e.g. `2026-04-16T00:00:00Z`
+- `end` — RFC3339 timestamp, e.g. `2026-04-16T01:00:00Z`
+
+When omitted, tools return an instant snapshot (current behaviour). When provided,
+the underlying PromQL is wrapped in the aggregation appropriate for each tool and
+evaluated at `end`:
+
+| Tool group | Wrapping applied when windowed |
+|---|---|
+| CPU / memory usage, underutilized quota, pod count | `avg_over_time(metric[Ns])` |
+| Top restarted pods | `increase(kube_pod_container_status_restarts_total[Ns])` |
+| Top unavailable pods | `min_over_time(kube_workload_status_unavailable[Ns]) >= 1` (Sysdig-canonical pattern — requires continuous unavailability for the entire window) |
+| HTTP / network errors | `sum_over_time(metric[Ns]) / N` (rate per second) |
+| Inventory tools (clusters, nodes, workloads, pod_containers, cronjobs) | `max_over_time(metric[Ns]) > 0` (workloads with status=ready/desired/running drop the `> 0` guard) |
+
+Validation rules (helper: `time_window.go`):
+
+- `end` without `start` → error.
+- `start` without `end` → `end` defaults to now.
+- `end <= start` → error.
+- `end > now + 60s` → error (60 s grace for client clock skew).
+- `end - start > SYSDIG_MCP_MAX_INTERVAL` (default **168 h / 7 d**) → error.
+
+Windowed queries carry a 60 s client-side PromQL `Timeout` to fail fast before the
+Sysdig edge proxy's own 80–90 s cut-off.
+
+The `interval` parameter on `k8s_list_top_http_errors_in_pods` and
+`k8s_list_top_network_errors_in_pods` is deprecated; `start`/`end` take precedence
+when both are present. An explicit `interval` emits a deprecation warning to the
+server log.
+
 # Adding a New Tool
 
 1.  **See other tools:** Check how other tools are implemented so you can have the context on how they should look like.

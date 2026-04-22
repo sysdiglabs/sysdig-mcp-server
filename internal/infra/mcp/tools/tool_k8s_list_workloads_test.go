@@ -5,21 +5,25 @@ import (
 	"context"
 	"io"
 	"net/http"
+	"time"
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
+	"go.uber.org/mock/gomock"
+
+	mocks_clock "github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock/mocks"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp/tools"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig/mocks"
-	"go.uber.org/mock/gomock"
 )
 
 var _ = Describe("KubernetesListWorkloads Tool", func() {
 	var (
 		tool       *tools.K8sListWorkloads
 		mockSysdig *mocks.MockExtendedClientWithResponsesInterface
+		mockClock  *mocks_clock.MockClock
 		mcpServer  *server.MCPServer
 		ctrl       *gomock.Controller
 	)
@@ -27,7 +31,9 @@ var _ = Describe("KubernetesListWorkloads Tool", func() {
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockSysdig = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		tool = tools.NewK8sListWorkloads(mockSysdig)
+		mockClock = mocks_clock.NewMockClock(ctrl)
+		mockClock.EXPECT().Now().AnyTimes().Return(time.Date(2026, time.April, 16, 12, 0, 0, 0, time.UTC))
+		tool = tools.NewK8sListWorkloads(mockSysdig, mockClock)
 		mcpServer = server.NewMCPServer("test", "test")
 		tool.RegisterInServer(mcpServer)
 	})
@@ -147,6 +153,58 @@ var _ = Describe("KubernetesListWorkloads Tool", func() {
 					Query: `kube_workload_status_running{kube_cluster_name="my_cluster",kube_namespace_name="my_namespace",kube_workload_name="my_workload",kube_workload_type="statefulset"}`,
 					Limit: new(sysdig.LimitQuery(10)),
 				},
+			),
+			Entry("windowed, ready status (no > 0 guard)",
+				"k8s_list_workloads",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name: "k8s_list_workloads",
+						Arguments: map[string]any{
+							"status": "ready",
+							"start":  "2026-04-16T10:00:00Z",
+							"end":    "2026-04-16T11:00:00Z",
+						},
+					},
+				},
+				mergeLimit(newWindowedQueryParams(
+					`max_over_time(kube_workload_status_ready[3600s])`,
+					time.Date(2026, time.April, 16, 11, 0, 0, 0, time.UTC),
+				), 10),
+			),
+			Entry("windowed, desired status (no > 0 guard)",
+				"k8s_list_workloads",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name: "k8s_list_workloads",
+						Arguments: map[string]any{
+							"status":       "desired",
+							"cluster_name": "prod",
+							"start":        "2026-04-16T10:00:00Z",
+							"end":          "2026-04-16T11:00:00Z",
+						},
+					},
+				},
+				mergeLimit(newWindowedQueryParams(
+					`max_over_time(kube_workload_status_desired{kube_cluster_name="prod"}[3600s])`,
+					time.Date(2026, time.April, 16, 11, 0, 0, 0, time.UTC),
+				), 10),
+			),
+			Entry("windowed, unavailable status (> 0 guard)",
+				"k8s_list_workloads",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name: "k8s_list_workloads",
+						Arguments: map[string]any{
+							"status": "unavailable",
+							"start":  "2026-04-16T10:00:00Z",
+							"end":    "2026-04-16T11:00:00Z",
+						},
+					},
+				},
+				mergeLimit(newWindowedQueryParams(
+					`max_over_time(kube_workload_status_unavailable[3600s]) > 0`,
+					time.Date(2026, time.April, 16, 11, 0, 0, 0, time.UTC),
+				), 10),
 			),
 		)
 	})

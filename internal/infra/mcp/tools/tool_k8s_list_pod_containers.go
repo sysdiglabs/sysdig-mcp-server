@@ -9,22 +9,25 @@ import (
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
 type K8sListPodContainers struct {
 	SysdigClient sysdig.ExtendedClientWithResponsesInterface
+	clock        clock.Clock
 }
 
-func NewK8sListPodContainers(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *K8sListPodContainers {
+func NewK8sListPodContainers(sysdigClient sysdig.ExtendedClientWithResponsesInterface, clk clock.Clock) *K8sListPodContainers {
 	return &K8sListPodContainers{
 		SysdigClient: sysdigClient,
+		clock:        clk,
 	}
 }
 
 func (t *K8sListPodContainers) RegisterInServer(s *server.MCPServer) {
 	tool := mcp.NewTool("k8s_list_pod_containers",
-		mcp.WithDescription("Retrieves information from a particular pod and container."),
+		mcp.WithDescription("Retrieves information from a particular pod and container. Optionally pass start/end (RFC3339) to list pod containers that existed at any point in the window."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
 		mcp.WithString("workload_type", mcp.Description("The type of the workload to filter by.")),
@@ -37,6 +40,7 @@ func (t *K8sListPodContainers) RegisterInServer(s *server.MCPServer) {
 			mcp.Description("Maximum number of pod containers to return."),
 			mcp.DefaultNumber(10),
 		),
+		WithTimeWindowParams(),
 		mcp.WithOutputSchema[map[string]any](),
 		mcp.WithReadOnlyHintAnnotation(true),
 		mcp.WithDestructiveHintAnnotation(false),
@@ -56,12 +60,26 @@ func (t *K8sListPodContainers) handle(ctx context.Context, request mcp.CallToolR
 	nodeName := mcp.ParseString(request, "node_name", "")
 	limit := mcp.ParseInt(request, "limit", 10)
 
-	query := buildKubePodContainerInfoQuery(clusterName, namespaceName, workloadType, workloadName, podName, containerName, imagePullstring, nodeName)
+	tw, err := ParseTimeWindow(request, t.clock)
+	if err != nil {
+		return mcp.NewToolResultErrorFromErr("invalid time window", err), nil
+	}
+	evalTime, err := tw.EvalTime()
+	if err != nil {
+		return mcp.NewToolResultErrorFromErr("failed to build eval time", err), nil
+	}
+
+	query := buildKubePodContainerInfoQuery(clusterName, namespaceName, workloadType, workloadName, podName, containerName, imagePullstring, nodeName, tw)
 
 	limitQuery := sysdig.LimitQuery(limit)
 	params := &sysdig.GetQueryV1Params{
 		Query: query,
 		Limit: &limitQuery,
+		Time:  evalTime,
+	}
+	if !tw.IsZero() {
+		timeout := sysdig.Timeout(windowedQueryTimeout)
+		params.Timeout = &timeout
 	}
 
 	httpResp, err := t.SysdigClient.GetQueryV1(ctx, params)
@@ -82,7 +100,7 @@ func (t *K8sListPodContainers) handle(ctx context.Context, request mcp.CallToolR
 	return mcp.NewToolResultJSON(queryResponse)
 }
 
-func buildKubePodContainerInfoQuery(clusterName, namespaceName, workloadType, workloadName, podName, containerName, imagePullstring, nodeName string) string {
+func buildKubePodContainerInfoQuery(clusterName, namespaceName, workloadType, workloadName, podName, containerName, imagePullstring, nodeName string, tw TimeWindow) string {
 	filters := []string{}
 	if clusterName != "" {
 		filters = append(filters, fmt.Sprintf("kube_cluster_name=\"%s\"", clusterName))
@@ -109,9 +127,12 @@ func buildKubePodContainerInfoQuery(clusterName, namespaceName, workloadType, wo
 		filters = append(filters, fmt.Sprintf("kube_node_name=\"%s\"", nodeName))
 	}
 
-	if len(filters) == 0 {
-		return "kube_pod_container_info"
+	metric := "kube_pod_container_info"
+	if len(filters) > 0 {
+		metric = fmt.Sprintf("kube_pod_container_info{%s}", strings.Join(filters, ","))
 	}
-
-	return fmt.Sprintf("kube_pod_container_info{%s}", strings.Join(filters, ","))
+	if !tw.IsZero() {
+		return fmt.Sprintf("max_over_time(%s%s) > 0", metric, tw.RangeSelector())
+	}
+	return metric
 }

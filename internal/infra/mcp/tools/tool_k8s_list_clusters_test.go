@@ -5,21 +5,25 @@ import (
 	"context"
 	"io"
 	"net/http"
+	"time"
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
+	"go.uber.org/mock/gomock"
+
+	mocks_clock "github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock/mocks"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp/tools"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig/mocks"
-	"go.uber.org/mock/gomock"
 )
 
 var _ = Describe("KubernetesListClusters Tool", func() {
 	var (
 		tool       *tools.K8sListClusters
 		mockSysdig *mocks.MockExtendedClientWithResponsesInterface
+		mockClock  *mocks_clock.MockClock
 		mcpServer  *server.MCPServer
 		ctrl       *gomock.Controller
 	)
@@ -27,7 +31,9 @@ var _ = Describe("KubernetesListClusters Tool", func() {
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockSysdig = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		tool = tools.NewK8sListClusters(mockSysdig)
+		mockClock = mocks_clock.NewMockClock(ctrl)
+		mockClock.EXPECT().Now().AnyTimes().Return(time.Date(2026, time.April, 16, 12, 0, 0, 0, time.UTC))
+		tool = tools.NewK8sListClusters(mockSysdig, mockClock)
 		mcpServer = server.NewMCPServer("test", "test")
 		tool.RegisterInServer(mcpServer)
 	})
@@ -102,6 +108,39 @@ var _ = Describe("KubernetesListClusters Tool", func() {
 					Query: `kube_cluster_info{cluster="my_cluster"}`,
 					Limit: new(sysdig.LimitQuery(20)),
 				},
+			),
+			Entry("windowed, no filters",
+				"k8s_list_clusters",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name: "k8s_list_clusters",
+						Arguments: map[string]any{
+							"start": "2026-04-16T10:00:00Z",
+							"end":   "2026-04-16T11:00:00Z",
+						},
+					},
+				},
+				mergeLimit(newWindowedQueryParams(
+					`max_over_time(kube_cluster_info[3600s]) > 0`,
+					time.Date(2026, time.April, 16, 11, 0, 0, 0, time.UTC),
+				), 10),
+			),
+			Entry("windowed, cluster_name filter",
+				"k8s_list_clusters",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name: "k8s_list_clusters",
+						Arguments: map[string]any{
+							"cluster_name": "my_cluster",
+							"start":        "2026-04-16T10:00:00Z",
+							"end":          "2026-04-16T11:00:00Z",
+						},
+					},
+				},
+				mergeLimit(newWindowedQueryParams(
+					`max_over_time(kube_cluster_info{cluster="my_cluster"}[3600s]) > 0`,
+					time.Date(2026, time.April, 16, 11, 0, 0, 0, time.UTC),
+				), 10),
 			),
 		)
 	})
