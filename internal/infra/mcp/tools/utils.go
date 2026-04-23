@@ -63,12 +63,11 @@ func RequiredPermissionsFromTool(tool mcp.Tool) []string {
 const (
 	maxIntervalEnvVar     = "SYSDIG_MCP_MAX_INTERVAL"
 	defaultMaxInterval    = 168 * time.Hour // 7 days
-	futureClockSkewGrace  = 60 * time.Second
 	windowedQueryTimeout  = "60s"
 	timeParamStart        = "start"
 	timeParamEnd          = "end"
 	startParamDescription = "Start of the query window as an RFC3339 timestamp (e.g. 2026-04-01T00:00:00Z). When omitted, the tool returns an instant snapshot (current behavior). When provided without end, end defaults to now."
-	endParamDescription   = "End of the query window as an RFC3339 timestamp (e.g. 2026-04-01T01:00:00Z). Requires start. Must not be more than 60s in the future."
+	endParamDescription   = "End of the query window as an RFC3339 timestamp (e.g. 2026-04-01T01:00:00Z). Requires start. If in the future, clamped to now."
 )
 
 // TimeWindow is a resolved, validated [Start, End] pair for a historical PromQL query.
@@ -121,7 +120,6 @@ func WithTimeWindowParams() mcp.ToolOption {
 //   - start without end:            end = clk.Now().
 //   - invalid RFC3339:              error naming the bad field.
 //   - end <= start:                 error.
-//   - end > clk.Now() + 60s:        error (generous grace for client clock skew).
 //   - end - start > maxInterval():  error referencing SYSDIG_MCP_MAX_INTERVAL.
 func ParseTimeWindow(request mcp.CallToolRequest, clk clock.Clock) (TimeWindow, error) {
 	startStr := mcp.ParseString(request, timeParamStart, "")
@@ -152,12 +150,12 @@ func ParseTimeWindow(request mcp.CallToolRequest, clk clock.Clock) (TimeWindow, 
 		}
 	}
 
-	if !end.After(start) {
-		return TimeWindow{}, fmt.Errorf("end (%s) must be after start (%s)", end.Format(time.RFC3339), start.Format(time.RFC3339))
+	if end.After(now) {
+		end = now
 	}
 
-	if end.After(now.Add(futureClockSkewGrace)) {
-		return TimeWindow{}, fmt.Errorf("end (%s) must not be more than %s in the future (server time: %s)", end.Format(time.RFC3339), futureClockSkewGrace, now.Format(time.RFC3339))
+	if !end.After(start) {
+		return TimeWindow{}, fmt.Errorf("end (%s) must be after start (%s)", end.Format(time.RFC3339), start.Format(time.RFC3339))
 	}
 
 	window := end.Sub(start)
