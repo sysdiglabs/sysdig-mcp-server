@@ -57,13 +57,12 @@ evaluated at `end`:
 | HTTP / network errors | `sum_over_time(metric[Ns]) / N` (rate per second) |
 | Inventory tools (clusters, nodes, workloads, pod_containers, cronjobs) | `max_over_time(metric[Ns]) > 0` (workloads with status=ready/desired/running drop the `> 0` guard) |
 
-Validation rules (helper: `time_window.go`):
+Validation rules (helper: `utils.go`):
 
 - `end` without `start` → error.
 - `start` without `end` → `end` defaults to now.
+- `end` in the future → clamped to now.
 - `end <= start` → error.
-- `end > now + 60s` → error (60 s grace for client clock skew).
-- `end - start > SYSDIG_MCP_MAX_INTERVAL` (default **168 h / 7 d**) → error.
 
 Windowed queries carry a 60 s client-side PromQL `Timeout` to fail fast before the
 Sysdig edge proxy's own 80–90 s cut-off.
