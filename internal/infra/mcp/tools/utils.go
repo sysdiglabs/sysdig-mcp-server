@@ -3,7 +3,6 @@ package tools
 import (
 	"fmt"
 	"log/slog"
-	"os"
 	"time"
 
 	"github.com/mark3labs/mcp-go/mcp"
@@ -61,8 +60,6 @@ func RequiredPermissionsFromTool(tool mcp.Tool) []string {
 // --- Time-window support for k8s_list_* Monitor tools --------------------
 
 const (
-	maxIntervalEnvVar     = "SYSDIG_MCP_MAX_INTERVAL"
-	defaultMaxInterval    = 168 * time.Hour // 7 days
 	windowedQueryTimeout  = "60s"
 	timeParamStart        = "start"
 	timeParamEnd          = "end"
@@ -115,12 +112,11 @@ func WithTimeWindowParams() mcp.ToolOption {
 // ParseTimeWindow reads "start" and "end" from the request, validates them, and returns
 // the resolved TimeWindow.
 //
-//   - Both absent:                  returns zero-value TimeWindow, nil error.
-//   - end without start:            error ("end requires start").
-//   - start without end:            end = clk.Now().
-//   - invalid RFC3339:              error naming the bad field.
-//   - end <= start:                 error.
-//   - end - start > maxInterval():  error referencing SYSDIG_MCP_MAX_INTERVAL.
+//   - Both absent:       returns zero-value TimeWindow, nil error.
+//   - end without start: error ("end requires start").
+//   - start without end: end = clk.Now().
+//   - invalid RFC3339:   error naming the bad field.
+//   - end <= start:      error.
 func ParseTimeWindow(request mcp.CallToolRequest, clk clock.Clock) (TimeWindow, error) {
 	startStr := mcp.ParseString(request, timeParamStart, "")
 	endStr := mcp.ParseString(request, timeParamEnd, "")
@@ -158,24 +154,7 @@ func ParseTimeWindow(request mcp.CallToolRequest, clk clock.Clock) (TimeWindow, 
 		return TimeWindow{}, fmt.Errorf("end (%s) must be after start (%s)", end.Format(time.RFC3339), start.Format(time.RFC3339))
 	}
 
-	window := end.Sub(start)
-	if max := maxInterval(); window > max {
-		return TimeWindow{}, fmt.Errorf("requested window (%s) exceeds maximum allowed (%s); set %s to raise the cap", window, max, maxIntervalEnvVar)
-	}
-
 	return TimeWindow{Start: start, End: end}, nil
-}
-
-// maxInterval returns the configured maximum window duration. The SYSDIG_MCP_MAX_INTERVAL
-// env var is read on every call (not cached) so tests can override it via t.Setenv without
-// bumping into sync.Once-style staleness.
-func maxInterval() time.Duration {
-	if v := os.Getenv(maxIntervalEnvVar); v != "" {
-		if d, err := time.ParseDuration(v); err == nil && d > 0 {
-			return d
-		}
-	}
-	return defaultMaxInterval
 }
 
 // requestHasArg reports whether the caller explicitly supplied the named argument
