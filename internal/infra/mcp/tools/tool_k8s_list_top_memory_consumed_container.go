@@ -56,10 +56,6 @@ func (t *K8sListTopMemoryConsumedContainer) handle(ctx context.Context, request 
 	if err != nil {
 		return mcp.NewToolResultErrorFromErr("invalid time window", err), nil
 	}
-	evalTime, err := tw.EvalTime()
-	if err != nil {
-		return mcp.NewToolResultErrorFromErr("failed to build eval time", err), nil
-	}
 
 	query := buildTopMemoryConsumedByContainerQuery(clusterName, namespaceName, workloadType, workloadName, limit, tw)
 
@@ -67,11 +63,9 @@ func (t *K8sListTopMemoryConsumedContainer) handle(ctx context.Context, request 
 	params := &sysdig.GetQueryV1Params{
 		Query: query,
 		Limit: &limitQuery,
-		Time:  evalTime,
 	}
-	if !tw.IsZero() {
-		timeout := sysdig.Timeout(windowedQueryTimeout)
-		params.Timeout = &timeout
+	if err := tw.ApplyToParams(params); err != nil {
+		return mcp.NewToolResultErrorFromErr("failed to build eval time", err), nil
 	}
 
 	httpResp, err := t.SysdigClient.GetQueryV1(ctx, params)

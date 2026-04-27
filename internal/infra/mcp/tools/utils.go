@@ -81,9 +81,13 @@ func (w TimeWindow) IsZero() bool {
 }
 
 // RangeSelector returns the PromQL range-selector literal for this window, e.g. "[3600s]".
-// The duration is rounded down to whole seconds so the selector is stable and debuggable.
 func (w TimeWindow) RangeSelector() string {
 	return fmt.Sprintf("[%ds]", int64(w.End.Sub(w.Start).Seconds()))
+}
+
+// WindowSeconds returns the duration of the window in whole seconds.
+func (w TimeWindow) WindowSeconds() int64 {
+	return int64(w.End.Sub(w.Start).Seconds())
 }
 
 // EvalTime returns a *sysdig.Time suitable for GetQueryV1Params.Time. The value is
@@ -98,6 +102,22 @@ func (w TimeWindow) EvalTime() (*sysdig.Time, error) {
 		return nil, fmt.Errorf("building eval time: %w", err)
 	}
 	return &qt, nil
+}
+
+// ApplyToParams sets Time and, for windowed queries, Timeout on params.
+// It consolidates the three-step boilerplate (EvalTime, set Time, set Timeout)
+// that every k8s_list_* handler would otherwise repeat.
+func (w TimeWindow) ApplyToParams(params *sysdig.GetQueryV1Params) error {
+	evalTime, err := w.EvalTime()
+	if err != nil {
+		return err
+	}
+	params.Time = evalTime
+	if !w.IsZero() {
+		timeout := sysdig.Timeout(windowedQueryTimeout)
+		params.Timeout = &timeout
+	}
+	return nil
 }
 
 // WithTimeWindowParams returns a ToolOption that declares the shared "start" and "end"
@@ -134,20 +154,18 @@ func ParseTimeWindow(request mcp.CallToolRequest, clk clock.Clock) (TimeWindow, 
 		return TimeWindow{}, fmt.Errorf("invalid start timestamp %q: must be RFC3339 (e.g. 2026-04-01T00:00:00Z)", startStr)
 	}
 
-	now := clk.Now()
-
 	var end time.Time
 	if endStr == "" {
-		end = now
+		end = clk.Now().Truncate(time.Second)
 	} else {
 		end, err = time.Parse(time.RFC3339, endStr)
 		if err != nil {
 			return TimeWindow{}, fmt.Errorf("invalid end timestamp %q: must be RFC3339 (e.g. 2026-04-01T01:00:00Z)", endStr)
 		}
-	}
-
-	if end.After(now) {
-		end = now
+		now := clk.Now().Truncate(time.Second)
+		if end.After(now) {
+			end = now
+		}
 	}
 
 	if !end.After(start) {

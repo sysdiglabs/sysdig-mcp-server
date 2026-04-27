@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log/slog"
 	"strings"
 	"time"
 
@@ -29,8 +28,8 @@ func NewK8sListTopHttpErrorsInPods(sysdigClient sysdig.ExtendedClientWithRespons
 
 func (t *K8sListTopHttpErrorsInPods) RegisterInServer(s *server.MCPServer) {
 	tool := mcp.NewTool("k8s_list_top_http_errors_in_pods",
-		mcp.WithDescription("Lists the pods with the highest rate of HTTP 4xx and 5xx errors over a time window, allowing filtering by cluster, namespace, workload type, and workload name. Pass start/end (RFC3339) to specify the window. The legacy 'interval' param is retained for backward compatibility; start/end take precedence when both are provided."),
-		mcp.WithString("interval", mcp.Description("Deprecated: use start/end instead. Time interval for the query (e.g. '1h', '30m'). Default is '1h'. Ignored when start is provided.")),
+		mcp.WithDescription("Lists the pods with the highest rate of HTTP 4xx and 5xx errors over a time window, allowing filtering by cluster, namespace, workload type, and workload name. Pass start/end (RFC3339) for an explicit window, or interval for a relative duration."),
+		mcp.WithString("interval", mcp.Description("Time interval for the query (e.g. '1h', '30m'). Default is '1h'. Ignored when start/end are provided.")),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
 		mcp.WithString("workload_type", mcp.Description("The type of the workload to filter by.")),
@@ -50,7 +49,6 @@ func (t *K8sListTopHttpErrorsInPods) RegisterInServer(s *server.MCPServer) {
 
 func (t *K8sListTopHttpErrorsInPods) handle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
 	interval := mcp.ParseString(request, "interval", "1h")
-	intervalExplicit := requestHasArg(request, "interval")
 	clusterName := mcp.ParseString(request, "cluster_name", "")
 	namespaceName := mcp.ParseString(request, "namespace_name", "")
 	workloadType := mcp.ParseString(request, "workload_type", "")
@@ -61,21 +59,11 @@ func (t *K8sListTopHttpErrorsInPods) handle(ctx context.Context, request mcp.Cal
 	if err != nil {
 		return mcp.NewToolResultErrorFromErr("invalid time window", err), nil
 	}
-	evalTime, err := tw.EvalTime()
-	if err != nil {
-		return mcp.NewToolResultErrorFromErr("failed to build eval time", err), nil
-	}
 
 	var query string
 	if !tw.IsZero() {
-		if intervalExplicit {
-			slog.Warn("ignoring deprecated 'interval' param because start/end were provided", "tool", "k8s_list_top_http_errors_in_pods")
-		}
-		query = buildTopHttpErrorsWindowedQuery(tw.RangeSelector(), int64(tw.End.Sub(tw.Start).Seconds()), limit, clusterName, namespaceName, workloadType, workloadName)
+		query = buildTopHttpErrorsWindowedQuery(tw.RangeSelector(), tw.WindowSeconds(), limit, clusterName, namespaceName, workloadType, workloadName)
 	} else {
-		if intervalExplicit {
-			slog.Warn("'interval' param is deprecated; use start/end instead", "tool", "k8s_list_top_http_errors_in_pods")
-		}
 		query, err = buildTopHttpErrorsLegacyQuery(interval, limit, clusterName, namespaceName, workloadType, workloadName)
 		if err != nil {
 			return mcp.NewToolResultErrorFromErr("failed to build query", err), nil
@@ -86,11 +74,9 @@ func (t *K8sListTopHttpErrorsInPods) handle(ctx context.Context, request mcp.Cal
 	params := &sysdig.GetQueryV1Params{
 		Query: query,
 		Limit: &limitQuery,
-		Time:  evalTime,
 	}
-	if !tw.IsZero() {
-		timeout := sysdig.Timeout(windowedQueryTimeout)
-		params.Timeout = &timeout
+	if err := tw.ApplyToParams(params); err != nil {
+		return mcp.NewToolResultErrorFromErr("failed to build eval time", err), nil
 	}
 
 	httpResp, err := t.SysdigClient.GetQueryV1(ctx, params)
