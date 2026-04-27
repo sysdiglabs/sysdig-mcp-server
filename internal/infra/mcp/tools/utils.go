@@ -12,7 +12,7 @@ import (
 
 func Examples[T any](examples ...T) mcp.PropertyOption {
 	return func(schema map[string]any) {
-		schema["exampes"] = examples
+		schema["examples"] = examples
 	}
 }
 
