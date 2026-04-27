@@ -67,10 +67,6 @@ Validation rules (helper: `utils.go`):
 Windowed queries carry a 60 s client-side PromQL `Timeout` to fail fast before the
 Sysdig edge proxy's own 80–90 s cut-off.
 
-For `k8s_list_top_http_errors_in_pods` and `k8s_list_top_network_errors_in_pods`,
-`interval` (e.g. `"1h"`) is still supported as a relative-duration shorthand; `start`/`end`
-take precedence when both are provided.
-
 # Adding a New Tool
 
 1.  **See other tools:** Check how other tools are implemented so you can have the context on how they should look like.

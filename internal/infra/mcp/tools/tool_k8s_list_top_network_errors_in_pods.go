@@ -28,7 +28,7 @@ func NewK8sListTopNetworkErrorsInPods(sysdigClient sysdig.ExtendedClientWithResp
 
 func (t *K8sListTopNetworkErrorsInPods) RegisterInServer(s *server.MCPServer) {
 	tool := mcp.NewTool("k8s_list_top_network_errors_in_pods",
-		mcp.WithDescription("Shows the top network errors by pod over a time window, aggregated by cluster, namespace, workload type, and workload name. The result is an average rate of network errors per second. Pass start/end (RFC3339) for an explicit window, or interval for a relative duration."),
+		mcp.WithDescription("Shows the top network errors by pod over a time window, aggregated by cluster, namespace, workload type, and workload name. The result is an average rate of network errors per second. Pass start/end (RFC3339) to specify the window. The legacy 'interval' param is retained for backward compatibility; start/end take precedence when both are provided."),
 		mcp.WithString("interval", mcp.Description("Time interval for the query (e.g. '1h', '30m'). Default is '1h'. Ignored when start/end are provided.")),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
