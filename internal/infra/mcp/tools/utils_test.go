@@ -90,6 +90,17 @@ var _ = Describe("ParseTimeWindow", func() {
 		Expect(err).To(MatchError(ContainSubstring("must be after start")))
 	})
 
+	It("returns correct TimeWindow when both start and end are valid past timestamps", func() {
+		mockClock.EXPECT().Now().Return(now)
+		tw, err := tools.ParseTimeWindow(makeRequest(map[string]any{
+			"start": "2026-04-16T10:00:00Z",
+			"end":   "2026-04-16T11:00:00Z",
+		}), mockClock)
+		Expect(err).NotTo(HaveOccurred())
+		Expect(tw.Start).To(Equal(time.Date(2026, time.April, 16, 10, 0, 0, 0, time.UTC)))
+		Expect(tw.End).To(Equal(time.Date(2026, time.April, 16, 11, 0, 0, 0, time.UTC)))
+	})
+
 	It("truncates sub-second precision from now so RangeSelector never emits [0s]", func() {
 		// now has 500ms; start is in the same second — after truncation end == start,
 		// which must be rejected rather than silently producing [0s].
