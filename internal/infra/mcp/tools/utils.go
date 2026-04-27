@@ -175,13 +175,3 @@ func ParseTimeWindow(request mcp.CallToolRequest, clk clock.Clock) (TimeWindow, 
 	return TimeWindow{Start: start, End: end}, nil
 }
 
-// requestHasArg reports whether the caller explicitly supplied the named argument
-// (distinguishes "user passed empty string" from "user didn't pass the key at all").
-func requestHasArg(request mcp.CallToolRequest, name string) bool {
-	args, ok := request.Params.Arguments.(map[string]any)
-	if !ok {
-		return false
-	}
-	_, present := args[name]
-	return present
-}
