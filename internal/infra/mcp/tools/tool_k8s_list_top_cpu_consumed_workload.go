@@ -57,20 +57,13 @@ func (t *K8sListTopCPUConsumedWorkload) handle(ctx context.Context, request mcp.
 		return mcp.NewToolResultErrorFromErr("invalid time window", err), nil
 	}
 
-	evalTime, err := tw.EvalTime()
-	if err != nil {
-		return mcp.NewToolResultErrorFromErr("failed to build eval time", err), nil
-	}
-
 	query := buildTopCPUConsumedByWorkloadQuery(clusterName, namespaceName, workloadType, workloadName, limit, tw)
 
 	params := &sysdig.GetQueryV1Params{
 		Query: query,
-		Time:  evalTime,
 	}
-	if !tw.IsZero() {
-		timeout := sysdig.Timeout(windowedQueryTimeout)
-		params.Timeout = &timeout
+	if err := tw.ApplyToParams(params); err != nil {
+		return mcp.NewToolResultErrorFromErr("failed to build eval time", err), nil
 	}
 
 	httpResp, err := t.SysdigClient.GetQueryV1(ctx, params)

@@ -54,10 +54,6 @@ func (t *K8sListCronjobs) handle(ctx context.Context, request mcp.CallToolReques
 	if err != nil {
 		return mcp.NewToolResultErrorFromErr("invalid time window", err), nil
 	}
-	evalTime, err := tw.EvalTime()
-	if err != nil {
-		return mcp.NewToolResultErrorFromErr("failed to build eval time", err), nil
-	}
 
 	query := buildKubeCronjobInfoQuery(clusterName, namespaceName, cronjobName, tw)
 
@@ -65,11 +61,9 @@ func (t *K8sListCronjobs) handle(ctx context.Context, request mcp.CallToolReques
 	params := &sysdig.GetQueryV1Params{
 		Query: query,
 		Limit: &limitQuery,
-		Time:  evalTime,
 	}
-	if !tw.IsZero() {
-		timeout := sysdig.Timeout(windowedQueryTimeout)
-		params.Timeout = &timeout
+	if err := tw.ApplyToParams(params); err != nil {
+		return mcp.NewToolResultErrorFromErr("failed to build eval time", err), nil
 	}
 
 	httpResp, err := t.SysdigClient.GetQueryV1(ctx, params)
