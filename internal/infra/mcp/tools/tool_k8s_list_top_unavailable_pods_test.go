@@ -5,21 +5,25 @@ import (
 	"context"
 	"io"
 	"net/http"
+	"time"
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
+	"go.uber.org/mock/gomock"
+
+	mocks_clock "github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock/mocks"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp/tools"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig/mocks"
-	"go.uber.org/mock/gomock"
 )
 
 var _ = Describe("KubernetesListTopUnavailablePods Tool", func() {
 	var (
 		tool       *tools.K8sListTopUnavailablePods
 		mockSysdig *mocks.MockExtendedClientWithResponsesInterface
+		mockClock  *mocks_clock.MockClock
 		mcpServer  *server.MCPServer
 		ctrl       *gomock.Controller
 	)
@@ -27,7 +31,9 @@ var _ = Describe("KubernetesListTopUnavailablePods Tool", func() {
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockSysdig = mocks.NewMockExtendedClientWithResponsesInterface(ctrl)
-		tool = tools.NewK8sListTopUnavailablePods(mockSysdig)
+		mockClock = mocks_clock.NewMockClock(ctrl)
+		mockClock.EXPECT().Now().AnyTimes().Return(time.Date(2026, time.April, 16, 12, 0, 0, 0, time.UTC))
+		tool = tools.NewK8sListTopUnavailablePods(mockSysdig, mockClock)
 		mcpServer = server.NewMCPServer("test", "test")
 		tool.RegisterInServer(mcpServer)
 	})
@@ -152,6 +158,40 @@ var _ = Describe("KubernetesListTopUnavailablePods Tool", func() {
       0 or vector(0)
 )`,
 				},
+			),
+			Entry("windowed, no filters (Sysdig-canonical pattern)",
+				"k8s_list_top_unavailable_pods",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name: "k8s_list_top_unavailable_pods",
+						Arguments: map[string]any{
+							"start": "2026-04-16T10:00:00Z",
+							"end":   "2026-04-16T11:00:00Z",
+						},
+					},
+				},
+				newWindowedQueryParams(
+					`topk(20, sum by (kube_cluster_name, kube_namespace_name, kube_workload_name) (min_over_time(kube_workload_status_unavailable{}[3600s]) >= 1))`,
+					time.Date(2026, time.April, 16, 11, 0, 0, 0, time.UTC),
+				),
+			),
+			Entry("windowed, with cluster filter",
+				"k8s_list_top_unavailable_pods",
+				mcp.CallToolRequest{
+					Params: mcp.CallToolParams{
+						Name: "k8s_list_top_unavailable_pods",
+						Arguments: map[string]any{
+							"cluster_name": "my-cluster",
+							"limit":        5,
+							"start":        "2026-04-16T10:00:00Z",
+							"end":          "2026-04-16T11:00:00Z",
+						},
+					},
+				},
+				newWindowedQueryParams(
+					`topk(5, sum by (kube_cluster_name, kube_namespace_name, kube_workload_name) (min_over_time(kube_workload_status_unavailable{kube_cluster_name="my-cluster"}[3600s]) >= 1))`,
+					time.Date(2026, time.April, 16, 11, 0, 0, 0, time.UTC),
+				),
 			),
 		)
 	})

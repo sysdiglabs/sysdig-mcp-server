@@ -10,23 +10,26 @@ import (
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
 type K8sListTopHttpErrorsInPods struct {
 	SysdigClient sysdig.ExtendedClientWithResponsesInterface
+	clock        clock.Clock
 }
 
-func NewK8sListTopHttpErrorsInPods(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *K8sListTopHttpErrorsInPods {
+func NewK8sListTopHttpErrorsInPods(sysdigClient sysdig.ExtendedClientWithResponsesInterface, clk clock.Clock) *K8sListTopHttpErrorsInPods {
 	return &K8sListTopHttpErrorsInPods{
 		SysdigClient: sysdigClient,
+		clock:        clk,
 	}
 }
 
 func (t *K8sListTopHttpErrorsInPods) RegisterInServer(s *server.MCPServer) {
 	tool := mcp.NewTool("k8s_list_top_http_errors_in_pods",
-		mcp.WithDescription("Lists the pods with the highest rate of HTTP 4xx and 5xx errors over a specified time interval, allowing filtering by cluster, namespace, workload type, and workload name."),
-		mcp.WithString("interval", mcp.Description("Time interval for the query (e.g. '1h', '30m'). Default is '1h'.")),
+		mcp.WithDescription("Lists the pods with the highest rate of HTTP 4xx and 5xx errors over a time window, allowing filtering by cluster, namespace, workload type, and workload name. Pass start/end (RFC3339) to specify the window. The legacy 'interval' param is retained for backward compatibility; start/end take precedence when both are provided."),
+		mcp.WithString("interval", mcp.Description("Time interval for the query (e.g. '1h', '30m'). Default is '1h'. Ignored when start/end are provided.")),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
 		mcp.WithString("workload_type", mcp.Description("The type of the workload to filter by.")),
@@ -35,6 +38,7 @@ func (t *K8sListTopHttpErrorsInPods) RegisterInServer(s *server.MCPServer) {
 			mcp.Description("Maximum number of pods to return."),
 			mcp.DefaultNumber(20),
 		),
+		WithTimeWindowParams(),
 		mcp.WithOutputSchema[map[string]any](),
 		mcp.WithReadOnlyHintAnnotation(true),
 		mcp.WithDestructiveHintAnnotation(false),
@@ -51,15 +55,28 @@ func (t *K8sListTopHttpErrorsInPods) handle(ctx context.Context, request mcp.Cal
 	workloadName := mcp.ParseString(request, "workload_name", "")
 	limit := mcp.ParseInt(request, "limit", 20)
 
-	query, err := buildTopHttpErrorsQuery(interval, limit, clusterName, namespaceName, workloadType, workloadName)
+	tw, err := ParseTimeWindow(request, t.clock)
 	if err != nil {
-		return mcp.NewToolResultErrorFromErr("failed to build query", err), nil
+		return mcp.NewToolResultErrorFromErr("invalid time window", err), nil
+	}
+
+	var query string
+	if !tw.IsZero() {
+		query = buildTopHttpErrorsWindowedQuery(tw.RangeSelector(), tw.WindowSeconds(), limit, clusterName, namespaceName, workloadType, workloadName)
+	} else {
+		query, err = buildTopHttpErrorsLegacyQuery(interval, limit, clusterName, namespaceName, workloadType, workloadName)
+		if err != nil {
+			return mcp.NewToolResultErrorFromErr("failed to build query", err), nil
+		}
 	}
 
 	limitQuery := sysdig.LimitQuery(limit)
 	params := &sysdig.GetQueryV1Params{
 		Query: query,
 		Limit: &limitQuery,
+	}
+	if err := tw.ApplyToParams(params); err != nil {
+		return mcp.NewToolResultErrorFromErr("failed to build eval time", err), nil
 	}
 
 	httpResp, err := t.SysdigClient.GetQueryV1(ctx, params)
@@ -80,13 +97,25 @@ func (t *K8sListTopHttpErrorsInPods) handle(ctx context.Context, request mcp.Cal
 	return mcp.NewToolResultJSON(queryResponse)
 }
 
-func buildTopHttpErrorsQuery(interval string, limit int, clusterName, namespaceName, workloadType, workloadName string) (string, error) {
+func buildTopHttpErrorsLegacyQuery(interval string, limit int, clusterName, namespaceName, workloadType, workloadName string) (string, error) {
 	duration, err := time.ParseDuration(interval)
 	if err != nil {
 		return "", fmt.Errorf("invalid interval format: %w", err)
 	}
 	seconds := duration.Seconds()
 
+	filterStr := httpErrorsFilterString(clusterName, namespaceName, workloadType, workloadName)
+	return fmt.Sprintf("topk(%d,sum(sum_over_time(sysdig_container_net_http_error_count{%s}[%s])) by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, kube_pod_name)) / %f",
+		limit, filterStr, interval, seconds), nil
+}
+
+func buildTopHttpErrorsWindowedQuery(rangeSelector string, windowSeconds int64, limit int, clusterName, namespaceName, workloadType, workloadName string) string {
+	filterStr := httpErrorsFilterString(clusterName, namespaceName, workloadType, workloadName)
+	return fmt.Sprintf("topk(%d,sum(sum_over_time(sysdig_container_net_http_error_count{%s}%s)) by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, kube_pod_name)) / %d",
+		limit, filterStr, rangeSelector, windowSeconds)
+}
+
+func httpErrorsFilterString(clusterName, namespaceName, workloadType, workloadName string) string {
 	filters := []string{}
 	if clusterName != "" {
 		filters = append(filters, fmt.Sprintf("kube_cluster_name=~\"%s\"", clusterName))
@@ -100,13 +129,5 @@ func buildTopHttpErrorsQuery(interval string, limit int, clusterName, namespaceN
 	if workloadName != "" {
 		filters = append(filters, fmt.Sprintf("kube_workload_name=\"%s\"", workloadName))
 	}
-
-	filterStr := ""
-	if len(filters) > 0 {
-		filterStr = strings.Join(filters, ",")
-	}
-
-	// topk(20,sum(sum_over_time(sysdig_container_net_http_error_count{kube_cluster_name=~"demo-kube-gke"}[1h])) by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, kube_pod_name)) / 3600
-	return fmt.Sprintf("topk(%d,sum(sum_over_time(sysdig_container_net_http_error_count{%s}[%s])) by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, kube_pod_name)) / %f",
-		limit, filterStr, interval, seconds), nil
+	return strings.Join(filters, ",")
 }

@@ -9,28 +9,32 @@ import (
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
 type K8sListUnderutilizedPodsMemoryQuota struct {
 	SysdigClient sysdig.ExtendedClientWithResponsesInterface
+	clock        clock.Clock
 }
 
-func NewK8sListUnderutilizedPodsMemoryQuota(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *K8sListUnderutilizedPodsMemoryQuota {
+func NewK8sListUnderutilizedPodsMemoryQuota(sysdigClient sysdig.ExtendedClientWithResponsesInterface, clk clock.Clock) *K8sListUnderutilizedPodsMemoryQuota {
 	return &K8sListUnderutilizedPodsMemoryQuota{
 		SysdigClient: sysdigClient,
+		clock:        clk,
 	}
 }
 
 func (t *K8sListUnderutilizedPodsMemoryQuota) RegisterInServer(s *server.MCPServer) {
 	tool := mcp.NewTool("k8s_list_underutilized_pods_memory_quota",
-		mcp.WithDescription("List Kubernetes pods with memory usage below 25% of the limit."),
+		mcp.WithDescription("List Kubernetes pods with memory usage below 25% of the limit. Optionally pass start/end (RFC3339) to evaluate the ratio averaged over a historical window instead of the current instant snapshot."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
 		mcp.WithNumber("limit",
 			mcp.Description("Maximum number of pods to return."),
 			mcp.DefaultNumber(10),
 		),
+		WithTimeWindowParams(),
 		mcp.WithOutputSchema[map[string]any](),
 		mcp.WithReadOnlyHintAnnotation(true),
 		mcp.WithDestructiveHintAnnotation(false),
@@ -44,12 +48,20 @@ func (t *K8sListUnderutilizedPodsMemoryQuota) handle(ctx context.Context, reques
 	namespaceName := mcp.ParseString(request, "namespace_name", "")
 	limit := mcp.ParseInt(request, "limit", 10)
 
-	query := buildUnderutilizedPodsByMemoryQuery(clusterName, namespaceName)
+	tw, err := ParseTimeWindow(request, t.clock)
+	if err != nil {
+		return mcp.NewToolResultErrorFromErr("invalid time window", err), nil
+	}
+
+	query := buildUnderutilizedPodsByMemoryQuery(clusterName, namespaceName, tw)
 
 	limitQuery := sysdig.LimitQuery(limit)
 	params := &sysdig.GetQueryV1Params{
 		Query: query,
 		Limit: &limitQuery,
+	}
+	if err := tw.ApplyToParams(params); err != nil {
+		return mcp.NewToolResultErrorFromErr("failed to build eval time", err), nil
 	}
 
 	httpResp, err := t.SysdigClient.GetQueryV1(ctx, params)
@@ -70,7 +82,7 @@ func (t *K8sListUnderutilizedPodsMemoryQuota) handle(ctx context.Context, reques
 	return mcp.NewToolResultJSON(queryResponse)
 }
 
-func buildUnderutilizedPodsByMemoryQuery(clusterName, namespaceName string) string {
+func buildUnderutilizedPodsByMemoryQuery(clusterName, namespaceName string, tw TimeWindow) string {
 	filters := []string{}
 	if clusterName != "" {
 		filters = append(filters, fmt.Sprintf(`kube_cluster_name="%s"`, clusterName))
@@ -84,5 +96,13 @@ func buildUnderutilizedPodsByMemoryQuery(clusterName, namespaceName string) stri
 		filterString = fmt.Sprintf("{%s}", strings.Join(filters, ","))
 	}
 
-	return fmt.Sprintf("sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_memory_used_bytes%s) / (sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(sysdig_container_memory_limit_bytes%s) > 0) < 0.25", filterString, filterString)
+	used := fmt.Sprintf("sysdig_container_memory_used_bytes%s", filterString)
+	limit := fmt.Sprintf("sysdig_container_memory_limit_bytes%s", filterString)
+	if !tw.IsZero() {
+		sel := tw.RangeSelector()
+		used = fmt.Sprintf("avg_over_time(%s%s)", used, sel)
+		limit = fmt.Sprintf("avg_over_time(%s%s)", limit, sel)
+	}
+
+	return fmt.Sprintf("sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(%s) / (sum by (kube_cluster_name, kube_namespace_name, kube_pod_name)(%s) > 0) < 0.25", used, limit)
 }
