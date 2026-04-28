@@ -22,7 +22,7 @@ var _ = Describe("ParseTimeWindow", func() {
 	BeforeEach(func() {
 		ctrl = gomock.NewController(GinkgoT())
 		mockClock = mocks_clock.NewMockClock(ctrl)
-		now = time.Date(2026, time.April, 16, 12, 0, 0, 500000000, time.UTC) // has sub-second part
+		now = time.Date(2026, time.April, 16, 12, 0, 0, 500000000, time.UTC)
 	})
 
 	AfterEach(func() { ctrl.Finish() })
@@ -102,8 +102,6 @@ var _ = Describe("ParseTimeWindow", func() {
 	})
 
 	It("truncates sub-second precision from now so RangeSelector never emits [0s]", func() {
-		// now has 500ms; start is in the same second — after truncation end == start,
-		// which must be rejected rather than silently producing [0s].
 		mockClock.EXPECT().Now().Return(now)
 		_, err := tools.ParseTimeWindow(makeRequest(map[string]any{
 			"start": "2026-04-16T12:00:00Z",

@@ -118,9 +118,6 @@ func buildKubeWorkloadInfoQuery(status, clusterName, namespaceName, workloadName
 	}
 
 	if !tw.IsZero() {
-		// For "unavailable" the canonical Sysdig idiom keeps a > 0 guard to drop
-		// workloads that were healthy all window (see advisories.json:206).
-		// For desired/ready/running, zero is a legitimate observed value.
 		wrapped := fmt.Sprintf("max_over_time(%s%s)", metric, tw.RangeSelector())
 		if status == "unavailable" {
 			return wrapped + " > 0"

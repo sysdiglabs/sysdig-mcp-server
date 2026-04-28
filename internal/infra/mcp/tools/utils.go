@@ -57,8 +57,6 @@ func RequiredPermissionsFromTool(tool mcp.Tool) []string {
 	return requiredPermissions
 }
 
-// --- Time-window support for k8s_list_* Monitor tools --------------------
-
 const (
 	windowedQueryTimeout  = "60s"
 	timeParamStart        = "start"
@@ -67,32 +65,23 @@ const (
 	endParamDescription   = "End of the query window as an RFC3339 timestamp (e.g. 2026-04-01T01:00:00Z). Requires start. If in the future, clamped to now."
 )
 
-// TimeWindow is a resolved, validated [Start, End] pair for a historical PromQL query.
-// A zero-value TimeWindow means no window was requested — the caller should emit its
-// existing instant query and leave GetQueryV1Params.Time nil.
 type TimeWindow struct {
 	Start time.Time
 	End   time.Time
 }
 
-// IsZero reports whether no time window was requested.
 func (w TimeWindow) IsZero() bool {
 	return w.Start.IsZero() && w.End.IsZero()
 }
 
-// RangeSelector returns the PromQL range-selector literal for this window, e.g. "[3600s]".
 func (w TimeWindow) RangeSelector() string {
 	return fmt.Sprintf("[%ds]", int64(w.End.Sub(w.Start).Seconds()))
 }
 
-// WindowSeconds returns the duration of the window in whole seconds.
 func (w TimeWindow) WindowSeconds() int64 {
 	return int64(w.End.Sub(w.Start).Seconds())
 }
 
-// EvalTime returns a *sysdig.Time suitable for GetQueryV1Params.Time. The value is
-// the End instant as unix seconds — the native format accepted by Sysdig's internal
-// PromQL stack (confirmed against backend PrometheusFacadeController.java:113).
 func (w TimeWindow) EvalTime() (*sysdig.Time, error) {
 	if w.IsZero() {
 		return nil, nil
@@ -104,9 +93,6 @@ func (w TimeWindow) EvalTime() (*sysdig.Time, error) {
 	return &qt, nil
 }
 
-// ApplyToParams sets Time and, for windowed queries, Timeout on params.
-// It consolidates the three-step boilerplate (EvalTime, set Time, set Timeout)
-// that every k8s_list_* handler would otherwise repeat.
 func (w TimeWindow) ApplyToParams(params *sysdig.GetQueryV1Params) error {
 	evalTime, err := w.EvalTime()
 	if err != nil {
@@ -120,8 +106,6 @@ func (w TimeWindow) ApplyToParams(params *sysdig.GetQueryV1Params) error {
 	return nil
 }
 
-// WithTimeWindowParams returns a ToolOption that declares the shared "start" and "end"
-// RFC3339 parameters on a tool.
 func WithTimeWindowParams() mcp.ToolOption {
 	return func(t *mcp.Tool) {
 		mcp.WithString(timeParamStart, mcp.Description(startParamDescription))(t)
@@ -129,14 +113,8 @@ func WithTimeWindowParams() mcp.ToolOption {
 	}
 }
 
-// ParseTimeWindow reads "start" and "end" from the request, validates them, and returns
-// the resolved TimeWindow.
-//
-//   - Both absent:       returns zero-value TimeWindow, nil error.
-//   - end without start: error ("end requires start").
-//   - start without end: end = clk.Now().
-//   - invalid RFC3339:   error naming the bad field.
-//   - end <= start:      error.
+// Reads "start" and "end" from the request, validates them, and return the resolved TimeWindow.
+
 func ParseTimeWindow(request mcp.CallToolRequest, clk clock.Clock) (TimeWindow, error) {
 	startStr := mcp.ParseString(request, timeParamStart, "")
 	endStr := mcp.ParseString(request, timeParamEnd, "")
