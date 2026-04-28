@@ -100,10 +100,6 @@ func buildTopUnavailablePodsQuery(limit int, clusterName, namespaceName, workloa
 	}
 
 	if !tw.IsZero() {
-		// Sysdig-canonical pattern (backend/.../advisories.json:206 — WorkloadReplicasMismatch):
-		// min_over_time(kube_workload_status_unavailable[W]) >= 1 — workload was unavailable
-		// for every scrape tick in the window. Simpler and more accurate than computing
-		// desired - ready across the window.
 		filtersStr := strings.Join(baseFilters, ",")
 		return fmt.Sprintf("topk(%d, sum by (kube_cluster_name, kube_namespace_name, kube_workload_name) (min_over_time(kube_workload_status_unavailable{%s}%s) >= 1))",
 			limit, filtersStr, tw.RangeSelector())
