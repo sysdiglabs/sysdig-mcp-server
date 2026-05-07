@@ -10,6 +10,7 @@ import (
 
 	mocks_clock "github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock/mocks"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp/tools"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
 var _ = Describe("ParseTimeWindow", func() {
@@ -101,11 +102,92 @@ var _ = Describe("ParseTimeWindow", func() {
 		Expect(tw.End).To(Equal(time.Date(2026, time.April, 16, 11, 0, 0, 0, time.UTC)))
 	})
 
-	It("truncates sub-second precision from now so RangeSelector never emits [0s]", func() {
+	It("rejects start at or after the truncated current second (end is not after start)", func() {
 		mockClock.EXPECT().Now().Return(now)
 		_, err := tools.ParseTimeWindow(makeRequest(map[string]any{
 			"start": "2026-04-16T12:00:00Z",
 		}), mockClock)
-		Expect(err).To(HaveOccurred())
+		Expect(err).To(MatchError(ContainSubstring("must be after start")))
+	})
+
+	It("rejects windows longer than 90 days", func() {
+		mockClock.EXPECT().Now().Return(now)
+		_, err := tools.ParseTimeWindow(makeRequest(map[string]any{
+			"start": "2026-01-01T00:00:00Z",
+			"end":   "2026-04-30T00:00:00Z",
+		}), mockClock)
+		Expect(err).To(MatchError(ContainSubstring("exceeds the maximum of 90 days")))
+	})
+
+	It("accepts windows of exactly 90 days", func() {
+		mockClock.EXPECT().Now().Return(now)
+		_, err := tools.ParseTimeWindow(makeRequest(map[string]any{
+			"start": "2026-01-01T00:00:00Z",
+			"end":   "2026-04-01T00:00:00Z",
+		}), mockClock)
+		Expect(err).NotTo(HaveOccurred())
+	})
+})
+
+var _ = Describe("TimeWindow methods", func() {
+	var (
+		start = time.Date(2026, time.April, 16, 10, 0, 0, 0, time.UTC)
+		end   = time.Date(2026, time.April, 16, 11, 0, 0, 0, time.UTC)
+		tw    = tools.TimeWindow{Start: start, End: end}
+	)
+
+	Describe("RangeSelector", func() {
+		It("returns the PromQL range-selector literal in seconds for a 1h window", func() {
+			Expect(tw.RangeSelector()).To(Equal("[3600s]"))
+		})
+
+		It("panics when called on a zero TimeWindow", func() {
+			Expect(func() { tools.TimeWindow{}.RangeSelector() }).To(PanicWith("RangeSelector called on zero TimeWindow"))
+		})
+	})
+
+	Describe("WindowSeconds", func() {
+		It("returns the window length in whole seconds for a 1h window", func() {
+			Expect(tw.WindowSeconds()).To(Equal(int64(3600)))
+		})
+
+		It("panics when called on a zero TimeWindow", func() {
+			Expect(func() { tools.TimeWindow{}.WindowSeconds() }).To(PanicWith("WindowSeconds called on zero TimeWindow"))
+		})
+	})
+
+	Describe("EvalTime", func() {
+		It("returns nil eval time for a zero TimeWindow", func() {
+			et, err := tools.TimeWindow{}.EvalTime()
+			Expect(err).NotTo(HaveOccurred())
+			Expect(et).To(BeNil())
+		})
+
+		It("returns a sysdig.Time encoding the window's End for a non-zero window", func() {
+			et, err := tw.EvalTime()
+			Expect(err).NotTo(HaveOccurred())
+			Expect(et).NotTo(BeNil())
+
+			var expected sysdig.Time
+			Expect(expected.FromQueryTime1(end.Unix())).To(Succeed())
+			Expect(*et).To(Equal(expected))
+		})
+	})
+
+	Describe("ApplyToParams", func() {
+		It("leaves params untouched on a zero TimeWindow", func() {
+			params := &sysdig.GetQueryV1Params{}
+			Expect(tools.TimeWindow{}.ApplyToParams(params)).To(Succeed())
+			Expect(params.Time).To(BeNil())
+			Expect(params.Timeout).To(BeNil())
+		})
+
+		It("sets Time and Timeout for a non-zero window", func() {
+			params := &sysdig.GetQueryV1Params{}
+			Expect(tw.ApplyToParams(params)).To(Succeed())
+			Expect(params.Time).NotTo(BeNil())
+			Expect(params.Timeout).NotTo(BeNil())
+			Expect(*params.Timeout).To(Equal(sysdig.Timeout("60s")))
+		})
 	})
 })

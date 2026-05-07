@@ -59,9 +59,10 @@ func RequiredPermissionsFromTool(tool mcp.Tool) []string {
 
 const (
 	windowedQueryTimeout  = "60s"
+	maxWindowDuration     = 90 * 24 * time.Hour
 	timeParamStart        = "start"
 	timeParamEnd          = "end"
-	startParamDescription = "Start of the query window as an RFC3339 timestamp (e.g. 2026-04-01T00:00:00Z). When omitted, the tool returns an instant snapshot (current behavior). When provided without end, end defaults to now."
+	startParamDescription = "Start of the query window as an RFC3339 timestamp (e.g. 2026-04-01T00:00:00Z). When omitted, the tool returns an instant snapshot (current behavior). When provided without end, end defaults to now. The window between start and end may not exceed 90 days."
 	endParamDescription   = "End of the query window as an RFC3339 timestamp (e.g. 2026-04-01T01:00:00Z). Requires start. If in the future, clamped to now."
 )
 
@@ -75,10 +76,16 @@ func (w TimeWindow) IsZero() bool {
 }
 
 func (w TimeWindow) RangeSelector() string {
+	if w.IsZero() {
+		panic("RangeSelector called on zero TimeWindow")
+	}
 	return fmt.Sprintf("[%ds]", int64(w.End.Sub(w.Start).Seconds()))
 }
 
 func (w TimeWindow) WindowSeconds() int64 {
+	if w.IsZero() {
+		panic("WindowSeconds called on zero TimeWindow")
+	}
 	return int64(w.End.Sub(w.Start).Seconds())
 }
 
@@ -94,15 +101,16 @@ func (w TimeWindow) EvalTime() (*sysdig.Time, error) {
 }
 
 func (w TimeWindow) ApplyToParams(params *sysdig.GetQueryV1Params) error {
+	if w.IsZero() {
+		return nil
+	}
 	evalTime, err := w.EvalTime()
 	if err != nil {
 		return err
 	}
 	params.Time = evalTime
-	if !w.IsZero() {
-		timeout := sysdig.Timeout(windowedQueryTimeout)
-		params.Timeout = &timeout
-	}
+	timeout := sysdig.Timeout(windowedQueryTimeout)
+	params.Timeout = &timeout
 	return nil
 }
 
@@ -114,7 +122,6 @@ func WithTimeWindowParams() mcp.ToolOption {
 }
 
 // Reads "start" and "end" from the request, validates them, and return the resolved TimeWindow.
-
 func ParseTimeWindow(request mcp.CallToolRequest, clk clock.Clock) (TimeWindow, error) {
 	startStr := mcp.ParseString(request, timeParamStart, "")
 	endStr := mcp.ParseString(request, timeParamEnd, "")
@@ -148,6 +155,10 @@ func ParseTimeWindow(request mcp.CallToolRequest, clk clock.Clock) (TimeWindow, 
 
 	if !end.After(start) {
 		return TimeWindow{}, fmt.Errorf("end (%s) must be after start (%s)", end.Format(time.RFC3339), start.Format(time.RFC3339))
+	}
+
+	if end.Sub(start) > maxWindowDuration {
+		return TimeWindow{}, fmt.Errorf("window between start (%s) and end (%s) exceeds the maximum of 90 days", start.Format(time.RFC3339), end.Format(time.RFC3339))
 	}
 
 	return TimeWindow{Start: start, End: end}, nil

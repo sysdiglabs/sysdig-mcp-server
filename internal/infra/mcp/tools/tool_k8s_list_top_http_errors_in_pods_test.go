@@ -160,4 +160,45 @@ var _ = Describe("KubernetesListTopHttpErrorsInPods Tool", func() {
 			Expect(result.Content[0].(mcp.TextContent).Text).To(ContainSubstring("invalid interval format"))
 		})
 	})
+
+	When("the time window is invalid", func() {
+		It("rejects an unparseable start", func() {
+			serverTool := mcpServer.GetTool("k8s_list_top_http_errors_in_pods")
+			result, err := serverTool.Handler(ctx, mcp.CallToolRequest{
+				Params: mcp.CallToolParams{
+					Name:      "k8s_list_top_http_errors_in_pods",
+					Arguments: map[string]any{"start": "not-a-timestamp"},
+				},
+			})
+			Expect(err).NotTo(HaveOccurred())
+			Expect(result.IsError).To(BeTrue())
+		})
+
+		It("rejects an end before start", func() {
+			serverTool := mcpServer.GetTool("k8s_list_top_http_errors_in_pods")
+			result, err := serverTool.Handler(ctx, mcp.CallToolRequest{
+				Params: mcp.CallToolParams{
+					Name: "k8s_list_top_http_errors_in_pods",
+					Arguments: map[string]any{
+						"start": "2026-04-16T11:00:00Z",
+						"end":   "2026-04-16T10:00:00Z",
+					},
+				},
+			})
+			Expect(err).NotTo(HaveOccurred())
+			Expect(result.IsError).To(BeTrue())
+		})
+
+		It("rejects an end provided without start", func() {
+			serverTool := mcpServer.GetTool("k8s_list_top_http_errors_in_pods")
+			result, err := serverTool.Handler(ctx, mcp.CallToolRequest{
+				Params: mcp.CallToolParams{
+					Name:      "k8s_list_top_http_errors_in_pods",
+					Arguments: map[string]any{"end": "2026-04-16T11:00:00Z"},
+				},
+			})
+			Expect(err).NotTo(HaveOccurred())
+			Expect(result.IsError).To(BeTrue())
+		})
+	})
 })
