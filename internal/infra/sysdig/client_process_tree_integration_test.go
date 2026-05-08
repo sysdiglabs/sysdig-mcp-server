@@ -24,7 +24,10 @@ var _ = Describe("Sysdig Process Tree Client", func() {
 		client, err = sysdig.NewSysdigClient(sysdig.WithFixedHostAndToken(sysdigURL, sysdigToken))
 		Expect(err).ToNot(HaveOccurred())
 
-		eventID = "1890fe2753b95afb04554c419d131851"
+		// This event ID points to a real syscall event with a process tree. It will expire
+		// due to Sysdig's retention policy. When it does, replace it with a recent syscall event
+		// that has a process tree (see AGENTS.md §4.5 for instructions).
+		eventID = "18ad8dc65d2d18e391f742f8e55e7778"
 	})
 
 	Context("when fetching the process tree for an event", func() {

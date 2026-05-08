@@ -163,4 +163,3 @@ func ParseTimeWindow(request mcp.CallToolRequest, clk clock.Clock) (TimeWindow, 
 
 	return TimeWindow{Start: start, End: end}, nil
 }
-
