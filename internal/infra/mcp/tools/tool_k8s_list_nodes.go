@@ -9,28 +9,32 @@ import (
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
 type K8sListNodes struct {
 	SysdigClient sysdig.ExtendedClientWithResponsesInterface
+	clock        clock.Clock
 }
 
-func NewK8sListNodes(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *K8sListNodes {
+func NewK8sListNodes(sysdigClient sysdig.ExtendedClientWithResponsesInterface, clk clock.Clock) *K8sListNodes {
 	return &K8sListNodes{
 		SysdigClient: sysdigClient,
+		clock:        clk,
 	}
 }
 
 func (t *K8sListNodes) RegisterInServer(s *server.MCPServer) {
 	tool := mcp.NewTool("k8s_list_nodes",
-		mcp.WithDescription("Lists the information from all nodes, all nodes from a cluster or a specific node with some name."),
+		mcp.WithDescription("Lists the information from all nodes, all nodes from a cluster or a specific node with some name. Optionally pass start/end (RFC3339) to list nodes that existed at any point in the window."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("node_name", mcp.Description("The name of the node to filter by.")),
 		mcp.WithNumber("limit",
 			mcp.Description("Maximum number of nodes to return."),
 			mcp.DefaultNumber(10),
 		),
+		WithTimeWindowParams(),
 		mcp.WithOutputSchema[map[string]any](),
 		mcp.WithReadOnlyHintAnnotation(true),
 		mcp.WithDestructiveHintAnnotation(false),
@@ -44,12 +48,20 @@ func (t *K8sListNodes) handle(ctx context.Context, request mcp.CallToolRequest) 
 	nodeName := mcp.ParseString(request, "node_name", "")
 	limit := mcp.ParseInt(request, "limit", 10)
 
-	query := buildKubeNodeInfoQuery(clusterName, nodeName)
+	tw, err := ParseTimeWindow(request, t.clock)
+	if err != nil {
+		return mcp.NewToolResultErrorFromErr("invalid time window", err), nil
+	}
+
+	query := buildKubeNodeInfoQuery(clusterName, nodeName, tw)
 
 	limitQuery := sysdig.LimitQuery(limit)
 	params := &sysdig.GetQueryV1Params{
 		Query: query,
 		Limit: &limitQuery,
+	}
+	if err := tw.ApplyToParams(params); err != nil {
+		return mcp.NewToolResultErrorFromErr("failed to build eval time", err), nil
 	}
 
 	httpResp, err := t.SysdigClient.GetQueryV1(ctx, params)
@@ -70,7 +82,7 @@ func (t *K8sListNodes) handle(ctx context.Context, request mcp.CallToolRequest) 
 	return mcp.NewToolResultJSON(queryResponse)
 }
 
-func buildKubeNodeInfoQuery(clusterName, nodeName string) string {
+func buildKubeNodeInfoQuery(clusterName, nodeName string, tw TimeWindow) string {
 	filters := []string{}
 	if clusterName != "" {
 		filters = append(filters, fmt.Sprintf("cluster=\"%s\"", clusterName))
@@ -79,9 +91,12 @@ func buildKubeNodeInfoQuery(clusterName, nodeName string) string {
 		filters = append(filters, fmt.Sprintf("kube_node_name=\"%s\"", nodeName))
 	}
 
-	if len(filters) == 0 {
-		return "kube_node_info"
+	metric := "kube_node_info"
+	if len(filters) > 0 {
+		metric = fmt.Sprintf("kube_node_info{%s}", strings.Join(filters, ","))
 	}
-
-	return fmt.Sprintf("kube_node_info{%s}", strings.Join(filters, ","))
+	if !tw.IsZero() {
+		return fmt.Sprintf("max_over_time(%s%s) > 0", metric, tw.RangeSelector())
+	}
+	return metric
 }

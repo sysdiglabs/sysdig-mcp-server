@@ -9,22 +9,25 @@ import (
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
+	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
 type K8sListTopCPUConsumedContainer struct {
 	SysdigClient sysdig.ExtendedClientWithResponsesInterface
+	clock        clock.Clock
 }
 
-func NewK8sListTopCPUConsumedContainer(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *K8sListTopCPUConsumedContainer {
+func NewK8sListTopCPUConsumedContainer(sysdigClient sysdig.ExtendedClientWithResponsesInterface, clk clock.Clock) *K8sListTopCPUConsumedContainer {
 	return &K8sListTopCPUConsumedContainer{
 		SysdigClient: sysdigClient,
+		clock:        clk,
 	}
 }
 
 func (t *K8sListTopCPUConsumedContainer) RegisterInServer(s *server.MCPServer) {
 	tool := mcp.NewTool("k8s_list_top_cpu_consumed_container",
-		mcp.WithDescription("Identifies the Kubernetes containers consuming the most CPU (in cores)."),
+		mcp.WithDescription("Identifies the Kubernetes containers consuming the most CPU (in cores). Optionally pass start/end (RFC3339) to query a historical window (averaged over the window) instead of the current instant snapshot."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
 		mcp.WithString("workload_type", mcp.Description("The type of the workload to filter by.")),
@@ -33,6 +36,7 @@ func (t *K8sListTopCPUConsumedContainer) RegisterInServer(s *server.MCPServer) {
 			mcp.Description("Maximum number of containers to return."),
 			mcp.DefaultNumber(20),
 		),
+		WithTimeWindowParams(),
 		mcp.WithOutputSchema[map[string]any](),
 		mcp.WithReadOnlyHintAnnotation(true),
 		mcp.WithDestructiveHintAnnotation(false),
@@ -48,10 +52,18 @@ func (t *K8sListTopCPUConsumedContainer) handle(ctx context.Context, request mcp
 	workloadName := mcp.ParseString(request, "workload_name", "")
 	limit := mcp.ParseInt(request, "limit", 20)
 
-	query := buildTopCPUConsumedByContainerQuery(clusterName, namespaceName, workloadType, workloadName, limit)
+	tw, err := ParseTimeWindow(request, t.clock)
+	if err != nil {
+		return mcp.NewToolResultErrorFromErr("invalid time window", err), nil
+	}
+
+	query := buildTopCPUConsumedByContainerQuery(clusterName, namespaceName, workloadType, workloadName, limit, tw)
 
 	params := &sysdig.GetQueryV1Params{
 		Query: query,
+	}
+	if err := tw.ApplyToParams(params); err != nil {
+		return mcp.NewToolResultErrorFromErr("failed to build eval time", err), nil
 	}
 
 	httpResp, err := t.SysdigClient.GetQueryV1(ctx, params)
@@ -72,7 +84,7 @@ func (t *K8sListTopCPUConsumedContainer) handle(ctx context.Context, request mcp
 	return mcp.NewToolResultJSON(queryResponse)
 }
 
-func buildTopCPUConsumedByContainerQuery(clusterName, namespaceName, workloadType, workloadName string, limit int) string {
+func buildTopCPUConsumedByContainerQuery(clusterName, namespaceName, workloadType, workloadName string, limit int, tw TimeWindow) string {
 	filters := []string{}
 	if clusterName != "" {
 		filters = append(filters, fmt.Sprintf(`kube_cluster_name="%s"`, clusterName))
@@ -92,5 +104,10 @@ func buildTopCPUConsumedByContainerQuery(clusterName, namespaceName, workloadTyp
 		filterString = fmt.Sprintf("{%s}", strings.Join(filters, ","))
 	}
 
-	return fmt.Sprintf("topk(%d, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, container_label_io_kubernetes_container_name)(sysdig_container_cpu_cores_used%s))", limit, filterString)
+	metric := fmt.Sprintf("sysdig_container_cpu_cores_used%s", filterString)
+	if !tw.IsZero() {
+		metric = fmt.Sprintf("avg_over_time(%s%s)", metric, tw.RangeSelector())
+	}
+
+	return fmt.Sprintf("topk(%d, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name, container_label_io_kubernetes_container_name)(%s))", limit, metric)
 }

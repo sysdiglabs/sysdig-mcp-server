@@ -131,6 +131,8 @@ The server dynamically filters the available tools based on the permissions asso
   - **Required Permission**: `metrics-data.read`
   - **Sample Prompt**: "Show the top 10 underutilized pods by memory quota in cluster 'production'"
 
+> **Note:** When a time window is provided, the underlying PromQL is wrapped in the aggregation appropriate for each tool (`avg_over_time`, `max_over_time`, `min_over_time`, `increase`, etc.) and evaluated at `end`. See [`internal/infra/mcp/tools/README.md`](./internal/infra/mcp/tools/README.md) for the per-tool aggregation table.
+
 ### Sysdig Secure
 
 - **`list_runtime_events`**
