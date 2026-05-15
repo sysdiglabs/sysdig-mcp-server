@@ -10,8 +10,6 @@ import (
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
-const baseFilter = `not originator in ("benchmarks","compliance","cloudsec","scanning","hostscanning")`
-
 type ToolListRuntimeEvents struct {
 	sysdigClient sysdig.ExtendedClientWithResponsesInterface
 	clock        clock.Clock
@@ -53,10 +51,8 @@ func toolRequestToEventsV1Params(request mcp.CallToolRequest, clock clock.Clock)
 		params.From = new(from.UnixNano())
 	}
 
-	params.Filter = new(baseFilter)
-	if filterExpr := request.GetString("filter_expr", ""); filterExpr != "" {
-		params.Filter = new(baseFilter + " and " + filterExpr)
-	}
+	filter := composeSecureEventsFilter(request.GetString("filter_expr", ""))
+	params.Filter = &filter
 
 	return params
 }
@@ -76,30 +72,14 @@ func (h *ToolListRuntimeEvents) RegisterInServer(s *server.MCPServer) {
 			mcp.DefaultNumber(50),
 		),
 		mcp.WithString("filter_expr",
-			mcp.Description(`Logical filter expression to select runtime security events.
-Supports operators: =, !=, in, contains, startsWith, exists.
-Combine with and/or/not.
-Key attributes include: severity (codes "0"-"7"), originator, sourceType, ruleName, rawEventCategory, engine, source, category, kubernetes.cluster.name, host.hostName, container.imageName, aws.accountId, azure.subscriptionId, gcp.projectId, policyId, trigger.
-
-To find machine learning (ML) detections (e.g. crypto mining, anomalous logins), use engine or source filters:
-- All ML events: 'engine = "machineLearning"'
-- AWS ML detections: 'source = "agentless-aws-ml"'
-- Okta ML detections: 'source = "agentless-okta-ml"'
-- By category: 'category = "machine-learning"'
-
-You can specify the severity of the events based on the following cases:
-- high-severity: 'severity in ("0","1","2","3")'
-- medium: 'severity in ("4","5")'
-- low: 'severity in ("6")'
-- info: 'severity in ("7")'
-`),
+			mcp.Description(secureEventsFilterDSL),
 			Examples(
 				`originator in ("awsCloudConnector","gcp") and not sourceType = "auditTrail"`,
 				`ruleName contains "Login"`,
 				`severity in ("0","1","2","3")`,
 				`kubernetes.cluster.name = "cluster1"`,
-				`host.hostName startsWith "web-"`,
-				`container.imageName = "nginx:latest" and originator = "hostscanning"`,
+				`host.hostName starts with "web-"`,
+				`container.image.repo = "nginx" and container.image.tag = "latest"`,
 				`aws.accountId = "123456789012"`,
 				`policyId = "CIS_Docker_Benchmark"`,
 				`engine = "machineLearning"`,

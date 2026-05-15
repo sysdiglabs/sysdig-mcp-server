@@ -150,6 +150,21 @@ The server dynamically filters the available tools based on the permissions asso
   - **Required Permission**: `policy-events.read`
   - **Sample Prompt**: "Get the process tree for event ID abc123"
 
+- **`count_runtime_events`**
+  - **Description**: Count runtime security events matching a filter expression in the last N hours, without paginating event bodies. Returns a histogram across 16 event categories, each bucketed by severity codes "0"-"7".
+  - **Required Permission**: `policy-events.read`
+  - **Sample Prompt**: "How many high-severity runtime events fired in cluster 'prod-gke' in the last 24 hours?"
+
+- **`runtime_events_timeseries`**
+  - **Description**: Bucket runtime security event counts over time, grouped by a categorical field (default `severity`). Use to find when a burst started or ended without paginating; minimum bucket width is 1 minute.
+  - **Required Permission**: `policy-events.read`
+  - **Sample Prompt**: "When did the spike in Suspicious Outbound Connection events on cluster 'prod-gke' start and stop?"
+
+- **`discover_runtime_event_field_values`**
+  - **Description**: Discover the distinct values of a runtime-events field present in a time window. Returns `suggested` (values active in the window) and `other` (values known to the tenant but inactive). Use BEFORE writing filters to avoid guessing cluster, rule, or image names.
+  - **Required Permission**: `policy-events.read`
+  - **Sample Prompt**: "Which clusters produced any runtime events in the last hour?" or "What rule names are firing right now?"
+
 - **`run_sysql`**
   - **Description**: Execute a pre-written SysQL query directly (use only when user provides explicit query).
   - **Required Permission**: `sage.exec`, `risks.read`

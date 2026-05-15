@@ -3823,6 +3823,26 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetEFOIntegratio
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEFOIntegrationByIdV2WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetEFOIntegrationByIdV2WithResponse), varargs...)
 }
 
+// GetEventFieldValuesWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetEventFieldValuesWithResponse(ctx context.Context, params *sysdig.GetEventFieldValuesParams, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetEventFieldValuesResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetEventFieldValuesWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetEventFieldValuesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetEventFieldValuesWithResponse indicates an expected call of GetEventFieldValuesWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetEventFieldValuesWithResponse(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEventFieldValuesWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetEventFieldValuesWithResponse), varargs...)
+}
+
 // GetEventV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) GetEventV1(ctx context.Context, eventId sysdig.EventId, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -5601,6 +5621,46 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetSBOMV1beta1Wi
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, params}, reqEditors...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSBOMV1beta1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetSBOMV1beta1WithResponse), varargs...)
+}
+
+// GetSecureEventsCountWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetSecureEventsCountWithResponse(ctx context.Context, params *sysdig.GetSecureEventsCountParams, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetSecureEventsCountResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetSecureEventsCountWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetSecureEventsCountResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetSecureEventsCountWithResponse indicates an expected call of GetSecureEventsCountWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetSecureEventsCountWithResponse(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSecureEventsCountWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetSecureEventsCountWithResponse), varargs...)
+}
+
+// GetSecureEventsTimeseriesByWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetSecureEventsTimeseriesByWithResponse(ctx context.Context, params *sysdig.GetSecureEventsTimeseriesByParams, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetSecureEventsTimeseriesByResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetSecureEventsTimeseriesByWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetSecureEventsTimeseriesByResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetSecureEventsTimeseriesByWithResponse indicates an expected call of GetSecureEventsTimeseriesByWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetSecureEventsTimeseriesByWithResponse(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSecureEventsTimeseriesByWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetSecureEventsTimeseriesByWithResponse), varargs...)
 }
 
 // GetSecureVulnerabilityV1Bundles mocks base method.

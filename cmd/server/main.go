@@ -116,6 +116,9 @@ func setupHandler(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *mcp
 		tools.NewToolListRuntimeEvents(sysdigClient, systemClock),
 		tools.NewToolGetEventInfo(sysdigClient),
 		tools.NewToolGetEventProcessTree(sysdigClient),
+		tools.NewToolCountRuntimeEvents(sysdigClient, systemClock),
+		tools.NewToolRuntimeEventsTimeseries(sysdigClient, systemClock),
+		tools.NewToolDiscoverRuntimeEventFieldValues(sysdigClient, systemClock),
 		tools.NewToolRunSysql(sysdigClient),
 		tools.NewToolGenerateSysql(sysdigClient),
 
