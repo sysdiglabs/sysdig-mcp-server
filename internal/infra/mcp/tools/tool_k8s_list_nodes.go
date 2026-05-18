@@ -26,11 +26,13 @@ func NewK8sListNodes(sysdigClient sysdig.ExtendedClientWithResponsesInterface, c
 }
 
 func (t *K8sListNodes) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("k8s_list_nodes",
+	tool := mcp.NewTool(
+		"k8s_list_nodes",
 		mcp.WithDescription("Lists the information from all nodes, all nodes from a cluster or a specific node with some name. Optionally pass start/end (RFC3339) to list nodes that existed at any point in the window."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("node_name", mcp.Description("The name of the node to filter by.")),
-		mcp.WithNumber("limit",
+		mcp.WithNumber(
+			"limit",
 			mcp.Description("Maximum number of nodes to return."),
 			mcp.DefaultNumber(10),
 		),

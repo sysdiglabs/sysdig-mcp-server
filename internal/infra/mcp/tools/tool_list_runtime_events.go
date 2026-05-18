@@ -62,20 +62,25 @@ func toolRequestToEventsV1Params(request mcp.CallToolRequest, clock clock.Clock)
 }
 
 func (h *ToolListRuntimeEvents) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("list_runtime_events",
+	tool := mcp.NewTool(
+		"list_runtime_events",
 		mcp.WithDescription("List runtime security events from the last given hours, optionally filtered by severity level. Includes both Falco-based and machine learning (ML) detections such as crypto mining, anomalous logins, and other ML-detected threats."),
-		mcp.WithString("cursor",
+		mcp.WithString(
+			"cursor",
 			mcp.Description("Cursor for pagination."),
 		),
-		mcp.WithNumber("scope_hours",
+		mcp.WithNumber(
+			"scope_hours",
 			mcp.Description("Number of hours back from now to include events."),
 			mcp.DefaultNumber(1),
 		),
-		mcp.WithNumber("limit",
+		mcp.WithNumber(
+			"limit",
 			mcp.Description("Maximum number of events to return. Maximum allowed value is 200."),
 			mcp.DefaultNumber(50),
 		),
-		mcp.WithString("filter_expr",
+		mcp.WithString(
+			"filter_expr",
 			mcp.Description(`Logical filter expression to select runtime security events.
 Supports operators: =, !=, in, contains, startsWith, exists.
 Combine with and/or/not.

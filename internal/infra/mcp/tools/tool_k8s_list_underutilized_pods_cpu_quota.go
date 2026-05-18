@@ -26,11 +26,13 @@ func NewK8sListUnderutilizedPodsCPUQuota(sysdigClient sysdig.ExtendedClientWithR
 }
 
 func (t *K8sListUnderutilizedPodsCPUQuota) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("k8s_list_underutilized_pods_cpu_quota",
+	tool := mcp.NewTool(
+		"k8s_list_underutilized_pods_cpu_quota",
 		mcp.WithDescription("List Kubernetes pods with CPU usage below 25% of the quota limit. Optionally pass start/end (RFC3339) to evaluate the ratio averaged over a historical window instead of the current instant snapshot."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
-		mcp.WithNumber("limit",
+		mcp.WithNumber(
+			"limit",
 			mcp.Description("Maximum number of pods to return."),
 			mcp.DefaultNumber(10),
 		),

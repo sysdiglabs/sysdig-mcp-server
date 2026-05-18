@@ -26,9 +26,11 @@ func NewK8sListWorkloads(sysdigClient sysdig.ExtendedClientWithResponsesInterfac
 }
 
 func (t *K8sListWorkloads) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("k8s_list_workloads",
+	tool := mcp.NewTool(
+		"k8s_list_workloads",
 		mcp.WithDescription("Lists all the workloads that are in a particular state, desired, ready, running or unavailable. The LLM can filter by cluster, namespace, workload name or type. Optionally pass start/end (RFC3339) to query over a historical window (peak value per workload; for the 'unavailable' status only workloads unavailable at any point in the window are returned)."),
-		mcp.WithString("status",
+		mcp.WithString(
+			"status",
 			mcp.Description("The status of the workload."),
 			mcp.Enum("desired", "ready", "running", "unavailable"),
 			mcp.Required(),
@@ -36,11 +38,13 @@ func (t *K8sListWorkloads) RegisterInServer(s *server.MCPServer) {
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
 		mcp.WithString("workload_name", mcp.Description("The name of the workload to filter by.")),
-		mcp.WithString("workload_type",
+		mcp.WithString(
+			"workload_type",
 			mcp.Description("The type of the workload."),
 			mcp.Enum("deployment", "daemonset", "statefulset"),
 		),
-		mcp.WithNumber("limit",
+		mcp.WithNumber(
+			"limit",
 			mcp.Description("Maximum number of workloads to return."),
 			mcp.DefaultNumber(10),
 		),

@@ -45,21 +45,23 @@ var _ = Describe("KubernetesListTopHttpErrorsInPods Tool", func() {
 	})
 
 	When("listing top http errors", func() {
-		DescribeTable("it succeeds", func(ctx context.Context, toolName string, request mcp.CallToolRequest, expectedParamsRequested sysdig.GetQueryV1Params) {
-			mockSysdig.EXPECT().GetQueryV1(gomock.Any(), &expectedParamsRequested).Return(&http.Response{
-				StatusCode: http.StatusOK,
-				Body:       io.NopCloser(bytes.NewBufferString(`{"status":"success"}`)),
-			}, nil)
+		DescribeTable(
+			"it succeeds", func(ctx context.Context, toolName string, request mcp.CallToolRequest, expectedParamsRequested sysdig.GetQueryV1Params) {
+				mockSysdig.EXPECT().GetQueryV1(gomock.Any(), &expectedParamsRequested).Return(&http.Response{
+					StatusCode: http.StatusOK,
+					Body:       io.NopCloser(bytes.NewBufferString(`{"status":"success"}`)),
+				}, nil)
 
-			serverTool := mcpServer.GetTool(toolName)
-			result, err := serverTool.Handler(ctx, request)
-			Expect(err).NotTo(HaveOccurred())
+				serverTool := mcpServer.GetTool(toolName)
+				result, err := serverTool.Handler(ctx, request)
+				Expect(err).NotTo(HaveOccurred())
 
-			resultData, ok := result.Content[0].(mcp.TextContent)
-			Expect(ok).To(BeTrue())
-			Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
-		},
-			Entry("default params (legacy path, no interval explicitly set)",
+				resultData, ok := result.Content[0].(mcp.TextContent)
+				Expect(ok).To(BeTrue())
+				Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
+			},
+			Entry(
+				"default params (legacy path, no interval explicitly set)",
 				"k8s_list_top_http_errors_in_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -72,7 +74,8 @@ var _ = Describe("KubernetesListTopHttpErrorsInPods Tool", func() {
 					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
-			Entry("legacy path, explicit interval",
+			Entry(
+				"legacy path, explicit interval",
 				"k8s_list_top_http_errors_in_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -90,7 +93,8 @@ var _ = Describe("KubernetesListTopHttpErrorsInPods Tool", func() {
 					Limit: new(sysdig.LimitQuery(5)),
 				},
 			),
-			Entry("legacy path, all filters",
+			Entry(
+				"legacy path, all filters",
 				"k8s_list_top_http_errors_in_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -110,7 +114,8 @@ var _ = Describe("KubernetesListTopHttpErrorsInPods Tool", func() {
 					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
-			Entry("windowed path via start/end",
+			Entry(
+				"windowed path via start/end",
 				"k8s_list_top_http_errors_in_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -126,7 +131,8 @@ var _ = Describe("KubernetesListTopHttpErrorsInPods Tool", func() {
 					time.Date(2026, time.April, 16, 11, 0, 0, 0, time.UTC),
 				), 20),
 			),
-			Entry("windowed path takes precedence over interval",
+			Entry(
+				"windowed path takes precedence over interval",
 				"k8s_list_top_http_errors_in_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{

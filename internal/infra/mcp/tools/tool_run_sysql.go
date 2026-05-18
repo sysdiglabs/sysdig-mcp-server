@@ -47,9 +47,11 @@ func (h *ToolRunSysql) handle(ctx context.Context, request mcp.CallToolRequest) 
 }
 
 func (h *ToolRunSysql) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("run_sysql",
+	tool := mcp.NewTool(
+		"run_sysql",
 		mcp.WithDescription(`Execute a SysQL query directly against the Sysdig API. You should try generating a SysQL query first to ensure that it's valid.`),
-		mcp.WithString("sysql_query",
+		mcp.WithString(
+			"sysql_query",
 			mcp.Description("A valid SysQL query string to execute directly."),
 			mcp.Required(),
 			Examples(

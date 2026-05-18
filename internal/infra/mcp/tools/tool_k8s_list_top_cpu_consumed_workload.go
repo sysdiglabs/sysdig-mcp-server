@@ -26,13 +26,15 @@ func NewK8sListTopCPUConsumedWorkload(sysdigClient sysdig.ExtendedClientWithResp
 }
 
 func (t *K8sListTopCPUConsumedWorkload) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("k8s_list_top_cpu_consumed_workload",
+	tool := mcp.NewTool(
+		"k8s_list_top_cpu_consumed_workload",
 		mcp.WithDescription("Identifies the Kubernetes workloads (all containers) consuming the most CPU (in cores). Optionally pass start/end (RFC3339) to query a historical window (averaged over the window) instead of the current instant snapshot."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
 		mcp.WithString("workload_type", mcp.Description("The type of the workload to filter by.")),
 		mcp.WithString("workload_name", mcp.Description("The name of the workload to filter by.")),
-		mcp.WithNumber("limit",
+		mcp.WithNumber(
+			"limit",
 			mcp.Description("Maximum number of workloads to return."),
 			mcp.DefaultNumber(20),
 		),

@@ -54,9 +54,11 @@ func (h *ToolGetEventProcessTree) handle(ctx context.Context, request mcp.CallTo
 }
 
 func (h *ToolGetEventProcessTree) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("get_event_process_tree",
+	tool := mcp.NewTool(
+		"get_event_process_tree",
 		mcp.WithDescription("Retrieves the process tree for a specific security event.\nNot every event has a process tree, so this may return an empty tree."),
-		mcp.WithString("event_id",
+		mcp.WithString(
+			"event_id",
 			mcp.Description("The unique identifier of the security event."),
 			mcp.Required(),
 		),

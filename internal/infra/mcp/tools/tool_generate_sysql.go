@@ -41,9 +41,11 @@ func (h *ToolGenerateSysql) handle(ctx context.Context, request mcp.CallToolRequ
 }
 
 func (h *ToolGenerateSysql) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("generate_sysql",
+	tool := mcp.NewTool(
+		"generate_sysql",
 		mcp.WithDescription(`Generates a SysQL query from a natural language question.`),
-		mcp.WithString("question",
+		mcp.WithString(
+			"question",
 			mcp.Description("A natural language question to be translated into a SysQL query."),
 			mcp.Required(),
 			Examples(
