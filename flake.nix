@@ -1,12 +1,14 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-25-11.url = "github:NixOS/nixpkgs/nixos-25.11";
     flake-utils.url = "github:numtide/flake-utils";
   };
   outputs =
     {
       self,
       nixpkgs,
+      nixpkgs-25-11,
       flake-utils,
     }:
     let
@@ -17,13 +19,24 @@
           else
             prev.callPackage ./package.nix { };
       };
+      useLatestGoVersion =
+        final: prev:
+        let
+          nixpkgs = import nixpkgs-25-11 { inherit (prev) system; };
+        in
+        {
+          go_1_26 = nixpkgs.go_1_26;
+        };
       flake = flake-utils.lib.eachDefaultSystem (
         system:
         let
           pkgs = import nixpkgs {
             inherit system;
             config.allowUnfree = true;
-            overlays = [ self.overlays.default ];
+            overlays = [
+              self.overlays.default
+              useLatestGoVersion
+            ];
           };
         in
         {
