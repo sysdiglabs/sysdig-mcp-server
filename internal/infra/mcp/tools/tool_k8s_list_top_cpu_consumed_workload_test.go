@@ -43,21 +43,23 @@ var _ = Describe("KubernetesListTopCPUConsumedWorkload Tool", func() {
 	})
 
 	When("listing top cpu consumed by workload", func() {
-		DescribeTable("it succeeds", func(ctx context.Context, toolName string, request mcp.CallToolRequest, expectedParamsRequested sysdig.GetQueryV1Params) {
-			mockSysdig.EXPECT().GetQueryV1(gomock.Any(), &expectedParamsRequested).Return(&http.Response{
-				StatusCode: http.StatusOK,
-				Body:       io.NopCloser(bytes.NewBufferString(`{"status":"success"}`)),
-			}, nil)
+		DescribeTable(
+			"it succeeds", func(ctx context.Context, toolName string, request mcp.CallToolRequest, expectedParamsRequested sysdig.GetQueryV1Params) {
+				mockSysdig.EXPECT().GetQueryV1(gomock.Any(), &expectedParamsRequested).Return(&http.Response{
+					StatusCode: http.StatusOK,
+					Body:       io.NopCloser(bytes.NewBufferString(`{"status":"success"}`)),
+				}, nil)
 
-			serverTool := mcpServer.GetTool(toolName)
-			result, err := serverTool.Handler(ctx, request)
-			Expect(err).NotTo(HaveOccurred())
+				serverTool := mcpServer.GetTool(toolName)
+				result, err := serverTool.Handler(ctx, request)
+				Expect(err).NotTo(HaveOccurred())
 
-			resultData, ok := result.Content[0].(mcp.TextContent)
-			Expect(ok).To(BeTrue())
-			Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
-		},
-			Entry("instant snapshot, no params",
+				resultData, ok := result.Content[0].(mcp.TextContent)
+				Expect(ok).To(BeTrue())
+				Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
+			},
+			Entry(
+				"instant snapshot, no params",
 				"k8s_list_top_cpu_consumed_workload",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -69,7 +71,8 @@ var _ = Describe("KubernetesListTopCPUConsumedWorkload Tool", func() {
 					Query: `topk(20, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name)(sysdig_container_cpu_cores_used))`,
 				},
 			),
-			Entry("instant snapshot, cluster+namespace filter",
+			Entry(
+				"instant snapshot, cluster+namespace filter",
 				"k8s_list_top_cpu_consumed_workload",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -85,7 +88,8 @@ var _ = Describe("KubernetesListTopCPUConsumedWorkload Tool", func() {
 					Query: `topk(10, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name)(sysdig_container_cpu_cores_used{kube_cluster_name="prod",kube_namespace_name="default"}))`,
 				},
 			),
-			Entry("instant snapshot, all filters",
+			Entry(
+				"instant snapshot, all filters",
 				"k8s_list_top_cpu_consumed_workload",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -103,7 +107,8 @@ var _ = Describe("KubernetesListTopCPUConsumedWorkload Tool", func() {
 					Query: `topk(5, sum by (kube_cluster_name, kube_namespace_name, kube_workload_type, kube_workload_name)(sysdig_container_cpu_cores_used{kube_cluster_name="prod",kube_namespace_name="default",kube_workload_type="deployment",kube_workload_name="api"}))`,
 				},
 			),
-			Entry("windowed, both start and end",
+			Entry(
+				"windowed, both start and end",
 				"k8s_list_top_cpu_consumed_workload",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -119,7 +124,8 @@ var _ = Describe("KubernetesListTopCPUConsumedWorkload Tool", func() {
 					time.Date(2026, time.April, 16, 11, 0, 0, 0, time.UTC),
 				),
 			),
-			Entry("windowed, start only defaults end to now",
+			Entry(
+				"windowed, start only defaults end to now",
 				"k8s_list_top_cpu_consumed_workload",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -134,7 +140,8 @@ var _ = Describe("KubernetesListTopCPUConsumedWorkload Tool", func() {
 					time.Date(2026, time.April, 16, 12, 0, 0, 0, time.UTC),
 				),
 			),
-			Entry("windowed, with filters",
+			Entry(
+				"windowed, with filters",
 				"k8s_list_top_cpu_consumed_workload",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{

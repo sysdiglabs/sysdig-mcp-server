@@ -43,21 +43,23 @@ var _ = Describe("KubernetesListTopUnavailablePods Tool", func() {
 	})
 
 	When("querying top unavailable pods", func() {
-		DescribeTable("it succeeds", func(ctx context.Context, toolName string, request mcp.CallToolRequest, expectedParamsRequested sysdig.GetQueryV1Params) {
-			mockSysdig.EXPECT().GetQueryV1(gomock.Any(), &expectedParamsRequested).Return(&http.Response{
-				StatusCode: http.StatusOK,
-				Body:       io.NopCloser(bytes.NewBufferString(`{"status":"success"}`)),
-			}, nil)
+		DescribeTable(
+			"it succeeds", func(ctx context.Context, toolName string, request mcp.CallToolRequest, expectedParamsRequested sysdig.GetQueryV1Params) {
+				mockSysdig.EXPECT().GetQueryV1(gomock.Any(), &expectedParamsRequested).Return(&http.Response{
+					StatusCode: http.StatusOK,
+					Body:       io.NopCloser(bytes.NewBufferString(`{"status":"success"}`)),
+				}, nil)
 
-			serverTool := mcpServer.GetTool(toolName)
-			result, err := serverTool.Handler(ctx, request)
-			Expect(err).NotTo(HaveOccurred())
+				serverTool := mcpServer.GetTool(toolName)
+				result, err := serverTool.Handler(ctx, request)
+				Expect(err).NotTo(HaveOccurred())
 
-			resultData, ok := result.Content[0].(mcp.TextContent)
-			Expect(ok).To(BeTrue())
-			Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
-		},
-			Entry("default params",
+				resultData, ok := result.Content[0].(mcp.TextContent)
+				Expect(ok).To(BeTrue())
+				Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
+			},
+			Entry(
+				"default params",
 				"k8s_list_top_unavailable_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -88,7 +90,8 @@ var _ = Describe("KubernetesListTopUnavailablePods Tool", func() {
 )`,
 				},
 			),
-			Entry("with specific limit and cluster",
+			Entry(
+				"with specific limit and cluster",
 				"k8s_list_top_unavailable_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -122,7 +125,8 @@ var _ = Describe("KubernetesListTopUnavailablePods Tool", func() {
 )`,
 				},
 			),
-			Entry("with all filters",
+			Entry(
+				"with all filters",
 				"k8s_list_top_unavailable_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -159,7 +163,8 @@ var _ = Describe("KubernetesListTopUnavailablePods Tool", func() {
 )`,
 				},
 			),
-			Entry("windowed, no filters (Sysdig-canonical pattern)",
+			Entry(
+				"windowed, no filters (Sysdig-canonical pattern)",
 				"k8s_list_top_unavailable_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -175,7 +180,8 @@ var _ = Describe("KubernetesListTopUnavailablePods Tool", func() {
 					time.Date(2026, time.April, 16, 11, 0, 0, 0, time.UTC),
 				),
 			),
-			Entry("windowed, with cluster filter",
+			Entry(
+				"windowed, with cluster filter",
 				"k8s_list_top_unavailable_pods",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{

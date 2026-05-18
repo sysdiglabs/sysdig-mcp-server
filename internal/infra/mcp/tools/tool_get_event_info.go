@@ -36,9 +36,11 @@ func (h *ToolGetEventInfo) handle(ctx context.Context, request mcp.CallToolReque
 }
 
 func (h *ToolGetEventInfo) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("get_event_info",
+	tool := mcp.NewTool(
+		"get_event_info",
 		mcp.WithDescription("Retrieve detailed information for a specific security event by its ID"),
-		mcp.WithString("event_id",
+		mcp.WithString(
+			"event_id",
 			mcp.Description("The unique identifier of the security event."),
 			mcp.Required(),
 		),

@@ -27,14 +27,16 @@ func NewK8sListTopHttpErrorsInPods(sysdigClient sysdig.ExtendedClientWithRespons
 }
 
 func (t *K8sListTopHttpErrorsInPods) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("k8s_list_top_http_errors_in_pods",
+	tool := mcp.NewTool(
+		"k8s_list_top_http_errors_in_pods",
 		mcp.WithDescription("Lists the pods with the highest rate of HTTP 4xx and 5xx errors over a time window, allowing filtering by cluster, namespace, workload type, and workload name. Pass start/end (RFC3339) to specify the window. The legacy 'interval' param is retained for backward compatibility; start/end take precedence when both are provided."),
 		mcp.WithString("interval", mcp.Description("Time interval for the query (e.g. '1h', '30m'). Default is '1h'. Ignored when start/end are provided.")),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
 		mcp.WithString("workload_type", mcp.Description("The type of the workload to filter by.")),
 		mcp.WithString("workload_name", mcp.Description("The name of the workload to filter by.")),
-		mcp.WithNumber("limit",
+		mcp.WithNumber(
+			"limit",
 			mcp.Description("Maximum number of pods to return."),
 			mcp.DefaultNumber(20),
 		),

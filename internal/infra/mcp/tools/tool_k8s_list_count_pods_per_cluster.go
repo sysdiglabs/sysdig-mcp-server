@@ -26,11 +26,13 @@ func NewK8sListCountPodsPerCluster(sysdigClient sysdig.ExtendedClientWithRespons
 }
 
 func (t *K8sListCountPodsPerCluster) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("k8s_list_count_pods_per_cluster",
+	tool := mcp.NewTool(
+		"k8s_list_count_pods_per_cluster",
 		mcp.WithDescription("List the count of running Kubernetes Pods grouped by cluster and namespace. Optionally pass start/end (RFC3339) to count pods averaged over a historical window instead of the current instant snapshot."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
-		mcp.WithNumber("limit",
+		mcp.WithNumber(
+			"limit",
 			mcp.Description("Maximum number of results to return."),
 			mcp.DefaultNumber(20),
 		),

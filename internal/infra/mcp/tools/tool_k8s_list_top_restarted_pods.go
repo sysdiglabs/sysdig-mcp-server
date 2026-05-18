@@ -26,14 +26,16 @@ func NewK8sListTopRestartedPods(sysdigClient sysdig.ExtendedClientWithResponsesI
 }
 
 func (t *K8sListTopRestartedPods) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("k8s_list_top_restarted_pods",
+	tool := mcp.NewTool(
+		"k8s_list_top_restarted_pods",
 		mcp.WithDescription("Lists the pods with the highest number of container restarts in the specified scope (cluster, namespace, workload, or individual pod). By default, it returns the top 10. Optionally pass start/end (RFC3339) to count restarts that occurred *within* the window (via increase() on the counter) instead of total lifetime restarts."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
 		mcp.WithString("workload_type", mcp.Description("The type of the workload to filter by.")),
 		mcp.WithString("workload_name", mcp.Description("The name of the workload to filter by.")),
 		mcp.WithString("pod_name", mcp.Description("The name of the pod to filter by.")),
-		mcp.WithNumber("limit",
+		mcp.WithNumber(
+			"limit",
 			mcp.Description("Maximum number of pods to return."),
 			mcp.DefaultNumber(10),
 		),

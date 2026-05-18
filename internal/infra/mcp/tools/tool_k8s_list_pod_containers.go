@@ -26,7 +26,8 @@ func NewK8sListPodContainers(sysdigClient sysdig.ExtendedClientWithResponsesInte
 }
 
 func (t *K8sListPodContainers) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("k8s_list_pod_containers",
+	tool := mcp.NewTool(
+		"k8s_list_pod_containers",
 		mcp.WithDescription("Retrieves information from a particular pod and container. Optionally pass start/end (RFC3339) to list pod containers that existed at any point in the window."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
@@ -36,7 +37,8 @@ func (t *K8sListPodContainers) RegisterInServer(s *server.MCPServer) {
 		mcp.WithString("container_name", mcp.Description("The name of the container to filter by.")),
 		mcp.WithString("image_pullstring", mcp.Description("The image pullstring to filter by.")),
 		mcp.WithString("node_name", mcp.Description("The name of the node to filter by.")),
-		mcp.WithNumber("limit",
+		mcp.WithNumber(
+			"limit",
 			mcp.Description("Maximum number of pod containers to return."),
 			mcp.DefaultNumber(10),
 		),

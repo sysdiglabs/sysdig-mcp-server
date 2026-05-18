@@ -26,12 +26,14 @@ func NewK8sListCronjobs(sysdigClient sysdig.ExtendedClientWithResponsesInterface
 }
 
 func (t *K8sListCronjobs) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("k8s_list_cronjobs",
+	tool := mcp.NewTool(
+		"k8s_list_cronjobs",
 		mcp.WithDescription("Retrieves information from the cronjobs in the cluster. Optionally pass start/end (RFC3339) to list cronjobs that existed at any point in the window."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
 		mcp.WithString("cronjob_name", mcp.Description("The name of the cronjob to filter by.")),
-		mcp.WithNumber("limit",
+		mcp.WithNumber(
+			"limit",
 			mcp.Description("Maximum number of cronjobs to return."),
 			mcp.DefaultNumber(10),
 		),

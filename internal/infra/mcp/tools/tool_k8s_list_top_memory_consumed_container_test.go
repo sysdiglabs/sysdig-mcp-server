@@ -43,21 +43,23 @@ var _ = Describe("KubernetesListTopMemoryConsumedContainer Tool", func() {
 	})
 
 	When("listing top memory consumed by container", func() {
-		DescribeTable("it succeeds", func(ctx context.Context, toolName string, request mcp.CallToolRequest, expectedParamsRequested sysdig.GetQueryV1Params) {
-			mockSysdig.EXPECT().GetQueryV1(gomock.Any(), &expectedParamsRequested).Return(&http.Response{
-				StatusCode: http.StatusOK,
-				Body:       io.NopCloser(bytes.NewBufferString(`{"status":"success"}`)),
-			}, nil)
+		DescribeTable(
+			"it succeeds", func(ctx context.Context, toolName string, request mcp.CallToolRequest, expectedParamsRequested sysdig.GetQueryV1Params) {
+				mockSysdig.EXPECT().GetQueryV1(gomock.Any(), &expectedParamsRequested).Return(&http.Response{
+					StatusCode: http.StatusOK,
+					Body:       io.NopCloser(bytes.NewBufferString(`{"status":"success"}`)),
+				}, nil)
 
-			serverTool := mcpServer.GetTool(toolName)
-			result, err := serverTool.Handler(ctx, request)
-			Expect(err).NotTo(HaveOccurred())
+				serverTool := mcpServer.GetTool(toolName)
+				result, err := serverTool.Handler(ctx, request)
+				Expect(err).NotTo(HaveOccurred())
 
-			resultData, ok := result.Content[0].(mcp.TextContent)
-			Expect(ok).To(BeTrue())
-			Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
-		},
-			Entry(nil,
+				resultData, ok := result.Content[0].(mcp.TextContent)
+				Expect(ok).To(BeTrue())
+				Expect(resultData.Text).To(MatchJSON(`{"status":"success"}`))
+			},
+			Entry(
+				nil,
 				"k8s_list_top_memory_consumed_container",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -70,7 +72,8 @@ var _ = Describe("KubernetesListTopMemoryConsumedContainer Tool", func() {
 					Limit: new(sysdig.LimitQuery(20)),
 				},
 			),
-			Entry(nil,
+			Entry(
+				nil,
 				"k8s_list_top_memory_consumed_container",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -87,7 +90,8 @@ var _ = Describe("KubernetesListTopMemoryConsumedContainer Tool", func() {
 					Limit: new(sysdig.LimitQuery(10)),
 				},
 			),
-			Entry(nil,
+			Entry(
+				nil,
 				"k8s_list_top_memory_consumed_container",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{
@@ -106,7 +110,8 @@ var _ = Describe("KubernetesListTopMemoryConsumedContainer Tool", func() {
 					Limit: new(sysdig.LimitQuery(5)),
 				},
 			),
-			Entry("windowed, both start and end",
+			Entry(
+				"windowed, both start and end",
 				"k8s_list_top_memory_consumed_container",
 				mcp.CallToolRequest{
 					Params: mcp.CallToolParams{

@@ -26,13 +26,15 @@ func NewK8sListTopUnavailablePods(sysdigClient sysdig.ExtendedClientWithResponse
 }
 
 func (t *K8sListTopUnavailablePods) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("k8s_list_top_unavailable_pods",
+	tool := mcp.NewTool(
+		"k8s_list_top_unavailable_pods",
 		mcp.WithDescription("Shows the top N pods with the highest number of unavailable or unready replicas in a Kubernetes cluster, ordered from highest to lowest. Optionally pass start/end (RFC3339) to report workloads that were *continuously* unavailable for the entire window (matches Sysdig's `WorkloadReplicasMismatch` advisory semantics)."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
 		mcp.WithString("workload_type", mcp.Description("The type of the workload to filter by.")),
 		mcp.WithString("workload_name", mcp.Description("The name of the workload to filter by.")),
-		mcp.WithNumber("limit",
+		mcp.WithNumber(
+			"limit",
 			mcp.Description("Maximum number of pods to return."),
 			mcp.DefaultNumber(20),
 		),

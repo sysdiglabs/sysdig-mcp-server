@@ -26,13 +26,15 @@ func NewK8sListTopMemoryConsumedContainer(sysdigClient sysdig.ExtendedClientWith
 }
 
 func (t *K8sListTopMemoryConsumedContainer) RegisterInServer(s *server.MCPServer) {
-	tool := mcp.NewTool("k8s_list_top_memory_consumed_container",
+	tool := mcp.NewTool(
+		"k8s_list_top_memory_consumed_container",
 		mcp.WithDescription("Lists memory-intensive containers. Optionally pass start/end (RFC3339) to query a historical window (averaged over the window) instead of the current instant snapshot."),
 		mcp.WithString("cluster_name", mcp.Description("The name of the cluster to filter by.")),
 		mcp.WithString("namespace_name", mcp.Description("The name of the namespace to filter by.")),
 		mcp.WithString("workload_type", mcp.Description("The type of the workload to filter by.")),
 		mcp.WithString("workload_name", mcp.Description("The name of the workload to filter by.")),
-		mcp.WithNumber("limit",
+		mcp.WithNumber(
+			"limit",
 			mcp.Description("Maximum number of containers to return."),
 			mcp.DefaultNumber(20),
 		),
