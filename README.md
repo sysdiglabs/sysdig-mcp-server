@@ -277,6 +277,32 @@ If you have Go installed, the MCP client can run the server directly without clo
 }
 ```
 
+Optional local guardrail with [Armorer Guard](https://github.com/ArmorerLabs/Armorer-Guard):
+
+```json
+{
+  "mcpServers": {
+    "sysdig-mcp-server": {
+      "command": "armorer-guard",
+      "args": [
+        "mcp-proxy",
+        "--",
+        "go",
+        "run",
+        "github.com/sysdiglabs/sysdig-mcp-server/cmd/server@latest"
+      ],
+      "env": {
+        "SYSDIG_MCP_API_HOST": "<your_sysdig_host>",
+        "SYSDIG_MCP_API_TOKEN": "<your_sysdig_api_token>",
+        "SYSDIG_MCP_TRANSPORT": "stdio"
+      }
+    }
+  }
+}
+```
+
+This keeps the same local stdio server and adds a local proxy that inspects tool-call arguments for prompt injection, credential leakage, exfiltration risk, and dangerous actions before forwarding safe calls to Sysdig MCP.
+
 Or using the CLI:
 
 ```bash
