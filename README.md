@@ -44,7 +44,7 @@ For Sysdig Secure-specific workflows, use the dedicated [@sysdig/secure-mcp-serv
 Get up and running with the Sysdig MCP Server quickly using our pre-built Docker image.
 
 1. **Get your API Token**:
-    Go to your Sysdig instance and navigate to **Settings > Sysdig Monitor API**. This token is required to authenticate requests to the Sysdig Platform (See the [Configuration](#configuration) section for more details).
+    Go to your Sysdig instance and navigate to **Settings > Sysdig Monitor API** (or **Sysdig Secure API** — either works, since SysQL tools accept both). This token is required to authenticate requests to the Sysdig Platform (See the [Configuration](#configuration) section for more details).
 
 2. **Configure your MCP client**:
 
@@ -209,7 +209,7 @@ SYSDIG_MCP_MOUNT_PATH=/sysdig-mcp-server
 
 ### API Permissions
 
-To use the MCP server tools, your API token needs specific permissions in Sysdig Secure. We recommend creating a dedicated Service Account (SA) with a custom role containing only the required permissions.
+To use the MCP server tools, your API token needs specific permissions on the Sysdig platform. We recommend creating a dedicated Service Account (SA) with a custom role containing only the required permissions.
 
 **Permissions Mapping:**
 
@@ -225,7 +225,7 @@ To use the MCP server tools, your API token needs specific permissions in Sysdig
 
 **Setting up Permissions:**
 
-1. Go to **Settings > Users & Teams > Roles** in your Sysdig Secure instance
+1. Go to **Settings > Users & Teams > Roles** in your Sysdig instance
 2. Create a new role with the permissions listed above
 3. Assign this role to a Service Account or user
 4. Use the API token from that account with the MCP server

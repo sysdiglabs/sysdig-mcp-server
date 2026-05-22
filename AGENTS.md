@@ -11,7 +11,7 @@ This document is a comprehensive guide for an AI agent tasked with developing an
 | Topic | Details |
 | --- | --- |
 | **Purpose** | Expose vetted Sysdig Monitor workflows (plus shared SysQL tooling) to LLMs through MCP tools. |
-| **Tech Stack** | Go 1.25+, `mcp-go`, Cobra CLI, Ginkgo/Gomega, `golangci-lint`, Nix. |
+| **Tech Stack** | Go 1.26+, `mcp-go`, Cobra CLI, Ginkgo/Gomega, `golangci-lint`, Nix. |
 | **Entry Point** | `cmd/server/main.go` (Cobra CLI that wires config, Sysdig client, etc.). |
 | **Dev Shell** | `nix develop` provides a consistent development environment. |
 | **Key Commands** | `just fmt`, `just lint`, `just test`, `just check`, `just update`. |
