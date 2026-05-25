@@ -23,20 +23,14 @@ The handler filters tools dynamically based on the Sysdig user's permissions. Ea
 | `k8s_list_underutilized_pods_cpu_quota` | `tool_k8s_list_underutilized_pods_cpu_quota.go` | List Kubernetes pods with CPU usage below 25% of the quota limit. | `metrics-data.read` | "Show the top 10 underutilized pods by CPU quota in cluster 'production'" |
 | `k8s_list_underutilized_pods_memory_quota` | `tool_k8s_list_underutilized_pods_memory_quota.go` | List Kubernetes pods with memory usage below 25% of the limit. | `metrics-data.read` | "Show the top 10 underutilized pods by memory quota in cluster 'production'" |
 
-### Sysdig Secure
-
-| Tool | File | Capability | Required Permissions | Useful Prompts |
-|---|---|---|---|---|
-| `list_runtime_events` | `tool_list_runtime_events.go` | Query runtime events with filters, cursor, scope. | `policy-events.read` | "Show high severity runtime events from last 2h." |
-| `get_event_info` | `tool_get_event_info.go` | Pull full payload for a single policy event. | `policy-events.read` | "Fetch event `abc123` details." |
-| `get_event_process_tree` | `tool_get_event_process_tree.go` | Retrieve the process tree for an event when available. | `policy-events.read` | "Show the process tree behind event `abc123`." |
-| `run_sysql` | `tool_run_sysql.go` | Execute caller-supplied Sysdig SysQL queries safely. | `sage.exec`, `risks.read` | "Run the following SysQL…". |
-
 ### Sysdig Monitor & Sysdig Secure
 
 | Tool | File | Capability | Required Permissions | Useful Prompts |
 |---|---|---|---|---|
 | `generate_sysql` | `tool_generate_sysql.go` | Convert natural language to SysQL via Sysdig Sage. | `sage.exec` (does not work with Service Accounts) | "Create a SysQL to list S3 buckets." |
+| `run_sysql` | `tool_run_sysql.go` | Execute caller-supplied Sysdig SysQL queries safely. | `sage.exec`, `risks.read` | "Run the following SysQL…". |
+
+> Dedicated Sysdig Secure tools (runtime events, event details, process trees) live in the separate [@sysdig/secure-mcp-server](https://www.npmjs.com/package/@sysdig/secure-mcp-server) package.
 
 ## Historical range (start / end)
 

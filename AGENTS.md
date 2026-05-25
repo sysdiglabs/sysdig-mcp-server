@@ -4,14 +4,14 @@ This document is a comprehensive guide for an AI agent tasked with developing an
 
 ## 1. Project Overview
 
-**Sysdig MCP Server** is a Go-based Model Context Protocol (MCP) server that exposes Sysdig Secure platform capabilities to LLMs. It provides tools for querying runtime security events, Kubernetes metrics, and executing SysQL queries through multiple transport protocols (stdio, streamable-http, SSE).
+**Sysdig MCP Server** is a Go-based Model Context Protocol (MCP) server that exposes Sysdig Monitor platform capabilities to LLMs. It provides tools for querying Kubernetes metrics and executing SysQL queries through multiple transport protocols (stdio, streamable-http, SSE). Sysdig Secure-specific tools live in the separate [@sysdig/secure-mcp-server](https://www.npmjs.com/package/@sysdig/secure-mcp-server) package.
 
 ### 1.1. Quick Facts
 
 | Topic | Details |
 | --- | --- |
-| **Purpose** | Expose vetted Sysdig Secure workflows to LLMs through MCP tools. |
-| **Tech Stack** | Go 1.25+, `mcp-go`, Cobra CLI, Ginkgo/Gomega, `golangci-lint`, Nix. |
+| **Purpose** | Expose vetted Sysdig Monitor workflows (plus shared SysQL tooling) to LLMs through MCP tools. |
+| **Tech Stack** | Go 1.26+, `mcp-go`, Cobra CLI, Ginkgo/Gomega, `golangci-lint`, Nix. |
 | **Entry Point** | `cmd/server/main.go` (Cobra CLI that wires config, Sysdig client, etc.). |
 | **Dev Shell** | `nix develop` provides a consistent development environment. |
 | **Key Commands** | `just fmt`, `just lint`, `just test`, `just check`, `just update`. |
@@ -32,10 +32,10 @@ direnv allow
 
 ### 2.2. Required Environment Variables
 
-The server requires API credentials to connect to Sysdig Secure.
+The server requires API credentials to connect to the Sysdig platform.
 
-- `SYSDIG_MCP_API_HOST`: Sysdig Secure instance URL (e.g., `https://us2.app.sysdig.com`).
-- `SYSDIG_MCP_API_TOKEN`: Sysdig Secure API token.
+- `SYSDIG_MCP_API_HOST`: Sysdig instance URL (e.g., `https://us2.app.sysdig.com`).
+- `SYSDIG_MCP_API_TOKEN`: Sysdig API token.
 
 For a full list of optional variables (e.g., for transport configuration), see the project's `README.md`.
 
@@ -132,16 +132,6 @@ feat(tools): add new runtime events tool
 fix: correct API endpoint URL
 chore: update dependencies
 ```
-
-### 4.5. Known Flaky Integration Tests
-
-The process tree integration tests in `internal/infra/sysdig/client_process_tree_integration_test.go` use a **hardcoded event ID** that points to a real Sysdig event. Since Sysdig events have a retention period, this event will eventually be deleted and the tests will fail with a `not found` error.
-
-**How to fix it:**
-
-1. Use the `list_runtime_events` MCP tool (or the Sysdig API) to find a recent runtime event that originates from a **syscall/workload source** (not cloud/cloudtrail), as only these have process trees. Filter for `category = "runtime"` and `source = "syscall"`.
-2. Verify the event has a process tree by calling `get_event_process_tree` with the event ID.
-3. Update the `eventID` variable in the test's `BeforeEach` block with the new event ID.
 
 ## 5. Guides & Reference
 

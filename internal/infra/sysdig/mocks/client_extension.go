@@ -5243,46 +5243,6 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetPricingV1With
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPricingV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetPricingV1WithResponse), varargs...)
 }
 
-// GetProcessTreeBranchesWithResponse mocks base method.
-func (m *MockExtendedClientWithResponsesInterface) GetProcessTreeBranchesWithResponse(ctx context.Context, eventID string, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetProcessTreeBranchesResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, eventID}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "GetProcessTreeBranchesWithResponse", varargs...)
-	ret0, _ := ret[0].(*sysdig.GetProcessTreeBranchesResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetProcessTreeBranchesWithResponse indicates an expected call of GetProcessTreeBranchesWithResponse.
-func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetProcessTreeBranchesWithResponse(ctx, eventID any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, eventID}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetProcessTreeBranchesWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetProcessTreeBranchesWithResponse), varargs...)
-}
-
-// GetProcessTreeTreesWithResponse mocks base method.
-func (m *MockExtendedClientWithResponsesInterface) GetProcessTreeTreesWithResponse(ctx context.Context, eventID string, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetProcessTreeTreesResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, eventID}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "GetProcessTreeTreesWithResponse", varargs...)
-	ret0, _ := ret[0].(*sysdig.GetProcessTreeTreesResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetProcessTreeTreesWithResponse indicates an expected call of GetProcessTreeTreesWithResponse.
-func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetProcessTreeTreesWithResponse(ctx, eventID any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, eventID}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetProcessTreeTreesWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetProcessTreeTreesWithResponse), varargs...)
-}
-
 // GetQueryRangeV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) GetQueryRangeV1(ctx context.Context, params *sysdig.GetQueryRangeV1Params, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()

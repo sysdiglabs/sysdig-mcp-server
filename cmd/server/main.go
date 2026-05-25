@@ -113,9 +113,6 @@ func setupHandler(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *mcp
 	systemClock := clock.NewSystemClock()
 	handler := mcp.NewHandler(Version, sysdigClient)
 	handler.RegisterTools(
-		tools.NewToolListRuntimeEvents(sysdigClient, systemClock),
-		tools.NewToolGetEventInfo(sysdigClient),
-		tools.NewToolGetEventProcessTree(sysdigClient),
 		tools.NewToolRunSysql(sysdigClient),
 		tools.NewToolGenerateSysql(sysdigClient),
 
