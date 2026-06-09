@@ -39,6 +39,7 @@ update:
 	nix develop --command go get -u -t -v ./...
 	nix develop --command go mod tidy
 	nix develop --command just rehash-package-nix
+	nix develop --command pinact run -u
 	nix develop --command pre-commit autoupdate
 	nix develop --command just update-base-images
 

@@ -52,15 +52,16 @@
               packages = [
                 ginkgo
                 go_1_26
-                govulncheck
                 gofumpt
                 golangci-lint
+                govulncheck
                 just
                 mockgen
                 nix-prefetch-docker
+                pinact
                 pre-commit
-                skopeo
                 sd
+                skopeo
               ];
               shellHook = ''
                 pre-commit install
