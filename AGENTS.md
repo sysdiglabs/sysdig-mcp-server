@@ -4,13 +4,13 @@ This document is a comprehensive guide for an AI agent tasked with developing an
 
 ## 1. Project Overview
 
-**Sysdig MCP Server** is a Go-based Model Context Protocol (MCP) server that exposes Sysdig Monitor platform capabilities to LLMs. It provides tools for querying Kubernetes metrics and executing SysQL queries through multiple transport protocols (stdio, streamable-http, SSE). Sysdig Secure-specific tools live in the separate [@sysdig/secure-mcp-server](https://www.npmjs.com/package/@sysdig/secure-mcp-server) package.
+**Sysdig MCP Server** is a Go-based Model Context Protocol (MCP) server that exposes Sysdig Monitor platform capabilities to LLMs. It provides tools for querying Kubernetes metrics through multiple transport protocols (stdio, streamable-http, SSE). Sysdig Secure-specific tools live in the separate [@sysdig/secure-mcp-server](https://www.npmjs.com/package/@sysdig/secure-mcp-server) package.
 
 ### 1.1. Quick Facts
 
 | Topic | Details |
 | --- | --- |
-| **Purpose** | Expose vetted Sysdig Monitor workflows (plus shared SysQL tooling) to LLMs through MCP tools. |
+| **Purpose** | Expose vetted Sysdig Monitor workflows to LLMs through MCP tools. |
 | **Tech Stack** | Go 1.26+, `mcp-go`, Cobra CLI, Ginkgo/Gomega, `golangci-lint`, Nix. |
 | **Entry Point** | `cmd/server/main.go` (Cobra CLI that wires config, Sysdig client, etc.). |
 | **Dev Shell** | `nix develop` provides a consistent development environment. |
