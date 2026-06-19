@@ -107,9 +107,9 @@ just test       # Run the unit test suite (auto-runs `go generate` first).
 just check      # A convenient alias for fmt + lint + test.
 ```
 
-### 4.2. Pre-commit Hooks
+### 4.2. Prek Hooks
 
-This repository uses **pre-commit** to automate quality checks before each commit.
+This repository uses **prek** to automate quality checks before each commit.
 The hooks are configured in `.pre-commit-config.yaml` to run `just fmt`, `just lint`, and `just test`.
 If any of the hooks fail, the commit will not be created.
 

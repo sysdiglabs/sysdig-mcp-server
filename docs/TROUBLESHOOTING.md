@@ -12,5 +12,5 @@
 **Problem**: Tests failing with "command not found"
 - **Solution**: Enter Nix shell with `nix develop` or `direnv allow`. All dev tools are provided by the flake.
 
-**Problem**: Pre-commit hooks not running
-- **Solution**: Run `pre-commit install` to install git hooks, then `pre-commit run -a` to test all files.
+**Problem**: Prek hooks not running
+- **Solution**: Run `prek install` to install git hooks, then `prek run -a` to test all files.

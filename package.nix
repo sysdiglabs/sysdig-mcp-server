@@ -1,5 +1,5 @@
-{ buildGo126Module, versionCheckHook }:
-buildGo126Module (finalAttrs: {
+{ buildGoLatestModule, versionCheckHook }:
+buildGoLatestModule (finalAttrs: {
   pname = "sysdig-mcp-server";
   version = "3.0.0";
   src = ./.;

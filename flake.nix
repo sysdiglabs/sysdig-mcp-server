@@ -1,14 +1,14 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-25-11.url = "github:NixOS/nixpkgs/nixos-25.11";
+    go-overlay.url = "github:purpleclay/go-overlay";
     flake-utils.url = "github:numtide/flake-utils";
   };
   outputs =
     {
       self,
       nixpkgs,
-      nixpkgs-25-11,
+      go-overlay,
       flake-utils,
     }:
     let
@@ -19,14 +19,10 @@
           else
             prev.callPackage ./package.nix { };
       };
-      useLatestGoVersion =
-        final: prev:
-        let
-          nixpkgs = import nixpkgs-25-11 { inherit (prev) system; };
-        in
-        {
-          go_1_26 = nixpkgs.go_1_26;
-        };
+      useLatestGoVersion = final: prev: {
+        go_latest = final.go-bin.latestStable;
+        buildGoLatestModule = prev.buildGoLatestModule.override { go = final.go-bin.latestStable; };
+      };
       flake = flake-utils.lib.eachDefaultSystem (
         system:
         let
@@ -35,6 +31,7 @@
             config.allowUnfree = true;
             overlays = [
               self.overlays.default
+              go-overlay.overlays.default
               useLatestGoVersion
             ];
           };
@@ -51,19 +48,19 @@
             mkShell {
               packages = [
                 ginkgo
-                go_1_26
+                go_latest
                 govulncheck
                 gofumpt
                 golangci-lint
                 just
                 mockgen
                 nix-prefetch-docker
-                pre-commit
+                prek
                 skopeo
                 sd
               ];
               shellHook = ''
-                pre-commit install
+                prek install
               '';
             };
 
