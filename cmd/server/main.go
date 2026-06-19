@@ -113,9 +113,6 @@ func setupHandler(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *mcp
 	systemClock := clock.NewSystemClock()
 	handler := mcp.NewHandler(Version, sysdigClient)
 	handler.RegisterTools(
-		tools.NewToolRunSysql(sysdigClient),
-		tools.NewToolGenerateSysql(sysdigClient),
-
 		tools.NewK8sListClusters(sysdigClient, systemClock),
 		tools.NewK8sListNodes(sysdigClient, systemClock),
 		tools.NewK8sListCronjobs(sysdigClient, systemClock),
