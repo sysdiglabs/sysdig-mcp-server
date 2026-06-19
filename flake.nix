@@ -21,7 +21,10 @@
       };
       useLatestGoVersion = final: prev: {
         go_latest = final.go-bin.latestStable;
-        buildGoLatestModule = prev.buildGoLatestModule.override { go = final.go-bin.latestStable; };
+        # Use buildPackages so the Go toolchain runs on the build platform while
+        # still cross-compiling for the target (matches nixpkgs' buildGo*Module),
+        # otherwise cross builds pick the target-arch Go binary and fail to exec.
+        buildGoLatestModule = prev.buildGoLatestModule.override { go = final.buildPackages.go-bin.latestStable; };
       };
       flake = flake-utils.lib.eachDefaultSystem (
         system:
