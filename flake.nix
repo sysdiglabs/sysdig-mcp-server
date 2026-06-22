@@ -55,12 +55,14 @@
                 govulncheck
                 gofumpt
                 golangci-lint
+                govulncheck
                 just
                 mockgen
                 nix-prefetch-docker
+                pinact
                 prek
-                skopeo
                 sd
+                skopeo
               ];
               shellHook = ''
                 prek install
