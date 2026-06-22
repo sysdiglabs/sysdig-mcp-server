@@ -6,8 +6,6 @@
 > **Breaking change — this MCP server now focuses on Sysdig Monitor.**
 >
 > Starting with the next major release, the dedicated Sysdig Secure tools (`list_runtime_events`, `get_event_info`, `get_event_process_tree`) have been removed from this server. For Sysdig Secure use cases, install the new **[@sysdig/secure-mcp-server](https://www.npmjs.com/package/@sysdig/secure-mcp-server)** package, which provides comprehensive coverage of Sysdig Secure capabilities.
->
-> The SysQL tools (`generate_sysql`, `run_sysql`) remain available here because they can be used against both Monitor and Secure datasets.
 
 ---
 
@@ -35,7 +33,7 @@
 
 ## Description
 
-This is an implementation of an [MCP (Model Context Protocol) Server](https://modelcontextprotocol.io/quickstart/server) that exposes Sysdig Monitor capabilities to LLMs, plus the cross-cutting SysQL tooling. New tools and functionalities will be added over time following semantic versioning. The goal is to provide a simple and easy-to-use interface for querying information from the Sysdig platform using LLMs.
+This is an implementation of an [MCP (Model Context Protocol) Server](https://modelcontextprotocol.io/quickstart/server) that exposes Sysdig Monitor capabilities to LLMs. New tools and functionalities will be added over time following semantic versioning. The goal is to provide a simple and easy-to-use interface for querying information from the Sysdig platform using LLMs.
 
 For Sysdig Secure-specific workflows, use the dedicated [@sysdig/secure-mcp-server](https://www.npmjs.com/package/@sysdig/secure-mcp-server).
 
@@ -44,7 +42,7 @@ For Sysdig Secure-specific workflows, use the dedicated [@sysdig/secure-mcp-serv
 Get up and running with the Sysdig MCP Server quickly using our pre-built Docker image.
 
 1. **Get your API Token**:
-    Go to your Sysdig instance and navigate to **Settings > Sysdig Monitor API** (or **Sysdig Secure API** — either works, since SysQL tools accept both). This token is required to authenticate requests to the Sysdig Platform (See the [Configuration](#configuration) section for more details).
+    Go to your Sysdig instance and navigate to **Settings > Sysdig Monitor API**. This token is required to authenticate requests to the Sysdig Platform (See the [Configuration](#configuration) section for more details).
 
 2. **Configure your MCP client**:
 
@@ -142,19 +140,6 @@ The server dynamically filters the available tools based on the permissions asso
 
 > **Note:** When a time window is provided, the underlying PromQL is wrapped in the aggregation appropriate for each tool (`avg_over_time`, `max_over_time`, `min_over_time`, `increase`, etc.) and evaluated at `end`. See [`internal/infra/mcp/tools/README.md`](./internal/infra/mcp/tools/README.md) for the per-tool aggregation table.
 
-### Sysdig Monitor & Sysdig Secure
-
-- **`generate_sysql`**
-  - **Description**: Generates a SysQL query from a natural language question.
-  - **Required Permission**: `sage.exec`
-  - **Sample Prompt**: "List top 10 pods by memory usage in the last hour"
-  - **Note**: The `generate_sysql` tool currently does not work with Service Account tokens and will return a 500 error. For this tool, use an API token assigned to a regular user account.
-
-- **`run_sysql`**
-  - **Description**: Execute a pre-written SysQL query directly (use only when user provides explicit query).
-  - **Required Permission**: `sage.exec`, `risks.read`
-  - **Sample Prompt**: "Run this query: MATCH CloudResource WHERE type = 'aws_s3_bucket' LIMIT 10"
-
 ## Requirements
 - [Go](https://go.dev/doc/install) 1.26 or higher (if running without Docker).
 
@@ -216,8 +201,6 @@ To use the MCP server tools, your API token needs specific permissions on the Sy
 | Permission           | Sysdig UI Permission Name                   |
 |----------------------|---------------------------------------------|
 | `metrics-data.read`  | Data Access Settings: "Metrics Data" (Read) |
-| `risks.read`         | Risks: "Access to risk feature" (Read)      |
-| `sage.exec`          | SysQL: "AI Query Generation" (Exec)         |
 
 **Additional Permissions:**
 
@@ -233,9 +216,6 @@ To use the MCP server tools, your API token needs specific permissions on the Sy
 > **Note:** When selecting permissions, some dependent permissions may be automatically added by Sysdig.
 
 For detailed instructions, see the official [Sysdig Roles Administration documentation](https://docs.sysdig.com/en/administration/roles-administration/).
-
->[!IMPORTANT]
-> **Service Account Limitation:** The `generate_sysql` tool currently does not work with Service Account tokens and will return a 500 error. For this tool, use an API token assigned to a regular user account.
 
 
 ## Server Setup
