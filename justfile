@@ -18,7 +18,7 @@ fix:
     go fix ./...
 
 # Format code
-fmt:
+fmt: fix
     gofumpt -w .
 
 # Ejecutar tests
