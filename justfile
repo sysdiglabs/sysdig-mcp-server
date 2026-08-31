@@ -18,7 +18,7 @@ fix:
     go fix ./...
 
 # Format code
-fmt:
+fmt: fix
     gofumpt -w .
 
 # Ejecutar tests
@@ -37,6 +37,7 @@ test-coverage: generate
 update:
 	nix flake update
 	nix develop --command go get -u -t -v ./...
+	nix develop --command just update-client
 	nix develop --command go mod tidy
 	nix develop --command just rehash-package-nix
 	nix develop --command pinact run -u
@@ -50,3 +51,14 @@ rehash-package-nix:
 update-base-images:
     nix-prefetch-docker --arch amd64 quay.io/sysdig/sysdig-mini-ubi9 1 > docker-base-amd64.nix
     nix-prefetch-docker --arch arm64 quay.io/sysdig/sysdig-mini-ubi9 1 > docker-base-aarch64.nix
+
+# Regenerate internal/infra/sysdig/client.gen.go from github.com/draios/api-spec
+update-client: && generate fmt
+    #!/usr/bin/env bash
+    set -euo pipefail
+    tmp_dir="$(mktemp -d)"
+    trap 'rm -rf "$tmp_dir"' EXIT
+    repo_root="$(pwd)"
+    git clone --depth 1 https://github.com/draios/api-spec.git "$tmp_dir"
+    (cd "$tmp_dir" && nix develop --command just merge-all)
+    oapi-codegen -package sysdig -generate client,types -o "$repo_root/internal/infra/sysdig/client.gen.go" "$tmp_dir/openapi.yaml"

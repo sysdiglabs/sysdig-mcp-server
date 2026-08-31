@@ -1003,6 +1003,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateNotificati
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateNotificationChannelWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateNotificationChannelWithResponse), varargs...)
 }
 
+// CreateNotificationTemplateV1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateNotificationTemplateV1(ctx context.Context, body sysdig.CreateNotificationTemplateV1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateNotificationTemplateV1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateNotificationTemplateV1 indicates an expected call of CreateNotificationTemplateV1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateNotificationTemplateV1(ctx, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateNotificationTemplateV1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateNotificationTemplateV1), varargs...)
+}
+
+// CreateNotificationTemplateV1WithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateNotificationTemplateV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateNotificationTemplateV1WithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateNotificationTemplateV1WithBody indicates an expected call of CreateNotificationTemplateV1WithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateNotificationTemplateV1WithBody(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateNotificationTemplateV1WithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateNotificationTemplateV1WithBody), varargs...)
+}
+
+// CreateNotificationTemplateV1WithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateNotificationTemplateV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.CreateNotificationTemplateV1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateNotificationTemplateV1WithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.CreateNotificationTemplateV1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateNotificationTemplateV1WithBodyWithResponse indicates an expected call of CreateNotificationTemplateV1WithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateNotificationTemplateV1WithBodyWithResponse(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateNotificationTemplateV1WithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateNotificationTemplateV1WithBodyWithResponse), varargs...)
+}
+
+// CreateNotificationTemplateV1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateNotificationTemplateV1WithResponse(ctx context.Context, body sysdig.CreateNotificationTemplateV1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.CreateNotificationTemplateV1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateNotificationTemplateV1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.CreateNotificationTemplateV1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateNotificationTemplateV1WithResponse indicates an expected call of CreateNotificationTemplateV1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateNotificationTemplateV1WithResponse(ctx, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateNotificationTemplateV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateNotificationTemplateV1WithResponse), varargs...)
+}
+
 // CreatePricingV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) CreatePricingV1(ctx context.Context, body sysdig.CreatePricingV1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -1323,6 +1403,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateSsoSetting
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateSsoSettingsV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateSsoSettingsV1WithResponse), varargs...)
 }
 
+// CreateSystemSsoSettingsV1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateSystemSsoSettingsV1(ctx context.Context, body sysdig.CreateSystemSsoSettingsV1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateSystemSsoSettingsV1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateSystemSsoSettingsV1 indicates an expected call of CreateSystemSsoSettingsV1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateSystemSsoSettingsV1(ctx, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateSystemSsoSettingsV1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateSystemSsoSettingsV1), varargs...)
+}
+
+// CreateSystemSsoSettingsV1WithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateSystemSsoSettingsV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateSystemSsoSettingsV1WithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateSystemSsoSettingsV1WithBody indicates an expected call of CreateSystemSsoSettingsV1WithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateSystemSsoSettingsV1WithBody(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateSystemSsoSettingsV1WithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateSystemSsoSettingsV1WithBody), varargs...)
+}
+
+// CreateSystemSsoSettingsV1WithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateSystemSsoSettingsV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.CreateSystemSsoSettingsV1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateSystemSsoSettingsV1WithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.CreateSystemSsoSettingsV1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateSystemSsoSettingsV1WithBodyWithResponse indicates an expected call of CreateSystemSsoSettingsV1WithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateSystemSsoSettingsV1WithBodyWithResponse(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateSystemSsoSettingsV1WithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateSystemSsoSettingsV1WithBodyWithResponse), varargs...)
+}
+
+// CreateSystemSsoSettingsV1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateSystemSsoSettingsV1WithResponse(ctx context.Context, body sysdig.CreateSystemSsoSettingsV1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.CreateSystemSsoSettingsV1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateSystemSsoSettingsV1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.CreateSystemSsoSettingsV1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateSystemSsoSettingsV1WithResponse indicates an expected call of CreateSystemSsoSettingsV1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateSystemSsoSettingsV1WithResponse(ctx, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateSystemSsoSettingsV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateSystemSsoSettingsV1WithResponse), varargs...)
+}
+
 // CreateTeamServiceAccountV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) CreateTeamServiceAccountV1(ctx context.Context, teamId sysdig.TeamIdPath, body sysdig.CreateTeamServiceAccountV1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -1563,6 +1723,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateUserV1With
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateUserV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateUserV1WithResponse), varargs...)
 }
 
+// CreateZonePolicyAssociation mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateZonePolicyAssociation(ctx context.Context, zoneId sysdig.ZoneId, body sysdig.CreateZonePolicyAssociationJSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateZonePolicyAssociation", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateZonePolicyAssociation indicates an expected call of CreateZonePolicyAssociation.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateZonePolicyAssociation(ctx, zoneId, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateZonePolicyAssociation", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateZonePolicyAssociation), varargs...)
+}
+
+// CreateZonePolicyAssociationWithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateZonePolicyAssociationWithBody(ctx context.Context, zoneId sysdig.ZoneId, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateZonePolicyAssociationWithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateZonePolicyAssociationWithBody indicates an expected call of CreateZonePolicyAssociationWithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateZonePolicyAssociationWithBody(ctx, zoneId, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateZonePolicyAssociationWithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateZonePolicyAssociationWithBody), varargs...)
+}
+
+// CreateZonePolicyAssociationWithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateZonePolicyAssociationWithBodyWithResponse(ctx context.Context, zoneId sysdig.ZoneId, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.CreateZonePolicyAssociationResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateZonePolicyAssociationWithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.CreateZonePolicyAssociationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateZonePolicyAssociationWithBodyWithResponse indicates an expected call of CreateZonePolicyAssociationWithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateZonePolicyAssociationWithBodyWithResponse(ctx, zoneId, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateZonePolicyAssociationWithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateZonePolicyAssociationWithBodyWithResponse), varargs...)
+}
+
+// CreateZonePolicyAssociationWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateZonePolicyAssociationWithResponse(ctx context.Context, zoneId sysdig.ZoneId, body sysdig.CreateZonePolicyAssociationJSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.CreateZonePolicyAssociationResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateZonePolicyAssociationWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.CreateZonePolicyAssociationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateZonePolicyAssociationWithResponse indicates an expected call of CreateZonePolicyAssociationWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateZonePolicyAssociationWithResponse(ctx, zoneId, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateZonePolicyAssociationWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateZonePolicyAssociationWithResponse), varargs...)
+}
+
 // CreateZoneV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) CreateZoneV1(ctx context.Context, body sysdig.CreateZoneV1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -1641,6 +1881,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateZoneV1With
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, body}, reqEditors...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateZoneV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateZoneV1WithResponse), varargs...)
+}
+
+// CreateZoneV2 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateZoneV2(ctx context.Context, body sysdig.CreateZoneV2JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateZoneV2", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateZoneV2 indicates an expected call of CreateZoneV2.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateZoneV2(ctx, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateZoneV2", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateZoneV2), varargs...)
+}
+
+// CreateZoneV2WithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateZoneV2WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateZoneV2WithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateZoneV2WithBody indicates an expected call of CreateZoneV2WithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateZoneV2WithBody(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateZoneV2WithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateZoneV2WithBody), varargs...)
+}
+
+// CreateZoneV2WithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateZoneV2WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.CreateZoneV2Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateZoneV2WithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.CreateZoneV2Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateZoneV2WithBodyWithResponse indicates an expected call of CreateZoneV2WithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateZoneV2WithBodyWithResponse(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateZoneV2WithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateZoneV2WithBodyWithResponse), varargs...)
+}
+
+// CreateZoneV2WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateZoneV2WithResponse(ctx context.Context, body sysdig.CreateZoneV2JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.CreateZoneV2Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateZoneV2WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.CreateZoneV2Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateZoneV2WithResponse indicates an expected call of CreateZoneV2WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateZoneV2WithResponse(ctx, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateZoneV2WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateZoneV2WithResponse), varargs...)
 }
 
 // DeleteAcceptedRiskV1 mocks base method.
@@ -2203,6 +2523,46 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteNotificati
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteNotificationChannelByIdWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteNotificationChannelByIdWithResponse), varargs...)
 }
 
+// DeleteNotificationTemplateByIdV1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) DeleteNotificationTemplateByIdV1(ctx context.Context, notificationTemplateId sysdig.NotificationTemplateIdPath, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, notificationTemplateId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeleteNotificationTemplateByIdV1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteNotificationTemplateByIdV1 indicates an expected call of DeleteNotificationTemplateByIdV1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteNotificationTemplateByIdV1(ctx, notificationTemplateId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, notificationTemplateId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteNotificationTemplateByIdV1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteNotificationTemplateByIdV1), varargs...)
+}
+
+// DeleteNotificationTemplateByIdV1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) DeleteNotificationTemplateByIdV1WithResponse(ctx context.Context, notificationTemplateId sysdig.NotificationTemplateIdPath, reqEditors ...sysdig.RequestEditorFn) (*sysdig.DeleteNotificationTemplateByIdV1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, notificationTemplateId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeleteNotificationTemplateByIdV1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.DeleteNotificationTemplateByIdV1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteNotificationTemplateByIdV1WithResponse indicates an expected call of DeleteNotificationTemplateByIdV1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteNotificationTemplateByIdV1WithResponse(ctx, notificationTemplateId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, notificationTemplateId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteNotificationTemplateByIdV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteNotificationTemplateByIdV1WithResponse), varargs...)
+}
+
 // DeletePricingByIdV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) DeletePricingByIdV1(ctx context.Context, pricingId sysdig.PricingIdPath, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -2443,6 +2803,46 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteSsoSetting
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteSsoSettingsByIdV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteSsoSettingsByIdV1WithResponse), varargs...)
 }
 
+// DeleteSystemSsoSettingsByIdV1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) DeleteSystemSsoSettingsByIdV1(ctx context.Context, ssoSettingsId sysdig.SsoSettingsIdPath, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, ssoSettingsId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeleteSystemSsoSettingsByIdV1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteSystemSsoSettingsByIdV1 indicates an expected call of DeleteSystemSsoSettingsByIdV1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteSystemSsoSettingsByIdV1(ctx, ssoSettingsId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, ssoSettingsId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteSystemSsoSettingsByIdV1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteSystemSsoSettingsByIdV1), varargs...)
+}
+
+// DeleteSystemSsoSettingsByIdV1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) DeleteSystemSsoSettingsByIdV1WithResponse(ctx context.Context, ssoSettingsId sysdig.SsoSettingsIdPath, reqEditors ...sysdig.RequestEditorFn) (*sysdig.DeleteSystemSsoSettingsByIdV1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, ssoSettingsId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeleteSystemSsoSettingsByIdV1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.DeleteSystemSsoSettingsByIdV1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteSystemSsoSettingsByIdV1WithResponse indicates an expected call of DeleteSystemSsoSettingsByIdV1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteSystemSsoSettingsByIdV1WithResponse(ctx, ssoSettingsId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, ssoSettingsId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteSystemSsoSettingsByIdV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteSystemSsoSettingsByIdV1WithResponse), varargs...)
+}
+
 // DeleteTeamByIdV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) DeleteTeamByIdV1(ctx context.Context, teamId sysdig.TeamIdPath, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -2603,6 +3003,46 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteUserByIdV1
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteUserByIdV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteUserByIdV1WithResponse), varargs...)
 }
 
+// DeleteZonePolicyAssociation mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) DeleteZonePolicyAssociation(ctx context.Context, zoneId sysdig.ZoneId, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeleteZonePolicyAssociation", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteZonePolicyAssociation indicates an expected call of DeleteZonePolicyAssociation.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteZonePolicyAssociation(ctx, zoneId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteZonePolicyAssociation", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteZonePolicyAssociation), varargs...)
+}
+
+// DeleteZonePolicyAssociationWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) DeleteZonePolicyAssociationWithResponse(ctx context.Context, zoneId sysdig.ZoneId, reqEditors ...sysdig.RequestEditorFn) (*sysdig.DeleteZonePolicyAssociationResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeleteZonePolicyAssociationWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.DeleteZonePolicyAssociationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteZonePolicyAssociationWithResponse indicates an expected call of DeleteZonePolicyAssociationWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteZonePolicyAssociationWithResponse(ctx, zoneId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteZonePolicyAssociationWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteZonePolicyAssociationWithResponse), varargs...)
+}
+
 // DeleteZoneV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) DeleteZoneV1(ctx context.Context, zoneId sysdig.ZoneId, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -2641,6 +3081,46 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteZoneV1With
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, zoneId}, reqEditors...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteZoneV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteZoneV1WithResponse), varargs...)
+}
+
+// DeleteZoneV2 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) DeleteZoneV2(ctx context.Context, zoneId sysdig.ZoneId, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeleteZoneV2", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteZoneV2 indicates an expected call of DeleteZoneV2.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteZoneV2(ctx, zoneId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteZoneV2", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteZoneV2), varargs...)
+}
+
+// DeleteZoneV2WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) DeleteZoneV2WithResponse(ctx context.Context, zoneId sysdig.ZoneId, reqEditors ...sysdig.RequestEditorFn) (*sysdig.DeleteZoneV2Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeleteZoneV2WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.DeleteZoneV2Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteZoneV2WithResponse indicates an expected call of DeleteZoneV2WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteZoneV2WithResponse(ctx, zoneId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteZoneV2WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteZoneV2WithResponse), varargs...)
 }
 
 // EditZoneV1 mocks base method.
@@ -2721,6 +3201,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) EditZoneV1WithRe
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, zoneId, body}, reqEditors...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "EditZoneV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).EditZoneV1WithResponse), varargs...)
+}
+
+// EditZoneV2 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) EditZoneV2(ctx context.Context, zoneId sysdig.ZoneId, body sysdig.EditZoneV2JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "EditZoneV2", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// EditZoneV2 indicates an expected call of EditZoneV2.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) EditZoneV2(ctx, zoneId, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "EditZoneV2", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).EditZoneV2), varargs...)
+}
+
+// EditZoneV2WithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) EditZoneV2WithBody(ctx context.Context, zoneId sysdig.ZoneId, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "EditZoneV2WithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// EditZoneV2WithBody indicates an expected call of EditZoneV2WithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) EditZoneV2WithBody(ctx, zoneId, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "EditZoneV2WithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).EditZoneV2WithBody), varargs...)
+}
+
+// EditZoneV2WithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) EditZoneV2WithBodyWithResponse(ctx context.Context, zoneId sysdig.ZoneId, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.EditZoneV2Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "EditZoneV2WithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.EditZoneV2Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// EditZoneV2WithBodyWithResponse indicates an expected call of EditZoneV2WithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) EditZoneV2WithBodyWithResponse(ctx, zoneId, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "EditZoneV2WithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).EditZoneV2WithBodyWithResponse), varargs...)
+}
+
+// EditZoneV2WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) EditZoneV2WithResponse(ctx context.Context, zoneId sysdig.ZoneId, body sysdig.EditZoneV2JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.EditZoneV2Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "EditZoneV2WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.EditZoneV2Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// EditZoneV2WithResponse indicates an expected call of EditZoneV2WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) EditZoneV2WithResponse(ctx, zoneId, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "EditZoneV2WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).EditZoneV2WithResponse), varargs...)
 }
 
 // GetAcceptedRiskV1 mocks base method.
@@ -3643,6 +4203,46 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetCustomPrometh
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCustomPrometheusJobsV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetCustomPrometheusJobsV1WithResponse), varargs...)
 }
 
+// GetDefaultNotificationTemplateV1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetDefaultNotificationTemplateV1(ctx context.Context, params *sysdig.GetDefaultNotificationTemplateV1Params, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetDefaultNotificationTemplateV1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetDefaultNotificationTemplateV1 indicates an expected call of GetDefaultNotificationTemplateV1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetDefaultNotificationTemplateV1(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetDefaultNotificationTemplateV1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetDefaultNotificationTemplateV1), varargs...)
+}
+
+// GetDefaultNotificationTemplateV1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetDefaultNotificationTemplateV1WithResponse(ctx context.Context, params *sysdig.GetDefaultNotificationTemplateV1Params, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetDefaultNotificationTemplateV1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetDefaultNotificationTemplateV1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetDefaultNotificationTemplateV1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetDefaultNotificationTemplateV1WithResponse indicates an expected call of GetDefaultNotificationTemplateV1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetDefaultNotificationTemplateV1WithResponse(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetDefaultNotificationTemplateV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetDefaultNotificationTemplateV1WithResponse), varargs...)
+}
+
 // GetDefaultRoleByDisplayNameV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) GetDefaultRoleByDisplayNameV1(ctx context.Context, roleDisplayName sysdig.GetDefaultRoleByDisplayNameV1ParamsRoleDisplayName, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -4003,46 +4603,6 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetFormatQueryV1
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetFormatQueryV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetFormatQueryV1WithResponse), varargs...)
 }
 
-// GetGlobaSsoSettingsV1 mocks base method.
-func (m *MockExtendedClientWithResponsesInterface) GetGlobaSsoSettingsV1(ctx context.Context, ssoProductId sysdig.GetGlobaSsoSettingsV1ParamsSsoProductId, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, ssoProductId}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "GetGlobaSsoSettingsV1", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetGlobaSsoSettingsV1 indicates an expected call of GetGlobaSsoSettingsV1.
-func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetGlobaSsoSettingsV1(ctx, ssoProductId any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, ssoProductId}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGlobaSsoSettingsV1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetGlobaSsoSettingsV1), varargs...)
-}
-
-// GetGlobaSsoSettingsV1WithResponse mocks base method.
-func (m *MockExtendedClientWithResponsesInterface) GetGlobaSsoSettingsV1WithResponse(ctx context.Context, ssoProductId sysdig.GetGlobaSsoSettingsV1ParamsSsoProductId, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetGlobaSsoSettingsV1Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, ssoProductId}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "GetGlobaSsoSettingsV1WithResponse", varargs...)
-	ret0, _ := ret[0].(*sysdig.GetGlobaSsoSettingsV1Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetGlobaSsoSettingsV1WithResponse indicates an expected call of GetGlobaSsoSettingsV1WithResponse.
-func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetGlobaSsoSettingsV1WithResponse(ctx, ssoProductId any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, ssoProductId}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGlobaSsoSettingsV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetGlobaSsoSettingsV1WithResponse), varargs...)
-}
-
 // GetGlobalServiceAccountByIdV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) GetGlobalServiceAccountByIdV1(ctx context.Context, serviceAccountId sysdig.ServiceAccountIdPath, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -4161,6 +4721,46 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetGlobalService
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, params}, reqEditors...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGlobalServiceAccountsV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetGlobalServiceAccountsV1WithResponse), varargs...)
+}
+
+// GetGlobalSsoSettingsV1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetGlobalSsoSettingsV1(ctx context.Context, ssoProductId sysdig.GetGlobalSsoSettingsV1ParamsSsoProductId, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, ssoProductId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetGlobalSsoSettingsV1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetGlobalSsoSettingsV1 indicates an expected call of GetGlobalSsoSettingsV1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetGlobalSsoSettingsV1(ctx, ssoProductId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, ssoProductId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGlobalSsoSettingsV1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetGlobalSsoSettingsV1), varargs...)
+}
+
+// GetGlobalSsoSettingsV1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetGlobalSsoSettingsV1WithResponse(ctx context.Context, ssoProductId sysdig.GetGlobalSsoSettingsV1ParamsSsoProductId, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetGlobalSsoSettingsV1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, ssoProductId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetGlobalSsoSettingsV1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetGlobalSsoSettingsV1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetGlobalSsoSettingsV1WithResponse indicates an expected call of GetGlobalSsoSettingsV1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetGlobalSsoSettingsV1WithResponse(ctx, ssoProductId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, ssoProductId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGlobalSsoSettingsV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetGlobalSsoSettingsV1WithResponse), varargs...)
 }
 
 // GetGroupMappingByIdV1 mocks base method.
@@ -4943,6 +5543,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetNotificationC
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetNotificationChannelsWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetNotificationChannelsWithResponse), varargs...)
 }
 
+// GetNotificationTemplateByIdV1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetNotificationTemplateByIdV1(ctx context.Context, notificationTemplateId sysdig.NotificationTemplateIdPath, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, notificationTemplateId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetNotificationTemplateByIdV1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetNotificationTemplateByIdV1 indicates an expected call of GetNotificationTemplateByIdV1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetNotificationTemplateByIdV1(ctx, notificationTemplateId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, notificationTemplateId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetNotificationTemplateByIdV1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetNotificationTemplateByIdV1), varargs...)
+}
+
+// GetNotificationTemplateByIdV1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetNotificationTemplateByIdV1WithResponse(ctx context.Context, notificationTemplateId sysdig.NotificationTemplateIdPath, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetNotificationTemplateByIdV1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, notificationTemplateId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetNotificationTemplateByIdV1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetNotificationTemplateByIdV1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetNotificationTemplateByIdV1WithResponse indicates an expected call of GetNotificationTemplateByIdV1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetNotificationTemplateByIdV1WithResponse(ctx, notificationTemplateId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, notificationTemplateId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetNotificationTemplateByIdV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetNotificationTemplateByIdV1WithResponse), varargs...)
+}
+
+// GetNotificationTemplatesV1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetNotificationTemplatesV1(ctx context.Context, params *sysdig.GetNotificationTemplatesV1Params, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetNotificationTemplatesV1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetNotificationTemplatesV1 indicates an expected call of GetNotificationTemplatesV1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetNotificationTemplatesV1(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetNotificationTemplatesV1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetNotificationTemplatesV1), varargs...)
+}
+
+// GetNotificationTemplatesV1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetNotificationTemplatesV1WithResponse(ctx context.Context, params *sysdig.GetNotificationTemplatesV1Params, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetNotificationTemplatesV1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetNotificationTemplatesV1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetNotificationTemplatesV1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetNotificationTemplatesV1WithResponse indicates an expected call of GetNotificationTemplatesV1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetNotificationTemplatesV1WithResponse(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetNotificationTemplatesV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetNotificationTemplatesV1WithResponse), varargs...)
+}
+
 // GetNotificationsV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) GetNotificationsV1(ctx context.Context, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -5263,6 +5943,46 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetQueryRangeV1W
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetQueryRangeV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetQueryRangeV1WithResponse), varargs...)
 }
 
+// GetQueryResult mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetQueryResult(ctx context.Context, params *sysdig.GetQueryResultParams, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetQueryResult", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetQueryResult indicates an expected call of GetQueryResult.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetQueryResult(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetQueryResult", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetQueryResult), varargs...)
+}
+
+// GetQueryResultWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetQueryResultWithResponse(ctx context.Context, params *sysdig.GetQueryResultParams, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetQueryResultResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetQueryResultWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetQueryResultResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetQueryResultWithResponse indicates an expected call of GetQueryResultWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetQueryResultWithResponse(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetQueryResultWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetQueryResultWithResponse), varargs...)
+}
+
 // GetQueryV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) GetQueryV1(ctx context.Context, params *sysdig.GetQueryV1Params, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -5541,6 +6261,46 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetSBOMV1beta1Wi
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, params}, reqEditors...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSBOMV1beta1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetSBOMV1beta1WithResponse), varargs...)
+}
+
+// GetSchema mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetSchema(ctx context.Context, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetSchema", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetSchema indicates an expected call of GetSchema.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetSchema(ctx any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSchema", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetSchema), varargs...)
+}
+
+// GetSchemaWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetSchemaWithResponse(ctx context.Context, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetSchemaResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetSchemaWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetSchemaResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetSchemaWithResponse indicates an expected call of GetSchemaWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetSchemaWithResponse(ctx any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSchemaWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetSchemaWithResponse), varargs...)
 }
 
 // GetSecureVulnerabilityV1Bundles mocks base method.
@@ -6183,44 +6943,84 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetStatusWalRepl
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetStatusWalReplayV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetStatusWalReplayV1WithResponse), varargs...)
 }
 
-// GetSysqlSchema mocks base method.
-func (m *MockExtendedClientWithResponsesInterface) GetSysqlSchema(ctx context.Context, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+// GetSystemSsoSettingsByIdV1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetSystemSsoSettingsByIdV1(ctx context.Context, ssoSettingsId sysdig.SsoSettingsIdPath, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
-	varargs := []any{ctx}
+	varargs := []any{ctx, ssoSettingsId}
 	for _, a := range reqEditors {
 		varargs = append(varargs, a)
 	}
-	ret := m.ctrl.Call(m, "GetSysqlSchema", varargs...)
+	ret := m.ctrl.Call(m, "GetSystemSsoSettingsByIdV1", varargs...)
 	ret0, _ := ret[0].(*http.Response)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetSysqlSchema indicates an expected call of GetSysqlSchema.
-func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetSysqlSchema(ctx any, reqEditors ...any) *gomock.Call {
+// GetSystemSsoSettingsByIdV1 indicates an expected call of GetSystemSsoSettingsByIdV1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetSystemSsoSettingsByIdV1(ctx, ssoSettingsId any, reqEditors ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSysqlSchema", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetSysqlSchema), varargs...)
+	varargs := append([]any{ctx, ssoSettingsId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSystemSsoSettingsByIdV1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetSystemSsoSettingsByIdV1), varargs...)
 }
 
-// GetSysqlSchemaWithResponse mocks base method.
-func (m *MockExtendedClientWithResponsesInterface) GetSysqlSchemaWithResponse(ctx context.Context, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetSysqlSchemaResponse, error) {
+// GetSystemSsoSettingsByIdV1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetSystemSsoSettingsByIdV1WithResponse(ctx context.Context, ssoSettingsId sysdig.SsoSettingsIdPath, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetSystemSsoSettingsByIdV1Response, error) {
 	m.ctrl.T.Helper()
-	varargs := []any{ctx}
+	varargs := []any{ctx, ssoSettingsId}
 	for _, a := range reqEditors {
 		varargs = append(varargs, a)
 	}
-	ret := m.ctrl.Call(m, "GetSysqlSchemaWithResponse", varargs...)
-	ret0, _ := ret[0].(*sysdig.GetSysqlSchemaResponse)
+	ret := m.ctrl.Call(m, "GetSystemSsoSettingsByIdV1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetSystemSsoSettingsByIdV1Response)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetSysqlSchemaWithResponse indicates an expected call of GetSysqlSchemaWithResponse.
-func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetSysqlSchemaWithResponse(ctx any, reqEditors ...any) *gomock.Call {
+// GetSystemSsoSettingsByIdV1WithResponse indicates an expected call of GetSystemSsoSettingsByIdV1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetSystemSsoSettingsByIdV1WithResponse(ctx, ssoSettingsId any, reqEditors ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSysqlSchemaWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetSysqlSchemaWithResponse), varargs...)
+	varargs := append([]any{ctx, ssoSettingsId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSystemSsoSettingsByIdV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetSystemSsoSettingsByIdV1WithResponse), varargs...)
+}
+
+// GetSystemSsoSettingsV1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetSystemSsoSettingsV1(ctx context.Context, params *sysdig.GetSystemSsoSettingsV1Params, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetSystemSsoSettingsV1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetSystemSsoSettingsV1 indicates an expected call of GetSystemSsoSettingsV1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetSystemSsoSettingsV1(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSystemSsoSettingsV1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetSystemSsoSettingsV1), varargs...)
+}
+
+// GetSystemSsoSettingsV1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetSystemSsoSettingsV1WithResponse(ctx context.Context, params *sysdig.GetSystemSsoSettingsV1Params, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetSystemSsoSettingsV1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetSystemSsoSettingsV1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetSystemSsoSettingsV1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetSystemSsoSettingsV1WithResponse indicates an expected call of GetSystemSsoSettingsV1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetSystemSsoSettingsV1WithResponse(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSystemSsoSettingsV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetSystemSsoSettingsV1WithResponse), varargs...)
 }
 
 // GetTargetsMetadataV1 mocks base method.
@@ -6943,6 +7743,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetZoneByIdV1Wit
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetZoneByIdV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetZoneByIdV1WithResponse), varargs...)
 }
 
+// GetZoneByIdV2 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetZoneByIdV2(ctx context.Context, zoneId sysdig.ZoneId, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetZoneByIdV2", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetZoneByIdV2 indicates an expected call of GetZoneByIdV2.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetZoneByIdV2(ctx, zoneId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetZoneByIdV2", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetZoneByIdV2), varargs...)
+}
+
+// GetZoneByIdV2WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetZoneByIdV2WithResponse(ctx context.Context, zoneId sysdig.ZoneId, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetZoneByIdV2Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetZoneByIdV2WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetZoneByIdV2Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetZoneByIdV2WithResponse indicates an expected call of GetZoneByIdV2WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetZoneByIdV2WithResponse(ctx, zoneId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetZoneByIdV2WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetZoneByIdV2WithResponse), varargs...)
+}
+
+// GetZonePolicyAssociation mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetZonePolicyAssociation(ctx context.Context, zoneId sysdig.ZoneId, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetZonePolicyAssociation", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetZonePolicyAssociation indicates an expected call of GetZonePolicyAssociation.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetZonePolicyAssociation(ctx, zoneId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetZonePolicyAssociation", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetZonePolicyAssociation), varargs...)
+}
+
+// GetZonePolicyAssociationWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetZonePolicyAssociationWithResponse(ctx context.Context, zoneId sysdig.ZoneId, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetZonePolicyAssociationResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetZonePolicyAssociationWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetZonePolicyAssociationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetZonePolicyAssociationWithResponse indicates an expected call of GetZonePolicyAssociationWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetZonePolicyAssociationWithResponse(ctx, zoneId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetZonePolicyAssociationWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetZonePolicyAssociationWithResponse), varargs...)
+}
+
 // ListEFOChannelsByIntegrationV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) ListEFOChannelsByIntegrationV1(ctx context.Context, params *sysdig.ListEFOChannelsByIntegrationV1Params, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -7301,6 +8181,46 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListZonesV1WithR
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, params}, reqEditors...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListZonesV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListZonesV1WithResponse), varargs...)
+}
+
+// ListZonesV2 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) ListZonesV2(ctx context.Context, params *sysdig.ListZonesV2Params, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListZonesV2", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListZonesV2 indicates an expected call of ListZonesV2.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListZonesV2(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListZonesV2", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListZonesV2), varargs...)
+}
+
+// ListZonesV2WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) ListZonesV2WithResponse(ctx context.Context, params *sysdig.ListZonesV2Params, reqEditors ...sysdig.RequestEditorFn) (*sysdig.ListZonesV2Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListZonesV2WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.ListZonesV2Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListZonesV2WithResponse indicates an expected call of ListZonesV2WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListZonesV2WithResponse(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListZonesV2WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListZonesV2WithResponse), varargs...)
 }
 
 // PostAcceptedRiskV1 mocks base method.
@@ -7783,6 +8703,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) PostQueryRangeV1
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PostQueryRangeV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).PostQueryRangeV1WithResponse), varargs...)
 }
 
+// PostQueryResult mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) PostQueryResult(ctx context.Context, body sysdig.PostQueryResultJSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "PostQueryResult", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PostQueryResult indicates an expected call of PostQueryResult.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) PostQueryResult(ctx, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PostQueryResult", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).PostQueryResult), varargs...)
+}
+
+// PostQueryResultWithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) PostQueryResultWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "PostQueryResultWithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PostQueryResultWithBody indicates an expected call of PostQueryResultWithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) PostQueryResultWithBody(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PostQueryResultWithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).PostQueryResultWithBody), varargs...)
+}
+
+// PostQueryResultWithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) PostQueryResultWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.PostQueryResultResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "PostQueryResultWithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.PostQueryResultResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PostQueryResultWithBodyWithResponse indicates an expected call of PostQueryResultWithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) PostQueryResultWithBodyWithResponse(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PostQueryResultWithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).PostQueryResultWithBodyWithResponse), varargs...)
+}
+
+// PostQueryResultWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) PostQueryResultWithResponse(ctx context.Context, body sysdig.PostQueryResultJSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.PostQueryResultResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "PostQueryResultWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.PostQueryResultResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PostQueryResultWithResponse indicates an expected call of PostQueryResultWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) PostQueryResultWithResponse(ctx, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PostQueryResultWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).PostQueryResultWithResponse), varargs...)
+}
+
 // PostQueryV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) PostQueryV1(ctx context.Context, params *sysdig.PostQueryV1Params, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -8181,126 +9181,6 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) PutSecureVulnera
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, policyId, body}, reqEditors...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PutSecureVulnerabilityV1PoliciesPolicyIdWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).PutSecureVulnerabilityV1PoliciesPolicyIdWithResponse), varargs...)
-}
-
-// QuerySysqlGet mocks base method.
-func (m *MockExtendedClientWithResponsesInterface) QuerySysqlGet(ctx context.Context, params *sysdig.QuerySysqlGetParams, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "QuerySysqlGet", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// QuerySysqlGet indicates an expected call of QuerySysqlGet.
-func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) QuerySysqlGet(ctx, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySysqlGet", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).QuerySysqlGet), varargs...)
-}
-
-// QuerySysqlGetWithResponse mocks base method.
-func (m *MockExtendedClientWithResponsesInterface) QuerySysqlGetWithResponse(ctx context.Context, params *sysdig.QuerySysqlGetParams, reqEditors ...sysdig.RequestEditorFn) (*sysdig.QuerySysqlGetResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "QuerySysqlGetWithResponse", varargs...)
-	ret0, _ := ret[0].(*sysdig.QuerySysqlGetResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// QuerySysqlGetWithResponse indicates an expected call of QuerySysqlGetWithResponse.
-func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) QuerySysqlGetWithResponse(ctx, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySysqlGetWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).QuerySysqlGetWithResponse), varargs...)
-}
-
-// QuerySysqlPost mocks base method.
-func (m *MockExtendedClientWithResponsesInterface) QuerySysqlPost(ctx context.Context, body sysdig.QuerySysqlPostJSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "QuerySysqlPost", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// QuerySysqlPost indicates an expected call of QuerySysqlPost.
-func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) QuerySysqlPost(ctx, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySysqlPost", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).QuerySysqlPost), varargs...)
-}
-
-// QuerySysqlPostWithBody mocks base method.
-func (m *MockExtendedClientWithResponsesInterface) QuerySysqlPostWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "QuerySysqlPostWithBody", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// QuerySysqlPostWithBody indicates an expected call of QuerySysqlPostWithBody.
-func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) QuerySysqlPostWithBody(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySysqlPostWithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).QuerySysqlPostWithBody), varargs...)
-}
-
-// QuerySysqlPostWithBodyWithResponse mocks base method.
-func (m *MockExtendedClientWithResponsesInterface) QuerySysqlPostWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.QuerySysqlPostResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "QuerySysqlPostWithBodyWithResponse", varargs...)
-	ret0, _ := ret[0].(*sysdig.QuerySysqlPostResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// QuerySysqlPostWithBodyWithResponse indicates an expected call of QuerySysqlPostWithBodyWithResponse.
-func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) QuerySysqlPostWithBodyWithResponse(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySysqlPostWithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).QuerySysqlPostWithBodyWithResponse), varargs...)
-}
-
-// QuerySysqlPostWithResponse mocks base method.
-func (m *MockExtendedClientWithResponsesInterface) QuerySysqlPostWithResponse(ctx context.Context, body sysdig.QuerySysqlPostJSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.QuerySysqlPostResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "QuerySysqlPostWithResponse", varargs...)
-	ret0, _ := ret[0].(*sysdig.QuerySysqlPostResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// QuerySysqlPostWithResponse indicates an expected call of QuerySysqlPostWithResponse.
-func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) QuerySysqlPostWithResponse(ctx, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySysqlPostWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).QuerySysqlPostWithResponse), varargs...)
 }
 
 // RemoteWriteV1WithBody mocks base method.
@@ -9943,6 +10823,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateNotificati
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateNotificationChannelByIdWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateNotificationChannelByIdWithResponse), varargs...)
 }
 
+// UpdateNotificationTemplateByIdV1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateNotificationTemplateByIdV1(ctx context.Context, notificationTemplateId sysdig.NotificationTemplateIdPath, body sysdig.UpdateNotificationTemplateByIdV1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, notificationTemplateId, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateNotificationTemplateByIdV1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateNotificationTemplateByIdV1 indicates an expected call of UpdateNotificationTemplateByIdV1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateNotificationTemplateByIdV1(ctx, notificationTemplateId, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, notificationTemplateId, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateNotificationTemplateByIdV1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateNotificationTemplateByIdV1), varargs...)
+}
+
+// UpdateNotificationTemplateByIdV1WithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateNotificationTemplateByIdV1WithBody(ctx context.Context, notificationTemplateId sysdig.NotificationTemplateIdPath, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, notificationTemplateId, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateNotificationTemplateByIdV1WithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateNotificationTemplateByIdV1WithBody indicates an expected call of UpdateNotificationTemplateByIdV1WithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateNotificationTemplateByIdV1WithBody(ctx, notificationTemplateId, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, notificationTemplateId, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateNotificationTemplateByIdV1WithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateNotificationTemplateByIdV1WithBody), varargs...)
+}
+
+// UpdateNotificationTemplateByIdV1WithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateNotificationTemplateByIdV1WithBodyWithResponse(ctx context.Context, notificationTemplateId sysdig.NotificationTemplateIdPath, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.UpdateNotificationTemplateByIdV1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, notificationTemplateId, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateNotificationTemplateByIdV1WithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.UpdateNotificationTemplateByIdV1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateNotificationTemplateByIdV1WithBodyWithResponse indicates an expected call of UpdateNotificationTemplateByIdV1WithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateNotificationTemplateByIdV1WithBodyWithResponse(ctx, notificationTemplateId, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, notificationTemplateId, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateNotificationTemplateByIdV1WithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateNotificationTemplateByIdV1WithBodyWithResponse), varargs...)
+}
+
+// UpdateNotificationTemplateByIdV1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateNotificationTemplateByIdV1WithResponse(ctx context.Context, notificationTemplateId sysdig.NotificationTemplateIdPath, body sysdig.UpdateNotificationTemplateByIdV1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.UpdateNotificationTemplateByIdV1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, notificationTemplateId, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateNotificationTemplateByIdV1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.UpdateNotificationTemplateByIdV1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateNotificationTemplateByIdV1WithResponse indicates an expected call of UpdateNotificationTemplateByIdV1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateNotificationTemplateByIdV1WithResponse(ctx, notificationTemplateId, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, notificationTemplateId, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateNotificationTemplateByIdV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateNotificationTemplateByIdV1WithResponse), varargs...)
+}
+
 // UpdatePricingByIdV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) UpdatePricingByIdV1(ctx context.Context, pricingId sysdig.PricingIdPath, body sysdig.UpdatePricingByIdV1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -10263,6 +11223,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateSsoSetting
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateSsoSettingsByIdV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateSsoSettingsByIdV1WithResponse), varargs...)
 }
 
+// UpdateSystemSsoSettingsByIdV1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateSystemSsoSettingsByIdV1(ctx context.Context, ssoSettingsId sysdig.SsoSettingsIdPath, body sysdig.UpdateSystemSsoSettingsByIdV1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, ssoSettingsId, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateSystemSsoSettingsByIdV1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateSystemSsoSettingsByIdV1 indicates an expected call of UpdateSystemSsoSettingsByIdV1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateSystemSsoSettingsByIdV1(ctx, ssoSettingsId, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, ssoSettingsId, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateSystemSsoSettingsByIdV1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateSystemSsoSettingsByIdV1), varargs...)
+}
+
+// UpdateSystemSsoSettingsByIdV1WithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateSystemSsoSettingsByIdV1WithBody(ctx context.Context, ssoSettingsId sysdig.SsoSettingsIdPath, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, ssoSettingsId, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateSystemSsoSettingsByIdV1WithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateSystemSsoSettingsByIdV1WithBody indicates an expected call of UpdateSystemSsoSettingsByIdV1WithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateSystemSsoSettingsByIdV1WithBody(ctx, ssoSettingsId, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, ssoSettingsId, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateSystemSsoSettingsByIdV1WithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateSystemSsoSettingsByIdV1WithBody), varargs...)
+}
+
+// UpdateSystemSsoSettingsByIdV1WithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateSystemSsoSettingsByIdV1WithBodyWithResponse(ctx context.Context, ssoSettingsId sysdig.SsoSettingsIdPath, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.UpdateSystemSsoSettingsByIdV1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, ssoSettingsId, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateSystemSsoSettingsByIdV1WithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.UpdateSystemSsoSettingsByIdV1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateSystemSsoSettingsByIdV1WithBodyWithResponse indicates an expected call of UpdateSystemSsoSettingsByIdV1WithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateSystemSsoSettingsByIdV1WithBodyWithResponse(ctx, ssoSettingsId, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, ssoSettingsId, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateSystemSsoSettingsByIdV1WithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateSystemSsoSettingsByIdV1WithBodyWithResponse), varargs...)
+}
+
+// UpdateSystemSsoSettingsByIdV1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateSystemSsoSettingsByIdV1WithResponse(ctx context.Context, ssoSettingsId sysdig.SsoSettingsIdPath, body sysdig.UpdateSystemSsoSettingsByIdV1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.UpdateSystemSsoSettingsByIdV1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, ssoSettingsId, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateSystemSsoSettingsByIdV1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.UpdateSystemSsoSettingsByIdV1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateSystemSsoSettingsByIdV1WithResponse indicates an expected call of UpdateSystemSsoSettingsByIdV1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateSystemSsoSettingsByIdV1WithResponse(ctx, ssoSettingsId, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, ssoSettingsId, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateSystemSsoSettingsByIdV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateSystemSsoSettingsByIdV1WithResponse), varargs...)
+}
+
 // UpdateTeamByIdV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) UpdateTeamByIdV1(ctx context.Context, teamId sysdig.TeamIdPath, body sysdig.UpdateTeamByIdV1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -10501,6 +11541,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateUserV1With
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, userId, body}, reqEditors...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateUserV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateUserV1WithResponse), varargs...)
+}
+
+// UpdateZonePolicyAssociation mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateZonePolicyAssociation(ctx context.Context, zoneId sysdig.ZoneId, body sysdig.UpdateZonePolicyAssociationJSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateZonePolicyAssociation", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateZonePolicyAssociation indicates an expected call of UpdateZonePolicyAssociation.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateZonePolicyAssociation(ctx, zoneId, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateZonePolicyAssociation", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateZonePolicyAssociation), varargs...)
+}
+
+// UpdateZonePolicyAssociationWithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateZonePolicyAssociationWithBody(ctx context.Context, zoneId sysdig.ZoneId, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateZonePolicyAssociationWithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateZonePolicyAssociationWithBody indicates an expected call of UpdateZonePolicyAssociationWithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateZonePolicyAssociationWithBody(ctx, zoneId, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateZonePolicyAssociationWithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateZonePolicyAssociationWithBody), varargs...)
+}
+
+// UpdateZonePolicyAssociationWithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateZonePolicyAssociationWithBodyWithResponse(ctx context.Context, zoneId sysdig.ZoneId, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.UpdateZonePolicyAssociationResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateZonePolicyAssociationWithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.UpdateZonePolicyAssociationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateZonePolicyAssociationWithBodyWithResponse indicates an expected call of UpdateZonePolicyAssociationWithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateZonePolicyAssociationWithBodyWithResponse(ctx, zoneId, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateZonePolicyAssociationWithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateZonePolicyAssociationWithBodyWithResponse), varargs...)
+}
+
+// UpdateZonePolicyAssociationWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateZonePolicyAssociationWithResponse(ctx context.Context, zoneId sysdig.ZoneId, body sysdig.UpdateZonePolicyAssociationJSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.UpdateZonePolicyAssociationResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, zoneId, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateZonePolicyAssociationWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.UpdateZonePolicyAssociationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateZonePolicyAssociationWithResponse indicates an expected call of UpdateZonePolicyAssociationWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateZonePolicyAssociationWithResponse(ctx, zoneId, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, zoneId, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateZonePolicyAssociationWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateZonePolicyAssociationWithResponse), varargs...)
 }
 
 // UploadCertificateV1WithBody mocks base method.

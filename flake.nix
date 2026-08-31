@@ -59,6 +59,7 @@
                 just
                 mockgen
                 nix-prefetch-docker
+                oapi-codegen
                 pinact
                 prek
                 sd
