@@ -4,7 +4,7 @@ buildGoLatestModule (finalAttrs: {
   version = "3.0.2";
   src = ./.;
   # This hash is automatically re-calculated with `just rehash-package-nix`. This is automatically called as well by `just update`.
-  vendorHash = "sha256-S8YUwHSQiA43O1KT8UURC6qT4HItusEaDaaQ5Z9CEiA=";
+  vendorHash = "sha256-byCVbElMdYTQIbuKVFLTcl98rOGSjvxSbrv1m5CyN5k=";
 
   subPackages = [
     "cmd/server"
