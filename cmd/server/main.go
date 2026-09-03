@@ -9,9 +9,11 @@ import (
 	"os"
 	"runtime/debug"
 	"strings"
+	"time"
 
 	"github.com/spf13/cobra"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/config"
+	infraauth "github.com/sysdiglabs/sysdig-mcp-server/internal/infra/auth"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/clock"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp/tools"
@@ -85,10 +87,7 @@ func setupLogger(logLevel string) {
 func setupSysdigClient(cfg *config.Config) (sysdig.ExtendedClientWithResponsesInterface, error) {
 	sysdigClientOptions := []sysdig.IntoClientOption{
 		sysdig.WithVersion(Version),
-		sysdig.WithFallbackAuthentication(
-			sysdig.WithHostAndTokenFromContext(),
-			sysdig.WithFixedHostAndToken(cfg.APIHost, cfg.APIToken),
-		),
+		sysdig.WithFixedHostAndToken(cfg.APIHost, cfg.APIToken),
 	}
 
 	if cfg.SkipTLSVerification {
@@ -107,6 +106,25 @@ func setupSysdigClient(cfg *config.Config) (sysdig.ExtendedClientWithResponsesIn
 		return nil, fmt.Errorf("error creating sysdig client: %w", err)
 	}
 	return sysdigClient, nil
+}
+
+func setupRemoteSecurity(cfg *config.Config) mcp.RemoteSecurity {
+	verifier := infraauth.NewJWTVerifier(
+		context.Background(),
+		cfg.AuthIssuer,
+		cfg.ResourceURL,
+		cfg.AuthJWKSURL,
+		cfg.AuthSigningAlgs,
+		cfg.AuthScopes,
+	)
+
+	return mcp.NewRemoteSecurity(
+		verifier,
+		cfg.ResourceURL,
+		cfg.AuthIssuer,
+		cfg.AuthScopes,
+		cfg.AllowedOrigins,
+	)
 }
 
 func setupHandler(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *mcp.Handler {
@@ -142,13 +160,25 @@ func startServer(cfg *config.Config, handler *mcp.Handler) error {
 	case "streamable-http":
 		addr := fmt.Sprintf("%s:%s", cfg.ListeningHost, cfg.ListeningPort)
 		slog.Info("MCP Server listening", "addr", addr, "mountPath", cfg.MountPath, "stateless", cfg.Stateless)
-		if err := http.ListenAndServe(addr, handler.AsStreamableHTTP(cfg.MountPath, cfg.Stateless)); err != nil {
+		server := &http.Server{
+			Addr:              addr,
+			Handler:           handler.AsStreamableHTTP(cfg.MountPath, cfg.Stateless, setupRemoteSecurity(cfg)),
+			ReadHeaderTimeout: 10 * time.Second,
+			IdleTimeout:       2 * time.Minute,
+		}
+		if err := server.ListenAndServe(); err != nil {
 			return fmt.Errorf("error serving streamable http: %w", err)
 		}
 	case "sse":
 		addr := fmt.Sprintf("%s:%s", cfg.ListeningHost, cfg.ListeningPort)
 		slog.Info("MCP Server listening", "addr", addr, "mountPath", cfg.MountPath)
-		if err := http.ListenAndServe(addr, handler.AsSSE(cfg.MountPath)); err != nil {
+		server := &http.Server{
+			Addr:              addr,
+			Handler:           handler.AsSSE(cfg.MountPath, setupRemoteSecurity(cfg)),
+			ReadHeaderTimeout: 10 * time.Second,
+			IdleTimeout:       2 * time.Minute,
+		}
+		if err := server.ListenAndServe(); err != nil {
 			return fmt.Errorf("error serving sse: %w", err)
 		}
 	default:
