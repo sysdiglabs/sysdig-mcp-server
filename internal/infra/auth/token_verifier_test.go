@@ -42,7 +42,7 @@ func TestJWTVerifier(t *testing.T) {
 		Algorithm: string(jose.RS256),
 		Use:       "sig",
 	}}}
-	jwksServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	jwksHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/jwks" {
 			http.NotFound(w, r)
 			return
@@ -51,7 +51,8 @@ func TestJWTVerifier(t *testing.T) {
 		if err := json.NewEncoder(w).Encode(jwks); err != nil {
 			t.Errorf("encoding JWKS: %v", err)
 		}
-	}))
+	})
+	jwksServer := httptest.NewServer(jwksHandler)
 	defer jwksServer.Close()
 
 	signer, err := jose.NewSigner(
@@ -185,4 +186,41 @@ func TestJWTVerifier(t *testing.T) {
 			}
 		})
 	}
+
+	t.Run("uses a supplied HTTP client for JWKS TLS policy", func(t *testing.T) {
+		tlsServer := httptest.NewTLSServer(jwksHandler)
+		defer tlsServer.Close()
+
+		rawToken := newToken(
+			testIssuer,
+			jwt.Audience{testAudience},
+			time.Now().Add(time.Hour),
+			accessTokenClaims{},
+		)
+
+		defaultVerifier := infraauth.NewJWTVerifier(
+			context.Background(),
+			testIssuer,
+			testAudience,
+			tlsServer.URL+"/jwks",
+			[]string{"RS256"},
+			nil,
+		)
+		if err := defaultVerifier.Verify(context.Background(), rawToken); err == nil {
+			t.Fatal("expected the default JWKS client to reject the self-signed certificate")
+		}
+
+		customVerifier := infraauth.NewJWTVerifierWithHTTPClient(
+			context.Background(),
+			testIssuer,
+			testAudience,
+			tlsServer.URL+"/jwks",
+			[]string{"RS256"},
+			nil,
+			tlsServer.Client(),
+		)
+		if err := customVerifier.Verify(context.Background(), rawToken); err != nil {
+			t.Fatalf("expected custom JWKS HTTP client to be used: %v", err)
+		}
+	})
 }

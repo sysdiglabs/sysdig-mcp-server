@@ -93,6 +93,30 @@ var _ = Describe("Client authentication", func() {
 		Expect(lastHeaders.Get("Authorization")).To(Equal("Bearer server-token"))
 	})
 
+	It("preserves a configured reverse-proxy path prefix", func() {
+		var requestedPath string
+		proxy := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			requestedPath = r.URL.Path
+			if requestedPath != "/sysdig-proxy/api/users/me/permissions" {
+				w.WriteHeader(http.StatusNotFound)
+				return
+			}
+			w.Header().Set("Content-Type", "application/json")
+			_, _ = w.Write([]byte(`{"permissions":[]}`))
+		}))
+		defer proxy.Close()
+
+		client, err := sysdig.NewSysdigClient(
+			sysdig.WithFixedHostAndToken(proxy.URL+"/sysdig-proxy", "server-token"),
+		)
+		Expect(err).NotTo(HaveOccurred())
+
+		resp, err := client.GetMyPermissionsWithResponse(context.Background())
+		Expect(err).NotTo(HaveOccurred())
+		Expect(resp.HTTPResponse.StatusCode).To(Equal(http.StatusOK))
+		Expect(requestedPath).To(Equal("/sysdig-proxy/api/users/me/permissions"))
+	})
+
 	It("rejects a non-absolute configured host", func() {
 		client, err := sysdig.NewSysdigClient(
 			sysdig.WithFixedHostAndToken("app.example.com", "server-token"),
@@ -101,6 +125,16 @@ var _ = Describe("Client authentication", func() {
 
 		_, err = client.GetMyPermissionsWithResponse(context.Background())
 		Expect(err).To(MatchError(ContainSubstring("absolute URL")))
+	})
+
+	It("rejects configured host query strings", func() {
+		client, err := sysdig.NewSysdigClient(
+			sysdig.WithFixedHostAndToken(ts.URL+"?tenant=one", "server-token"),
+		)
+		Expect(err).NotTo(HaveOccurred())
+
+		_, err = client.GetMyPermissionsWithResponse(context.Background())
+		Expect(err).To(MatchError(ContainSubstring("query string")))
 	})
 
 	Describe("WithVersion", func() {

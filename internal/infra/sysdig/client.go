@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 func updateReqWithHostURL(req *http.Request, host string) error {
@@ -15,8 +16,18 @@ func updateReqWithHostURL(req *http.Request, host string) error {
 	if !u.IsAbs() || u.Host == "" {
 		return fmt.Errorf("Sysdig API host must be an absolute URL")
 	}
+	if u.User != nil || u.RawQuery != "" || u.Fragment != "" {
+		return fmt.Errorf("Sysdig API host must not contain user information, a query string, or a fragment")
+	}
+
 	req.URL.Scheme = u.Scheme
 	req.URL.Host = u.Host
+
+	basePath := strings.TrimSuffix(u.Path, "/")
+	if basePath != "" {
+		req.URL.Path = basePath + "/" + strings.TrimPrefix(req.URL.Path, "/")
+		req.URL.RawPath = ""
+	}
 	return nil
 }
 

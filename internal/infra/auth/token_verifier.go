@@ -41,7 +41,37 @@ func NewJWTVerifier(
 	signingAlgorithms []string,
 	requiredScopes []string,
 ) *JWTVerifier {
-	ctx = oidc.ClientContext(ctx, &http.Client{Timeout: jwksRequestTimeout})
+	return NewJWTVerifierWithHTTPClient(
+		ctx,
+		issuer,
+		audience,
+		jwksURL,
+		signingAlgorithms,
+		requiredScopes,
+		nil,
+	)
+}
+
+func NewJWTVerifierWithHTTPClient(
+	ctx context.Context,
+	issuer string,
+	audience string,
+	jwksURL string,
+	signingAlgorithms []string,
+	requiredScopes []string,
+	httpClient *http.Client,
+) *JWTVerifier {
+	if httpClient == nil {
+		httpClient = &http.Client{}
+	} else {
+		clone := *httpClient
+		httpClient = &clone
+	}
+	if httpClient.Timeout == 0 {
+		httpClient.Timeout = jwksRequestTimeout
+	}
+
+	ctx = oidc.ClientContext(ctx, httpClient)
 	keySet := oidc.NewRemoteKeySet(ctx, jwksURL)
 	verifier := oidc.NewVerifier(issuer, keySet, &oidc.Config{
 		ClientID:             audience,

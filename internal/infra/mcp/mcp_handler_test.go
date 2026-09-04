@@ -10,6 +10,7 @@ import (
 	"log/slog"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"time"
 
 	"github.com/mark3labs/mcp-go/client"
@@ -197,6 +198,16 @@ var _ = Describe("McpHandler", func() {
 			Expect(verifier.calls).To(BeZero())
 		})
 
+		It("rejects duplicate Origin headers", func() {
+			headers := authorizationHeaders()
+			headers.Add("Origin", allowedOrigin)
+			headers.Add("Origin", allowedOrigin)
+			resp := testClient.RPC(context.Background(), "tools/list", nil, headers)
+			defer func() { _ = resp.Body.Close() }()
+			Expect(resp.StatusCode).To(Equal(http.StatusBadRequest))
+			Expect(verifier.calls).To(BeZero())
+		})
+
 		It("returns CORS headers only for an exact allowlisted origin", func(ctx SpecContext) {
 			headers := authorizationHeaders()
 			headers.Set("Origin", allowedOrigin)
@@ -208,6 +219,25 @@ var _ = Describe("McpHandler", func() {
 			Expect(resp.Header.Get("Vary")).To(ContainSubstring("Origin"))
 		}, NodeTimeout(5*time.Second))
 
+		It("normalizes origin host case before exact comparison", func() {
+			mixedCaseSecurity := localmcp.NewRemoteSecurity(
+				verifier,
+				resourceURL,
+				"https://identity.example.com",
+				[]string{"mcp:tools"},
+				[]string{"https://Client.Example.com"},
+			)
+			client := NewHTTPTestClient(handler.AsStreamableHTTP("/", false, mixedCaseSecurity))
+			req := httptest.NewRequest(http.MethodOptions, "/", nil)
+			req.Header.Set("Origin", "https://client.example.com")
+			req.Header.Set("Access-Control-Request-Method", http.MethodPost)
+			recorder := httptest.NewRecorder()
+			client.handler.ServeHTTP(recorder, req)
+
+			Expect(recorder.Code).To(Equal(http.StatusNoContent))
+			Expect(recorder.Header().Get("Access-Control-Allow-Origin")).To(Equal("https://client.example.com"))
+		})
+
 		It("answers an allowlisted CORS preflight without a token", func() {
 			req := httptest.NewRequest(http.MethodOptions, "/", nil)
 			req.Header.Set("Origin", allowedOrigin)
@@ -218,6 +248,17 @@ var _ = Describe("McpHandler", func() {
 			Expect(recorder.Code).To(Equal(http.StatusNoContent))
 			Expect(recorder.Header().Get("Access-Control-Allow-Origin")).To(Equal(allowedOrigin))
 			Expect(recorder.Header().Get("Access-Control-Allow-Headers")).To(ContainSubstring("Authorization"))
+			Expect(recorder.Header().Get("Access-Control-Max-Age")).To(Equal("600"))
+			Expect(verifier.calls).To(BeZero())
+		})
+
+		It("does not treat a plain OPTIONS request as a CORS preflight", func() {
+			req := httptest.NewRequest(http.MethodOptions, "/", nil)
+			req.Header.Set("Origin", allowedOrigin)
+			recorder := httptest.NewRecorder()
+			testClient.handler.ServeHTTP(recorder, req)
+
+			Expect(recorder.Code).To(Equal(http.StatusUnauthorized))
 			Expect(verifier.calls).To(BeZero())
 		})
 
@@ -256,8 +297,37 @@ var _ = Describe("McpHandler", func() {
 			Expect(upstreamAuthorization).NotTo(ContainSubstring(validMCPToken))
 		}, NodeTimeout(5*time.Second))
 
-		It("constructs a protected SSE handler", func() {
-			Expect(handler.AsSSE("/sse", remoteSecurity(verifier))).NotTo(BeNil())
+		It("routes the protected SSE message endpoint and preserves exact-origin CORS", func() {
+			sseHandler := handler.AsSSE("/sysdig-mcp-server", remoteSecurity(verifier))
+			req := httptest.NewRequest(
+				http.MethodPost,
+				"/sysdig-mcp-server/message?sessionId=missing",
+				strings.NewReader(`{"jsonrpc":"2.0","id":1,"method":"ping"}`),
+			)
+			req.Header = authorizationHeaders()
+			req.Header.Set("Content-Type", "application/json")
+			req.Header.Set("Origin", allowedOrigin)
+			recorder := httptest.NewRecorder()
+			sseHandler.ServeHTTP(recorder, req)
+
+			Expect(recorder.Code).NotTo(Equal(http.StatusNotFound))
+			Expect(recorder.Header().Get("Access-Control-Allow-Origin")).To(Equal(allowedOrigin))
+			Expect(recorder.Header().Get("Access-Control-Allow-Origin")).NotTo(Equal("*"))
+			Expect(verifier.calls).To(Equal(1))
+		})
+
+		It("serves SSE preflight on the actual SSE endpoint", func() {
+			sseHandler := handler.AsSSE("/sysdig-mcp-server", remoteSecurity(verifier))
+			req := httptest.NewRequest(http.MethodOptions, "/sysdig-mcp-server/sse", nil)
+			req.Header.Set("Origin", allowedOrigin)
+			req.Header.Set("Access-Control-Request-Method", http.MethodGet)
+			recorder := httptest.NewRecorder()
+			sseHandler.ServeHTTP(recorder, req)
+
+			Expect(recorder.Code).To(Equal(http.StatusNoContent))
+			Expect(recorder.Header().Get("Access-Control-Allow-Origin")).To(Equal(allowedOrigin))
+			Expect(recorder.Header().Get("Access-Control-Max-Age")).To(Equal("600"))
+			Expect(verifier.calls).To(BeZero())
 		})
 
 		It("serves stateless calls without initialization", func(ctx SpecContext) {

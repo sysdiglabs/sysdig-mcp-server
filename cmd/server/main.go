@@ -91,14 +91,7 @@ func setupSysdigClient(cfg *config.Config) (sysdig.ExtendedClientWithResponsesIn
 	}
 
 	if cfg.SkipTLSVerification {
-		transport := http.DefaultTransport.(*http.Transport).Clone()
-		if transport.TLSClientConfig == nil {
-			transport.TLSClientConfig = &tls.Config{}
-		}
-		transport.TLSClientConfig.InsecureSkipVerify = true
-		httpClient := &http.Client{Transport: transport}
-
-		sysdigClientOptions = append(sysdigClientOptions, sysdig.WithHTTPClient(httpClient))
+		sysdigClientOptions = append(sysdigClientOptions, sysdig.WithHTTPClient(insecureHTTPClient()))
 	}
 
 	sysdigClient, err := sysdig.NewSysdigClient(sysdigClientOptions...)
@@ -109,13 +102,19 @@ func setupSysdigClient(cfg *config.Config) (sysdig.ExtendedClientWithResponsesIn
 }
 
 func setupRemoteSecurity(cfg *config.Config) mcp.RemoteSecurity {
-	verifier := infraauth.NewJWTVerifier(
+	var jwksHTTPClient *http.Client
+	if cfg.SkipJWKSTLSVerification {
+		jwksHTTPClient = insecureHTTPClient()
+	}
+
+	verifier := infraauth.NewJWTVerifierWithHTTPClient(
 		context.Background(),
 		cfg.AuthIssuer,
 		cfg.ResourceURL,
 		cfg.AuthJWKSURL,
 		cfg.AuthSigningAlgs,
 		cfg.AuthScopes,
+		jwksHTTPClient,
 	)
 
 	return mcp.NewRemoteSecurity(
@@ -125,6 +124,15 @@ func setupRemoteSecurity(cfg *config.Config) mcp.RemoteSecurity {
 		cfg.AuthScopes,
 		cfg.AllowedOrigins,
 	)
+}
+
+func insecureHTTPClient() *http.Client {
+	transport := http.DefaultTransport.(*http.Transport).Clone()
+	if transport.TLSClientConfig == nil {
+		transport.TLSClientConfig = &tls.Config{}
+	}
+	transport.TLSClientConfig.InsecureSkipVerify = true
+	return &http.Client{Transport: transport}
 }
 
 func setupHandler(sysdigClient sysdig.ExtendedClientWithResponsesInterface) *mcp.Handler {
@@ -164,6 +172,7 @@ func startServer(cfg *config.Config, handler *mcp.Handler) error {
 			Addr:              addr,
 			Handler:           handler.AsStreamableHTTP(cfg.MountPath, cfg.Stateless, setupRemoteSecurity(cfg)),
 			ReadHeaderTimeout: 10 * time.Second,
+			ReadTimeout:       30 * time.Second,
 			IdleTimeout:       2 * time.Minute,
 		}
 		if err := server.ListenAndServe(); err != nil {
@@ -176,6 +185,7 @@ func startServer(cfg *config.Config, handler *mcp.Handler) error {
 			Addr:              addr,
 			Handler:           handler.AsSSE(cfg.MountPath, setupRemoteSecurity(cfg)),
 			ReadHeaderTimeout: 10 * time.Second,
+			ReadTimeout:       30 * time.Second,
 			IdleTimeout:       2 * time.Minute,
 		}
 		if err := server.ListenAndServe(); err != nil {

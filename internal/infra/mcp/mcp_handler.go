@@ -15,6 +15,8 @@ import (
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
+const corsMaxAgeSeconds = 600
+
 type Handler struct {
 	server *server.MCPServer
 }
@@ -90,7 +92,9 @@ func (h *Handler) ServeStdio(ctx context.Context, stdin io.Reader, stdout io.Wri
 func (h *Handler) AsStreamableHTTP(mountPath string, stateless bool, security RemoteSecurity) http.Handler {
 	mux := http.NewServeMux()
 
-	var opts []server.StreamableHTTPOption
+	opts := []server.StreamableHTTPOption{
+		server.WithStreamableHTTPCORS(remoteCORSOptions(security)...),
+	}
 	if stateless {
 		opts = append(opts, server.WithStateLess(true))
 	}
@@ -103,10 +107,31 @@ func (h *Handler) AsStreamableHTTP(mountPath string, stateless bool, security Re
 
 func (h *Handler) AsSSE(mountPath string, security RemoteSecurity) http.Handler {
 	mux := http.NewServeMux()
-	sseServer := server.NewSSEServer(h.server, server.WithStaticBasePath(mountPath))
+	sseServer := server.NewSSEServer(
+		h.server,
+		server.WithStaticBasePath(mountPath),
+		server.WithSSECORS(remoteCORSOptions(security)...),
+	)
 	security.mountMetadata(mux)
-	mux.Handle(mountPath, security.protect(sseServer))
+	mux.Handle(sseServer.CompleteSsePath(), security.protect(sseServer.SSEHandler()))
+	mux.Handle(sseServer.CompleteMessagePath(), security.protect(sseServer.MessageHandler()))
 	return mux
+}
+
+func remoteCORSOptions(security RemoteSecurity) []server.CORSOption {
+	return []server.CORSOption{
+		server.WithCORSAllowedOrigins(security.corsOrigins()...),
+		server.WithCORSAllowedMethods(http.MethodGet, http.MethodPost, http.MethodDelete, http.MethodOptions),
+		server.WithCORSAllowedHeaders(
+			"Authorization",
+			"Content-Type",
+			"Last-Event-ID",
+			server.HeaderKeyProtocolVersion,
+			server.HeaderKeySessionID,
+		),
+		server.WithCORSExposedHeaders(server.HeaderKeySessionID, "WWW-Authenticate"),
+		server.WithCORSMaxAge(corsMaxAgeSeconds),
+	}
 }
 
 func (h *Handler) ServeInProcessClient() (*client.Client, error) {

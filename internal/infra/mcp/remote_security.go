@@ -12,10 +12,11 @@ import (
 )
 
 type RemoteSecurity struct {
-	verifier       infraauth.TokenVerifier
-	allowedOrigins map[string]struct{}
-	metadata       server.ProtectedResourceMetadataConfig
-	metadataURL    string
+	verifier           infraauth.TokenVerifier
+	allowedOrigins     map[string]struct{}
+	corsAllowedOrigins []string
+	metadata           server.ProtectedResourceMetadataConfig
+	metadataURL        string
 }
 
 func NewRemoteSecurity(
@@ -26,8 +27,14 @@ func NewRemoteSecurity(
 	allowedOrigins []string,
 ) RemoteSecurity {
 	origins := make(map[string]struct{}, len(allowedOrigins))
+	corsOrigins := make([]string, 0, len(allowedOrigins))
 	for _, origin := range allowedOrigins {
-		origins[origin] = struct{}{}
+		normalized := normalizeOrigin(origin)
+		if _, exists := origins[normalized]; exists {
+			continue
+		}
+		origins[normalized] = struct{}{}
+		corsOrigins = append(corsOrigins, normalized)
 	}
 
 	metadata := server.ProtectedResourceMetadataConfig{
@@ -39,28 +46,28 @@ func NewRemoteSecurity(
 	}
 
 	return RemoteSecurity{
-		verifier:       verifier,
-		allowedOrigins: origins,
-		metadata:       metadata,
-		metadataURL:    protectedResourceMetadataURL(resourceURL),
+		verifier:           verifier,
+		allowedOrigins:     origins,
+		corsAllowedOrigins: corsOrigins,
+		metadata:           metadata,
+		metadataURL:        protectedResourceMetadataURL(resourceURL),
 	}
 }
 
 func (s RemoteSecurity) protect(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Add("Vary", "Origin")
-		if origin := r.Header.Get("Origin"); origin != "" {
+		origin, hasOrigin, ok := requestOrigin(r.Header.Values("Origin"))
+		if !ok {
+			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+			return
+		}
+		if hasOrigin {
 			if _, allowed := s.allowedOrigins[origin]; !allowed {
 				http.Error(w, http.StatusText(http.StatusForbidden), http.StatusForbidden)
 				return
 			}
-			w.Header().Set("Access-Control-Allow-Origin", origin)
-			w.Header().Set("Access-Control-Expose-Headers", "Mcp-Session-Id, WWW-Authenticate")
-
-			if r.Method == http.MethodOptions {
-				w.Header().Set("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS")
-				w.Header().Set("Access-Control-Allow-Headers", "Authorization, Content-Type, Last-Event-ID, Mcp-Protocol-Version, Mcp-Session-Id")
-				w.WriteHeader(http.StatusNoContent)
+			if isCORSPreflight(r) {
+				next.ServeHTTP(w, r)
 				return
 			}
 		}
@@ -84,6 +91,10 @@ func (s RemoteSecurity) protect(next http.Handler) http.Handler {
 	})
 }
 
+func (s RemoteSecurity) corsOrigins() []string {
+	return append([]string(nil), s.corsAllowedOrigins...)
+}
+
 func (s RemoteSecurity) writeInsufficientScope(w http.ResponseWriter) {
 	challenge := fmt.Sprintf(
 		`Bearer resource_metadata=%q, error="insufficient_scope", scope=%q`,
@@ -105,6 +116,30 @@ func (s RemoteSecurity) writeUnauthorized(w http.ResponseWriter, authError strin
 	}
 	w.Header().Set("WWW-Authenticate", challenge)
 	http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
+}
+
+func requestOrigin(values []string) (origin string, present bool, ok bool) {
+	if len(values) == 0 {
+		return "", false, true
+	}
+	if len(values) != 1 || strings.TrimSpace(values[0]) == "" {
+		return "", true, false
+	}
+	return normalizeOrigin(values[0]), true, true
+}
+
+func normalizeOrigin(origin string) string {
+	u, err := url.Parse(origin)
+	if err != nil || !u.IsAbs() || u.Host == "" {
+		return origin
+	}
+	u.Scheme = strings.ToLower(u.Scheme)
+	u.Host = strings.ToLower(u.Host)
+	return u.String()
+}
+
+func isCORSPreflight(r *http.Request) bool {
+	return r.Method == http.MethodOptions && r.Header.Get("Access-Control-Request-Method") != ""
 }
 
 func bearerToken(values []string) (string, bool) {

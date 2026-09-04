@@ -14,6 +14,7 @@ func validConfig(transport string) *config.Config {
 		APIHost:   "https://app.us4.sysdig.com",
 		APIToken:  "sysdig-token",
 		Transport: transport,
+		MountPath: "/sysdig-mcp-server",
 	}
 	if transport != "stdio" {
 		cfg.ResourceURL = "https://mcp.example.com/sysdig-mcp-server"
@@ -64,21 +65,39 @@ var _ = Describe("Config", func() {
 			Entry("JWKS URL", func(cfg *config.Config) { cfg.AuthJWKSURL = "" }, "SYSDIG_MCP_AUTH_JWKS_URL"),
 		)
 
-		DescribeTable("rejects unsafe URLs",
+		DescribeTable("rejects unsafe URLs and paths",
 			func(mutate func(*config.Config), expected string) {
 				cfg := validConfig("streamable-http")
 				mutate(cfg)
 				Expect(cfg.Validate()).To(MatchError(ContainSubstring(expected)))
 			},
 			Entry("relative API host", func(cfg *config.Config) { cfg.APIHost = "app.example.com" }, "absolute URL"),
-			Entry("plaintext resource", func(cfg *config.Config) { cfg.ResourceURL = "http://mcp.example.com" }, "must use https"),
+			Entry("API host query", func(cfg *config.Config) { cfg.APIHost += "?tenant=one" }, "query string"),
+			Entry("plaintext resource", func(cfg *config.Config) { cfg.ResourceURL = "http://mcp.example.com/sysdig-mcp-server" }, "must use https"),
+			Entry("resource query", func(cfg *config.Config) { cfg.ResourceURL += "?tenant=one" }, "query string"),
+			Entry("resource path mismatch", func(cfg *config.Config) { cfg.ResourceURL = "https://mcp.example.com/other" }, "must match SYSDIG_MCP_MOUNT_PATH"),
+			Entry("non-canonical mount path", func(cfg *config.Config) { cfg.MountPath = "/sysdig-mcp-server/" }, "canonical URL path"),
 			Entry("issuer with user info", func(cfg *config.Config) { cfg.AuthIssuer = "https://user@identity.example.com" }, "user information"),
+			Entry("issuer query", func(cfg *config.Config) { cfg.AuthIssuer += "?tenant=one" }, "query string"),
 			Entry("fragmented JWKS URL", func(cfg *config.Config) { cfg.AuthJWKSURL += "#keys" }, "fragment"),
 			Entry("wildcard origin", func(cfg *config.Config) { cfg.AllowedOrigins = []string{"*"} }, "wildcard"),
 			Entry("origin path", func(cfg *config.Config) { cfg.AllowedOrigins = []string{"https://client.example.com/path"} }, "scheme and authority"),
+			Entry("invalid scope", func(cfg *config.Config) { cfg.AuthScopes = []string{"mcp:\"tools"} }, "invalid scope"),
 			Entry("empty signing algorithms", func(cfg *config.Config) { cfg.AuthSigningAlgs = nil }, "at least one"),
 			Entry("symmetric signing", func(cfg *config.Config) { cfg.AuthSigningAlgs = []string{"HS256"} }, "asymmetric signing algorithm"),
 		)
+
+		It("allows an API path prefix when it is otherwise safe", func() {
+			cfg := validConfig("streamable-http")
+			cfg.APIHost = "https://gateway.example.com/sysdig-proxy"
+			Expect(cfg.Validate()).To(Succeed())
+		})
+
+		It("allows a JWKS URL with a query component", func() {
+			cfg := validConfig("streamable-http")
+			cfg.AuthJWKSURL = "https://identity.example.com/jwks?tenant=one"
+			Expect(cfg.Validate()).To(Succeed())
+		})
 
 		It("allows HTTP only for loopback development", func() {
 			cfg := validConfig("streamable-http")
@@ -107,12 +126,14 @@ var _ = Describe("Config", func() {
 			Expect(cfg.MountPath).To(Equal("/sysdig-mcp-server"))
 			Expect(cfg.LogLevel).To(Equal("INFO"))
 			Expect(cfg.SkipTLSVerification).To(BeFalse())
+			Expect(cfg.SkipJWKSTLSVerification).To(BeFalse())
 			Expect(cfg.Stateless).To(BeFalse())
 			Expect(cfg.AuthSigningAlgs).To(Equal([]string{"RS256"}))
 		})
 
 		It("loads all remote security values", func() {
 			_ = os.Setenv("SYSDIG_MCP_API_SKIP_TLS_VERIFICATION", "true")
+			_ = os.Setenv("SYSDIG_MCP_AUTH_JWKS_SKIP_TLS_VERIFICATION", "true")
 			_ = os.Setenv("SYSDIG_MCP_TRANSPORT", "streamable-http")
 			_ = os.Setenv("SYSDIG_MCP_LISTENING_HOST", "0.0.0.0")
 			_ = os.Setenv("SYSDIG_MCP_LISTENING_PORT", "9090")
@@ -122,13 +143,14 @@ var _ = Describe("Config", func() {
 			_ = os.Setenv("SYSDIG_MCP_RESOURCE_URL", "https://mcp.example.com/custom")
 			_ = os.Setenv("SYSDIG_MCP_AUTH_ISSUER", "https://identity.example.com")
 			_ = os.Setenv("SYSDIG_MCP_AUTH_JWKS_URL", "https://identity.example.com/jwks")
-			_ = os.Setenv("SYSDIG_MCP_AUTH_SCOPES", "mcp:tools, profile")
+			_ = os.Setenv("SYSDIG_MCP_AUTH_SCOPES", "mcp:tools,\r\n profile")
 			_ = os.Setenv("SYSDIG_MCP_AUTH_SIGNING_ALGS", "RS256 ES256")
 			_ = os.Setenv("SYSDIG_MCP_ALLOWED_ORIGINS", "https://one.example.com, https://two.example.com")
 
 			cfg, err := config.Load()
 			Expect(err).NotTo(HaveOccurred())
 			Expect(cfg.SkipTLSVerification).To(BeTrue())
+			Expect(cfg.SkipJWKSTLSVerification).To(BeTrue())
 			Expect(cfg.Transport).To(Equal("streamable-http"))
 			Expect(cfg.ListeningHost).To(Equal("0.0.0.0"))
 			Expect(cfg.ListeningPort).To(Equal("9090"))
