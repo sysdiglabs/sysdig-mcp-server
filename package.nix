@@ -1,10 +1,10 @@
 { buildGoLatestModule, versionCheckHook }:
 buildGoLatestModule (finalAttrs: {
   pname = "sysdig-mcp-server";
-  version = "3.0.2";
+  version = "4.0.0";
   src = ./.;
   # This hash is automatically re-calculated with `just rehash-package-nix`. This is automatically called as well by `just update`.
-  vendorHash = "sha256-byCVbElMdYTQIbuKVFLTcl98rOGSjvxSbrv1m5CyN5k=";
+  vendorHash = "sha256-3CqE9xLjGc6fsQ2Cjd5SaCZjyO2LmdvEOg8NTAnMJqo=";
 
   subPackages = [
     "cmd/server"

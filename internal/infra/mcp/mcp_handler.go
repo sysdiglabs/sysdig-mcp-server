@@ -15,6 +15,8 @@ import (
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 )
 
+const corsMaxAgeSeconds = 600
+
 type Handler struct {
 	server *server.MCPServer
 }
@@ -67,7 +69,7 @@ func NewHandler(version string, sysdigClient sysdig.ExtendedClientWithResponsesI
 	s := server.NewMCPServer(
 		"Sysdig MCP Server",
 		version,
-		server.WithInstructions("Provides Sysdig Secure tools and resources."),
+		server.WithInstructions("Provides read-only Sysdig Monitor tools for infrastructure analysis."),
 		server.WithToolCapabilities(true),
 		server.WithToolFilter(toolPermissionFiltering(sysdigClient)),
 	)
@@ -87,58 +89,51 @@ func (h *Handler) ServeStdio(ctx context.Context, stdin io.Reader, stdout io.Wri
 	return server.NewStdioServer(h.server).Listen(ctx, stdin, stdout)
 }
 
-func (h *Handler) AsStreamableHTTP(mountPath string, stateless bool) http.Handler {
+func (h *Handler) AsStreamableHTTP(mountPath string, stateless bool, security RemoteSecurity) http.Handler {
 	mux := http.NewServeMux()
 
-	var opts []server.StreamableHTTPOption
+	opts := []server.StreamableHTTPOption{
+		server.WithStreamableHTTPCORS(remoteCORSOptions(security)...),
+	}
 	if stateless {
 		opts = append(opts, server.WithStateLess(true))
 	}
 
 	httpServer := server.NewStreamableHTTPServer(h.server, opts...)
-	mux.Handle(mountPath, authMiddleware(httpServer))
+	security.mountMetadata(mux)
+	mux.Handle(mountPath, security.protect(httpServer))
 	return mux
 }
 
-func (h *Handler) AsSSE(mountPath string) http.Handler {
+func (h *Handler) AsSSE(mountPath string, security RemoteSecurity) http.Handler {
 	mux := http.NewServeMux()
-	sseServer := server.NewSSEServer(h.server, server.WithStaticBasePath(mountPath))
-	mux.Handle(mountPath, authMiddleware(sseServer))
+	sseServer := server.NewSSEServer(
+		h.server,
+		server.WithStaticBasePath(mountPath),
+		server.WithSSECORS(remoteCORSOptions(security)...),
+	)
+	security.mountMetadata(mux)
+	mux.Handle(sseServer.CompleteSsePath(), security.protect(sseServer.SSEHandler()))
+	mux.Handle(sseServer.CompleteMessagePath(), security.protect(sseServer.MessageHandler()))
 	return mux
+}
+
+func remoteCORSOptions(security RemoteSecurity) []server.CORSOption {
+	return []server.CORSOption{
+		server.WithCORSAllowedOrigins(security.corsOrigins()...),
+		server.WithCORSAllowedMethods(http.MethodGet, http.MethodPost, http.MethodDelete, http.MethodOptions),
+		server.WithCORSAllowedHeaders(
+			"Authorization",
+			"Content-Type",
+			"Last-Event-ID",
+			server.HeaderKeyProtocolVersion,
+			server.HeaderKeySessionID,
+		),
+		server.WithCORSExposedHeaders(server.HeaderKeySessionID, "WWW-Authenticate"),
+		server.WithCORSMaxAge(corsMaxAgeSeconds),
+	}
 }
 
 func (h *Handler) ServeInProcessClient() (*client.Client, error) {
 	return client.NewInProcessClient(h.server)
-}
-
-func authMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		slog.Debug("starting middleware", "headers", r.Header.Clone())
-		ctx := r.Context()
-
-		if host := r.Header.Get("X-Sysdig-Host"); host != "" {
-			slog.Debug("setting up host", "host", host)
-			ctx = sysdig.WrapContextWithHost(ctx, host)
-		}
-
-		var token string
-		authHeader := r.Header.Get("Authorization")
-		if authHeader != "" {
-			parts := strings.Split(authHeader, " ")
-			if len(parts) == 2 && strings.ToLower(parts[0]) == "bearer" {
-				token = parts[1]
-			}
-		}
-
-		if token == "" {
-			token = r.Header.Get("X-Sysdig-Token")
-		}
-
-		if token != "" {
-			slog.Debug("setting up token", "token", token)
-			ctx = sysdig.WrapContextWithToken(ctx, token)
-		}
-
-		next.ServeHTTP(w, r.WithContext(ctx))
-	})
 }

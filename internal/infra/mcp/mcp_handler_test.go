@@ -4,11 +4,13 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"log/slog"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"time"
 
 	"github.com/mark3labs/mcp-go/client"
@@ -18,13 +20,19 @@ import (
 	. "github.com/onsi/gomega"
 	"go.uber.org/mock/gomock"
 
+	infraauth "github.com/sysdiglabs/sysdig-mcp-server/internal/infra/auth"
 	localmcp "github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/mcp/tools"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig"
 	"github.com/sysdiglabs/sysdig-mcp-server/internal/infra/sysdig/mocks"
 )
 
-// dummyTool implements the interface required by Handler.RegisterTools
+const (
+	validMCPToken = "mcp-access-token"
+	allowedOrigin = "https://client.example.com"
+	resourceURL   = "https://mcp.example.com/sysdig-mcp-server"
+)
+
 type dummyTool struct {
 	name                string
 	requiredPermissions []string
@@ -32,18 +40,45 @@ type dummyTool struct {
 
 func (d *dummyTool) RegisterInServer(s *server.MCPServer) {
 	tool := mcp.NewTool(d.name, mcp.WithDescription("dummy tool"))
-	// Initialize Meta to avoid nil pointer issues in strict checks
 	if tool.Meta == nil {
-		tool.Meta = &mcp.Meta{
-			AdditionalFields: make(map[string]any),
-		}
+		tool.Meta = &mcp.Meta{AdditionalFields: make(map[string]any)}
 	}
 	if len(d.requiredPermissions) > 0 {
 		tools.WithRequiredPermissions(d.requiredPermissions...)(&tool)
 	}
-	s.AddTool(tool, func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	s.AddTool(tool, func(context.Context, mcp.CallToolRequest) (*mcp.CallToolResult, error) {
 		return mcp.NewToolResultText("success"), nil
 	})
+}
+
+type fakeTokenVerifier struct {
+	validToken string
+	calls      int
+}
+
+func (v *fakeTokenVerifier) Verify(_ context.Context, rawToken string) error {
+	v.calls++
+	if rawToken == "insufficient-scope" {
+		return infraauth.ErrInsufficientScope
+	}
+	if rawToken != v.validToken {
+		return errors.New("invalid access token")
+	}
+	return nil
+}
+
+func remoteSecurity(verifier *fakeTokenVerifier) localmcp.RemoteSecurity {
+	return localmcp.NewRemoteSecurity(
+		verifier,
+		resourceURL,
+		"https://identity.example.com",
+		[]string{"mcp:tools"},
+		[]string{allowedOrigin},
+	)
+}
+
+func authorizationHeaders() http.Header {
+	return http.Header{"Authorization": []string{"Bearer " + validMCPToken}}
 }
 
 var _ = Describe("McpHandler", func() {
@@ -65,163 +100,262 @@ var _ = Describe("McpHandler", func() {
 	})
 
 	Context("Permissions", func() {
-		It("should filter tools based on permissions", func() {
-			t1 := &dummyTool{name: "tool1", requiredPermissions: []string{"perm1"}}
-			t2 := &dummyTool{name: "tool2", requiredPermissions: []string{"perm2"}}
-			t3 := &dummyTool{name: "tool3" /* no permissions required */}
-
-			handler.RegisterTools(t1, t2, t3)
+		It("filters tools based on permissions", func() {
+			handler.RegisterTools(
+				&dummyTool{name: "tool1", requiredPermissions: []string{"perm1"}},
+				&dummyTool{name: "tool2", requiredPermissions: []string{"perm2"}},
+				&dummyTool{name: "tool3"},
+			)
 
 			mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any()).Return(&sysdig.GetMyPermissionsResponse{
-				HTTPResponse: &http.Response{StatusCode: 200},
-				JSON200: &sysdig.UserPermissions{
-					Permissions: []string{"perm1"},
-				},
+				HTTPResponse: &http.Response{StatusCode: http.StatusOK},
+				JSON200:      &sysdig.UserPermissions{Permissions: []string{"perm1"}},
 			}, nil)
 
 			c := initializeInProcessClient(handler)
-
 			resp, err := c.ListTools(context.Background(), mcp.ListToolsRequest{})
 			Expect(err).NotTo(HaveOccurred())
 
 			var names []string
-			for _, t := range resp.Tools {
-				names = append(names, t.Name)
+			for _, tool := range resp.Tools {
+				names = append(names, tool.Name)
 			}
 			Expect(names).To(ConsistOf("tool1", "tool3"))
 		})
 
-		It("should handle permission errors gracefully", func() {
-			t1 := &dummyTool{name: "tool1", requiredPermissions: []string{"perm1"}}
-			handler.RegisterTools(t1)
-
-			mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any()).Return(nil, fmt.Errorf("error"))
+		It("handles permission errors without exposing tools", func() {
+			handler.RegisterTools(&dummyTool{name: "tool1", requiredPermissions: []string{"perm1"}})
+			mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any()).Return(nil, fmt.Errorf("permission lookup failed"))
 
 			c := initializeInProcessClient(handler)
-
 			resp, err := c.ListTools(context.Background(), mcp.ListToolsRequest{})
 			Expect(err).NotTo(HaveOccurred())
 			Expect(resp.Tools).To(BeEmpty())
 		})
 	})
 
-	Context("HTTP Handlers and Middleware", func() {
-		var testClient *HTTPTestClient
+	Context("Remote trust boundary", func() {
+		var (
+			verifier   *fakeTokenVerifier
+			testClient *HTTPTestClient
+		)
 
 		BeforeEach(func() {
-			// Default middleware setup for HTTP tests
-			h := handler.AsStreamableHTTP("/", false)
-			testClient = NewHTTPTestClient(h)
+			verifier = &fakeTokenVerifier{validToken: validMCPToken}
+			testClient = NewHTTPTestClient(handler.AsStreamableHTTP("/", false, remoteSecurity(verifier)))
 		})
 
-		It("AsStreamableHTTP should serve correctly and middleware should extract headers", func(ctx SpecContext) {
-			expectedHost := "https://test.sysdig.com"
-			expectedToken := "my-token"
-
-			t1 := &dummyTool{name: "tool1", requiredPermissions: []string{"perm1"}}
-			handler.RegisterTools(t1)
-
-			mockClient.EXPECT().
-				GetMyPermissionsWithResponse(gomock.Any(), gomock.Any()).
-				DoAndReturn(func(c context.Context, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetMyPermissionsResponse, error) {
-					Expect(sysdig.GetHostFromContext(c)).To(Equal(expectedHost))
-					Expect(sysdig.GetTokenFromContext(c)).To(Equal(expectedToken))
-
-					return &sysdig.GetMyPermissionsResponse{
-						HTTPResponse: &http.Response{StatusCode: 200},
-						JSON200: &sysdig.UserPermissions{
-							Permissions: []string{"perm1"},
-						},
-					}, nil
-				})
-
-			testClient.Initialize(ctx)
-
-			headers := map[string]string{
-				"X-Sysdig-Host": expectedHost,
-				"Authorization": "Bearer " + expectedToken,
-			}
-			respList := testClient.ListTools(ctx, headers)
-			Expect(respList.StatusCode).To(Equal(http.StatusOK))
-		}, NodeTimeout(time.Second*5))
-
-		It("should handle X-Sysdig-Token header in middleware", func(ctx SpecContext) {
-			expectedToken := "token-header"
-
+		It("serves an authenticated Streamable HTTP session", func(ctx SpecContext) {
 			handler.RegisterTools(&dummyTool{name: "tool1", requiredPermissions: []string{"perm1"}})
+			mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any()).Return(&sysdig.GetMyPermissionsResponse{
+				HTTPResponse: &http.Response{StatusCode: http.StatusOK},
+				JSON200:      &sysdig.UserPermissions{Permissions: []string{"perm1"}},
+			}, nil)
 
-			mockClient.EXPECT().
-				GetMyPermissionsWithResponse(gomock.Any(), gomock.Any()).
-				DoAndReturn(func(c context.Context, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetMyPermissionsResponse, error) {
-					Expect(sysdig.GetTokenFromContext(c)).To(Equal(expectedToken))
+			testClient.Initialize(ctx, authorizationHeaders())
+			resp := testClient.ListTools(ctx, authorizationHeaders())
+			defer func() { _ = resp.Body.Close() }()
+			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+			Expect(verifier.calls).To(Equal(2))
+		}, NodeTimeout(5*time.Second))
 
-					return &sysdig.GetMyPermissionsResponse{
-						HTTPResponse: &http.Response{StatusCode: 200},
-						JSON200:      &sysdig.UserPermissions{Permissions: []string{"perm1"}},
-					}, nil
-				})
+		DescribeTable("rejects invalid authorization headers",
+			func(headers http.Header) {
+				resp := testClient.RPC(context.Background(), "tools/list", nil, headers)
+				defer func() { _ = resp.Body.Close() }()
+				Expect(resp.StatusCode).To(Equal(http.StatusUnauthorized))
+				Expect(resp.Header.Get("WWW-Authenticate")).To(ContainSubstring("resource_metadata="))
+			},
+			Entry("missing", http.Header{}),
+			Entry("wrong scheme", http.Header{"Authorization": []string{"Basic abc"}}),
+			Entry("empty bearer", http.Header{"Authorization": []string{"Bearer"}}),
+			Entry("duplicate", http.Header{"Authorization": []string{"Bearer one", "Bearer two"}}),
+		)
 
-			testClient.Initialize(ctx)
-
-			headers := map[string]string{"X-Sysdig-Token": expectedToken}
-			respList := testClient.ListTools(ctx, headers)
-			Expect(respList.StatusCode).To(Equal(http.StatusOK))
-		}, NodeTimeout(time.Second*5))
-
-		It("should handle request with no auth headers", func(ctx SpecContext) {
-			mockClient.EXPECT().
-				GetMyPermissionsWithResponse(gomock.Any(), gomock.Any()).
-				Return(nil, fmt.Errorf("no auth"))
-
-			testClient.Initialize(ctx)
-			respList := testClient.ListTools(ctx, nil)
-			Expect(respList.StatusCode).To(Equal(http.StatusOK))
-		}, NodeTimeout(time.Second*5))
-
-		It("AsSSE should return a handler", func() {
-			h := handler.AsSSE("/sse")
-			Expect(h).NotTo(BeNil())
+		It("returns invalid_token when JWT verification fails", func() {
+			headers := http.Header{"Authorization": []string{"Bearer wrong-token"}}
+			resp := testClient.RPC(context.Background(), "tools/list", nil, headers)
+			defer func() { _ = resp.Body.Close() }()
+			Expect(resp.StatusCode).To(Equal(http.StatusUnauthorized))
+			Expect(resp.Header.Get("WWW-Authenticate")).To(ContainSubstring(`error="invalid_token"`))
 		})
 
-		It("AsStreamableHTTP with stateless should serve tools/list without initialize", func(ctx SpecContext) {
-			h := handler.AsStreamableHTTP("/", true)
-			statelessClient := NewHTTPTestClient(h)
+		It("returns insufficient_scope with 403 for a valid but under-scoped token", func() {
+			headers := http.Header{"Authorization": []string{"Bearer insufficient-scope"}}
+			resp := testClient.RPC(context.Background(), "tools/list", nil, headers)
+			defer func() { _ = resp.Body.Close() }()
+			Expect(resp.StatusCode).To(Equal(http.StatusForbidden))
+			Expect(resp.Header.Get("WWW-Authenticate")).To(ContainSubstring(`error="insufficient_scope"`))
+			Expect(resp.Header.Get("WWW-Authenticate")).To(ContainSubstring(`scope="mcp:tools"`))
+		})
 
+		It("rejects non-allowlisted browser origins before token verification", func() {
+			headers := authorizationHeaders()
+			headers.Set("Origin", "https://evil.example.com")
+			resp := testClient.RPC(context.Background(), "tools/list", nil, headers)
+			defer func() { _ = resp.Body.Close() }()
+			Expect(resp.StatusCode).To(Equal(http.StatusForbidden))
+			Expect(verifier.calls).To(BeZero())
+		})
+
+		It("rejects duplicate Origin headers", func() {
+			headers := authorizationHeaders()
+			headers.Add("Origin", allowedOrigin)
+			headers.Add("Origin", allowedOrigin)
+			resp := testClient.RPC(context.Background(), "tools/list", nil, headers)
+			defer func() { _ = resp.Body.Close() }()
+			Expect(resp.StatusCode).To(Equal(http.StatusBadRequest))
+			Expect(verifier.calls).To(BeZero())
+		})
+
+		It("returns CORS headers only for an exact allowlisted origin", func(ctx SpecContext) {
+			headers := authorizationHeaders()
+			headers.Set("Origin", allowedOrigin)
+			testClient.Initialize(ctx, headers)
+			resp := testClient.RPC(ctx, "ping", nil, headers)
+			defer func() { _ = resp.Body.Close() }()
+			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+			Expect(resp.Header.Get("Access-Control-Allow-Origin")).To(Equal(allowedOrigin))
+			Expect(resp.Header.Get("Vary")).To(ContainSubstring("Origin"))
+		}, NodeTimeout(5*time.Second))
+
+		It("normalizes origin host case before exact comparison", func() {
+			mixedCaseSecurity := localmcp.NewRemoteSecurity(
+				verifier,
+				resourceURL,
+				"https://identity.example.com",
+				[]string{"mcp:tools"},
+				[]string{"https://Client.Example.com"},
+			)
+			client := NewHTTPTestClient(handler.AsStreamableHTTP("/", false, mixedCaseSecurity))
+			req := httptest.NewRequest(http.MethodOptions, "/", nil)
+			req.Header.Set("Origin", "https://client.example.com")
+			req.Header.Set("Access-Control-Request-Method", http.MethodPost)
+			recorder := httptest.NewRecorder()
+			client.handler.ServeHTTP(recorder, req)
+
+			Expect(recorder.Code).To(Equal(http.StatusNoContent))
+			Expect(recorder.Header().Get("Access-Control-Allow-Origin")).To(Equal("https://client.example.com"))
+		})
+
+		It("answers an allowlisted CORS preflight without a token", func() {
+			req := httptest.NewRequest(http.MethodOptions, "/", nil)
+			req.Header.Set("Origin", allowedOrigin)
+			req.Header.Set("Access-Control-Request-Method", http.MethodPost)
+			recorder := httptest.NewRecorder()
+			testClient.handler.ServeHTTP(recorder, req)
+
+			Expect(recorder.Code).To(Equal(http.StatusNoContent))
+			Expect(recorder.Header().Get("Access-Control-Allow-Origin")).To(Equal(allowedOrigin))
+			Expect(recorder.Header().Get("Access-Control-Allow-Headers")).To(ContainSubstring("Authorization"))
+			Expect(recorder.Header().Get("Access-Control-Max-Age")).To(Equal("600"))
+			Expect(verifier.calls).To(BeZero())
+		})
+
+		It("does not treat a plain OPTIONS request as a CORS preflight", func() {
+			req := httptest.NewRequest(http.MethodOptions, "/", nil)
+			req.Header.Set("Origin", allowedOrigin)
+			recorder := httptest.NewRecorder()
+			testClient.handler.ServeHTTP(recorder, req)
+
+			Expect(recorder.Code).To(Equal(http.StatusUnauthorized))
+			Expect(verifier.calls).To(BeZero())
+		})
+
+		It("publishes OAuth protected-resource metadata without authentication", func() {
+			req := httptest.NewRequest(http.MethodGet, "/.well-known/oauth-protected-resource/sysdig-mcp-server", nil)
+			recorder := httptest.NewRecorder()
+			testClient.handler.ServeHTTP(recorder, req)
+
+			Expect(recorder.Code).To(Equal(http.StatusOK))
+			Expect(recorder.Header().Get("Content-Type")).To(ContainSubstring("application/json"))
+			Expect(recorder.Body.String()).To(ContainSubstring(resourceURL))
+			Expect(recorder.Body.String()).To(ContainSubstring("https://identity.example.com"))
+			Expect(verifier.calls).To(BeZero())
+		})
+
+		It("never forwards the MCP access token to Sysdig", func(ctx SpecContext) {
+			var upstreamAuthorization string
+			upstream := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				upstreamAuthorization = r.Header.Get("Authorization")
+				w.Header().Set("Content-Type", "application/json")
+				_, _ = w.Write([]byte(`{"permissions":[]}`))
+			}))
+			defer upstream.Close()
+
+			sysdigClient, err := sysdig.NewSysdigClient(sysdig.WithFixedHostAndToken(upstream.URL, "server-side-sysdig-token"))
+			Expect(err).NotTo(HaveOccurred())
+			isolatedHandler := localmcp.NewHandler("dev", sysdigClient)
+			isolatedHandler.RegisterTools(&dummyTool{name: "tool1"})
+			client := NewHTTPTestClient(isolatedHandler.AsStreamableHTTP("/", false, remoteSecurity(verifier)))
+
+			client.Initialize(ctx, authorizationHeaders())
+			resp := client.ListTools(ctx, authorizationHeaders())
+			defer func() { _ = resp.Body.Close() }()
+			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+			Expect(upstreamAuthorization).To(Equal("Bearer server-side-sysdig-token"))
+			Expect(upstreamAuthorization).NotTo(ContainSubstring(validMCPToken))
+		}, NodeTimeout(5*time.Second))
+
+		It("routes the protected SSE message endpoint and preserves exact-origin CORS", func() {
+			sseHandler := handler.AsSSE("/sysdig-mcp-server", remoteSecurity(verifier))
+			req := httptest.NewRequest(
+				http.MethodPost,
+				"/sysdig-mcp-server/message?sessionId=missing",
+				strings.NewReader(`{"jsonrpc":"2.0","id":1,"method":"ping"}`),
+			)
+			req.Header = authorizationHeaders()
+			req.Header.Set("Content-Type", "application/json")
+			req.Header.Set("Origin", allowedOrigin)
+			recorder := httptest.NewRecorder()
+			sseHandler.ServeHTTP(recorder, req)
+
+			Expect(recorder.Code).NotTo(Equal(http.StatusNotFound))
+			Expect(recorder.Header().Get("Access-Control-Allow-Origin")).To(Equal(allowedOrigin))
+			Expect(recorder.Header().Get("Access-Control-Allow-Origin")).NotTo(Equal("*"))
+			Expect(verifier.calls).To(Equal(1))
+		})
+
+		It("serves SSE preflight on the actual SSE endpoint", func() {
+			sseHandler := handler.AsSSE("/sysdig-mcp-server", remoteSecurity(verifier))
+			req := httptest.NewRequest(http.MethodOptions, "/sysdig-mcp-server/sse", nil)
+			req.Header.Set("Origin", allowedOrigin)
+			req.Header.Set("Access-Control-Request-Method", http.MethodGet)
+			recorder := httptest.NewRecorder()
+			sseHandler.ServeHTTP(recorder, req)
+
+			Expect(recorder.Code).To(Equal(http.StatusNoContent))
+			Expect(recorder.Header().Get("Access-Control-Allow-Origin")).To(Equal(allowedOrigin))
+			Expect(recorder.Header().Get("Access-Control-Max-Age")).To(Equal("600"))
+			Expect(verifier.calls).To(BeZero())
+		})
+
+		It("serves stateless calls without initialization", func(ctx SpecContext) {
+			statelessClient := NewHTTPTestClient(handler.AsStreamableHTTP("/", true, remoteSecurity(verifier)))
 			handler.RegisterTools(&dummyTool{name: "tool1"})
+			mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any()).Return(&sysdig.GetMyPermissionsResponse{
+				HTTPResponse: &http.Response{StatusCode: http.StatusOK},
+				JSON200:      &sysdig.UserPermissions{Permissions: []string{}},
+			}, nil)
 
-			mockClient.EXPECT().
-				GetMyPermissionsWithResponse(gomock.Any(), gomock.Any()).
-				Return(&sysdig.GetMyPermissionsResponse{
-					HTTPResponse: &http.Response{StatusCode: 200},
-					JSON200:      &sysdig.UserPermissions{Permissions: []string{}},
-				}, nil)
-
-			// Call tools/list directly without initialize — should work in stateless mode
-			resp := statelessClient.ListTools(ctx, nil)
+			resp := statelessClient.ListTools(ctx, authorizationHeaders())
+			defer func() { _ = resp.Body.Close() }()
 			Expect(resp.StatusCode).To(Equal(http.StatusOK))
 			Expect(resp.Header.Get("Mcp-Session-Id")).To(BeEmpty())
-		}, NodeTimeout(time.Second*5))
+		}, NodeTimeout(5*time.Second))
 	})
 
 	Context("Stdio", func() {
-		It("ServeStdio should return when context is cancelled", func(ctx SpecContext) {
-			c, cancel := context.WithCancel(ctx)
+		It("returns when the context is cancelled", func(ctx SpecContext) {
+			cancelled, cancel := context.WithCancel(ctx)
 			cancel()
+			reader, writer := io.Pipe()
+			defer func() { _ = writer.Close() }()
 
-			r, w := io.Pipe()
-			defer func() { _ = w.Close() }()
-
-			err := handler.ServeStdio(c, r, io.Discard)
-			// ServeStdio typically returns when the context is canceled or IO stream ends.
-			// We just want to ensure it doesn't block indefinitely and exits.
-			if err != nil {
-				Expect(err).To(HaveOccurred())
-			}
-		}, NodeTimeout(time.Second*5))
+			_ = handler.ServeStdio(cancelled, reader, io.Discard)
+		}, NodeTimeout(5*time.Second))
 	})
 })
-
-// Helpers
 
 func initializeInProcessClient(handler *localmcp.Handler) *client.Client {
 	c, err := handler.ServeInProcessClient()
@@ -237,13 +371,10 @@ type HTTPTestClient struct {
 }
 
 func NewHTTPTestClient(handler http.Handler) *HTTPTestClient {
-	return &HTTPTestClient{
-		handler: handler,
-	}
+	return &HTTPTestClient{handler: handler}
 }
 
-// RPC sends a JSON-RPC 2.0 request
-func (c *HTTPTestClient) RPC(ctx context.Context, method string, params any, headers map[string]string) *http.Response {
+func (c *HTTPTestClient) RPC(ctx context.Context, method string, params any, headers http.Header) *http.Response {
 	payload := map[string]any{
 		"jsonrpc": "2.0",
 		"id":      1,
@@ -255,15 +386,16 @@ func (c *HTTPTestClient) RPC(ctx context.Context, method string, params any, hea
 
 	body, err := json.Marshal(payload)
 	Expect(err).NotTo(HaveOccurred())
-
-	req, err := http.NewRequestWithContext(ctx, "POST", "/", bytes.NewReader(body))
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, "/", bytes.NewReader(body))
 	Expect(err).NotTo(HaveOccurred())
 	req.Header.Set("Content-Type", "application/json")
 	if c.sessionID != "" {
 		req.Header.Set("Mcp-Session-Id", c.sessionID)
 	}
-	for k, v := range headers {
-		req.Header.Set(k, v)
+	for key, values := range headers {
+		for _, value := range values {
+			req.Header.Add(key, value)
+		}
 	}
 
 	recorder := httptest.NewRecorder()
@@ -271,7 +403,7 @@ func (c *HTTPTestClient) RPC(ctx context.Context, method string, params any, hea
 	return recorder.Result()
 }
 
-func (c *HTTPTestClient) Initialize(ctx context.Context) {
+func (c *HTTPTestClient) Initialize(ctx context.Context, headers http.Header) {
 	params := mcp.InitializeParams{
 		ProtocolVersion: "2024-11-05",
 		ClientInfo: mcp.Implementation{
@@ -281,13 +413,12 @@ func (c *HTTPTestClient) Initialize(ctx context.Context) {
 		Capabilities: mcp.ClientCapabilities{},
 	}
 
-	resp := c.RPC(ctx, "initialize", params, nil)
+	resp := c.RPC(ctx, "initialize", params, headers)
 	defer func() { _ = resp.Body.Close() }()
-
 	Expect(resp.StatusCode).To(Equal(http.StatusOK))
 	c.sessionID = resp.Header.Get("Mcp-Session-Id")
 }
 
-func (c *HTTPTestClient) ListTools(ctx context.Context, headers map[string]string) *http.Response {
+func (c *HTTPTestClient) ListTools(ctx context.Context, headers http.Header) *http.Response {
 	return c.RPC(ctx, "tools/list", nil, headers)
 }
