@@ -123,6 +123,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateAccessKeyV
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAccessKeyV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateAccessKeyV1WithResponse), varargs...)
 }
 
+// CreateAutomation mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateAutomation(ctx context.Context, params *sysdig.CreateAutomationParams, body sysdig.CreateAutomationJSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateAutomation", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateAutomation indicates an expected call of CreateAutomation.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateAutomation(ctx, params, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAutomation", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateAutomation), varargs...)
+}
+
+// CreateAutomationWithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateAutomationWithBody(ctx context.Context, params *sysdig.CreateAutomationParams, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateAutomationWithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateAutomationWithBody indicates an expected call of CreateAutomationWithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateAutomationWithBody(ctx, params, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAutomationWithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateAutomationWithBody), varargs...)
+}
+
+// CreateAutomationWithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateAutomationWithBodyWithResponse(ctx context.Context, params *sysdig.CreateAutomationParams, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.CreateAutomationResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateAutomationWithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.CreateAutomationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateAutomationWithBodyWithResponse indicates an expected call of CreateAutomationWithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateAutomationWithBodyWithResponse(ctx, params, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAutomationWithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateAutomationWithBodyWithResponse), varargs...)
+}
+
+// CreateAutomationWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateAutomationWithResponse(ctx context.Context, params *sysdig.CreateAutomationParams, body sysdig.CreateAutomationJSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.CreateAutomationResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateAutomationWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.CreateAutomationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateAutomationWithResponse indicates an expected call of CreateAutomationWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateAutomationWithResponse(ctx, params, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAutomationWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateAutomationWithResponse), varargs...)
+}
+
 // CreateCSRV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) CreateCSRV1(ctx context.Context, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -2043,6 +2123,46 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteAccessKeyB
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteAccessKeyByIdV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteAccessKeyByIdV1WithResponse), varargs...)
 }
 
+// DeleteAutomationById mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) DeleteAutomationById(ctx context.Context, automationID sysdig.AutomationID, params *sysdig.DeleteAutomationByIdParams, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, automationID, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeleteAutomationById", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteAutomationById indicates an expected call of DeleteAutomationById.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteAutomationById(ctx, automationID, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, automationID, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteAutomationById", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteAutomationById), varargs...)
+}
+
+// DeleteAutomationByIdWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) DeleteAutomationByIdWithResponse(ctx context.Context, automationID sysdig.AutomationID, params *sysdig.DeleteAutomationByIdParams, reqEditors ...sysdig.RequestEditorFn) (*sysdig.DeleteAutomationByIdResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, automationID, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeleteAutomationByIdWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.DeleteAutomationByIdResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteAutomationByIdWithResponse indicates an expected call of DeleteAutomationByIdWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteAutomationByIdWithResponse(ctx, automationID, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, automationID, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteAutomationByIdWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteAutomationByIdWithResponse), varargs...)
+}
+
 // DeleteCertificateV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) DeleteCertificateV1(ctx context.Context, certId sysdig.PathCertificateId, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -3923,6 +4043,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetAlertsV1WithR
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAlertsV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetAlertsV1WithResponse), varargs...)
 }
 
+// GetAutomationById mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetAutomationById(ctx context.Context, automationID sysdig.AutomationID, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, automationID}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetAutomationById", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAutomationById indicates an expected call of GetAutomationById.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetAutomationById(ctx, automationID any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, automationID}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutomationById", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetAutomationById), varargs...)
+}
+
+// GetAutomationByIdWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetAutomationByIdWithResponse(ctx context.Context, automationID sysdig.AutomationID, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetAutomationByIdResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, automationID}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetAutomationByIdWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetAutomationByIdResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAutomationByIdWithResponse indicates an expected call of GetAutomationByIdWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetAutomationByIdWithResponse(ctx, automationID any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, automationID}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutomationByIdWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetAutomationByIdWithResponse), varargs...)
+}
+
+// GetAutomationExecution mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetAutomationExecution(ctx context.Context, automationExecutionID sysdig.AutomationExecutionID, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, automationExecutionID}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetAutomationExecution", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAutomationExecution indicates an expected call of GetAutomationExecution.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetAutomationExecution(ctx, automationExecutionID any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, automationExecutionID}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutomationExecution", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetAutomationExecution), varargs...)
+}
+
+// GetAutomationExecutionWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetAutomationExecutionWithResponse(ctx context.Context, automationExecutionID sysdig.AutomationExecutionID, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetAutomationExecutionResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, automationExecutionID}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetAutomationExecutionWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetAutomationExecutionResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAutomationExecutionWithResponse indicates an expected call of GetAutomationExecutionWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetAutomationExecutionWithResponse(ctx, automationExecutionID any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, automationExecutionID}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutomationExecutionWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetAutomationExecutionWithResponse), varargs...)
+}
+
 // GetCaptureStorageConfigurationV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) GetCaptureStorageConfigurationV1(ctx context.Context, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -4201,6 +4401,46 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetCustomPrometh
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, params}, reqEditors...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCustomPrometheusJobsV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetCustomPrometheusJobsV1WithResponse), varargs...)
+}
+
+// GetCveCatalogEntryV1beta1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetCveCatalogEntryV1beta1(ctx context.Context, cveId string, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, cveId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetCveCatalogEntryV1beta1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetCveCatalogEntryV1beta1 indicates an expected call of GetCveCatalogEntryV1beta1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetCveCatalogEntryV1beta1(ctx, cveId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, cveId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCveCatalogEntryV1beta1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetCveCatalogEntryV1beta1), varargs...)
+}
+
+// GetCveCatalogEntryV1beta1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetCveCatalogEntryV1beta1WithResponse(ctx context.Context, cveId string, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetCveCatalogEntryV1beta1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, cveId}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetCveCatalogEntryV1beta1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetCveCatalogEntryV1beta1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetCveCatalogEntryV1beta1WithResponse indicates an expected call of GetCveCatalogEntryV1beta1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetCveCatalogEntryV1beta1WithResponse(ctx, cveId any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, cveId}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCveCatalogEntryV1beta1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetCveCatalogEntryV1beta1WithResponse), varargs...)
 }
 
 // GetDefaultNotificationTemplateV1 mocks base method.
@@ -7823,6 +8063,126 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetZonePolicyAss
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetZonePolicyAssociationWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetZonePolicyAssociationWithResponse), varargs...)
 }
 
+// ListAutomationExecutions mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) ListAutomationExecutions(ctx context.Context, params *sysdig.ListAutomationExecutionsParams, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListAutomationExecutions", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListAutomationExecutions indicates an expected call of ListAutomationExecutions.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListAutomationExecutions(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListAutomationExecutions", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListAutomationExecutions), varargs...)
+}
+
+// ListAutomationExecutionsWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) ListAutomationExecutionsWithResponse(ctx context.Context, params *sysdig.ListAutomationExecutionsParams, reqEditors ...sysdig.RequestEditorFn) (*sysdig.ListAutomationExecutionsResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListAutomationExecutionsWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.ListAutomationExecutionsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListAutomationExecutionsWithResponse indicates an expected call of ListAutomationExecutionsWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListAutomationExecutionsWithResponse(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListAutomationExecutionsWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListAutomationExecutionsWithResponse), varargs...)
+}
+
+// ListAutomations mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) ListAutomations(ctx context.Context, params *sysdig.ListAutomationsParams, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListAutomations", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListAutomations indicates an expected call of ListAutomations.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListAutomations(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListAutomations", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListAutomations), varargs...)
+}
+
+// ListAutomationsWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) ListAutomationsWithResponse(ctx context.Context, params *sysdig.ListAutomationsParams, reqEditors ...sysdig.RequestEditorFn) (*sysdig.ListAutomationsResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListAutomationsWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.ListAutomationsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListAutomationsWithResponse indicates an expected call of ListAutomationsWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListAutomationsWithResponse(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListAutomationsWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListAutomationsWithResponse), varargs...)
+}
+
+// ListCveCatalogV1beta1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) ListCveCatalogV1beta1(ctx context.Context, params *sysdig.ListCveCatalogV1beta1Params, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListCveCatalogV1beta1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListCveCatalogV1beta1 indicates an expected call of ListCveCatalogV1beta1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListCveCatalogV1beta1(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListCveCatalogV1beta1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListCveCatalogV1beta1), varargs...)
+}
+
+// ListCveCatalogV1beta1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) ListCveCatalogV1beta1WithResponse(ctx context.Context, params *sysdig.ListCveCatalogV1beta1Params, reqEditors ...sysdig.RequestEditorFn) (*sysdig.ListCveCatalogV1beta1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListCveCatalogV1beta1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.ListCveCatalogV1beta1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListCveCatalogV1beta1WithResponse indicates an expected call of ListCveCatalogV1beta1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListCveCatalogV1beta1WithResponse(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListCveCatalogV1beta1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListCveCatalogV1beta1WithResponse), varargs...)
+}
+
 // ListEFOChannelsByIntegrationV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) ListEFOChannelsByIntegrationV1(ctx context.Context, params *sysdig.ListEFOChannelsByIntegrationV1Params, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -9821,6 +10181,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateAccessKeyB
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, accessKeyId, body}, reqEditors...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateAccessKeyByIdV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateAccessKeyByIdV1WithResponse), varargs...)
+}
+
+// UpdateAutomation mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateAutomation(ctx context.Context, automationID sysdig.AutomationID, params *sysdig.UpdateAutomationParams, body sysdig.UpdateAutomationJSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, automationID, params, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateAutomation", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateAutomation indicates an expected call of UpdateAutomation.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateAutomation(ctx, automationID, params, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, automationID, params, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateAutomation", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateAutomation), varargs...)
+}
+
+// UpdateAutomationWithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateAutomationWithBody(ctx context.Context, automationID sysdig.AutomationID, params *sysdig.UpdateAutomationParams, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, automationID, params, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateAutomationWithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateAutomationWithBody indicates an expected call of UpdateAutomationWithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateAutomationWithBody(ctx, automationID, params, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, automationID, params, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateAutomationWithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateAutomationWithBody), varargs...)
+}
+
+// UpdateAutomationWithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateAutomationWithBodyWithResponse(ctx context.Context, automationID sysdig.AutomationID, params *sysdig.UpdateAutomationParams, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.UpdateAutomationResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, automationID, params, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateAutomationWithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.UpdateAutomationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateAutomationWithBodyWithResponse indicates an expected call of UpdateAutomationWithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateAutomationWithBodyWithResponse(ctx, automationID, params, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, automationID, params, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateAutomationWithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateAutomationWithBodyWithResponse), varargs...)
+}
+
+// UpdateAutomationWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateAutomationWithResponse(ctx context.Context, automationID sysdig.AutomationID, params *sysdig.UpdateAutomationParams, body sysdig.UpdateAutomationJSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.UpdateAutomationResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, automationID, params, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateAutomationWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.UpdateAutomationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateAutomationWithResponse indicates an expected call of UpdateAutomationWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateAutomationWithResponse(ctx, automationID, params, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, automationID, params, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateAutomationWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateAutomationWithResponse), varargs...)
 }
 
 // UpdateCaptureStorageConfigurationV1 mocks base method.

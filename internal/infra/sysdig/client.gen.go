@@ -78,6 +78,57 @@ func (e ActionType) Valid() bool {
 	}
 }
 
+// Defines values for AffectedComponentV1Beta1Ecosystem.
+const (
+	AffectedComponentV1Beta1EcosystemApk         AffectedComponentV1Beta1Ecosystem = "apk"
+	AffectedComponentV1Beta1EcosystemApplication AffectedComponentV1Beta1Ecosystem = "application"
+	AffectedComponentV1Beta1EcosystemCargo       AffectedComponentV1Beta1Ecosystem = "cargo"
+	AffectedComponentV1Beta1EcosystemComposer    AffectedComponentV1Beta1Ecosystem = "composer"
+	AffectedComponentV1Beta1EcosystemDeb         AffectedComponentV1Beta1Ecosystem = "deb"
+	AffectedComponentV1Beta1EcosystemGem         AffectedComponentV1Beta1Ecosystem = "gem"
+	AffectedComponentV1Beta1EcosystemGo          AffectedComponentV1Beta1Ecosystem = "go"
+	AffectedComponentV1Beta1EcosystemMaven       AffectedComponentV1Beta1Ecosystem = "maven"
+	AffectedComponentV1Beta1EcosystemNpm         AffectedComponentV1Beta1Ecosystem = "npm"
+	AffectedComponentV1Beta1EcosystemNuget       AffectedComponentV1Beta1Ecosystem = "nuget"
+	AffectedComponentV1Beta1EcosystemOci         AffectedComponentV1Beta1Ecosystem = "oci"
+	AffectedComponentV1Beta1EcosystemPypi        AffectedComponentV1Beta1Ecosystem = "pypi"
+	AffectedComponentV1Beta1EcosystemRpm         AffectedComponentV1Beta1Ecosystem = "rpm"
+)
+
+// Valid indicates whether the value is a known member of the AffectedComponentV1Beta1Ecosystem enum.
+func (e AffectedComponentV1Beta1Ecosystem) Valid() bool {
+	switch e {
+	case AffectedComponentV1Beta1EcosystemApk:
+		return true
+	case AffectedComponentV1Beta1EcosystemApplication:
+		return true
+	case AffectedComponentV1Beta1EcosystemCargo:
+		return true
+	case AffectedComponentV1Beta1EcosystemComposer:
+		return true
+	case AffectedComponentV1Beta1EcosystemDeb:
+		return true
+	case AffectedComponentV1Beta1EcosystemGem:
+		return true
+	case AffectedComponentV1Beta1EcosystemGo:
+		return true
+	case AffectedComponentV1Beta1EcosystemMaven:
+		return true
+	case AffectedComponentV1Beta1EcosystemNpm:
+		return true
+	case AffectedComponentV1Beta1EcosystemNuget:
+		return true
+	case AffectedComponentV1Beta1EcosystemOci:
+		return true
+	case AffectedComponentV1Beta1EcosystemPypi:
+		return true
+	case AffectedComponentV1Beta1EcosystemRpm:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for AgentlessRuntimeDetectionContentIntegrationType.
 const (
 	AgentlessRuntimeDetectionContentIntegrationTypeAzure      AgentlessRuntimeDetectionContentIntegrationType = "azure"
@@ -546,6 +597,261 @@ func (e AuthenticatedConnectionInfoWebhookTimestampFormat) Valid() bool {
 	case AuthenticatedConnectionInfoWebhookTimestampFormatNanoseconds:
 		return true
 	case AuthenticatedConnectionInfoWebhookTimestampFormatSeconds:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AutomationActionNodeV1Alpha1Type.
+const (
+	AutomationActionNodeV1Alpha1TypeAction AutomationActionNodeV1Alpha1Type = "action"
+)
+
+// Valid indicates whether the value is a known member of the AutomationActionNodeV1Alpha1Type enum.
+func (e AutomationActionNodeV1Alpha1Type) Valid() bool {
+	switch e {
+	case AutomationActionNodeV1Alpha1TypeAction:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AutomationConditionNodeV1Alpha1Type.
+const (
+	AutomationConditionNodeV1Alpha1TypeCondition AutomationConditionNodeV1Alpha1Type = "condition"
+)
+
+// Valid indicates whether the value is a known member of the AutomationConditionNodeV1Alpha1Type enum.
+func (e AutomationConditionNodeV1Alpha1Type) Valid() bool {
+	switch e {
+	case AutomationConditionNodeV1Alpha1TypeCondition:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AutomationExecutionOverviewV1Alpha1Status.
+const (
+	AutomationExecutionOverviewV1Alpha1StatusDone            AutomationExecutionOverviewV1Alpha1Status = "done"
+	AutomationExecutionOverviewV1Alpha1StatusFailed          AutomationExecutionOverviewV1Alpha1Status = "failed"
+	AutomationExecutionOverviewV1Alpha1StatusPending         AutomationExecutionOverviewV1Alpha1Status = "pending"
+	AutomationExecutionOverviewV1Alpha1StatusRunning         AutomationExecutionOverviewV1Alpha1Status = "running"
+	AutomationExecutionOverviewV1Alpha1StatusSkipped         AutomationExecutionOverviewV1Alpha1Status = "skipped"
+	AutomationExecutionOverviewV1Alpha1StatusWaitingResponse AutomationExecutionOverviewV1Alpha1Status = "waiting_response"
+)
+
+// Valid indicates whether the value is a known member of the AutomationExecutionOverviewV1Alpha1Status enum.
+func (e AutomationExecutionOverviewV1Alpha1Status) Valid() bool {
+	switch e {
+	case AutomationExecutionOverviewV1Alpha1StatusDone:
+		return true
+	case AutomationExecutionOverviewV1Alpha1StatusFailed:
+		return true
+	case AutomationExecutionOverviewV1Alpha1StatusPending:
+		return true
+	case AutomationExecutionOverviewV1Alpha1StatusRunning:
+		return true
+	case AutomationExecutionOverviewV1Alpha1StatusSkipped:
+		return true
+	case AutomationExecutionOverviewV1Alpha1StatusWaitingResponse:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AutomationExecutionV1Alpha1Status.
+const (
+	AutomationExecutionV1Alpha1StatusDone            AutomationExecutionV1Alpha1Status = "done"
+	AutomationExecutionV1Alpha1StatusFailed          AutomationExecutionV1Alpha1Status = "failed"
+	AutomationExecutionV1Alpha1StatusPending         AutomationExecutionV1Alpha1Status = "pending"
+	AutomationExecutionV1Alpha1StatusRunning         AutomationExecutionV1Alpha1Status = "running"
+	AutomationExecutionV1Alpha1StatusSkipped         AutomationExecutionV1Alpha1Status = "skipped"
+	AutomationExecutionV1Alpha1StatusWaitingResponse AutomationExecutionV1Alpha1Status = "waiting_response"
+)
+
+// Valid indicates whether the value is a known member of the AutomationExecutionV1Alpha1Status enum.
+func (e AutomationExecutionV1Alpha1Status) Valid() bool {
+	switch e {
+	case AutomationExecutionV1Alpha1StatusDone:
+		return true
+	case AutomationExecutionV1Alpha1StatusFailed:
+		return true
+	case AutomationExecutionV1Alpha1StatusPending:
+		return true
+	case AutomationExecutionV1Alpha1StatusRunning:
+		return true
+	case AutomationExecutionV1Alpha1StatusSkipped:
+		return true
+	case AutomationExecutionV1Alpha1StatusWaitingResponse:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AutomationNodeExecutionOverviewV1Alpha1Status.
+const (
+	AutomationNodeExecutionOverviewV1Alpha1StatusDone            AutomationNodeExecutionOverviewV1Alpha1Status = "done"
+	AutomationNodeExecutionOverviewV1Alpha1StatusFailed          AutomationNodeExecutionOverviewV1Alpha1Status = "failed"
+	AutomationNodeExecutionOverviewV1Alpha1StatusPending         AutomationNodeExecutionOverviewV1Alpha1Status = "pending"
+	AutomationNodeExecutionOverviewV1Alpha1StatusRunning         AutomationNodeExecutionOverviewV1Alpha1Status = "running"
+	AutomationNodeExecutionOverviewV1Alpha1StatusSkipped         AutomationNodeExecutionOverviewV1Alpha1Status = "skipped"
+	AutomationNodeExecutionOverviewV1Alpha1StatusWaitingResponse AutomationNodeExecutionOverviewV1Alpha1Status = "waiting_response"
+)
+
+// Valid indicates whether the value is a known member of the AutomationNodeExecutionOverviewV1Alpha1Status enum.
+func (e AutomationNodeExecutionOverviewV1Alpha1Status) Valid() bool {
+	switch e {
+	case AutomationNodeExecutionOverviewV1Alpha1StatusDone:
+		return true
+	case AutomationNodeExecutionOverviewV1Alpha1StatusFailed:
+		return true
+	case AutomationNodeExecutionOverviewV1Alpha1StatusPending:
+		return true
+	case AutomationNodeExecutionOverviewV1Alpha1StatusRunning:
+		return true
+	case AutomationNodeExecutionOverviewV1Alpha1StatusSkipped:
+		return true
+	case AutomationNodeExecutionOverviewV1Alpha1StatusWaitingResponse:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AutomationNodeTypeV1Alpha1.
+const (
+	AutomationNodeTypeV1Alpha1Action    AutomationNodeTypeV1Alpha1 = "action"
+	AutomationNodeTypeV1Alpha1Condition AutomationNodeTypeV1Alpha1 = "condition"
+)
+
+// Valid indicates whether the value is a known member of the AutomationNodeTypeV1Alpha1 enum.
+func (e AutomationNodeTypeV1Alpha1) Valid() bool {
+	switch e {
+	case AutomationNodeTypeV1Alpha1Action:
+		return true
+	case AutomationNodeTypeV1Alpha1Condition:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AutomationTriggerV1Alpha1On.
+const (
+	AlertOccurrence              AutomationTriggerV1Alpha1On = "alert_occurrence"
+	NewFindings                  AutomationTriggerV1Alpha1On = "new_findings"
+	NewFindingsGroupedByImage    AutomationTriggerV1Alpha1On = "new_findings_grouped_by_image"
+	NewFindingsGroupedByResource AutomationTriggerV1Alpha1On = "new_findings_grouped_by_resource"
+	NewRisk                      AutomationTriggerV1Alpha1On = "new_risk"
+	NewThreat                    AutomationTriggerV1Alpha1On = "new_threat"
+	PlanSlaComplianceBreach      AutomationTriggerV1Alpha1On = "plan_sla_compliance_breach"
+	PlanSlaComplianceWarning     AutomationTriggerV1Alpha1On = "plan_sla_compliance_warning"
+	RiskUpdate                   AutomationTriggerV1Alpha1On = "risk_update"
+	RuntimePolicy                AutomationTriggerV1Alpha1On = "runtime_policy"
+	ShieldStatusChange           AutomationTriggerV1Alpha1On = "shield_status_change"
+	VmExceptionAboutToExpire     AutomationTriggerV1Alpha1On = "vm_exception_about_to_expire"
+	VmExceptionCreated           AutomationTriggerV1Alpha1On = "vm_exception_created"
+	VmExceptionDeleted           AutomationTriggerV1Alpha1On = "vm_exception_deleted"
+	VmExceptionExpired           AutomationTriggerV1Alpha1On = "vm_exception_expired"
+	VmExceptionUpdated           AutomationTriggerV1Alpha1On = "vm_exception_updated"
+)
+
+// Valid indicates whether the value is a known member of the AutomationTriggerV1Alpha1On enum.
+func (e AutomationTriggerV1Alpha1On) Valid() bool {
+	switch e {
+	case AlertOccurrence:
+		return true
+	case NewFindings:
+		return true
+	case NewFindingsGroupedByImage:
+		return true
+	case NewFindingsGroupedByResource:
+		return true
+	case NewRisk:
+		return true
+	case NewThreat:
+		return true
+	case PlanSlaComplianceBreach:
+		return true
+	case PlanSlaComplianceWarning:
+		return true
+	case RiskUpdate:
+		return true
+	case RuntimePolicy:
+		return true
+	case ShieldStatusChange:
+		return true
+	case VmExceptionAboutToExpire:
+		return true
+	case VmExceptionCreated:
+		return true
+	case VmExceptionDeleted:
+		return true
+	case VmExceptionExpired:
+		return true
+	case VmExceptionUpdated:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AutomationValidationErrorV1Alpha1ErrorType.
+const (
+	AutomationActionInputInvalid            AutomationValidationErrorV1Alpha1ErrorType = "automation_action_input_invalid"
+	AutomationActionNotAllowed              AutomationValidationErrorV1Alpha1ErrorType = "automation_action_not_allowed"
+	AutomationAlreadyExecuted               AutomationValidationErrorV1Alpha1ErrorType = "automation_already_executed"
+	AutomationBelongsToAnotherTeam          AutomationValidationErrorV1Alpha1ErrorType = "automation_belongs_to_another_team"
+	AutomationConditionExprInvalid          AutomationValidationErrorV1Alpha1ErrorType = "automation_condition_expr_invalid"
+	AutomationFeatureNotAllowed             AutomationValidationErrorV1Alpha1ErrorType = "automation_feature_not_allowed"
+	AutomationNameNotUniquePerTeam          AutomationValidationErrorV1Alpha1ErrorType = "automation_name_not_unique_per_team"
+	AutomationNotFound                      AutomationValidationErrorV1Alpha1ErrorType = "automation_not_found"
+	AutomationTriggerHasNoActionDescendants AutomationValidationErrorV1Alpha1ErrorType = "automation_trigger_has_no_action_descendants"
+	AutomationTriggerWhenInvalid            AutomationValidationErrorV1Alpha1ErrorType = "automation_trigger_when_invalid"
+	ExecutionBelongsToAnotherCustomer       AutomationValidationErrorV1Alpha1ErrorType = "execution_belongs_to_another_customer"
+	ExecutionBelongsToAnotherTeam           AutomationValidationErrorV1Alpha1ErrorType = "execution_belongs_to_another_team"
+	ExecutionContextMissing                 AutomationValidationErrorV1Alpha1ErrorType = "execution_context_missing"
+	ExecutionNotFound                       AutomationValidationErrorV1Alpha1ErrorType = "execution_not_found"
+	InvalidPayload                          AutomationValidationErrorV1Alpha1ErrorType = "invalid_payload"
+)
+
+// Valid indicates whether the value is a known member of the AutomationValidationErrorV1Alpha1ErrorType enum.
+func (e AutomationValidationErrorV1Alpha1ErrorType) Valid() bool {
+	switch e {
+	case AutomationActionInputInvalid:
+		return true
+	case AutomationActionNotAllowed:
+		return true
+	case AutomationAlreadyExecuted:
+		return true
+	case AutomationBelongsToAnotherTeam:
+		return true
+	case AutomationConditionExprInvalid:
+		return true
+	case AutomationFeatureNotAllowed:
+		return true
+	case AutomationNameNotUniquePerTeam:
+		return true
+	case AutomationNotFound:
+		return true
+	case AutomationTriggerHasNoActionDescendants:
+		return true
+	case AutomationTriggerWhenInvalid:
+		return true
+	case ExecutionBelongsToAnotherCustomer:
+		return true
+	case ExecutionBelongsToAnotherTeam:
+		return true
+	case ExecutionContextMissing:
+		return true
+	case ExecutionNotFound:
+		return true
+	case InvalidPayload:
 		return true
 	default:
 		return false
@@ -1227,6 +1533,156 @@ func (e CreateRiskAcceptedRequestStages) Valid() bool {
 	case CreateRiskAcceptedRequestStagesRegistry:
 		return true
 	case CreateRiskAcceptedRequestStagesRuntime:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CveScoreCvss2V1Beta1Type.
+const (
+	CveScoreCvss2V1Beta1TypeN20 CveScoreCvss2V1Beta1Type = "2.0"
+)
+
+// Valid indicates whether the value is a known member of the CveScoreCvss2V1Beta1Type enum.
+func (e CveScoreCvss2V1Beta1Type) Valid() bool {
+	switch e {
+	case CveScoreCvss2V1Beta1TypeN20:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CveScoreCvss3V1Beta1Type.
+const (
+	CveScoreCvss3V1Beta1TypeN30 CveScoreCvss3V1Beta1Type = "3.0"
+	CveScoreCvss3V1Beta1TypeN31 CveScoreCvss3V1Beta1Type = "3.1"
+)
+
+// Valid indicates whether the value is a known member of the CveScoreCvss3V1Beta1Type enum.
+func (e CveScoreCvss3V1Beta1Type) Valid() bool {
+	switch e {
+	case CveScoreCvss3V1Beta1TypeN30:
+		return true
+	case CveScoreCvss3V1Beta1TypeN31:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CveScoreCvss4V1Beta1Type.
+const (
+	CveScoreCvss4V1Beta1TypeN40 CveScoreCvss4V1Beta1Type = "4.0"
+)
+
+// Valid indicates whether the value is a known member of the CveScoreCvss4V1Beta1Type enum.
+func (e CveScoreCvss4V1Beta1Type) Valid() bool {
+	switch e {
+	case CveScoreCvss4V1Beta1TypeN40:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CveScoreV1Beta1Type.
+const (
+	CveScoreV1Beta1TypeN20 CveScoreV1Beta1Type = "2.0"
+	CveScoreV1Beta1TypeN30 CveScoreV1Beta1Type = "3.0"
+	CveScoreV1Beta1TypeN31 CveScoreV1Beta1Type = "3.1"
+	CveScoreV1Beta1TypeN40 CveScoreV1Beta1Type = "4.0"
+)
+
+// Valid indicates whether the value is a known member of the CveScoreV1Beta1Type enum.
+func (e CveScoreV1Beta1Type) Valid() bool {
+	switch e {
+	case CveScoreV1Beta1TypeN20:
+		return true
+	case CveScoreV1Beta1TypeN30:
+		return true
+	case CveScoreV1Beta1TypeN31:
+		return true
+	case CveScoreV1Beta1TypeN40:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CveSummaryV1Beta1Ecosystems.
+const (
+	CveSummaryV1Beta1EcosystemsApk         CveSummaryV1Beta1Ecosystems = "apk"
+	CveSummaryV1Beta1EcosystemsApplication CveSummaryV1Beta1Ecosystems = "application"
+	CveSummaryV1Beta1EcosystemsCargo       CveSummaryV1Beta1Ecosystems = "cargo"
+	CveSummaryV1Beta1EcosystemsComposer    CveSummaryV1Beta1Ecosystems = "composer"
+	CveSummaryV1Beta1EcosystemsDeb         CveSummaryV1Beta1Ecosystems = "deb"
+	CveSummaryV1Beta1EcosystemsGem         CveSummaryV1Beta1Ecosystems = "gem"
+	CveSummaryV1Beta1EcosystemsGo          CveSummaryV1Beta1Ecosystems = "go"
+	CveSummaryV1Beta1EcosystemsMaven       CveSummaryV1Beta1Ecosystems = "maven"
+	CveSummaryV1Beta1EcosystemsNpm         CveSummaryV1Beta1Ecosystems = "npm"
+	CveSummaryV1Beta1EcosystemsNuget       CveSummaryV1Beta1Ecosystems = "nuget"
+	CveSummaryV1Beta1EcosystemsOci         CveSummaryV1Beta1Ecosystems = "oci"
+	CveSummaryV1Beta1EcosystemsPypi        CveSummaryV1Beta1Ecosystems = "pypi"
+	CveSummaryV1Beta1EcosystemsRpm         CveSummaryV1Beta1Ecosystems = "rpm"
+)
+
+// Valid indicates whether the value is a known member of the CveSummaryV1Beta1Ecosystems enum.
+func (e CveSummaryV1Beta1Ecosystems) Valid() bool {
+	switch e {
+	case CveSummaryV1Beta1EcosystemsApk:
+		return true
+	case CveSummaryV1Beta1EcosystemsApplication:
+		return true
+	case CveSummaryV1Beta1EcosystemsCargo:
+		return true
+	case CveSummaryV1Beta1EcosystemsComposer:
+		return true
+	case CveSummaryV1Beta1EcosystemsDeb:
+		return true
+	case CveSummaryV1Beta1EcosystemsGem:
+		return true
+	case CveSummaryV1Beta1EcosystemsGo:
+		return true
+	case CveSummaryV1Beta1EcosystemsMaven:
+		return true
+	case CveSummaryV1Beta1EcosystemsNpm:
+		return true
+	case CveSummaryV1Beta1EcosystemsNuget:
+		return true
+	case CveSummaryV1Beta1EcosystemsOci:
+		return true
+	case CveSummaryV1Beta1EcosystemsPypi:
+		return true
+	case CveSummaryV1Beta1EcosystemsRpm:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CveSummaryV1Beta1Severity.
+const (
+	CveSummaryV1Beta1SeverityCritical   CveSummaryV1Beta1Severity = "critical"
+	CveSummaryV1Beta1SeverityHigh       CveSummaryV1Beta1Severity = "high"
+	CveSummaryV1Beta1SeverityLow        CveSummaryV1Beta1Severity = "low"
+	CveSummaryV1Beta1SeverityMedium     CveSummaryV1Beta1Severity = "medium"
+	CveSummaryV1Beta1SeverityNegligible CveSummaryV1Beta1Severity = "negligible"
+)
+
+// Valid indicates whether the value is a known member of the CveSummaryV1Beta1Severity enum.
+func (e CveSummaryV1Beta1Severity) Valid() bool {
+	switch e {
+	case CveSummaryV1Beta1SeverityCritical:
+		return true
+	case CveSummaryV1Beta1SeverityHigh:
+		return true
+	case CveSummaryV1Beta1SeverityLow:
+		return true
+	case CveSummaryV1Beta1SeverityMedium:
+		return true
+	case CveSummaryV1Beta1SeverityNegligible:
 		return true
 	default:
 		return false
@@ -4662,6 +5118,150 @@ func (e VulnerabilitySeverity) Valid() bool {
 	}
 }
 
+// Defines values for AutomationExecutionSort.
+const (
+	AutomationExecutionSortStartedAt       AutomationExecutionSort = "startedAt"
+	AutomationExecutionSortStartedAtAsc    AutomationExecutionSort = "startedAt:asc"
+	AutomationExecutionSortStartedAtDesc   AutomationExecutionSort = "startedAt:desc"
+	AutomationExecutionSortStatusState     AutomationExecutionSort = "status.state"
+	AutomationExecutionSortStatusStateAsc  AutomationExecutionSort = "status.state:asc"
+	AutomationExecutionSortStatusStateDesc AutomationExecutionSort = "status.state:desc"
+)
+
+// Valid indicates whether the value is a known member of the AutomationExecutionSort enum.
+func (e AutomationExecutionSort) Valid() bool {
+	switch e {
+	case AutomationExecutionSortStartedAt:
+		return true
+	case AutomationExecutionSortStartedAtAsc:
+		return true
+	case AutomationExecutionSortStartedAtDesc:
+		return true
+	case AutomationExecutionSortStatusState:
+		return true
+	case AutomationExecutionSortStatusStateAsc:
+		return true
+	case AutomationExecutionSortStatusStateDesc:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AutomationExecutionStatus.
+const (
+	AutomationExecutionStatusDone            AutomationExecutionStatus = "done"
+	AutomationExecutionStatusFailed          AutomationExecutionStatus = "failed"
+	AutomationExecutionStatusPending         AutomationExecutionStatus = "pending"
+	AutomationExecutionStatusRunning         AutomationExecutionStatus = "running"
+	AutomationExecutionStatusSkipped         AutomationExecutionStatus = "skipped"
+	AutomationExecutionStatusWaitingResponse AutomationExecutionStatus = "waiting_response"
+)
+
+// Valid indicates whether the value is a known member of the AutomationExecutionStatus enum.
+func (e AutomationExecutionStatus) Valid() bool {
+	switch e {
+	case AutomationExecutionStatusDone:
+		return true
+	case AutomationExecutionStatusFailed:
+		return true
+	case AutomationExecutionStatusPending:
+		return true
+	case AutomationExecutionStatusRunning:
+		return true
+	case AutomationExecutionStatusSkipped:
+		return true
+	case AutomationExecutionStatusWaitingResponse:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AutomationsSort.
+const (
+	AutomationsSortAuthor          AutomationsSort = "author"
+	AutomationsSortAuthorAsc       AutomationsSort = "author:asc"
+	AutomationsSortAuthorDesc      AutomationsSort = "author:desc"
+	AutomationsSortCreatedAt       AutomationsSort = "createdAt"
+	AutomationsSortCreatedAtAsc    AutomationsSort = "createdAt:asc"
+	AutomationsSortCreatedAtDesc   AutomationsSort = "createdAt:desc"
+	AutomationsSortEnabled         AutomationsSort = "enabled"
+	AutomationsSortEnabledAsc      AutomationsSort = "enabled:asc"
+	AutomationsSortEnabledDesc     AutomationsSort = "enabled:desc"
+	AutomationsSortGroup           AutomationsSort = "group"
+	AutomationsSortGroupAsc        AutomationsSort = "group:asc"
+	AutomationsSortGroupDesc       AutomationsSort = "group:desc"
+	AutomationsSortName            AutomationsSort = "name"
+	AutomationsSortNameAsc         AutomationsSort = "name:asc"
+	AutomationsSortNameDesc        AutomationsSort = "name:desc"
+	AutomationsSortStatusState     AutomationsSort = "status.state"
+	AutomationsSortStatusStateAsc  AutomationsSort = "status.state:asc"
+	AutomationsSortStatusStateDesc AutomationsSort = "status.state:desc"
+	AutomationsSortTriggerOn       AutomationsSort = "trigger.on"
+	AutomationsSortTriggerOnAsc    AutomationsSort = "trigger.on:asc"
+	AutomationsSortTriggerOnDesc   AutomationsSort = "trigger.on:desc"
+	AutomationsSortUpdatedAt       AutomationsSort = "updatedAt"
+	AutomationsSortUpdatedAtAsc    AutomationsSort = "updatedAt:asc"
+	AutomationsSortUpdatedAtDesc   AutomationsSort = "updatedAt:desc"
+)
+
+// Valid indicates whether the value is a known member of the AutomationsSort enum.
+func (e AutomationsSort) Valid() bool {
+	switch e {
+	case AutomationsSortAuthor:
+		return true
+	case AutomationsSortAuthorAsc:
+		return true
+	case AutomationsSortAuthorDesc:
+		return true
+	case AutomationsSortCreatedAt:
+		return true
+	case AutomationsSortCreatedAtAsc:
+		return true
+	case AutomationsSortCreatedAtDesc:
+		return true
+	case AutomationsSortEnabled:
+		return true
+	case AutomationsSortEnabledAsc:
+		return true
+	case AutomationsSortEnabledDesc:
+		return true
+	case AutomationsSortGroup:
+		return true
+	case AutomationsSortGroupAsc:
+		return true
+	case AutomationsSortGroupDesc:
+		return true
+	case AutomationsSortName:
+		return true
+	case AutomationsSortNameAsc:
+		return true
+	case AutomationsSortNameDesc:
+		return true
+	case AutomationsSortStatusState:
+		return true
+	case AutomationsSortStatusStateAsc:
+		return true
+	case AutomationsSortStatusStateDesc:
+		return true
+	case AutomationsSortTriggerOn:
+		return true
+	case AutomationsSortTriggerOnAsc:
+		return true
+	case AutomationsSortTriggerOnDesc:
+		return true
+	case AutomationsSortUpdatedAt:
+		return true
+	case AutomationsSortUpdatedAtAsc:
+		return true
+	case AutomationsSortUpdatedAtDesc:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for RoleDisplayNamePath.
 const (
 	RoleDisplayNamePathAdvancedUser   RoleDisplayNamePath = "Advanced User"
@@ -4866,6 +5466,150 @@ func (e UpdateGlobalSsoSettingsV1ParamsSsoProductId) Valid() bool {
 	}
 }
 
+// Defines values for ListAutomationExecutionsParamsSort.
+const (
+	ListAutomationExecutionsParamsSortStartedAt       ListAutomationExecutionsParamsSort = "startedAt"
+	ListAutomationExecutionsParamsSortStartedAtAsc    ListAutomationExecutionsParamsSort = "startedAt:asc"
+	ListAutomationExecutionsParamsSortStartedAtDesc   ListAutomationExecutionsParamsSort = "startedAt:desc"
+	ListAutomationExecutionsParamsSortStatusState     ListAutomationExecutionsParamsSort = "status.state"
+	ListAutomationExecutionsParamsSortStatusStateAsc  ListAutomationExecutionsParamsSort = "status.state:asc"
+	ListAutomationExecutionsParamsSortStatusStateDesc ListAutomationExecutionsParamsSort = "status.state:desc"
+)
+
+// Valid indicates whether the value is a known member of the ListAutomationExecutionsParamsSort enum.
+func (e ListAutomationExecutionsParamsSort) Valid() bool {
+	switch e {
+	case ListAutomationExecutionsParamsSortStartedAt:
+		return true
+	case ListAutomationExecutionsParamsSortStartedAtAsc:
+		return true
+	case ListAutomationExecutionsParamsSortStartedAtDesc:
+		return true
+	case ListAutomationExecutionsParamsSortStatusState:
+		return true
+	case ListAutomationExecutionsParamsSortStatusStateAsc:
+		return true
+	case ListAutomationExecutionsParamsSortStatusStateDesc:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ListAutomationExecutionsParamsStatus.
+const (
+	ListAutomationExecutionsParamsStatusDone            ListAutomationExecutionsParamsStatus = "done"
+	ListAutomationExecutionsParamsStatusFailed          ListAutomationExecutionsParamsStatus = "failed"
+	ListAutomationExecutionsParamsStatusPending         ListAutomationExecutionsParamsStatus = "pending"
+	ListAutomationExecutionsParamsStatusRunning         ListAutomationExecutionsParamsStatus = "running"
+	ListAutomationExecutionsParamsStatusSkipped         ListAutomationExecutionsParamsStatus = "skipped"
+	ListAutomationExecutionsParamsStatusWaitingResponse ListAutomationExecutionsParamsStatus = "waiting_response"
+)
+
+// Valid indicates whether the value is a known member of the ListAutomationExecutionsParamsStatus enum.
+func (e ListAutomationExecutionsParamsStatus) Valid() bool {
+	switch e {
+	case ListAutomationExecutionsParamsStatusDone:
+		return true
+	case ListAutomationExecutionsParamsStatusFailed:
+		return true
+	case ListAutomationExecutionsParamsStatusPending:
+		return true
+	case ListAutomationExecutionsParamsStatusRunning:
+		return true
+	case ListAutomationExecutionsParamsStatusSkipped:
+		return true
+	case ListAutomationExecutionsParamsStatusWaitingResponse:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ListAutomationsParamsSort.
+const (
+	ListAutomationsParamsSortAuthor          ListAutomationsParamsSort = "author"
+	ListAutomationsParamsSortAuthorAsc       ListAutomationsParamsSort = "author:asc"
+	ListAutomationsParamsSortAuthorDesc      ListAutomationsParamsSort = "author:desc"
+	ListAutomationsParamsSortCreatedAt       ListAutomationsParamsSort = "createdAt"
+	ListAutomationsParamsSortCreatedAtAsc    ListAutomationsParamsSort = "createdAt:asc"
+	ListAutomationsParamsSortCreatedAtDesc   ListAutomationsParamsSort = "createdAt:desc"
+	ListAutomationsParamsSortEnabled         ListAutomationsParamsSort = "enabled"
+	ListAutomationsParamsSortEnabledAsc      ListAutomationsParamsSort = "enabled:asc"
+	ListAutomationsParamsSortEnabledDesc     ListAutomationsParamsSort = "enabled:desc"
+	ListAutomationsParamsSortGroup           ListAutomationsParamsSort = "group"
+	ListAutomationsParamsSortGroupAsc        ListAutomationsParamsSort = "group:asc"
+	ListAutomationsParamsSortGroupDesc       ListAutomationsParamsSort = "group:desc"
+	ListAutomationsParamsSortName            ListAutomationsParamsSort = "name"
+	ListAutomationsParamsSortNameAsc         ListAutomationsParamsSort = "name:asc"
+	ListAutomationsParamsSortNameDesc        ListAutomationsParamsSort = "name:desc"
+	ListAutomationsParamsSortStatusState     ListAutomationsParamsSort = "status.state"
+	ListAutomationsParamsSortStatusStateAsc  ListAutomationsParamsSort = "status.state:asc"
+	ListAutomationsParamsSortStatusStateDesc ListAutomationsParamsSort = "status.state:desc"
+	ListAutomationsParamsSortTriggerOn       ListAutomationsParamsSort = "trigger.on"
+	ListAutomationsParamsSortTriggerOnAsc    ListAutomationsParamsSort = "trigger.on:asc"
+	ListAutomationsParamsSortTriggerOnDesc   ListAutomationsParamsSort = "trigger.on:desc"
+	ListAutomationsParamsSortUpdatedAt       ListAutomationsParamsSort = "updatedAt"
+	ListAutomationsParamsSortUpdatedAtAsc    ListAutomationsParamsSort = "updatedAt:asc"
+	ListAutomationsParamsSortUpdatedAtDesc   ListAutomationsParamsSort = "updatedAt:desc"
+)
+
+// Valid indicates whether the value is a known member of the ListAutomationsParamsSort enum.
+func (e ListAutomationsParamsSort) Valid() bool {
+	switch e {
+	case ListAutomationsParamsSortAuthor:
+		return true
+	case ListAutomationsParamsSortAuthorAsc:
+		return true
+	case ListAutomationsParamsSortAuthorDesc:
+		return true
+	case ListAutomationsParamsSortCreatedAt:
+		return true
+	case ListAutomationsParamsSortCreatedAtAsc:
+		return true
+	case ListAutomationsParamsSortCreatedAtDesc:
+		return true
+	case ListAutomationsParamsSortEnabled:
+		return true
+	case ListAutomationsParamsSortEnabledAsc:
+		return true
+	case ListAutomationsParamsSortEnabledDesc:
+		return true
+	case ListAutomationsParamsSortGroup:
+		return true
+	case ListAutomationsParamsSortGroupAsc:
+		return true
+	case ListAutomationsParamsSortGroupDesc:
+		return true
+	case ListAutomationsParamsSortName:
+		return true
+	case ListAutomationsParamsSortNameAsc:
+		return true
+	case ListAutomationsParamsSortNameDesc:
+		return true
+	case ListAutomationsParamsSortStatusState:
+		return true
+	case ListAutomationsParamsSortStatusStateAsc:
+		return true
+	case ListAutomationsParamsSortStatusStateDesc:
+		return true
+	case ListAutomationsParamsSortTriggerOn:
+		return true
+	case ListAutomationsParamsSortTriggerOnAsc:
+		return true
+	case ListAutomationsParamsSortTriggerOnDesc:
+		return true
+	case ListAutomationsParamsSortUpdatedAt:
+		return true
+	case ListAutomationsParamsSortUpdatedAtAsc:
+		return true
+	case ListAutomationsParamsSortUpdatedAtDesc:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for GetRulesV1ParamsType.
 const (
 	GetRulesV1ParamsTypeAlert GetRulesV1ParamsType = "alert"
@@ -5031,6 +5775,33 @@ func (e GetAcceptedRisksV1ParamsSort) Valid() bool {
 	case AcceptanceDate:
 		return true
 	case ExpirationDate:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ListCveCatalogV1beta1ParamsSeverity.
+const (
+	ListCveCatalogV1beta1ParamsSeverityCritical   ListCveCatalogV1beta1ParamsSeverity = "critical"
+	ListCveCatalogV1beta1ParamsSeverityHigh       ListCveCatalogV1beta1ParamsSeverity = "high"
+	ListCveCatalogV1beta1ParamsSeverityLow        ListCveCatalogV1beta1ParamsSeverity = "low"
+	ListCveCatalogV1beta1ParamsSeverityMedium     ListCveCatalogV1beta1ParamsSeverity = "medium"
+	ListCveCatalogV1beta1ParamsSeverityNegligible ListCveCatalogV1beta1ParamsSeverity = "negligible"
+)
+
+// Valid indicates whether the value is a known member of the ListCveCatalogV1beta1ParamsSeverity enum.
+func (e ListCveCatalogV1beta1ParamsSeverity) Valid() bool {
+	switch e {
+	case ListCveCatalogV1beta1ParamsSeverityCritical:
+		return true
+	case ListCveCatalogV1beta1ParamsSeverityHigh:
+		return true
+	case ListCveCatalogV1beta1ParamsSeverityLow:
+		return true
+	case ListCveCatalogV1beta1ParamsSeverityMedium:
+		return true
+	case ListCveCatalogV1beta1ParamsSeverityNegligible:
 		return true
 	default:
 		return false
@@ -5338,6 +6109,77 @@ type AdditionalTeamPermissionsV1 struct {
 	//
 	// Example: false
 	HasSysdigCaptures *bool `json:"hasSysdigCaptures,omitempty"`
+}
+
+// AffectedComponentV1Beta1 A component, within one ecosystem, affected by this CVE.
+type AffectedComponentV1Beta1 struct {
+	// ComponentName Name of the affected component, within its ecosystem. For `application`/`oci` ecosystems, this is the application or image name rather than a package name.
+	//
+	//
+	// Example: org.apache.logging.log4j:log4j-core
+	ComponentName string `json:"componentName"`
+
+	// ComponentType Component type as reported by the source vendor. Omitted when unavailable.
+	//
+	// Example: maven
+	ComponentType *string `json:"componentType,omitempty"`
+
+	// Ecosystem Sysdig-normalized component ecosystem, one of a closed set of known values. `application` and `oci` mark a whole-application or whole-image entry rather than a package within a language or OS package manager; `componentName`/`ranges` still apply, scoped to that application or image as a unit.
+	//
+	//
+	// Example: maven
+	Ecosystem AffectedComponentV1Beta1Ecosystem `json:"ecosystem"`
+
+	// EcosystemVersion Ecosystem-specific version qualifier (e.g. the Linux distribution release). Omitted when not applicable.
+	//
+	//
+	// Example: 11
+	EcosystemVersion *string `json:"ecosystemVersion,omitempty"`
+
+	// Ranges Version ranges affected by this CVE, one entry per vendor-reported range.
+	Ranges []AffectedRangeV1Beta1 `json:"ranges"`
+}
+
+// AffectedComponentV1Beta1Ecosystem Sysdig-normalized component ecosystem, one of a closed set of known values. `application` and `oci` mark a whole-application or whole-image entry rather than a package within a language or OS package manager; `componentName`/`ranges` still apply, scoped to that application or image as a unit.
+//
+// Example: maven
+type AffectedComponentV1Beta1Ecosystem string
+
+// AffectedRangeV1Beta1 A single vendor-reported version range for an affected component.
+type AffectedRangeV1Beta1 struct {
+	// Aliases Vendor advisory identifiers for this range (e.g. RHSA, ELSA, GLSA IDs).
+	Aliases *[]string `json:"aliases,omitempty"`
+
+	// FixSource Source of the `fixedAt` timestamp. Omitted when unavailable.
+	//
+	// Example: nvd
+	FixSource *string `json:"fixSource,omitempty"`
+
+	// Fixed Version at which the vulnerability was fixed. Omitted when no fix is known.
+	//
+	// Example: 2.17.1
+	Fixed *string `json:"fixed,omitempty"`
+
+	// FixedAt When the `fixed` version was released, according to `fixSource`. Omitted when unknown.
+	//
+	// Example: 2021-12-13T00:00:00Z
+	FixedAt *time.Time `json:"fixedAt,omitempty"`
+
+	// Introduced Version at which the vulnerability was introduced. Omitted when unknown.
+	//
+	// Example: 2.0-beta9
+	Introduced *string `json:"introduced,omitempty"`
+
+	// LastAffected Last known affected version, for ranges reported without an explicit fixed version. Omitted when unknown.
+	//
+	//
+	// Example: 2.14.1
+	LastAffected *string `json:"lastAffected,omitempty"`
+
+	// SourceVendor Vendor that reported this range. Omitted when unavailable.
+	//
+	// Example: nvd
+	SourceVendor *string `json:"sourceVendor,omitempty"`
 }
 
 // AgentlessMlRuntimeDetectionContent Agentless ML event content
@@ -6324,6 +7166,546 @@ type AuthenticatedConnectionInfoWebhookOutput string
 //
 // Example: seconds
 type AuthenticatedConnectionInfoWebhookTimestampFormat string
+
+// AutomationActionNodeV1Alpha1 A node that executes an action. Only the properties declared here are accepted; a stray `condition` (or any other unknown property) is rejected rather than ignored.
+type AutomationActionNodeV1Alpha1 struct {
+	// Action The action executed by an automation node.
+	Action AutomationActionV1Alpha1 `json:"action"`
+
+	// OnError Identifiers of nodes to execute if this node errors.
+	//
+	// Example: []
+	OnError []string `json:"onError"`
+
+	// OutboundEdges The nodes to execute next.
+	//
+	// Example: []
+	OutboundEdges []AutomationOutboundEdgesV1Alpha1 `json:"outboundEdges"`
+
+	// Type The node type discriminator. Always `action` for this variant.
+	//
+	// Example: action
+	Type AutomationActionNodeV1Alpha1Type `json:"type"`
+}
+
+// AutomationActionNodeV1Alpha1Type The node type discriminator. Always `action` for this variant.
+//
+// Example: action
+type AutomationActionNodeV1Alpha1Type string
+
+// AutomationActionV1Alpha1 The action executed by an automation node.
+type AutomationActionV1Alpha1 struct {
+	// Inputs Action-specific input parameters. This is an object whose structure depends on the action `type`.
+	//
+	//
+	// Example: {"integrationId":"8215","issueTypes":{"33083":{"customFields":{},"standardFields":{"assignee":"6161884f7e6c170167e4e4ac","labels":["/dev/master","10s_flush"],"reporter":"6161884f7e6c170167e4e4ac"}}}}
+	Inputs map[string]interface{} `json:"inputs"`
+
+	// Type The action type. The currently accepted values are grouped below. Which types an
+	// automation may use depends on its `trigger.on` event; an action type that is not
+	// valid for the automation's trigger is rejected with `422 Unprocessable Content`.
+	// New values may be added in future minor versions; clients must handle unknown
+	// values defensively.
+	//
+	// Notification channels, accepted on every trigger:
+	// - `slack`
+	// - `email`
+	// - `ms_teams`
+	// - `pager_duty`
+	// - `webhook`
+	// - `amazon_sns`
+	//
+	// Notification channels accepted only on the `alert_occurrence` trigger:
+	// - `gchat`
+	// - `ibm_event_notifications`
+	// - `victorops`
+	// - `opsgenie`
+	// - `team_email`
+	// - `prometheus_alert_manager`
+	// - `custom_webhook`
+	//
+	// Ticketing, accepted on the risk_update and new_findings triggers:
+	// - `jira`
+	//
+	// Response actions, accepted primarily on the `runtime_policy` trigger:
+	// - `kill_container`
+	// - `kill_process`
+	// - `stop_container`
+	// - `pause_container`
+	// - `file_acquire`
+	// - `file_quarantine`
+	// - `capture`
+	// - `k8s_isolate_network`
+	// - `k8s_volume_snapshot`
+	// - `k8s_get_logs`
+	// - `k8s_rollout_restart`
+	// - `k8s_delete_pod`
+	// - `cloud_make_private_resource`
+	// - `cloud_volume_snapshot`
+	// - `cloud_iam_quarantine`
+	// - `cloud_fetch_logs`
+	//
+	//
+	// Example: jira
+	Type string `json:"type"`
+}
+
+// AutomationConditionNodeV1Alpha1 A node that evaluates a condition to control the automation flow. Only the properties declared here are accepted; a stray `action` (or any other unknown property) is rejected rather than ignored.
+type AutomationConditionNodeV1Alpha1 struct {
+	// Condition The condition evaluated by an automation node.
+	Condition AutomationConditionV1Alpha1 `json:"condition"`
+
+	// OnError Identifiers of nodes to execute if this node errors.
+	//
+	// Example: []
+	OnError []string `json:"onError"`
+
+	// OutboundEdges The nodes to execute next.
+	//
+	// Example: []
+	OutboundEdges []AutomationOutboundEdgesV1Alpha1 `json:"outboundEdges"`
+
+	// Type The node type discriminator. Always `condition` for this variant.
+	//
+	// Example: condition
+	Type AutomationConditionNodeV1Alpha1Type `json:"type"`
+}
+
+// AutomationConditionNodeV1Alpha1Type The node type discriminator. Always `condition` for this variant.
+//
+// Example: condition
+type AutomationConditionNodeV1Alpha1Type string
+
+// AutomationConditionV1Alpha1 The condition evaluated by an automation node.
+type AutomationConditionV1Alpha1 struct {
+	// Else Identifiers of nodes to execute when the expression evaluates to false.
+	Else *[]string `json:"else,omitempty"`
+
+	// If Expression that must evaluate to true for the condition to pass.
+	//
+	// Example: trigger.finding.hasExploit = true
+	If string `json:"if"`
+
+	// Then Identifiers of nodes to execute when the expression evaluates to true.
+	Then *[]string `json:"then,omitempty"`
+}
+
+// AutomationExecutionOverviewV1Alpha1 A single execution of an automation. Read-only; produced by the server.
+type AutomationExecutionOverviewV1Alpha1 struct {
+	// AutomationId The automation this execution belongs to.
+	//
+	// Example: 0191a8b0-3001-7a4e-8b3c-1f2e3d4c5b01
+	AutomationId *openapi_types.UUID `json:"automationId,omitempty"`
+
+	// Id UUIDv7 of the execution.
+	//
+	// Example: 0191a8b0-3050-7a4e-8b3c-1f2e3d4c5b50
+	Id *openapi_types.UUID `json:"id,omitempty"`
+
+	// Nodes Per-node execution records, keyed by node identifier. Each key mirrors a key of the automation's `nodes` map (for example `Condition_1` or `Send_Slack_1`). The labels are assigned by the server and are stable for the lifetime of the automation.
+	//
+	//
+	// Example: {"Condition_1":{"executionId":"0191a8b0-3050-7a4e-8b3c-1f2e3d4c5b50","finishedAt":"2026-08-11T04:00:16Z","id":"Condition_1","startedAt":"2026-08-11T04:00:16Z","status":"done"},"Send_Slack_1":{"executionId":"0191a8b0-3050-7a4e-8b3c-1f2e3d4c5b50","id":"Send_Slack_1","status":"skipped"},"Send_Slack_2":{"executionId":"0191a8b0-3050-7a4e-8b3c-1f2e3d4c5b50","finishedAt":"2026-08-11T04:00:16Z","id":"Send_Slack_2","inputs":{"channelId":"293660"},"outputs":{},"startedAt":"2026-08-11T04:00:16Z","status":"done"}}
+	Nodes *map[string]AutomationNodeExecutionOverviewV1Alpha1 `json:"nodes,omitempty"`
+
+	// StartedAt When the execution started.
+	//
+	// Example: 2026-08-11T04:00:00.000Z
+	StartedAt *time.Time `json:"startedAt,omitempty"`
+
+	// Status Overall execution status.
+	//
+	// Example: done
+	Status *AutomationExecutionOverviewV1Alpha1Status `json:"status,omitempty"`
+}
+
+// AutomationExecutionOverviewV1Alpha1Status Overall execution status.
+//
+// Example: done
+type AutomationExecutionOverviewV1Alpha1Status string
+
+// AutomationExecutionV1Alpha1 A single execution of an automation: the automation definition as it stood when the execution ran, the per-node results, and the trigger event payload that drove it. Read-only; produced by the server.
+type AutomationExecutionV1Alpha1 struct {
+	// AutomationId The automation this execution belongs to.
+	//
+	// Example: 0191a8b0-3001-7a4e-8b3c-1f2e3d4c5b01
+	AutomationId *openapi_types.UUID `json:"automationId,omitempty"`
+
+	// AutomationSnapshot The automation definition as it stood at the moment this execution ran. Held separately from the live automation so that historical executions stay interpretable after the automation is edited or deleted.
+	AutomationSnapshot *AutomationSnapshotV1Alpha1 `json:"automationSnapshot,omitempty"`
+
+	// CustomerId ID of customer that owns the automation.
+	//
+	// Example: 123
+	CustomerId int32 `json:"customerId"`
+
+	// EventId UUIDv7 of the event that triggered this execution, as minted by the originating event stream. Use it to correlate the execution with the source record in the API that owns the event.
+	//
+	//
+	// Example: 0191a8b0-30a2-7a4e-8b3c-1f2e3d4c5ba2
+	EventId *openapi_types.UUID `json:"eventId,omitempty"`
+
+	// EventType Class of the event that triggered this execution, in `EVENT_TYPE_*` form. Corresponds to the automation's `trigger.on` value and determines both which API owns the event and the shape of `variables`. New values may be added in future minor versions; clients must handle unknown values defensively.
+	//
+	//
+	// Example: EVENT_TYPE_NEW_RISK_RESOURCE
+	EventType *string `json:"eventType,omitempty"`
+
+	// ExecutionId UUIDv7 of the execution.
+	//
+	// Example: 0191a8b0-3050-7a4e-8b3c-1f2e3d4c5b50
+	ExecutionId *openapi_types.UUID `json:"executionId,omitempty"`
+
+	// FinishedAt When the execution finished. Omitted while the execution is still in progress.
+	//
+	//
+	// Example: 2026-08-24T06:01:29.898251Z
+	FinishedAt *time.Time `json:"finishedAt,omitempty"`
+
+	// Nodes Per-node execution records, keyed by node identifier. Each key mirrors a key of `automationSnapshot.nodes` (for example `Condition_1` or `Send_Slack_1`). The labels are assigned by the server and are stable for the lifetime of the automation.
+	//
+	//
+	// Example: {"Condition_1":{"executionId":"0191a8b0-3050-7a4e-8b3c-1f2e3d4c5b50","finishedAt":"2026-08-24T06:01:29Z","id":"Condition_1","startedAt":"2026-08-24T06:01:29Z","status":"done"},"Send_Slack_1":{"executionId":"0191a8b0-3050-7a4e-8b3c-1f2e3d4c5b50","id":"Send_Slack_1","status":"skipped"},"Send_Slack_2":{"executionId":"0191a8b0-3050-7a4e-8b3c-1f2e3d4c5b50","finishedAt":"2026-08-24T06:01:29Z","id":"Send_Slack_2","inputs":{"channelId":"293660"},"outputs":{},"startedAt":"2026-08-24T06:01:29Z","status":"done"}}
+	Nodes *map[string]AutomationNodeExecutionOverviewV1Alpha1 `json:"nodes,omitempty"`
+
+	// StartedAt When the execution started.
+	//
+	// Example: 2026-08-24T06:01:28.501096Z
+	StartedAt *time.Time `json:"startedAt,omitempty"`
+
+	// Status Overall execution status. New values may be added in future minor versions; clients must handle unknown values defensively.
+	//
+	//
+	// Example: done
+	Status *AutomationExecutionV1Alpha1Status `json:"status,omitempty"`
+
+	// TruncatedVariablesCount Number of entries dropped from `variables` because the payload exceeded the size the server retains, serialized as a decimal string. `"0"` when nothing was dropped.
+	//
+	//
+	// Example: 0
+	TruncatedVariablesCount *string `json:"truncatedVariablesCount,omitempty"`
+
+	// Variables Snapshot of the trigger event payload, exposed to node templates through the `trigger.*` namespace.
+	//
+	// The contents are not defined by this API. They are the resource representation returned by whichever Sysdig API owns the triggering event, reproduced verbatim, so the shape varies with `eventType` (and correspondingly with the automation's `trigger.on`). An `EVENT_TYPE_NEW_RISK_RESOURCE` execution — the example below — carries `variables.resource` as a resource-and-risk record from the Risks API; a findings trigger carries a Vulnerability Management finding instead, and so on.
+	//
+	// Treat the contents as opaque and resolve field semantics against the documentation of the API that owns the event rather than against this schema. That API may add or change fields without a version bump here. Oversized payloads are trimmed; see `truncatedVariablesCount`.
+	//
+	//
+	// Example: {"resource":{"category":"Compute","hash":"4194fddb9f4a9113228b97bd1d536c552855e7a42ad375f5e2b05333","labels":["AutoTag_Creator: GitHubActions","instance: alma-8-x86_64"],"name":"i-0c57aa981866969c5","platform":"AWS","risk":{"hasExploit":true,"hash":"7b9107de9ca55ae92abc5f85ec86899cca73e5d01e42b134cf5d702c","isLive":true,"name":"Exposed EC2 with Critical Exploitable Vulnerability","platform":"AWS","policy":"0","resourceCategory":"Compute","resourceType":"EC2 Instance","resources":["a1c52220e210abc6","5e84f76c08b00173"],"severity":"High","type":"EC2 Instance","zones":["39001597","11641"]},"riskLastChange":"RISK_LAST_CHANGE_INCREASE","type":"EC2 Instance","zones":["1","39001597"]}}
+	Variables *map[string]interface{} `json:"variables,omitempty"`
+}
+
+// AutomationExecutionV1Alpha1Status Overall execution status. New values may be added in future minor versions; clients must handle unknown values defensively.
+//
+// Example: done
+type AutomationExecutionV1Alpha1Status string
+
+// AutomationNodeExecutionOverviewV1Alpha1 The execution record of a single node within an automation execution. Read-only; produced by the server.
+type AutomationNodeExecutionOverviewV1Alpha1 struct {
+	// ExecutionId UUIDv7 of the execution this node belongs to.
+	//
+	// Example: 0191a8b0-3050-7a4e-8b3c-1f2e3d4c5b50
+	ExecutionId *openapi_types.UUID `json:"executionId,omitempty"`
+
+	// FinishedAt When the node finished executing. Omitted while the node is still running and when it never started.
+	//
+	//
+	// Example: 2026-08-24T06:01:29Z
+	FinishedAt *time.Time `json:"finishedAt,omitempty"`
+
+	// Id Identifier of the node within the automation flow. Matches both the key this object is filed under in `nodes` and the corresponding key of the automation's `nodes` map.
+	//
+	//
+	// Example: Send_Slack_2
+	Id *string `json:"id,omitempty"`
+
+	// Inputs Resolved input values passed to the node, keyed by input name. Shape depends on the node's action or condition. Omitted when the node takes no inputs or was never executed.
+	//
+	//
+	// Example: {"channelId":"293660"}
+	Inputs *map[string]interface{} `json:"inputs,omitempty"`
+
+	// Outputs Values produced by the node, keyed by output name. Shape depends on the node's action or condition. Omitted when the node was never executed, and an empty object when the node executed but produced no outputs.
+	//
+	//
+	// Example: {}
+	Outputs *map[string]interface{} `json:"outputs,omitempty"`
+
+	// StartedAt When the node started executing. Omitted when the node never started, for example when its status is `skipped` or `pending`.
+	//
+	//
+	// Example: 2026-08-24T06:01:29Z
+	StartedAt *time.Time `json:"startedAt,omitempty"`
+
+	// Status Status of this node within the execution. New values may be added in future minor versions; clients must handle unknown values defensively.
+	//
+	//
+	// Example: done
+	Status *AutomationNodeExecutionOverviewV1Alpha1Status `json:"status,omitempty"`
+}
+
+// AutomationNodeExecutionOverviewV1Alpha1Status Status of this node within the execution. New values may be added in future minor versions; clients must handle unknown values defensively.
+//
+// Example: done
+type AutomationNodeExecutionOverviewV1Alpha1Status string
+
+// AutomationNodeTypeV1Alpha1 The node type discriminator.
+//
+// Example: action
+type AutomationNodeTypeV1Alpha1 string
+
+// AutomationNodeV1Alpha1 A single node in the automation flow. A node is either an action node or a condition node, distinguished by the `type` discriminator.
+type AutomationNodeV1Alpha1 struct {
+	// Type The node type discriminator.
+	//
+	// Example: action
+	Type  AutomationNodeTypeV1Alpha1 `json:"type"`
+	union json.RawMessage
+}
+
+// AutomationOutboundEdgesV1Alpha1 Node that is an outbound edge in an automation graph.
+type AutomationOutboundEdgesV1Alpha1 struct {
+	// Node Action that this node represents.
+	//
+	// Example: Create_Jira_Tickets_1
+	Node *string `json:"node,omitempty"`
+}
+
+// AutomationSnapshotV1Alpha1 The automation definition as captured at the moment an execution ran. Read-only; produced by the server. Because it is a point-in-time copy it keeps historical executions interpretable after the live automation is edited or deleted, and it may therefore differ from the current automation returned by the automations endpoints.
+type AutomationSnapshotV1Alpha1 struct {
+	// Author Author of the automation.
+	//
+	// Example: johndoe@example.com
+	Author *string `json:"author,omitempty"`
+
+	// CreatedAt Timestamp when the automation was created in the system.
+	//
+	// Example: 2025-11-21T14:07:03.484154Z
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+
+	// CustomerId ID of customer that owns the automation.
+	//
+	// Example: 123
+	CustomerId int32 `json:"customerId"`
+
+	// Enabled Indicates whether the automation was enabled when the execution ran.
+	//
+	// Example: true
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Group The automation group.
+	//
+	// Example: default
+	Group *string `json:"group,omitempty"`
+
+	// Id The automation ID.
+	//
+	// Example: 0191a8b0-3001-7a4e-8b3c-1f2e3d4c5b01
+	Id *openapi_types.UUID `json:"id,omitempty"`
+
+	// Name The automation name.
+	//
+	// Example: SECOPS - Update Production Risks
+	Name *string `json:"name,omitempty"`
+
+	// Nodes Map of node identifiers to their definitions, as configured when the execution ran, in the same shape the automations `nodes` map.
+	Nodes *map[string]AutomationNodeV1Alpha1 `json:"nodes,omitempty"`
+
+	// Status Server-computed status of the automation at snapshot time, in the same shape the automations endpoints return.
+	Status *AutomationStatusV1Alpha1 `json:"status,omitempty"`
+
+	// TeamId ID of team that owns the automation. Minted by the Teams/IAM platform API; treated as an opaque foreign reference.
+	//
+	// Example: 12
+	TeamId int32 `json:"teamId"`
+
+	// Trigger The trigger the automation was configured with when the execution ran.
+	Trigger *AutomationTriggerV1Alpha1 `json:"trigger,omitempty"`
+
+	// UpdatedAt Timestamp when the automation was last updated in the system.
+	//
+	// Example: 2025-11-28T11:14:54.241962Z
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+
+	// Version Version of the automation.
+	//
+	// Example: v1
+	Version *string `json:"version,omitempty"`
+}
+
+// AutomationStatusV1Alpha1 Server-computed status of the automation.
+type AutomationStatusV1Alpha1 struct {
+	// State Current lifecycle state of the automation. One of: `error`, `warning`, `active`, `inactive`. New values may be added in future minor versions; clients must handle unknown values defensively.
+	//
+	//
+	// Example: error
+	State *string `json:"state,omitempty"`
+
+	// ValidationError Details of the validation error found for the automation, if any.
+	ValidationError *AutomationValidationErrorV1Alpha1 `json:"validationError,omitempty"`
+}
+
+// AutomationTriggerV1Alpha1 Automation trigger.
+type AutomationTriggerV1Alpha1 struct {
+	// On Event that triggers the automation. New values may be added in future minor versions; clients must handle unknown
+	// values defensively.
+	//
+	//
+	// Example: new_findings
+	On AutomationTriggerV1Alpha1On `json:"on"`
+
+	// OutboundEdges The list of automation trigger outbound edges.
+	OutboundEdges []AutomationOutboundEdgesV1Alpha1 `json:"outboundEdges"`
+
+	// When Condition that needs to be met to trigger the automation.
+	//
+	// Example: finding.severity in (0, 1, 2)
+	When string `json:"when"`
+}
+
+// AutomationTriggerV1Alpha1On Event that triggers the automation. New values may be added in future minor versions; clients must handle unknown
+// values defensively.
+//
+// Example: new_findings
+type AutomationTriggerV1Alpha1On string
+
+// AutomationV1Alpha1 Automation.
+type AutomationV1Alpha1 struct {
+	// Author Author of the automation.
+	//
+	// Example: johndoe@example.com
+	Author *string `json:"author,omitempty"`
+
+	// CreatedAt Timestamp when the automation was created in the system.
+	//
+	// Example: 2025-11-18T21:19:11.411128Z
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+
+	// CustomerId ID of customer that owns the automation.
+	//
+	// Example: 123
+	CustomerId *int32 `json:"customerId,omitempty"`
+
+	// Enabled Indicates if the automation is enabled or not.
+	//
+	// Example: false
+	Enabled bool `json:"enabled"`
+
+	// Group The automation group.
+	//
+	// Example: default
+	Group string `json:"group"`
+
+	// Id The automation ID.
+	//
+	// Example: 01913d2e-2c8a-7a4e-b9c2-3f5e8a1d9b00
+	Id *openapi_types.UUID `json:"id,omitempty"`
+
+	// Name The automation name.
+	//
+	// Example: High-Sev VM to Slack
+	Name string `json:"name"`
+
+	// Nodes Map of node identifiers to their definitions. Each key is a unique node name within the automation flow.
+	Nodes map[string]AutomationNodeV1Alpha1 `json:"nodes"`
+
+	// Status Server-computed status of the automation.
+	Status *AutomationStatusV1Alpha1 `json:"status,omitempty"`
+
+	// TeamId ID of team that owns the automation. Minted by the Teams/IAM platform API; treated as an opaque foreign reference.
+	//
+	// Example: 12
+	TeamId *int32 `json:"teamId,omitempty"`
+
+	// Trigger Automation trigger.
+	Trigger AutomationTriggerV1Alpha1 `json:"trigger"`
+
+	// UpdatedAt Timestamp when the automation was last updated in the system.
+	//
+	// Example: 2025-11-18T21:19:11.411128Z
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+
+	// Version Version of the automation.
+	//
+	// Example: v1
+	Version *string `json:"version,omitempty"`
+}
+
+// AutomationValidationErrorV1Alpha1 Details of the error found while validating the automation.
+type AutomationValidationErrorV1Alpha1 struct {
+	// Details Additional error details as key-value string pairs.
+	//
+	// Example: {}
+	Details map[string]string `json:"details"`
+
+	// ErrorType Identifier of the validation error. New values may be added in future minor versions; clients must handle unknown
+	// values defensively.
+	//
+	//
+	// Example: automation_action_input_invalid
+	ErrorType AutomationValidationErrorV1Alpha1ErrorType `json:"errorType"`
+
+	// Message Description of the validation error.
+	//
+	// Example: Invalid automation: Action input 'integrationId' must be an integer.
+	Message string `json:"message"`
+}
+
+// AutomationValidationErrorV1Alpha1ErrorType Identifier of the validation error. New values may be added in future minor versions; clients must handle unknown
+// values defensively.
+//
+// Example: automation_action_input_invalid
+type AutomationValidationErrorV1Alpha1ErrorType string
+
+// AutomationWritableV1Alpha1 Writable fields of an automation (client-supplied, non read-only).
+type AutomationWritableV1Alpha1 struct {
+	// Enabled Indicates if the automation is enabled or not.
+	//
+	// Example: false
+	Enabled bool `json:"enabled"`
+
+	// Group The automation group.
+	//
+	// Example: default
+	Group string `json:"group"`
+
+	// Name The automation name.
+	//
+	// Example: High-Sev VM to Slack
+	Name string `json:"name"`
+
+	// Nodes Map of node identifiers to their definitions. Each key is a unique node name within the automation flow.
+	Nodes map[string]AutomationNodeV1Alpha1 `json:"nodes"`
+
+	// Trigger Automation trigger.
+	Trigger AutomationTriggerV1Alpha1 `json:"trigger"`
+}
+
+// AutomationsPageV1Alpha1 Pagination information.
+type AutomationsPageV1Alpha1 struct {
+	// Next `next` is a string pointing to the next page of data.
+	// Use this as the `cursor` to scroll paginated results and get the next page of data.
+	// If not included, the current response is the last page.
+	//
+	//
+	// Example: KzltNGUybXIwdWkzZThhMjE1bjRn
+	Next *string `json:"next,omitempty"`
+
+	// Previous `prev` is a string pointing to the previous page of data.
+	// Use this as the `cursor` to get the previous page of data.
+	//
+	//
+	// Example: LTltNGUybXIwdWkzZThhMjE1bjRn
+	Previous *string `json:"previous,omitempty"`
+
+	// Total The total number of items (automations) matching the search criteria. This number is always
+	// greater than or equal to the number of automations returned in the current page.
+	//
+	//
+	// Example: 10
+	Total *int64 `json:"total,omitempty"`
+}
 
 // BaseAction defines model for BaseAction.
 type BaseAction struct {
@@ -7594,6 +8976,12 @@ type CreateAmazonSqsIntegrationRequest struct {
 	Type IntegrationType `json:"type"`
 }
 
+// CreateAutomationRequestV1Alpha1 Request body to create an automation.
+type CreateAutomationRequestV1Alpha1 = AutomationWritableV1Alpha1
+
+// CreateAutomationResponseV1Alpha1 The newly created automation.
+type CreateAutomationResponseV1Alpha1 = AutomationV1Alpha1
+
 // CreateBundleRequest Bundle definition
 type CreateBundleRequest struct {
 	// Description Human readable description of this Bundle
@@ -8808,6 +10196,348 @@ type CustomJobsEnablementV1 struct {
 	EnablementByCluster *map[string]bool `json:"enablementByCluster,omitempty"`
 }
 
+// CveDetailV1Beta1 Full catalog record for a single CVE, as returned by the single-item endpoint. This is intentionally richer than the list endpoint's item shape (`CveSummaryV1Beta1`) — see the `vendors` and `affected` properties below.
+type CveDetailV1Beta1 struct {
+	// Affected Components affected by this CVE with the version ranges reported for each.
+	Affected []AffectedComponentV1Beta1 `json:"affected"`
+
+	// Summary Summary view of a single CVE in the Sysdig catalog, as returned by the list endpoint.
+	Summary CveSummaryV1Beta1 `json:"summary"`
+
+	// Vendors Per-vendor metadata for this CVE. One entry per vendor that reports on it.
+	Vendors []CveVendorMetadataV1Beta1 `json:"vendors"`
+}
+
+// CveExploitV1Beta1 A known public exploit reported by a vendor.
+type CveExploitV1Beta1 struct {
+	// Links URLs with more information about this exploit.
+	Links []string `json:"links"`
+
+	// PublishedAt When this exploit was published. Omitted when unknown.
+	//
+	// Example: 2021-12-10T00:00:00Z
+	PublishedAt *time.Time `json:"publishedAt,omitempty"`
+
+	// Source Vendor or source reporting this exploit.
+	//
+	// Example: vulndb
+	Source string `json:"source"`
+}
+
+// CveReferenceV1Beta1 An external reference link reported by a vendor.
+type CveReferenceV1Beta1 struct {
+	// Source Vendor providing this reference. Omitted when unavailable.
+	//
+	// Example: nvd
+	Source *string `json:"source,omitempty"`
+
+	// Type Category of this reference in the reporting vendor's vocabulary (e.g. `Patch`, `Third Party Advisory`). Omitted when unavailable.
+	//
+	//
+	// Example: Patch
+	Type *string `json:"type,omitempty"`
+
+	// Url The reference URL.
+	//
+	// Example: https://logging.apache.org/log4j/2.x/security.html
+	Url string `json:"url"`
+}
+
+// CveScoreCvss2V1Beta1 A CVSS v2.0 score reported by a vendor.
+type CveScoreCvss2V1Beta1 struct {
+	// BaseScore CVSS base score, from 0 to 10.
+	//
+	// Example: 10
+	BaseScore float64 `json:"baseScore"`
+
+	// ExploitabilityScore CVSS exploitability sub-score, from 0 to 10. Omitted when not computed.
+	//
+	// Example: 10
+	ExploitabilityScore *float64 `json:"exploitabilityScore,omitempty"`
+
+	// ImpactScore CVSS impact sub-score, from 0 to 10. Omitted when not computed.
+	//
+	// Example: 10
+	ImpactScore *float64 `json:"impactScore,omitempty"`
+
+	// Source Name of the vendor that computed this score.
+	//
+	// Example: nvd
+	Source string `json:"source"`
+
+	// TemporalScore CVSS temporal score, adjusting the base score for exploit maturity and remediation availability. Omitted when not computed.
+	//
+	//
+	// Example: 9.5
+	TemporalScore *float64 `json:"temporalScore,omitempty"`
+
+	// Type CVSS specification version discriminator. Always `2.0` for this variant.
+	//
+	// Example: 2.0
+	Type CveScoreCvss2V1Beta1Type `json:"type"`
+
+	// Vector CVSS vector string.
+	//
+	// Example: AV:N/AC:L/Au:N/C:C/I:C/A:C
+	Vector string `json:"vector"`
+}
+
+// CveScoreCvss2V1Beta1Type CVSS specification version discriminator. Always `2.0` for this variant.
+//
+// Example: 2.0
+type CveScoreCvss2V1Beta1Type string
+
+// CveScoreCvss3V1Beta1 A CVSS v3.0 or v3.1 score reported by a vendor.
+type CveScoreCvss3V1Beta1 struct {
+	// BaseScore CVSS base score, from 0 to 10.
+	//
+	// Example: 10
+	BaseScore float64 `json:"baseScore"`
+
+	// ExploitabilityScore CVSS exploitability sub-score. CVSS v3.x caps this at 3.9. Omitted when not computed.
+	//
+	// Example: 3.9
+	ExploitabilityScore *float64 `json:"exploitabilityScore,omitempty"`
+
+	// ImpactScore CVSS impact sub-score. CVSS v3.x caps this at 6.0. Omitted when not computed.
+	//
+	// Example: 6
+	ImpactScore *float64 `json:"impactScore,omitempty"`
+
+	// Source Vendor that computed this score.
+	//
+	// Example: nvd
+	Source string `json:"source"`
+
+	// TemporalScore CVSS temporal score, adjusting the base score for exploit maturity and remediation availability. Omitted when not computed.
+	//
+	//
+	// Example: 9.5
+	TemporalScore *float64 `json:"temporalScore,omitempty"`
+
+	// Type CVSS specification version discriminator.
+	//
+	// Example: 3.1
+	Type CveScoreCvss3V1Beta1Type `json:"type"`
+
+	// Vector CVSS vector string.
+	//
+	// Example: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H
+	Vector string `json:"vector"`
+}
+
+// CveScoreCvss3V1Beta1Type CVSS specification version discriminator.
+//
+// Example: 3.1
+type CveScoreCvss3V1Beta1Type string
+
+// CveScoreCvss4V1Beta1 A CVSS v4.0 score reported by a vendor. CVSS v4.0 restructured its metric groups and does not define `exploitabilityScore`/`impactScore` sub-scores. This variant omits them.
+type CveScoreCvss4V1Beta1 struct {
+	// BaseScore CVSS base score, from 0 to 10.
+	//
+	// Example: 10
+	BaseScore float64 `json:"baseScore"`
+
+	// Source Vendor that computed this score.
+	//
+	// Example: nvd
+	Source string `json:"source"`
+
+	// TemporalScore CVSS temporal score, adjusting the base score for exploit maturity and remediation availability. Omitted when not computed.
+	//
+	//
+	// Example: 9.5
+	TemporalScore *float64 `json:"temporalScore,omitempty"`
+
+	// Type CVSS specification version discriminator. Always `4.0` for this variant.
+	//
+	// Example: 4.0
+	Type CveScoreCvss4V1Beta1Type `json:"type"`
+
+	// Vector CVSS vector string.
+	//
+	// Example: CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N
+	Vector string `json:"vector"`
+}
+
+// CveScoreCvss4V1Beta1Type CVSS specification version discriminator. Always `4.0` for this variant.
+//
+// Example: 4.0
+type CveScoreCvss4V1Beta1Type string
+
+// CveScoreV1Beta1 A CVSS score reported by a vendor. The shape of `exploitabilityScore`/`impactScore` (bounds, and whether they're present at all) varies by CVSS specification `type`, per the FIRST.org CVSS specification (https://www.first.org/cvss/). These bounds are also enforced server-side. A value inside a variant's schema range can still be internally inconsistent (e.g. not matching `vector`); the schema constrains the range, not full CVSS correctness.
+type CveScoreV1Beta1 struct {
+	// Type CVSS specification version used to compute this score.
+	//
+	// Example: 3.1
+	Type  CveScoreV1Beta1Type `json:"type"`
+	union json.RawMessage
+}
+
+// CveScoreV1Beta1Type CVSS specification version used to compute this score.
+//
+// Example: 3.1
+type CveScoreV1Beta1Type string
+
+// CveSummaryV1Beta1 Summary view of a single CVE in the Sysdig catalog, as returned by the list endpoint.
+type CveSummaryV1Beta1 struct {
+	// AffectedComponents Names of components affected by this CVE, across all ecosystems.
+	AffectedComponents []string `json:"affectedComponents"`
+
+	// Description Human-readable description of the vulnerability.
+	//
+	// Example: Apache Log4j2 JNDI features used in configuration, log messages, and parameters do not protect against attacker-controlled LDAP and other JNDI related endpoints.
+	Description string `json:"description"`
+
+	// Ecosystems Sysdig-normalized component ecosystems affected by this CVE, from a closed set of known values. Includes `application`/`oci` when a whole application or image is affected, not just a package.
+	Ecosystems []CveSummaryV1Beta1Ecosystems `json:"ecosystems"`
+
+	// EpssPercentile Percentile rank of `epssScore` among all scored CVEs, from 0 to 1. Omitted when not available.
+	//
+	// Example: 0.99
+	EpssPercentile *float64 `json:"epssPercentile,omitempty"`
+
+	// EpssScore EPSS score (probability of exploitation in the next 30 days), from 0 to 1. Omitted when not available.
+	//
+	// Example: 0.94
+	EpssScore *float64 `json:"epssScore,omitempty"`
+
+	// EpssScoreVendor Source of the EPSS score. Omitted when unavailable.
+	//
+	// Example: first.org
+	EpssScoreVendor *string `json:"epssScoreVendor,omitempty"`
+
+	// HasExploit Whether a public exploit is known for this CVE.
+	//
+	// Example: true
+	HasExploit bool `json:"hasExploit"`
+
+	// HasExploitVendor Which vendor reported the exploit referenced by `hasExploit`. Omitted when unavailable.
+	//
+	// Example: vulndb
+	HasExploitVendor *string `json:"hasExploitVendor,omitempty"`
+
+	// HasFix Whether at least one affected component has a known fixed version.
+	//
+	// Example: true
+	HasFix bool `json:"hasFix"`
+
+	// HasKev Whether this CVE is listed in the CISA Known Exploited Vulnerabilities (KEV) catalog.
+	//
+	// Example: true
+	HasKev bool `json:"hasKev"`
+
+	// Id The CVE identifier.
+	//
+	// Example: CVE-2021-44228
+	Id *string `json:"id,omitempty"`
+
+	// PublishDateVendor Which vendor's publish date `publishedAt` reflects. Omitted when unavailable.
+	//
+	// Example: nvd
+	PublishDateVendor *string `json:"publishDateVendor,omitempty"`
+
+	// PublishedAt When the CVE was published. Omitted when unknown.
+	//
+	// Example: 2021-12-10T10:15:00Z
+	PublishedAt *time.Time `json:"publishedAt,omitempty"`
+
+	// Severity Sysdig-normalized severity. Omitted when no vendor score was available to derive it.
+	//
+	// Example: critical
+	Severity *CveSummaryV1Beta1Severity `json:"severity,omitempty"`
+
+	// SeverityVendor Which vendor's score `severity` was derived from. Not a fixed set: any vendor Sysdig currently or in the future ingests scores from (e.g. `nvd`, `vulndb`, `first.org`, `cisa`, or a per-distro security tracker). Omitted when unavailable.
+	//
+	//
+	// Example: nvd
+	SeverityVendor *string `json:"severityVendor,omitempty"`
+}
+
+// CveSummaryV1Beta1Ecosystems Example: maven
+type CveSummaryV1Beta1Ecosystems string
+
+// CveSummaryV1Beta1Severity Sysdig-normalized severity. Omitted when no vendor score was available to derive it.
+//
+// Example: critical
+type CveSummaryV1Beta1Severity string
+
+// CveVendorMetadataV1Beta1 A single vendor's report about a CVE.
+type CveVendorMetadataV1Beta1 struct {
+	// Description Vendor's description of the vulnerability. Omitted when the vendor doesn't supply one.
+	//
+	// Example: Apache Log4j2 JNDI features used in configuration, log messages, and parameters do not protect against attacker-controlled LDAP and other JNDI related endpoints.
+	Description *string `json:"description,omitempty"`
+
+	// Details Extended vendor-supplied details beyond `description`. Omitted when unavailable.
+	//
+	// Example: By default, when using a Java naming and directory interface (JNDI) lookup...
+	Details *string `json:"details,omitempty"`
+
+	// Epss Exploit Prediction Scoring System (EPSS) assessment.
+	Epss *EpssScoreV1Beta1 `json:"epss,omitempty"`
+
+	// Exploits Known public exploits reported by this vendor.
+	Exploits *[]CveExploitV1Beta1 `json:"exploits,omitempty"`
+
+	// FixedAt When a fix became available according to this vendor. Omitted when unknown.
+	//
+	// Example: 2021-12-13T00:00:00Z
+	FixedAt *time.Time `json:"fixedAt,omitempty"`
+
+	// Kev CISA Known Exploited Vulnerabilities (KEV) catalog details.
+	Kev *KevInfoV1Beta1 `json:"kev,omitempty"`
+
+	// PublishedAt When the vendor published this CVE. Omitted when unknown.
+	//
+	// Example: 2021-12-10T10:15:00Z
+	PublishedAt *time.Time `json:"publishedAt,omitempty"`
+
+	// References External reference links reported by this vendor.
+	References *[]CveReferenceV1Beta1 `json:"references,omitempty"`
+
+	// Scores CVSS scores reported by this vendor.
+	Scores *[]CveScoreV1Beta1 `json:"scores,omitempty"`
+
+	// Severity Vendor-reported severity label, in the vendor's own vocabulary (not normalized). Omitted when unavailable.
+	//
+	//
+	// Example: CRITICAL
+	Severity *string `json:"severity,omitempty"`
+
+	// Solution Vendor-recommended remediation. Omitted when unavailable.
+	//
+	// Example: Upgrade to version 2.17.1 or later.
+	Solution *string `json:"solution,omitempty"`
+
+	// Summary Vendor-supplied short summary, distinct from `description`. Omitted when unavailable.
+	//
+	// Example: Remote code execution via crafted JNDI lookups.
+	Summary *string `json:"summary,omitempty"`
+
+	// Vendor Name of the reporting vendor.
+	//
+	// Example: nvd
+	Vendor string `json:"vendor"`
+
+	// Weaknesses CWE weaknesses associated with this CVE by this vendor.
+	Weaknesses *[]CveWeaknessV1Beta1 `json:"weaknesses,omitempty"`
+}
+
+// CveWeaknessV1Beta1 A CWE weakness associated with this CVE by a vendor.
+type CveWeaknessV1Beta1 struct {
+	// Id Common Weakness Enumeration (CWE) identifier (https://cwe.mitre.org/).
+	//
+	//
+	// Example: CWE-502
+	Id *string `json:"id,omitempty"`
+
+	// Source Vendor reporting this weakness.
+	//
+	// Example: nvd
+	Source string `json:"source"`
+}
+
 // CvssScore defines model for CvssScore.
 type CvssScore struct {
 	// Score CVSS score
@@ -9022,6 +10752,29 @@ type EntryPointV1 struct {
 // EntryResponse The response to a GET entry call
 type EntryResponse struct {
 	union json.RawMessage
+}
+
+// EpssScoreV1Beta1 Exploit Prediction Scoring System (EPSS) assessment.
+type EpssScoreV1Beta1 struct {
+	// Percentile Percentile rank of `score` among all scored CVEs, from 0 to 1. Omitted when not available.
+	//
+	// Example: 0.99
+	Percentile *float64 `json:"percentile,omitempty"`
+
+	// Score Probability of exploitation in the next 30 days, from 0 to 1.
+	//
+	// Example: 0.94
+	Score float64 `json:"score"`
+
+	// ScoredAt When this EPSS score was computed. Omitted when unavailable.
+	//
+	// Example: 2024-01-01T00:00:00Z
+	ScoredAt *time.Time `json:"scoredAt,omitempty"`
+
+	// Version EPSS model version used to compute `score`. Omitted when unavailable.
+	//
+	// Example: 2023.03.01
+	Version *string `json:"version,omitempty"`
 }
 
 // Error defines model for Error.
@@ -9458,6 +11211,15 @@ type GetAmazonSqsIntegrationResponse struct {
 	//
 	// Example: SYSLOG
 	Type IntegrationType `json:"type"`
+}
+
+// GetAutomationByIdResponseV1Alpha1 The automation with given ID.
+type GetAutomationByIdResponseV1Alpha1 = AutomationV1Alpha1
+
+// GetAutomationExecutionResponseV1Alpha1 The requested automation execution.
+type GetAutomationExecutionResponseV1Alpha1 struct {
+	// ExecutionHistory The automation execution, including its automation snapshot and node results.
+	ExecutionHistory *AutomationExecutionV1Alpha1 `json:"executionHistory,omitempty"`
 }
 
 // GetBundleResponse Bundle definition
@@ -12130,6 +13892,19 @@ type KafkaTlsEncryptedV1 struct {
 // KafkaTlsEncryptedV1IsTlsEnabled Example: true
 type KafkaTlsEncryptedV1IsTlsEnabled bool
 
+// KevInfoV1Beta1 CISA Known Exploited Vulnerabilities (KEV) catalog details.
+type KevInfoV1Beta1 struct {
+	// DueAt Remediation due date assigned by CISA BOD 22-01. Omitted when this CVE has no CISA-assigned due date.
+	//
+	// Example: 2022-01-18T00:00:00Z
+	DueAt *time.Time `json:"dueAt,omitempty"`
+
+	// HasKnownRansomwareCampaignUse Whether CISA has flagged this CVE as used in ransomware campaigns.
+	//
+	// Example: false
+	HasKnownRansomwareCampaignUse bool `json:"hasKnownRansomwareCampaignUse"`
+}
+
 // KeyValueObject defines model for KeyValueObject.
 type KeyValueObject struct {
 	// Key The key
@@ -12336,6 +14111,24 @@ type ListAuditEventsResponse struct {
 	Page AuditPage `json:"page"`
 }
 
+// ListAutomationExecutionsPaginatedResponseV1Alpha1 A page of automation executions.
+type ListAutomationExecutionsPaginatedResponseV1Alpha1 struct {
+	// Data The executions in this page.
+	Data []AutomationExecutionOverviewV1Alpha1 `json:"data"`
+
+	// Page Pagination information.
+	Page *AutomationsPageV1Alpha1 `json:"page,omitempty"`
+}
+
+// ListAutomationsPaginatedResponseV1Alpha1 The list of automations matching a search criteria.
+type ListAutomationsPaginatedResponseV1Alpha1 struct {
+	// Data The list of automations.
+	Data []AutomationV1Alpha1 `json:"data"`
+
+	// Page Pagination information.
+	Page AutomationsPageV1Alpha1 `json:"page"`
+}
+
 // ListBundlesResponse Bundles list response
 type ListBundlesResponse struct {
 	// Data Bundles collection
@@ -12343,6 +14136,27 @@ type ListBundlesResponse struct {
 
 	// Page Page details, providing both returned and total count of matched elements.
 	Page PoliciesPage `json:"page"`
+}
+
+// ListCveCatalogResponseV1Beta1 A page of CVEs matching the given filters.
+type ListCveCatalogResponseV1Beta1 struct {
+	// Data The list of CVEs in this page.
+	Data []CveSummaryV1Beta1 `json:"data"`
+
+	// Page Page information.
+	Page *struct {
+		// Next Opaque cursor pointing to the next page of results. Use it as the `cursor` query parameter to continue paging. Absent on the last page.
+		//
+		//
+		// Example: MTI0MjM0Cg==
+		Next *string `json:"next,omitempty"`
+
+		// Total The total number of items (CVEs) matching the given filters. Always greater than or equal to the number of CVEs returned in the current page. Omitted when computing it would be too costly for the given filters.
+		//
+		//
+		// Example: 10000
+		Total *int64 `json:"total,omitempty"`
+	} `json:"page,omitempty"`
 }
 
 // ListEfoIntegrationsResponseV1 defines model for ListEfoIntegrationsResponseV1.
@@ -12913,10 +14727,19 @@ type Package struct {
 	// Example: l-123124
 	LayerRef *string `json:"layerRef,omitempty"`
 
-	// License license of the package
+	// License license of the package. (deprecated, refer to `licenses` field)
 	//
 	// Example: MIT
+	// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	License *string `json:"license,omitempty"`
+
+	// Licenses List of licenses detected for the package. The list is empty if no license is detected.
+	// Licenses that cannot be identified are marked as "unknown".
+	// The relationship between multiple license entries (e.g., whether they represent an AND or OR relationship) is not determined.
+	//
+	//
+	// Example: ["MIT","Apache-2.0"]
+	Licenses *[]string `json:"licenses,omitempty"`
 
 	// Name name of the package
 	//
@@ -14764,7 +16587,7 @@ type ScanResultResponse struct {
 	// Metadata metadata of the scan result
 	Metadata ScanResultResponse_Metadata `json:"metadata"`
 
-	// Packages Example: {"2772f8a6c73fa17":{"category":"package","endOfLifeDate":"2020-04-21T16:08:08.845336507Z","isRemoved":true,"isRunning":true,"layerRef":"f95aa9ae66563e7e808b","license":"MIT","name":"openssl","path":"/usr/local/bin/openssl","riskAcceptRefs":["acb4b0d2565bfef"],"suggestedFix":"1.2.3","type":"os","version":"1.2.3","vulnerabilitiesRefs":["71af37c6a8f2772"]}}
+	// Packages Example: {"2772f8a6c73fa17":{"category":"package","endOfLifeDate":"2020-04-21T16:08:08.845336507Z","isRemoved":true,"isRunning":true,"layerRef":"f95aa9ae66563e7e808b","license":"MIT","licenses":["MIT","Apache-2.0"],"name":"openssl","path":"/usr/local/bin/openssl","riskAcceptRefs":["acb4b0d2565bfef"],"suggestedFix":"1.2.3","type":"os","version":"1.2.3","vulnerabilitiesRefs":["71af37c6a8f2772"]}}
 	Packages map[string]Package `json:"packages"`
 	Policies *Policies          `json:"policies,omitempty"`
 	Producer *Producer          `json:"producer,omitempty"`
@@ -15861,6 +17684,12 @@ type UpdateAmazonSqsIntegrationRequest struct {
 	// Example: SYSLOG
 	Type IntegrationType `json:"type"`
 }
+
+// UpdateAutomationRequestV1Alpha1 Request body to update an existing automation.
+type UpdateAutomationRequestV1Alpha1 = AutomationWritableV1Alpha1
+
+// UpdateAutomationResponseV1Alpha1 The updated automation.
+type UpdateAutomationResponseV1Alpha1 = AutomationV1Alpha1
 
 // UpdateChronicleIntegrationConnInfo Update Chronicle Integration Connection Info
 type UpdateChronicleIntegrationConnInfo struct {
@@ -18043,6 +19872,42 @@ type AccessKeyIdPath = UnlimitedLong
 // ActionExecutionId Example: 1234567890123456789012345678901234567890123456789012345678901234
 type ActionExecutionId = string
 
+// AutomationExecutionID Example: 0191a8b0-3001-7a4e-8b3c-1f2e3d4c5b01
+type AutomationExecutionID = openapi_types.UUID
+
+// AutomationExecutionSort Example: startedAt:asc
+type AutomationExecutionSort string
+
+// AutomationExecutionStatus Example: done
+type AutomationExecutionStatus string
+
+// AutomationID Example: 0191a8b0-3001-7a4e-8b3c-1f2e3d4c5b01
+type AutomationID = openapi_types.UUID
+
+// AutomationsCursor Example: LTltNGUybXIwdWkzZThhMjE1bjRn
+type AutomationsCursor = string
+
+// AutomationsEnabled Example: true
+type AutomationsEnabled = bool
+
+// AutomationsGroup Example: production
+type AutomationsGroup = string
+
+// AutomationsIfMatch Example: "334181ea7fe6d58180cf6b4e9d1bf524"
+type AutomationsIfMatch = string
+
+// AutomationsLimit Example: 100
+type AutomationsLimit = int32
+
+// AutomationsSearch Example: high-cpu
+type AutomationsSearch = string
+
+// AutomationsSort Example: name:asc
+type AutomationsSort string
+
+// AutomationsTriggerOn Example: new_risk
+type AutomationsTriggerOn = string
+
 // Enabled Example: false
 type Enabled = bool
 
@@ -18056,6 +19921,9 @@ type Filter = string
 //
 // Example: 1
 type GroupMappingIdPath = UnlimitedLong
+
+// IdempotencyKey Example: 01913d2e-2c8a-7a4e-b9c2-3f5e8a1d9b00
+type IdempotencyKey = openapi_types.UUID
 
 // InhibitionRulePath
 //
@@ -18270,6 +20138,9 @@ type Conflict = Error
 
 // ConflictV2 defines model for ConflictV2.
 type ConflictV2 = ErrorV2
+
+// CveCatalogInternalServerErrorV2 defines model for CveCatalogInternalServerErrorV2.
+type CveCatalogInternalServerErrorV2 = ErrorV2
 
 // Forbidden defines model for Forbidden.
 type Forbidden = Error
@@ -18784,6 +20655,75 @@ type ListZonesV1Params struct {
 	// Multiple orderings can be applied by repeating the `orderby` parameter:\
 	// `&orderby=key1:direction1&orderby=key2:direction2`
 	Orderby *MultiOrderBy `form:"orderby,omitempty" json:"orderby,omitempty"`
+}
+
+// ListAutomationExecutionsParams defines parameters for ListAutomationExecutions.
+type ListAutomationExecutionsParams struct {
+	// AutomationId Filter executions by the automation they belong to.
+	AutomationId openapi_types.UUID `form:"automationId" json:"automationId"`
+
+	// Limit The maximum number of automations to return in a single page.
+	Limit *AutomationsLimit `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Sort Sort the automation execution list by a single field, in the form `<field>[:asc|desc]` (direction defaults to `asc`).
+	Sort *ListAutomationExecutionsParamsSort `form:"sort,omitempty" json:"sort,omitempty"`
+
+	// Status Filters automations with a given status.
+	Status *ListAutomationExecutionsParamsStatus `form:"status,omitempty" json:"status,omitempty"`
+
+	// Cursor Opaque cursor used to retrieve a page of results. Use the `next`/`prev` value returned by the previous list response; omit it to fetch the first page.
+	Cursor *AutomationsCursor `form:"cursor,omitempty" json:"cursor,omitempty"`
+}
+
+// ListAutomationExecutionsParamsSort defines parameters for ListAutomationExecutions.
+type ListAutomationExecutionsParamsSort string
+
+// ListAutomationExecutionsParamsStatus defines parameters for ListAutomationExecutions.
+type ListAutomationExecutionsParamsStatus string
+
+// ListAutomationsParams defines parameters for ListAutomations.
+type ListAutomationsParams struct {
+	// Enabled When set, returns only automations whose enabled state matches this value.
+	Enabled *AutomationsEnabled `form:"enabled,omitempty" json:"enabled,omitempty"`
+
+	// Group Filters automations belonging to the given group.
+	Group *AutomationsGroup `form:"group,omitempty" json:"group,omitempty"`
+
+	// Sort Sort the automations list by a single field, in the form `<field>[:asc|desc]` (direction defaults to `asc`).
+	Sort *ListAutomationsParamsSort `form:"sort,omitempty" json:"sort,omitempty"`
+
+	// Search Free-text term used to filter automations by name or description.
+	Search *AutomationsSearch `form:"search,omitempty" json:"search,omitempty"`
+
+	// TriggerOn Filters automations by the event type they are triggered on.
+	TriggerOn *AutomationsTriggerOn `form:"triggerOn,omitempty" json:"triggerOn,omitempty"`
+
+	// Limit The maximum number of automations to return in a single page.
+	Limit *AutomationsLimit `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Cursor Opaque cursor used to retrieve a page of results. Use the `next`/`prev` value returned by the previous list response; omit it to fetch the first page.
+	Cursor *AutomationsCursor `form:"cursor,omitempty" json:"cursor,omitempty"`
+}
+
+// ListAutomationsParamsSort defines parameters for ListAutomations.
+type ListAutomationsParamsSort string
+
+// CreateAutomationParams defines parameters for CreateAutomation.
+type CreateAutomationParams struct {
+	// IdempotencyKey Unique key chosen by the client to safely retry a creation request without creating duplicate resources. Replaying the same key with an identical body returns the original result; a different body for the same key is rejected.
+	IdempotencyKey *IdempotencyKey `json:"Idempotency-Key,omitempty"`
+}
+
+// DeleteAutomationByIdParams defines parameters for DeleteAutomationById.
+type DeleteAutomationByIdParams struct {
+	// IfMatch ETag from a prior GET. Guards the write against lost updates; the server returns 412 Precondition Failed if the configuration changed in the meantime.
+	IfMatch AutomationsIfMatch `json:"If-Match"`
+}
+
+// UpdateAutomationParams defines parameters for UpdateAutomation.
+type UpdateAutomationParams struct {
+	// IfMatch ETag from a prior GET. Guards the write against lost updates; the server returns 412 Precondition Failed if the configuration changed in the meantime.
+	IfMatch AutomationsIfMatch `json:"If-Match"`
 }
 
 // ListZonesV2Params defines parameters for ListZonesV2.
@@ -19462,6 +21402,48 @@ type GetAcceptedRisksV1ParamsOrder string
 // GetAcceptedRisksV1ParamsSort defines parameters for GetAcceptedRisksV1.
 type GetAcceptedRisksV1ParamsSort string
 
+// ListCveCatalogV1beta1Params defines parameters for ListCveCatalogV1beta1.
+type ListCveCatalogV1beta1Params struct {
+	// Query Free-text substring match against the CVE ID or an affected component name.
+	Query *string `form:"query,omitempty" json:"query,omitempty"`
+
+	// ComponentName Restrict results to CVEs affecting a component with exactly this name.
+	ComponentName *string `form:"componentName,omitempty" json:"componentName,omitempty"`
+
+	// Severity Restrict results to one or more Sysdig-normalized severities. Repeat the parameter to match any of several severities (OR).
+	Severity *[]ListCveCatalogV1beta1ParamsSeverity `form:"severity,omitempty" json:"severity,omitempty"`
+
+	// CvssMin Restrict results to CVEs with a base CVSS score greater than or equal to this value. Must be less than or equal to `cvssMax` when both are given, otherwise the request is rejected with `400 Bad Request`.
+	CvssMin *float64 `form:"cvssMin,omitempty" json:"cvssMin,omitempty"`
+
+	// CvssMax Restrict results to CVEs with a base CVSS score less than or equal to this value. Must be greater than or equal to `cvssMin` when both are given, otherwise the request is rejected with `400 Bad Request`.
+	CvssMax *float64 `form:"cvssMax,omitempty" json:"cvssMax,omitempty"`
+
+	// PublishedAfter Restrict results to CVEs published at or after this timestamp. Must be earlier than or equal to `publishedBefore` when both are given, otherwise the request is rejected with `400 Bad Request`.
+	PublishedAfter *time.Time `form:"publishedAfter,omitempty" json:"publishedAfter,omitempty"`
+
+	// PublishedBefore Restrict results to CVEs published at or before this timestamp. Must be later than or equal to `publishedAfter` when both are given, otherwise the request is rejected with `400 Bad Request`.
+	PublishedBefore *time.Time `form:"publishedBefore,omitempty" json:"publishedBefore,omitempty"`
+
+	// HasExploit Restrict results to CVEs with (`true`) or without (`false`) a known public exploit.
+	HasExploit *bool `form:"hasExploit,omitempty" json:"hasExploit,omitempty"`
+
+	// HasKev Restrict results to CVEs that are (`true`) or are not (`false`) listed in the CISA Known Exploited Vulnerabilities (KEV) catalog.
+	HasKev *bool `form:"hasKev,omitempty" json:"hasKev,omitempty"`
+
+	// HasFix Restrict results to CVEs that do (`true`) or do not (`false`) have a known fix.
+	HasFix *bool `form:"hasFix,omitempty" json:"hasFix,omitempty"`
+
+	// Cursor Opaque cursor used to retrieve a page of results. Use the `next` value returned by the previous list response; omit it to fetch the first page.
+	Cursor *string `form:"cursor,omitempty" json:"cursor,omitempty"`
+
+	// Limit The maximum number of CVEs to return in a single page.
+	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
+}
+
+// ListCveCatalogV1beta1ParamsSeverity defines parameters for ListCveCatalogV1beta1.
+type ListCveCatalogV1beta1ParamsSeverity string
+
 // GetSBOMV1beta1Params defines parameters for GetSBOMV1beta1.
 type GetSBOMV1beta1Params struct {
 	// AssetId The ID of the asset for which we want to retrieve the SBOM. It's the imageId for container-image and the hostId for hosts
@@ -19631,6 +21613,12 @@ type CreateZoneV1JSONRequestBody = CreateZoneRequestV1
 //
 // Deprecated: this type has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 type EditZoneV1JSONRequestBody = CreateZoneRequestV1
+
+// CreateAutomationJSONRequestBody defines body for CreateAutomation for application/json ContentType.
+type CreateAutomationJSONRequestBody = CreateAutomationRequestV1Alpha1
+
+// UpdateAutomationJSONRequestBody defines body for UpdateAutomation for application/json ContentType.
+type UpdateAutomationJSONRequestBody = UpdateAutomationRequestV1Alpha1
 
 // CreateZoneV2JSONRequestBody defines body for CreateZoneV2 for application/json ContentType.
 type CreateZoneV2JSONRequestBody = CreateZoneRequestV2
@@ -20495,6 +22483,144 @@ func (t *AuthenticatedConnectionInfoKafkaV1) UnmarshalJSON(b []byte) error {
 		err = json.Unmarshal(raw, &t.Topic)
 		if err != nil {
 			return fmt.Errorf("error reading 'topic': %w", err)
+		}
+	}
+
+	return err
+}
+
+// AsAutomationActionNodeV1Alpha1 returns the union data inside the AutomationNodeV1Alpha1 as a AutomationActionNodeV1Alpha1
+func (t AutomationNodeV1Alpha1) AsAutomationActionNodeV1Alpha1() (AutomationActionNodeV1Alpha1, error) {
+	var body AutomationActionNodeV1Alpha1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAutomationActionNodeV1Alpha1 overwrites any union data inside the AutomationNodeV1Alpha1 as the provided AutomationActionNodeV1Alpha1
+func (t *AutomationNodeV1Alpha1) FromAutomationActionNodeV1Alpha1(v AutomationActionNodeV1Alpha1) error {
+	t.Type = "action"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+	b, err = runtime.JSONMerge(b, []byte(`{"type":"action"}`))
+	t.union = b
+	return err
+}
+
+// MergeAutomationActionNodeV1Alpha1 performs a merge with any union data inside the AutomationNodeV1Alpha1, using the provided AutomationActionNodeV1Alpha1
+func (t *AutomationNodeV1Alpha1) MergeAutomationActionNodeV1Alpha1(v AutomationActionNodeV1Alpha1) error {
+	t.Type = "action"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+	b, err = runtime.JSONMerge(b, []byte(`{"type":"action"}`))
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsAutomationConditionNodeV1Alpha1 returns the union data inside the AutomationNodeV1Alpha1 as a AutomationConditionNodeV1Alpha1
+func (t AutomationNodeV1Alpha1) AsAutomationConditionNodeV1Alpha1() (AutomationConditionNodeV1Alpha1, error) {
+	var body AutomationConditionNodeV1Alpha1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAutomationConditionNodeV1Alpha1 overwrites any union data inside the AutomationNodeV1Alpha1 as the provided AutomationConditionNodeV1Alpha1
+func (t *AutomationNodeV1Alpha1) FromAutomationConditionNodeV1Alpha1(v AutomationConditionNodeV1Alpha1) error {
+	t.Type = "condition"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+	b, err = runtime.JSONMerge(b, []byte(`{"type":"condition"}`))
+	t.union = b
+	return err
+}
+
+// MergeAutomationConditionNodeV1Alpha1 performs a merge with any union data inside the AutomationNodeV1Alpha1, using the provided AutomationConditionNodeV1Alpha1
+func (t *AutomationNodeV1Alpha1) MergeAutomationConditionNodeV1Alpha1(v AutomationConditionNodeV1Alpha1) error {
+	t.Type = "condition"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+	b, err = runtime.JSONMerge(b, []byte(`{"type":"condition"}`))
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t AutomationNodeV1Alpha1) Discriminator() (string, error) {
+	var discriminator struct {
+		Discriminator string `json:"type"`
+	}
+	err := json.Unmarshal(t.union, &discriminator)
+	return discriminator.Discriminator, err
+}
+
+func (t AutomationNodeV1Alpha1) ValueByDiscriminator() (interface{}, error) {
+	discriminator, err := t.Discriminator()
+	if err != nil {
+		return nil, err
+	}
+	switch discriminator {
+	case "action":
+		return t.AsAutomationActionNodeV1Alpha1()
+	case "condition":
+		return t.AsAutomationConditionNodeV1Alpha1()
+	default:
+		return nil, errors.New("unknown discriminator value: " + discriminator)
+	}
+}
+
+func (t AutomationNodeV1Alpha1) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	object := make(map[string]json.RawMessage)
+	if t.union != nil {
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	object["type"], err = json.Marshal(t.Type)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'type': %w", err)
+	}
+
+	b, err = json.Marshal(object)
+	return b, err
+}
+
+func (t *AutomationNodeV1Alpha1) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	if err != nil {
+		return err
+	}
+	object := make(map[string]json.RawMessage)
+	err = json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["type"]; found {
+		err = json.Unmarshal(raw, &t.Type)
+		if err != nil {
+			return fmt.Errorf("error reading 'type': %w", err)
 		}
 	}
 
@@ -22600,6 +24726,154 @@ func (t CreateWebhookIntegrationRequest_ConnectionInfo) MarshalJSON() ([]byte, e
 
 func (t *CreateWebhookIntegrationRequest_ConnectionInfo) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsCveScoreCvss2V1Beta1 returns the union data inside the CveScoreV1Beta1 as a CveScoreCvss2V1Beta1
+func (t CveScoreV1Beta1) AsCveScoreCvss2V1Beta1() (CveScoreCvss2V1Beta1, error) {
+	var body CveScoreCvss2V1Beta1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCveScoreCvss2V1Beta1 overwrites any union data inside the CveScoreV1Beta1 as the provided CveScoreCvss2V1Beta1
+func (t *CveScoreV1Beta1) FromCveScoreCvss2V1Beta1(v CveScoreCvss2V1Beta1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCveScoreCvss2V1Beta1 performs a merge with any union data inside the CveScoreV1Beta1, using the provided CveScoreCvss2V1Beta1
+func (t *CveScoreV1Beta1) MergeCveScoreCvss2V1Beta1(v CveScoreCvss2V1Beta1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsCveScoreCvss3V1Beta1 returns the union data inside the CveScoreV1Beta1 as a CveScoreCvss3V1Beta1
+func (t CveScoreV1Beta1) AsCveScoreCvss3V1Beta1() (CveScoreCvss3V1Beta1, error) {
+	var body CveScoreCvss3V1Beta1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCveScoreCvss3V1Beta1 overwrites any union data inside the CveScoreV1Beta1 as the provided CveScoreCvss3V1Beta1
+func (t *CveScoreV1Beta1) FromCveScoreCvss3V1Beta1(v CveScoreCvss3V1Beta1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCveScoreCvss3V1Beta1 performs a merge with any union data inside the CveScoreV1Beta1, using the provided CveScoreCvss3V1Beta1
+func (t *CveScoreV1Beta1) MergeCveScoreCvss3V1Beta1(v CveScoreCvss3V1Beta1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsCveScoreCvss4V1Beta1 returns the union data inside the CveScoreV1Beta1 as a CveScoreCvss4V1Beta1
+func (t CveScoreV1Beta1) AsCveScoreCvss4V1Beta1() (CveScoreCvss4V1Beta1, error) {
+	var body CveScoreCvss4V1Beta1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCveScoreCvss4V1Beta1 overwrites any union data inside the CveScoreV1Beta1 as the provided CveScoreCvss4V1Beta1
+func (t *CveScoreV1Beta1) FromCveScoreCvss4V1Beta1(v CveScoreCvss4V1Beta1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCveScoreCvss4V1Beta1 performs a merge with any union data inside the CveScoreV1Beta1, using the provided CveScoreCvss4V1Beta1
+func (t *CveScoreV1Beta1) MergeCveScoreCvss4V1Beta1(v CveScoreCvss4V1Beta1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t CveScoreV1Beta1) Discriminator() (string, error) {
+	var discriminator struct {
+		Discriminator string `json:"type"`
+	}
+	err := json.Unmarshal(t.union, &discriminator)
+	return discriminator.Discriminator, err
+}
+
+func (t CveScoreV1Beta1) ValueByDiscriminator() (interface{}, error) {
+	discriminator, err := t.Discriminator()
+	if err != nil {
+		return nil, err
+	}
+	switch discriminator {
+	case "2.0":
+		return t.AsCveScoreCvss2V1Beta1()
+	case "3.0":
+		return t.AsCveScoreCvss3V1Beta1()
+	case "3.1":
+		return t.AsCveScoreCvss3V1Beta1()
+	case "4.0":
+		return t.AsCveScoreCvss4V1Beta1()
+	default:
+		return nil, errors.New("unknown discriminator value: " + discriminator)
+	}
+}
+
+func (t CveScoreV1Beta1) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	object := make(map[string]json.RawMessage)
+	if t.union != nil {
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	object["type"], err = json.Marshal(t.Type)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'type': %w", err)
+	}
+
+	b, err = json.Marshal(object)
+	return b, err
+}
+
+func (t *CveScoreV1Beta1) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	if err != nil {
+		return err
+	}
+	object := make(map[string]json.RawMessage)
+	err = json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["type"]; found {
+		err = json.Unmarshal(raw, &t.Type)
+		if err != nil {
+			return fmt.Errorf("error reading 'type': %w", err)
+		}
+	}
+
 	return err
 }
 
@@ -31389,6 +33663,95 @@ type ClientInterface interface {
 	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	EditZoneV1(ctx context.Context, zoneId ZoneId, body EditZoneV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListAutomationExecutions List Automation Executions
+	//
+	// Retrieve a paginated list of automation executions (history).\
+	// \
+	// **Required permissions:** _automations.read_
+	//
+	// Corresponds with GET /platform/v1alpha1/automation-executions (the `ListAutomationExecutions` operationId).
+	ListAutomationExecutions(ctx context.Context, params *ListAutomationExecutionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAutomationExecution Get Automation Execution By Id
+	//
+	// Retrieve a single automation execution.\
+	// \
+	// **Required permissions:** _automations.read_
+	//
+	// Corresponds with GET /platform/v1alpha1/automation-executions/{automationExecutionId} (the `GetAutomationExecution` operationId).
+	GetAutomationExecution(ctx context.Context, automationExecutionID AutomationExecutionID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListAutomations List Automations
+	//
+	// Retrieve the list of automations.\
+	// \
+	// **Required permissions:** _automations.read_
+	//
+	// Corresponds with GET /platform/v1alpha1/automations (the `ListAutomations` operationId).
+	ListAutomations(ctx context.Context, params *ListAutomationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateAutomationWithBody Create Automation
+	//
+	// Create an automation.\
+	// \
+	// **Required permissions:** _automations.edit_
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /platform/v1alpha1/automations (the `CreateAutomation` operationId).
+	CreateAutomationWithBody(ctx context.Context, params *CreateAutomationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateAutomation Create Automation
+	//
+	// Create an automation.\
+	// \
+	// **Required permissions:** _automations.edit_
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /platform/v1alpha1/automations (the `CreateAutomation` operationId).
+	CreateAutomation(ctx context.Context, params *CreateAutomationParams, body CreateAutomationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteAutomationById Delete Automation
+	//
+	// Delete an automation by its ID.\
+	// \
+	// **Required permissions:** _automations.edit_
+	//
+	// Corresponds with DELETE /platform/v1alpha1/automations/{automationId} (the `DeleteAutomationById` operationId).
+	DeleteAutomationById(ctx context.Context, automationID AutomationID, params *DeleteAutomationByIdParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAutomationById Get Automation
+	//
+	// Retrieve an automation by ID.\
+	// \
+	// **Required permissions:** _automations.read_
+	//
+	// Corresponds with GET /platform/v1alpha1/automations/{automationId} (the `GetAutomationById` operationId).
+	GetAutomationById(ctx context.Context, automationID AutomationID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateAutomationWithBody Update Automation
+	//
+	// Update an automation.\
+	// \
+	// **Required permissions:** _automations.edit_
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PUT /platform/v1alpha1/automations/{automationId} (the `UpdateAutomation` operationId).
+	UpdateAutomationWithBody(ctx context.Context, automationID AutomationID, params *UpdateAutomationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateAutomation Update Automation
+	//
+	// Update an automation.\
+	// \
+	// **Required permissions:** _automations.edit_
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PUT /platform/v1alpha1/automations/{automationId} (the `UpdateAutomation` operationId).
+	UpdateAutomation(ctx context.Context, automationID AutomationID, params *UpdateAutomationParams, body UpdateAutomationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListZonesV2 List Zones
 	//
 	// Retrieve a paginated list of Zones.
@@ -32355,6 +34718,27 @@ type ClientInterface interface {
 	//
 	// Corresponds with PUT /secure/vulnerability/v1beta1/accepted-risks/{acceptedRiskID} (the `UpdateAcceptedRiskV1` operationId).
 	UpdateAcceptedRiskV1(ctx context.Context, acceptedRiskID AcceptedRiskID, body UpdateAcceptedRiskV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListCveCatalogV1beta1 List CVEs
+	//
+	// List CVEs in the Sysdig vulnerability catalog. Supports free-text search plus dedicated
+	// equality filters for severity, CVSS score range, publish date range, and exploit/KEV/fix
+	// availability. Filters are combined with AND.\
+	// \
+	// **Required permissions:** _secure.vm.scanresults.read_ or _secure.images.read_
+	//
+	// Corresponds with GET /secure/vulnerability/v1beta1/cves (the `ListCveCatalogV1beta1` operationId).
+	ListCveCatalogV1beta1(ctx context.Context, params *ListCveCatalogV1beta1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetCveCatalogEntryV1beta1 Get CVE
+	//
+	// Retrieve the full catalog record for a single CVE, including per-vendor metadata and the
+	// affected component ranges across ecosystems.\
+	// \
+	// **Required permissions:** _secure.vm.scanresults.read_ or _secure.images.read_
+	//
+	// Corresponds with GET /secure/vulnerability/v1beta1/cves/{cveId} (the `GetCveCatalogEntryV1beta1` operationId).
+	GetCveCatalogEntryV1beta1(ctx context.Context, cveId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSBOMV1beta1 Get SBOM
 	//
@@ -36108,6 +38492,185 @@ func (c *Client) EditZoneV1(ctx context.Context, zoneId ZoneId, body EditZoneV1J
 	return c.Client.Do(req)
 }
 
+// ListAutomationExecutions List Automation Executions
+//
+// Retrieve a paginated list of automation executions (history).\
+// \
+// **Required permissions:** _automations.read_
+//
+// Corresponds with GET /platform/v1alpha1/automation-executions (the `ListAutomationExecutions` operationId).
+func (c *Client) ListAutomationExecutions(ctx context.Context, params *ListAutomationExecutionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListAutomationExecutionsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GetAutomationExecution Get Automation Execution By Id
+//
+// Retrieve a single automation execution.\
+// \
+// **Required permissions:** _automations.read_
+//
+// Corresponds with GET /platform/v1alpha1/automation-executions/{automationExecutionId} (the `GetAutomationExecution` operationId).
+func (c *Client) GetAutomationExecution(ctx context.Context, automationExecutionID AutomationExecutionID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAutomationExecutionRequest(c.Server, automationExecutionID)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ListAutomations List Automations
+//
+// Retrieve the list of automations.\
+// \
+// **Required permissions:** _automations.read_
+//
+// Corresponds with GET /platform/v1alpha1/automations (the `ListAutomations` operationId).
+func (c *Client) ListAutomations(ctx context.Context, params *ListAutomationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListAutomationsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// CreateAutomationWithBody Create Automation
+//
+// Create an automation.\
+// \
+// **Required permissions:** _automations.edit_
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /platform/v1alpha1/automations (the `CreateAutomation` operationId).
+func (c *Client) CreateAutomationWithBody(ctx context.Context, params *CreateAutomationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAutomationRequestWithBody(c.Server, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// CreateAutomation Create Automation
+//
+// Create an automation.\
+// \
+// **Required permissions:** _automations.edit_
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /platform/v1alpha1/automations (the `CreateAutomation` operationId).
+func (c *Client) CreateAutomation(ctx context.Context, params *CreateAutomationParams, body CreateAutomationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAutomationRequest(c.Server, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DeleteAutomationById Delete Automation
+//
+// Delete an automation by its ID.\
+// \
+// **Required permissions:** _automations.edit_
+//
+// Corresponds with DELETE /platform/v1alpha1/automations/{automationId} (the `DeleteAutomationById` operationId).
+func (c *Client) DeleteAutomationById(ctx context.Context, automationID AutomationID, params *DeleteAutomationByIdParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteAutomationByIdRequest(c.Server, automationID, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GetAutomationById Get Automation
+//
+// Retrieve an automation by ID.\
+// \
+// **Required permissions:** _automations.read_
+//
+// Corresponds with GET /platform/v1alpha1/automations/{automationId} (the `GetAutomationById` operationId).
+func (c *Client) GetAutomationById(ctx context.Context, automationID AutomationID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAutomationByIdRequest(c.Server, automationID)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// UpdateAutomationWithBody Update Automation
+//
+// Update an automation.\
+// \
+// **Required permissions:** _automations.edit_
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PUT /platform/v1alpha1/automations/{automationId} (the `UpdateAutomation` operationId).
+func (c *Client) UpdateAutomationWithBody(ctx context.Context, automationID AutomationID, params *UpdateAutomationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateAutomationRequestWithBody(c.Server, automationID, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// UpdateAutomation Update Automation
+//
+// Update an automation.\
+// \
+// **Required permissions:** _automations.edit_
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PUT /platform/v1alpha1/automations/{automationId} (the `UpdateAutomation` operationId).
+func (c *Client) UpdateAutomation(ctx context.Context, automationID AutomationID, params *UpdateAutomationParams, body UpdateAutomationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateAutomationRequest(c.Server, automationID, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // ListZonesV2 List Zones
 //
 // Retrieve a paginated list of Zones.
@@ -38125,6 +40688,47 @@ func (c *Client) UpdateAcceptedRiskV1WithBody(ctx context.Context, acceptedRiskI
 // Corresponds with PUT /secure/vulnerability/v1beta1/accepted-risks/{acceptedRiskID} (the `UpdateAcceptedRiskV1` operationId).
 func (c *Client) UpdateAcceptedRiskV1(ctx context.Context, acceptedRiskID AcceptedRiskID, body UpdateAcceptedRiskV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateAcceptedRiskV1Request(c.Server, acceptedRiskID, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ListCveCatalogV1beta1 List CVEs
+//
+// List CVEs in the Sysdig vulnerability catalog. Supports free-text search plus dedicated
+// equality filters for severity, CVSS score range, publish date range, and exploit/KEV/fix
+// availability. Filters are combined with AND.\
+// \
+// **Required permissions:** _secure.vm.scanresults.read_ or _secure.images.read_
+//
+// Corresponds with GET /secure/vulnerability/v1beta1/cves (the `ListCveCatalogV1beta1` operationId).
+func (c *Client) ListCveCatalogV1beta1(ctx context.Context, params *ListCveCatalogV1beta1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListCveCatalogV1beta1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GetCveCatalogEntryV1beta1 Get CVE
+//
+// Retrieve the full catalog record for a single CVE, including per-vendor metadata and the
+// affected component ranges across ecosystems.\
+// \
+// **Required permissions:** _secure.vm.scanresults.read_ or _secure.images.read_
+//
+// Corresponds with GET /secure/vulnerability/v1beta1/cves/{cveId} (the `GetCveCatalogEntryV1beta1` operationId).
+func (c *Client) GetCveCatalogEntryV1beta1(ctx context.Context, cveId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetCveCatalogEntryV1beta1Request(c.Server, cveId)
 	if err != nil {
 		return nil, err
 	}
@@ -44436,6 +47040,460 @@ func NewEditZoneV1RequestWithBody(server string, zoneId ZoneId, contentType stri
 	return req, nil
 }
 
+// NewListAutomationExecutionsRequest constructs an http.Request for the ListAutomationExecutions method
+func NewListAutomationExecutionsRequest(server string, params *ListAutomationExecutionsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/v1alpha1/automation-executions")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "automationId", params.AutomationId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "uuid"}); err != nil {
+			return nil, err
+		} else {
+			for _, qp := range strings.Split(queryFrag, "&") {
+				rawQueryFragments = append(rawQueryFragments, qp)
+			}
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Status != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "status", *params.Status, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Cursor != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "cursor", *params.Cursor, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetAutomationExecutionRequest constructs an http.Request for the GetAutomationExecution method
+func NewGetAutomationExecutionRequest(server string, automationExecutionID AutomationExecutionID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "automationExecutionId", automationExecutionID, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/v1alpha1/automation-executions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewListAutomationsRequest constructs an http.Request for the ListAutomations method
+func NewListAutomationsRequest(server string, params *ListAutomationsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/v1alpha1/automations")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Enabled != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "enabled", *params.Enabled, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Group != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "group", *params.Group, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Search != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "search", *params.Search, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.TriggerOn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "triggerOn", *params.TriggerOn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Cursor != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "cursor", *params.Cursor, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateAutomationRequest calls the generic CreateAutomation builder with application/json body
+func NewCreateAutomationRequest(server string, params *CreateAutomationParams, body CreateAutomationJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateAutomationRequestWithBody(server, params, "application/json", bodyReader)
+}
+
+// NewCreateAutomationRequestWithBody constructs an http.Request for the CreateAutomation method, with any body, and a specified content type
+func NewCreateAutomationRequestWithBody(server string, params *CreateAutomationParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/v1alpha1/automations")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.IdempotencyKey != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", *params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: "uuid"})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Idempotency-Key", headerParam0)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewDeleteAutomationByIdRequest constructs an http.Request for the DeleteAutomationById method
+func NewDeleteAutomationByIdRequest(server string, automationID AutomationID, params *DeleteAutomationByIdParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "automationId", automationID, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/v1alpha1/automations/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithOptions("simple", false, "If-Match", params.IfMatch, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("If-Match", headerParam0)
+
+	}
+
+	return req, nil
+}
+
+// NewGetAutomationByIdRequest constructs an http.Request for the GetAutomationById method
+func NewGetAutomationByIdRequest(server string, automationID AutomationID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "automationId", automationID, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/v1alpha1/automations/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateAutomationRequest calls the generic UpdateAutomation builder with application/json body
+func NewUpdateAutomationRequest(server string, automationID AutomationID, params *UpdateAutomationParams, body UpdateAutomationJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateAutomationRequestWithBody(server, automationID, params, "application/json", bodyReader)
+}
+
+// NewUpdateAutomationRequestWithBody constructs an http.Request for the UpdateAutomation method, with any body, and a specified content type
+func NewUpdateAutomationRequestWithBody(server string, automationID AutomationID, params *UpdateAutomationParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "automationId", automationID, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/v1alpha1/automations/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithOptions("simple", false, "If-Match", params.IfMatch, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("If-Match", headerParam0)
+
+	}
+
+	return req, nil
+}
+
 // NewListZonesV2Request constructs an http.Request for the ListZonesV2 method
 func NewListZonesV2Request(server string, params *ListZonesV2Params) (*http.Request, error) {
 	var err error
@@ -48940,6 +51998,226 @@ func NewUpdateAcceptedRiskV1RequestWithBody(server string, acceptedRiskID Accept
 	return req, nil
 }
 
+// NewListCveCatalogV1beta1Request constructs an http.Request for the ListCveCatalogV1beta1 method
+func NewListCveCatalogV1beta1Request(server string, params *ListCveCatalogV1beta1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/secure/vulnerability/v1beta1/cves")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Query != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "query", *params.Query, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.ComponentName != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "componentName", *params.ComponentName, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Severity != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "severity", *params.Severity, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.CvssMin != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "cvssMin", *params.CvssMin, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "number", Format: "double"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.CvssMax != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "cvssMax", *params.CvssMax, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "number", Format: "double"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PublishedAfter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "publishedAfter", *params.PublishedAfter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "date-time"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PublishedBefore != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "publishedBefore", *params.PublishedBefore, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "date-time"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.HasExploit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "hasExploit", *params.HasExploit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.HasKev != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "hasKev", *params.HasKev, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.HasFix != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "hasFix", *params.HasFix, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Cursor != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "cursor", *params.Cursor, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetCveCatalogEntryV1beta1Request constructs an http.Request for the GetCveCatalogEntryV1beta1 method
+func NewGetCveCatalogEntryV1beta1Request(server string, cveId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "cveId", cveId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/secure/vulnerability/v1beta1/cves/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewGetSBOMV1beta1Request constructs an http.Request for the GetSBOMV1beta1 method
 func NewGetSBOMV1beta1Request(server string, params *GetSBOMV1beta1Params) (*http.Request, error) {
 	var err error
@@ -51153,6 +54431,105 @@ type ClientWithResponsesInterface interface {
 	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	EditZoneV1WithResponse(ctx context.Context, zoneId ZoneId, body EditZoneV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EditZoneV1Response, error)
 
+	// ListAutomationExecutionsWithResponse List Automation Executions
+	//
+	// Retrieve a paginated list of automation executions (history).\
+	// \
+	// **Required permissions:** _automations.read_
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /platform/v1alpha1/automation-executions (the `ListAutomationExecutions` operationId).
+	ListAutomationExecutionsWithResponse(ctx context.Context, params *ListAutomationExecutionsParams, reqEditors ...RequestEditorFn) (*ListAutomationExecutionsResponse, error)
+
+	// GetAutomationExecutionWithResponse Get Automation Execution By Id
+	//
+	// Retrieve a single automation execution.\
+	// \
+	// **Required permissions:** _automations.read_
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /platform/v1alpha1/automation-executions/{automationExecutionId} (the `GetAutomationExecution` operationId).
+	GetAutomationExecutionWithResponse(ctx context.Context, automationExecutionID AutomationExecutionID, reqEditors ...RequestEditorFn) (*GetAutomationExecutionResponse, error)
+
+	// ListAutomationsWithResponse List Automations
+	//
+	// Retrieve the list of automations.\
+	// \
+	// **Required permissions:** _automations.read_
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /platform/v1alpha1/automations (the `ListAutomations` operationId).
+	ListAutomationsWithResponse(ctx context.Context, params *ListAutomationsParams, reqEditors ...RequestEditorFn) (*ListAutomationsResponse, error)
+
+	// CreateAutomationWithBodyWithResponse Create Automation
+	//
+	// Create an automation.\
+	// \
+	// **Required permissions:** _automations.edit_
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /platform/v1alpha1/automations (the `CreateAutomation` operationId).
+	CreateAutomationWithBodyWithResponse(ctx context.Context, params *CreateAutomationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAutomationResponse, error)
+
+	// CreateAutomationWithResponse Create Automation
+	//
+	// Create an automation.\
+	// \
+	// **Required permissions:** _automations.edit_
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /platform/v1alpha1/automations (the `CreateAutomation` operationId).
+	CreateAutomationWithResponse(ctx context.Context, params *CreateAutomationParams, body CreateAutomationJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAutomationResponse, error)
+
+	// DeleteAutomationByIdWithResponse Delete Automation
+	//
+	// Delete an automation by its ID.\
+	// \
+	// **Required permissions:** _automations.edit_
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /platform/v1alpha1/automations/{automationId} (the `DeleteAutomationById` operationId).
+	DeleteAutomationByIdWithResponse(ctx context.Context, automationID AutomationID, params *DeleteAutomationByIdParams, reqEditors ...RequestEditorFn) (*DeleteAutomationByIdResponse, error)
+
+	// GetAutomationByIdWithResponse Get Automation
+	//
+	// Retrieve an automation by ID.\
+	// \
+	// **Required permissions:** _automations.read_
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /platform/v1alpha1/automations/{automationId} (the `GetAutomationById` operationId).
+	GetAutomationByIdWithResponse(ctx context.Context, automationID AutomationID, reqEditors ...RequestEditorFn) (*GetAutomationByIdResponse, error)
+
+	// UpdateAutomationWithBodyWithResponse Update Automation
+	//
+	// Update an automation.\
+	// \
+	// **Required permissions:** _automations.edit_
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /platform/v1alpha1/automations/{automationId} (the `UpdateAutomation` operationId).
+	UpdateAutomationWithBodyWithResponse(ctx context.Context, automationID AutomationID, params *UpdateAutomationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAutomationResponse, error)
+
+	// UpdateAutomationWithResponse Update Automation
+	//
+	// Update an automation.\
+	// \
+	// **Required permissions:** _automations.edit_
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /platform/v1alpha1/automations/{automationId} (the `UpdateAutomation` operationId).
+	UpdateAutomationWithResponse(ctx context.Context, automationID AutomationID, params *UpdateAutomationParams, body UpdateAutomationJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAutomationResponse, error)
+
 	// ListZonesV2WithResponse List Zones
 	//
 	// Retrieve a paginated list of Zones.
@@ -52277,6 +55654,31 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with PUT /secure/vulnerability/v1beta1/accepted-risks/{acceptedRiskID} (the `UpdateAcceptedRiskV1` operationId).
 	UpdateAcceptedRiskV1WithResponse(ctx context.Context, acceptedRiskID AcceptedRiskID, body UpdateAcceptedRiskV1JSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAcceptedRiskV1Response, error)
+
+	// ListCveCatalogV1beta1WithResponse List CVEs
+	//
+	// List CVEs in the Sysdig vulnerability catalog. Supports free-text search plus dedicated
+	// equality filters for severity, CVSS score range, publish date range, and exploit/KEV/fix
+	// availability. Filters are combined with AND.\
+	// \
+	// **Required permissions:** _secure.vm.scanresults.read_ or _secure.images.read_
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /secure/vulnerability/v1beta1/cves (the `ListCveCatalogV1beta1` operationId).
+	ListCveCatalogV1beta1WithResponse(ctx context.Context, params *ListCveCatalogV1beta1Params, reqEditors ...RequestEditorFn) (*ListCveCatalogV1beta1Response, error)
+
+	// GetCveCatalogEntryV1beta1WithResponse Get CVE
+	//
+	// Retrieve the full catalog record for a single CVE, including per-vendor metadata and the
+	// affected component ranges across ecosystems.\
+	// \
+	// **Required permissions:** _secure.vm.scanresults.read_ or _secure.images.read_
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /secure/vulnerability/v1beta1/cves/{cveId} (the `GetCveCatalogEntryV1beta1` operationId).
+	GetCveCatalogEntryV1beta1WithResponse(ctx context.Context, cveId string, reqEditors ...RequestEditorFn) (*GetCveCatalogEntryV1beta1Response, error)
 
 	// GetSBOMV1beta1WithResponse Get SBOM
 	//
@@ -70171,6 +73573,1207 @@ func (r EditZoneV1Response) ContentType() string {
 	return ""
 }
 
+// ListAutomationExecutionsResponse200Headers the declared response headers of an HTTP 200 response for ListAutomationExecutions
+type ListAutomationExecutionsResponse200Headers struct {
+	ETag                *string
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int64
+	XRequestId          openapi_types.UUID
+}
+
+// ListAutomationExecutionsResponse400Headers the declared response headers of an HTTP 400 response for ListAutomationExecutions
+type ListAutomationExecutionsResponse400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListAutomationExecutionsResponse401Headers the declared response headers of an HTTP 401 response for ListAutomationExecutions
+type ListAutomationExecutionsResponse401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListAutomationExecutionsResponse403Headers the declared response headers of an HTTP 403 response for ListAutomationExecutions
+type ListAutomationExecutionsResponse403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListAutomationExecutionsResponse429Headers the declared response headers of an HTTP 429 response for ListAutomationExecutions
+type ListAutomationExecutionsResponse429Headers struct {
+	RetryAfter          *int32
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListAutomationExecutionsResponse500Headers the declared response headers of an HTTP 500 response for ListAutomationExecutions
+type ListAutomationExecutionsResponse500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type ListAutomationExecutionsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ListAutomationExecutionsPaginatedResponseV1Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON429 the response for an HTTP 429 `application/json` response
+	JSON429 *TooManyRequestsV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *ListAutomationExecutionsResponse200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *ListAutomationExecutionsResponse400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *ListAutomationExecutionsResponse401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *ListAutomationExecutionsResponse403Headers
+	// Headers429 the parsed response headers for an HTTP 429 response
+	Headers429 *ListAutomationExecutionsResponse429Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *ListAutomationExecutionsResponse500Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ListAutomationExecutionsResponse) GetJSON200() *ListAutomationExecutionsPaginatedResponseV1Alpha1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r ListAutomationExecutionsResponse) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ListAutomationExecutionsResponse) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r ListAutomationExecutionsResponse) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON429 returns the response for an HTTP 429 `application/json` response
+func (r ListAutomationExecutionsResponse) GetJSON429() *TooManyRequestsV2 {
+	return r.JSON429
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ListAutomationExecutionsResponse) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ListAutomationExecutionsResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ListAutomationExecutionsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListAutomationExecutionsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListAutomationExecutionsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// GetAutomationExecutionResponse200Headers the declared response headers of an HTTP 200 response for GetAutomationExecution
+type GetAutomationExecutionResponse200Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetAutomationExecutionResponse400Headers the declared response headers of an HTTP 400 response for GetAutomationExecution
+type GetAutomationExecutionResponse400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetAutomationExecutionResponse401Headers the declared response headers of an HTTP 401 response for GetAutomationExecution
+type GetAutomationExecutionResponse401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetAutomationExecutionResponse403Headers the declared response headers of an HTTP 403 response for GetAutomationExecution
+type GetAutomationExecutionResponse403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetAutomationExecutionResponse404Headers the declared response headers of an HTTP 404 response for GetAutomationExecution
+type GetAutomationExecutionResponse404Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetAutomationExecutionResponse429Headers the declared response headers of an HTTP 429 response for GetAutomationExecution
+type GetAutomationExecutionResponse429Headers struct {
+	RetryAfter          *int32
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetAutomationExecutionResponse500Headers the declared response headers of an HTTP 500 response for GetAutomationExecution
+type GetAutomationExecutionResponse500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type GetAutomationExecutionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GetAutomationExecutionResponseV1Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFoundV2
+	// JSON429 the response for an HTTP 429 `application/json` response
+	JSON429 *TooManyRequestsV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *GetAutomationExecutionResponse200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *GetAutomationExecutionResponse400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *GetAutomationExecutionResponse401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *GetAutomationExecutionResponse403Headers
+	// Headers404 the parsed response headers for an HTTP 404 response
+	Headers404 *GetAutomationExecutionResponse404Headers
+	// Headers429 the parsed response headers for an HTTP 429 response
+	Headers429 *GetAutomationExecutionResponse429Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *GetAutomationExecutionResponse500Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetAutomationExecutionResponse) GetJSON200() *GetAutomationExecutionResponseV1Alpha1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetAutomationExecutionResponse) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GetAutomationExecutionResponse) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetAutomationExecutionResponse) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetAutomationExecutionResponse) GetJSON404() *NotFoundV2 {
+	return r.JSON404
+}
+
+// GetJSON429 returns the response for an HTTP 429 `application/json` response
+func (r GetAutomationExecutionResponse) GetJSON429() *TooManyRequestsV2 {
+	return r.JSON429
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetAutomationExecutionResponse) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetAutomationExecutionResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAutomationExecutionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAutomationExecutionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetAutomationExecutionResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// ListAutomationsResponse200Headers the declared response headers of an HTTP 200 response for ListAutomations
+type ListAutomationsResponse200Headers struct {
+	ETag                *string
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int64
+	XRequestId          openapi_types.UUID
+}
+
+// ListAutomationsResponse400Headers the declared response headers of an HTTP 400 response for ListAutomations
+type ListAutomationsResponse400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListAutomationsResponse401Headers the declared response headers of an HTTP 401 response for ListAutomations
+type ListAutomationsResponse401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListAutomationsResponse403Headers the declared response headers of an HTTP 403 response for ListAutomations
+type ListAutomationsResponse403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListAutomationsResponse429Headers the declared response headers of an HTTP 429 response for ListAutomations
+type ListAutomationsResponse429Headers struct {
+	RetryAfter          *int32
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListAutomationsResponse500Headers the declared response headers of an HTTP 500 response for ListAutomations
+type ListAutomationsResponse500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type ListAutomationsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ListAutomationsPaginatedResponseV1Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON429 the response for an HTTP 429 `application/json` response
+	JSON429 *TooManyRequestsV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *ListAutomationsResponse200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *ListAutomationsResponse400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *ListAutomationsResponse401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *ListAutomationsResponse403Headers
+	// Headers429 the parsed response headers for an HTTP 429 response
+	Headers429 *ListAutomationsResponse429Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *ListAutomationsResponse500Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ListAutomationsResponse) GetJSON200() *ListAutomationsPaginatedResponseV1Alpha1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r ListAutomationsResponse) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ListAutomationsResponse) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r ListAutomationsResponse) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON429 returns the response for an HTTP 429 `application/json` response
+func (r ListAutomationsResponse) GetJSON429() *TooManyRequestsV2 {
+	return r.JSON429
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ListAutomationsResponse) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ListAutomationsResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ListAutomationsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListAutomationsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListAutomationsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// CreateAutomationResponse201Headers the declared response headers of an HTTP 201 response for CreateAutomation
+type CreateAutomationResponse201Headers struct {
+	ETag                *string
+	Location            string
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int64
+	XRequestId          openapi_types.UUID
+}
+
+// CreateAutomationResponse400Headers the declared response headers of an HTTP 400 response for CreateAutomation
+type CreateAutomationResponse400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateAutomationResponse401Headers the declared response headers of an HTTP 401 response for CreateAutomation
+type CreateAutomationResponse401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateAutomationResponse403Headers the declared response headers of an HTTP 403 response for CreateAutomation
+type CreateAutomationResponse403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateAutomationResponse409Headers the declared response headers of an HTTP 409 response for CreateAutomation
+type CreateAutomationResponse409Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateAutomationResponse415Headers the declared response headers of an HTTP 415 response for CreateAutomation
+type CreateAutomationResponse415Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateAutomationResponse422Headers the declared response headers of an HTTP 422 response for CreateAutomation
+type CreateAutomationResponse422Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateAutomationResponse429Headers the declared response headers of an HTTP 429 response for CreateAutomation
+type CreateAutomationResponse429Headers struct {
+	RetryAfter          *int32
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateAutomationResponse500Headers the declared response headers of an HTTP 500 response for CreateAutomation
+type CreateAutomationResponse500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type CreateAutomationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON201 the response for an HTTP 201 `application/json` response
+	JSON201 *CreateAutomationResponseV1Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *ConflictV2
+	// JSON415 the response for an HTTP 415 `application/json` response
+	JSON415 *UnsupportedMediaTypeV2
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *UnprocessableEntityV2
+	// JSON429 the response for an HTTP 429 `application/json` response
+	JSON429 *TooManyRequestsV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers201 the parsed response headers for an HTTP 201 response
+	Headers201 *CreateAutomationResponse201Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *CreateAutomationResponse400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *CreateAutomationResponse401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *CreateAutomationResponse403Headers
+	// Headers409 the parsed response headers for an HTTP 409 response
+	Headers409 *CreateAutomationResponse409Headers
+	// Headers415 the parsed response headers for an HTTP 415 response
+	Headers415 *CreateAutomationResponse415Headers
+	// Headers422 the parsed response headers for an HTTP 422 response
+	Headers422 *CreateAutomationResponse422Headers
+	// Headers429 the parsed response headers for an HTTP 429 response
+	Headers429 *CreateAutomationResponse429Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *CreateAutomationResponse500Headers
+}
+
+// GetJSON201 returns the response for an HTTP 201 `application/json` response
+func (r CreateAutomationResponse) GetJSON201() *CreateAutomationResponseV1Alpha1 {
+	return r.JSON201
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r CreateAutomationResponse) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r CreateAutomationResponse) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r CreateAutomationResponse) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r CreateAutomationResponse) GetJSON409() *ConflictV2 {
+	return r.JSON409
+}
+
+// GetJSON415 returns the response for an HTTP 415 `application/json` response
+func (r CreateAutomationResponse) GetJSON415() *UnsupportedMediaTypeV2 {
+	return r.JSON415
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r CreateAutomationResponse) GetJSON422() *UnprocessableEntityV2 {
+	return r.JSON422
+}
+
+// GetJSON429 returns the response for an HTTP 429 `application/json` response
+func (r CreateAutomationResponse) GetJSON429() *TooManyRequestsV2 {
+	return r.JSON429
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r CreateAutomationResponse) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r CreateAutomationResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateAutomationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateAutomationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateAutomationResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// DeleteAutomationByIdResponse204Headers the declared response headers of an HTTP 204 response for DeleteAutomationById
+type DeleteAutomationByIdResponse204Headers struct {
+	ETag                *string
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int64
+	XRequestId          openapi_types.UUID
+}
+
+// DeleteAutomationByIdResponse400Headers the declared response headers of an HTTP 400 response for DeleteAutomationById
+type DeleteAutomationByIdResponse400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// DeleteAutomationByIdResponse401Headers the declared response headers of an HTTP 401 response for DeleteAutomationById
+type DeleteAutomationByIdResponse401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// DeleteAutomationByIdResponse403Headers the declared response headers of an HTTP 403 response for DeleteAutomationById
+type DeleteAutomationByIdResponse403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// DeleteAutomationByIdResponse404Headers the declared response headers of an HTTP 404 response for DeleteAutomationById
+type DeleteAutomationByIdResponse404Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// DeleteAutomationByIdResponse412Headers the declared response headers of an HTTP 412 response for DeleteAutomationById
+type DeleteAutomationByIdResponse412Headers struct {
+	ETag                *string
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int64
+	XRequestId          openapi_types.UUID
+}
+
+// DeleteAutomationByIdResponse428Headers the declared response headers of an HTTP 428 response for DeleteAutomationById
+type DeleteAutomationByIdResponse428Headers struct {
+	ETag                *string
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int64
+	XRequestId          openapi_types.UUID
+}
+
+// DeleteAutomationByIdResponse429Headers the declared response headers of an HTTP 429 response for DeleteAutomationById
+type DeleteAutomationByIdResponse429Headers struct {
+	RetryAfter          *int32
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// DeleteAutomationByIdResponse500Headers the declared response headers of an HTTP 500 response for DeleteAutomationById
+type DeleteAutomationByIdResponse500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type DeleteAutomationByIdResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFoundV2
+	// JSON412 the response for an HTTP 412 `application/json` response
+	JSON412 *ErrorV2
+	// JSON428 the response for an HTTP 428 `application/json` response
+	JSON428 *ErrorV2
+	// JSON429 the response for an HTTP 429 `application/json` response
+	JSON429 *TooManyRequestsV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers204 the parsed response headers for an HTTP 204 response
+	Headers204 *DeleteAutomationByIdResponse204Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *DeleteAutomationByIdResponse400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *DeleteAutomationByIdResponse401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *DeleteAutomationByIdResponse403Headers
+	// Headers404 the parsed response headers for an HTTP 404 response
+	Headers404 *DeleteAutomationByIdResponse404Headers
+	// Headers412 the parsed response headers for an HTTP 412 response
+	Headers412 *DeleteAutomationByIdResponse412Headers
+	// Headers428 the parsed response headers for an HTTP 428 response
+	Headers428 *DeleteAutomationByIdResponse428Headers
+	// Headers429 the parsed response headers for an HTTP 429 response
+	Headers429 *DeleteAutomationByIdResponse429Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *DeleteAutomationByIdResponse500Headers
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r DeleteAutomationByIdResponse) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DeleteAutomationByIdResponse) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r DeleteAutomationByIdResponse) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r DeleteAutomationByIdResponse) GetJSON404() *NotFoundV2 {
+	return r.JSON404
+}
+
+// GetJSON412 returns the response for an HTTP 412 `application/json` response
+func (r DeleteAutomationByIdResponse) GetJSON412() *ErrorV2 {
+	return r.JSON412
+}
+
+// GetJSON428 returns the response for an HTTP 428 `application/json` response
+func (r DeleteAutomationByIdResponse) GetJSON428() *ErrorV2 {
+	return r.JSON428
+}
+
+// GetJSON429 returns the response for an HTTP 429 `application/json` response
+func (r DeleteAutomationByIdResponse) GetJSON429() *TooManyRequestsV2 {
+	return r.JSON429
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DeleteAutomationByIdResponse) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DeleteAutomationByIdResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteAutomationByIdResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteAutomationByIdResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DeleteAutomationByIdResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// GetAutomationByIdResponse200Headers the declared response headers of an HTTP 200 response for GetAutomationById
+type GetAutomationByIdResponse200Headers struct {
+	ETag                *string
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int64
+	XRequestId          openapi_types.UUID
+}
+
+// GetAutomationByIdResponse400Headers the declared response headers of an HTTP 400 response for GetAutomationById
+type GetAutomationByIdResponse400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetAutomationByIdResponse401Headers the declared response headers of an HTTP 401 response for GetAutomationById
+type GetAutomationByIdResponse401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetAutomationByIdResponse403Headers the declared response headers of an HTTP 403 response for GetAutomationById
+type GetAutomationByIdResponse403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetAutomationByIdResponse404Headers the declared response headers of an HTTP 404 response for GetAutomationById
+type GetAutomationByIdResponse404Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetAutomationByIdResponse429Headers the declared response headers of an HTTP 429 response for GetAutomationById
+type GetAutomationByIdResponse429Headers struct {
+	RetryAfter          *int32
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetAutomationByIdResponse500Headers the declared response headers of an HTTP 500 response for GetAutomationById
+type GetAutomationByIdResponse500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type GetAutomationByIdResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GetAutomationByIdResponseV1Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFoundV2
+	// JSON429 the response for an HTTP 429 `application/json` response
+	JSON429 *TooManyRequestsV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *GetAutomationByIdResponse200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *GetAutomationByIdResponse400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *GetAutomationByIdResponse401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *GetAutomationByIdResponse403Headers
+	// Headers404 the parsed response headers for an HTTP 404 response
+	Headers404 *GetAutomationByIdResponse404Headers
+	// Headers429 the parsed response headers for an HTTP 429 response
+	Headers429 *GetAutomationByIdResponse429Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *GetAutomationByIdResponse500Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetAutomationByIdResponse) GetJSON200() *GetAutomationByIdResponseV1Alpha1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetAutomationByIdResponse) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GetAutomationByIdResponse) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetAutomationByIdResponse) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetAutomationByIdResponse) GetJSON404() *NotFoundV2 {
+	return r.JSON404
+}
+
+// GetJSON429 returns the response for an HTTP 429 `application/json` response
+func (r GetAutomationByIdResponse) GetJSON429() *TooManyRequestsV2 {
+	return r.JSON429
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetAutomationByIdResponse) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetAutomationByIdResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAutomationByIdResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAutomationByIdResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetAutomationByIdResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// UpdateAutomationResponse200Headers the declared response headers of an HTTP 200 response for UpdateAutomation
+type UpdateAutomationResponse200Headers struct {
+	ETag                *string
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int64
+	XRequestId          openapi_types.UUID
+}
+
+// UpdateAutomationResponse400Headers the declared response headers of an HTTP 400 response for UpdateAutomation
+type UpdateAutomationResponse400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateAutomationResponse401Headers the declared response headers of an HTTP 401 response for UpdateAutomation
+type UpdateAutomationResponse401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateAutomationResponse403Headers the declared response headers of an HTTP 403 response for UpdateAutomation
+type UpdateAutomationResponse403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateAutomationResponse404Headers the declared response headers of an HTTP 404 response for UpdateAutomation
+type UpdateAutomationResponse404Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateAutomationResponse409Headers the declared response headers of an HTTP 409 response for UpdateAutomation
+type UpdateAutomationResponse409Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateAutomationResponse412Headers the declared response headers of an HTTP 412 response for UpdateAutomation
+type UpdateAutomationResponse412Headers struct {
+	ETag                *string
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int64
+	XRequestId          openapi_types.UUID
+}
+
+// UpdateAutomationResponse415Headers the declared response headers of an HTTP 415 response for UpdateAutomation
+type UpdateAutomationResponse415Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateAutomationResponse422Headers the declared response headers of an HTTP 422 response for UpdateAutomation
+type UpdateAutomationResponse422Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateAutomationResponse428Headers the declared response headers of an HTTP 428 response for UpdateAutomation
+type UpdateAutomationResponse428Headers struct {
+	ETag                *string
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int64
+	XRequestId          openapi_types.UUID
+}
+
+// UpdateAutomationResponse429Headers the declared response headers of an HTTP 429 response for UpdateAutomation
+type UpdateAutomationResponse429Headers struct {
+	RetryAfter          *int32
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateAutomationResponse500Headers the declared response headers of an HTTP 500 response for UpdateAutomation
+type UpdateAutomationResponse500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type UpdateAutomationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *UpdateAutomationResponseV1Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFoundV2
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *ConflictV2
+	// JSON412 the response for an HTTP 412 `application/json` response
+	JSON412 *ErrorV2
+	// JSON415 the response for an HTTP 415 `application/json` response
+	JSON415 *UnsupportedMediaTypeV2
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *UnprocessableEntityV2
+	// JSON428 the response for an HTTP 428 `application/json` response
+	JSON428 *ErrorV2
+	// JSON429 the response for an HTTP 429 `application/json` response
+	JSON429 *TooManyRequestsV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *UpdateAutomationResponse200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *UpdateAutomationResponse400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *UpdateAutomationResponse401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *UpdateAutomationResponse403Headers
+	// Headers404 the parsed response headers for an HTTP 404 response
+	Headers404 *UpdateAutomationResponse404Headers
+	// Headers409 the parsed response headers for an HTTP 409 response
+	Headers409 *UpdateAutomationResponse409Headers
+	// Headers412 the parsed response headers for an HTTP 412 response
+	Headers412 *UpdateAutomationResponse412Headers
+	// Headers415 the parsed response headers for an HTTP 415 response
+	Headers415 *UpdateAutomationResponse415Headers
+	// Headers422 the parsed response headers for an HTTP 422 response
+	Headers422 *UpdateAutomationResponse422Headers
+	// Headers428 the parsed response headers for an HTTP 428 response
+	Headers428 *UpdateAutomationResponse428Headers
+	// Headers429 the parsed response headers for an HTTP 429 response
+	Headers429 *UpdateAutomationResponse429Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *UpdateAutomationResponse500Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r UpdateAutomationResponse) GetJSON200() *UpdateAutomationResponseV1Alpha1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r UpdateAutomationResponse) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r UpdateAutomationResponse) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r UpdateAutomationResponse) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r UpdateAutomationResponse) GetJSON404() *NotFoundV2 {
+	return r.JSON404
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r UpdateAutomationResponse) GetJSON409() *ConflictV2 {
+	return r.JSON409
+}
+
+// GetJSON412 returns the response for an HTTP 412 `application/json` response
+func (r UpdateAutomationResponse) GetJSON412() *ErrorV2 {
+	return r.JSON412
+}
+
+// GetJSON415 returns the response for an HTTP 415 `application/json` response
+func (r UpdateAutomationResponse) GetJSON415() *UnsupportedMediaTypeV2 {
+	return r.JSON415
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r UpdateAutomationResponse) GetJSON422() *UnprocessableEntityV2 {
+	return r.JSON422
+}
+
+// GetJSON428 returns the response for an HTTP 428 `application/json` response
+func (r UpdateAutomationResponse) GetJSON428() *ErrorV2 {
+	return r.JSON428
+}
+
+// GetJSON429 returns the response for an HTTP 429 `application/json` response
+func (r UpdateAutomationResponse) GetJSON429() *TooManyRequestsV2 {
+	return r.JSON429
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r UpdateAutomationResponse) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r UpdateAutomationResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateAutomationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateAutomationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdateAutomationResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 // ListZonesV2Response200Headers the declared response headers of an HTTP 200 response for ListZonesV2
 type ListZonesV2Response200Headers struct {
 	XRateLimitLimit *int32
@@ -80212,6 +84815,333 @@ func (r UpdateAcceptedRiskV1Response) ContentType() string {
 	return ""
 }
 
+// ListCveCatalogV1beta1Response200Headers the declared response headers of an HTTP 200 response for ListCveCatalogV1beta1
+type ListCveCatalogV1beta1Response200Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int64
+	XRequestId          string
+}
+
+// ListCveCatalogV1beta1Response400Headers the declared response headers of an HTTP 400 response for ListCveCatalogV1beta1
+type ListCveCatalogV1beta1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListCveCatalogV1beta1Response401Headers the declared response headers of an HTTP 401 response for ListCveCatalogV1beta1
+type ListCveCatalogV1beta1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListCveCatalogV1beta1Response403Headers the declared response headers of an HTTP 403 response for ListCveCatalogV1beta1
+type ListCveCatalogV1beta1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListCveCatalogV1beta1Response429Headers the declared response headers of an HTTP 429 response for ListCveCatalogV1beta1
+type ListCveCatalogV1beta1Response429Headers struct {
+	RetryAfter          *int32
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListCveCatalogV1beta1Response500Headers the declared response headers of an HTTP 500 response for ListCveCatalogV1beta1
+type ListCveCatalogV1beta1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int64
+	XRequestId          string
+}
+
+// ListCveCatalogV1beta1Response503Headers the declared response headers of an HTTP 503 response for ListCveCatalogV1beta1
+type ListCveCatalogV1beta1Response503Headers struct {
+	RetryAfter          *int32
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type ListCveCatalogV1beta1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ListCveCatalogResponseV1Beta1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON429 the response for an HTTP 429 `application/json` response
+	JSON429 *TooManyRequestsV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CveCatalogInternalServerErrorV2
+	// JSON503 the response for an HTTP 503 `application/json` response
+	JSON503 *ErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *ListCveCatalogV1beta1Response200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *ListCveCatalogV1beta1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *ListCveCatalogV1beta1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *ListCveCatalogV1beta1Response403Headers
+	// Headers429 the parsed response headers for an HTTP 429 response
+	Headers429 *ListCveCatalogV1beta1Response429Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *ListCveCatalogV1beta1Response500Headers
+	// Headers503 the parsed response headers for an HTTP 503 response
+	Headers503 *ListCveCatalogV1beta1Response503Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ListCveCatalogV1beta1Response) GetJSON200() *ListCveCatalogResponseV1Beta1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r ListCveCatalogV1beta1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ListCveCatalogV1beta1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r ListCveCatalogV1beta1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON429 returns the response for an HTTP 429 `application/json` response
+func (r ListCveCatalogV1beta1Response) GetJSON429() *TooManyRequestsV2 {
+	return r.JSON429
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ListCveCatalogV1beta1Response) GetJSON500() *CveCatalogInternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetJSON503 returns the response for an HTTP 503 `application/json` response
+func (r ListCveCatalogV1beta1Response) GetJSON503() *ErrorV2 {
+	return r.JSON503
+}
+
+// GetBody returns the raw response body bytes
+func (r ListCveCatalogV1beta1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ListCveCatalogV1beta1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListCveCatalogV1beta1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListCveCatalogV1beta1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// GetCveCatalogEntryV1beta1Response200Headers the declared response headers of an HTTP 200 response for GetCveCatalogEntryV1beta1
+type GetCveCatalogEntryV1beta1Response200Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int64
+	XRequestId          string
+}
+
+// GetCveCatalogEntryV1beta1Response400Headers the declared response headers of an HTTP 400 response for GetCveCatalogEntryV1beta1
+type GetCveCatalogEntryV1beta1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetCveCatalogEntryV1beta1Response401Headers the declared response headers of an HTTP 401 response for GetCveCatalogEntryV1beta1
+type GetCveCatalogEntryV1beta1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetCveCatalogEntryV1beta1Response403Headers the declared response headers of an HTTP 403 response for GetCveCatalogEntryV1beta1
+type GetCveCatalogEntryV1beta1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetCveCatalogEntryV1beta1Response404Headers the declared response headers of an HTTP 404 response for GetCveCatalogEntryV1beta1
+type GetCveCatalogEntryV1beta1Response404Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetCveCatalogEntryV1beta1Response429Headers the declared response headers of an HTTP 429 response for GetCveCatalogEntryV1beta1
+type GetCveCatalogEntryV1beta1Response429Headers struct {
+	RetryAfter          *int32
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetCveCatalogEntryV1beta1Response500Headers the declared response headers of an HTTP 500 response for GetCveCatalogEntryV1beta1
+type GetCveCatalogEntryV1beta1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int64
+	XRequestId          string
+}
+
+// GetCveCatalogEntryV1beta1Response503Headers the declared response headers of an HTTP 503 response for GetCveCatalogEntryV1beta1
+type GetCveCatalogEntryV1beta1Response503Headers struct {
+	RetryAfter          *int32
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type GetCveCatalogEntryV1beta1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CveDetailV1Beta1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFoundV2
+	// JSON429 the response for an HTTP 429 `application/json` response
+	JSON429 *TooManyRequestsV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CveCatalogInternalServerErrorV2
+	// JSON503 the response for an HTTP 503 `application/json` response
+	JSON503 *ErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *GetCveCatalogEntryV1beta1Response200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *GetCveCatalogEntryV1beta1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *GetCveCatalogEntryV1beta1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *GetCveCatalogEntryV1beta1Response403Headers
+	// Headers404 the parsed response headers for an HTTP 404 response
+	Headers404 *GetCveCatalogEntryV1beta1Response404Headers
+	// Headers429 the parsed response headers for an HTTP 429 response
+	Headers429 *GetCveCatalogEntryV1beta1Response429Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *GetCveCatalogEntryV1beta1Response500Headers
+	// Headers503 the parsed response headers for an HTTP 503 response
+	Headers503 *GetCveCatalogEntryV1beta1Response503Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetCveCatalogEntryV1beta1Response) GetJSON200() *CveDetailV1Beta1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetCveCatalogEntryV1beta1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GetCveCatalogEntryV1beta1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetCveCatalogEntryV1beta1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetCveCatalogEntryV1beta1Response) GetJSON404() *NotFoundV2 {
+	return r.JSON404
+}
+
+// GetJSON429 returns the response for an HTTP 429 `application/json` response
+func (r GetCveCatalogEntryV1beta1Response) GetJSON429() *TooManyRequestsV2 {
+	return r.JSON429
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetCveCatalogEntryV1beta1Response) GetJSON500() *CveCatalogInternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetJSON503 returns the response for an HTTP 503 `application/json` response
+func (r GetCveCatalogEntryV1beta1Response) GetJSON503() *ErrorV2 {
+	return r.JSON503
+}
+
+// GetBody returns the raw response body bytes
+func (r GetCveCatalogEntryV1beta1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GetCveCatalogEntryV1beta1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetCveCatalogEntryV1beta1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetCveCatalogEntryV1beta1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 // GetSBOMV1beta1Response200Headers the declared response headers of an HTTP 200 response for GetSBOMV1beta1
 type GetSBOMV1beta1Response200Headers struct {
 	ContentType     *string
@@ -83544,6 +88474,159 @@ func (c *ClientWithResponses) EditZoneV1WithResponse(ctx context.Context, zoneId
 	return ParseEditZoneV1Response(rsp)
 }
 
+// ListAutomationExecutionsWithResponse List Automation Executions
+//
+// Retrieve a paginated list of automation executions (history).\
+// \
+// **Required permissions:** _automations.read_
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /platform/v1alpha1/automation-executions (the `ListAutomationExecutions` operationId).
+func (c *ClientWithResponses) ListAutomationExecutionsWithResponse(ctx context.Context, params *ListAutomationExecutionsParams, reqEditors ...RequestEditorFn) (*ListAutomationExecutionsResponse, error) {
+	rsp, err := c.ListAutomationExecutions(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListAutomationExecutionsResponse(rsp)
+}
+
+// GetAutomationExecutionWithResponse Get Automation Execution By Id
+//
+// Retrieve a single automation execution.\
+// \
+// **Required permissions:** _automations.read_
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /platform/v1alpha1/automation-executions/{automationExecutionId} (the `GetAutomationExecution` operationId).
+func (c *ClientWithResponses) GetAutomationExecutionWithResponse(ctx context.Context, automationExecutionID AutomationExecutionID, reqEditors ...RequestEditorFn) (*GetAutomationExecutionResponse, error) {
+	rsp, err := c.GetAutomationExecution(ctx, automationExecutionID, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAutomationExecutionResponse(rsp)
+}
+
+// ListAutomationsWithResponse List Automations
+//
+// Retrieve the list of automations.\
+// \
+// **Required permissions:** _automations.read_
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /platform/v1alpha1/automations (the `ListAutomations` operationId).
+func (c *ClientWithResponses) ListAutomationsWithResponse(ctx context.Context, params *ListAutomationsParams, reqEditors ...RequestEditorFn) (*ListAutomationsResponse, error) {
+	rsp, err := c.ListAutomations(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListAutomationsResponse(rsp)
+}
+
+// CreateAutomationWithBodyWithResponse Create Automation
+//
+// Create an automation.\
+// \
+// **Required permissions:** _automations.edit_
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /platform/v1alpha1/automations (the `CreateAutomation` operationId).
+func (c *ClientWithResponses) CreateAutomationWithBodyWithResponse(ctx context.Context, params *CreateAutomationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAutomationResponse, error) {
+	rsp, err := c.CreateAutomationWithBody(ctx, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateAutomationResponse(rsp)
+}
+
+// CreateAutomationWithResponse Create Automation
+//
+// Create an automation.\
+// \
+// **Required permissions:** _automations.edit_
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /platform/v1alpha1/automations (the `CreateAutomation` operationId).
+func (c *ClientWithResponses) CreateAutomationWithResponse(ctx context.Context, params *CreateAutomationParams, body CreateAutomationJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAutomationResponse, error) {
+	rsp, err := c.CreateAutomation(ctx, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateAutomationResponse(rsp)
+}
+
+// DeleteAutomationByIdWithResponse Delete Automation
+//
+// Delete an automation by its ID.\
+// \
+// **Required permissions:** _automations.edit_
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /platform/v1alpha1/automations/{automationId} (the `DeleteAutomationById` operationId).
+func (c *ClientWithResponses) DeleteAutomationByIdWithResponse(ctx context.Context, automationID AutomationID, params *DeleteAutomationByIdParams, reqEditors ...RequestEditorFn) (*DeleteAutomationByIdResponse, error) {
+	rsp, err := c.DeleteAutomationById(ctx, automationID, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteAutomationByIdResponse(rsp)
+}
+
+// GetAutomationByIdWithResponse Get Automation
+//
+// Retrieve an automation by ID.\
+// \
+// **Required permissions:** _automations.read_
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /platform/v1alpha1/automations/{automationId} (the `GetAutomationById` operationId).
+func (c *ClientWithResponses) GetAutomationByIdWithResponse(ctx context.Context, automationID AutomationID, reqEditors ...RequestEditorFn) (*GetAutomationByIdResponse, error) {
+	rsp, err := c.GetAutomationById(ctx, automationID, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAutomationByIdResponse(rsp)
+}
+
+// UpdateAutomationWithBodyWithResponse Update Automation
+//
+// Update an automation.\
+// \
+// **Required permissions:** _automations.edit_
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /platform/v1alpha1/automations/{automationId} (the `UpdateAutomation` operationId).
+func (c *ClientWithResponses) UpdateAutomationWithBodyWithResponse(ctx context.Context, automationID AutomationID, params *UpdateAutomationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAutomationResponse, error) {
+	rsp, err := c.UpdateAutomationWithBody(ctx, automationID, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateAutomationResponse(rsp)
+}
+
+// UpdateAutomationWithResponse Update Automation
+//
+// Update an automation.\
+// \
+// **Required permissions:** _automations.edit_
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /platform/v1alpha1/automations/{automationId} (the `UpdateAutomation` operationId).
+func (c *ClientWithResponses) UpdateAutomationWithResponse(ctx context.Context, automationID AutomationID, params *UpdateAutomationParams, body UpdateAutomationJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAutomationResponse, error) {
+	rsp, err := c.UpdateAutomation(ctx, automationID, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateAutomationResponse(rsp)
+}
+
 // ListZonesV2WithResponse List Zones
 //
 // Retrieve a paginated list of Zones.
@@ -85306,6 +90389,43 @@ func (c *ClientWithResponses) UpdateAcceptedRiskV1WithResponse(ctx context.Conte
 		return nil, err
 	}
 	return ParseUpdateAcceptedRiskV1Response(rsp)
+}
+
+// ListCveCatalogV1beta1WithResponse List CVEs
+//
+// List CVEs in the Sysdig vulnerability catalog. Supports free-text search plus dedicated
+// equality filters for severity, CVSS score range, publish date range, and exploit/KEV/fix
+// availability. Filters are combined with AND.\
+// \
+// **Required permissions:** _secure.vm.scanresults.read_ or _secure.images.read_
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /secure/vulnerability/v1beta1/cves (the `ListCveCatalogV1beta1` operationId).
+func (c *ClientWithResponses) ListCveCatalogV1beta1WithResponse(ctx context.Context, params *ListCveCatalogV1beta1Params, reqEditors ...RequestEditorFn) (*ListCveCatalogV1beta1Response, error) {
+	rsp, err := c.ListCveCatalogV1beta1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListCveCatalogV1beta1Response(rsp)
+}
+
+// GetCveCatalogEntryV1beta1WithResponse Get CVE
+//
+// Retrieve the full catalog record for a single CVE, including per-vendor metadata and the
+// affected component ranges across ecosystems.\
+// \
+// **Required permissions:** _secure.vm.scanresults.read_ or _secure.images.read_
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /secure/vulnerability/v1beta1/cves/{cveId} (the `GetCveCatalogEntryV1beta1` operationId).
+func (c *ClientWithResponses) GetCveCatalogEntryV1beta1WithResponse(ctx context.Context, cveId string, reqEditors ...RequestEditorFn) (*GetCveCatalogEntryV1beta1Response, error) {
+	rsp, err := c.GetCveCatalogEntryV1beta1(ctx, cveId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetCveCatalogEntryV1beta1Response(rsp)
 }
 
 // GetSBOMV1beta1WithResponse Get SBOM
@@ -108381,6 +113501,2410 @@ func ParseEditZoneV1Response(rsp *http.Response) (*EditZoneV1Response, error) {
 	return response, nil
 }
 
+// ParseListAutomationExecutionsResponse parses an HTTP response from a ListAutomationExecutionsWithResponse call
+func ParseListAutomationExecutionsResponse(rsp *http.Response) (*ListAutomationExecutionsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListAutomationExecutionsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListAutomationExecutionsPaginatedResponseV1Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequestsV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers ListAutomationExecutionsResponse200Headers
+		if values := rsp.Header.Values("ETag"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "ETag", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.ETag = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int64
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int64"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers ListAutomationExecutionsResponse400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers ListAutomationExecutionsResponse401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers ListAutomationExecutionsResponse403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 429:
+		var headers ListAutomationExecutionsResponse429Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers429 = &headers
+	case rsp.StatusCode == 500:
+		var headers ListAutomationExecutionsResponse500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseGetAutomationExecutionResponse parses an HTTP response from a GetAutomationExecutionWithResponse call
+func ParseGetAutomationExecutionResponse(rsp *http.Response) (*GetAutomationExecutionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAutomationExecutionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GetAutomationExecutionResponseV1Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequestsV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers GetAutomationExecutionResponse200Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers GetAutomationExecutionResponse400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers GetAutomationExecutionResponse401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers GetAutomationExecutionResponse403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 404:
+		var headers GetAutomationExecutionResponse404Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers404 = &headers
+	case rsp.StatusCode == 429:
+		var headers GetAutomationExecutionResponse429Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers429 = &headers
+	case rsp.StatusCode == 500:
+		var headers GetAutomationExecutionResponse500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseListAutomationsResponse parses an HTTP response from a ListAutomationsWithResponse call
+func ParseListAutomationsResponse(rsp *http.Response) (*ListAutomationsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListAutomationsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListAutomationsPaginatedResponseV1Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequestsV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers ListAutomationsResponse200Headers
+		if values := rsp.Header.Values("ETag"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "ETag", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.ETag = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int64
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int64"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers ListAutomationsResponse400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers ListAutomationsResponse401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers ListAutomationsResponse403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 429:
+		var headers ListAutomationsResponse429Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers429 = &headers
+	case rsp.StatusCode == 500:
+		var headers ListAutomationsResponse500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseCreateAutomationResponse parses an HTTP response from a CreateAutomationWithResponse call
+func ParseCreateAutomationResponse(rsp *http.Response) (*CreateAutomationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateAutomationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest CreateAutomationResponseV1Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ConflictV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 415:
+		var dest UnsupportedMediaTypeV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON415 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntityV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequestsV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 201:
+		var headers CreateAutomationResponse201Headers
+		if values := rsp.Header.Values("ETag"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "ETag", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.ETag = &value
+		}
+		if values := rsp.Header.Values("Location"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "Location", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uri-reference"}); err != nil {
+				return nil, err
+			}
+			headers.Location = value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int64
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int64"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers201 = &headers
+	case rsp.StatusCode == 400:
+		var headers CreateAutomationResponse400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers CreateAutomationResponse401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers CreateAutomationResponse403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 409:
+		var headers CreateAutomationResponse409Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers409 = &headers
+	case rsp.StatusCode == 415:
+		var headers CreateAutomationResponse415Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers415 = &headers
+	case rsp.StatusCode == 422:
+		var headers CreateAutomationResponse422Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers422 = &headers
+	case rsp.StatusCode == 429:
+		var headers CreateAutomationResponse429Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers429 = &headers
+	case rsp.StatusCode == 500:
+		var headers CreateAutomationResponse500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseDeleteAutomationByIdResponse parses an HTTP response from a DeleteAutomationByIdWithResponse call
+func ParseDeleteAutomationByIdResponse(rsp *http.Response) (*DeleteAutomationByIdResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteAutomationByIdResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case rsp.StatusCode == 204:
+		break // No content-type
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 412:
+		var dest ErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON412 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 428:
+		var dest ErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON428 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequestsV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 204:
+		var headers DeleteAutomationByIdResponse204Headers
+		if values := rsp.Header.Values("ETag"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "ETag", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.ETag = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int64
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int64"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers204 = &headers
+	case rsp.StatusCode == 400:
+		var headers DeleteAutomationByIdResponse400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers DeleteAutomationByIdResponse401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers DeleteAutomationByIdResponse403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 404:
+		var headers DeleteAutomationByIdResponse404Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers404 = &headers
+	case rsp.StatusCode == 412:
+		var headers DeleteAutomationByIdResponse412Headers
+		if values := rsp.Header.Values("ETag"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "ETag", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.ETag = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int64
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int64"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers412 = &headers
+	case rsp.StatusCode == 428:
+		var headers DeleteAutomationByIdResponse428Headers
+		if values := rsp.Header.Values("ETag"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "ETag", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.ETag = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int64
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int64"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers428 = &headers
+	case rsp.StatusCode == 429:
+		var headers DeleteAutomationByIdResponse429Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers429 = &headers
+	case rsp.StatusCode == 500:
+		var headers DeleteAutomationByIdResponse500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseGetAutomationByIdResponse parses an HTTP response from a GetAutomationByIdWithResponse call
+func ParseGetAutomationByIdResponse(rsp *http.Response) (*GetAutomationByIdResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAutomationByIdResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GetAutomationByIdResponseV1Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequestsV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers GetAutomationByIdResponse200Headers
+		if values := rsp.Header.Values("ETag"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "ETag", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.ETag = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int64
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int64"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers GetAutomationByIdResponse400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers GetAutomationByIdResponse401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers GetAutomationByIdResponse403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 404:
+		var headers GetAutomationByIdResponse404Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers404 = &headers
+	case rsp.StatusCode == 429:
+		var headers GetAutomationByIdResponse429Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers429 = &headers
+	case rsp.StatusCode == 500:
+		var headers GetAutomationByIdResponse500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseUpdateAutomationResponse parses an HTTP response from a UpdateAutomationWithResponse call
+func ParseUpdateAutomationResponse(rsp *http.Response) (*UpdateAutomationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateAutomationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest UpdateAutomationResponseV1Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ConflictV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 412:
+		var dest ErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON412 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 415:
+		var dest UnsupportedMediaTypeV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON415 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntityV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 428:
+		var dest ErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON428 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequestsV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers UpdateAutomationResponse200Headers
+		if values := rsp.Header.Values("ETag"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "ETag", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.ETag = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int64
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int64"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers UpdateAutomationResponse400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers UpdateAutomationResponse401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers UpdateAutomationResponse403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 404:
+		var headers UpdateAutomationResponse404Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers404 = &headers
+	case rsp.StatusCode == 409:
+		var headers UpdateAutomationResponse409Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers409 = &headers
+	case rsp.StatusCode == 412:
+		var headers UpdateAutomationResponse412Headers
+		if values := rsp.Header.Values("ETag"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "ETag", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.ETag = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int64
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int64"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers412 = &headers
+	case rsp.StatusCode == 415:
+		var headers UpdateAutomationResponse415Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers415 = &headers
+	case rsp.StatusCode == 422:
+		var headers UpdateAutomationResponse422Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers422 = &headers
+	case rsp.StatusCode == 428:
+		var headers UpdateAutomationResponse428Headers
+		if values := rsp.Header.Values("ETag"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "ETag", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.ETag = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int64
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int64"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers428 = &headers
+	case rsp.StatusCode == 429:
+		var headers UpdateAutomationResponse429Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers429 = &headers
+	case rsp.StatusCode == 500:
+		var headers UpdateAutomationResponse500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
 // ParseListZonesV2Response parses an HTTP response from a ListZonesV2WithResponse call
 func ParseListZonesV2Response(rsp *http.Response) (*ListZonesV2Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -120169,6 +127693,648 @@ func ParseUpdateAcceptedRiskV1Response(rsp *http.Response) (*UpdateAcceptedRiskV
 			headers.XRequestId = &value
 		}
 		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseListCveCatalogV1beta1Response parses an HTTP response from a ListCveCatalogV1beta1WithResponse call
+func ParseListCveCatalogV1beta1Response(rsp *http.Response) (*ListCveCatalogV1beta1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListCveCatalogV1beta1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListCveCatalogResponseV1Beta1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequestsV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CveCatalogInternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 503:
+		var dest ErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON503 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers ListCveCatalogV1beta1Response200Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int64
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int64"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers ListCveCatalogV1beta1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers ListCveCatalogV1beta1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers ListCveCatalogV1beta1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 429:
+		var headers ListCveCatalogV1beta1Response429Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers429 = &headers
+	case rsp.StatusCode == 500:
+		var headers ListCveCatalogV1beta1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int64
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int64"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers500 = &headers
+	case rsp.StatusCode == 503:
+		var headers ListCveCatalogV1beta1Response503Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers503 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseGetCveCatalogEntryV1beta1Response parses an HTTP response from a GetCveCatalogEntryV1beta1WithResponse call
+func ParseGetCveCatalogEntryV1beta1Response(rsp *http.Response) (*GetCveCatalogEntryV1beta1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetCveCatalogEntryV1beta1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CveDetailV1Beta1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequestsV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CveCatalogInternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 503:
+		var dest ErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON503 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers GetCveCatalogEntryV1beta1Response200Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int64
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int64"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers GetCveCatalogEntryV1beta1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers GetCveCatalogEntryV1beta1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers GetCveCatalogEntryV1beta1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 404:
+		var headers GetCveCatalogEntryV1beta1Response404Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers404 = &headers
+	case rsp.StatusCode == 429:
+		var headers GetCveCatalogEntryV1beta1Response429Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers429 = &headers
+	case rsp.StatusCode == 500:
+		var headers GetCveCatalogEntryV1beta1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int64
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int64"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers500 = &headers
+	case rsp.StatusCode == 503:
+		var headers GetCveCatalogEntryV1beta1Response503Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers503 = &headers
 	}
 
 	return response, nil
