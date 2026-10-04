@@ -177,16 +177,34 @@ var _ = Describe("McpHandler", func() {
 		}, NodeTimeout(5*time.Second))
 
 		It("does not apply legacy session ownership to the 2026-07-28 protocol", func(ctx SpecContext) {
+			mockClient.EXPECT().GetMyPermissionsWithResponse(gomock.Any()).Return(
+				&sysdig.GetMyPermissionsResponse{
+					HTTPResponse: &http.Response{StatusCode: http.StatusOK},
+					JSON200:      &sysdig.UserPermissions{},
+				}, nil,
+			)
 			modernClient := NewHTTPTestClient(handler.AsStreamableHTTP("/", false, remoteSecurity(verifier)))
 			headers := authorizationHeaders()
 			headers.Set(mcp.HeaderProtocolVersion, mcp.ProtocolVersion20260728)
-			headers.Set(mcp.HeaderMethod, string(mcp.MethodPing))
+			headers.Set(mcp.HeaderMethod, string(mcp.MethodToolsList))
 			headers.Set(mcp.HeaderSessionID, "stale-session-id")
 
-			resp := modernClient.RPC(ctx, "ping", nil, headers)
+			params := map[string]any{
+				"_meta": map[string]any{
+					mcp.MetaKeyProtocolVersion: mcp.ProtocolVersion20260728,
+					mcp.MetaKeyClientInfo: map[string]any{
+						"name":    "test-client",
+						"version": "1.0.0",
+					},
+					mcp.MetaKeyClientCapabilities: map[string]any{},
+				},
+			}
+			resp := modernClient.RPC(ctx, "tools/list", params, headers)
 			defer func() { _ = resp.Body.Close() }()
 
-			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+			body, err := io.ReadAll(resp.Body)
+			Expect(err).NotTo(HaveOccurred())
+			Expect(resp.StatusCode).To(Equal(http.StatusOK), string(body))
 		}, NodeTimeout(5*time.Second))
 
 		DescribeTable("rejects invalid authorization headers",

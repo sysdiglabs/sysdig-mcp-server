@@ -163,7 +163,7 @@ func (r *boundedRemoteKeySet) fetchKeys(ctx context.Context) ([]jose.JSONWebKey,
 	if err != nil {
 		return nil, fmt.Errorf("fetching JWKS: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	body, err := io.ReadAll(io.LimitReader(resp.Body, maxJWKSResponseBytes+1))
 	if err != nil {
