@@ -67,30 +67,6 @@ var _ = Describe("Client TLS", func() {
 	})
 })
 
-var _ = Describe("Context helpers", func() {
-	It("roundtrips token through context", func() {
-		ctx := sysdig.WrapContextWithToken(context.Background(), "my-token")
-		Expect(sysdig.GetTokenFromContext(ctx)).To(Equal("my-token"))
-	})
-
-	It("roundtrips host through context", func() {
-		ctx := sysdig.WrapContextWithHost(context.Background(), "https://example.com")
-		Expect(sysdig.GetHostFromContext(ctx)).To(Equal("https://example.com"))
-	})
-
-	It("panics when token is missing from context", func() {
-		Expect(func() {
-			sysdig.GetTokenFromContext(context.Background())
-		}).To(Panic())
-	})
-
-	It("panics when host is missing from context", func() {
-		Expect(func() {
-			sysdig.GetHostFromContext(context.Background())
-		}).To(Panic())
-	})
-})
-
 var _ = Describe("Client authentication", func() {
 	var ts *httptest.Server
 	var lastHeaders http.Header
@@ -105,74 +81,60 @@ var _ = Describe("Client authentication", func() {
 		ts.Close()
 	})
 
-	Describe("WithHostAndTokenFromContext", func() {
-		It("authenticates using context values", func() {
-			client, err := sysdig.NewSysdigClient(sysdig.WithHostAndTokenFromContext())
-			Expect(err).NotTo(HaveOccurred())
+	It("always sends the configured server-side token", func() {
+		client, err := sysdig.NewSysdigClient(
+			sysdig.WithFixedHostAndToken(ts.URL, "server-token"),
+		)
+		Expect(err).NotTo(HaveOccurred())
 
-			ctx := sysdig.WrapContextWithHost(context.Background(), ts.URL)
-			ctx = sysdig.WrapContextWithToken(ctx, "ctx-token")
-
-			resp, err := client.GetMyPermissionsWithResponse(ctx)
-			Expect(err).NotTo(HaveOccurred())
-			Expect(resp.HTTPResponse.StatusCode).To(Equal(http.StatusOK))
-			Expect(lastHeaders.Get("Authorization")).To(Equal("Bearer ctx-token"))
-		})
-
-		It("fails when token is missing from context", func() {
-			client, err := sysdig.NewSysdigClient(sysdig.WithHostAndTokenFromContext())
-			Expect(err).NotTo(HaveOccurred())
-
-			ctx := sysdig.WrapContextWithHost(context.Background(), ts.URL)
-
-			_, err = client.GetMyPermissionsWithResponse(ctx)
-			Expect(err).To(MatchError(ContainSubstring("authorization token not present")))
-		})
+		resp, err := client.GetMyPermissionsWithResponse(context.Background())
+		Expect(err).NotTo(HaveOccurred())
+		Expect(resp.HTTPResponse.StatusCode).To(Equal(http.StatusOK))
+		Expect(lastHeaders.Get("Authorization")).To(Equal("Bearer server-token"))
 	})
 
-	Describe("WithFallbackAuthentication", func() {
-		It("uses first auth when it succeeds", func() {
-			client, err := sysdig.NewSysdigClient(
-				sysdig.WithFallbackAuthentication(
-					sysdig.WithFixedHostAndToken(ts.URL, "primary-token"),
-					sysdig.WithFixedHostAndToken(ts.URL, "fallback-token"),
-				),
-			)
-			Expect(err).NotTo(HaveOccurred())
+	It("preserves a configured reverse-proxy path prefix", func() {
+		var requestedPath string
+		proxy := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			requestedPath = r.URL.Path
+			if requestedPath != "/sysdig-proxy/api/users/me/permissions" {
+				w.WriteHeader(http.StatusNotFound)
+				return
+			}
+			w.Header().Set("Content-Type", "application/json")
+			_, _ = w.Write([]byte(`{"permissions":[]}`))
+		}))
+		defer proxy.Close()
 
-			resp, err := client.GetMyPermissionsWithResponse(context.Background())
-			Expect(err).NotTo(HaveOccurred())
-			Expect(resp.HTTPResponse.StatusCode).To(Equal(http.StatusOK))
-			Expect(lastHeaders.Get("Authorization")).To(Equal("Bearer primary-token"))
-		})
+		client, err := sysdig.NewSysdigClient(
+			sysdig.WithFixedHostAndToken(proxy.URL+"/sysdig-proxy", "server-token"),
+		)
+		Expect(err).NotTo(HaveOccurred())
 
-		It("falls back to second auth when first fails", func() {
-			client, err := sysdig.NewSysdigClient(
-				sysdig.WithFallbackAuthentication(
-					sysdig.WithHostAndTokenFromContext(),
-					sysdig.WithFixedHostAndToken(ts.URL, "fallback-token"),
-				),
-			)
-			Expect(err).NotTo(HaveOccurred())
+		resp, err := client.GetMyPermissionsWithResponse(context.Background())
+		Expect(err).NotTo(HaveOccurred())
+		Expect(resp.HTTPResponse.StatusCode).To(Equal(http.StatusOK))
+		Expect(requestedPath).To(Equal("/sysdig-proxy/api/users/me/permissions"))
+	})
 
-			resp, err := client.GetMyPermissionsWithResponse(context.Background())
-			Expect(err).NotTo(HaveOccurred())
-			Expect(resp.HTTPResponse.StatusCode).To(Equal(http.StatusOK))
-			Expect(lastHeaders.Get("Authorization")).To(Equal("Bearer fallback-token"))
-		})
+	It("rejects a non-absolute configured host", func() {
+		client, err := sysdig.NewSysdigClient(
+			sysdig.WithFixedHostAndToken("app.example.com", "server-token"),
+		)
+		Expect(err).NotTo(HaveOccurred())
 
-		It("fails when all auth methods fail", func() {
-			client, err := sysdig.NewSysdigClient(
-				sysdig.WithFallbackAuthentication(
-					sysdig.WithHostAndTokenFromContext(),
-					sysdig.WithHostAndTokenFromContext(),
-				),
-			)
-			Expect(err).NotTo(HaveOccurred())
+		_, err = client.GetMyPermissionsWithResponse(context.Background())
+		Expect(err).To(MatchError(ContainSubstring("absolute URL")))
+	})
 
-			_, err = client.GetMyPermissionsWithResponse(context.Background())
-			Expect(err).To(MatchError(ContainSubstring("unable to authenticate")))
-		})
+	It("rejects configured host query strings", func() {
+		client, err := sysdig.NewSysdigClient(
+			sysdig.WithFixedHostAndToken(ts.URL+"?tenant=one", "server-token"),
+		)
+		Expect(err).NotTo(HaveOccurred())
+
+		_, err = client.GetMyPermissionsWithResponse(context.Background())
+		Expect(err).To(MatchError(ContainSubstring("query string")))
 	})
 
 	Describe("WithVersion", func() {

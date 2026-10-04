@@ -11,7 +11,7 @@ This document is a comprehensive guide for an AI agent tasked with developing an
 | Topic | Details |
 | --- | --- |
 | **Purpose** | Expose vetted Sysdig Monitor workflows to LLMs through MCP tools. |
-| **Tech Stack** | Go 1.26+, `mcp-go`, Cobra CLI, Ginkgo/Gomega, `golangci-lint`, Nix. |
+| **Tech Stack** | Go 1.27+, `mcp-go`, `go-oidc`, Cobra CLI, Ginkgo/Gomega, `golangci-lint`, Nix. |
 | **Entry Point** | `cmd/server/main.go` (Cobra CLI that wires config, Sysdig client, etc.). |
 | **Dev Shell** | `nix develop` provides a consistent development environment. |
 | **Key Commands** | `just fmt`, `just lint`, `just test`, `just check`, `just update`. |
@@ -50,6 +50,7 @@ internal/
   config/                - Environment variable loading and validation
   infra/
     clock/               - System clock abstraction (for testing)
+    auth/                - Remote JWT access-token verification
     mcp/                 - MCP server handler, transport setup, middleware
       tools/             - Individual MCP tool implementations
     sysdig/              - Sysdig API client (generated + extensions)
@@ -68,19 +69,18 @@ package.nix              - Defines how the package is going to be built with Nix
 
 2.  **Configuration (`internal/config/config.go`):**
     - Loads environment variables with `SYSDIG_MCP_*` prefix
-    - Validates required fields for stdio transport (API host and token mandatory)
-    - Supports remote transports where auth can come via HTTP headers
+    - Requires fixed Sysdig API credentials for every transport
+    - Validates the OAuth issuer, JWT/JWKS policy, resource audience, and exact browser origins for remote transports
 
 3.  **MCP Handler (`internal/infra/mcp/mcp_handler.go`):**
     - Wraps mcp-go server with permission filtering (`toolPermissionFiltering`, line 26-64)
     - Dynamically filters tools based on Sysdig API token permissions
-    - HTTP middleware extracts `Authorization` and `X-Sysdig-Host` headers for remote transports (line 108-138)
+    - Remote security validates OAuth access tokens and browser origins, then publishes RFC 9728 protected-resource metadata
 
 4.  **Sysdig Client (`internal/infra/sysdig/`):**
     - `client.gen.go`: Generated OpenAPI client (**DO NOT EDIT**, manually regenerated via oapi-codegen, not with `go generate`)
-    - `client.go`: Authentication strategies with fallback support
-    - Context-based auth: `WrapContextWithToken()` and `WrapContextWithHost()` for remote transports
-    - Fixed auth: `WithFixedHostAndToken()` for stdio mode and remote transports
+    - `client.go`: Fixed server-side authentication and version request editors
+    - `WithFixedHostAndToken()` is the only Sysdig authentication path; inbound MCP credentials must never be forwarded upstream
     - Custom extensions in `client_extension.go` and `client_*.go` files
 
 5.  **Tools (`internal/infra/mcp/tools/`):**

@@ -50,7 +50,7 @@ Get up and running with the Sysdig MCP Server quickly using our pre-built Docker
 
     Substitute the following placeholders with your actual values:
     - `<your_sysdig_host>`: The hostname of your Sysdig instance (e.g., `https://us2.app.sysdig.com` or `https://eu1.app.sysdig.com`)
-    - `<your_sysdig_api_token>`: Your Sysdig API token (Secure or Monitor)
+    - `<your_sysdig_api_token>`: Your least-privilege Sysdig Monitor API token
 
 ## Available Tools
 
@@ -141,14 +141,20 @@ The server dynamically filters the available tools based on the permissions asso
 > **Note:** When a time window is provided, the underlying PromQL is wrapped in the aggregation appropriate for each tool (`avg_over_time`, `max_over_time`, `min_over_time`, `increase`, etc.) and evaluated at `end`. See [`internal/infra/mcp/tools/README.md`](./internal/infra/mcp/tools/README.md) for the per-tool aggregation table.
 
 ## Requirements
-- [Go](https://go.dev/doc/install) 1.26 or higher (if running without Docker).
+- [Go](https://go.dev/doc/install) 1.27 or higher (if running without Docker).
 
 ## Configuration
 
-The following environment variables are **required** for configuring the Sysdig SDK:
+The following environment variables are **required for every transport**. They are deployment secrets and are never accepted from an MCP request:
 
-- `SYSDIG_MCP_API_HOST`: The URL of your Sysdig instance (e.g., `https://us2.app.sysdig.com`). **Required when using `stdio` transport.**
-- `SYSDIG_MCP_API_TOKEN`: Your Sysdig API token (Secure or Monitor). **Required only when using `stdio` transport.**
+- `SYSDIG_MCP_API_HOST`: The absolute URL of your Sysdig instance (e.g., `https://us2.app.sysdig.com`).
+- `SYSDIG_MCP_API_TOKEN`: A dedicated, least-privilege Sysdig Monitor API token used only for server-to-Sysdig requests.
+
+Remote transports (`streamable-http` and `sse`) are OAuth 2.1 protected resources and also require:
+
+- `SYSDIG_MCP_RESOURCE_URL`: The public MCP endpoint and expected JWT audience (for example, `https://mcp.example.com/sysdig-mcp-server`).
+- `SYSDIG_MCP_AUTH_ISSUER`: The exact access-token issuer and authorization server URL.
+- `SYSDIG_MCP_AUTH_JWKS_URL`: The issuer's JWKS endpoint used to verify JWT signatures.
 
 You can also set the following variables to override the default configuration:
 
@@ -159,6 +165,11 @@ You can also set the following variables to override the default configuration:
 - `SYSDIG_MCP_LISTENING_PORT`: The port for the server when it is deployed using remote protocols (`streamable-http`, `sse`). Defaults to: `8080`
 - `SYSDIG_MCP_LISTENING_HOST`: The host for the server when it is deployed using remote protocols (`streamable-http`, `sse`). Defaults to all interfaces (`:port`). Set to `127.0.0.1` for local-only access.
 - `SYSDIG_MCP_STATELESS`: Enable stateless mode for `streamable-http` transport, where each request is self-contained with no session tracking (useful for AWS Bedrock AgentCore). Defaults to: `false`.
+- `SYSDIG_MCP_AUTH_SCOPES`: Comma- or space-separated scopes required on remote MCP access tokens. Defaults to no required scopes.
+- `SYSDIG_MCP_AUTH_SIGNING_ALGS`: Comma- or space-separated asymmetric JWT algorithms accepted from the issuer. Defaults to: `RS256`. Symmetric algorithms and `none` are rejected.
+- `SYSDIG_MCP_ALLOWED_ORIGINS`: Comma- or space-separated browser origins allowed to call the remote transport, using exact `scheme://authority` values. Wildcards are rejected. If omitted, requests carrying an `Origin` header are denied; non-browser clients remain supported.
+
+All configured URLs must use HTTPS. Plain HTTP is accepted only for loopback development (`localhost` or a loopback IP).
 
 You can find your API token in the Sysdig UI under **Settings > Sysdig Secure API** (or **Sysdig Monitor API**). Make sure to copy the token as it will not be shown again.
 
@@ -183,14 +194,23 @@ SYSDIG_MCP_LOGLEVEL=INFO
 ```bash
 # Required
 SYSDIG_MCP_TRANSPORT=streamable-http
+SYSDIG_MCP_API_HOST=https://us2.app.sysdig.com
+SYSDIG_MCP_API_TOKEN=your-server-side-sysdig-token
+SYSDIG_MCP_RESOURCE_URL=https://mcp.example.com/sysdig-mcp-server
+SYSDIG_MCP_AUTH_ISSUER=https://identity.example.com
+SYSDIG_MCP_AUTH_JWKS_URL=https://identity.example.com/.well-known/jwks.json
 
-# Optional (Host and Token can be provided via HTTP headers)
-# SYSDIG_MCP_API_HOST=<your_sysdig_host>
-# SYSDIG_MCP_API_TOKEN=your-api-token-here
+# Optional remote policy
+SYSDIG_MCP_AUTH_SCOPES=mcp:tools
+SYSDIG_MCP_AUTH_SIGNING_ALGS=RS256
+SYSDIG_MCP_ALLOWED_ORIGINS=https://approved-client.example.com
 SYSDIG_MCP_LISTENING_PORT=8080
 SYSDIG_MCP_LISTENING_HOST=
 SYSDIG_MCP_MOUNT_PATH=/sysdig-mcp-server
 ```
+
+> [!IMPORTANT]
+> This is a breaking security boundary for remote deployments. MCP clients present an issuer-signed access token intended for `SYSDIG_MCP_RESOURCE_URL`; they never present a Sysdig API token. The server does not support `X-Sysdig-Host`, `X-Sysdig-Token`, or forwarding the request's `Authorization` value to Sysdig.
 
 ### API Permissions
 
@@ -376,7 +396,7 @@ codex mcp add \
 
 ### Kubernetes
 
-Deploy the MCP server to a Kubernetes cluster as a remote service. MCP clients like Claude Desktop will connect to it via URL.
+Deploy the MCP server to a Kubernetes cluster as an HTTPS remote service. MCP clients like Claude Desktop connect with an access token issued specifically for this MCP resource.
 
 **1. Create a Secret with your Sysdig credentials:**
 
@@ -418,6 +438,16 @@ spec:
         env:
           - name: SYSDIG_MCP_TRANSPORT
             value: "streamable-http"
+          - name: SYSDIG_MCP_RESOURCE_URL
+            value: "https://mcp.example.com/sysdig-mcp-server"
+          - name: SYSDIG_MCP_AUTH_ISSUER
+            value: "https://identity.example.com"
+          - name: SYSDIG_MCP_AUTH_JWKS_URL
+            value: "https://identity.example.com/.well-known/jwks.json"
+          - name: SYSDIG_MCP_AUTH_SCOPES
+            value: "mcp:tools"
+          - name: SYSDIG_MCP_ALLOWED_ORIGINS
+            value: "https://approved-client.example.com"
         envFrom:
         - secretRef:
             name: mcp-server-secrets
@@ -436,7 +466,7 @@ spec:
     targetPort: 8080
 ```
 
-> **Note:** Expose the Service externally using a `NodePort`, `LoadBalancer`, or `Ingress` depending on your cluster setup. The examples in the [Client Configuration](#client-configuration) section assume the server is reachable at `http://<server-address>:<port>/sysdig-mcp-server`.
+> **Note:** Terminate TLS at an Ingress or load balancer and set `SYSDIG_MCP_RESOURCE_URL` to the exact externally reachable endpoint. Keep the Kubernetes Service private; only the ingress should expose it.
 
 ## Local Development
 
@@ -456,28 +486,34 @@ direnv allow
 
 ## Client Configuration
 
-To use the MCP server with a client like Claude or Cursor, you need to provide the server's URL and authentication details.
+To use the MCP server with a client like Claude or Cursor, provide the server URL and authentication details appropriate to the transport.
 
 ### Authentication
 
-When using the `sse` or `streamable-http` transport, the server requires a Bearer token for authentication. The token is passed in the `X-Sysdig-Token` or default to `Authorization` header of the HTTP request (i.e `Bearer SYSDIG_MCP_API_TOKEN`).
+With `stdio`, the locally launched process uses `SYSDIG_MCP_API_HOST` and `SYSDIG_MCP_API_TOKEN` directly.
 
-Additionally, you can specify the Sysdig host by providing the `X-Sysdig-Host` header.
+With `sse` or `streamable-http`, the server requires an issuer-signed JWT access token in the standard `Authorization` header. The token must:
 
-> **Note:** When provided, the authentication headers (`Authorization`, `X-Sysdig-Token`) and host header (`X-Sysdig-Host`) take precedence over the configured environment variables.
+- have an `iss` claim equal to `SYSDIG_MCP_AUTH_ISSUER`;
+- include `SYSDIG_MCP_RESOURCE_URL` in `aud`;
+- be unexpired and use an allowed asymmetric signing algorithm;
+- contain every configured scope in `scope` or `scp`.
+
+The MCP access token and the server-side Sysdig token are different credentials for different audiences. The server validates the first and never forwards it; outbound Sysdig calls always use the second.
 
 Example headers:
 
 ```
-Authorization: Bearer <your_sysdig_api_token>
-X-Sysdig-Host: <your_sysdig_host>
+Authorization: Bearer <your_mcp_access_token>
 ```
+
+The server publishes OAuth protected-resource metadata at `/.well-known/oauth-protected-resource[/<resource-path>]`. Missing or invalid credentials receive `401 Unauthorized` with a `WWW-Authenticate` challenge that points clients to this metadata.
 
 ### URL
 
-If you are running the server with the `sse` or `streamable-http` transport, the URL will be `http://<host>:<port><mount_path>`, where `<mount_path>` is the value of `SYSDIG_MCP_MOUNT_PATH` (defaults to `/sysdig-mcp-server`). Do not include a trailing `/`.
+If you are running the server with the `sse` or `streamable-http` transport, the production URL is `https://<host><mount_path>`, where `<mount_path>` is the value of `SYSDIG_MCP_MOUNT_PATH` (defaults to `/sysdig-mcp-server`). Do not include a trailing `/`.
 
-For example, if you are running the server locally on port 8080 with the default mount path, the URL will be `http://localhost:8080/sysdig-mcp-server`.
+For loopback development only, the default URL can be `http://localhost:8080/sysdig-mcp-server`.
 
 ### Claude Desktop App
 
@@ -486,7 +522,7 @@ For the Claude Desktop app, configure the MCP server by editing the `claude_desk
 1. Go to **Settings > Developer** in the Claude Desktop app.
 2. Click on **Edit Config** to open the `claude_desktop_config.json` file.
 3. Add the JSON configuration from the [Server Setup](#server-setup) section that matches your installation method (Go, Docker, or Binary).
-4. Replace `<your_sysdig_host>` with your Sysdig host URL and `<your_sysdig_api_token>` with your Sysdig Secure or Monitor API token.
+4. Replace `<your_sysdig_host>` with your Sysdig host URL and `<your_sysdig_api_token>` with your Sysdig Monitor API token.
 5. Save the file and restart the Claude Desktop app.
 
 **Connecting to a Remote Server:**
@@ -501,21 +537,20 @@ If the MCP server is deployed remotely (e.g., in a [Kubernetes cluster](#kuberne
       "args": [
         "-y",
         "mcp-remote",
-        "http://<server-address>:<port>/sysdig-mcp-server",
-        "--allow-http"
+        "https://mcp.example.com/sysdig-mcp-server"
       ]
     }
   }
 }
 ```
 
-> **Note:** The `--allow-http` flag is required when connecting over plain HTTP. If your server is behind HTTPS (e.g., via an Ingress with TLS), you can omit it. No authentication headers or tokens are needed in the client configuration when the server has `SYSDIG_MCP_API_HOST` and `SYSDIG_MCP_API_TOKEN` set as environment variables.
+> **Note:** Use `--allow-http` only for loopback development. In production, use HTTPS and authenticate through the authorization server advertised by the protected-resource metadata. Configuring the server-side Sysdig token does not authenticate MCP clients.
 
 ### MCP Inspector
 
 1. Run the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) locally.
 2. Select the transport type and configure the connection to the Sysdig MCP server.
-3. Pass the Authorization header if using `streamable-http` or the `SYSDIG_MCP_API_TOKEN` env var if using `stdio`.
+3. For `streamable-http`, complete OAuth with the configured issuer or pass `Authorization: Bearer <your_mcp_access_token>`. For `stdio`, configure `SYSDIG_MCP_API_TOKEN` in the launched process.
 
 ![mcp-inspector](./docs/assets/mcp-inspector.png)
 
