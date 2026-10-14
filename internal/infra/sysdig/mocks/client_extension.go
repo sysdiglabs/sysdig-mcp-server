@@ -1243,6 +1243,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreatePricingV1W
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePricingV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreatePricingV1WithResponse), varargs...)
 }
 
+// CreateReportV2Alpha1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateReportV2Alpha1(ctx context.Context, body sysdig.CreateReportV2Alpha1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateReportV2Alpha1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateReportV2Alpha1 indicates an expected call of CreateReportV2Alpha1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateReportV2Alpha1(ctx, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateReportV2Alpha1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateReportV2Alpha1), varargs...)
+}
+
+// CreateReportV2Alpha1WithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateReportV2Alpha1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateReportV2Alpha1WithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateReportV2Alpha1WithBody indicates an expected call of CreateReportV2Alpha1WithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateReportV2Alpha1WithBody(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateReportV2Alpha1WithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateReportV2Alpha1WithBody), varargs...)
+}
+
+// CreateReportV2Alpha1WithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateReportV2Alpha1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.CreateReportV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateReportV2Alpha1WithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.CreateReportV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateReportV2Alpha1WithBodyWithResponse indicates an expected call of CreateReportV2Alpha1WithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateReportV2Alpha1WithBodyWithResponse(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateReportV2Alpha1WithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateReportV2Alpha1WithBodyWithResponse), varargs...)
+}
+
+// CreateReportV2Alpha1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateReportV2Alpha1WithResponse(ctx context.Context, body sysdig.CreateReportV2Alpha1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.CreateReportV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateReportV2Alpha1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.CreateReportV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateReportV2Alpha1WithResponse indicates an expected call of CreateReportV2Alpha1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateReportV2Alpha1WithResponse(ctx, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateReportV2Alpha1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateReportV2Alpha1WithResponse), varargs...)
+}
+
 // CreateRoleV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) CreateRoleV1(ctx context.Context, body sysdig.CreateRoleV1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -1321,6 +1401,166 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateRoleV1With
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, body}, reqEditors...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateRoleV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateRoleV1WithResponse), varargs...)
+}
+
+// CreateRunV2Alpha1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateRunV2Alpha1(ctx context.Context, body sysdig.CreateRunV2Alpha1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateRunV2Alpha1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateRunV2Alpha1 indicates an expected call of CreateRunV2Alpha1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateRunV2Alpha1(ctx, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateRunV2Alpha1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateRunV2Alpha1), varargs...)
+}
+
+// CreateRunV2Alpha1WithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateRunV2Alpha1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateRunV2Alpha1WithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateRunV2Alpha1WithBody indicates an expected call of CreateRunV2Alpha1WithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateRunV2Alpha1WithBody(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateRunV2Alpha1WithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateRunV2Alpha1WithBody), varargs...)
+}
+
+// CreateRunV2Alpha1WithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateRunV2Alpha1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.CreateRunV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateRunV2Alpha1WithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.CreateRunV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateRunV2Alpha1WithBodyWithResponse indicates an expected call of CreateRunV2Alpha1WithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateRunV2Alpha1WithBodyWithResponse(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateRunV2Alpha1WithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateRunV2Alpha1WithBodyWithResponse), varargs...)
+}
+
+// CreateRunV2Alpha1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateRunV2Alpha1WithResponse(ctx context.Context, body sysdig.CreateRunV2Alpha1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.CreateRunV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateRunV2Alpha1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.CreateRunV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateRunV2Alpha1WithResponse indicates an expected call of CreateRunV2Alpha1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateRunV2Alpha1WithResponse(ctx, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateRunV2Alpha1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateRunV2Alpha1WithResponse), varargs...)
+}
+
+// CreateScheduleV2Alpha1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateScheduleV2Alpha1(ctx context.Context, body sysdig.CreateScheduleV2Alpha1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateScheduleV2Alpha1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateScheduleV2Alpha1 indicates an expected call of CreateScheduleV2Alpha1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateScheduleV2Alpha1(ctx, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateScheduleV2Alpha1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateScheduleV2Alpha1), varargs...)
+}
+
+// CreateScheduleV2Alpha1WithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateScheduleV2Alpha1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateScheduleV2Alpha1WithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateScheduleV2Alpha1WithBody indicates an expected call of CreateScheduleV2Alpha1WithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateScheduleV2Alpha1WithBody(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateScheduleV2Alpha1WithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateScheduleV2Alpha1WithBody), varargs...)
+}
+
+// CreateScheduleV2Alpha1WithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateScheduleV2Alpha1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.CreateScheduleV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateScheduleV2Alpha1WithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.CreateScheduleV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateScheduleV2Alpha1WithBodyWithResponse indicates an expected call of CreateScheduleV2Alpha1WithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateScheduleV2Alpha1WithBodyWithResponse(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateScheduleV2Alpha1WithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateScheduleV2Alpha1WithBodyWithResponse), varargs...)
+}
+
+// CreateScheduleV2Alpha1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) CreateScheduleV2Alpha1WithResponse(ctx context.Context, body sysdig.CreateScheduleV2Alpha1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.CreateScheduleV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateScheduleV2Alpha1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.CreateScheduleV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateScheduleV2Alpha1WithResponse indicates an expected call of CreateScheduleV2Alpha1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) CreateScheduleV2Alpha1WithResponse(ctx, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateScheduleV2Alpha1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).CreateScheduleV2Alpha1WithResponse), varargs...)
 }
 
 // CreateServiceAccountsNotificationSettingsV1 mocks base method.
@@ -2723,6 +2963,46 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeletePricingByI
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeletePricingByIdV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeletePricingByIdV1WithResponse), varargs...)
 }
 
+// DeleteReportV2Alpha1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) DeleteReportV2Alpha1(ctx context.Context, reportID sysdig.ReportID, params *sysdig.DeleteReportV2Alpha1Params, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, reportID, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeleteReportV2Alpha1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteReportV2Alpha1 indicates an expected call of DeleteReportV2Alpha1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteReportV2Alpha1(ctx, reportID, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, reportID, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteReportV2Alpha1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteReportV2Alpha1), varargs...)
+}
+
+// DeleteReportV2Alpha1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) DeleteReportV2Alpha1WithResponse(ctx context.Context, reportID sysdig.ReportID, params *sysdig.DeleteReportV2Alpha1Params, reqEditors ...sysdig.RequestEditorFn) (*sysdig.DeleteReportV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, reportID, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeleteReportV2Alpha1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.DeleteReportV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteReportV2Alpha1WithResponse indicates an expected call of DeleteReportV2Alpha1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteReportV2Alpha1WithResponse(ctx, reportID, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, reportID, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteReportV2Alpha1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteReportV2Alpha1WithResponse), varargs...)
+}
+
 // DeleteRoleByIdV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) DeleteRoleByIdV1(ctx context.Context, roleId sysdig.RoleIdPath, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -2761,6 +3041,46 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteRoleByIdV1
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, roleId}, reqEditors...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteRoleByIdV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteRoleByIdV1WithResponse), varargs...)
+}
+
+// DeleteScheduleV2Alpha1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) DeleteScheduleV2Alpha1(ctx context.Context, scheduleID sysdig.ScheduleID, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, scheduleID}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeleteScheduleV2Alpha1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteScheduleV2Alpha1 indicates an expected call of DeleteScheduleV2Alpha1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteScheduleV2Alpha1(ctx, scheduleID any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, scheduleID}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteScheduleV2Alpha1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteScheduleV2Alpha1), varargs...)
+}
+
+// DeleteScheduleV2Alpha1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) DeleteScheduleV2Alpha1WithResponse(ctx context.Context, scheduleID sysdig.ScheduleID, reqEditors ...sysdig.RequestEditorFn) (*sysdig.DeleteScheduleV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, scheduleID}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeleteScheduleV2Alpha1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.DeleteScheduleV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteScheduleV2Alpha1WithResponse indicates an expected call of DeleteScheduleV2Alpha1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) DeleteScheduleV2Alpha1WithResponse(ctx, scheduleID any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, scheduleID}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteScheduleV2Alpha1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).DeleteScheduleV2Alpha1WithResponse), varargs...)
 }
 
 // DeleteSecureVulnerabilityV1BundlesBundleId mocks base method.
@@ -6263,6 +6583,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetQueryV1WithRe
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetQueryV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetQueryV1WithResponse), varargs...)
 }
 
+// GetReportTemplateV2Alpha1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetReportTemplateV2Alpha1(ctx context.Context, templateID sysdig.TemplateID, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, templateID}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetReportTemplateV2Alpha1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetReportTemplateV2Alpha1 indicates an expected call of GetReportTemplateV2Alpha1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetReportTemplateV2Alpha1(ctx, templateID any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, templateID}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetReportTemplateV2Alpha1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetReportTemplateV2Alpha1), varargs...)
+}
+
+// GetReportTemplateV2Alpha1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetReportTemplateV2Alpha1WithResponse(ctx context.Context, templateID sysdig.TemplateID, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetReportTemplateV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, templateID}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetReportTemplateV2Alpha1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetReportTemplateV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetReportTemplateV2Alpha1WithResponse indicates an expected call of GetReportTemplateV2Alpha1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetReportTemplateV2Alpha1WithResponse(ctx, templateID any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, templateID}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetReportTemplateV2Alpha1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetReportTemplateV2Alpha1WithResponse), varargs...)
+}
+
+// GetReportV2Alpha1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetReportV2Alpha1(ctx context.Context, reportID sysdig.ReportID, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, reportID}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetReportV2Alpha1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetReportV2Alpha1 indicates an expected call of GetReportV2Alpha1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetReportV2Alpha1(ctx, reportID any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, reportID}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetReportV2Alpha1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetReportV2Alpha1), varargs...)
+}
+
+// GetReportV2Alpha1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetReportV2Alpha1WithResponse(ctx context.Context, reportID sysdig.ReportID, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetReportV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, reportID}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetReportV2Alpha1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetReportV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetReportV2Alpha1WithResponse indicates an expected call of GetReportV2Alpha1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetReportV2Alpha1WithResponse(ctx, reportID any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, reportID}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetReportV2Alpha1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetReportV2Alpha1WithResponse), varargs...)
+}
+
 // GetResource mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) GetResource(ctx context.Context, hash string, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -6463,6 +6863,46 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetRulesV1WithRe
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetRulesV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetRulesV1WithResponse), varargs...)
 }
 
+// GetRunV2Alpha1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetRunV2Alpha1(ctx context.Context, runID sysdig.RunID, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, runID}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetRunV2Alpha1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetRunV2Alpha1 indicates an expected call of GetRunV2Alpha1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetRunV2Alpha1(ctx, runID any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, runID}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetRunV2Alpha1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetRunV2Alpha1), varargs...)
+}
+
+// GetRunV2Alpha1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetRunV2Alpha1WithResponse(ctx context.Context, runID sysdig.RunID, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetRunV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, runID}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetRunV2Alpha1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetRunV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetRunV2Alpha1WithResponse indicates an expected call of GetRunV2Alpha1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetRunV2Alpha1WithResponse(ctx, runID any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, runID}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetRunV2Alpha1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetRunV2Alpha1WithResponse), varargs...)
+}
+
 // GetSBOMV1beta1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) GetSBOMV1beta1(ctx context.Context, params *sysdig.GetSBOMV1beta1Params, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -6501,6 +6941,46 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetSBOMV1beta1Wi
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, params}, reqEditors...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSBOMV1beta1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetSBOMV1beta1WithResponse), varargs...)
+}
+
+// GetScheduleV2Alpha1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetScheduleV2Alpha1(ctx context.Context, scheduleID sysdig.ScheduleID, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, scheduleID}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetScheduleV2Alpha1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetScheduleV2Alpha1 indicates an expected call of GetScheduleV2Alpha1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetScheduleV2Alpha1(ctx, scheduleID any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, scheduleID}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetScheduleV2Alpha1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetScheduleV2Alpha1), varargs...)
+}
+
+// GetScheduleV2Alpha1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) GetScheduleV2Alpha1WithResponse(ctx context.Context, scheduleID sysdig.ScheduleID, reqEditors ...sysdig.RequestEditorFn) (*sysdig.GetScheduleV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, scheduleID}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetScheduleV2Alpha1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.GetScheduleV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetScheduleV2Alpha1WithResponse indicates an expected call of GetScheduleV2Alpha1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) GetScheduleV2Alpha1WithResponse(ctx, scheduleID any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, scheduleID}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetScheduleV2Alpha1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).GetScheduleV2Alpha1WithResponse), varargs...)
 }
 
 // GetSchema mocks base method.
@@ -8463,6 +8943,126 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListJobsV1WithRe
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListJobsV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListJobsV1WithResponse), varargs...)
 }
 
+// ListReportTemplatesV2Alpha1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) ListReportTemplatesV2Alpha1(ctx context.Context, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListReportTemplatesV2Alpha1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListReportTemplatesV2Alpha1 indicates an expected call of ListReportTemplatesV2Alpha1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListReportTemplatesV2Alpha1(ctx any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListReportTemplatesV2Alpha1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListReportTemplatesV2Alpha1), varargs...)
+}
+
+// ListReportTemplatesV2Alpha1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) ListReportTemplatesV2Alpha1WithResponse(ctx context.Context, reqEditors ...sysdig.RequestEditorFn) (*sysdig.ListReportTemplatesV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListReportTemplatesV2Alpha1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.ListReportTemplatesV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListReportTemplatesV2Alpha1WithResponse indicates an expected call of ListReportTemplatesV2Alpha1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListReportTemplatesV2Alpha1WithResponse(ctx any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListReportTemplatesV2Alpha1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListReportTemplatesV2Alpha1WithResponse), varargs...)
+}
+
+// ListReportsV2Alpha1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) ListReportsV2Alpha1(ctx context.Context, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListReportsV2Alpha1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListReportsV2Alpha1 indicates an expected call of ListReportsV2Alpha1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListReportsV2Alpha1(ctx any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListReportsV2Alpha1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListReportsV2Alpha1), varargs...)
+}
+
+// ListReportsV2Alpha1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) ListReportsV2Alpha1WithResponse(ctx context.Context, reqEditors ...sysdig.RequestEditorFn) (*sysdig.ListReportsV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListReportsV2Alpha1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.ListReportsV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListReportsV2Alpha1WithResponse indicates an expected call of ListReportsV2Alpha1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListReportsV2Alpha1WithResponse(ctx any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListReportsV2Alpha1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListReportsV2Alpha1WithResponse), varargs...)
+}
+
+// ListRunsV2Alpha1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) ListRunsV2Alpha1(ctx context.Context, params *sysdig.ListRunsV2Alpha1Params, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListRunsV2Alpha1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListRunsV2Alpha1 indicates an expected call of ListRunsV2Alpha1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListRunsV2Alpha1(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListRunsV2Alpha1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListRunsV2Alpha1), varargs...)
+}
+
+// ListRunsV2Alpha1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) ListRunsV2Alpha1WithResponse(ctx context.Context, params *sysdig.ListRunsV2Alpha1Params, reqEditors ...sysdig.RequestEditorFn) (*sysdig.ListRunsV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListRunsV2Alpha1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.ListRunsV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListRunsV2Alpha1WithResponse indicates an expected call of ListRunsV2Alpha1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListRunsV2Alpha1WithResponse(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListRunsV2Alpha1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListRunsV2Alpha1WithResponse), varargs...)
+}
+
 // ListSchedulesV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) ListSchedulesV1(ctx context.Context, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -8501,6 +9101,46 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListSchedulesV1W
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx}, reqEditors...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListSchedulesV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListSchedulesV1WithResponse), varargs...)
+}
+
+// ListSchedulesV2Alpha1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) ListSchedulesV2Alpha1(ctx context.Context, params *sysdig.ListSchedulesV2Alpha1Params, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListSchedulesV2Alpha1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListSchedulesV2Alpha1 indicates an expected call of ListSchedulesV2Alpha1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListSchedulesV2Alpha1(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListSchedulesV2Alpha1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListSchedulesV2Alpha1), varargs...)
+}
+
+// ListSchedulesV2Alpha1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) ListSchedulesV2Alpha1WithResponse(ctx context.Context, params *sysdig.ListSchedulesV2Alpha1Params, reqEditors ...sysdig.RequestEditorFn) (*sysdig.ListSchedulesV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, params}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListSchedulesV2Alpha1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.ListSchedulesV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListSchedulesV2Alpha1WithResponse indicates an expected call of ListSchedulesV2Alpha1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListSchedulesV2Alpha1WithResponse(ctx, params any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, params}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListSchedulesV2Alpha1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListSchedulesV2Alpha1WithResponse), varargs...)
 }
 
 // ListZonesV1 mocks base method.
@@ -8581,6 +9221,166 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) ListZonesV2WithR
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, params}, reqEditors...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListZonesV2WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).ListZonesV2WithResponse), varargs...)
+}
+
+// PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBody(ctx context.Context, reportID sysdig.ReportID, params *sysdig.PatchReportV2Alpha1Params, body sysdig.PatchReportV2Alpha1ApplicationMergePatchPlusJSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, reportID, params, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBody indicates an expected call of PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBody(ctx, reportID, params, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, reportID, params, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBody), varargs...)
+}
+
+// PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse(ctx context.Context, reportID sysdig.ReportID, params *sysdig.PatchReportV2Alpha1Params, body sysdig.PatchReportV2Alpha1ApplicationMergePatchPlusJSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.PatchReportV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, reportID, params, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.PatchReportV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse indicates an expected call of PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse(ctx, reportID, params, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, reportID, params, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse), varargs...)
+}
+
+// PatchReportV2Alpha1WithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) PatchReportV2Alpha1WithBody(ctx context.Context, reportID sysdig.ReportID, params *sysdig.PatchReportV2Alpha1Params, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, reportID, params, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "PatchReportV2Alpha1WithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PatchReportV2Alpha1WithBody indicates an expected call of PatchReportV2Alpha1WithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) PatchReportV2Alpha1WithBody(ctx, reportID, params, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, reportID, params, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PatchReportV2Alpha1WithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).PatchReportV2Alpha1WithBody), varargs...)
+}
+
+// PatchReportV2Alpha1WithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) PatchReportV2Alpha1WithBodyWithResponse(ctx context.Context, reportID sysdig.ReportID, params *sysdig.PatchReportV2Alpha1Params, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.PatchReportV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, reportID, params, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "PatchReportV2Alpha1WithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.PatchReportV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PatchReportV2Alpha1WithBodyWithResponse indicates an expected call of PatchReportV2Alpha1WithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) PatchReportV2Alpha1WithBodyWithResponse(ctx, reportID, params, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, reportID, params, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PatchReportV2Alpha1WithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).PatchReportV2Alpha1WithBodyWithResponse), varargs...)
+}
+
+// PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBody(ctx context.Context, scheduleID sysdig.ScheduleID, body sysdig.PatchScheduleV2Alpha1ApplicationMergePatchPlusJSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, scheduleID, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBody indicates an expected call of PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBody(ctx, scheduleID, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, scheduleID, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBody), varargs...)
+}
+
+// PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse(ctx context.Context, scheduleID sysdig.ScheduleID, body sysdig.PatchScheduleV2Alpha1ApplicationMergePatchPlusJSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.PatchScheduleV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, scheduleID, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.PatchScheduleV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse indicates an expected call of PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse(ctx, scheduleID, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, scheduleID, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse), varargs...)
+}
+
+// PatchScheduleV2Alpha1WithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) PatchScheduleV2Alpha1WithBody(ctx context.Context, scheduleID sysdig.ScheduleID, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, scheduleID, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "PatchScheduleV2Alpha1WithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PatchScheduleV2Alpha1WithBody indicates an expected call of PatchScheduleV2Alpha1WithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) PatchScheduleV2Alpha1WithBody(ctx, scheduleID, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, scheduleID, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PatchScheduleV2Alpha1WithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).PatchScheduleV2Alpha1WithBody), varargs...)
+}
+
+// PatchScheduleV2Alpha1WithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) PatchScheduleV2Alpha1WithBodyWithResponse(ctx context.Context, scheduleID sysdig.ScheduleID, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.PatchScheduleV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, scheduleID, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "PatchScheduleV2Alpha1WithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.PatchScheduleV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PatchScheduleV2Alpha1WithBodyWithResponse indicates an expected call of PatchScheduleV2Alpha1WithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) PatchScheduleV2Alpha1WithBodyWithResponse(ctx, scheduleID, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, scheduleID, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PatchScheduleV2Alpha1WithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).PatchScheduleV2Alpha1WithBodyWithResponse), varargs...)
 }
 
 // PostAcceptedRiskV1 mocks base method.
@@ -11423,6 +12223,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdatePricingByI
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdatePricingByIdV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdatePricingByIdV1WithResponse), varargs...)
 }
 
+// UpdateReportV2Alpha1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateReportV2Alpha1(ctx context.Context, reportID sysdig.ReportID, params *sysdig.UpdateReportV2Alpha1Params, body sysdig.UpdateReportV2Alpha1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, reportID, params, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateReportV2Alpha1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateReportV2Alpha1 indicates an expected call of UpdateReportV2Alpha1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateReportV2Alpha1(ctx, reportID, params, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, reportID, params, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateReportV2Alpha1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateReportV2Alpha1), varargs...)
+}
+
+// UpdateReportV2Alpha1WithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateReportV2Alpha1WithBody(ctx context.Context, reportID sysdig.ReportID, params *sysdig.UpdateReportV2Alpha1Params, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, reportID, params, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateReportV2Alpha1WithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateReportV2Alpha1WithBody indicates an expected call of UpdateReportV2Alpha1WithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateReportV2Alpha1WithBody(ctx, reportID, params, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, reportID, params, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateReportV2Alpha1WithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateReportV2Alpha1WithBody), varargs...)
+}
+
+// UpdateReportV2Alpha1WithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateReportV2Alpha1WithBodyWithResponse(ctx context.Context, reportID sysdig.ReportID, params *sysdig.UpdateReportV2Alpha1Params, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.UpdateReportV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, reportID, params, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateReportV2Alpha1WithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.UpdateReportV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateReportV2Alpha1WithBodyWithResponse indicates an expected call of UpdateReportV2Alpha1WithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateReportV2Alpha1WithBodyWithResponse(ctx, reportID, params, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, reportID, params, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateReportV2Alpha1WithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateReportV2Alpha1WithBodyWithResponse), varargs...)
+}
+
+// UpdateReportV2Alpha1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateReportV2Alpha1WithResponse(ctx context.Context, reportID sysdig.ReportID, params *sysdig.UpdateReportV2Alpha1Params, body sysdig.UpdateReportV2Alpha1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.UpdateReportV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, reportID, params, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateReportV2Alpha1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.UpdateReportV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateReportV2Alpha1WithResponse indicates an expected call of UpdateReportV2Alpha1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateReportV2Alpha1WithResponse(ctx, reportID, params, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, reportID, params, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateReportV2Alpha1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateReportV2Alpha1WithResponse), varargs...)
+}
+
 // UpdateRoleByIdV1 mocks base method.
 func (m *MockExtendedClientWithResponsesInterface) UpdateRoleByIdV1(ctx context.Context, roleId sysdig.RoleIdPath, body sysdig.UpdateRoleByIdV1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
 	m.ctrl.T.Helper()
@@ -11501,6 +12381,86 @@ func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateRoleByIdV1
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, roleId, body}, reqEditors...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateRoleByIdV1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateRoleByIdV1WithResponse), varargs...)
+}
+
+// UpdateScheduleV2Alpha1 mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateScheduleV2Alpha1(ctx context.Context, scheduleID sysdig.ScheduleID, body sysdig.UpdateScheduleV2Alpha1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, scheduleID, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateScheduleV2Alpha1", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateScheduleV2Alpha1 indicates an expected call of UpdateScheduleV2Alpha1.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateScheduleV2Alpha1(ctx, scheduleID, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, scheduleID, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateScheduleV2Alpha1", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateScheduleV2Alpha1), varargs...)
+}
+
+// UpdateScheduleV2Alpha1WithBody mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateScheduleV2Alpha1WithBody(ctx context.Context, scheduleID sysdig.ScheduleID, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*http.Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, scheduleID, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateScheduleV2Alpha1WithBody", varargs...)
+	ret0, _ := ret[0].(*http.Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateScheduleV2Alpha1WithBody indicates an expected call of UpdateScheduleV2Alpha1WithBody.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateScheduleV2Alpha1WithBody(ctx, scheduleID, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, scheduleID, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateScheduleV2Alpha1WithBody", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateScheduleV2Alpha1WithBody), varargs...)
+}
+
+// UpdateScheduleV2Alpha1WithBodyWithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateScheduleV2Alpha1WithBodyWithResponse(ctx context.Context, scheduleID sysdig.ScheduleID, contentType string, body io.Reader, reqEditors ...sysdig.RequestEditorFn) (*sysdig.UpdateScheduleV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, scheduleID, contentType, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateScheduleV2Alpha1WithBodyWithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.UpdateScheduleV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateScheduleV2Alpha1WithBodyWithResponse indicates an expected call of UpdateScheduleV2Alpha1WithBodyWithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateScheduleV2Alpha1WithBodyWithResponse(ctx, scheduleID, contentType, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, scheduleID, contentType, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateScheduleV2Alpha1WithBodyWithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateScheduleV2Alpha1WithBodyWithResponse), varargs...)
+}
+
+// UpdateScheduleV2Alpha1WithResponse mocks base method.
+func (m *MockExtendedClientWithResponsesInterface) UpdateScheduleV2Alpha1WithResponse(ctx context.Context, scheduleID sysdig.ScheduleID, body sysdig.UpdateScheduleV2Alpha1JSONRequestBody, reqEditors ...sysdig.RequestEditorFn) (*sysdig.UpdateScheduleV2Alpha1Response, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, scheduleID, body}
+	for _, a := range reqEditors {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateScheduleV2Alpha1WithResponse", varargs...)
+	ret0, _ := ret[0].(*sysdig.UpdateScheduleV2Alpha1Response)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateScheduleV2Alpha1WithResponse indicates an expected call of UpdateScheduleV2Alpha1WithResponse.
+func (mr *MockExtendedClientWithResponsesInterfaceMockRecorder) UpdateScheduleV2Alpha1WithResponse(ctx, scheduleID, body any, reqEditors ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, scheduleID, body}, reqEditors...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateScheduleV2Alpha1WithResponse", reflect.TypeOf((*MockExtendedClientWithResponsesInterface)(nil).UpdateScheduleV2Alpha1WithResponse), varargs...)
 }
 
 // UpdateServiceAccountsNotificationSettingsV1 mocks base method.
