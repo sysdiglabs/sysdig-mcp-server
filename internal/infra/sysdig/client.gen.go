@@ -230,13 +230,13 @@ func (e AlertsResponseV1Status) Valid() bool {
 
 // Defines values for ApiGraphEntityDefType.
 const (
-	Entity ApiGraphEntityDefType = "Entity"
+	ApiGraphEntityDefTypeEntity ApiGraphEntityDefType = "Entity"
 )
 
 // Valid indicates whether the value is a known member of the ApiGraphEntityDefType enum.
 func (e ApiGraphEntityDefType) Valid() bool {
 	switch e {
-	case Entity:
+	case ApiGraphEntityDefTypeEntity:
 		return true
 	default:
 		return false
@@ -852,6 +852,105 @@ func (e AutomationValidationErrorV1Alpha1ErrorType) Valid() bool {
 	case ExecutionNotFound:
 		return true
 	case InvalidPayload:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AvailableFilterV2Alpha1Operators.
+const (
+	AvailableFilterV2Alpha1OperatorsContains   AvailableFilterV2Alpha1Operators = "contains"
+	AvailableFilterV2Alpha1OperatorsEndsWith   AvailableFilterV2Alpha1Operators = "ends_with"
+	AvailableFilterV2Alpha1OperatorsEq         AvailableFilterV2Alpha1Operators = "eq"
+	AvailableFilterV2Alpha1OperatorsGt         AvailableFilterV2Alpha1Operators = "gt"
+	AvailableFilterV2Alpha1OperatorsGte        AvailableFilterV2Alpha1Operators = "gte"
+	AvailableFilterV2Alpha1OperatorsIn         AvailableFilterV2Alpha1Operators = "in"
+	AvailableFilterV2Alpha1OperatorsLt         AvailableFilterV2Alpha1Operators = "lt"
+	AvailableFilterV2Alpha1OperatorsLte        AvailableFilterV2Alpha1Operators = "lte"
+	AvailableFilterV2Alpha1OperatorsNotEq      AvailableFilterV2Alpha1Operators = "not_eq"
+	AvailableFilterV2Alpha1OperatorsNotIn      AvailableFilterV2Alpha1Operators = "not_in"
+	AvailableFilterV2Alpha1OperatorsStartsWith AvailableFilterV2Alpha1Operators = "starts_with"
+)
+
+// Valid indicates whether the value is a known member of the AvailableFilterV2Alpha1Operators enum.
+func (e AvailableFilterV2Alpha1Operators) Valid() bool {
+	switch e {
+	case AvailableFilterV2Alpha1OperatorsContains:
+		return true
+	case AvailableFilterV2Alpha1OperatorsEndsWith:
+		return true
+	case AvailableFilterV2Alpha1OperatorsEq:
+		return true
+	case AvailableFilterV2Alpha1OperatorsGt:
+		return true
+	case AvailableFilterV2Alpha1OperatorsGte:
+		return true
+	case AvailableFilterV2Alpha1OperatorsIn:
+		return true
+	case AvailableFilterV2Alpha1OperatorsLt:
+		return true
+	case AvailableFilterV2Alpha1OperatorsLte:
+		return true
+	case AvailableFilterV2Alpha1OperatorsNotEq:
+		return true
+	case AvailableFilterV2Alpha1OperatorsNotIn:
+		return true
+	case AvailableFilterV2Alpha1OperatorsStartsWith:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AvailableFilterV2Alpha1Type.
+const (
+	AvailableFilterV2Alpha1TypeBoolean AvailableFilterV2Alpha1Type = "boolean"
+	AvailableFilterV2Alpha1TypeDate    AvailableFilterV2Alpha1Type = "date"
+	AvailableFilterV2Alpha1TypeEntity  AvailableFilterV2Alpha1Type = "entity"
+	AvailableFilterV2Alpha1TypeEnum    AvailableFilterV2Alpha1Type = "enum"
+	AvailableFilterV2Alpha1TypeNumber  AvailableFilterV2Alpha1Type = "number"
+	AvailableFilterV2Alpha1TypeString  AvailableFilterV2Alpha1Type = "string"
+)
+
+// Valid indicates whether the value is a known member of the AvailableFilterV2Alpha1Type enum.
+func (e AvailableFilterV2Alpha1Type) Valid() bool {
+	switch e {
+	case AvailableFilterV2Alpha1TypeBoolean:
+		return true
+	case AvailableFilterV2Alpha1TypeDate:
+		return true
+	case AvailableFilterV2Alpha1TypeEntity:
+		return true
+	case AvailableFilterV2Alpha1TypeEnum:
+		return true
+	case AvailableFilterV2Alpha1TypeNumber:
+		return true
+	case AvailableFilterV2Alpha1TypeString:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AvailableFilterV2Alpha1ValueSource.
+const (
+	AvailableFilterV2Alpha1ValueSourceInline   AvailableFilterV2Alpha1ValueSource = "inline"
+	AvailableFilterV2Alpha1ValueSourceNone     AvailableFilterV2Alpha1ValueSource = "none"
+	AvailableFilterV2Alpha1ValueSourceOpen     AvailableFilterV2Alpha1ValueSource = "open"
+	AvailableFilterV2Alpha1ValueSourceResource AvailableFilterV2Alpha1ValueSource = "resource"
+)
+
+// Valid indicates whether the value is a known member of the AvailableFilterV2Alpha1ValueSource enum.
+func (e AvailableFilterV2Alpha1ValueSource) Valid() bool {
+	switch e {
+	case AvailableFilterV2Alpha1ValueSourceInline:
+		return true
+	case AvailableFilterV2Alpha1ValueSourceNone:
+		return true
+	case AvailableFilterV2Alpha1ValueSourceOpen:
+		return true
+	case AvailableFilterV2Alpha1ValueSourceResource:
 		return true
 	default:
 		return false
@@ -1533,6 +1632,84 @@ func (e CreateRiskAcceptedRequestStages) Valid() bool {
 	case CreateRiskAcceptedRequestStagesRegistry:
 		return true
 	case CreateRiskAcceptedRequestStagesRuntime:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CreateRunRequestV2Alpha1Compression.
+const (
+	CreateRunRequestV2Alpha1CompressionGzip CreateRunRequestV2Alpha1Compression = "gzip"
+	CreateRunRequestV2Alpha1CompressionZip  CreateRunRequestV2Alpha1Compression = "zip"
+)
+
+// Valid indicates whether the value is a known member of the CreateRunRequestV2Alpha1Compression enum.
+func (e CreateRunRequestV2Alpha1Compression) Valid() bool {
+	switch e {
+	case CreateRunRequestV2Alpha1CompressionGzip:
+		return true
+	case CreateRunRequestV2Alpha1CompressionZip:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CreateRunRequestV2Alpha1Format.
+const (
+	CreateRunRequestV2Alpha1FormatCsv  CreateRunRequestV2Alpha1Format = "csv"
+	CreateRunRequestV2Alpha1FormatJson CreateRunRequestV2Alpha1Format = "json"
+	CreateRunRequestV2Alpha1FormatPdf  CreateRunRequestV2Alpha1Format = "pdf"
+)
+
+// Valid indicates whether the value is a known member of the CreateRunRequestV2Alpha1Format enum.
+func (e CreateRunRequestV2Alpha1Format) Valid() bool {
+	switch e {
+	case CreateRunRequestV2Alpha1FormatCsv:
+		return true
+	case CreateRunRequestV2Alpha1FormatJson:
+		return true
+	case CreateRunRequestV2Alpha1FormatPdf:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CreateScheduleRequestV2Alpha1Compression.
+const (
+	CreateScheduleRequestV2Alpha1CompressionGzip CreateScheduleRequestV2Alpha1Compression = "gzip"
+	CreateScheduleRequestV2Alpha1CompressionZip  CreateScheduleRequestV2Alpha1Compression = "zip"
+)
+
+// Valid indicates whether the value is a known member of the CreateScheduleRequestV2Alpha1Compression enum.
+func (e CreateScheduleRequestV2Alpha1Compression) Valid() bool {
+	switch e {
+	case CreateScheduleRequestV2Alpha1CompressionGzip:
+		return true
+	case CreateScheduleRequestV2Alpha1CompressionZip:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CreateScheduleRequestV2Alpha1Format.
+const (
+	CreateScheduleRequestV2Alpha1FormatCsv  CreateScheduleRequestV2Alpha1Format = "csv"
+	CreateScheduleRequestV2Alpha1FormatJson CreateScheduleRequestV2Alpha1Format = "json"
+	CreateScheduleRequestV2Alpha1FormatPdf  CreateScheduleRequestV2Alpha1Format = "pdf"
+)
+
+// Valid indicates whether the value is a known member of the CreateScheduleRequestV2Alpha1Format enum.
+func (e CreateScheduleRequestV2Alpha1Format) Valid() bool {
+	switch e {
+	case CreateScheduleRequestV2Alpha1FormatCsv:
+		return true
+	case CreateScheduleRequestV2Alpha1FormatJson:
+		return true
+	case CreateScheduleRequestV2Alpha1FormatPdf:
 		return true
 	default:
 		return false
@@ -3387,6 +3564,27 @@ func (e NotificationChannelTypeV1) Valid() bool {
 	}
 }
 
+// Defines values for NotificationChannelV2Alpha1Type.
+const (
+	Email     NotificationChannelV2Alpha1Type = "email"
+	Slack     NotificationChannelV2Alpha1Type = "slack"
+	TeamEmail NotificationChannelV2Alpha1Type = "team_email"
+)
+
+// Valid indicates whether the value is a known member of the NotificationChannelV2Alpha1Type enum.
+func (e NotificationChannelV2Alpha1Type) Valid() bool {
+	switch e {
+	case Email:
+		return true
+	case Slack:
+		return true
+	case TeamEmail:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for Operand.
 const (
 	OperandContains   Operand = "contains"
@@ -3576,6 +3774,81 @@ const (
 func (e PackageVersionContextType) Valid() bool {
 	switch e {
 	case PackageVersionContextTypePackageVersion:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PanelSummaryV2Alpha1ChartType.
+const (
+	PanelSummaryV2Alpha1ChartTypeGauge     PanelSummaryV2Alpha1ChartType = "gauge"
+	PanelSummaryV2Alpha1ChartTypeNumber    PanelSummaryV2Alpha1ChartType = "number"
+	PanelSummaryV2Alpha1ChartTypePie       PanelSummaryV2Alpha1ChartType = "pie"
+	PanelSummaryV2Alpha1ChartTypeSankey    PanelSummaryV2Alpha1ChartType = "sankey"
+	PanelSummaryV2Alpha1ChartTypeTable     PanelSummaryV2Alpha1ChartType = "table"
+	PanelSummaryV2Alpha1ChartTypeText      PanelSummaryV2Alpha1ChartType = "text"
+	PanelSummaryV2Alpha1ChartTypeTimechart PanelSummaryV2Alpha1ChartType = "timechart"
+	PanelSummaryV2Alpha1ChartTypeToplist   PanelSummaryV2Alpha1ChartType = "toplist"
+)
+
+// Valid indicates whether the value is a known member of the PanelSummaryV2Alpha1ChartType enum.
+func (e PanelSummaryV2Alpha1ChartType) Valid() bool {
+	switch e {
+	case PanelSummaryV2Alpha1ChartTypeGauge:
+		return true
+	case PanelSummaryV2Alpha1ChartTypeNumber:
+		return true
+	case PanelSummaryV2Alpha1ChartTypePie:
+		return true
+	case PanelSummaryV2Alpha1ChartTypeSankey:
+		return true
+	case PanelSummaryV2Alpha1ChartTypeTable:
+		return true
+	case PanelSummaryV2Alpha1ChartTypeText:
+		return true
+	case PanelSummaryV2Alpha1ChartTypeTimechart:
+		return true
+	case PanelSummaryV2Alpha1ChartTypeToplist:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PatchScheduleRequestV2Alpha1Compression.
+const (
+	PatchScheduleRequestV2Alpha1CompressionGzip PatchScheduleRequestV2Alpha1Compression = "gzip"
+	PatchScheduleRequestV2Alpha1CompressionZip  PatchScheduleRequestV2Alpha1Compression = "zip"
+)
+
+// Valid indicates whether the value is a known member of the PatchScheduleRequestV2Alpha1Compression enum.
+func (e PatchScheduleRequestV2Alpha1Compression) Valid() bool {
+	switch e {
+	case PatchScheduleRequestV2Alpha1CompressionGzip:
+		return true
+	case PatchScheduleRequestV2Alpha1CompressionZip:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PatchScheduleRequestV2Alpha1Format.
+const (
+	PatchScheduleRequestV2Alpha1FormatCsv  PatchScheduleRequestV2Alpha1Format = "csv"
+	PatchScheduleRequestV2Alpha1FormatJson PatchScheduleRequestV2Alpha1Format = "json"
+	PatchScheduleRequestV2Alpha1FormatPdf  PatchScheduleRequestV2Alpha1Format = "pdf"
+)
+
+// Valid indicates whether the value is a known member of the PatchScheduleRequestV2Alpha1Format enum.
+func (e PatchScheduleRequestV2Alpha1Format) Valid() bool {
+	switch e {
+	case PatchScheduleRequestV2Alpha1FormatCsv:
+		return true
+	case PatchScheduleRequestV2Alpha1FormatJson:
+		return true
+	case PatchScheduleRequestV2Alpha1FormatPdf:
 		return true
 	default:
 		return false
@@ -3773,22 +4046,22 @@ func (e PromqlMatcherOperator) Valid() bool {
 
 // Defines values for QueryMode.
 const (
-	AdjacencyList QueryMode = "AdjacencyList"
-	Graph         QueryMode = "Graph"
-	RootList      QueryMode = "RootList"
-	Table         QueryMode = "Table"
+	QueryModeAdjacencyList QueryMode = "AdjacencyList"
+	QueryModeGraph         QueryMode = "Graph"
+	QueryModeRootList      QueryMode = "RootList"
+	QueryModeTable         QueryMode = "Table"
 )
 
 // Valid indicates whether the value is a known member of the QueryMode enum.
 func (e QueryMode) Valid() bool {
 	switch e {
-	case AdjacencyList:
+	case QueryModeAdjacencyList:
 		return true
-	case Graph:
+	case QueryModeGraph:
 		return true
-	case RootList:
+	case QueryModeRootList:
 		return true
-	case Table:
+	case QueryModeTable:
 		return true
 	default:
 		return false
@@ -3831,6 +4104,72 @@ func (e QueryResponseV1Status) Valid() bool {
 	case QueryResponseV1StatusError:
 		return true
 	case QueryResponseV1StatusSuccess:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReportFilterV2Alpha1Operator.
+const (
+	ReportFilterV2Alpha1OperatorContains   ReportFilterV2Alpha1Operator = "contains"
+	ReportFilterV2Alpha1OperatorEndsWith   ReportFilterV2Alpha1Operator = "ends_with"
+	ReportFilterV2Alpha1OperatorEq         ReportFilterV2Alpha1Operator = "eq"
+	ReportFilterV2Alpha1OperatorGt         ReportFilterV2Alpha1Operator = "gt"
+	ReportFilterV2Alpha1OperatorGte        ReportFilterV2Alpha1Operator = "gte"
+	ReportFilterV2Alpha1OperatorIn         ReportFilterV2Alpha1Operator = "in"
+	ReportFilterV2Alpha1OperatorLt         ReportFilterV2Alpha1Operator = "lt"
+	ReportFilterV2Alpha1OperatorLte        ReportFilterV2Alpha1Operator = "lte"
+	ReportFilterV2Alpha1OperatorNotEq      ReportFilterV2Alpha1Operator = "not_eq"
+	ReportFilterV2Alpha1OperatorNotIn      ReportFilterV2Alpha1Operator = "not_in"
+	ReportFilterV2Alpha1OperatorStartsWith ReportFilterV2Alpha1Operator = "starts_with"
+)
+
+// Valid indicates whether the value is a known member of the ReportFilterV2Alpha1Operator enum.
+func (e ReportFilterV2Alpha1Operator) Valid() bool {
+	switch e {
+	case ReportFilterV2Alpha1OperatorContains:
+		return true
+	case ReportFilterV2Alpha1OperatorEndsWith:
+		return true
+	case ReportFilterV2Alpha1OperatorEq:
+		return true
+	case ReportFilterV2Alpha1OperatorGt:
+		return true
+	case ReportFilterV2Alpha1OperatorGte:
+		return true
+	case ReportFilterV2Alpha1OperatorIn:
+		return true
+	case ReportFilterV2Alpha1OperatorLt:
+		return true
+	case ReportFilterV2Alpha1OperatorLte:
+		return true
+	case ReportFilterV2Alpha1OperatorNotEq:
+		return true
+	case ReportFilterV2Alpha1OperatorNotIn:
+		return true
+	case ReportFilterV2Alpha1OperatorStartsWith:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReportResponseV2Alpha1Kind.
+const (
+	ReportResponseV2Alpha1KindCompliance              ReportResponseV2Alpha1Kind = "compliance"
+	ReportResponseV2Alpha1KindPostureV2               ReportResponseV2Alpha1Kind = "posture_v2"
+	ReportResponseV2Alpha1KindVulnerabilityManagement ReportResponseV2Alpha1Kind = "vulnerability_management"
+)
+
+// Valid indicates whether the value is a known member of the ReportResponseV2Alpha1Kind enum.
+func (e ReportResponseV2Alpha1Kind) Valid() bool {
+	switch e {
+	case ReportResponseV2Alpha1KindCompliance:
+		return true
+	case ReportResponseV2Alpha1KindPostureV2:
+		return true
+	case ReportResponseV2Alpha1KindVulnerabilityManagement:
 		return true
 	default:
 		return false
@@ -4197,6 +4536,309 @@ func (e RulesResponseV1Status) Valid() bool {
 	}
 }
 
+// Defines values for RunBaseV2Alpha1Compression.
+const (
+	RunBaseV2Alpha1CompressionGzip RunBaseV2Alpha1Compression = "gzip"
+	RunBaseV2Alpha1CompressionZip  RunBaseV2Alpha1Compression = "zip"
+)
+
+// Valid indicates whether the value is a known member of the RunBaseV2Alpha1Compression enum.
+func (e RunBaseV2Alpha1Compression) Valid() bool {
+	switch e {
+	case RunBaseV2Alpha1CompressionGzip:
+		return true
+	case RunBaseV2Alpha1CompressionZip:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RunBaseV2Alpha1Format.
+const (
+	RunBaseV2Alpha1FormatCsv  RunBaseV2Alpha1Format = "csv"
+	RunBaseV2Alpha1FormatJson RunBaseV2Alpha1Format = "json"
+	RunBaseV2Alpha1FormatPdf  RunBaseV2Alpha1Format = "pdf"
+)
+
+// Valid indicates whether the value is a known member of the RunBaseV2Alpha1Format enum.
+func (e RunBaseV2Alpha1Format) Valid() bool {
+	switch e {
+	case RunBaseV2Alpha1FormatCsv:
+		return true
+	case RunBaseV2Alpha1FormatJson:
+		return true
+	case RunBaseV2Alpha1FormatPdf:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RunBaseV2Alpha1Status.
+const (
+	RunBaseV2Alpha1StatusCompleted RunBaseV2Alpha1Status = "completed"
+	RunBaseV2Alpha1StatusFailed    RunBaseV2Alpha1Status = "failed"
+	RunBaseV2Alpha1StatusPending   RunBaseV2Alpha1Status = "pending"
+	RunBaseV2Alpha1StatusRunning   RunBaseV2Alpha1Status = "running"
+)
+
+// Valid indicates whether the value is a known member of the RunBaseV2Alpha1Status enum.
+func (e RunBaseV2Alpha1Status) Valid() bool {
+	switch e {
+	case RunBaseV2Alpha1StatusCompleted:
+		return true
+	case RunBaseV2Alpha1StatusFailed:
+		return true
+	case RunBaseV2Alpha1StatusPending:
+		return true
+	case RunBaseV2Alpha1StatusRunning:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RunCompletedV2Alpha1Compression.
+const (
+	RunCompletedV2Alpha1CompressionGzip RunCompletedV2Alpha1Compression = "gzip"
+	RunCompletedV2Alpha1CompressionZip  RunCompletedV2Alpha1Compression = "zip"
+)
+
+// Valid indicates whether the value is a known member of the RunCompletedV2Alpha1Compression enum.
+func (e RunCompletedV2Alpha1Compression) Valid() bool {
+	switch e {
+	case RunCompletedV2Alpha1CompressionGzip:
+		return true
+	case RunCompletedV2Alpha1CompressionZip:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RunCompletedV2Alpha1Format.
+const (
+	RunCompletedV2Alpha1FormatCsv  RunCompletedV2Alpha1Format = "csv"
+	RunCompletedV2Alpha1FormatJson RunCompletedV2Alpha1Format = "json"
+	RunCompletedV2Alpha1FormatPdf  RunCompletedV2Alpha1Format = "pdf"
+)
+
+// Valid indicates whether the value is a known member of the RunCompletedV2Alpha1Format enum.
+func (e RunCompletedV2Alpha1Format) Valid() bool {
+	switch e {
+	case RunCompletedV2Alpha1FormatCsv:
+		return true
+	case RunCompletedV2Alpha1FormatJson:
+		return true
+	case RunCompletedV2Alpha1FormatPdf:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RunCompletedV2Alpha1Status.
+const (
+	RunCompletedV2Alpha1StatusCompleted RunCompletedV2Alpha1Status = "completed"
+)
+
+// Valid indicates whether the value is a known member of the RunCompletedV2Alpha1Status enum.
+func (e RunCompletedV2Alpha1Status) Valid() bool {
+	switch e {
+	case RunCompletedV2Alpha1StatusCompleted:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RunFailedV2Alpha1Compression.
+const (
+	RunFailedV2Alpha1CompressionGzip RunFailedV2Alpha1Compression = "gzip"
+	RunFailedV2Alpha1CompressionZip  RunFailedV2Alpha1Compression = "zip"
+)
+
+// Valid indicates whether the value is a known member of the RunFailedV2Alpha1Compression enum.
+func (e RunFailedV2Alpha1Compression) Valid() bool {
+	switch e {
+	case RunFailedV2Alpha1CompressionGzip:
+		return true
+	case RunFailedV2Alpha1CompressionZip:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RunFailedV2Alpha1Format.
+const (
+	RunFailedV2Alpha1FormatCsv  RunFailedV2Alpha1Format = "csv"
+	RunFailedV2Alpha1FormatJson RunFailedV2Alpha1Format = "json"
+	RunFailedV2Alpha1FormatPdf  RunFailedV2Alpha1Format = "pdf"
+)
+
+// Valid indicates whether the value is a known member of the RunFailedV2Alpha1Format enum.
+func (e RunFailedV2Alpha1Format) Valid() bool {
+	switch e {
+	case RunFailedV2Alpha1FormatCsv:
+		return true
+	case RunFailedV2Alpha1FormatJson:
+		return true
+	case RunFailedV2Alpha1FormatPdf:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RunFailedV2Alpha1Status.
+const (
+	RunFailedV2Alpha1StatusFailed RunFailedV2Alpha1Status = "failed"
+)
+
+// Valid indicates whether the value is a known member of the RunFailedV2Alpha1Status enum.
+func (e RunFailedV2Alpha1Status) Valid() bool {
+	switch e {
+	case RunFailedV2Alpha1StatusFailed:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RunPendingV2Alpha1Compression.
+const (
+	RunPendingV2Alpha1CompressionGzip RunPendingV2Alpha1Compression = "gzip"
+	RunPendingV2Alpha1CompressionZip  RunPendingV2Alpha1Compression = "zip"
+)
+
+// Valid indicates whether the value is a known member of the RunPendingV2Alpha1Compression enum.
+func (e RunPendingV2Alpha1Compression) Valid() bool {
+	switch e {
+	case RunPendingV2Alpha1CompressionGzip:
+		return true
+	case RunPendingV2Alpha1CompressionZip:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RunPendingV2Alpha1Format.
+const (
+	RunPendingV2Alpha1FormatCsv  RunPendingV2Alpha1Format = "csv"
+	RunPendingV2Alpha1FormatJson RunPendingV2Alpha1Format = "json"
+	RunPendingV2Alpha1FormatPdf  RunPendingV2Alpha1Format = "pdf"
+)
+
+// Valid indicates whether the value is a known member of the RunPendingV2Alpha1Format enum.
+func (e RunPendingV2Alpha1Format) Valid() bool {
+	switch e {
+	case RunPendingV2Alpha1FormatCsv:
+		return true
+	case RunPendingV2Alpha1FormatJson:
+		return true
+	case RunPendingV2Alpha1FormatPdf:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RunPendingV2Alpha1Status.
+const (
+	RunPendingV2Alpha1StatusPending RunPendingV2Alpha1Status = "pending"
+)
+
+// Valid indicates whether the value is a known member of the RunPendingV2Alpha1Status enum.
+func (e RunPendingV2Alpha1Status) Valid() bool {
+	switch e {
+	case RunPendingV2Alpha1StatusPending:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RunResponseV2Alpha1Status.
+const (
+	RunResponseV2Alpha1StatusCompleted RunResponseV2Alpha1Status = "completed"
+	RunResponseV2Alpha1StatusFailed    RunResponseV2Alpha1Status = "failed"
+	RunResponseV2Alpha1StatusPending   RunResponseV2Alpha1Status = "pending"
+	RunResponseV2Alpha1StatusRunning   RunResponseV2Alpha1Status = "running"
+)
+
+// Valid indicates whether the value is a known member of the RunResponseV2Alpha1Status enum.
+func (e RunResponseV2Alpha1Status) Valid() bool {
+	switch e {
+	case RunResponseV2Alpha1StatusCompleted:
+		return true
+	case RunResponseV2Alpha1StatusFailed:
+		return true
+	case RunResponseV2Alpha1StatusPending:
+		return true
+	case RunResponseV2Alpha1StatusRunning:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RunRunningV2Alpha1Compression.
+const (
+	RunRunningV2Alpha1CompressionGzip RunRunningV2Alpha1Compression = "gzip"
+	RunRunningV2Alpha1CompressionZip  RunRunningV2Alpha1Compression = "zip"
+)
+
+// Valid indicates whether the value is a known member of the RunRunningV2Alpha1Compression enum.
+func (e RunRunningV2Alpha1Compression) Valid() bool {
+	switch e {
+	case RunRunningV2Alpha1CompressionGzip:
+		return true
+	case RunRunningV2Alpha1CompressionZip:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RunRunningV2Alpha1Format.
+const (
+	RunRunningV2Alpha1FormatCsv  RunRunningV2Alpha1Format = "csv"
+	RunRunningV2Alpha1FormatJson RunRunningV2Alpha1Format = "json"
+	RunRunningV2Alpha1FormatPdf  RunRunningV2Alpha1Format = "pdf"
+)
+
+// Valid indicates whether the value is a known member of the RunRunningV2Alpha1Format enum.
+func (e RunRunningV2Alpha1Format) Valid() bool {
+	switch e {
+	case RunRunningV2Alpha1FormatCsv:
+		return true
+	case RunRunningV2Alpha1FormatJson:
+		return true
+	case RunRunningV2Alpha1FormatPdf:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RunRunningV2Alpha1Status.
+const (
+	RunRunningV2Alpha1StatusRunning RunRunningV2Alpha1Status = "running"
+)
+
+// Valid indicates whether the value is a known member of the RunRunningV2Alpha1Status enum.
+func (e RunRunningV2Alpha1Status) Valid() bool {
+	switch e {
+	case RunRunningV2Alpha1StatusRunning:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for SbomResultResponseBomFormat.
 const (
 	CycloneDX SbomResultResponseBomFormat = "CycloneDX"
@@ -4290,6 +4932,108 @@ func (e ScanResultResponseStage) Valid() bool {
 	case ScanResultResponseStageRegistry:
 		return true
 	case ScanResultResponseStageRuntime:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ScheduleRequestV2Alpha1Compression.
+const (
+	ScheduleRequestV2Alpha1CompressionGzip ScheduleRequestV2Alpha1Compression = "gzip"
+	ScheduleRequestV2Alpha1CompressionZip  ScheduleRequestV2Alpha1Compression = "zip"
+)
+
+// Valid indicates whether the value is a known member of the ScheduleRequestV2Alpha1Compression enum.
+func (e ScheduleRequestV2Alpha1Compression) Valid() bool {
+	switch e {
+	case ScheduleRequestV2Alpha1CompressionGzip:
+		return true
+	case ScheduleRequestV2Alpha1CompressionZip:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ScheduleRequestV2Alpha1Format.
+const (
+	ScheduleRequestV2Alpha1FormatCsv  ScheduleRequestV2Alpha1Format = "csv"
+	ScheduleRequestV2Alpha1FormatJson ScheduleRequestV2Alpha1Format = "json"
+	ScheduleRequestV2Alpha1FormatPdf  ScheduleRequestV2Alpha1Format = "pdf"
+)
+
+// Valid indicates whether the value is a known member of the ScheduleRequestV2Alpha1Format enum.
+func (e ScheduleRequestV2Alpha1Format) Valid() bool {
+	switch e {
+	case ScheduleRequestV2Alpha1FormatCsv:
+		return true
+	case ScheduleRequestV2Alpha1FormatJson:
+		return true
+	case ScheduleRequestV2Alpha1FormatPdf:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ScheduleResponseV2Alpha1Compression.
+const (
+	ScheduleResponseV2Alpha1CompressionGzip ScheduleResponseV2Alpha1Compression = "gzip"
+	ScheduleResponseV2Alpha1CompressionZip  ScheduleResponseV2Alpha1Compression = "zip"
+)
+
+// Valid indicates whether the value is a known member of the ScheduleResponseV2Alpha1Compression enum.
+func (e ScheduleResponseV2Alpha1Compression) Valid() bool {
+	switch e {
+	case ScheduleResponseV2Alpha1CompressionGzip:
+		return true
+	case ScheduleResponseV2Alpha1CompressionZip:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ScheduleResponseV2Alpha1Format.
+const (
+	ScheduleResponseV2Alpha1FormatCsv  ScheduleResponseV2Alpha1Format = "csv"
+	ScheduleResponseV2Alpha1FormatJson ScheduleResponseV2Alpha1Format = "json"
+	ScheduleResponseV2Alpha1FormatPdf  ScheduleResponseV2Alpha1Format = "pdf"
+)
+
+// Valid indicates whether the value is a known member of the ScheduleResponseV2Alpha1Format enum.
+func (e ScheduleResponseV2Alpha1Format) Valid() bool {
+	switch e {
+	case ScheduleResponseV2Alpha1FormatCsv:
+		return true
+	case ScheduleResponseV2Alpha1FormatJson:
+		return true
+	case ScheduleResponseV2Alpha1FormatPdf:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ScheduleResponseV2Alpha1Status.
+const (
+	ScheduleResponseV2Alpha1StatusActive            ScheduleResponseV2Alpha1Status = "active"
+	ScheduleResponseV2Alpha1StatusActiveLimitedData ScheduleResponseV2Alpha1Status = "active_limited_data"
+	ScheduleResponseV2Alpha1StatusError             ScheduleResponseV2Alpha1Status = "error"
+	ScheduleResponseV2Alpha1StatusInactive          ScheduleResponseV2Alpha1Status = "inactive"
+)
+
+// Valid indicates whether the value is a known member of the ScheduleResponseV2Alpha1Status enum.
+func (e ScheduleResponseV2Alpha1Status) Valid() bool {
+	switch e {
+	case ScheduleResponseV2Alpha1StatusActive:
+		return true
+	case ScheduleResponseV2Alpha1StatusActiveLimitedData:
+		return true
+	case ScheduleResponseV2Alpha1StatusError:
+		return true
+	case ScheduleResponseV2Alpha1StatusInactive:
 		return true
 	default:
 		return false
@@ -4473,6 +5217,27 @@ func (e TeamRoleV1) Valid() bool {
 	case ROLETEAMSERVICEMANAGER:
 		return true
 	case ROLETEAMSTANDARD:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for TemplateV2Alpha1Kind.
+const (
+	TemplateV2Alpha1KindCompliance              TemplateV2Alpha1Kind = "compliance"
+	TemplateV2Alpha1KindPostureV2               TemplateV2Alpha1Kind = "posture_v2"
+	TemplateV2Alpha1KindVulnerabilityManagement TemplateV2Alpha1Kind = "vulnerability_management"
+)
+
+// Valid indicates whether the value is a known member of the TemplateV2Alpha1Kind enum.
+func (e TemplateV2Alpha1Kind) Valid() bool {
+	switch e {
+	case TemplateV2Alpha1KindCompliance:
+		return true
+	case TemplateV2Alpha1KindPostureV2:
+		return true
+	case TemplateV2Alpha1KindVulnerabilityManagement:
 		return true
 	default:
 		return false
@@ -4692,6 +5457,45 @@ func (e UpdateRiskAcceptedReason) Valid() bool {
 	case UpdateRiskAcceptedReasonRiskOwned:
 		return true
 	case UpdateRiskAcceptedReasonRiskTransferred:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateScheduleRequestV2Alpha1Compression.
+const (
+	UpdateScheduleRequestV2Alpha1CompressionGzip UpdateScheduleRequestV2Alpha1Compression = "gzip"
+	UpdateScheduleRequestV2Alpha1CompressionZip  UpdateScheduleRequestV2Alpha1Compression = "zip"
+)
+
+// Valid indicates whether the value is a known member of the UpdateScheduleRequestV2Alpha1Compression enum.
+func (e UpdateScheduleRequestV2Alpha1Compression) Valid() bool {
+	switch e {
+	case UpdateScheduleRequestV2Alpha1CompressionGzip:
+		return true
+	case UpdateScheduleRequestV2Alpha1CompressionZip:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateScheduleRequestV2Alpha1Format.
+const (
+	UpdateScheduleRequestV2Alpha1FormatCsv  UpdateScheduleRequestV2Alpha1Format = "csv"
+	UpdateScheduleRequestV2Alpha1FormatJson UpdateScheduleRequestV2Alpha1Format = "json"
+	UpdateScheduleRequestV2Alpha1FormatPdf  UpdateScheduleRequestV2Alpha1Format = "pdf"
+)
+
+// Valid indicates whether the value is a known member of the UpdateScheduleRequestV2Alpha1Format enum.
+func (e UpdateScheduleRequestV2Alpha1Format) Valid() bool {
+	switch e {
+	case UpdateScheduleRequestV2Alpha1FormatCsv:
+		return true
+	case UpdateScheduleRequestV2Alpha1FormatJson:
+		return true
+	case UpdateScheduleRequestV2Alpha1FormatPdf:
 		return true
 	default:
 		return false
@@ -5289,6 +6093,48 @@ func (e RoleDisplayNamePath) Valid() bool {
 	}
 }
 
+// Defines values for RunStatusQuery.
+const (
+	RunStatusQueryCompleted RunStatusQuery = "completed"
+	RunStatusQueryFailed    RunStatusQuery = "failed"
+	RunStatusQueryPending   RunStatusQuery = "pending"
+	RunStatusQueryRunning   RunStatusQuery = "running"
+)
+
+// Valid indicates whether the value is a known member of the RunStatusQuery enum.
+func (e RunStatusQuery) Valid() bool {
+	switch e {
+	case RunStatusQueryCompleted:
+		return true
+	case RunStatusQueryFailed:
+		return true
+	case RunStatusQueryPending:
+		return true
+	case RunStatusQueryRunning:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RunTriggerQuery.
+const (
+	RunTriggerQueryOnDemand RunTriggerQuery = "on_demand"
+	RunTriggerQuerySchedule RunTriggerQuery = "schedule"
+)
+
+// Valid indicates whether the value is a known member of the RunTriggerQuery enum.
+func (e RunTriggerQuery) Valid() bool {
+	switch e {
+	case RunTriggerQueryOnDemand:
+		return true
+	case RunTriggerQuerySchedule:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for SsoProductIdPath.
 const (
 	SsoProductIdPathMonitor SsoProductIdPath = "monitor"
@@ -5387,16 +6233,58 @@ func (e ListJobsV1ParamsStatus) Valid() bool {
 
 // Defines values for ListJobsV1ParamsKind.
 const (
-	ComplianceReadiness     ListJobsV1ParamsKind = "compliance_readiness"
-	VulnerabilityManagement ListJobsV1ParamsKind = "vulnerability_management"
+	ListJobsV1ParamsKindComplianceReadiness     ListJobsV1ParamsKind = "compliance_readiness"
+	ListJobsV1ParamsKindVulnerabilityManagement ListJobsV1ParamsKind = "vulnerability_management"
 )
 
 // Valid indicates whether the value is a known member of the ListJobsV1ParamsKind enum.
 func (e ListJobsV1ParamsKind) Valid() bool {
 	switch e {
-	case ComplianceReadiness:
+	case ListJobsV1ParamsKindComplianceReadiness:
 		return true
-	case VulnerabilityManagement:
+	case ListJobsV1ParamsKindVulnerabilityManagement:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ListRunsV2Alpha1ParamsTrigger.
+const (
+	ListRunsV2Alpha1ParamsTriggerOnDemand ListRunsV2Alpha1ParamsTrigger = "on_demand"
+	ListRunsV2Alpha1ParamsTriggerSchedule ListRunsV2Alpha1ParamsTrigger = "schedule"
+)
+
+// Valid indicates whether the value is a known member of the ListRunsV2Alpha1ParamsTrigger enum.
+func (e ListRunsV2Alpha1ParamsTrigger) Valid() bool {
+	switch e {
+	case ListRunsV2Alpha1ParamsTriggerOnDemand:
+		return true
+	case ListRunsV2Alpha1ParamsTriggerSchedule:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ListRunsV2Alpha1ParamsStatus.
+const (
+	ListRunsV2Alpha1ParamsStatusCompleted ListRunsV2Alpha1ParamsStatus = "completed"
+	ListRunsV2Alpha1ParamsStatusFailed    ListRunsV2Alpha1ParamsStatus = "failed"
+	ListRunsV2Alpha1ParamsStatusPending   ListRunsV2Alpha1ParamsStatus = "pending"
+	ListRunsV2Alpha1ParamsStatusRunning   ListRunsV2Alpha1ParamsStatus = "running"
+)
+
+// Valid indicates whether the value is a known member of the ListRunsV2Alpha1ParamsStatus enum.
+func (e ListRunsV2Alpha1ParamsStatus) Valid() bool {
+	switch e {
+	case ListRunsV2Alpha1ParamsStatusCompleted:
+		return true
+	case ListRunsV2Alpha1ParamsStatusFailed:
+		return true
+	case ListRunsV2Alpha1ParamsStatusPending:
+		return true
+	case ListRunsV2Alpha1ParamsStatusRunning:
 		return true
 	default:
 		return false
@@ -7707,6 +8595,192 @@ type AutomationsPageV1Alpha1 struct {
 	Total *int64 `json:"total,omitempty"`
 }
 
+// AvailableFilterV2Alpha1 A filter a report, template, or panel supports — which filters apply and how to obtain valid values.
+// Customer-scoped values are never embedded; `valueSource` tells you where to get them.
+//
+// Read `valueSource` first and branch on it. Do not infer the source from which of
+// `values`/`valuesFrom` happens to be present.
+//
+// `type` tells you which field of `ReportFilter` carries the value; `operators` tells you how that
+// value may be matched. Both are declared by the filter's underlying query, so neither is fixed
+// across templates — read them here rather than assuming.
+type AvailableFilterV2Alpha1 struct {
+	// DependsOn Other filter keys whose selected values constrain this filter's valid values. When present, the
+	// caller SHOULD resolve those filters first and scope this filter's option lookup by them —
+	// otherwise it may send a value that is rejected with `422`.
+	//
+	// Example: a compliance template's `policy` depends on `zone`, because only the policies attached
+	// to the selected zone are valid.
+	DependsOn *[]string `json:"dependsOn,omitempty"`
+
+	// Description Human-readable explanation of what this filter selects, and of the unit for `number` filters
+	// (for example "days until the CISA-KEV due date"). Present when the underlying query declares
+	// one.
+	//
+	//
+	// Example: Severity of the vulnerability.
+	Description *string `json:"description,omitempty"`
+
+	// Key Stable filter key, always `snake_case` — safe to use unescaped in a query string.
+	//
+	// A key is **stable across templates**: where a filter appears on more than one template it uses the
+	// same key on each, even where the underlying queries name the field differently. Some address a
+	// nested field internally; the key is always the published name, never the internal one — the
+	// CISA-KEV due-date filter is `vuln_cisa_kev_due_date` on every template that offers it.
+	//
+	// **Which keys are report-wide and which are per-panel is decided per template, not globally.**
+	// Each template promotes a curated set of keys to report level; everything else its panels' queries
+	// support stays per-panel. So the same key can be report-wide on one template and per-panel on
+	// another — `vuln_severity` is report-wide on the vulnerability program report and per-panel on the
+	// runtime container report. The two sets never overlap **within one template**: a key listed in the
+	// template's report-level `availableFilters` is excluded from every `panels[].availableFilters`, and
+	// vice versa.
+	//
+	// Treat a key as an opaque identifier: read it from the `availableFilters` of the level you intend to
+	// set it at, and send it back unchanged rather than constructing it or assuming its level. In
+	// particular it is the filter's own name, not the name of the column the report renders — the two
+	// differ, and only this one is accepted.
+	//
+	//
+	// Example: vuln_severity
+	Key string `json:"key"`
+
+	// Operators Operators this filter accepts, in the order the underlying query declares them. **The first
+	// entry is the default** — the one applied when a `ReportFilter` for this key omits `operator`.
+	//
+	// Send only an operator listed here; anything else is rejected with `422`. The list is per-filter
+	// and per-template, so a key that supports `contains` on one template may not on another.
+	//
+	// * `in` / `not_in` — membership against `values`; `not_in` is the negation.
+	// * `eq` / `not_eq` — equality against a single `value`. On a presence filter — one with no `values`
+	//   and only these two operators — send `value: ""` and the operator alone decides: `not_eq` matches
+	//   records that have the field set, `eq` matches records that do not.
+	// * `contains` / `starts_with` / `ends_with` — substring, prefix and suffix match against a single
+	//   string `value`, case-sensitive. Offered together, and only for `open` filters, where they are the
+	//   only way to match high-cardinality values you cannot enumerate.
+	// * `lt` / `lte` / `gt` / `gte` — ordered comparison against a single `value`; offered for `date`
+	//   and `number` filters.
+	Operators []AvailableFilterV2Alpha1Operators `json:"operators"`
+
+	// Required Whether this filter is always applied. `true` means the underlying query cannot run without a
+	// value for it, so it can be **narrowed but never removed**:
+	//
+	// * Omit it from a create or update and the current value stays — the template's default on create,
+	//   the report's existing value on update.
+	// * It survives a clear. Sending `filters: []` for a panel resets its optional filters and leaves
+	//   the required ones at their current values; there is no request that removes one.
+	// * Send it like any other filter to change its value, subject to its `operators`.
+	//
+	// `false` means the filter is optional and can be omitted or cleared freely. Always present, like the
+	// other capability fields on this object, so a caller never has to infer it. Required filters are
+	// rare — most templates have none — and they are always echoed back in `filters` so a reader sees the
+	// full scope actually in force.
+	//
+	//
+	// Example: false
+	Required bool `json:"required"`
+
+	// Type What kind of value this filter takes:
+	//
+	// * `entity` — a customer entity, identified by id. Pair with `valueSource: resource`.
+	// * `enum` — one of a fixed, customer-independent vocabulary. Pair with `valueSource: inline`, which
+	//   lists the vocabulary in `values`.
+	// * `string` — free text drawn from the customer's own data: an image name, a package name, a CVE id.
+	//   Pair with `valueSource: open`, since the set is too large to enumerate. Match it exactly with
+	//   `eq`/`in`, or partially with `contains`/`starts_with`/`ends_with`.
+	// * `boolean` — a flag.
+	// * `date` — an instant, as an RFC 3339 string. Express a range as two filter entries on the same
+	//   `key`, one `gte` and one `lte`.
+	// * `number` — a numeric quantity; the unit is stated in `description`. Whole days for window filters
+	//   such as a CISA-KEV due-date window; fractional where the quantity is naturally fractional, such
+	//   as a CVSS score of `7.5`.
+	//
+	// **`type` describes the value, not which field carries it.** The carrier is decided by `operator`:
+	// `in`/`not_in` take the `values` array, every other operator takes the scalar `value`. So the same
+	// `type` can use either field — `vuln_id` is a `string` matched with `in`, `container_image` is a
+	// `string` matched with `contains`.
+	//
+	//
+	// Example: enum
+	Type AvailableFilterV2Alpha1Type `json:"type"`
+
+	// ValueSource Where valid values come from — the caller MUST branch on this:
+	//
+	// * `inline` — a fixed, customer-independent set, listed in `values`. Pick from that list.
+	// * `resource` — customer-scoped entities supplied by another API, named in `valuesFrom`. Fetch
+	//   options from it and pass the returned ids.
+	// * `open` — high-cardinality values drawn from the customer's own data (container image names,
+	//   package names, hostnames). **Not enumerable through this API**: no `values`, no `valuesFrom`.
+	//   Send exact values you already know from your environment, or use the `contains` operator when
+	//   it appears in `operators` to match on a substring instead.
+	// * `none` — the filter takes no value list; `boolean`, `date` and `number` filters use this.
+	//
+	//
+	// Example: inline
+	ValueSource AvailableFilterV2Alpha1ValueSource `json:"valueSource"`
+
+	// Values Accepted values. Present **only** when `valueSource` is `inline`.
+	//
+	// Always lowercase `snake_case`, regardless of how the value is spelled internally — the service
+	// translates to the internal form (so `high` may map to an internal `High`, or to a numeric
+	// severity code). Send these values verbatim; do not send internal spellings or codes.
+	Values *[]string `json:"values,omitempty"`
+
+	// ValuesFrom Name of the API supplying valid values, as entity ids. Present **only** when `valueSource` is
+	// `resource`.
+	//
+	// A free-form resource name, not a fixed enumeration: the set of names is **not exhaustive** and
+	// may grow in future minor versions, so treat an unrecognised name as a resource to fetch rather
+	// than an error. It is **not guaranteed to be a platform-wide resource collection**, and the
+	// returned set may be a **subset** scoped to what this report kind can actually report on — the
+	// same `key` may resolve against different sources for different template kinds. Always fetch from
+	// the name given here rather than assuming a platform endpoint.
+	//
+	//
+	// Example: zones
+	ValuesFrom *string `json:"valuesFrom,omitempty"`
+}
+
+// AvailableFilterV2Alpha1Operators Example: in
+type AvailableFilterV2Alpha1Operators string
+
+// AvailableFilterV2Alpha1Type What kind of value this filter takes:
+//
+//   - `entity` — a customer entity, identified by id. Pair with `valueSource: resource`.
+//   - `enum` — one of a fixed, customer-independent vocabulary. Pair with `valueSource: inline`, which
+//     lists the vocabulary in `values`.
+//   - `string` — free text drawn from the customer's own data: an image name, a package name, a CVE id.
+//     Pair with `valueSource: open`, since the set is too large to enumerate. Match it exactly with
+//     `eq`/`in`, or partially with `contains`/`starts_with`/`ends_with`.
+//   - `boolean` — a flag.
+//   - `date` — an instant, as an RFC 3339 string. Express a range as two filter entries on the same
+//     `key`, one `gte` and one `lte`.
+//   - `number` — a numeric quantity; the unit is stated in `description`. Whole days for window filters
+//     such as a CISA-KEV due-date window; fractional where the quantity is naturally fractional, such
+//     as a CVSS score of `7.5`.
+//
+// **`type` describes the value, not which field carries it.** The carrier is decided by `operator`:
+// `in`/`not_in` take the `values` array, every other operator takes the scalar `value`. So the same
+// `type` can use either field — `vuln_id` is a `string` matched with `in`, `container_image` is a
+// `string` matched with `contains`.
+//
+// Example: enum
+type AvailableFilterV2Alpha1Type string
+
+// AvailableFilterV2Alpha1ValueSource Where valid values come from — the caller MUST branch on this:
+//
+//   - `inline` — a fixed, customer-independent set, listed in `values`. Pick from that list.
+//   - `resource` — customer-scoped entities supplied by another API, named in `valuesFrom`. Fetch
+//     options from it and pass the returned ids.
+//   - `open` — high-cardinality values drawn from the customer's own data (container image names,
+//     package names, hostnames). **Not enumerable through this API**: no `values`, no `valuesFrom`.
+//     Send exact values you already know from your environment, or use the `contains` operator when
+//     it appears in `operators` to match on a substring instead.
+//   - `none` — the filter takes no value list; `boolean`, `date` and `number` filters use this.
+//
+// Example: inline
+type AvailableFilterV2Alpha1ValueSource string
+
 // BaseAction defines model for BaseAction.
 type BaseAction struct {
 	// Type Action type.
@@ -9737,6 +10811,66 @@ type CreateQradarIntegrationRequest struct {
 	Type IntegrationType `json:"type"`
 }
 
+// CreateReportRequestV2Alpha1 Create a report from a template. Optionally create a schedule in the same request (embedded
+// `schedule`). Template-based only — panels/layout are never authored via the API.
+type CreateReportRequestV2Alpha1 struct {
+	// DefaultTimeframe The report's own default reporting window, used when a run created from it does not state one. Defaults to the template's `defaultTimePreset`.
+	// `preset` must be one of the template's `timePresets`; any other value is rejected with `422`.
+	//
+	// Relative only, and advisory: a run may always report over a different window. Set it so that the
+	// report carries the period it is meant to be read over, rather than every caller having to
+	// remember.
+	DefaultTimeframe *ScheduleTimeframeV2Alpha1 `json:"defaultTimeframe,omitempty"`
+
+	// Description Report description.
+	//
+	// Example: Weekly critical/high in prod.
+	Description *string `json:"description,omitempty"`
+
+	// Filters Report-wide filters, validated against the template's report-level `availableFilters`.
+	//
+	// Each applies to **every panel whose query supports that key** — one filter here is equivalent to
+	// setting it on each of those panels, which is what makes the generated document internally
+	// consistent. Panels whose queries do not use the key are unaffected.
+	//
+	// A compliance report takes exactly one `zone` and one `policy`; any other number is rejected with `422`.
+	//
+	// Which keys are accepted here is decided by the template, not fixed across the API: some templates
+	// promote most of their filter surface to report level and leave their panels with none, others
+	// promote only `zone`. Read the template's `availableFilters` rather than assuming. Keys the template
+	// leaves per-panel go in `panels` instead, and the two sets never overlap.
+	Filters *[]ReportFilterV2Alpha1 `json:"filters,omitempty"`
+
+	// Name Report name. Leading and trailing whitespace is trimmed; a name that is empty once trimmed is rejected.
+	//
+	// Example: Prod runtime vulns
+	Name string `json:"name"`
+
+	// Panels Per-panel filters. Sparse — list only the panels you want to scope; omitted panels keep the
+	// template's defaults. Panels themselves are never authored via the API; this only sets filters on
+	// panels the template already defines.
+	Panels *[]PanelFilterAssignmentV2Alpha1 `json:"panels,omitempty"`
+
+	// Schedule A schedule's settings. Embedded as-is in `POST /reports`, where the report is implicit. `POST /schedules`
+	// uses `CreateScheduleRequest`, which requires `reportId`; `PUT /schedules/{scheduleId}` uses
+	// `UpdateScheduleRequest`, which omits it.
+	//
+	// **A schedule describes only *when* and *in what form* a report is produced, never *what it covers*.**
+	// Scope is not part of this payload and cannot be set per schedule — to report on a different scope, create
+	// a second report.
+	//
+	// A schedule has **no scope of its own at all**. Every run covers the scope its report has **when the run
+	// fires**, so editing a report's `filters` changes what all of that report's existing schedules deliver, from
+	// their next run onwards — and nothing in this payload or in the schedule response reflects that change. Two
+	// schedules on the same report therefore always deliver the same scope as each other.
+	Schedule *ScheduleRequestV2Alpha1 `json:"schedule,omitempty"`
+
+	// TemplateId Identifier (slug) of the template to create the report from.
+	//
+	// Example: runtime_container_vulnerabilities
+	TemplateId string `json:"templateId"`
+}
+
 // CreateRiskAcceptedRequest defines model for CreateRiskAcceptedRequest.
 type CreateRiskAcceptedRequest struct {
 	// Context If entityType is not `vulnerability`, `policyRule` or `package`, you should use `Empty Matcher` in the context. The platform-scoping matchers — `assetType`, `osName`, `osNameNot`, `architecture` and `architectureNot` — are valid only with entityType `vulnerability`, and each must be the definition's only context. New matcher variants MAY be added in a minor version, so clients MUST handle an unrecognised `contextType` defensively (surface it as an opaque value and continue) rather than failing to deserialize.
@@ -9790,6 +10924,243 @@ type CreateRiskAcceptedRequestReason string
 
 // CreateRiskAcceptedRequestStages Example: runtime
 type CreateRiskAcceptedRequestStages string
+
+// CreateRunRequestV2Alpha1 Generate a report on demand. Scope is not part of this payload and cannot be set per run — to export a
+// different scope, edit the report or create another one. The run records the report's scope **as it is at
+// the moment the run is created**, and `RunResponse.filters` reports that snapshot. Set `panelId` for a per-panel
+// export (CSV/JSON only). No password (password protection is a schedule-only feature).\
+// \
+// On-demand generation covers **recent history only** — see the recency limit on `timeframe`.
+type CreateRunRequestV2Alpha1 struct {
+	// Compression Compression of the produced file. Defaults to `gzip`, which is what the Sysdig UI sends; `zip` is
+	// the opt-in choice, and the only one a scheduled delivery password can protect.
+	//
+	//
+	// Example: gzip
+	Compression *CreateRunRequestV2Alpha1Compression `json:"compression,omitempty"`
+
+	// FileName Base name for the produced file. Defaults to the report's name (or the panel's name for a
+	// per-panel export).\
+	// \
+	// This is a **base name, not the final file name**. The service always appends a UTC timestamp
+	// and the format/compression extensions, so `fileName: "prod-runtime-vulns"` with
+	// `format: csv` and `compression: gzip` yields
+	// `prod-runtime-vulns_2026-07-28T10_05_00.000Z.csv.gz`. With `compression: zip` only the `.zip`
+	// extension is appended.\
+	// \
+	// Any path components are stripped and `:` is replaced with `_`, so the value cannot influence
+	// the storage location. Send a non-empty string or omit the field entirely; an empty string is
+	// rejected with `422`.\
+	// \
+	// On-demand only — a schedule's runs are always named after the report.
+	//
+	//
+	// Example: prod-runtime-vulns
+	FileName *string `json:"fileName,omitempty"`
+
+	// Format Output format. **Not every format is valid for every report** — the permitted set is
+	// determined by the `kind` of the template the report was created from (see `Template.kind`):\
+	// \
+	// - `posture_v2` — `csv` only\
+	// - `compliance` — `pdf` only\
+	// - `vulnerability_management` — `csv`, `pdf` or `json`\
+	// \
+	// An unsupported combination is rejected with `422`.\
+	// \
+	// Where a report's kind permits `csv` or `json`, that holds whatever its panels look like — including
+	// panels that are charts rather than tables: they export each panel's underlying result rows, with
+	// the chart type recorded as
+	// metadata in the JSON form. (Sysdig's own UI offers only `pdf` for chart-bearing reports, but
+	// that is a presentation choice — the data export is not restricted.)
+	//
+	//
+	// Example: pdf
+	Format CreateRunRequestV2Alpha1Format `json:"format"`
+
+	// PanelId Export only this panel — an id assigned by the reporting service, and one of the report's
+	// `panels[].id`. CSV/JSON only; on-demand only.
+	//
+	// Not available for every report: a report whose template has no panels (`panels: []`) cannot be
+	// exported per panel, and sending `panelId` for one is rejected with `422`. Check the report's
+	// `panels` before offering this.
+	//
+	//
+	// Example: 1
+	PanelId *int64 `json:"panelId,omitempty"`
+
+	// ReportId The report to generate, as assigned by the reporting service.
+	//
+	// Example: 26
+	ReportId int64 `json:"reportId"`
+
+	// Timeframe Window to report over. An absolute `startAt`/`endAt` range may span at most **31 days**
+	// (note: relative `preset` values cap at 30 days). Omit to use the report's `defaultTimeframe`.
+	Timeframe *TimeframeV2Alpha1 `json:"timeframe,omitempty"`
+
+	// Timezone IANA timezone the produced file's dates and day boundaries are rendered in. Defaults to `UTC`.\
+	// \
+	// This affects presentation, not selection: `timeframe` is resolved against absolute instants
+	// either way, so two runs of the same report over the same window in different timezones cover the
+	// same data and differ only in how dates are formatted and where day boundaries fall in grouped
+	// output.
+	//
+	//
+	// Example: America/New_York
+	Timezone *string `json:"timezone,omitempty"`
+}
+
+// CreateRunRequestV2Alpha1Compression Compression of the produced file. Defaults to `gzip`, which is what the Sysdig UI sends; `zip` is
+// the opt-in choice, and the only one a scheduled delivery password can protect.
+//
+// Example: gzip
+type CreateRunRequestV2Alpha1Compression string
+
+// CreateRunRequestV2Alpha1Format Output format. **Not every format is valid for every report** — the permitted set is
+// determined by the `kind` of the template the report was created from (see `Template.kind`):\
+// \
+// - `posture_v2` — `csv` only\
+// - `compliance` — `pdf` only\
+// - `vulnerability_management` — `csv`, `pdf` or `json`\
+// \
+// An unsupported combination is rejected with `422`.\
+// \
+// Where a report's kind permits `csv` or `json`, that holds whatever its panels look like — including
+// panels that are charts rather than tables: they export each panel's underlying result rows, with
+// the chart type recorded as
+// metadata in the JSON form. (Sysdig's own UI offers only `pdf` for chart-bearing reports, but
+// that is a presentation choice — the data export is not restricted.)
+//
+// Example: pdf
+type CreateRunRequestV2Alpha1Format string
+
+// CreateScheduleRequestV2Alpha1 Payload for `POST /schedules`: a schedule plus the `reportId` it belongs to, which is required here.
+// When a schedule is embedded in `POST /reports`, the report is implicit and `reportId` is omitted.
+type CreateScheduleRequestV2Alpha1 struct {
+	// Compression Compression of the produced file. Defaults to `gzip` on create, which is what the Sysdig UI sends.
+	// On update an omitted value keeps the schedule's current compression rather than resetting it, so a
+	// password-protected `zip` schedule is not silently turned into a `gzip` one its password cannot
+	// protect. `delivery.password` requires `zip`.
+	// Changing a password-protected schedule to `gzip` is rejected with `422` unless the same request
+	// also removes the password — see `delivery.password`.
+	//
+	//
+	// Example: gzip
+	Compression *CreateScheduleRequestV2Alpha1Compression `json:"compression,omitempty"`
+
+	// Cron Cron expression defining the recurrence, as **six fields** —
+	// `second minute hour dayOfMonth month dayOfWeek`. The common five-field form is **not** accepted and is
+	// rejected with `422`.
+	//
+	// Always evaluated in **UTC**, whatever `timezone` says. To fire at a local wall-clock time, convert it to
+	// UTC yourself before building the expression — the Sysdig UI does exactly this, which is why a schedule
+	// created here and one created there behave the same way. Converting means three things, and the second is
+	// the one that is easy to miss:
+	//
+	// 1. Convert the local time to UTC; that gives `hour` and `minute`.
+	// 2. **If that conversion crosses midnight, shift the day as well.** Monday 22:00 in
+	//    `America/New_York` is *Tuesday* 02:00 UTC, so `dayOfWeek` becomes `TUE` — a schedule that converts
+	//    only the time fires on the wrong day.
+	// 3. Leave a `dayOfMonth` of `28-31` alone. That is the "last day of the month" form, and it is the one
+	//    case where `timezone` affects firing: the service uses it to decide whether today is that month's
+	//    last day.
+	//
+	// Which `timeframe.preset` values are accepted depends on the recurrence this describes — see `timeframe`.
+	//
+	//
+	// Example: 0 30 6 * * MON
+	Cron string `json:"cron"`
+
+	// Delivery How a scheduled report's output is delivered and protected.
+	//
+	// `isSecureDownload` and `password` are **two independent protections** and may be used separately or
+	// together:
+	// * `isSecureDownload` gates *who may fetch the file* (a Sysdig login is required).
+	// * `password` encrypts *the file itself* (zip password). `isPasswordProtected` reports whether one is set.
+	Delivery *DeliveryV2Alpha1 `json:"delivery,omitempty"`
+
+	// Description Optional free-text note describing what this schedule is for and who consumes it.
+	//
+	// Example: Weekly vulnerability summary for the platform team's Monday review.
+	Description *string `json:"description,omitempty"`
+
+	// Enabled Whether the schedule is active. Defaults to true.
+	//
+	// Example: true
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Format Output format of each generated run. **Not every format is valid for every report** — the
+	// permitted set is determined by the `kind` of the template the report was created from (see
+	// `Template.kind`):\
+	// \
+	// - `posture_v2` — `csv` only\
+	// - `compliance` — `pdf` only\
+	// - `vulnerability_management` — `csv`, `pdf` or `json`\
+	// \
+	// An unsupported combination is rejected with `422`.\
+	// \
+	// Where a report's kind permits `csv` or `json`, that holds whatever its panels look like — including
+	// panels that are charts rather than tables: they export each panel's underlying result rows.
+	//
+	//
+	// Example: pdf
+	Format CreateScheduleRequestV2Alpha1Format `json:"format"`
+
+	// Name Optional schedule name (a report may have multiple named schedules).
+	//
+	// Example: Weekly
+	Name *string `json:"name,omitempty"`
+
+	// ReportId The report this schedule belongs to, as assigned by the reporting service. Required for `POST /schedules`; omit when embedded in `POST /reports`.
+	//
+	// Example: 26
+	ReportId int64 `json:"reportId"`
+
+	// Timeframe Window each run reports over. Required: a schedule does not fall back to the report's
+	// `defaultTimeframe`, because which presets are accepted depends on `cron` (below).
+	//
+	// **Which presets are accepted depends on `cron`:** a daily recurrence takes `1d`; a weekly one `1d` or
+	// `7d`; a monthly one `1d`, `7d` or `30d`; any other cron is unrestricted. A `cron`/`preset` combination
+	// outside that is rejected with `422`, naming `/timeframe/preset`.
+	Timeframe ScheduleTimeframeV2Alpha1 `json:"timeframe"`
+
+	// Timezone IANA timezone the `cron` expression was composed in — a record of the caller's intent, so a UI can
+	// render the schedule back as a local time.
+	//
+	// **It does not shift when the schedule fires.** `cron` is evaluated in UTC regardless, so convert a local
+	// wall-clock time to UTC yourself when building the expression. Its one effect on firing is for a cron
+	// whose day-of-month selects the end of the month (e.g. `28-31`), where it decides whether today is that
+	// month's last day in this zone.
+	//
+	//
+	// Example: America/New_York
+	Timezone string `json:"timezone"`
+}
+
+// CreateScheduleRequestV2Alpha1Compression Compression of the produced file. Defaults to `gzip` on create, which is what the Sysdig UI sends.
+// On update an omitted value keeps the schedule's current compression rather than resetting it, so a
+// password-protected `zip` schedule is not silently turned into a `gzip` one its password cannot
+// protect. `delivery.password` requires `zip`.
+// Changing a password-protected schedule to `gzip` is rejected with `422` unless the same request
+// also removes the password — see `delivery.password`.
+//
+// Example: gzip
+type CreateScheduleRequestV2Alpha1Compression string
+
+// CreateScheduleRequestV2Alpha1Format Output format of each generated run. **Not every format is valid for every report** — the
+// permitted set is determined by the `kind` of the template the report was created from (see
+// `Template.kind`):\
+// \
+// - `posture_v2` — `csv` only\
+// - `compliance` — `pdf` only\
+// - `vulnerability_management` — `csv`, `pdf` or `json`\
+// \
+// An unsupported combination is rejected with `422`.\
+// \
+// Where a report's kind permits `csv` or `json`, that holds whatever its panels look like — including
+// panels that are charts rather than tables: they export each panel's underlying result rows.
+//
+// Example: pdf
+type CreateScheduleRequestV2Alpha1Format string
 
 // CreateServiceAccountRequestV1 defines model for CreateServiceAccountRequestV1.
 type CreateServiceAccountRequestV1 struct {
@@ -10591,6 +11962,42 @@ type DefaultRoleResponseV1 struct {
 	// SecurePermissions Set of Secure permissions assigned to the role.
 	// Check the `permissions` endpoint to list the available values.
 	SecurePermissions *[]string `json:"securePermissions,omitempty"`
+}
+
+// DeliveryV2Alpha1 How a scheduled report's output is delivered and protected.
+//
+// `isSecureDownload` and `password` are **two independent protections** and may be used separately or
+// together:
+// * `isSecureDownload` gates *who may fetch the file* (a Sysdig login is required).
+// * `password` encrypts *the file itself* (zip password). `isPasswordProtected` reports whether one is set.
+type DeliveryV2Alpha1 struct {
+	// Channels Notification channels the produced file is delivered to.
+	Channels *[]NotificationChannelV2Alpha1 `json:"channels,omitempty"`
+
+	// IsPasswordProtected Whether the produced file is password-protected. The password itself is never returned.
+	//
+	//
+	// Example: true
+	IsPasswordProtected *bool `json:"isPasswordProtected,omitempty"`
+
+	// IsSecureDownload Require a Sysdig login to access the report when it is shared via a notification channel.
+	// Gates access to the download; it does **not** password-protect the file — use `password` for
+	// that. Independent of `password` and of `compression`.
+	//
+	//
+	// Example: true
+	IsSecureDownload *bool `json:"isSecureDownload,omitempty"`
+
+	// Password Password protecting the produced file. Only available for `compression: zip`. Independent of
+	// `isSecureDownload`. Write-only — accepted on write, never returned; read `isPasswordProtected` to
+	// tell whether one is set.
+	//
+	// On update, an omitted `password` keeps the current one, even when the rest of `delivery` is
+	// replaced. Send a new value to change it, or `null` to remove it.
+	//
+	//
+	// Example: s3cr3t-p4ss
+	Password *string `json:"password,omitempty"`
 }
 
 // DenyCve Predicate expressing "any of these CVEs is present".
@@ -13175,7 +14582,7 @@ type JobResponse struct {
 	// Example: user@sysdig.com
 	CreatedBy string `json:"createdBy"`
 
-	// CustomerId ID of the user associated with the job.
+	// CustomerId ID of the customer associated with the job.
 	//
 	// Example: 121517
 	CustomerId int64 `json:"customerId"`
@@ -14214,6 +15621,12 @@ type ListPoliciesResponse struct {
 	Page PoliciesPage `json:"page"`
 }
 
+// ListReportsV2Alpha1 A list of reports.
+type ListReportsV2Alpha1 struct {
+	// Data List of reports.
+	Data []ReportResponseV2Alpha1 `json:"data"`
+}
+
 // ListRiskAcceptedResponse defines model for ListRiskAcceptedResponse.
 type ListRiskAcceptedResponse struct {
 	// Data List of Accepted Risks
@@ -14232,10 +15645,28 @@ type ListRiskAcceptedResponse struct {
 	} `json:"page,omitempty"`
 }
 
+// ListRunsV2Alpha1 A list of report runs.
+type ListRunsV2Alpha1 struct {
+	// Data List of runs.
+	Data []RunResponseV2Alpha1 `json:"data"`
+}
+
 // ListSchedules defines model for ListSchedules.
 type ListSchedules struct {
 	// Data List of Schedules.
 	Data []ScheduleResponse `json:"data"`
+}
+
+// ListSchedulesV2Alpha1 A list of report schedules.
+type ListSchedulesV2Alpha1 struct {
+	// Data List of schedules.
+	Data []ScheduleResponseV2Alpha1 `json:"data"`
+}
+
+// ListTemplatesV2Alpha1 A list of report templates.
+type ListTemplatesV2Alpha1 struct {
+	// Data List of templates.
+	Data []TemplateV2Alpha1 `json:"data"`
 }
 
 // ListZonesResponseV1 defines model for ListZonesResponseV1.
@@ -14532,6 +15963,27 @@ type NotificationChannelResponseV1 struct {
 //
 // Example: EMAIL
 type NotificationChannelTypeV1 string
+
+// NotificationChannelV2Alpha1 A notification channel a scheduled report is delivered to.
+type NotificationChannelV2Alpha1 struct {
+	// Id Notification channel identifier, as assigned by the notification-channel service.
+	//
+	// Example: 42
+	Id int64 `json:"id"`
+
+	// Type Notification channel type, always lowercase. Send and expect these spellings verbatim; the
+	// service translates to the internal form, which is upper-cased.
+	//
+	//
+	// Example: email
+	Type NotificationChannelV2Alpha1Type `json:"type"`
+}
+
+// NotificationChannelV2Alpha1Type Notification channel type, always lowercase. Send and expect these spellings verbatim; the
+// service translates to the internal form, which is upper-cased.
+//
+// Example: email
+type NotificationChannelV2Alpha1Type string
 
 // NotificationTemplateChannelTypeV1 Notification channel type that the notification template is rendered for. New values may be added in a minor version. Currently supported values: pager_duty.
 //
@@ -14922,6 +16374,101 @@ type PaginatedIntegrationsResponseV1 struct {
 	} `json:"page,omitempty"`
 }
 
+// PanelFilterAssignmentV2Alpha1 Filters to apply to one panel of a report.
+//
+// Sparse — list only the panels you want to scope; panels you omit keep the defaults inherited from the
+// template.
+//
+// Each `key` must be one of **that panel's** `availableFilters` (see the panel entries in
+// `GET /templates/{templateId}` or `GET /reports/{reportId}`). An unknown key is rejected with `422`, and
+// so is a key this template promotes to report level: those are set once in the report's `filters` and
+// cannot be overridden per panel, because a panel contradicting the report's own scope would produce a
+// document whose panels cannot be compared. If a filter you want is missing from this panel's list, check
+// the report-level `availableFilters` — on many templates that is where it lives.
+type PanelFilterAssignmentV2Alpha1 struct {
+	// Filters Filters to apply to this panel. Replaces the panel's current set rather than merging with it — an
+	// empty array clears the panel's **optional** filters.
+	//
+	// Filters whose `availableFilters` entry says `required: true` are exempt: they cannot be removed, so
+	// omitting one leaves its current value in place and an empty array does not clear it. Send one
+	// explicitly to change its value. Most panels have no required filters; where they exist they are
+	// always visible in `panels[].filters`, so a caller can see what it is keeping.
+	Filters *[]ReportFilterV2Alpha1 `json:"filters,omitempty"`
+
+	// Id Panel identifier, assigned by the reporting service and returned in the template's or report's
+	// `panels[].id`. Must exist on the
+	// report being created or updated; an unknown id is rejected with `422`.
+	//
+	//
+	// Example: 5
+	Id int64 `json:"id"`
+}
+
+// PanelSummaryV2Alpha1 Read-only panel identity and filter scope — enough to preview a report's contents, see how each
+// panel is scoped, and target per-panel export (via a run's `panelId`). Panel rendering internals are
+// not exposed.
+//
+// **Panel filters and report filters partition a template's filter surface; they never overlap.** A
+// report's `filters` carry the keys that template promotes to report level, and apply to every panel
+// whose query supports them. A panel's `filters` carry the remaining keys its query supports, and apply
+// to that panel alone. Which keys fall on which side is decided per template, so validate each against
+// its own `availableFilters` rather than assuming a fixed split.
+//
+// A key is never settable at both levels on the same template. Allowing it would let one panel silently
+// contradict the report's own scope and produce a document whose panels cannot be compared, so a
+// report-level key sent in a panel's filters is rejected with `422`.
+//
+// On a **template**, `filters` are the panel's built-in defaults. On a **report**, they are what that
+// report applies — set them via `panels` on the create/update request.
+type PanelSummaryV2Alpha1 struct {
+	// AvailableFilters Filters this panel supports, derived from the panel's underlying query **minus** the keys this
+	// template promotes to report level. A key valid here is never valid at report level on the same
+	// template, and vice versa — the two lists partition the surface.
+	//
+	// Also excluded, and not settable: operands the report kind's generation path ignores, and operands
+	// the query resolves internally rather than from a caller-supplied value.
+	//
+	// Filters the query **always** applies are a different case and *are* listed here, marked
+	// `required: true` — they can be narrowed but not removed. See `required` on `AvailableFilter`.
+	//
+	// Empty is a normal and common result — it means the template exposes this panel's whole filter
+	// surface at report level, or the panel has no query (a text panel), or the kind's data is not
+	// produced by a panel query at all.
+	AvailableFilters *[]AvailableFilterV2Alpha1 `json:"availableFilters,omitempty"`
+
+	// ChartType Panel chart type.
+	//
+	// Example: table
+	ChartType PanelSummaryV2Alpha1ChartType `json:"chartType"`
+
+	// Filters Filters currently applied to this panel. On a template these are the panel's built-in defaults;
+	// on a report they are what this report applies. Every `key` is one of this panel's
+	// `availableFilters` — including any marked `required: true`, which always appear here because they
+	// are always in force.
+	Filters *[]ReportFilterV2Alpha1 `json:"filters,omitempty"`
+
+	// Id Panel identifier, unique within the report/template. Assigned by the reporting service (legacy integer id, not UUIDv7).
+	//
+	// Example: 1
+	Id *int64 `json:"id,omitempty"`
+
+	// Name Panel title. **May be an empty string** — `text` panels used for prose or spacing usually have no
+	// title, and a few report kinds leave even their data-bearing panel untitled. Always present, never
+	// null.
+	//
+	// When presenting a panel list, fall back to `chartType` and `id`; do not assume a non-empty
+	// string. `id` is what a per-panel run targets, so an untitled panel is still addressable.
+	//
+	//
+	// Example: Top vulnerable images
+	Name string `json:"name"`
+}
+
+// PanelSummaryV2Alpha1ChartType Panel chart type.
+//
+// Example: table
+type PanelSummaryV2Alpha1ChartType string
+
 // ParameterType The type of an Response Action parameter.\
 // It may assume the following values:\
 // * string\
@@ -14953,6 +16500,145 @@ type ParseErrorResponse struct {
 	// Example: query_parse_error
 	Type string `json:"type"`
 }
+
+// PatchReportRequestV2Alpha1 JSON Merge Patch body for a report ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)). Include only
+// the fields you want to change; omitted fields are left as they are. `templateId` and `kind` are
+// immutable and are rejected with `422`.
+//
+// Merge Patch replaces arrays wholesale rather than merging them element-wise, so `filters` and `panels`
+// overwrite the current values entirely. Send `null` to clear a field.
+type PatchReportRequestV2Alpha1 struct {
+	// DefaultTimeframe The report's default reporting window. `null` resets it to the template's `defaultTimePreset`.
+	// `preset` must be one of the template's `timePresets`; any other value is rejected with `422`.
+	DefaultTimeframe *ScheduleTimeframeV2Alpha1 `json:"defaultTimeframe,omitempty"`
+
+	// Description Report description. `null` clears it.
+	//
+	// Example: Weekly critical/high in prod.
+	Description *string `json:"description,omitempty"`
+
+	// Filters Report-wide filters, replacing the current set entirely. `null` clears all report-wide filters.
+	// Validated against the template's report-level `availableFilters`; each applies to every panel whose
+	// query supports the key.
+	//
+	// A compliance report takes exactly one `zone` and one `policy`; any other number is rejected with `422`.
+	Filters *[]ReportFilterV2Alpha1 `json:"filters,omitempty"`
+
+	// Name Report name. Leading and trailing whitespace is trimmed; a name that is empty once trimmed is rejected.
+	//
+	// Example: Prod runtime vulns
+	Name *string `json:"name,omitempty"`
+
+	// Panels Per-panel filters. Sparse — list only the panels you want to change; panels not listed keep their
+	// current filters. `null` is the same as listing every panel with an empty `filters`: each panel's
+	// optional filters are cleared, and its required filters keep their current values.
+	Panels *[]PanelFilterAssignmentV2Alpha1 `json:"panels,omitempty"`
+}
+
+// PatchScheduleRequestV2Alpha1 JSON Merge Patch body for a schedule ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)). Include only
+// the fields you want to change; omitted fields are left as they are. `reportId` is immutable — move a
+// schedule by deleting it and creating a new one.
+//
+// Schedules carry no `ETag`: only reports are versioned, so schedule writes are unconditional
+// (last writer wins). Merge Patch replaces objects and arrays wholesale rather than merging them, so
+// `delivery` and `timeframe` overwrite the current value entirely.
+//
+// The most common use is toggling a schedule without resending its whole definition:
+// `{"enabled": false}`.
+type PatchScheduleRequestV2Alpha1 struct {
+	// Compression Compression applied to the produced file. Omit to keep the schedule's current compression — there is
+	// no uncompressed state, so there is nothing to clear it to. Send `zip` or `gzip` to change it.
+	// Changing a password-protected schedule to `gzip` is rejected with `422` unless the same request
+	// also removes the password — see `delivery.password`.
+	//
+	//
+	// Example: zip
+	Compression *PatchScheduleRequestV2Alpha1Compression `json:"compression,omitempty"`
+
+	// Cron Cron expression for when the schedule runs, as **six fields** —
+	// `second minute hour dayOfMonth month dayOfWeek`. The common five-field form is **not** accepted and is
+	// rejected with `422`.
+	//
+	// Always evaluated in **UTC**, whatever `timezone` says. To fire at a local wall-clock time, convert it to
+	// UTC yourself before building the expression. Converting means three things, and the second is the one
+	// that is easy to miss:
+	//
+	// 1. Convert the local time to UTC; that gives `hour` and `minute`.
+	// 2. **If that conversion crosses midnight, shift the day as well.** Monday 22:00 in
+	//    `America/New_York` is *Tuesday* 02:00 UTC, so `dayOfWeek` becomes `TUE` — a schedule that converts
+	//    only the time fires on the wrong day.
+	// 3. Leave a `dayOfMonth` of `28-31` alone. That is the "last day of the month" form, and it is the one
+	//    case where `timezone` affects firing: the service uses it to decide whether today is that month's
+	//    last day.
+	//
+	// **Patching `cron` alone can invalidate the stored `timeframe`.** Which `timeframe.preset` values are
+	// accepted depends on the recurrence — see `timeframe` — so a change of recurrence may require patching
+	// `timeframe` in the same request.
+	//
+	//
+	// Example: 0 30 6 * * MON
+	Cron *string `json:"cron,omitempty"`
+
+	// Delivery How a scheduled report's output is delivered and protected.
+	//
+	// `isSecureDownload` and `password` are **two independent protections** and may be used separately or
+	// together:
+	// * `isSecureDownload` gates *who may fetch the file* (a Sysdig login is required).
+	// * `password` encrypts *the file itself* (zip password). `isPasswordProtected` reports whether one is set.
+	Delivery *DeliveryV2Alpha1 `json:"delivery,omitempty"`
+
+	// Description Free-text note about this schedule. `null` clears it.
+	//
+	// Example: Weekly vulnerability summary for the platform team's Monday review.
+	Description *string `json:"description,omitempty"`
+
+	// Enabled Whether the schedule runs. Set `false` to pause it without deleting it.
+	//
+	// Example: false
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Format Output format of the produced file. Valid values depend on the report's `kind`.
+	//
+	// Example: pdf
+	Format *PatchScheduleRequestV2Alpha1Format `json:"format,omitempty"`
+
+	// Name Schedule name.
+	//
+	// Example: Weekly prod vulns
+	Name *string `json:"name,omitempty"`
+
+	// Timeframe Window each run reports over. Omit to keep the schedule's current window.
+	//
+	// Which presets are accepted depends on the recurrence `cron` describes, so patching `cron` on its
+	// own can leave the stored preset invalid — send both in the same request when you change the
+	// recurrence.
+	Timeframe *ScheduleTimeframeV2Alpha1 `json:"timeframe,omitempty"`
+
+	// Timezone IANA timezone the `cron` expression was composed in — a record of the caller's intent, so a UI can
+	// render the schedule back as a local time.
+	//
+	// **It does not shift when the schedule fires.** `cron` is evaluated in UTC regardless, so convert a local
+	// wall-clock time to UTC yourself when building the expression. Its one effect on firing is for a cron
+	// whose day-of-month selects the end of the month (e.g. `28-31`), where it decides whether today is that
+	// month's last day in this zone.
+	//
+	//
+	// Example: America/New_York
+	Timezone *string `json:"timezone,omitempty"`
+}
+
+// PatchScheduleRequestV2Alpha1Compression Compression applied to the produced file. Omit to keep the schedule's current compression — there is
+// no uncompressed state, so there is nothing to clear it to. Send `zip` or `gzip` to change it.
+// Changing a password-protected schedule to `gzip` is rejected with `422` unless the same request
+// also removes the password — see `delivery.password`.
+//
+// Example: zip
+type PatchScheduleRequestV2Alpha1Compression string
+
+// PatchScheduleRequestV2Alpha1Format Output format of the produced file. Valid values depend on the report's `kind`.
+//
+// Example: pdf
+type PatchScheduleRequestV2Alpha1Format string
 
 // PermissionV1 Permission to perform an action on the Sysdig platform.
 type PermissionV1 struct {
@@ -15744,6 +17430,223 @@ type RegistryResultsResponse struct {
 	Page *VulnerabilityManagementPage `json:"page,omitempty"`
 }
 
+// ReportFilterV2Alpha1 A filter value applied to a report or to one of its panels.
+//
+// **Which field carries the value is decided by `operator`, not by `type`:** `in` and `not_in` take the
+// `values` array, every other operator takes the scalar `value`. Sending both at once, or the one the
+// operator does not use, is rejected with `422`.
+//
+// In practice `entity` and `enum` filters are matched with `in`/`not_in` and so use `values`; `boolean`,
+// `date` and `number` are matched with scalar operators and so use `value`; and a `string` filter uses
+// either — `values` with `in`, `value` with `contains`/`starts_with`/`ends_with`/`eq`. Read the filter's
+// `operators` in `availableFilters` rather than inferring from `type`.
+//
+// `operator` selects how the value is matched and must be one of the filter's declared `operators`.
+// Omit it to get that filter's default (the first entry in `operators`) — for most filters `in` for
+// lists and `eq` for scalars.
+//
+// **A range is two entries.** To bound a `date` or `number` filter on both sides, send the same `key`
+// twice, once with `gte` and once with `lte`. Repeating a key with any other pair of operators (two
+// `in`s, an `eq` and a `not_eq`) is rejected with `422`.
+type ReportFilterV2Alpha1 struct {
+	// Key The filter key, matching one of the template's `availableFilters[].key`.
+	//
+	// Example: vuln_severity
+	Key string `json:"key"`
+
+	// Operator How `values`/`value` is matched. Must appear in this filter's `availableFilters[].operators`; an
+	// operator the filter does not declare is rejected with `422`. Omitted means the filter's default,
+	// which is the first entry in that list.
+	//
+	// `in`/`not_in` apply to `values`. Every other operator applies to `value`. Pairing an operator with
+	// the wrong field is rejected with `422`.
+	//
+	// `contains`, `starts_with` and `ends_with` are substring, prefix and suffix matches on a string
+	// `value`. A filter that offers one generally offers all three; matching is case-sensitive.
+	//
+	//
+	// Example: in
+	Operator *ReportFilterV2Alpha1Operator `json:"operator,omitempty"`
+
+	// Value Selected value for any operator other than `in`/`not_in` — a single scalar rather than a list:
+	//
+	// * `boolean` — `true` matches records where the flag is set, `false` matches records where it is
+	//   not. Both are real constraints; omit the filter to apply neither.
+	// * `date` — an RFC 3339 instant, matched with `lt`/`lte`/`gt`/`gte`.
+	// * `number` — a non-negative quantity in the unit given by the filter's `description`, matched with
+	//   `lt`/`lte`/`gt`/`gte` or `eq`/`not_eq`. Whole days for window filters; fractional where the
+	//   quantity is naturally fractional, such as a CVSS score of `7.5`. Send the value as a user would
+	//   read it; where the underlying query encodes it differently the service converts.
+	// * a string, when matched with `contains`/`starts_with`/`ends_with` against an `open` filter.
+	//
+	// **Presence filters take an empty string.** A few filters test only whether a field is set at all and
+	// carry no value of their own — `vuln_cisa_kev_due_date` on the templates that expose it as a flag is
+	// the one to know. Send `value: ""` and let the operator carry the meaning: `not_eq` matches records
+	// that have the field, `eq` matches records that do not. Its `availableFilters` entry declares
+	// `operators: [eq, not_eq]` and no `values`, which is how you recognise one.
+	//
+	//
+	// Example: true
+	Value *ReportFilterV2Alpha1_Value `json:"value,omitempty"`
+
+	// Values Selected values, used with `in` and `not_in`: entity ids for an `entity` filter, vocabulary
+	// members for an `enum` filter, or exact strings for a `string` filter.
+	//
+	// An empty array is rejected with `422` — omit the filter entirely to apply no constraint. For an
+	// `enum` filter send the values exactly as listed in `availableFilters[].values`.
+	Values *[]ReportFilterV2Alpha1_Values_Item `json:"values,omitempty"`
+}
+
+// ReportFilterV2Alpha1Operator How `values`/`value` is matched. Must appear in this filter's `availableFilters[].operators`; an
+// operator the filter does not declare is rejected with `422`. Omitted means the filter's default,
+// which is the first entry in that list.
+//
+// `in`/`not_in` apply to `values`. Every other operator applies to `value`. Pairing an operator with
+// the wrong field is rejected with `422`.
+//
+// `contains`, `starts_with` and `ends_with` are substring, prefix and suffix matches on a string
+// `value`. A filter that offers one generally offers all three; matching is case-sensitive.
+//
+// Example: in
+type ReportFilterV2Alpha1Operator string
+
+// ReportFilterV2Alpha1Value0 Example: true
+type ReportFilterV2Alpha1Value0 = bool
+
+// ReportFilterV2Alpha1Value1 Example: 2026-09-01T00:00:00Z
+type ReportFilterV2Alpha1Value1 = string
+
+// ReportFilterV2Alpha1Value2 Example: 7.5
+type ReportFilterV2Alpha1Value2 = float32
+
+// ReportFilterV2Alpha1_Value Selected value for any operator other than `in`/`not_in` — a single scalar rather than a list:
+//
+//   - `boolean` — `true` matches records where the flag is set, `false` matches records where it is
+//     not. Both are real constraints; omit the filter to apply neither.
+//   - `date` — an RFC 3339 instant, matched with `lt`/`lte`/`gt`/`gte`.
+//   - `number` — a non-negative quantity in the unit given by the filter's `description`, matched with
+//     `lt`/`lte`/`gt`/`gte` or `eq`/`not_eq`. Whole days for window filters; fractional where the
+//     quantity is naturally fractional, such as a CVSS score of `7.5`. Send the value as a user would
+//     read it; where the underlying query encodes it differently the service converts.
+//   - a string, when matched with `contains`/`starts_with`/`ends_with` against an `open` filter.
+//
+// **Presence filters take an empty string.** A few filters test only whether a field is set at all and
+// carry no value of their own — `vuln_cisa_kev_due_date` on the templates that expose it as a flag is
+// the one to know. Send `value: ""` and let the operator carry the meaning: `not_eq` matches records
+// that have the field, `eq` matches records that do not. Its `availableFilters` entry declares
+// `operators: [eq, not_eq]` and no `values`, which is how you recognise one.
+//
+// Example: true
+type ReportFilterV2Alpha1_Value struct {
+	union json.RawMessage
+}
+
+// ReportFilterV2Alpha1Values0 Example: high
+type ReportFilterV2Alpha1Values0 = string
+
+// ReportFilterV2Alpha1Values1 Example: 12
+type ReportFilterV2Alpha1Values1 = int64
+
+// ReportFilterV2Alpha1_Values_Item An entity id (integer) or enum value (string).
+//
+// Example: high
+type ReportFilterV2Alpha1_Values_Item struct {
+	union json.RawMessage
+}
+
+// ReportResponseV2Alpha1 A customer-owned report instance created from a template (saved filters + name).
+type ReportResponseV2Alpha1 struct {
+	// AvailableFilters Filters this report can apply **report-wide**, inherited from its template. Present here so that
+	// editing a report does not require fetching the template as well; the per-panel remainder is under
+	// `panels[].availableFilters`, and the two lists never share a key.
+	//
+	// The contents are template-specific — do not assume a fixed set of report-level keys.
+	AvailableFilters *[]AvailableFilterV2Alpha1 `json:"availableFilters,omitempty"`
+
+	// CreatedAt Timestamp when the report was created.
+	//
+	// Example: 2026-07-28T10:00:00Z
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+
+	// CreatedBy Email of the user who created the report.
+	//
+	// Example: jane@acme.com
+	CreatedBy *string `json:"createdBy,omitempty"`
+
+	// DefaultTimeframe The report's default reporting window, applied to runs created from it that do not state their
+	// own. Seeded from the template's `defaultTimePreset` when the report is created.
+	DefaultTimeframe *ScheduleTimeframeV2Alpha1 `json:"defaultTimeframe,omitempty"`
+
+	// Description Report description.
+	//
+	// Example: Weekly critical/high in prod.
+	Description *string `json:"description,omitempty"`
+
+	// Filters Applied **report-wide** filters (echoed back with template defaults applied). Each affects every
+	// panel whose query supports the key. Filters applied to a single panel are echoed under
+	// `panels[].filters`, and no key appears in both.
+	Filters []ReportFilterV2Alpha1 `json:"filters"`
+
+	// Id Report identifier, assigned by the reporting service. Legacy integer identifier retained for
+	// compatibility (pre-existing-identifier exception; not UUIDv7).
+	//
+	//
+	// Example: 26
+	Id *int64 `json:"id,omitempty"`
+
+	// Kind Report category, derived from the template.
+	//
+	// Example: vulnerability_management
+	Kind *ReportResponseV2Alpha1Kind `json:"kind,omitempty"`
+
+	// Name Report name.
+	//
+	// Example: Prod runtime vulns
+	Name string `json:"name"`
+
+	// Panels Panel preview — identity, the filters each panel supports (`availableFilters`), and the filters
+	// this report applies to it (`filters`). A per-panel run's `panelId` must be one of these.
+	Panels *[]PanelSummaryV2Alpha1 `json:"panels,omitempty"`
+
+	// ScheduleCount Count of schedules attached to this report. Fetch the schedules via `GET /schedules?reportId=`.
+	//
+	// Example: 1
+	ScheduleCount *int64 `json:"scheduleCount,omitempty"`
+
+	// ScheduleIds Identifiers of the schedules attached to this report, the same set `scheduleCount` counts. On the
+	// response to a `POST /reports` that embedded a `schedule`, this holds the id of the schedule that
+	// request created. Fetch a schedule with `GET /schedules/{scheduleId}`.
+	ScheduleIds *[]string `json:"scheduleIds,omitempty"`
+
+	// TemplateId Identifier (slug) of the template this report was created from. Immutable — a report cannot be
+	// moved to another template. Fetch the template to see the full filter and panel catalog this
+	// report's own `availableFilters` are drawn from.
+	//
+	//
+	// Example: runtime_container_vulnerabilities
+	TemplateId *string `json:"templateId,omitempty"`
+
+	// Type Resource type, derived from the template. `report` is the only value returned today. New values MAY
+	// be added in a future minor version — treat an unrecognised value as opaque and carry on rather than
+	// failing on it.
+	//
+	// Never accepted in a request body — supplying it is a `400`.
+	//
+	//
+	// Example: report
+	Type *string `json:"type,omitempty"`
+
+	// UpdatedAt Timestamp when the report was last updated.
+	//
+	// Example: 2026-07-28T10:00:00Z
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+}
+
+// ReportResponseV2Alpha1Kind Report category, derived from the template.
+//
+// Example: vulnerability_management
+type ReportResponseV2Alpha1Kind string
+
 // RequestBodyDisabledMetricsV1 Change Disabled Metrics per JobName
 type RequestBodyDisabledMetricsV1 struct {
 	Data []DisableJobsAndMetricsV1 `json:"data"`
@@ -16144,6 +18047,19 @@ type RoleResponseV1 struct {
 	SecurePermissions *[]string `json:"securePermissions,omitempty"`
 }
 
+// RowCountV2Alpha1 Row counts for a run, present when the run completed with limited data.
+type RowCountV2Alpha1 struct {
+	// Included Rows actually included in the output (capped).
+	//
+	// Example: 10000
+	Included *int64 `json:"included,omitempty"`
+
+	// Total Total rows the report would have produced.
+	//
+	// Example: 12000
+	Total *int64 `json:"total,omitempty"`
+}
+
 // Rule defines model for Rule.
 type Rule struct {
 	// Description rule description
@@ -16326,6 +18242,714 @@ type RulesResponseV1DataGroupsRulesType string
 //
 // Example: success
 type RulesResponseV1Status string
+
+// RunBaseV2Alpha1 Fields every run carries, whatever its `status`. Not used on its own — see `Run`.
+type RunBaseV2Alpha1 struct {
+	// Compression Compression applied to the produced file, echoing what the run was created with. Absent when the
+	// run records no compression at all — every run created through this API records one, so expect this
+	// only on older runs.
+	//
+	// Together with `format` this determines the produced file's extensions and media type, which
+	// `result` reports once the run has completed.
+	//
+	//
+	// Example: zip
+	Compression *RunBaseV2Alpha1Compression `json:"compression,omitempty"`
+
+	// CreatedAt Timestamp when the run was created.
+	//
+	// Example: 2026-07-28T10:05:00Z
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+
+	// FileName The run's requested base name — the `fileName` sent on create, or the report/panel name when
+	// none was sent. **Not the name of the produced file:** the service appends a UTC timestamp and
+	// the format/compression extensions when it writes the file. The full name is `result.fileName`.
+	//
+	//
+	// Example: prod-runtime-vulns
+	FileName *string `json:"fileName,omitempty"`
+
+	// Filters The report-wide filters this run used — the scope recorded on the run itself.
+	//
+	// This is a **snapshot**, not a live view of the report: editing the report's filters afterwards does
+	// not change it, so a historical run stays an accurate record of what its file contains — the only
+	// way to tell what scope an already-produced file covers.
+	//
+	// A run created through this API always records its report's scope at the moment of creation. A run
+	// created in the Sysdig UI can be **narrower** than its report, because the UI sets scope per run —
+	// for example a run over one zone of a report scoped to two. Read this field as the truth about this
+	// run, not as a copy of the report. Absent on runs created before scope snapshots were recorded.
+	Filters *[]ReportFilterV2Alpha1 `json:"filters,omitempty"`
+
+	// FinishedAt Timestamp when the run finished (completed or failed). Present once the run has finished.
+	//
+	// Example: 2026-07-28T10:05:40Z
+	FinishedAt *time.Time `json:"finishedAt,omitempty"`
+
+	// Format Output format.
+	//
+	// Example: pdf
+	Format *RunBaseV2Alpha1Format `json:"format,omitempty"`
+
+	// Id Run identifier, assigned by the reporting service (legacy identifier format retained for compatibility; not UUIDv7).
+	//
+	// Example: 2feo8FR30cAOiYFPfT4cKGtOUnd
+	Id *string `json:"id,omitempty"`
+
+	// PanelId For a per-panel export, the panel exported (a panel id assigned by the reporting service). Omitted for a whole-report run.
+	//
+	// Example: 1
+	PanelId *int64 `json:"panelId,omitempty"`
+
+	// ReportId The report this run was generated from. Legacy integer id assigned by the reporting service (not UUIDv7).
+	//
+	// Example: 26
+	ReportId *int64 `json:"reportId,omitempty"`
+
+	// ScheduleId The schedule that produced this run. Omitted for on-demand runs. Legacy id assigned by the reporting service.
+	//
+	// Example: 2pAtvxUMOXjoZlA1WJkkoCL6SeS
+	ScheduleId *string `json:"scheduleId,omitempty"`
+
+	// StartedAt Timestamp when the run started executing. Present once the run has started.
+	//
+	// Example: 2026-07-28T10:05:02Z
+	StartedAt *time.Time `json:"startedAt,omitempty"`
+
+	// Status Run (job) status. See `Run.status`; each variant pins its own value.
+	//
+	// Example: completed
+	Status *RunBaseV2Alpha1Status `json:"status,omitempty"`
+
+	// Timeframe The window this run covered, always as an absolute `startAt`/`endAt` range. A `preset` sent on
+	// create — or inherited from a schedule — is resolved to absolute instants when the run is created,
+	// so a run records the period it actually reported over rather than the relative expression that
+	// produced it.
+	Timeframe *TimeframeV2Alpha1 `json:"timeframe,omitempty"`
+
+	// Timezone The IANA timezone the produced file's dates were rendered in. `UTC` when none was requested.
+	//
+	// Example: America/New_York
+	Timezone *string `json:"timezone,omitempty"`
+
+	// Type Resource type, derived from the run's report. `report` is the only value returned today. New values
+	// MAY be added in a future minor version — treat an unrecognised value as opaque and carry on rather
+	// than failing on it.
+	//
+	//
+	// Example: report
+	Type *string `json:"type,omitempty"`
+}
+
+// RunBaseV2Alpha1Compression Compression applied to the produced file, echoing what the run was created with. Absent when the
+// run records no compression at all — every run created through this API records one, so expect this
+// only on older runs.
+//
+// Together with `format` this determines the produced file's extensions and media type, which
+// `result` reports once the run has completed.
+//
+// Example: zip
+type RunBaseV2Alpha1Compression string
+
+// RunBaseV2Alpha1Format Output format.
+//
+// Example: pdf
+type RunBaseV2Alpha1Format string
+
+// RunBaseV2Alpha1Status Run (job) status. See `Run.status`; each variant pins its own value.
+//
+// Example: completed
+type RunBaseV2Alpha1Status string
+
+// RunCompletedV2Alpha1 A run that produced its file.
+type RunCompletedV2Alpha1 struct {
+	// Compression Compression applied to the produced file, echoing what the run was created with. Absent when the
+	// run records no compression at all — every run created through this API records one, so expect this
+	// only on older runs.
+	//
+	// Together with `format` this determines the produced file's extensions and media type, which
+	// `result` reports once the run has completed.
+	//
+	//
+	// Example: zip
+	Compression *RunCompletedV2Alpha1Compression `json:"compression,omitempty"`
+
+	// CreatedAt Timestamp when the run was created.
+	//
+	// Example: 2026-07-28T10:05:00Z
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+
+	// FileName The run's requested base name — the `fileName` sent on create, or the report/panel name when
+	// none was sent. **Not the name of the produced file:** the service appends a UTC timestamp and
+	// the format/compression extensions when it writes the file. The full name is `result.fileName`.
+	//
+	//
+	// Example: prod-runtime-vulns
+	FileName *string `json:"fileName,omitempty"`
+
+	// Filters The report-wide filters this run used — the scope recorded on the run itself.
+	//
+	// This is a **snapshot**, not a live view of the report: editing the report's filters afterwards does
+	// not change it, so a historical run stays an accurate record of what its file contains — the only
+	// way to tell what scope an already-produced file covers.
+	//
+	// A run created through this API always records its report's scope at the moment of creation. A run
+	// created in the Sysdig UI can be **narrower** than its report, because the UI sets scope per run —
+	// for example a run over one zone of a report scoped to two. Read this field as the truth about this
+	// run, not as a copy of the report. Absent on runs created before scope snapshots were recorded.
+	Filters *[]ReportFilterV2Alpha1 `json:"filters,omitempty"`
+
+	// FinishedAt Timestamp when the run finished (completed or failed). Present once the run has finished.
+	//
+	// Example: 2026-07-28T10:05:40Z
+	FinishedAt *time.Time `json:"finishedAt,omitempty"`
+
+	// Format Output format.
+	//
+	// Example: pdf
+	Format *RunCompletedV2Alpha1Format `json:"format,omitempty"`
+
+	// Id Run identifier, assigned by the reporting service (legacy identifier format retained for compatibility; not UUIDv7).
+	//
+	// Example: 2feo8FR30cAOiYFPfT4cKGtOUnd
+	Id *string `json:"id,omitempty"`
+
+	// PanelId For a per-panel export, the panel exported (a panel id assigned by the reporting service). Omitted for a whole-report run.
+	//
+	// Example: 1
+	PanelId *int64 `json:"panelId,omitempty"`
+
+	// ReportId The report this run was generated from. Legacy integer id assigned by the reporting service (not UUIDv7).
+	//
+	// Example: 26
+	ReportId *int64 `json:"reportId,omitempty"`
+
+	// Result Summary of the file a completed run produced. Present if and only if the run's `status` is `completed`;
+	// the file itself is fetched from the run's `resultUri`.
+	Result RunResultV2Alpha1 `json:"result"`
+
+	// ResultUri Absolute URL of the produced file. Present while `status` is `completed` and the file is still
+	// retained (until `result.expiresAt`); absent otherwise.
+	//
+	// The URL points outside this API, at the platform's report-file endpoint. Fetch it with the same
+	// `Authorization` header as your API calls: the endpoint requires
+	// `platform.reporting.reports.read`, so the URL on its own does not grant access. It may redirect to a
+	// short-lived storage URL on another host; do **not** forward `Authorization` to a different host.
+	//
+	// Treat the value as opaque — follow it as given rather than building or parsing it — and do not rely
+	// on it after `result.expiresAt`.
+	//
+	//
+	// Example: https://api.us2.sysdig.com/api/platform/reporting_files/v1/secure/prod-runtime-vulns_2026-07-28T10_05_00.000Z.csv.gz?token=eyJhbGc
+	ResultUri *string `json:"resultUri,omitempty"`
+
+	// ScheduleId The schedule that produced this run. Omitted for on-demand runs. Legacy id assigned by the reporting service.
+	//
+	// Example: 2pAtvxUMOXjoZlA1WJkkoCL6SeS
+	ScheduleId *string `json:"scheduleId,omitempty"`
+
+	// StartedAt Timestamp when the run started executing. Present once the run has started.
+	//
+	// Example: 2026-07-28T10:05:02Z
+	StartedAt *time.Time `json:"startedAt,omitempty"`
+
+	// Status Always `completed` for this variant.
+	//
+	// Example: completed
+	Status *RunCompletedV2Alpha1Status `json:"status,omitempty"`
+
+	// Timeframe The window this run covered, always as an absolute `startAt`/`endAt` range. A `preset` sent on
+	// create — or inherited from a schedule — is resolved to absolute instants when the run is created,
+	// so a run records the period it actually reported over rather than the relative expression that
+	// produced it.
+	Timeframe *TimeframeV2Alpha1 `json:"timeframe,omitempty"`
+
+	// Timezone The IANA timezone the produced file's dates were rendered in. `UTC` when none was requested.
+	//
+	// Example: America/New_York
+	Timezone *string `json:"timezone,omitempty"`
+
+	// Type Resource type, derived from the run's report. `report` is the only value returned today. New values
+	// MAY be added in a future minor version — treat an unrecognised value as opaque and carry on rather
+	// than failing on it.
+	//
+	//
+	// Example: report
+	Type *string `json:"type,omitempty"`
+}
+
+// RunCompletedV2Alpha1Compression Compression applied to the produced file, echoing what the run was created with. Absent when the
+// run records no compression at all — every run created through this API records one, so expect this
+// only on older runs.
+//
+// Together with `format` this determines the produced file's extensions and media type, which
+// `result` reports once the run has completed.
+//
+// Example: zip
+type RunCompletedV2Alpha1Compression string
+
+// RunCompletedV2Alpha1Format Output format.
+//
+// Example: pdf
+type RunCompletedV2Alpha1Format string
+
+// RunCompletedV2Alpha1Status Always `completed` for this variant.
+//
+// Example: completed
+type RunCompletedV2Alpha1Status string
+
+// RunErrorV2Alpha1 Why a run failed. Present if and only if the run's `status` is `failed`.
+//
+// Same `type`, `message` and `details` as the API's error body, without `requestId`: a run is not tied to
+// a single request, and the run's own `id` is the key to quote when reporting the failure.
+type RunErrorV2Alpha1 struct {
+	// Details Further details of the failure, when available.
+	Details *[]struct {
+		// Message Detail message.
+		//
+		// Example: Panel 3 exceeded 300s
+		Message string `json:"message"`
+	} `json:"details,omitempty"`
+
+	// Message Human-readable description of the failure.
+	//
+	// Example: Query timed out
+	Message *string `json:"message,omitempty"`
+
+	// Type Machine-readable failure category, so a client can decide whether retrying makes sense — for example
+	// `timeout` or `internal` may succeed on retry, while `permission_denied` or `invalid_request` will
+	// not. New values MAY be added in a future minor version: treat an unrecognised value as opaque.
+	//
+	//
+	// Example: timeout
+	Type *string `json:"type,omitempty"`
+}
+
+// RunFailedV2Alpha1 A run that ended without producing a file.
+type RunFailedV2Alpha1 struct {
+	// Compression Compression applied to the produced file, echoing what the run was created with. Absent when the
+	// run records no compression at all — every run created through this API records one, so expect this
+	// only on older runs.
+	//
+	// Together with `format` this determines the produced file's extensions and media type, which
+	// `result` reports once the run has completed.
+	//
+	//
+	// Example: zip
+	Compression *RunFailedV2Alpha1Compression `json:"compression,omitempty"`
+
+	// CreatedAt Timestamp when the run was created.
+	//
+	// Example: 2026-07-28T10:05:00Z
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+
+	// Error Why a run failed. Present if and only if the run's `status` is `failed`.
+	//
+	// Same `type`, `message` and `details` as the API's error body, without `requestId`: a run is not tied to
+	// a single request, and the run's own `id` is the key to quote when reporting the failure.
+	Error RunErrorV2Alpha1 `json:"error"`
+
+	// FileName The run's requested base name — the `fileName` sent on create, or the report/panel name when
+	// none was sent. **Not the name of the produced file:** the service appends a UTC timestamp and
+	// the format/compression extensions when it writes the file. The full name is `result.fileName`.
+	//
+	//
+	// Example: prod-runtime-vulns
+	FileName *string `json:"fileName,omitempty"`
+
+	// Filters The report-wide filters this run used — the scope recorded on the run itself.
+	//
+	// This is a **snapshot**, not a live view of the report: editing the report's filters afterwards does
+	// not change it, so a historical run stays an accurate record of what its file contains — the only
+	// way to tell what scope an already-produced file covers.
+	//
+	// A run created through this API always records its report's scope at the moment of creation. A run
+	// created in the Sysdig UI can be **narrower** than its report, because the UI sets scope per run —
+	// for example a run over one zone of a report scoped to two. Read this field as the truth about this
+	// run, not as a copy of the report. Absent on runs created before scope snapshots were recorded.
+	Filters *[]ReportFilterV2Alpha1 `json:"filters,omitempty"`
+
+	// FinishedAt Timestamp when the run finished (completed or failed). Present once the run has finished.
+	//
+	// Example: 2026-07-28T10:05:40Z
+	FinishedAt *time.Time `json:"finishedAt,omitempty"`
+
+	// Format Output format.
+	//
+	// Example: pdf
+	Format *RunFailedV2Alpha1Format `json:"format,omitempty"`
+
+	// Id Run identifier, assigned by the reporting service (legacy identifier format retained for compatibility; not UUIDv7).
+	//
+	// Example: 2feo8FR30cAOiYFPfT4cKGtOUnd
+	Id *string `json:"id,omitempty"`
+
+	// PanelId For a per-panel export, the panel exported (a panel id assigned by the reporting service). Omitted for a whole-report run.
+	//
+	// Example: 1
+	PanelId *int64 `json:"panelId,omitempty"`
+
+	// ReportId The report this run was generated from. Legacy integer id assigned by the reporting service (not UUIDv7).
+	//
+	// Example: 26
+	ReportId *int64 `json:"reportId,omitempty"`
+
+	// ScheduleId The schedule that produced this run. Omitted for on-demand runs. Legacy id assigned by the reporting service.
+	//
+	// Example: 2pAtvxUMOXjoZlA1WJkkoCL6SeS
+	ScheduleId *string `json:"scheduleId,omitempty"`
+
+	// StartedAt Timestamp when the run started executing. Present once the run has started.
+	//
+	// Example: 2026-07-28T10:05:02Z
+	StartedAt *time.Time `json:"startedAt,omitempty"`
+
+	// Status Always `failed` for this variant.
+	//
+	// Example: failed
+	Status *RunFailedV2Alpha1Status `json:"status,omitempty"`
+
+	// Timeframe The window this run covered, always as an absolute `startAt`/`endAt` range. A `preset` sent on
+	// create — or inherited from a schedule — is resolved to absolute instants when the run is created,
+	// so a run records the period it actually reported over rather than the relative expression that
+	// produced it.
+	Timeframe *TimeframeV2Alpha1 `json:"timeframe,omitempty"`
+
+	// Timezone The IANA timezone the produced file's dates were rendered in. `UTC` when none was requested.
+	//
+	// Example: America/New_York
+	Timezone *string `json:"timezone,omitempty"`
+
+	// Type Resource type, derived from the run's report. `report` is the only value returned today. New values
+	// MAY be added in a future minor version — treat an unrecognised value as opaque and carry on rather
+	// than failing on it.
+	//
+	//
+	// Example: report
+	Type *string `json:"type,omitempty"`
+}
+
+// RunFailedV2Alpha1Compression Compression applied to the produced file, echoing what the run was created with. Absent when the
+// run records no compression at all — every run created through this API records one, so expect this
+// only on older runs.
+//
+// Together with `format` this determines the produced file's extensions and media type, which
+// `result` reports once the run has completed.
+//
+// Example: zip
+type RunFailedV2Alpha1Compression string
+
+// RunFailedV2Alpha1Format Output format.
+//
+// Example: pdf
+type RunFailedV2Alpha1Format string
+
+// RunFailedV2Alpha1Status Always `failed` for this variant.
+//
+// Example: failed
+type RunFailedV2Alpha1Status string
+
+// RunPendingV2Alpha1 A run that is queued and has not started.
+type RunPendingV2Alpha1 struct {
+	// Compression Compression applied to the produced file, echoing what the run was created with. Absent when the
+	// run records no compression at all — every run created through this API records one, so expect this
+	// only on older runs.
+	//
+	// Together with `format` this determines the produced file's extensions and media type, which
+	// `result` reports once the run has completed.
+	//
+	//
+	// Example: zip
+	Compression *RunPendingV2Alpha1Compression `json:"compression,omitempty"`
+
+	// CreatedAt Timestamp when the run was created.
+	//
+	// Example: 2026-07-28T10:05:00Z
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+
+	// FileName The run's requested base name — the `fileName` sent on create, or the report/panel name when
+	// none was sent. **Not the name of the produced file:** the service appends a UTC timestamp and
+	// the format/compression extensions when it writes the file. The full name is `result.fileName`.
+	//
+	//
+	// Example: prod-runtime-vulns
+	FileName *string `json:"fileName,omitempty"`
+
+	// Filters The report-wide filters this run used — the scope recorded on the run itself.
+	//
+	// This is a **snapshot**, not a live view of the report: editing the report's filters afterwards does
+	// not change it, so a historical run stays an accurate record of what its file contains — the only
+	// way to tell what scope an already-produced file covers.
+	//
+	// A run created through this API always records its report's scope at the moment of creation. A run
+	// created in the Sysdig UI can be **narrower** than its report, because the UI sets scope per run —
+	// for example a run over one zone of a report scoped to two. Read this field as the truth about this
+	// run, not as a copy of the report. Absent on runs created before scope snapshots were recorded.
+	Filters *[]ReportFilterV2Alpha1 `json:"filters,omitempty"`
+
+	// FinishedAt Timestamp when the run finished (completed or failed). Present once the run has finished.
+	//
+	// Example: 2026-07-28T10:05:40Z
+	FinishedAt *time.Time `json:"finishedAt,omitempty"`
+
+	// Format Output format.
+	//
+	// Example: pdf
+	Format *RunPendingV2Alpha1Format `json:"format,omitempty"`
+
+	// Id Run identifier, assigned by the reporting service (legacy identifier format retained for compatibility; not UUIDv7).
+	//
+	// Example: 2feo8FR30cAOiYFPfT4cKGtOUnd
+	Id *string `json:"id,omitempty"`
+
+	// PanelId For a per-panel export, the panel exported (a panel id assigned by the reporting service). Omitted for a whole-report run.
+	//
+	// Example: 1
+	PanelId *int64 `json:"panelId,omitempty"`
+
+	// ReportId The report this run was generated from. Legacy integer id assigned by the reporting service (not UUIDv7).
+	//
+	// Example: 26
+	ReportId *int64 `json:"reportId,omitempty"`
+
+	// ScheduleId The schedule that produced this run. Omitted for on-demand runs. Legacy id assigned by the reporting service.
+	//
+	// Example: 2pAtvxUMOXjoZlA1WJkkoCL6SeS
+	ScheduleId *string `json:"scheduleId,omitempty"`
+
+	// StartedAt Timestamp when the run started executing. Present once the run has started.
+	//
+	// Example: 2026-07-28T10:05:02Z
+	StartedAt *time.Time `json:"startedAt,omitempty"`
+
+	// Status Always `pending` for this variant.
+	//
+	// Example: pending
+	Status *RunPendingV2Alpha1Status `json:"status,omitempty"`
+
+	// Timeframe The window this run covered, always as an absolute `startAt`/`endAt` range. A `preset` sent on
+	// create — or inherited from a schedule — is resolved to absolute instants when the run is created,
+	// so a run records the period it actually reported over rather than the relative expression that
+	// produced it.
+	Timeframe *TimeframeV2Alpha1 `json:"timeframe,omitempty"`
+
+	// Timezone The IANA timezone the produced file's dates were rendered in. `UTC` when none was requested.
+	//
+	// Example: America/New_York
+	Timezone *string `json:"timezone,omitempty"`
+
+	// Type Resource type, derived from the run's report. `report` is the only value returned today. New values
+	// MAY be added in a future minor version — treat an unrecognised value as opaque and carry on rather
+	// than failing on it.
+	//
+	//
+	// Example: report
+	Type *string `json:"type,omitempty"`
+}
+
+// RunPendingV2Alpha1Compression Compression applied to the produced file, echoing what the run was created with. Absent when the
+// run records no compression at all — every run created through this API records one, so expect this
+// only on older runs.
+//
+// Together with `format` this determines the produced file's extensions and media type, which
+// `result` reports once the run has completed.
+//
+// Example: zip
+type RunPendingV2Alpha1Compression string
+
+// RunPendingV2Alpha1Format Output format.
+//
+// Example: pdf
+type RunPendingV2Alpha1Format string
+
+// RunPendingV2Alpha1Status Always `pending` for this variant.
+//
+// Example: pending
+type RunPendingV2Alpha1Status string
+
+// RunResponseV2Alpha1 A single report generation run (on-demand or produced by a schedule). Report generation is asynchronous:
+// the run is a job, and `status` selects which fields it carries — `result`/`resultUri` once it has
+// completed, `error` once it has failed.
+type RunResponseV2Alpha1 struct {
+	// Id Run identifier, assigned by the reporting service (legacy identifier format retained for compatibility; not UUIDv7).
+	//
+	// Example: 2feo8FR30cAOiYFPfT4cKGtOUnd
+	Id *string `json:"id,omitempty"`
+
+	// Status Run (job) status, which selects the variant: `pending` and `running` while the file is being
+	// produced, then `completed` (with `result`) or `failed` (with `error`). `completed` covers a truncated
+	// result too — inspect `result.hasLimitedData` and `result.rowCount` to detect a capped run.
+	//
+	// There is no `cancelled` state and no `DELETE` on this resource: once a run is created it cannot be
+	// stopped, only waited out.
+	//
+	//
+	// Example: completed
+	Status RunResponseV2Alpha1Status `json:"status"`
+	union  json.RawMessage
+}
+
+// RunResponseV2Alpha1Status Run (job) status, which selects the variant: `pending` and `running` while the file is being
+// produced, then `completed` (with `result`) or `failed` (with `error`). `completed` covers a truncated
+// result too — inspect `result.hasLimitedData` and `result.rowCount` to detect a capped run.
+//
+// There is no `cancelled` state and no `DELETE` on this resource: once a run is created it cannot be
+// stopped, only waited out.
+//
+// Example: completed
+type RunResponseV2Alpha1Status string
+
+// RunResultV2Alpha1 Summary of the file a completed run produced. Present if and only if the run's `status` is `completed`;
+// the file itself is fetched from the run's `resultUri`.
+type RunResultV2Alpha1 struct {
+	// ContentType Media type of the downloaded bytes. A compressed file is served as the archive type —
+	// `application/gzip` or `application/zip` — not as the inner format with a `Content-Encoding`, so a
+	// client saves the bytes as they arrive rather than having them decompressed in transit.
+	//
+	//
+	// Example: application/gzip
+	ContentType *string `json:"contentType,omitempty"`
+
+	// ExpiresAt When the produced file stops being retained. After this instant the run no longer carries a
+	// `resultUri`, and a previously read one stops working.
+	//
+	//
+	// Example: 2026-08-04T10:05:40Z
+	ExpiresAt *time.Time `json:"expiresAt,omitempty"`
+
+	// FileName Name of the produced file, as sent in the download's `Content-Disposition`: the run's base name plus
+	// a UTC timestamp and the format and compression extensions.
+	//
+	//
+	// Example: prod-runtime-vulns_2026-07-28T10_05_00.000Z.csv.gz
+	FileName *string `json:"fileName,omitempty"`
+
+	// HasLimitedData True when the output was truncated by the row limit; `rowCount` then states by how much.
+	//
+	// Example: false
+	HasLimitedData *bool `json:"hasLimitedData,omitempty"`
+
+	// RowCount Row counts for a run, present when the run completed with limited data.
+	RowCount *RowCountV2Alpha1 `json:"rowCount,omitempty"`
+}
+
+// RunRunningV2Alpha1 A run that is executing.
+type RunRunningV2Alpha1 struct {
+	// Compression Compression applied to the produced file, echoing what the run was created with. Absent when the
+	// run records no compression at all — every run created through this API records one, so expect this
+	// only on older runs.
+	//
+	// Together with `format` this determines the produced file's extensions and media type, which
+	// `result` reports once the run has completed.
+	//
+	//
+	// Example: zip
+	Compression *RunRunningV2Alpha1Compression `json:"compression,omitempty"`
+
+	// CreatedAt Timestamp when the run was created.
+	//
+	// Example: 2026-07-28T10:05:00Z
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+
+	// FileName The run's requested base name — the `fileName` sent on create, or the report/panel name when
+	// none was sent. **Not the name of the produced file:** the service appends a UTC timestamp and
+	// the format/compression extensions when it writes the file. The full name is `result.fileName`.
+	//
+	//
+	// Example: prod-runtime-vulns
+	FileName *string `json:"fileName,omitempty"`
+
+	// Filters The report-wide filters this run used — the scope recorded on the run itself.
+	//
+	// This is a **snapshot**, not a live view of the report: editing the report's filters afterwards does
+	// not change it, so a historical run stays an accurate record of what its file contains — the only
+	// way to tell what scope an already-produced file covers.
+	//
+	// A run created through this API always records its report's scope at the moment of creation. A run
+	// created in the Sysdig UI can be **narrower** than its report, because the UI sets scope per run —
+	// for example a run over one zone of a report scoped to two. Read this field as the truth about this
+	// run, not as a copy of the report. Absent on runs created before scope snapshots were recorded.
+	Filters *[]ReportFilterV2Alpha1 `json:"filters,omitempty"`
+
+	// FinishedAt Timestamp when the run finished (completed or failed). Present once the run has finished.
+	//
+	// Example: 2026-07-28T10:05:40Z
+	FinishedAt *time.Time `json:"finishedAt,omitempty"`
+
+	// Format Output format.
+	//
+	// Example: pdf
+	Format *RunRunningV2Alpha1Format `json:"format,omitempty"`
+
+	// Id Run identifier, assigned by the reporting service (legacy identifier format retained for compatibility; not UUIDv7).
+	//
+	// Example: 2feo8FR30cAOiYFPfT4cKGtOUnd
+	Id *string `json:"id,omitempty"`
+
+	// PanelId For a per-panel export, the panel exported (a panel id assigned by the reporting service). Omitted for a whole-report run.
+	//
+	// Example: 1
+	PanelId *int64 `json:"panelId,omitempty"`
+
+	// ReportId The report this run was generated from. Legacy integer id assigned by the reporting service (not UUIDv7).
+	//
+	// Example: 26
+	ReportId *int64 `json:"reportId,omitempty"`
+
+	// ScheduleId The schedule that produced this run. Omitted for on-demand runs. Legacy id assigned by the reporting service.
+	//
+	// Example: 2pAtvxUMOXjoZlA1WJkkoCL6SeS
+	ScheduleId *string `json:"scheduleId,omitempty"`
+
+	// StartedAt Timestamp when the run started executing. Present once the run has started.
+	//
+	// Example: 2026-07-28T10:05:02Z
+	StartedAt *time.Time `json:"startedAt,omitempty"`
+
+	// Status Always `running` for this variant.
+	//
+	// Example: running
+	Status *RunRunningV2Alpha1Status `json:"status,omitempty"`
+
+	// Timeframe The window this run covered, always as an absolute `startAt`/`endAt` range. A `preset` sent on
+	// create — or inherited from a schedule — is resolved to absolute instants when the run is created,
+	// so a run records the period it actually reported over rather than the relative expression that
+	// produced it.
+	Timeframe *TimeframeV2Alpha1 `json:"timeframe,omitempty"`
+
+	// Timezone The IANA timezone the produced file's dates were rendered in. `UTC` when none was requested.
+	//
+	// Example: America/New_York
+	Timezone *string `json:"timezone,omitempty"`
+
+	// Type Resource type, derived from the run's report. `report` is the only value returned today. New values
+	// MAY be added in a future minor version — treat an unrecognised value as opaque and carry on rather
+	// than failing on it.
+	//
+	//
+	// Example: report
+	Type *string `json:"type,omitempty"`
+}
+
+// RunRunningV2Alpha1Compression Compression applied to the produced file, echoing what the run was created with. Absent when the
+// run records no compression at all — every run created through this API records one, so expect this
+// only on older runs.
+//
+// Together with `format` this determines the produced file's extensions and media type, which
+// `result` reports once the run has completed.
+//
+// Example: zip
+type RunRunningV2Alpha1Compression string
+
+// RunRunningV2Alpha1Format Output format.
+//
+// Example: pdf
+type RunRunningV2Alpha1Format string
+
+// RunRunningV2Alpha1Status Always `running` for this variant.
+//
+// Example: running
+type RunRunningV2Alpha1Status string
 
 // RuntimeResult Runtime result
 type RuntimeResult struct {
@@ -16619,6 +19243,145 @@ type ScanResultResponse_Metadata struct {
 // Example: pipeline
 type ScanResultResponseStage string
 
+// ScheduleRequestV2Alpha1 A schedule's settings. Embedded as-is in `POST /reports`, where the report is implicit. `POST /schedules`
+// uses `CreateScheduleRequest`, which requires `reportId`; `PUT /schedules/{scheduleId}` uses
+// `UpdateScheduleRequest`, which omits it.
+//
+// **A schedule describes only *when* and *in what form* a report is produced, never *what it covers*.**
+// Scope is not part of this payload and cannot be set per schedule — to report on a different scope, create
+// a second report.
+//
+// A schedule has **no scope of its own at all**. Every run covers the scope its report has **when the run
+// fires**, so editing a report's `filters` changes what all of that report's existing schedules deliver, from
+// their next run onwards — and nothing in this payload or in the schedule response reflects that change. Two
+// schedules on the same report therefore always deliver the same scope as each other.
+type ScheduleRequestV2Alpha1 struct {
+	// Compression Compression of the produced file. Defaults to `gzip` on create, which is what the Sysdig UI sends.
+	// On update an omitted value keeps the schedule's current compression rather than resetting it, so a
+	// password-protected `zip` schedule is not silently turned into a `gzip` one its password cannot
+	// protect. `delivery.password` requires `zip`.
+	// Changing a password-protected schedule to `gzip` is rejected with `422` unless the same request
+	// also removes the password — see `delivery.password`.
+	//
+	//
+	// Example: gzip
+	Compression *ScheduleRequestV2Alpha1Compression `json:"compression,omitempty"`
+
+	// Cron Cron expression defining the recurrence, as **six fields** —
+	// `second minute hour dayOfMonth month dayOfWeek`. The common five-field form is **not** accepted and is
+	// rejected with `422`.
+	//
+	// Always evaluated in **UTC**, whatever `timezone` says. To fire at a local wall-clock time, convert it to
+	// UTC yourself before building the expression — the Sysdig UI does exactly this, which is why a schedule
+	// created here and one created there behave the same way. Converting means three things, and the second is
+	// the one that is easy to miss:
+	//
+	// 1. Convert the local time to UTC; that gives `hour` and `minute`.
+	// 2. **If that conversion crosses midnight, shift the day as well.** Monday 22:00 in
+	//    `America/New_York` is *Tuesday* 02:00 UTC, so `dayOfWeek` becomes `TUE` — a schedule that converts
+	//    only the time fires on the wrong day.
+	// 3. Leave a `dayOfMonth` of `28-31` alone. That is the "last day of the month" form, and it is the one
+	//    case where `timezone` affects firing: the service uses it to decide whether today is that month's
+	//    last day.
+	//
+	// Which `timeframe.preset` values are accepted depends on the recurrence this describes — see `timeframe`.
+	//
+	//
+	// Example: 0 30 6 * * MON
+	Cron string `json:"cron"`
+
+	// Delivery How a scheduled report's output is delivered and protected.
+	//
+	// `isSecureDownload` and `password` are **two independent protections** and may be used separately or
+	// together:
+	// * `isSecureDownload` gates *who may fetch the file* (a Sysdig login is required).
+	// * `password` encrypts *the file itself* (zip password). `isPasswordProtected` reports whether one is set.
+	Delivery *DeliveryV2Alpha1 `json:"delivery,omitempty"`
+
+	// Description Optional free-text note describing what this schedule is for and who consumes it.
+	//
+	// Example: Weekly vulnerability summary for the platform team's Monday review.
+	Description *string `json:"description,omitempty"`
+
+	// Enabled Whether the schedule is active. Defaults to true.
+	//
+	// Example: true
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Format Output format of each generated run. **Not every format is valid for every report** — the
+	// permitted set is determined by the `kind` of the template the report was created from (see
+	// `Template.kind`):\
+	// \
+	// - `posture_v2` — `csv` only\
+	// - `compliance` — `pdf` only\
+	// - `vulnerability_management` — `csv`, `pdf` or `json`\
+	// \
+	// An unsupported combination is rejected with `422`.\
+	// \
+	// Where a report's kind permits `csv` or `json`, that holds whatever its panels look like — including
+	// panels that are charts rather than tables: they export each panel's underlying result rows.
+	//
+	//
+	// Example: pdf
+	Format ScheduleRequestV2Alpha1Format `json:"format"`
+
+	// Name Optional schedule name (a report may have multiple named schedules).
+	//
+	// Example: Weekly
+	Name *string `json:"name,omitempty"`
+
+	// ReportId The report this schedule belongs to, as assigned by the reporting service. Required for `POST /schedules`; omit when embedded in `POST /reports`.
+	//
+	// Example: 26
+	ReportId *int64 `json:"reportId,omitempty"`
+
+	// Timeframe Window each run reports over. Required: a schedule does not fall back to the report's
+	// `defaultTimeframe`, because which presets are accepted depends on `cron` (below).
+	//
+	// **Which presets are accepted depends on `cron`:** a daily recurrence takes `1d`; a weekly one `1d` or
+	// `7d`; a monthly one `1d`, `7d` or `30d`; any other cron is unrestricted. A `cron`/`preset` combination
+	// outside that is rejected with `422`, naming `/timeframe/preset`.
+	Timeframe ScheduleTimeframeV2Alpha1 `json:"timeframe"`
+
+	// Timezone IANA timezone the `cron` expression was composed in — a record of the caller's intent, so a UI can
+	// render the schedule back as a local time.
+	//
+	// **It does not shift when the schedule fires.** `cron` is evaluated in UTC regardless, so convert a local
+	// wall-clock time to UTC yourself when building the expression. Its one effect on firing is for a cron
+	// whose day-of-month selects the end of the month (e.g. `28-31`), where it decides whether today is that
+	// month's last day in this zone.
+	//
+	//
+	// Example: America/New_York
+	Timezone string `json:"timezone"`
+}
+
+// ScheduleRequestV2Alpha1Compression Compression of the produced file. Defaults to `gzip` on create, which is what the Sysdig UI sends.
+// On update an omitted value keeps the schedule's current compression rather than resetting it, so a
+// password-protected `zip` schedule is not silently turned into a `gzip` one its password cannot
+// protect. `delivery.password` requires `zip`.
+// Changing a password-protected schedule to `gzip` is rejected with `422` unless the same request
+// also removes the password — see `delivery.password`.
+//
+// Example: gzip
+type ScheduleRequestV2Alpha1Compression string
+
+// ScheduleRequestV2Alpha1Format Output format of each generated run. **Not every format is valid for every report** — the
+// permitted set is determined by the `kind` of the template the report was created from (see
+// `Template.kind`):\
+// \
+// - `posture_v2` — `csv` only\
+// - `compliance` — `pdf` only\
+// - `vulnerability_management` — `csv`, `pdf` or `json`\
+// \
+// An unsupported combination is rejected with `422`.\
+// \
+// Where a report's kind permits `csv` or `json`, that holds whatever its panels look like — including
+// panels that are charts rather than tables: they export each panel's underlying result rows.
+//
+// Example: pdf
+type ScheduleRequestV2Alpha1Format string
+
 // ScheduleResponse Schema for a scheduled report
 type ScheduleResponse struct {
 	// Compression Compression format
@@ -16739,6 +19502,183 @@ type ScheduleResponse struct {
 
 	// Zones List of zone IDs
 	Zones []int64 `json:"zones"`
+}
+
+// ScheduleResponseV2Alpha1 A recurring schedule that generates report runs.
+type ScheduleResponseV2Alpha1 struct {
+	// Compression Compression of the produced file.
+	//
+	// Example: zip
+	Compression *ScheduleResponseV2Alpha1Compression `json:"compression,omitempty"`
+
+	// CreatedAt Timestamp when the schedule was created.
+	//
+	// Example: 2026-07-20T09:00:00Z
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+
+	// CreatedBy Email of the user who created the schedule.
+	//
+	// Example: jane@acme.com
+	CreatedBy *string `json:"createdBy,omitempty"`
+
+	// Cron Cron expression defining the recurrence, as six fields —
+	// `second minute hour dayOfMonth month dayOfWeek`, evaluated in **UTC**.
+	//
+	//
+	// Example: 0 30 6 * * MON
+	Cron string `json:"cron"`
+
+	// Delivery How a scheduled report's output is delivered and protected.
+	//
+	// `isSecureDownload` and `password` are **two independent protections** and may be used separately or
+	// together:
+	// * `isSecureDownload` gates *who may fetch the file* (a Sysdig login is required).
+	// * `password` encrypts *the file itself* (zip password). `isPasswordProtected` reports whether one is set.
+	Delivery *DeliveryV2Alpha1 `json:"delivery,omitempty"`
+
+	// Description Free-text note describing what this schedule is for and who consumes it.
+	//
+	// Example: Weekly vulnerability summary for the platform team's Monday review.
+	Description *string `json:"description,omitempty"`
+
+	// Enabled Whether the schedule is active (the user toggle).
+	//
+	// Example: true
+	Enabled bool `json:"enabled"`
+
+	// Format Output format of each generated run.
+	//
+	// Example: pdf
+	Format ScheduleResponseV2Alpha1Format `json:"format"`
+
+	// Id Schedule identifier. Legacy identifier format retained for compatibility (pre-existing-identifier exception).
+	//
+	// Example: 2pAtvxUMOXjoZlA1WJkkoCL6SeS
+	Id *string `json:"id,omitempty"`
+
+	// LastRunAt Timestamp of the last completed run. Omitted until the schedule has run once.
+	//
+	// Example: 2026-07-27T13:00:00Z
+	LastRunAt *time.Time `json:"lastRunAt,omitempty"`
+
+	// Name Schedule name.
+	//
+	// Example: Weekly
+	Name *string `json:"name,omitempty"`
+
+	// ReportId The report this schedule belongs to, as assigned by the reporting service. Immutable: a schedule
+	// cannot be moved to another report, so `UpdateScheduleRequest` has no `reportId`.
+	//
+	//
+	// Example: 26
+	ReportId *int64 `json:"reportId,omitempty"`
+
+	// Status Server-computed effective state of the schedule. Distinct from the `enabled` toggle: a schedule
+	// the user has enabled can still be `inactive` or `error`.
+	//
+	// `active_limited_data` means active **and** the most recent run was truncated by the row limit —
+	// the schedule is working, but its last delivery was capped. The per-run equivalent is
+	// `RunResponse.hasLimitedData`. This value tracks the latest run, so it can change between two reads
+	// without the schedule having been edited.
+	//
+	//
+	// Example: active
+	Status *ScheduleResponseV2Alpha1Status `json:"status,omitempty"`
+
+	// Timeframe Window each run of this schedule reports over. Omitted for the report kinds that do not take one —
+	// read it rather than assuming a window exists.
+	Timeframe *ScheduleTimeframeV2Alpha1 `json:"timeframe,omitempty"`
+
+	// Timezone IANA timezone the `cron` expression was composed in — a record of the caller's intent, so a UI can
+	// render the schedule back as a local time.
+	//
+	// **It does not shift when the schedule fires.** `cron` is evaluated in UTC regardless, so convert a local
+	// wall-clock time to UTC yourself when building the expression. Its one effect on firing is for a cron
+	// whose day-of-month selects the end of the month (e.g. `28-31`), where it decides whether today is that
+	// month's last day in this zone.
+	//
+	//
+	// Example: America/New_York
+	Timezone string `json:"timezone"`
+
+	// Type Resource type, derived from the schedule's report. `report` is the only value returned today. New
+	// values MAY be added in a future minor version — treat an unrecognised value as opaque and carry on
+	// rather than failing on it.
+	//
+	// Never accepted in a request body — supplying it is a `400`.
+	//
+	//
+	// Example: report
+	Type *string `json:"type,omitempty"`
+
+	// UpdatedAt Timestamp when the schedule was last updated.
+	//
+	// Example: 2026-07-27T13:00:05Z
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+}
+
+// ScheduleResponseV2Alpha1Compression Compression of the produced file.
+//
+// Example: zip
+type ScheduleResponseV2Alpha1Compression string
+
+// ScheduleResponseV2Alpha1Format Output format of each generated run.
+//
+// Example: pdf
+type ScheduleResponseV2Alpha1Format string
+
+// ScheduleResponseV2Alpha1Status Server-computed effective state of the schedule. Distinct from the `enabled` toggle: a schedule
+// the user has enabled can still be `inactive` or `error`.
+//
+// `active_limited_data` means active **and** the most recent run was truncated by the row limit —
+// the schedule is working, but its last delivery was capped. The per-run equivalent is
+// `RunResponse.hasLimitedData`. This value tracks the latest run, so it can change between two reads
+// without the schedule having been edited.
+//
+// Example: active
+type ScheduleResponseV2Alpha1Status string
+
+// ScheduleTimeframeV2Alpha1 Reporting window applied to each scheduled run — set on a schedule, or carried by a report's
+// `defaultTimeframe`, which supplies the window for the runs created from that report when they do not
+// state one of their own. **Relative only** —
+// a scheduled run reports over the window ending at the moment it fires, so an absolute
+// `startAt`/`endAt` range would make every run cover the same fixed period. Use `POST /runs` when you
+// want an absolute range.
+//
+// **Not every report kind takes a window.** A compliance report reports on the current state of its
+// policy rather than over a period, so no window applies to it: a compliance schedule accepts the
+// `timeframe` its request requires but does not store it, and reads back without one, and a compliance
+// report's `defaultTimeframe` is not applied to its runs. Every other kind takes a window.
+//
+// Presets are whole days, written `Nd` with N between 1 and 30 — e.g. `1d`, `7d`, `30d`. Over-30-day
+// windows are not valid: `90d` is rejected.
+//
+// **The window is rolling and ends at the firing instant, in UTC** — it is not calendar-aligned. A
+// schedule with `1d` firing at 06:00 covers 06:00 the previous day to 06:00 today, not yesterday
+// midnight to midnight. So there is no `24h` preset and no need for one: `1d` **is** the rolling
+// 24-hour window. Each run records the absolute range it resolved to in its own `timeframe`.
+//
+// **The set narrows with the recurrence** the schedule's `cron` describes, so that a window is never
+// longer than it can be reported on meaningfully:
+//
+// - fires every day — `1d`
+// - fires on a day of the week — `1d`, `7d`
+// - fires on a day of the month — `1d`, `7d`, `30d`
+// - any other recurrence — no restriction
+//
+// A preset outside the set its `cron` allows is rejected with `422`. The pattern below is the widest
+// form; it cannot express this rule, which is why the check happens on the request.
+type ScheduleTimeframeV2Alpha1 struct {
+	// Preset Relative window as whole days, `Nd` with 1 ≤ N ≤ 30 (e.g. `1d`, `7d`, `30d`). Values outside this
+	// pattern or range are rejected.
+	//
+	// **The accepted subset depends on the schedule's `cron`:** `1d` for a daily recurrence; `1d` or `7d`
+	// for a weekly one; `1d`, `7d` or `30d` for a monthly one; unrestricted for any other cron. A preset
+	// the `cron` does not allow is rejected with `422`.
+	//
+	//
+	// Example: 7d
+	Preset string `json:"preset"`
 }
 
 // Scope Scope labels that define the asset
@@ -17521,6 +20461,95 @@ type TeamUserResponseV1 struct {
 	UserId *UnlimitedLong `json:"userId,omitempty"`
 }
 
+// TemplateV2Alpha1 A report template (catalog entry). Read-only. Exposes identity, metadata, the filters a report
+// created from it can use, and a minimal panel preview. Panel rendering internals are not exposed.
+type TemplateV2Alpha1 struct {
+	// AvailableFilters Filters a report created from this template can apply **report-wide** — each affects every panel
+	// whose query supports it. The per-panel remainder is under `panels[].availableFilters`, and the two
+	// lists partition this template's filter surface: no key appears in both.
+	//
+	// **The split varies by template, so read it rather than assuming.** Most templates promote only
+	// `zone` here and leave the filterable keys on their panels. Others — typically the summary-style
+	// reports whose panels all aggregate the same dataset — promote most of their surface here, because a
+	// filter like severity is only meaningful applied to the whole document. Either arrangement is normal.
+	//
+	// **The split also varies between panels of the same template.** Promotion removes a key from every
+	// panel that declared it, so a panel whose query supports nothing beyond the promoted set comes back
+	// with an empty `availableFilters`, while a panel drawing on a richer query keeps the remainder.
+	// Expect one template to contain both kinds, and read each panel's own list.
+	AvailableFilters *[]AvailableFilterV2Alpha1 `json:"availableFilters,omitempty"`
+
+	// CreatedAt Timestamp when the template was created.
+	//
+	// Example: 2026-01-01T00:00:00Z
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+
+	// DefaultTimePreset Suggested default reporting window (advisory), in the same rolling `Nd` form a run or schedule
+	// accepts — see `Timeframe`. Empty when unset.
+	//
+	//
+	// Example: 7d
+	DefaultTimePreset *string `json:"defaultTimePreset,omitempty"`
+
+	// Description Template description.
+	//
+	// Example: Vulnerabilities for running containers.
+	Description *string `json:"description,omitempty"`
+
+	// Id Template identifier (stable slug). Referenced as `templateId` when creating a report.
+	// Legacy identifier format retained for compatibility (pre-existing-identifier exception).
+	//
+	//
+	// Example: runtime_container_vulnerabilities
+	Id *string `json:"id,omitempty"`
+
+	// Kind Report category.
+	//
+	// Example: vulnerability_management
+	Kind *TemplateV2Alpha1Kind `json:"kind,omitempty"`
+
+	// Name Human-readable template name.
+	//
+	// Example: Runtime Container Vulnerabilities
+	Name *string `json:"name,omitempty"`
+
+	// Panels Panel preview — identity, the filters each panel supports (`availableFilters`), and the panel's
+	// built-in default `filters`. Use these to decide what to send in a report's `panels`.
+	//
+	// **An empty array is legitimate.** Some report kinds do not build their output from panels at all;
+	// for those the whole filter surface is at report level and this list is empty. It means the template
+	// has no panels, not that the preview was withheld. Two consequences: a report created from such a
+	// template accepts no `panels` on create or update, and its runs cannot use `panelId`, because there
+	// is no panel to target.
+	Panels *[]PanelSummaryV2Alpha1 `json:"panels,omitempty"`
+
+	// TimePresets Suggested reporting-window options (advisory; not a hard constraint on runs/schedules), each in
+	// the rolling `Nd` form a run or schedule accepts.
+	//
+	// This list may be shorter than the equivalent picker in the Sysdig UI. The UI offers a rolling
+	// "24 h" option alongside a calendar-aligned "1 d"; because presets here are always rolling, both
+	// collapse to `1d` and the duplicate is dropped. A caller wanting the calendar-aligned variant
+	// sends `startAt`/`endAt` on a run instead.
+	TimePresets *[]string `json:"timePresets,omitempty"`
+
+	// Type Resource type. `report` is the only value returned today. New values MAY be added in a future
+	// minor version — treat an unrecognised value as opaque and carry on rather than failing on it.
+	//
+	//
+	// Example: report
+	Type *string `json:"type,omitempty"`
+
+	// UpdatedAt Timestamp when the template was last updated.
+	//
+	// Example: 2026-01-01T00:00:00Z
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+}
+
+// TemplateV2Alpha1Kind Report category.
+//
+// Example: vulnerability_management
+type TemplateV2Alpha1Kind string
+
 // TimeFrame The start and end time of the request
 type TimeFrame struct {
 	// From
@@ -17532,6 +20561,58 @@ type TimeFrame struct {
 	//
 	// Example: 1
 	To *UnlimitedLong `json:"to,omitempty"`
+}
+
+// TimeframeV2Alpha1 Reporting window for an on-demand run. Provide either a relative `preset` or an absolute
+// `startAt`/`endAt` range, not both. Schedules use `ScheduleTimeframe` instead, which accepts a
+// `preset` only — an absolute range there would pin every run to the same fixed period.\
+// \
+// **Not every report kind takes a window.** A compliance report reports on the current state of its
+// policy rather than over a period, and the service rejects a timeframe supplied for one — so do not
+// send this field when running a compliance report. Every other kind takes a window.\
+// \
+// Presets are **whole days only**, written `Nd` with N between 1 and 30 — e.g. `1d`, `7d`, `30d`.
+// Over-30-day windows are rejected: `90d` is **not** a valid preset.\
+// \
+// **A preset is a rolling window ending at the moment the run is created**, not a calendar-aligned
+// one: `1d` is the 24 hours up to now, `7d` the 168 hours up to now. It is resolved to absolute
+// instants when the run is created, and the resolved range is echoed back in the run's `timeframe`.
+// This matches how a schedule's preset is resolved when it fires.\
+// \
+// There is therefore no `24h` preset and no need for one — `1d` **is** the rolling 24-hour window. If
+// you want a calendar-aligned window instead — yesterday midnight to midnight, or a whole month —
+// compute the boundaries yourself and send `startAt`/`endAt`; presets cannot express one.\
+// \
+// **Absolute ranges cover recent history only.** Both `startAt` and `endAt` must fall within the
+// current calendar month or the one immediately before it, and the range may span at most 31 days.
+// A window that reaches further back is rejected with `422`, even if it is under 31 days — for
+// example, on 2 September a request for 1–15 July is rejected, while 1 August – 1 September is
+// accepted. Reporting keeps no long-tail window for on-demand generation; use a schedule if you
+// need a report produced regularly over time.
+type TimeframeV2Alpha1 struct {
+	// EndAt Absolute end of the window (RFC 3339). Runs only. Must fall inside the recency limit
+	// described above.
+	//
+	//
+	// Example: 2026-07-28T23:59:59Z
+	EndAt *time.Time `json:"endAt,omitempty"`
+
+	// Preset Relative window as whole days, `Nd` with 1 ≤ N ≤ 30 (e.g. `1d`, `7d`, `30d`). Values outside
+	// this pattern or range are rejected with `422`.
+	//
+	// Rolling, ending at the instant the run is created — `1d` is the last 24 hours, not yesterday.
+	// Use `startAt`/`endAt` for a calendar-aligned window.
+	//
+	//
+	// Example: 7d
+	Preset *string `json:"preset,omitempty"`
+
+	// StartAt Absolute start of the window (RFC 3339). Runs only. Must be no later than `endAt`, and must
+	// fall inside the recency limit described above.
+	//
+	//
+	// Example: 2026-07-28T00:00:00Z
+	StartAt *time.Time `json:"startAt,omitempty"`
 }
 
 // Timestamp Timestamp the audit event occured, expressed in nanoseconds.
@@ -18523,6 +21604,39 @@ type UpdateQradarIntegrationRequest struct {
 	Type IntegrationType `json:"type"`
 }
 
+// UpdateReportRequestV2Alpha1 Update a report's mutable fields. `templateId` and `kind` are immutable.
+type UpdateReportRequestV2Alpha1 struct {
+	// DefaultTimeframe The report's default reporting window. Omitted resets it to the template's `defaultTimePreset`,
+	// as with every other mutable field on a `PUT`.
+	// `preset` must be one of the template's `timePresets`; any other value is rejected with `422`.
+	DefaultTimeframe *ScheduleTimeframeV2Alpha1 `json:"defaultTimeframe,omitempty"`
+
+	// Description Report description.
+	//
+	// Example: Weekly critical/high in prod.
+	Description *string `json:"description,omitempty"`
+
+	// Filters Report-wide filters, validated against the template's report-level `availableFilters`. Each applies
+	// to every panel whose query supports that key. Keys the template leaves per-panel go in `panels`
+	// instead; the two sets never overlap, and a report-level key sent under `panels` is rejected with
+	// `422`.
+	//
+	// A compliance report takes exactly one `zone` and one `policy`; any other number is rejected with `422`.
+	Filters *[]ReportFilterV2Alpha1 `json:"filters,omitempty"`
+
+	// Name Report name. Leading and trailing whitespace is trimmed; a name that is empty once trimmed is rejected.
+	//
+	// Example: Prod runtime vulns
+	Name string `json:"name"`
+
+	// Panels Per-panel filters. Sparse — list only the panels you want to change; omitted panels keep their
+	// current filters. Panels cannot be added, removed, or reordered.
+	//
+	// Omitting `panels` altogether is the same as listing every panel with an empty `filters`: each
+	// panel's optional filters are cleared, and its required filters keep their current values.
+	Panels *[]PanelFilterAssignmentV2Alpha1 `json:"panels,omitempty"`
+}
+
 // UpdateRiskAccepted defines model for UpdateRiskAccepted.
 type UpdateRiskAccepted struct {
 	// Description Description of why the accepted risk was created
@@ -18546,6 +21660,133 @@ type UpdateRiskAccepted struct {
 //
 // Example: RiskTransferred
 type UpdateRiskAcceptedReason string
+
+// UpdateScheduleRequestV2Alpha1 Payload for `PUT /schedules/{scheduleId}`, which replaces the schedule's mutable fields. `reportId` is
+// immutable and is not part of this payload — a schedule cannot be moved to another report.
+//
+// `enabled` is required here, unlike on create: a replacement must state whether the schedule runs, so
+// that editing a paused schedule never resumes it by omission.
+type UpdateScheduleRequestV2Alpha1 struct {
+	// Compression Compression of the produced file. Defaults to `gzip` on create, which is what the Sysdig UI sends.
+	// On update an omitted value keeps the schedule's current compression rather than resetting it, so a
+	// password-protected `zip` schedule is not silently turned into a `gzip` one its password cannot
+	// protect. `delivery.password` requires `zip`.
+	// Changing a password-protected schedule to `gzip` is rejected with `422` unless the same request
+	// also removes the password — see `delivery.password`.
+	//
+	//
+	// Example: gzip
+	Compression *UpdateScheduleRequestV2Alpha1Compression `json:"compression,omitempty"`
+
+	// Cron Cron expression defining the recurrence, as **six fields** —
+	// `second minute hour dayOfMonth month dayOfWeek`. The common five-field form is **not** accepted and is
+	// rejected with `422`.
+	//
+	// Always evaluated in **UTC**, whatever `timezone` says. To fire at a local wall-clock time, convert it to
+	// UTC yourself before building the expression — the Sysdig UI does exactly this, which is why a schedule
+	// created here and one created there behave the same way. Converting means three things, and the second is
+	// the one that is easy to miss:
+	//
+	// 1. Convert the local time to UTC; that gives `hour` and `minute`.
+	// 2. **If that conversion crosses midnight, shift the day as well.** Monday 22:00 in
+	//    `America/New_York` is *Tuesday* 02:00 UTC, so `dayOfWeek` becomes `TUE` — a schedule that converts
+	//    only the time fires on the wrong day.
+	// 3. Leave a `dayOfMonth` of `28-31` alone. That is the "last day of the month" form, and it is the one
+	//    case where `timezone` affects firing: the service uses it to decide whether today is that month's
+	//    last day.
+	//
+	// Which `timeframe.preset` values are accepted depends on the recurrence this describes — see `timeframe`.
+	//
+	//
+	// Example: 0 30 6 * * MON
+	Cron string `json:"cron"`
+
+	// Delivery How a scheduled report's output is delivered and protected.
+	//
+	// `isSecureDownload` and `password` are **two independent protections** and may be used separately or
+	// together:
+	// * `isSecureDownload` gates *who may fetch the file* (a Sysdig login is required).
+	// * `password` encrypts *the file itself* (zip password). `isPasswordProtected` reports whether one is set.
+	Delivery *DeliveryV2Alpha1 `json:"delivery,omitempty"`
+
+	// Description Optional free-text note describing what this schedule is for and who consumes it.
+	//
+	// Example: Weekly vulnerability summary for the platform team's Monday review.
+	Description *string `json:"description,omitempty"`
+
+	// Enabled Whether the schedule runs. Set `false` to pause it without deleting it.
+	//
+	// Example: true
+	Enabled bool `json:"enabled"`
+
+	// Format Output format of each generated run. **Not every format is valid for every report** — the
+	// permitted set is determined by the `kind` of the template the report was created from (see
+	// `Template.kind`):\
+	// \
+	// - `posture_v2` — `csv` only\
+	// - `compliance` — `pdf` only\
+	// - `vulnerability_management` — `csv`, `pdf` or `json`\
+	// \
+	// An unsupported combination is rejected with `422`.\
+	// \
+	// Where a report's kind permits `csv` or `json`, that holds whatever its panels look like — including
+	// panels that are charts rather than tables: they export each panel's underlying result rows.
+	//
+	//
+	// Example: pdf
+	Format UpdateScheduleRequestV2Alpha1Format `json:"format"`
+
+	// Name Optional schedule name (a report may have multiple named schedules).
+	//
+	// Example: Weekly
+	Name *string `json:"name,omitempty"`
+
+	// Timeframe Window each run reports over. Required: a schedule does not fall back to the report's
+	// `defaultTimeframe`, because which presets are accepted depends on `cron` (below).
+	//
+	// **Which presets are accepted depends on `cron`:** a daily recurrence takes `1d`; a weekly one `1d` or
+	// `7d`; a monthly one `1d`, `7d` or `30d`; any other cron is unrestricted. A `cron`/`preset` combination
+	// outside that is rejected with `422`, naming `/timeframe/preset`.
+	Timeframe ScheduleTimeframeV2Alpha1 `json:"timeframe"`
+
+	// Timezone IANA timezone the `cron` expression was composed in — a record of the caller's intent, so a UI can
+	// render the schedule back as a local time.
+	//
+	// **It does not shift when the schedule fires.** `cron` is evaluated in UTC regardless, so convert a local
+	// wall-clock time to UTC yourself when building the expression. Its one effect on firing is for a cron
+	// whose day-of-month selects the end of the month (e.g. `28-31`), where it decides whether today is that
+	// month's last day in this zone.
+	//
+	//
+	// Example: America/New_York
+	Timezone string `json:"timezone"`
+}
+
+// UpdateScheduleRequestV2Alpha1Compression Compression of the produced file. Defaults to `gzip` on create, which is what the Sysdig UI sends.
+// On update an omitted value keeps the schedule's current compression rather than resetting it, so a
+// password-protected `zip` schedule is not silently turned into a `gzip` one its password cannot
+// protect. `delivery.password` requires `zip`.
+// Changing a password-protected schedule to `gzip` is rejected with `422` unless the same request
+// also removes the password — see `delivery.password`.
+//
+// Example: gzip
+type UpdateScheduleRequestV2Alpha1Compression string
+
+// UpdateScheduleRequestV2Alpha1Format Output format of each generated run. **Not every format is valid for every report** — the
+// permitted set is determined by the `kind` of the template the report was created from (see
+// `Template.kind`):\
+// \
+// - `posture_v2` — `csv` only\
+// - `compliance` — `pdf` only\
+// - `vulnerability_management` — `csv`, `pdf` or `json`\
+// \
+// An unsupported combination is rejected with `422`.\
+// \
+// Where a report's kind permits `csv` or `json`, that holds whatever its panels look like — including
+// panels that are charts rather than tables: they export each panel's underlying result rows.
+//
+// Example: pdf
+type UpdateScheduleRequestV2Alpha1Format string
 
 // UpdateServiceAccountsNotificationSettingsRequestV1 defines model for UpdateServiceAccountsNotificationSettingsRequestV1.
 type UpdateServiceAccountsNotificationSettingsRequestV1 struct {
@@ -19925,6 +23166,12 @@ type GroupMappingIdPath = UnlimitedLong
 // IdempotencyKey Example: 01913d2e-2c8a-7a4e-b9c2-3f5e8a1d9b00
 type IdempotencyKey = openapi_types.UUID
 
+// IfMatchHeader Example: "7"
+type IfMatchHeader = string
+
+// IfMatchHeaderOptional Example: "7"
+type IfMatchHeaderOptional = string
+
 // InhibitionRulePath
 //
 // Example: 1
@@ -20050,6 +23297,12 @@ type PricingIdPath = UnlimitedLong
 // Query Example: up
 type Query = string
 
+// ReportID Example: 26
+type ReportID = int64
+
+// ReportIdQuery Example: 26
+type ReportIdQuery = int64
+
 // RoleDisplayNamePath Example: View Only
 type RoleDisplayNamePath string
 
@@ -20058,10 +23311,28 @@ type RoleDisplayNamePath string
 // Example: 1
 type RoleIdPath = UnlimitedLong
 
+// RunID Example: 2feo8FR30cAOiYFPfT4cKGtOUnd
+type RunID = string
+
+// RunStatusQuery Example: completed
+type RunStatusQuery string
+
+// RunTriggerQuery Example: on_demand
+type RunTriggerQuery string
+
+// ScheduleID Example: 2pAtvxUMOXjoZlA1WJkkoCL6SeS
+type ScheduleID = string
+
+// ScheduleIdQuery Example: 2pAtvxUMOXjoZlA1WJkkoCL6SeS
+type ScheduleIdQuery = string
+
 // ServiceAccountIdPath
 //
 // Example: 1
 type ServiceAccountIdPath = UnlimitedLong
+
+// SinceAtQuery Example: 2026-09-01T00:00:00Z
+type SinceAtQuery = time.Time
 
 // SsoProductIdPath Example: secure
 type SsoProductIdPath string
@@ -20080,6 +23351,9 @@ type Step struct {
 //
 // Example: 1
 type TeamIdPath = UnlimitedLong
+
+// TemplateID Example: runtime_container_vulnerabilities
+type TemplateID = string
 
 // Time Time defined as RFC3339 or a unix timestamp
 type Time = QueryTime
@@ -20170,6 +23444,12 @@ type NotFoundPrometheus = string
 
 // NotFoundV2 defines model for NotFoundV2.
 type NotFoundV2 = ErrorV2
+
+// PreconditionFailedV2Alpha1 defines model for PreconditionFailedV2Alpha1.
+type PreconditionFailedV2Alpha1 = ErrorV2
+
+// PreconditionRequiredV2Alpha1 defines model for PreconditionRequiredV2Alpha1.
+type PreconditionRequiredV2Alpha1 = ErrorV2
 
 // TooManyRequests defines model for TooManyRequests.
 type TooManyRequests = Error
@@ -20421,6 +23701,95 @@ type ListJobsV1ParamsStatus string
 
 // ListJobsV1ParamsKind defines parameters for ListJobsV1.
 type ListJobsV1ParamsKind string
+
+// DeleteReportV2Alpha1Params defines parameters for DeleteReportV2Alpha1.
+type DeleteReportV2Alpha1Params struct {
+	// IfMatch Optional optimistic-concurrency guard. Supply the `ETag` returned by a previous `GET`, `PUT`, or
+	// `PATCH` of this report to delete it only if it has not changed since you read it; a stale value is
+	// rejected with `412` and the report is left in place.\
+	// \
+	// Unlike `PUT` and `PATCH`, this header is **not required** here — an unconditional delete is
+	// accepted. Supply it when you are deleting on the strength of a report state you read earlier and a
+	// concurrent edit should abort the delete.
+	IfMatch *IfMatchHeaderOptional `json:"If-Match,omitempty"`
+}
+
+// PatchReportV2Alpha1Params defines parameters for PatchReportV2Alpha1.
+type PatchReportV2Alpha1Params struct {
+	// IfMatch Optimistic-concurrency guard, **required** on report writes. Supply the `ETag` returned by a previous
+	// `GET`, `PUT`, or `PATCH` of this report; the write is applied only if the report has not changed since.\
+	// \
+	// A stale value is rejected with `412` and no change is made — re-read the report, reapply your change to
+	// the fresh state, and retry with the new `ETag`. **Omitting the header is rejected with `428`** — the write
+	// must be conditional — while a malformed value is rejected with `400`. The header is declared optional only
+	// so that omitting it produces `428` rather than a generic parameter-validation `400`.\
+	// \
+	// Reports are the only versioned resource in this API; schedules and runs accept unconditional writes and
+	// do not take this header.
+	IfMatch *IfMatchHeader `json:"If-Match,omitempty"`
+}
+
+// UpdateReportV2Alpha1Params defines parameters for UpdateReportV2Alpha1.
+type UpdateReportV2Alpha1Params struct {
+	// IfMatch Optimistic-concurrency guard, **required** on report writes. Supply the `ETag` returned by a previous
+	// `GET`, `PUT`, or `PATCH` of this report; the write is applied only if the report has not changed since.\
+	// \
+	// A stale value is rejected with `412` and no change is made — re-read the report, reapply your change to
+	// the fresh state, and retry with the new `ETag`. **Omitting the header is rejected with `428`** — the write
+	// must be conditional — while a malformed value is rejected with `400`. The header is declared optional only
+	// so that omitting it produces `428` rather than a generic parameter-validation `400`.\
+	// \
+	// Reports are the only versioned resource in this API; schedules and runs accept unconditional writes and
+	// do not take this header.
+	IfMatch *IfMatchHeader `json:"If-Match,omitempty"`
+}
+
+// ListRunsV2Alpha1Params defines parameters for ListRunsV2Alpha1.
+type ListRunsV2Alpha1Params struct {
+	// ReportId Filter results to the given report identifier.
+	ReportId *ReportIdQuery `form:"reportId,omitempty" json:"reportId,omitempty"`
+
+	// ScheduleId Filter results to the given schedule identifier.
+	ScheduleId *ScheduleIdQuery `form:"scheduleId,omitempty" json:"scheduleId,omitempty"`
+
+	// Trigger Return only runs started this way:
+	//
+	// * `on_demand` — runs created directly via `POST /runs`. These are the runs a `scheduleId` filter
+	//   cannot reach, since they have none.
+	// * `schedule` — runs produced by any schedule.
+	//
+	// Omitted returns both. Combining `trigger=on_demand` with `scheduleId` is rejected with `400`, since
+	// the two can never both hold. `trigger=schedule` with a `scheduleId` is accepted but redundant.
+	Trigger *ListRunsV2Alpha1ParamsTrigger `form:"trigger,omitempty" json:"trigger,omitempty"`
+
+	// Status Filter runs by status.
+	Status *ListRunsV2Alpha1ParamsStatus `form:"status,omitempty" json:"status,omitempty"`
+
+	// SinceAt Return only runs with activity at or after this instant (RFC 3339) — i.e. runs that **finished**
+	// at/after it, plus runs that **started** at/after it (so in-flight and failed runs are included).
+	// Intended for incremental polling: pass the timestamp of your previous poll to fetch only what has
+	// changed since.\
+	// \
+	// The name deliberately does not commit to one timestamp: a run matches on either of its two, so
+	// neither `finishedAt` nor `startedAt` would describe the filter correctly.\
+	// \
+	// A run that has not started yet has no activity, so it is not returned until it starts. For the same
+	// reason `sinceAt` cannot be combined with `status=pending` or `status=running`: either combination
+	// returns `400`.
+	SinceAt *SinceAtQuery `form:"sinceAt,omitempty" json:"sinceAt,omitempty"`
+}
+
+// ListRunsV2Alpha1ParamsTrigger defines parameters for ListRunsV2Alpha1.
+type ListRunsV2Alpha1ParamsTrigger string
+
+// ListRunsV2Alpha1ParamsStatus defines parameters for ListRunsV2Alpha1.
+type ListRunsV2Alpha1ParamsStatus string
+
+// ListSchedulesV2Alpha1Params defines parameters for ListSchedulesV2Alpha1.
+type ListSchedulesV2Alpha1Params struct {
+	// ReportId Filter results to the given report identifier.
+	ReportId *ReportIdQuery `form:"reportId,omitempty" json:"reportId,omitempty"`
+}
 
 // GetAccessKeysV1Params defines parameters for GetAccessKeysV1.
 type GetAccessKeysV1Params struct {
@@ -21507,6 +24876,27 @@ type CreateJiraIssueTypeV1JSONRequestBody = CreateIssueTypeRequestV1
 
 // UpdateJiraIssueTypeV1JSONRequestBody defines body for UpdateJiraIssueTypeV1 for application/json ContentType.
 type UpdateJiraIssueTypeV1JSONRequestBody = UpdateIssueTypeRequestV1
+
+// CreateReportV2Alpha1JSONRequestBody defines body for CreateReportV2Alpha1 for application/json ContentType.
+type CreateReportV2Alpha1JSONRequestBody = CreateReportRequestV2Alpha1
+
+// PatchReportV2Alpha1ApplicationMergePatchPlusJSONRequestBody defines body for PatchReportV2Alpha1 for application/merge-patch+json ContentType.
+type PatchReportV2Alpha1ApplicationMergePatchPlusJSONRequestBody = PatchReportRequestV2Alpha1
+
+// UpdateReportV2Alpha1JSONRequestBody defines body for UpdateReportV2Alpha1 for application/json ContentType.
+type UpdateReportV2Alpha1JSONRequestBody = UpdateReportRequestV2Alpha1
+
+// CreateRunV2Alpha1JSONRequestBody defines body for CreateRunV2Alpha1 for application/json ContentType.
+type CreateRunV2Alpha1JSONRequestBody = CreateRunRequestV2Alpha1
+
+// CreateScheduleV2Alpha1JSONRequestBody defines body for CreateScheduleV2Alpha1 for application/json ContentType.
+type CreateScheduleV2Alpha1JSONRequestBody = CreateScheduleRequestV2Alpha1
+
+// PatchScheduleV2Alpha1ApplicationMergePatchPlusJSONRequestBody defines body for PatchScheduleV2Alpha1 for application/merge-patch+json ContentType.
+type PatchScheduleV2Alpha1ApplicationMergePatchPlusJSONRequestBody = PatchScheduleRequestV2Alpha1
+
+// UpdateScheduleV2Alpha1JSONRequestBody defines body for UpdateScheduleV2Alpha1 for application/json ContentType.
+type UpdateScheduleV2Alpha1JSONRequestBody = UpdateScheduleRequestV2Alpha1
 
 // CreateAccessKeyV1JSONRequestBody defines body for CreateAccessKeyV1 for application/json ContentType.
 type CreateAccessKeyV1JSONRequestBody = CreateAccessKeyRequestV1
@@ -29395,6 +32785,156 @@ func (t *QueryTime) UnmarshalJSON(b []byte) error {
 	return err
 }
 
+// AsReportFilterV2Alpha1Value0 returns the union data inside the ReportFilterV2Alpha1_Value as a ReportFilterV2Alpha1Value0
+func (t ReportFilterV2Alpha1_Value) AsReportFilterV2Alpha1Value0() (ReportFilterV2Alpha1Value0, error) {
+	var body ReportFilterV2Alpha1Value0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromReportFilterV2Alpha1Value0 overwrites any union data inside the ReportFilterV2Alpha1_Value as the provided ReportFilterV2Alpha1Value0
+func (t *ReportFilterV2Alpha1_Value) FromReportFilterV2Alpha1Value0(v ReportFilterV2Alpha1Value0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeReportFilterV2Alpha1Value0 performs a merge with any union data inside the ReportFilterV2Alpha1_Value, using the provided ReportFilterV2Alpha1Value0
+func (t *ReportFilterV2Alpha1_Value) MergeReportFilterV2Alpha1Value0(v ReportFilterV2Alpha1Value0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsReportFilterV2Alpha1Value1 returns the union data inside the ReportFilterV2Alpha1_Value as a ReportFilterV2Alpha1Value1
+func (t ReportFilterV2Alpha1_Value) AsReportFilterV2Alpha1Value1() (ReportFilterV2Alpha1Value1, error) {
+	var body ReportFilterV2Alpha1Value1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromReportFilterV2Alpha1Value1 overwrites any union data inside the ReportFilterV2Alpha1_Value as the provided ReportFilterV2Alpha1Value1
+func (t *ReportFilterV2Alpha1_Value) FromReportFilterV2Alpha1Value1(v ReportFilterV2Alpha1Value1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeReportFilterV2Alpha1Value1 performs a merge with any union data inside the ReportFilterV2Alpha1_Value, using the provided ReportFilterV2Alpha1Value1
+func (t *ReportFilterV2Alpha1_Value) MergeReportFilterV2Alpha1Value1(v ReportFilterV2Alpha1Value1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsReportFilterV2Alpha1Value2 returns the union data inside the ReportFilterV2Alpha1_Value as a ReportFilterV2Alpha1Value2
+func (t ReportFilterV2Alpha1_Value) AsReportFilterV2Alpha1Value2() (ReportFilterV2Alpha1Value2, error) {
+	var body ReportFilterV2Alpha1Value2
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromReportFilterV2Alpha1Value2 overwrites any union data inside the ReportFilterV2Alpha1_Value as the provided ReportFilterV2Alpha1Value2
+func (t *ReportFilterV2Alpha1_Value) FromReportFilterV2Alpha1Value2(v ReportFilterV2Alpha1Value2) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeReportFilterV2Alpha1Value2 performs a merge with any union data inside the ReportFilterV2Alpha1_Value, using the provided ReportFilterV2Alpha1Value2
+func (t *ReportFilterV2Alpha1_Value) MergeReportFilterV2Alpha1Value2(v ReportFilterV2Alpha1Value2) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t ReportFilterV2Alpha1_Value) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *ReportFilterV2Alpha1_Value) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsReportFilterV2Alpha1Values0 returns the union data inside the ReportFilterV2Alpha1_Values_Item as a ReportFilterV2Alpha1Values0
+func (t ReportFilterV2Alpha1_Values_Item) AsReportFilterV2Alpha1Values0() (ReportFilterV2Alpha1Values0, error) {
+	var body ReportFilterV2Alpha1Values0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromReportFilterV2Alpha1Values0 overwrites any union data inside the ReportFilterV2Alpha1_Values_Item as the provided ReportFilterV2Alpha1Values0
+func (t *ReportFilterV2Alpha1_Values_Item) FromReportFilterV2Alpha1Values0(v ReportFilterV2Alpha1Values0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeReportFilterV2Alpha1Values0 performs a merge with any union data inside the ReportFilterV2Alpha1_Values_Item, using the provided ReportFilterV2Alpha1Values0
+func (t *ReportFilterV2Alpha1_Values_Item) MergeReportFilterV2Alpha1Values0(v ReportFilterV2Alpha1Values0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsReportFilterV2Alpha1Values1 returns the union data inside the ReportFilterV2Alpha1_Values_Item as a ReportFilterV2Alpha1Values1
+func (t ReportFilterV2Alpha1_Values_Item) AsReportFilterV2Alpha1Values1() (ReportFilterV2Alpha1Values1, error) {
+	var body ReportFilterV2Alpha1Values1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromReportFilterV2Alpha1Values1 overwrites any union data inside the ReportFilterV2Alpha1_Values_Item as the provided ReportFilterV2Alpha1Values1
+func (t *ReportFilterV2Alpha1_Values_Item) FromReportFilterV2Alpha1Values1(v ReportFilterV2Alpha1Values1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeReportFilterV2Alpha1Values1 performs a merge with any union data inside the ReportFilterV2Alpha1_Values_Item, using the provided ReportFilterV2Alpha1Values1
+func (t *ReportFilterV2Alpha1_Values_Item) MergeReportFilterV2Alpha1Values1(v ReportFilterV2Alpha1Values1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t ReportFilterV2Alpha1_Values_Item) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *ReportFilterV2Alpha1_Values_Item) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
 // AsResourceFilterV2Request0 returns the union data inside the ResourceFilterV2Request as a ResourceFilterV2Request0
 func (t ResourceFilterV2Request) AsResourceFilterV2Request0() (ResourceFilterV2Request0, error) {
 	var body ResourceFilterV2Request0
@@ -30042,6 +33582,232 @@ func (t Rule_Failures_Item) MarshalJSON() ([]byte, error) {
 
 func (t *Rule_Failures_Item) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsRunPendingV2Alpha1 returns the union data inside the RunResponseV2Alpha1 as a RunPendingV2Alpha1
+func (t RunResponseV2Alpha1) AsRunPendingV2Alpha1() (RunPendingV2Alpha1, error) {
+	var body RunPendingV2Alpha1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromRunPendingV2Alpha1 overwrites any union data inside the RunResponseV2Alpha1 as the provided RunPendingV2Alpha1
+func (t *RunResponseV2Alpha1) FromRunPendingV2Alpha1(v RunPendingV2Alpha1) error {
+	t.Status = "pending"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+	b, err = runtime.JSONMerge(b, []byte(`{"status":"pending"}`))
+	t.union = b
+	return err
+}
+
+// MergeRunPendingV2Alpha1 performs a merge with any union data inside the RunResponseV2Alpha1, using the provided RunPendingV2Alpha1
+func (t *RunResponseV2Alpha1) MergeRunPendingV2Alpha1(v RunPendingV2Alpha1) error {
+	t.Status = "pending"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+	b, err = runtime.JSONMerge(b, []byte(`{"status":"pending"}`))
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsRunRunningV2Alpha1 returns the union data inside the RunResponseV2Alpha1 as a RunRunningV2Alpha1
+func (t RunResponseV2Alpha1) AsRunRunningV2Alpha1() (RunRunningV2Alpha1, error) {
+	var body RunRunningV2Alpha1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromRunRunningV2Alpha1 overwrites any union data inside the RunResponseV2Alpha1 as the provided RunRunningV2Alpha1
+func (t *RunResponseV2Alpha1) FromRunRunningV2Alpha1(v RunRunningV2Alpha1) error {
+	t.Status = "running"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+	b, err = runtime.JSONMerge(b, []byte(`{"status":"running"}`))
+	t.union = b
+	return err
+}
+
+// MergeRunRunningV2Alpha1 performs a merge with any union data inside the RunResponseV2Alpha1, using the provided RunRunningV2Alpha1
+func (t *RunResponseV2Alpha1) MergeRunRunningV2Alpha1(v RunRunningV2Alpha1) error {
+	t.Status = "running"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+	b, err = runtime.JSONMerge(b, []byte(`{"status":"running"}`))
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsRunCompletedV2Alpha1 returns the union data inside the RunResponseV2Alpha1 as a RunCompletedV2Alpha1
+func (t RunResponseV2Alpha1) AsRunCompletedV2Alpha1() (RunCompletedV2Alpha1, error) {
+	var body RunCompletedV2Alpha1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromRunCompletedV2Alpha1 overwrites any union data inside the RunResponseV2Alpha1 as the provided RunCompletedV2Alpha1
+func (t *RunResponseV2Alpha1) FromRunCompletedV2Alpha1(v RunCompletedV2Alpha1) error {
+	t.Status = "completed"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+	b, err = runtime.JSONMerge(b, []byte(`{"status":"completed"}`))
+	t.union = b
+	return err
+}
+
+// MergeRunCompletedV2Alpha1 performs a merge with any union data inside the RunResponseV2Alpha1, using the provided RunCompletedV2Alpha1
+func (t *RunResponseV2Alpha1) MergeRunCompletedV2Alpha1(v RunCompletedV2Alpha1) error {
+	t.Status = "completed"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+	b, err = runtime.JSONMerge(b, []byte(`{"status":"completed"}`))
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsRunFailedV2Alpha1 returns the union data inside the RunResponseV2Alpha1 as a RunFailedV2Alpha1
+func (t RunResponseV2Alpha1) AsRunFailedV2Alpha1() (RunFailedV2Alpha1, error) {
+	var body RunFailedV2Alpha1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromRunFailedV2Alpha1 overwrites any union data inside the RunResponseV2Alpha1 as the provided RunFailedV2Alpha1
+func (t *RunResponseV2Alpha1) FromRunFailedV2Alpha1(v RunFailedV2Alpha1) error {
+	t.Status = "failed"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+	b, err = runtime.JSONMerge(b, []byte(`{"status":"failed"}`))
+	t.union = b
+	return err
+}
+
+// MergeRunFailedV2Alpha1 performs a merge with any union data inside the RunResponseV2Alpha1, using the provided RunFailedV2Alpha1
+func (t *RunResponseV2Alpha1) MergeRunFailedV2Alpha1(v RunFailedV2Alpha1) error {
+	t.Status = "failed"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+	b, err = runtime.JSONMerge(b, []byte(`{"status":"failed"}`))
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t RunResponseV2Alpha1) Discriminator() (string, error) {
+	var discriminator struct {
+		Discriminator string `json:"status"`
+	}
+	err := json.Unmarshal(t.union, &discriminator)
+	return discriminator.Discriminator, err
+}
+
+func (t RunResponseV2Alpha1) ValueByDiscriminator() (interface{}, error) {
+	discriminator, err := t.Discriminator()
+	if err != nil {
+		return nil, err
+	}
+	switch discriminator {
+	case "completed":
+		return t.AsRunCompletedV2Alpha1()
+	case "failed":
+		return t.AsRunFailedV2Alpha1()
+	case "pending":
+		return t.AsRunPendingV2Alpha1()
+	case "running":
+		return t.AsRunRunningV2Alpha1()
+	default:
+		return nil, errors.New("unknown discriminator value: " + discriminator)
+	}
+}
+
+func (t RunResponseV2Alpha1) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	object := make(map[string]json.RawMessage)
+	if t.union != nil {
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	object["id"], err = json.Marshal(t.Id)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'id': %w", err)
+	}
+
+	object["status"], err = json.Marshal(t.Status)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'status': %w", err)
+	}
+
+	b, err = json.Marshal(object)
+	return b, err
+}
+
+func (t *RunResponseV2Alpha1) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	if err != nil {
+		return err
+	}
+	object := make(map[string]json.RawMessage)
+	err = json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["id"]; found {
+		err = json.Unmarshal(raw, &t.Id)
+		if err != nil {
+			return fmt.Errorf("error reading 'id': %w", err)
+		}
+	}
+
+	if raw, found := object["status"]; found {
+		err = json.Unmarshal(raw, &t.Status)
+		if err != nil {
+			return fmt.Errorf("error reading 'status': %w", err)
+		}
+	}
+
 	return err
 }
 
@@ -32385,6 +36151,366 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /platform/reporting/v1/schedules (the `ListSchedulesV1` operationId).
 	ListSchedulesV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListReportsV2Alpha1 List Reports
+	//
+	// Retrieve the list of reports.\
+	// \
+	// **Visibility scope:** returns reports belonging to the caller's team within the caller's
+	// customer account, not the whole tenant.\
+	// \
+	// **Reports of a superseded kind are omitted.** A report created from a template of an earlier
+	// resource-posture generation has no `kind` this API can express, so it is not listed here and
+	// `GET /reports/{reportId}` returns `404` for it. Such reports still exist and stay readable through
+	// the v1 API and the Sysdig UI — nothing is deleted — so a report visible in the UI may be absent
+	// here.\
+	// \
+	// **Required permissions:** platform.reporting.reports.read
+	//
+	// Corresponds with GET /platform/reporting/v2alpha1/reports (the `ListReportsV2Alpha1` operationId).
+	ListReportsV2Alpha1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateReportV2Alpha1WithBody Create Report
+	//
+	// Create a report from a template. Optionally create a schedule in the same request by including
+	// a `schedule` object.\
+	// \
+	// **Atomicity:** when a `schedule` is included the call is all-or-nothing — if the schedule is
+	// invalid or cannot be created, the report is not created either and nothing is left behind.
+	// Creating a report and its schedule separately (`POST /reports` then `POST /schedules`) remains
+	// supported.\
+	// \
+	// The `201` body's `scheduleIds` holds the id of the schedule created alongside the report, and
+	// `Location` points at the report.\
+	// \
+	// **Required permissions:** platform.reporting.reports.edit, plus
+	// `platform.reporting.schedules.edit` when the body includes a `schedule` — that request creates a
+	// schedule as well, and is refused as a whole if either permission is missing.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /platform/reporting/v2alpha1/reports (the `CreateReportV2Alpha1` operationId).
+	CreateReportV2Alpha1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateReportV2Alpha1 Create Report
+	//
+	// Create a report from a template. Optionally create a schedule in the same request by including
+	// a `schedule` object.\
+	// \
+	// **Atomicity:** when a `schedule` is included the call is all-or-nothing — if the schedule is
+	// invalid or cannot be created, the report is not created either and nothing is left behind.
+	// Creating a report and its schedule separately (`POST /reports` then `POST /schedules`) remains
+	// supported.\
+	// \
+	// The `201` body's `scheduleIds` holds the id of the schedule created alongside the report, and
+	// `Location` points at the report.\
+	// \
+	// **Required permissions:** platform.reporting.reports.edit, plus
+	// `platform.reporting.schedules.edit` when the body includes a `schedule` — that request creates a
+	// schedule as well, and is refused as a whole if either permission is missing.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /platform/reporting/v2alpha1/reports (the `CreateReportV2Alpha1` operationId).
+	CreateReportV2Alpha1(ctx context.Context, body CreateReportV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteReportV2Alpha1 Delete Report
+	//
+	// Delete a report. Cascades to its schedules and run history.\
+	// \
+	// `If-Match` is **optional** here, unlike on `PUT` and `PATCH`: an unconditional delete is accepted.
+	// Supply the report's `ETag` to abort the delete if the report has changed since you read it.\
+	// \
+	// **Required permissions:** platform.reporting.reports.edit
+	//
+	// Corresponds with DELETE /platform/reporting/v2alpha1/reports/{reportId} (the `DeleteReportV2Alpha1` operationId).
+	DeleteReportV2Alpha1(ctx context.Context, reportID ReportID, params *DeleteReportV2Alpha1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetReportV2Alpha1 Get Report
+	//
+	// Retrieve a report by its identifier.\
+	// \
+	// **Required permissions:** platform.reporting.reports.read
+	//
+	// Corresponds with GET /platform/reporting/v2alpha1/reports/{reportId} (the `GetReportV2Alpha1` operationId).
+	GetReportV2Alpha1(ctx context.Context, reportID ReportID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PatchReportV2Alpha1WithBody Patch Report
+	//
+	// Partially update a report using JSON Merge Patch ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)).
+	// Send only the fields you want to change; omitted fields keep their current values. `templateId` and
+	// `kind` are immutable.\
+	// \
+	// Array-valued fields (`filters`, `panels`) are **replaced wholesale**, not merged element-wise — that
+	// is what Merge Patch specifies. To clear a report's filters send `"filters": null`.\
+	// \
+	// `If-Match` is **required** — supply the report's current `ETag` so a concurrent change cannot be silently overwritten.\
+	// \
+	// **Required permissions:** platform.reporting.reports.edit
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /platform/reporting/v2alpha1/reports/{reportId} (the `PatchReportV2Alpha1` operationId).
+	PatchReportV2Alpha1WithBody(ctx context.Context, reportID ReportID, params *PatchReportV2Alpha1Params, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBody Patch Report
+	//
+	// Partially update a report using JSON Merge Patch ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)).
+	// Send only the fields you want to change; omitted fields keep their current values. `templateId` and
+	// `kind` are immutable.\
+	// \
+	// Array-valued fields (`filters`, `panels`) are **replaced wholesale**, not merged element-wise — that
+	// is what Merge Patch specifies. To clear a report's filters send `"filters": null`.\
+	// \
+	// `If-Match` is **required** — supply the report's current `ETag` so a concurrent change cannot be silently overwritten.\
+	// \
+	// **Required permissions:** platform.reporting.reports.edit
+	//
+	// Takes a body of the `application/merge-patch+json` content type.
+	//
+	// Corresponds with PATCH /platform/reporting/v2alpha1/reports/{reportId} (the `PatchReportV2Alpha1` operationId).
+	PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBody(ctx context.Context, reportID ReportID, params *PatchReportV2Alpha1Params, body PatchReportV2Alpha1ApplicationMergePatchPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateReportV2Alpha1WithBody Update Report
+	//
+	// Replace a report's mutable fields — `name`, `description`, `filters`, and per-panel `filters`.
+	// `templateId` and `kind` are immutable. Omitted mutable fields are reset to their defaults; use
+	// `PATCH` to change a subset.\
+	// \
+	// `If-Match` is **required** — supply the report's current `ETag` so a concurrent change cannot be silently overwritten.\
+	// \
+	// **Required permissions:** platform.reporting.reports.edit
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PUT /platform/reporting/v2alpha1/reports/{reportId} (the `UpdateReportV2Alpha1` operationId).
+	UpdateReportV2Alpha1WithBody(ctx context.Context, reportID ReportID, params *UpdateReportV2Alpha1Params, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateReportV2Alpha1 Update Report
+	//
+	// Replace a report's mutable fields — `name`, `description`, `filters`, and per-panel `filters`.
+	// `templateId` and `kind` are immutable. Omitted mutable fields are reset to their defaults; use
+	// `PATCH` to change a subset.\
+	// \
+	// `If-Match` is **required** — supply the report's current `ETag` so a concurrent change cannot be silently overwritten.\
+	// \
+	// **Required permissions:** platform.reporting.reports.edit
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PUT /platform/reporting/v2alpha1/reports/{reportId} (the `UpdateReportV2Alpha1` operationId).
+	UpdateReportV2Alpha1(ctx context.Context, reportID ReportID, params *UpdateReportV2Alpha1Params, body UpdateReportV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListRunsV2Alpha1 List Report Runs
+	//
+	// Retrieve report runs, optionally filtered by report, schedule, how they were triggered, status,
+	// or activity time.\
+	// \
+	// **`reportId` and `scheduleId` are mutually exclusive** — supply at most one. Sending both is
+	// rejected with `400`.\
+	// \
+	// To count or list a report's ad-hoc downloads — for instance to warn a user how many produced files
+	// deleting the report would destroy — combine `reportId` with `trigger=on_demand`.\
+	// \
+	// **Incremental polling:** use `sinceAt` to fetch only runs with activity at or after a given
+	// instant. Because this listing is unpaginated, `sinceAt` is the recommended way to avoid
+	// re-reading the whole retained history on every poll. `sinceAt` cannot be combined with
+	// `status=pending` or `status=running` (`400`).\
+	// \
+	// **Retention:** this listing is not a complete history. Completed runs — including truncated
+	// ones — are returned only while their produced file is still retrievable (a fixed retention
+	// window, currently expressed in days); older completed runs are omitted. Runs in any other
+	// state, including failed runs, are not subject to this window. Treat
+	// the listing as "runs whose output is still available", not "everything that ever ran".\
+	// \
+	// **Downloadable files:** to list the files currently available for download, filter with
+	// `status=completed` — each such run carries its `resultUri` until its file expires.\
+	// \
+	// **Visibility scope:** returns runs belonging to the caller's team within the caller's customer
+	// account, not the whole tenant.\
+	// \
+	// **Required permissions:** platform.reporting.report-downloads.read
+	//
+	// Corresponds with GET /platform/reporting/v2alpha1/runs (the `ListRunsV2Alpha1` operationId).
+	ListRunsV2Alpha1(ctx context.Context, params *ListRunsV2Alpha1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateRunV2Alpha1WithBody Generate Report Run
+	//
+	// Generate a report on demand (asynchronous). Poll `GET /runs/{runId}` until the run completes, then
+	// download the file from its `resultUri`.\
+	// \
+	// **Required permissions:** platform.reporting.report-downloads.read
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /platform/reporting/v2alpha1/runs (the `CreateRunV2Alpha1` operationId).
+	CreateRunV2Alpha1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateRunV2Alpha1 Generate Report Run
+	//
+	// Generate a report on demand (asynchronous). Poll `GET /runs/{runId}` until the run completes, then
+	// download the file from its `resultUri`.\
+	// \
+	// **Required permissions:** platform.reporting.report-downloads.read
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /platform/reporting/v2alpha1/runs (the `CreateRunV2Alpha1` operationId).
+	CreateRunV2Alpha1(ctx context.Context, body CreateRunV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetRunV2Alpha1 Get Report Run
+	//
+	// Retrieve a report run by its identifier (poll for status).\
+	// \
+	// **Required permissions:** platform.reporting.report-downloads.read
+	//
+	// Corresponds with GET /platform/reporting/v2alpha1/runs/{runId} (the `GetRunV2Alpha1` operationId).
+	GetRunV2Alpha1(ctx context.Context, runID RunID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListSchedulesV2Alpha1 List Report Schedules
+	//
+	// Retrieve the list of report schedules, optionally filtered by report.\
+	// \
+	// **Visibility scope:** returns schedules belonging to the caller's team within the caller's customer
+	// account, and only schedules attached to a **report**. The reporting service also stores schedules of
+	// other kinds — ones attached directly to a template, and data-export schedules — which have no
+	// representation in this API and are never returned here. A schedule visible in the Sysdig UI may
+	// therefore be absent from this listing.\
+	// \
+	// **Required permissions:** platform.reporting.schedules.read
+	//
+	// Corresponds with GET /platform/reporting/v2alpha1/schedules (the `ListSchedulesV2Alpha1` operationId).
+	ListSchedulesV2Alpha1(ctx context.Context, params *ListSchedulesV2Alpha1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateScheduleV2Alpha1WithBody Create Report Schedule
+	//
+	// Create a schedule for an existing report.\
+	// \
+	// **Required permissions:** platform.reporting.schedules.edit
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /platform/reporting/v2alpha1/schedules (the `CreateScheduleV2Alpha1` operationId).
+	CreateScheduleV2Alpha1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateScheduleV2Alpha1 Create Report Schedule
+	//
+	// Create a schedule for an existing report.\
+	// \
+	// **Required permissions:** platform.reporting.schedules.edit
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /platform/reporting/v2alpha1/schedules (the `CreateScheduleV2Alpha1` operationId).
+	CreateScheduleV2Alpha1(ctx context.Context, body CreateScheduleV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteScheduleV2Alpha1 Delete Report Schedule
+	//
+	// Delete a schedule. Cascades to its run history.\
+	// \
+	// **Required permissions:** platform.reporting.schedules.edit
+	//
+	// Corresponds with DELETE /platform/reporting/v2alpha1/schedules/{scheduleId} (the `DeleteScheduleV2Alpha1` operationId).
+	DeleteScheduleV2Alpha1(ctx context.Context, scheduleID ScheduleID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetScheduleV2Alpha1 Get Report Schedule
+	//
+	// Retrieve a schedule by its identifier.\
+	// \
+	// **Required permissions:** platform.reporting.schedules.read
+	//
+	// Corresponds with GET /platform/reporting/v2alpha1/schedules/{scheduleId} (the `GetScheduleV2Alpha1` operationId).
+	GetScheduleV2Alpha1(ctx context.Context, scheduleID ScheduleID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PatchScheduleV2Alpha1WithBody Patch Report Schedule
+	//
+	// Partially update a schedule using JSON Merge Patch ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)).
+	// Send only the fields you want to change; omitted fields keep their current values. `reportId` is
+	// immutable and `status` is server-computed.\
+	// \
+	// Typical use is pausing or resuming without resending the whole definition: `{"enabled": false}`.\
+	// \
+	// Objects and arrays are replaced wholesale rather than merged, so `delivery` and `timeframe` overwrite
+	// the current value entirely. Schedules are not versioned and carry no `ETag`, so writes are
+	// unconditional.\
+	// \
+	// **Required permissions:** platform.reporting.schedules.edit
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /platform/reporting/v2alpha1/schedules/{scheduleId} (the `PatchScheduleV2Alpha1` operationId).
+	PatchScheduleV2Alpha1WithBody(ctx context.Context, scheduleID ScheduleID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBody Patch Report Schedule
+	//
+	// Partially update a schedule using JSON Merge Patch ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)).
+	// Send only the fields you want to change; omitted fields keep their current values. `reportId` is
+	// immutable and `status` is server-computed.\
+	// \
+	// Typical use is pausing or resuming without resending the whole definition: `{"enabled": false}`.\
+	// \
+	// Objects and arrays are replaced wholesale rather than merged, so `delivery` and `timeframe` overwrite
+	// the current value entirely. Schedules are not versioned and carry no `ETag`, so writes are
+	// unconditional.\
+	// \
+	// **Required permissions:** platform.reporting.schedules.edit
+	//
+	// Takes a body of the `application/merge-patch+json` content type.
+	//
+	// Corresponds with PATCH /platform/reporting/v2alpha1/schedules/{scheduleId} (the `PatchScheduleV2Alpha1` operationId).
+	PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBody(ctx context.Context, scheduleID ScheduleID, body PatchScheduleV2Alpha1ApplicationMergePatchPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateScheduleV2Alpha1WithBody Update Report Schedule
+	//
+	// Update a schedule. `reportId` is immutable; `status` is server-computed (read-only).\
+	// \
+	// **Required permissions:** platform.reporting.schedules.edit
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PUT /platform/reporting/v2alpha1/schedules/{scheduleId} (the `UpdateScheduleV2Alpha1` operationId).
+	UpdateScheduleV2Alpha1WithBody(ctx context.Context, scheduleID ScheduleID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateScheduleV2Alpha1 Update Report Schedule
+	//
+	// Update a schedule. `reportId` is immutable; `status` is server-computed (read-only).\
+	// \
+	// **Required permissions:** platform.reporting.schedules.edit
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PUT /platform/reporting/v2alpha1/schedules/{scheduleId} (the `UpdateScheduleV2Alpha1` operationId).
+	UpdateScheduleV2Alpha1(ctx context.Context, scheduleID ScheduleID, body UpdateScheduleV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListReportTemplatesV2Alpha1 List Report Templates
+	//
+	// Retrieve the catalog of available report templates.\
+	// \
+	// **The catalog is not the same for every customer.** Templates gated by controlled availability
+	// or by product entitlement are omitted for customers that do not have them enabled, so this
+	// listing is the authoritative set of templates the caller may create reports from. Do not
+	// hard-code template ids — read them from here. A template absent from this listing also cannot be
+	// fetched by id (`404`).\
+	// \
+	// **Superseded templates are omitted for everyone.** The reporting service still stores templates of
+	// an earlier resource-posture generation that the Sysdig UI no longer offers; those have no `kind` in
+	// this API and never appear here. Their replacements are the `posture_v2` templates. Reports created
+	// from a superseded template before it was retired remain readable through the v1 API and the UI, but
+	// are not exposed here — see `GET /reports`.\
+	// \
+	// **Required permissions:** platform.reporting.reports.read
+	//
+	// Corresponds with GET /platform/reporting/v2alpha1/templates (the `ListReportTemplatesV2Alpha1` operationId).
+	ListReportTemplatesV2Alpha1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetReportTemplateV2Alpha1 Get Report Template
+	//
+	// Retrieve a single report template by its identifier.\
+	// \
+	// **Required permissions:** platform.reporting.reports.read
+	//
+	// Corresponds with GET /platform/reporting/v2alpha1/templates/{templateId} (the `GetReportTemplateV2Alpha1` operationId).
+	GetReportTemplateV2Alpha1(ctx context.Context, templateID TemplateID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetAccessKeysV1 List Access Keys
 	//
@@ -35982,6 +40108,606 @@ func (c *Client) ListJobsV1(ctx context.Context, params *ListJobsV1Params, reqEd
 // Corresponds with GET /platform/reporting/v1/schedules (the `ListSchedulesV1` operationId).
 func (c *Client) ListSchedulesV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListSchedulesV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ListReportsV2Alpha1 List Reports
+//
+// Retrieve the list of reports.\
+// \
+// **Visibility scope:** returns reports belonging to the caller's team within the caller's
+// customer account, not the whole tenant.\
+// \
+// **Reports of a superseded kind are omitted.** A report created from a template of an earlier
+// resource-posture generation has no `kind` this API can express, so it is not listed here and
+// `GET /reports/{reportId}` returns `404` for it. Such reports still exist and stay readable through
+// the v1 API and the Sysdig UI — nothing is deleted — so a report visible in the UI may be absent
+// here.\
+// \
+// **Required permissions:** platform.reporting.reports.read
+//
+// Corresponds with GET /platform/reporting/v2alpha1/reports (the `ListReportsV2Alpha1` operationId).
+func (c *Client) ListReportsV2Alpha1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListReportsV2Alpha1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// CreateReportV2Alpha1WithBody Create Report
+//
+// Create a report from a template. Optionally create a schedule in the same request by including
+// a `schedule` object.\
+// \
+// **Atomicity:** when a `schedule` is included the call is all-or-nothing — if the schedule is
+// invalid or cannot be created, the report is not created either and nothing is left behind.
+// Creating a report and its schedule separately (`POST /reports` then `POST /schedules`) remains
+// supported.\
+// \
+// The `201` body's `scheduleIds` holds the id of the schedule created alongside the report, and
+// `Location` points at the report.\
+// \
+// **Required permissions:** platform.reporting.reports.edit, plus
+// `platform.reporting.schedules.edit` when the body includes a `schedule` — that request creates a
+// schedule as well, and is refused as a whole if either permission is missing.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /platform/reporting/v2alpha1/reports (the `CreateReportV2Alpha1` operationId).
+func (c *Client) CreateReportV2Alpha1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateReportV2Alpha1RequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// CreateReportV2Alpha1 Create Report
+//
+// Create a report from a template. Optionally create a schedule in the same request by including
+// a `schedule` object.\
+// \
+// **Atomicity:** when a `schedule` is included the call is all-or-nothing — if the schedule is
+// invalid or cannot be created, the report is not created either and nothing is left behind.
+// Creating a report and its schedule separately (`POST /reports` then `POST /schedules`) remains
+// supported.\
+// \
+// The `201` body's `scheduleIds` holds the id of the schedule created alongside the report, and
+// `Location` points at the report.\
+// \
+// **Required permissions:** platform.reporting.reports.edit, plus
+// `platform.reporting.schedules.edit` when the body includes a `schedule` — that request creates a
+// schedule as well, and is refused as a whole if either permission is missing.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /platform/reporting/v2alpha1/reports (the `CreateReportV2Alpha1` operationId).
+func (c *Client) CreateReportV2Alpha1(ctx context.Context, body CreateReportV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateReportV2Alpha1Request(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DeleteReportV2Alpha1 Delete Report
+//
+// Delete a report. Cascades to its schedules and run history.\
+// \
+// `If-Match` is **optional** here, unlike on `PUT` and `PATCH`: an unconditional delete is accepted.
+// Supply the report's `ETag` to abort the delete if the report has changed since you read it.\
+// \
+// **Required permissions:** platform.reporting.reports.edit
+//
+// Corresponds with DELETE /platform/reporting/v2alpha1/reports/{reportId} (the `DeleteReportV2Alpha1` operationId).
+func (c *Client) DeleteReportV2Alpha1(ctx context.Context, reportID ReportID, params *DeleteReportV2Alpha1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteReportV2Alpha1Request(c.Server, reportID, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GetReportV2Alpha1 Get Report
+//
+// Retrieve a report by its identifier.\
+// \
+// **Required permissions:** platform.reporting.reports.read
+//
+// Corresponds with GET /platform/reporting/v2alpha1/reports/{reportId} (the `GetReportV2Alpha1` operationId).
+func (c *Client) GetReportV2Alpha1(ctx context.Context, reportID ReportID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetReportV2Alpha1Request(c.Server, reportID)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// PatchReportV2Alpha1WithBody Patch Report
+//
+// Partially update a report using JSON Merge Patch ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)).
+// Send only the fields you want to change; omitted fields keep their current values. `templateId` and
+// `kind` are immutable.\
+// \
+// Array-valued fields (`filters`, `panels`) are **replaced wholesale**, not merged element-wise — that
+// is what Merge Patch specifies. To clear a report's filters send `"filters": null`.\
+// \
+// `If-Match` is **required** — supply the report's current `ETag` so a concurrent change cannot be silently overwritten.\
+// \
+// **Required permissions:** platform.reporting.reports.edit
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /platform/reporting/v2alpha1/reports/{reportId} (the `PatchReportV2Alpha1` operationId).
+func (c *Client) PatchReportV2Alpha1WithBody(ctx context.Context, reportID ReportID, params *PatchReportV2Alpha1Params, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPatchReportV2Alpha1RequestWithBody(c.Server, reportID, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBody Patch Report
+//
+// Partially update a report using JSON Merge Patch ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)).
+// Send only the fields you want to change; omitted fields keep their current values. `templateId` and
+// `kind` are immutable.\
+// \
+// Array-valued fields (`filters`, `panels`) are **replaced wholesale**, not merged element-wise — that
+// is what Merge Patch specifies. To clear a report's filters send `"filters": null`.\
+// \
+// `If-Match` is **required** — supply the report's current `ETag` so a concurrent change cannot be silently overwritten.\
+// \
+// **Required permissions:** platform.reporting.reports.edit
+//
+// Takes a body of the `application/merge-patch+json` content type.
+//
+// Corresponds with PATCH /platform/reporting/v2alpha1/reports/{reportId} (the `PatchReportV2Alpha1` operationId).
+func (c *Client) PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBody(ctx context.Context, reportID ReportID, params *PatchReportV2Alpha1Params, body PatchReportV2Alpha1ApplicationMergePatchPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPatchReportV2Alpha1RequestWithApplicationMergePatchPlusJSONBody(c.Server, reportID, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// UpdateReportV2Alpha1WithBody Update Report
+//
+// Replace a report's mutable fields — `name`, `description`, `filters`, and per-panel `filters`.
+// `templateId` and `kind` are immutable. Omitted mutable fields are reset to their defaults; use
+// `PATCH` to change a subset.\
+// \
+// `If-Match` is **required** — supply the report's current `ETag` so a concurrent change cannot be silently overwritten.\
+// \
+// **Required permissions:** platform.reporting.reports.edit
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PUT /platform/reporting/v2alpha1/reports/{reportId} (the `UpdateReportV2Alpha1` operationId).
+func (c *Client) UpdateReportV2Alpha1WithBody(ctx context.Context, reportID ReportID, params *UpdateReportV2Alpha1Params, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateReportV2Alpha1RequestWithBody(c.Server, reportID, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// UpdateReportV2Alpha1 Update Report
+//
+// Replace a report's mutable fields — `name`, `description`, `filters`, and per-panel `filters`.
+// `templateId` and `kind` are immutable. Omitted mutable fields are reset to their defaults; use
+// `PATCH` to change a subset.\
+// \
+// `If-Match` is **required** — supply the report's current `ETag` so a concurrent change cannot be silently overwritten.\
+// \
+// **Required permissions:** platform.reporting.reports.edit
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PUT /platform/reporting/v2alpha1/reports/{reportId} (the `UpdateReportV2Alpha1` operationId).
+func (c *Client) UpdateReportV2Alpha1(ctx context.Context, reportID ReportID, params *UpdateReportV2Alpha1Params, body UpdateReportV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateReportV2Alpha1Request(c.Server, reportID, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ListRunsV2Alpha1 List Report Runs
+//
+// Retrieve report runs, optionally filtered by report, schedule, how they were triggered, status,
+// or activity time.\
+// \
+// **`reportId` and `scheduleId` are mutually exclusive** — supply at most one. Sending both is
+// rejected with `400`.\
+// \
+// To count or list a report's ad-hoc downloads — for instance to warn a user how many produced files
+// deleting the report would destroy — combine `reportId` with `trigger=on_demand`.\
+// \
+// **Incremental polling:** use `sinceAt` to fetch only runs with activity at or after a given
+// instant. Because this listing is unpaginated, `sinceAt` is the recommended way to avoid
+// re-reading the whole retained history on every poll. `sinceAt` cannot be combined with
+// `status=pending` or `status=running` (`400`).\
+// \
+// **Retention:** this listing is not a complete history. Completed runs — including truncated
+// ones — are returned only while their produced file is still retrievable (a fixed retention
+// window, currently expressed in days); older completed runs are omitted. Runs in any other
+// state, including failed runs, are not subject to this window. Treat
+// the listing as "runs whose output is still available", not "everything that ever ran".\
+// \
+// **Downloadable files:** to list the files currently available for download, filter with
+// `status=completed` — each such run carries its `resultUri` until its file expires.\
+// \
+// **Visibility scope:** returns runs belonging to the caller's team within the caller's customer
+// account, not the whole tenant.\
+// \
+// **Required permissions:** platform.reporting.report-downloads.read
+//
+// Corresponds with GET /platform/reporting/v2alpha1/runs (the `ListRunsV2Alpha1` operationId).
+func (c *Client) ListRunsV2Alpha1(ctx context.Context, params *ListRunsV2Alpha1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListRunsV2Alpha1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// CreateRunV2Alpha1WithBody Generate Report Run
+//
+// Generate a report on demand (asynchronous). Poll `GET /runs/{runId}` until the run completes, then
+// download the file from its `resultUri`.\
+// \
+// **Required permissions:** platform.reporting.report-downloads.read
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /platform/reporting/v2alpha1/runs (the `CreateRunV2Alpha1` operationId).
+func (c *Client) CreateRunV2Alpha1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRunV2Alpha1RequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// CreateRunV2Alpha1 Generate Report Run
+//
+// Generate a report on demand (asynchronous). Poll `GET /runs/{runId}` until the run completes, then
+// download the file from its `resultUri`.\
+// \
+// **Required permissions:** platform.reporting.report-downloads.read
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /platform/reporting/v2alpha1/runs (the `CreateRunV2Alpha1` operationId).
+func (c *Client) CreateRunV2Alpha1(ctx context.Context, body CreateRunV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRunV2Alpha1Request(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GetRunV2Alpha1 Get Report Run
+//
+// Retrieve a report run by its identifier (poll for status).\
+// \
+// **Required permissions:** platform.reporting.report-downloads.read
+//
+// Corresponds with GET /platform/reporting/v2alpha1/runs/{runId} (the `GetRunV2Alpha1` operationId).
+func (c *Client) GetRunV2Alpha1(ctx context.Context, runID RunID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRunV2Alpha1Request(c.Server, runID)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ListSchedulesV2Alpha1 List Report Schedules
+//
+// Retrieve the list of report schedules, optionally filtered by report.\
+// \
+// **Visibility scope:** returns schedules belonging to the caller's team within the caller's customer
+// account, and only schedules attached to a **report**. The reporting service also stores schedules of
+// other kinds — ones attached directly to a template, and data-export schedules — which have no
+// representation in this API and are never returned here. A schedule visible in the Sysdig UI may
+// therefore be absent from this listing.\
+// \
+// **Required permissions:** platform.reporting.schedules.read
+//
+// Corresponds with GET /platform/reporting/v2alpha1/schedules (the `ListSchedulesV2Alpha1` operationId).
+func (c *Client) ListSchedulesV2Alpha1(ctx context.Context, params *ListSchedulesV2Alpha1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListSchedulesV2Alpha1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// CreateScheduleV2Alpha1WithBody Create Report Schedule
+//
+// Create a schedule for an existing report.\
+// \
+// **Required permissions:** platform.reporting.schedules.edit
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /platform/reporting/v2alpha1/schedules (the `CreateScheduleV2Alpha1` operationId).
+func (c *Client) CreateScheduleV2Alpha1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateScheduleV2Alpha1RequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// CreateScheduleV2Alpha1 Create Report Schedule
+//
+// Create a schedule for an existing report.\
+// \
+// **Required permissions:** platform.reporting.schedules.edit
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /platform/reporting/v2alpha1/schedules (the `CreateScheduleV2Alpha1` operationId).
+func (c *Client) CreateScheduleV2Alpha1(ctx context.Context, body CreateScheduleV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateScheduleV2Alpha1Request(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DeleteScheduleV2Alpha1 Delete Report Schedule
+//
+// Delete a schedule. Cascades to its run history.\
+// \
+// **Required permissions:** platform.reporting.schedules.edit
+//
+// Corresponds with DELETE /platform/reporting/v2alpha1/schedules/{scheduleId} (the `DeleteScheduleV2Alpha1` operationId).
+func (c *Client) DeleteScheduleV2Alpha1(ctx context.Context, scheduleID ScheduleID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteScheduleV2Alpha1Request(c.Server, scheduleID)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GetScheduleV2Alpha1 Get Report Schedule
+//
+// Retrieve a schedule by its identifier.\
+// \
+// **Required permissions:** platform.reporting.schedules.read
+//
+// Corresponds with GET /platform/reporting/v2alpha1/schedules/{scheduleId} (the `GetScheduleV2Alpha1` operationId).
+func (c *Client) GetScheduleV2Alpha1(ctx context.Context, scheduleID ScheduleID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetScheduleV2Alpha1Request(c.Server, scheduleID)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// PatchScheduleV2Alpha1WithBody Patch Report Schedule
+//
+// Partially update a schedule using JSON Merge Patch ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)).
+// Send only the fields you want to change; omitted fields keep their current values. `reportId` is
+// immutable and `status` is server-computed.\
+// \
+// Typical use is pausing or resuming without resending the whole definition: `{"enabled": false}`.\
+// \
+// Objects and arrays are replaced wholesale rather than merged, so `delivery` and `timeframe` overwrite
+// the current value entirely. Schedules are not versioned and carry no `ETag`, so writes are
+// unconditional.\
+// \
+// **Required permissions:** platform.reporting.schedules.edit
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /platform/reporting/v2alpha1/schedules/{scheduleId} (the `PatchScheduleV2Alpha1` operationId).
+func (c *Client) PatchScheduleV2Alpha1WithBody(ctx context.Context, scheduleID ScheduleID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPatchScheduleV2Alpha1RequestWithBody(c.Server, scheduleID, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBody Patch Report Schedule
+//
+// Partially update a schedule using JSON Merge Patch ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)).
+// Send only the fields you want to change; omitted fields keep their current values. `reportId` is
+// immutable and `status` is server-computed.\
+// \
+// Typical use is pausing or resuming without resending the whole definition: `{"enabled": false}`.\
+// \
+// Objects and arrays are replaced wholesale rather than merged, so `delivery` and `timeframe` overwrite
+// the current value entirely. Schedules are not versioned and carry no `ETag`, so writes are
+// unconditional.\
+// \
+// **Required permissions:** platform.reporting.schedules.edit
+//
+// Takes a body of the `application/merge-patch+json` content type.
+//
+// Corresponds with PATCH /platform/reporting/v2alpha1/schedules/{scheduleId} (the `PatchScheduleV2Alpha1` operationId).
+func (c *Client) PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBody(ctx context.Context, scheduleID ScheduleID, body PatchScheduleV2Alpha1ApplicationMergePatchPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPatchScheduleV2Alpha1RequestWithApplicationMergePatchPlusJSONBody(c.Server, scheduleID, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// UpdateScheduleV2Alpha1WithBody Update Report Schedule
+//
+// Update a schedule. `reportId` is immutable; `status` is server-computed (read-only).\
+// \
+// **Required permissions:** platform.reporting.schedules.edit
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PUT /platform/reporting/v2alpha1/schedules/{scheduleId} (the `UpdateScheduleV2Alpha1` operationId).
+func (c *Client) UpdateScheduleV2Alpha1WithBody(ctx context.Context, scheduleID ScheduleID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateScheduleV2Alpha1RequestWithBody(c.Server, scheduleID, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// UpdateScheduleV2Alpha1 Update Report Schedule
+//
+// Update a schedule. `reportId` is immutable; `status` is server-computed (read-only).\
+// \
+// **Required permissions:** platform.reporting.schedules.edit
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PUT /platform/reporting/v2alpha1/schedules/{scheduleId} (the `UpdateScheduleV2Alpha1` operationId).
+func (c *Client) UpdateScheduleV2Alpha1(ctx context.Context, scheduleID ScheduleID, body UpdateScheduleV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateScheduleV2Alpha1Request(c.Server, scheduleID, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ListReportTemplatesV2Alpha1 List Report Templates
+//
+// Retrieve the catalog of available report templates.\
+// \
+// **The catalog is not the same for every customer.** Templates gated by controlled availability
+// or by product entitlement are omitted for customers that do not have them enabled, so this
+// listing is the authoritative set of templates the caller may create reports from. Do not
+// hard-code template ids — read them from here. A template absent from this listing also cannot be
+// fetched by id (`404`).\
+// \
+// **Superseded templates are omitted for everyone.** The reporting service still stores templates of
+// an earlier resource-posture generation that the Sysdig UI no longer offers; those have no `kind` in
+// this API and never appear here. Their replacements are the `posture_v2` templates. Reports created
+// from a superseded template before it was retired remain readable through the v1 API and the UI, but
+// are not exposed here — see `GET /reports`.\
+// \
+// **Required permissions:** platform.reporting.reports.read
+//
+// Corresponds with GET /platform/reporting/v2alpha1/templates (the `ListReportTemplatesV2Alpha1` operationId).
+func (c *Client) ListReportTemplatesV2Alpha1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListReportTemplatesV2Alpha1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GetReportTemplateV2Alpha1 Get Report Template
+//
+// Retrieve a single report template by its identifier.\
+// \
+// **Required permissions:** platform.reporting.reports.read
+//
+// Corresponds with GET /platform/reporting/v2alpha1/templates/{templateId} (the `GetReportTemplateV2Alpha1` operationId).
+func (c *Client) GetReportTemplateV2Alpha1(ctx context.Context, templateID TemplateID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetReportTemplateV2Alpha1Request(c.Server, templateID)
 	if err != nil {
 		return nil, err
 	}
@@ -42879,6 +47605,773 @@ func NewListSchedulesV1Request(server string) (*http.Request, error) {
 	}
 
 	operationPath := fmt.Sprintf("/platform/reporting/v1/schedules")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewListReportsV2Alpha1Request constructs an http.Request for the ListReportsV2Alpha1 method
+func NewListReportsV2Alpha1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/reporting/v2alpha1/reports")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateReportV2Alpha1Request calls the generic CreateReportV2Alpha1 builder with application/json body
+func NewCreateReportV2Alpha1Request(server string, body CreateReportV2Alpha1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateReportV2Alpha1RequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewCreateReportV2Alpha1RequestWithBody constructs an http.Request for the CreateReportV2Alpha1 method, with any body, and a specified content type
+func NewCreateReportV2Alpha1RequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/reporting/v2alpha1/reports")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteReportV2Alpha1Request constructs an http.Request for the DeleteReportV2Alpha1 method
+func NewDeleteReportV2Alpha1Request(server string, reportID ReportID, params *DeleteReportV2Alpha1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "reportId", reportID, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: "int64"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/reporting/v2alpha1/reports/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.IfMatch != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "If-Match", *params.IfMatch, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("If-Match", headerParam0)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewGetReportV2Alpha1Request constructs an http.Request for the GetReportV2Alpha1 method
+func NewGetReportV2Alpha1Request(server string, reportID ReportID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "reportId", reportID, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: "int64"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/reporting/v2alpha1/reports/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPatchReportV2Alpha1RequestWithApplicationMergePatchPlusJSONBody calls the generic PatchReportV2Alpha1 builder with application/merge-patch+json body
+func NewPatchReportV2Alpha1RequestWithApplicationMergePatchPlusJSONBody(server string, reportID ReportID, params *PatchReportV2Alpha1Params, body PatchReportV2Alpha1ApplicationMergePatchPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewPatchReportV2Alpha1RequestWithBody(server, reportID, params, "application/merge-patch+json", bodyReader)
+}
+
+// NewPatchReportV2Alpha1RequestWithBody constructs an http.Request for the PatchReportV2Alpha1 method, with any body, and a specified content type
+func NewPatchReportV2Alpha1RequestWithBody(server string, reportID ReportID, params *PatchReportV2Alpha1Params, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "reportId", reportID, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: "int64"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/reporting/v2alpha1/reports/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.IfMatch != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "If-Match", *params.IfMatch, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("If-Match", headerParam0)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewUpdateReportV2Alpha1Request calls the generic UpdateReportV2Alpha1 builder with application/json body
+func NewUpdateReportV2Alpha1Request(server string, reportID ReportID, params *UpdateReportV2Alpha1Params, body UpdateReportV2Alpha1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateReportV2Alpha1RequestWithBody(server, reportID, params, "application/json", bodyReader)
+}
+
+// NewUpdateReportV2Alpha1RequestWithBody constructs an http.Request for the UpdateReportV2Alpha1 method, with any body, and a specified content type
+func NewUpdateReportV2Alpha1RequestWithBody(server string, reportID ReportID, params *UpdateReportV2Alpha1Params, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "reportId", reportID, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: "int64"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/reporting/v2alpha1/reports/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.IfMatch != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "If-Match", *params.IfMatch, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("If-Match", headerParam0)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewListRunsV2Alpha1Request constructs an http.Request for the ListRunsV2Alpha1 method
+func NewListRunsV2Alpha1Request(server string, params *ListRunsV2Alpha1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/reporting/v2alpha1/runs")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.ReportId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "reportId", *params.ReportId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int64"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.ScheduleId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "scheduleId", *params.ScheduleId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Trigger != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "trigger", *params.Trigger, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Status != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "status", *params.Status, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.SinceAt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sinceAt", *params.SinceAt, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "date-time"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateRunV2Alpha1Request calls the generic CreateRunV2Alpha1 builder with application/json body
+func NewCreateRunV2Alpha1Request(server string, body CreateRunV2Alpha1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateRunV2Alpha1RequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewCreateRunV2Alpha1RequestWithBody constructs an http.Request for the CreateRunV2Alpha1 method, with any body, and a specified content type
+func NewCreateRunV2Alpha1RequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/reporting/v2alpha1/runs")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGetRunV2Alpha1Request constructs an http.Request for the GetRunV2Alpha1 method
+func NewGetRunV2Alpha1Request(server string, runID RunID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "runId", runID, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/reporting/v2alpha1/runs/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewListSchedulesV2Alpha1Request constructs an http.Request for the ListSchedulesV2Alpha1 method
+func NewListSchedulesV2Alpha1Request(server string, params *ListSchedulesV2Alpha1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/reporting/v2alpha1/schedules")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.ReportId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "reportId", *params.ReportId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int64"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateScheduleV2Alpha1Request calls the generic CreateScheduleV2Alpha1 builder with application/json body
+func NewCreateScheduleV2Alpha1Request(server string, body CreateScheduleV2Alpha1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateScheduleV2Alpha1RequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewCreateScheduleV2Alpha1RequestWithBody constructs an http.Request for the CreateScheduleV2Alpha1 method, with any body, and a specified content type
+func NewCreateScheduleV2Alpha1RequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/reporting/v2alpha1/schedules")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteScheduleV2Alpha1Request constructs an http.Request for the DeleteScheduleV2Alpha1 method
+func NewDeleteScheduleV2Alpha1Request(server string, scheduleID ScheduleID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "scheduleId", scheduleID, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/reporting/v2alpha1/schedules/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetScheduleV2Alpha1Request constructs an http.Request for the GetScheduleV2Alpha1 method
+func NewGetScheduleV2Alpha1Request(server string, scheduleID ScheduleID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "scheduleId", scheduleID, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/reporting/v2alpha1/schedules/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPatchScheduleV2Alpha1RequestWithApplicationMergePatchPlusJSONBody calls the generic PatchScheduleV2Alpha1 builder with application/merge-patch+json body
+func NewPatchScheduleV2Alpha1RequestWithApplicationMergePatchPlusJSONBody(server string, scheduleID ScheduleID, body PatchScheduleV2Alpha1ApplicationMergePatchPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewPatchScheduleV2Alpha1RequestWithBody(server, scheduleID, "application/merge-patch+json", bodyReader)
+}
+
+// NewPatchScheduleV2Alpha1RequestWithBody constructs an http.Request for the PatchScheduleV2Alpha1 method, with any body, and a specified content type
+func NewPatchScheduleV2Alpha1RequestWithBody(server string, scheduleID ScheduleID, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "scheduleId", scheduleID, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/reporting/v2alpha1/schedules/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewUpdateScheduleV2Alpha1Request calls the generic UpdateScheduleV2Alpha1 builder with application/json body
+func NewUpdateScheduleV2Alpha1Request(server string, scheduleID ScheduleID, body UpdateScheduleV2Alpha1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateScheduleV2Alpha1RequestWithBody(server, scheduleID, "application/json", bodyReader)
+}
+
+// NewUpdateScheduleV2Alpha1RequestWithBody constructs an http.Request for the UpdateScheduleV2Alpha1 method, with any body, and a specified content type
+func NewUpdateScheduleV2Alpha1RequestWithBody(server string, scheduleID ScheduleID, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "scheduleId", scheduleID, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/reporting/v2alpha1/schedules/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListReportTemplatesV2Alpha1Request constructs an http.Request for the ListReportTemplatesV2Alpha1 method
+func NewListReportTemplatesV2Alpha1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/reporting/v2alpha1/templates")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetReportTemplateV2Alpha1Request constructs an http.Request for the GetReportTemplateV2Alpha1 method
+func NewGetReportTemplateV2Alpha1Request(server string, templateID TemplateID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "templateId", templateID, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/platform/reporting/v2alpha1/templates/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -53044,6 +58537,386 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /platform/reporting/v1/schedules (the `ListSchedulesV1` operationId).
 	ListSchedulesV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ListSchedulesV1Response, error)
 
+	// ListReportsV2Alpha1WithResponse List Reports
+	//
+	// Retrieve the list of reports.\
+	// \
+	// **Visibility scope:** returns reports belonging to the caller's team within the caller's
+	// customer account, not the whole tenant.\
+	// \
+	// **Reports of a superseded kind are omitted.** A report created from a template of an earlier
+	// resource-posture generation has no `kind` this API can express, so it is not listed here and
+	// `GET /reports/{reportId}` returns `404` for it. Such reports still exist and stay readable through
+	// the v1 API and the Sysdig UI — nothing is deleted — so a report visible in the UI may be absent
+	// here.\
+	// \
+	// **Required permissions:** platform.reporting.reports.read
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /platform/reporting/v2alpha1/reports (the `ListReportsV2Alpha1` operationId).
+	ListReportsV2Alpha1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ListReportsV2Alpha1Response, error)
+
+	// CreateReportV2Alpha1WithBodyWithResponse Create Report
+	//
+	// Create a report from a template. Optionally create a schedule in the same request by including
+	// a `schedule` object.\
+	// \
+	// **Atomicity:** when a `schedule` is included the call is all-or-nothing — if the schedule is
+	// invalid or cannot be created, the report is not created either and nothing is left behind.
+	// Creating a report and its schedule separately (`POST /reports` then `POST /schedules`) remains
+	// supported.\
+	// \
+	// The `201` body's `scheduleIds` holds the id of the schedule created alongside the report, and
+	// `Location` points at the report.\
+	// \
+	// **Required permissions:** platform.reporting.reports.edit, plus
+	// `platform.reporting.schedules.edit` when the body includes a `schedule` — that request creates a
+	// schedule as well, and is refused as a whole if either permission is missing.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /platform/reporting/v2alpha1/reports (the `CreateReportV2Alpha1` operationId).
+	CreateReportV2Alpha1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateReportV2Alpha1Response, error)
+
+	// CreateReportV2Alpha1WithResponse Create Report
+	//
+	// Create a report from a template. Optionally create a schedule in the same request by including
+	// a `schedule` object.\
+	// \
+	// **Atomicity:** when a `schedule` is included the call is all-or-nothing — if the schedule is
+	// invalid or cannot be created, the report is not created either and nothing is left behind.
+	// Creating a report and its schedule separately (`POST /reports` then `POST /schedules`) remains
+	// supported.\
+	// \
+	// The `201` body's `scheduleIds` holds the id of the schedule created alongside the report, and
+	// `Location` points at the report.\
+	// \
+	// **Required permissions:** platform.reporting.reports.edit, plus
+	// `platform.reporting.schedules.edit` when the body includes a `schedule` — that request creates a
+	// schedule as well, and is refused as a whole if either permission is missing.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /platform/reporting/v2alpha1/reports (the `CreateReportV2Alpha1` operationId).
+	CreateReportV2Alpha1WithResponse(ctx context.Context, body CreateReportV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*CreateReportV2Alpha1Response, error)
+
+	// DeleteReportV2Alpha1WithResponse Delete Report
+	//
+	// Delete a report. Cascades to its schedules and run history.\
+	// \
+	// `If-Match` is **optional** here, unlike on `PUT` and `PATCH`: an unconditional delete is accepted.
+	// Supply the report's `ETag` to abort the delete if the report has changed since you read it.\
+	// \
+	// **Required permissions:** platform.reporting.reports.edit
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /platform/reporting/v2alpha1/reports/{reportId} (the `DeleteReportV2Alpha1` operationId).
+	DeleteReportV2Alpha1WithResponse(ctx context.Context, reportID ReportID, params *DeleteReportV2Alpha1Params, reqEditors ...RequestEditorFn) (*DeleteReportV2Alpha1Response, error)
+
+	// GetReportV2Alpha1WithResponse Get Report
+	//
+	// Retrieve a report by its identifier.\
+	// \
+	// **Required permissions:** platform.reporting.reports.read
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /platform/reporting/v2alpha1/reports/{reportId} (the `GetReportV2Alpha1` operationId).
+	GetReportV2Alpha1WithResponse(ctx context.Context, reportID ReportID, reqEditors ...RequestEditorFn) (*GetReportV2Alpha1Response, error)
+
+	// PatchReportV2Alpha1WithBodyWithResponse Patch Report
+	//
+	// Partially update a report using JSON Merge Patch ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)).
+	// Send only the fields you want to change; omitted fields keep their current values. `templateId` and
+	// `kind` are immutable.\
+	// \
+	// Array-valued fields (`filters`, `panels`) are **replaced wholesale**, not merged element-wise — that
+	// is what Merge Patch specifies. To clear a report's filters send `"filters": null`.\
+	// \
+	// `If-Match` is **required** — supply the report's current `ETag` so a concurrent change cannot be silently overwritten.\
+	// \
+	// **Required permissions:** platform.reporting.reports.edit
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /platform/reporting/v2alpha1/reports/{reportId} (the `PatchReportV2Alpha1` operationId).
+	PatchReportV2Alpha1WithBodyWithResponse(ctx context.Context, reportID ReportID, params *PatchReportV2Alpha1Params, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchReportV2Alpha1Response, error)
+
+	// PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse Patch Report
+	//
+	// Partially update a report using JSON Merge Patch ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)).
+	// Send only the fields you want to change; omitted fields keep their current values. `templateId` and
+	// `kind` are immutable.\
+	// \
+	// Array-valued fields (`filters`, `panels`) are **replaced wholesale**, not merged element-wise — that
+	// is what Merge Patch specifies. To clear a report's filters send `"filters": null`.\
+	// \
+	// `If-Match` is **required** — supply the report's current `ETag` so a concurrent change cannot be silently overwritten.\
+	// \
+	// **Required permissions:** platform.reporting.reports.edit
+	//
+	// Takes a body of the `application/merge-patch+json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /platform/reporting/v2alpha1/reports/{reportId} (the `PatchReportV2Alpha1` operationId).
+	PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse(ctx context.Context, reportID ReportID, params *PatchReportV2Alpha1Params, body PatchReportV2Alpha1ApplicationMergePatchPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchReportV2Alpha1Response, error)
+
+	// UpdateReportV2Alpha1WithBodyWithResponse Update Report
+	//
+	// Replace a report's mutable fields — `name`, `description`, `filters`, and per-panel `filters`.
+	// `templateId` and `kind` are immutable. Omitted mutable fields are reset to their defaults; use
+	// `PATCH` to change a subset.\
+	// \
+	// `If-Match` is **required** — supply the report's current `ETag` so a concurrent change cannot be silently overwritten.\
+	// \
+	// **Required permissions:** platform.reporting.reports.edit
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /platform/reporting/v2alpha1/reports/{reportId} (the `UpdateReportV2Alpha1` operationId).
+	UpdateReportV2Alpha1WithBodyWithResponse(ctx context.Context, reportID ReportID, params *UpdateReportV2Alpha1Params, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateReportV2Alpha1Response, error)
+
+	// UpdateReportV2Alpha1WithResponse Update Report
+	//
+	// Replace a report's mutable fields — `name`, `description`, `filters`, and per-panel `filters`.
+	// `templateId` and `kind` are immutable. Omitted mutable fields are reset to their defaults; use
+	// `PATCH` to change a subset.\
+	// \
+	// `If-Match` is **required** — supply the report's current `ETag` so a concurrent change cannot be silently overwritten.\
+	// \
+	// **Required permissions:** platform.reporting.reports.edit
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /platform/reporting/v2alpha1/reports/{reportId} (the `UpdateReportV2Alpha1` operationId).
+	UpdateReportV2Alpha1WithResponse(ctx context.Context, reportID ReportID, params *UpdateReportV2Alpha1Params, body UpdateReportV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateReportV2Alpha1Response, error)
+
+	// ListRunsV2Alpha1WithResponse List Report Runs
+	//
+	// Retrieve report runs, optionally filtered by report, schedule, how they were triggered, status,
+	// or activity time.\
+	// \
+	// **`reportId` and `scheduleId` are mutually exclusive** — supply at most one. Sending both is
+	// rejected with `400`.\
+	// \
+	// To count or list a report's ad-hoc downloads — for instance to warn a user how many produced files
+	// deleting the report would destroy — combine `reportId` with `trigger=on_demand`.\
+	// \
+	// **Incremental polling:** use `sinceAt` to fetch only runs with activity at or after a given
+	// instant. Because this listing is unpaginated, `sinceAt` is the recommended way to avoid
+	// re-reading the whole retained history on every poll. `sinceAt` cannot be combined with
+	// `status=pending` or `status=running` (`400`).\
+	// \
+	// **Retention:** this listing is not a complete history. Completed runs — including truncated
+	// ones — are returned only while their produced file is still retrievable (a fixed retention
+	// window, currently expressed in days); older completed runs are omitted. Runs in any other
+	// state, including failed runs, are not subject to this window. Treat
+	// the listing as "runs whose output is still available", not "everything that ever ran".\
+	// \
+	// **Downloadable files:** to list the files currently available for download, filter with
+	// `status=completed` — each such run carries its `resultUri` until its file expires.\
+	// \
+	// **Visibility scope:** returns runs belonging to the caller's team within the caller's customer
+	// account, not the whole tenant.\
+	// \
+	// **Required permissions:** platform.reporting.report-downloads.read
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /platform/reporting/v2alpha1/runs (the `ListRunsV2Alpha1` operationId).
+	ListRunsV2Alpha1WithResponse(ctx context.Context, params *ListRunsV2Alpha1Params, reqEditors ...RequestEditorFn) (*ListRunsV2Alpha1Response, error)
+
+	// CreateRunV2Alpha1WithBodyWithResponse Generate Report Run
+	//
+	// Generate a report on demand (asynchronous). Poll `GET /runs/{runId}` until the run completes, then
+	// download the file from its `resultUri`.\
+	// \
+	// **Required permissions:** platform.reporting.report-downloads.read
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /platform/reporting/v2alpha1/runs (the `CreateRunV2Alpha1` operationId).
+	CreateRunV2Alpha1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRunV2Alpha1Response, error)
+
+	// CreateRunV2Alpha1WithResponse Generate Report Run
+	//
+	// Generate a report on demand (asynchronous). Poll `GET /runs/{runId}` until the run completes, then
+	// download the file from its `resultUri`.\
+	// \
+	// **Required permissions:** platform.reporting.report-downloads.read
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /platform/reporting/v2alpha1/runs (the `CreateRunV2Alpha1` operationId).
+	CreateRunV2Alpha1WithResponse(ctx context.Context, body CreateRunV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRunV2Alpha1Response, error)
+
+	// GetRunV2Alpha1WithResponse Get Report Run
+	//
+	// Retrieve a report run by its identifier (poll for status).\
+	// \
+	// **Required permissions:** platform.reporting.report-downloads.read
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /platform/reporting/v2alpha1/runs/{runId} (the `GetRunV2Alpha1` operationId).
+	GetRunV2Alpha1WithResponse(ctx context.Context, runID RunID, reqEditors ...RequestEditorFn) (*GetRunV2Alpha1Response, error)
+
+	// ListSchedulesV2Alpha1WithResponse List Report Schedules
+	//
+	// Retrieve the list of report schedules, optionally filtered by report.\
+	// \
+	// **Visibility scope:** returns schedules belonging to the caller's team within the caller's customer
+	// account, and only schedules attached to a **report**. The reporting service also stores schedules of
+	// other kinds — ones attached directly to a template, and data-export schedules — which have no
+	// representation in this API and are never returned here. A schedule visible in the Sysdig UI may
+	// therefore be absent from this listing.\
+	// \
+	// **Required permissions:** platform.reporting.schedules.read
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /platform/reporting/v2alpha1/schedules (the `ListSchedulesV2Alpha1` operationId).
+	ListSchedulesV2Alpha1WithResponse(ctx context.Context, params *ListSchedulesV2Alpha1Params, reqEditors ...RequestEditorFn) (*ListSchedulesV2Alpha1Response, error)
+
+	// CreateScheduleV2Alpha1WithBodyWithResponse Create Report Schedule
+	//
+	// Create a schedule for an existing report.\
+	// \
+	// **Required permissions:** platform.reporting.schedules.edit
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /platform/reporting/v2alpha1/schedules (the `CreateScheduleV2Alpha1` operationId).
+	CreateScheduleV2Alpha1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScheduleV2Alpha1Response, error)
+
+	// CreateScheduleV2Alpha1WithResponse Create Report Schedule
+	//
+	// Create a schedule for an existing report.\
+	// \
+	// **Required permissions:** platform.reporting.schedules.edit
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /platform/reporting/v2alpha1/schedules (the `CreateScheduleV2Alpha1` operationId).
+	CreateScheduleV2Alpha1WithResponse(ctx context.Context, body CreateScheduleV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScheduleV2Alpha1Response, error)
+
+	// DeleteScheduleV2Alpha1WithResponse Delete Report Schedule
+	//
+	// Delete a schedule. Cascades to its run history.\
+	// \
+	// **Required permissions:** platform.reporting.schedules.edit
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /platform/reporting/v2alpha1/schedules/{scheduleId} (the `DeleteScheduleV2Alpha1` operationId).
+	DeleteScheduleV2Alpha1WithResponse(ctx context.Context, scheduleID ScheduleID, reqEditors ...RequestEditorFn) (*DeleteScheduleV2Alpha1Response, error)
+
+	// GetScheduleV2Alpha1WithResponse Get Report Schedule
+	//
+	// Retrieve a schedule by its identifier.\
+	// \
+	// **Required permissions:** platform.reporting.schedules.read
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /platform/reporting/v2alpha1/schedules/{scheduleId} (the `GetScheduleV2Alpha1` operationId).
+	GetScheduleV2Alpha1WithResponse(ctx context.Context, scheduleID ScheduleID, reqEditors ...RequestEditorFn) (*GetScheduleV2Alpha1Response, error)
+
+	// PatchScheduleV2Alpha1WithBodyWithResponse Patch Report Schedule
+	//
+	// Partially update a schedule using JSON Merge Patch ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)).
+	// Send only the fields you want to change; omitted fields keep their current values. `reportId` is
+	// immutable and `status` is server-computed.\
+	// \
+	// Typical use is pausing or resuming without resending the whole definition: `{"enabled": false}`.\
+	// \
+	// Objects and arrays are replaced wholesale rather than merged, so `delivery` and `timeframe` overwrite
+	// the current value entirely. Schedules are not versioned and carry no `ETag`, so writes are
+	// unconditional.\
+	// \
+	// **Required permissions:** platform.reporting.schedules.edit
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /platform/reporting/v2alpha1/schedules/{scheduleId} (the `PatchScheduleV2Alpha1` operationId).
+	PatchScheduleV2Alpha1WithBodyWithResponse(ctx context.Context, scheduleID ScheduleID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchScheduleV2Alpha1Response, error)
+
+	// PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse Patch Report Schedule
+	//
+	// Partially update a schedule using JSON Merge Patch ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)).
+	// Send only the fields you want to change; omitted fields keep their current values. `reportId` is
+	// immutable and `status` is server-computed.\
+	// \
+	// Typical use is pausing or resuming without resending the whole definition: `{"enabled": false}`.\
+	// \
+	// Objects and arrays are replaced wholesale rather than merged, so `delivery` and `timeframe` overwrite
+	// the current value entirely. Schedules are not versioned and carry no `ETag`, so writes are
+	// unconditional.\
+	// \
+	// **Required permissions:** platform.reporting.schedules.edit
+	//
+	// Takes a body of the `application/merge-patch+json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /platform/reporting/v2alpha1/schedules/{scheduleId} (the `PatchScheduleV2Alpha1` operationId).
+	PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse(ctx context.Context, scheduleID ScheduleID, body PatchScheduleV2Alpha1ApplicationMergePatchPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchScheduleV2Alpha1Response, error)
+
+	// UpdateScheduleV2Alpha1WithBodyWithResponse Update Report Schedule
+	//
+	// Update a schedule. `reportId` is immutable; `status` is server-computed (read-only).\
+	// \
+	// **Required permissions:** platform.reporting.schedules.edit
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /platform/reporting/v2alpha1/schedules/{scheduleId} (the `UpdateScheduleV2Alpha1` operationId).
+	UpdateScheduleV2Alpha1WithBodyWithResponse(ctx context.Context, scheduleID ScheduleID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateScheduleV2Alpha1Response, error)
+
+	// UpdateScheduleV2Alpha1WithResponse Update Report Schedule
+	//
+	// Update a schedule. `reportId` is immutable; `status` is server-computed (read-only).\
+	// \
+	// **Required permissions:** platform.reporting.schedules.edit
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /platform/reporting/v2alpha1/schedules/{scheduleId} (the `UpdateScheduleV2Alpha1` operationId).
+	UpdateScheduleV2Alpha1WithResponse(ctx context.Context, scheduleID ScheduleID, body UpdateScheduleV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScheduleV2Alpha1Response, error)
+
+	// ListReportTemplatesV2Alpha1WithResponse List Report Templates
+	//
+	// Retrieve the catalog of available report templates.\
+	// \
+	// **The catalog is not the same for every customer.** Templates gated by controlled availability
+	// or by product entitlement are omitted for customers that do not have them enabled, so this
+	// listing is the authoritative set of templates the caller may create reports from. Do not
+	// hard-code template ids — read them from here. A template absent from this listing also cannot be
+	// fetched by id (`404`).\
+	// \
+	// **Superseded templates are omitted for everyone.** The reporting service still stores templates of
+	// an earlier resource-posture generation that the Sysdig UI no longer offers; those have no `kind` in
+	// this API and never appear here. Their replacements are the `posture_v2` templates. Reports created
+	// from a superseded template before it was retired remain readable through the v1 API and the UI, but
+	// are not exposed here — see `GET /reports`.\
+	// \
+	// **Required permissions:** platform.reporting.reports.read
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /platform/reporting/v2alpha1/templates (the `ListReportTemplatesV2Alpha1` operationId).
+	ListReportTemplatesV2Alpha1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ListReportTemplatesV2Alpha1Response, error)
+
+	// GetReportTemplateV2Alpha1WithResponse Get Report Template
+	//
+	// Retrieve a single report template by its identifier.\
+	// \
+	// **Required permissions:** platform.reporting.reports.read
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /platform/reporting/v2alpha1/templates/{templateId} (the `GetReportTemplateV2Alpha1` operationId).
+	GetReportTemplateV2Alpha1WithResponse(ctx context.Context, templateID TemplateID, reqEditors ...RequestEditorFn) (*GetReportTemplateV2Alpha1Response, error)
+
 	// GetAccessKeysV1WithResponse List Access Keys
 	//
 	// Retrieve a paginated list of access keys.\
@@ -61406,6 +67279,2570 @@ func (r ListSchedulesV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r ListSchedulesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// ListReportsV2Alpha1Response200Headers the declared response headers of an HTTP 200 response for ListReportsV2Alpha1
+type ListReportsV2Alpha1Response200Headers struct {
+	XRequestId openapi_types.UUID
+}
+
+// ListReportsV2Alpha1Response400Headers the declared response headers of an HTTP 400 response for ListReportsV2Alpha1
+type ListReportsV2Alpha1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListReportsV2Alpha1Response401Headers the declared response headers of an HTTP 401 response for ListReportsV2Alpha1
+type ListReportsV2Alpha1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListReportsV2Alpha1Response403Headers the declared response headers of an HTTP 403 response for ListReportsV2Alpha1
+type ListReportsV2Alpha1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListReportsV2Alpha1Response500Headers the declared response headers of an HTTP 500 response for ListReportsV2Alpha1
+type ListReportsV2Alpha1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type ListReportsV2Alpha1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ListReportsV2Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *ListReportsV2Alpha1Response200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *ListReportsV2Alpha1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *ListReportsV2Alpha1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *ListReportsV2Alpha1Response403Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *ListReportsV2Alpha1Response500Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ListReportsV2Alpha1Response) GetJSON200() *ListReportsV2Alpha1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r ListReportsV2Alpha1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ListReportsV2Alpha1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r ListReportsV2Alpha1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ListReportsV2Alpha1Response) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ListReportsV2Alpha1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ListReportsV2Alpha1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListReportsV2Alpha1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListReportsV2Alpha1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// CreateReportV2Alpha1Response201Headers the declared response headers of an HTTP 201 response for CreateReportV2Alpha1
+type CreateReportV2Alpha1Response201Headers struct {
+	ETag       string
+	Location   string
+	XRequestId openapi_types.UUID
+}
+
+// CreateReportV2Alpha1Response400Headers the declared response headers of an HTTP 400 response for CreateReportV2Alpha1
+type CreateReportV2Alpha1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateReportV2Alpha1Response401Headers the declared response headers of an HTTP 401 response for CreateReportV2Alpha1
+type CreateReportV2Alpha1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateReportV2Alpha1Response403Headers the declared response headers of an HTTP 403 response for CreateReportV2Alpha1
+type CreateReportV2Alpha1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateReportV2Alpha1Response409Headers the declared response headers of an HTTP 409 response for CreateReportV2Alpha1
+type CreateReportV2Alpha1Response409Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateReportV2Alpha1Response415Headers the declared response headers of an HTTP 415 response for CreateReportV2Alpha1
+type CreateReportV2Alpha1Response415Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateReportV2Alpha1Response422Headers the declared response headers of an HTTP 422 response for CreateReportV2Alpha1
+type CreateReportV2Alpha1Response422Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateReportV2Alpha1Response500Headers the declared response headers of an HTTP 500 response for CreateReportV2Alpha1
+type CreateReportV2Alpha1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type CreateReportV2Alpha1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON201 the response for an HTTP 201 `application/json` response
+	JSON201 *ReportResponseV2Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *ConflictV2
+	// JSON415 the response for an HTTP 415 `application/json` response
+	JSON415 *UnsupportedMediaTypeV2
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *UnprocessableEntityV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers201 the parsed response headers for an HTTP 201 response
+	Headers201 *CreateReportV2Alpha1Response201Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *CreateReportV2Alpha1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *CreateReportV2Alpha1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *CreateReportV2Alpha1Response403Headers
+	// Headers409 the parsed response headers for an HTTP 409 response
+	Headers409 *CreateReportV2Alpha1Response409Headers
+	// Headers415 the parsed response headers for an HTTP 415 response
+	Headers415 *CreateReportV2Alpha1Response415Headers
+	// Headers422 the parsed response headers for an HTTP 422 response
+	Headers422 *CreateReportV2Alpha1Response422Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *CreateReportV2Alpha1Response500Headers
+}
+
+// GetJSON201 returns the response for an HTTP 201 `application/json` response
+func (r CreateReportV2Alpha1Response) GetJSON201() *ReportResponseV2Alpha1 {
+	return r.JSON201
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r CreateReportV2Alpha1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r CreateReportV2Alpha1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r CreateReportV2Alpha1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r CreateReportV2Alpha1Response) GetJSON409() *ConflictV2 {
+	return r.JSON409
+}
+
+// GetJSON415 returns the response for an HTTP 415 `application/json` response
+func (r CreateReportV2Alpha1Response) GetJSON415() *UnsupportedMediaTypeV2 {
+	return r.JSON415
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r CreateReportV2Alpha1Response) GetJSON422() *UnprocessableEntityV2 {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r CreateReportV2Alpha1Response) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r CreateReportV2Alpha1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateReportV2Alpha1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateReportV2Alpha1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateReportV2Alpha1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// DeleteReportV2Alpha1Response204Headers the declared response headers of an HTTP 204 response for DeleteReportV2Alpha1
+type DeleteReportV2Alpha1Response204Headers struct {
+	XRequestId openapi_types.UUID
+}
+
+// DeleteReportV2Alpha1Response400Headers the declared response headers of an HTTP 400 response for DeleteReportV2Alpha1
+type DeleteReportV2Alpha1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// DeleteReportV2Alpha1Response401Headers the declared response headers of an HTTP 401 response for DeleteReportV2Alpha1
+type DeleteReportV2Alpha1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// DeleteReportV2Alpha1Response403Headers the declared response headers of an HTTP 403 response for DeleteReportV2Alpha1
+type DeleteReportV2Alpha1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// DeleteReportV2Alpha1Response404Headers the declared response headers of an HTTP 404 response for DeleteReportV2Alpha1
+type DeleteReportV2Alpha1Response404Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// DeleteReportV2Alpha1Response412Headers the declared response headers of an HTTP 412 response for DeleteReportV2Alpha1
+type DeleteReportV2Alpha1Response412Headers struct {
+	XRequestId openapi_types.UUID
+}
+
+// DeleteReportV2Alpha1Response500Headers the declared response headers of an HTTP 500 response for DeleteReportV2Alpha1
+type DeleteReportV2Alpha1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type DeleteReportV2Alpha1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFoundV2
+	// JSON412 the response for an HTTP 412 `application/json` response
+	JSON412 *PreconditionFailedV2Alpha1
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers204 the parsed response headers for an HTTP 204 response
+	Headers204 *DeleteReportV2Alpha1Response204Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *DeleteReportV2Alpha1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *DeleteReportV2Alpha1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *DeleteReportV2Alpha1Response403Headers
+	// Headers404 the parsed response headers for an HTTP 404 response
+	Headers404 *DeleteReportV2Alpha1Response404Headers
+	// Headers412 the parsed response headers for an HTTP 412 response
+	Headers412 *DeleteReportV2Alpha1Response412Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *DeleteReportV2Alpha1Response500Headers
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r DeleteReportV2Alpha1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DeleteReportV2Alpha1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r DeleteReportV2Alpha1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r DeleteReportV2Alpha1Response) GetJSON404() *NotFoundV2 {
+	return r.JSON404
+}
+
+// GetJSON412 returns the response for an HTTP 412 `application/json` response
+func (r DeleteReportV2Alpha1Response) GetJSON412() *PreconditionFailedV2Alpha1 {
+	return r.JSON412
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DeleteReportV2Alpha1Response) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DeleteReportV2Alpha1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteReportV2Alpha1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteReportV2Alpha1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DeleteReportV2Alpha1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// GetReportV2Alpha1Response200Headers the declared response headers of an HTTP 200 response for GetReportV2Alpha1
+type GetReportV2Alpha1Response200Headers struct {
+	ETag       string
+	XRequestId openapi_types.UUID
+}
+
+// GetReportV2Alpha1Response400Headers the declared response headers of an HTTP 400 response for GetReportV2Alpha1
+type GetReportV2Alpha1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetReportV2Alpha1Response401Headers the declared response headers of an HTTP 401 response for GetReportV2Alpha1
+type GetReportV2Alpha1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetReportV2Alpha1Response403Headers the declared response headers of an HTTP 403 response for GetReportV2Alpha1
+type GetReportV2Alpha1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetReportV2Alpha1Response404Headers the declared response headers of an HTTP 404 response for GetReportV2Alpha1
+type GetReportV2Alpha1Response404Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetReportV2Alpha1Response500Headers the declared response headers of an HTTP 500 response for GetReportV2Alpha1
+type GetReportV2Alpha1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type GetReportV2Alpha1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReportResponseV2Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFoundV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *GetReportV2Alpha1Response200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *GetReportV2Alpha1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *GetReportV2Alpha1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *GetReportV2Alpha1Response403Headers
+	// Headers404 the parsed response headers for an HTTP 404 response
+	Headers404 *GetReportV2Alpha1Response404Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *GetReportV2Alpha1Response500Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetReportV2Alpha1Response) GetJSON200() *ReportResponseV2Alpha1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetReportV2Alpha1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GetReportV2Alpha1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetReportV2Alpha1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetReportV2Alpha1Response) GetJSON404() *NotFoundV2 {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetReportV2Alpha1Response) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetReportV2Alpha1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GetReportV2Alpha1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetReportV2Alpha1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetReportV2Alpha1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// PatchReportV2Alpha1Response200Headers the declared response headers of an HTTP 200 response for PatchReportV2Alpha1
+type PatchReportV2Alpha1Response200Headers struct {
+	ETag       string
+	XRequestId openapi_types.UUID
+}
+
+// PatchReportV2Alpha1Response400Headers the declared response headers of an HTTP 400 response for PatchReportV2Alpha1
+type PatchReportV2Alpha1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// PatchReportV2Alpha1Response401Headers the declared response headers of an HTTP 401 response for PatchReportV2Alpha1
+type PatchReportV2Alpha1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// PatchReportV2Alpha1Response403Headers the declared response headers of an HTTP 403 response for PatchReportV2Alpha1
+type PatchReportV2Alpha1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// PatchReportV2Alpha1Response404Headers the declared response headers of an HTTP 404 response for PatchReportV2Alpha1
+type PatchReportV2Alpha1Response404Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// PatchReportV2Alpha1Response409Headers the declared response headers of an HTTP 409 response for PatchReportV2Alpha1
+type PatchReportV2Alpha1Response409Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// PatchReportV2Alpha1Response412Headers the declared response headers of an HTTP 412 response for PatchReportV2Alpha1
+type PatchReportV2Alpha1Response412Headers struct {
+	XRequestId openapi_types.UUID
+}
+
+// PatchReportV2Alpha1Response415Headers the declared response headers of an HTTP 415 response for PatchReportV2Alpha1
+type PatchReportV2Alpha1Response415Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// PatchReportV2Alpha1Response422Headers the declared response headers of an HTTP 422 response for PatchReportV2Alpha1
+type PatchReportV2Alpha1Response422Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// PatchReportV2Alpha1Response428Headers the declared response headers of an HTTP 428 response for PatchReportV2Alpha1
+type PatchReportV2Alpha1Response428Headers struct {
+	XRequestId openapi_types.UUID
+}
+
+// PatchReportV2Alpha1Response500Headers the declared response headers of an HTTP 500 response for PatchReportV2Alpha1
+type PatchReportV2Alpha1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type PatchReportV2Alpha1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReportResponseV2Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFoundV2
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *ConflictV2
+	// JSON412 the response for an HTTP 412 `application/json` response
+	JSON412 *PreconditionFailedV2Alpha1
+	// JSON415 the response for an HTTP 415 `application/json` response
+	JSON415 *UnsupportedMediaTypeV2
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *UnprocessableEntityV2
+	// JSON428 the response for an HTTP 428 `application/json` response
+	JSON428 *PreconditionRequiredV2Alpha1
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *PatchReportV2Alpha1Response200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *PatchReportV2Alpha1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *PatchReportV2Alpha1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *PatchReportV2Alpha1Response403Headers
+	// Headers404 the parsed response headers for an HTTP 404 response
+	Headers404 *PatchReportV2Alpha1Response404Headers
+	// Headers409 the parsed response headers for an HTTP 409 response
+	Headers409 *PatchReportV2Alpha1Response409Headers
+	// Headers412 the parsed response headers for an HTTP 412 response
+	Headers412 *PatchReportV2Alpha1Response412Headers
+	// Headers415 the parsed response headers for an HTTP 415 response
+	Headers415 *PatchReportV2Alpha1Response415Headers
+	// Headers422 the parsed response headers for an HTTP 422 response
+	Headers422 *PatchReportV2Alpha1Response422Headers
+	// Headers428 the parsed response headers for an HTTP 428 response
+	Headers428 *PatchReportV2Alpha1Response428Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *PatchReportV2Alpha1Response500Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r PatchReportV2Alpha1Response) GetJSON200() *ReportResponseV2Alpha1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r PatchReportV2Alpha1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r PatchReportV2Alpha1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r PatchReportV2Alpha1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r PatchReportV2Alpha1Response) GetJSON404() *NotFoundV2 {
+	return r.JSON404
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r PatchReportV2Alpha1Response) GetJSON409() *ConflictV2 {
+	return r.JSON409
+}
+
+// GetJSON412 returns the response for an HTTP 412 `application/json` response
+func (r PatchReportV2Alpha1Response) GetJSON412() *PreconditionFailedV2Alpha1 {
+	return r.JSON412
+}
+
+// GetJSON415 returns the response for an HTTP 415 `application/json` response
+func (r PatchReportV2Alpha1Response) GetJSON415() *UnsupportedMediaTypeV2 {
+	return r.JSON415
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r PatchReportV2Alpha1Response) GetJSON422() *UnprocessableEntityV2 {
+	return r.JSON422
+}
+
+// GetJSON428 returns the response for an HTTP 428 `application/json` response
+func (r PatchReportV2Alpha1Response) GetJSON428() *PreconditionRequiredV2Alpha1 {
+	return r.JSON428
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r PatchReportV2Alpha1Response) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r PatchReportV2Alpha1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r PatchReportV2Alpha1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PatchReportV2Alpha1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r PatchReportV2Alpha1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// UpdateReportV2Alpha1Response200Headers the declared response headers of an HTTP 200 response for UpdateReportV2Alpha1
+type UpdateReportV2Alpha1Response200Headers struct {
+	ETag       string
+	XRequestId openapi_types.UUID
+}
+
+// UpdateReportV2Alpha1Response400Headers the declared response headers of an HTTP 400 response for UpdateReportV2Alpha1
+type UpdateReportV2Alpha1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateReportV2Alpha1Response401Headers the declared response headers of an HTTP 401 response for UpdateReportV2Alpha1
+type UpdateReportV2Alpha1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateReportV2Alpha1Response403Headers the declared response headers of an HTTP 403 response for UpdateReportV2Alpha1
+type UpdateReportV2Alpha1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateReportV2Alpha1Response404Headers the declared response headers of an HTTP 404 response for UpdateReportV2Alpha1
+type UpdateReportV2Alpha1Response404Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateReportV2Alpha1Response409Headers the declared response headers of an HTTP 409 response for UpdateReportV2Alpha1
+type UpdateReportV2Alpha1Response409Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateReportV2Alpha1Response412Headers the declared response headers of an HTTP 412 response for UpdateReportV2Alpha1
+type UpdateReportV2Alpha1Response412Headers struct {
+	XRequestId openapi_types.UUID
+}
+
+// UpdateReportV2Alpha1Response415Headers the declared response headers of an HTTP 415 response for UpdateReportV2Alpha1
+type UpdateReportV2Alpha1Response415Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateReportV2Alpha1Response422Headers the declared response headers of an HTTP 422 response for UpdateReportV2Alpha1
+type UpdateReportV2Alpha1Response422Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateReportV2Alpha1Response428Headers the declared response headers of an HTTP 428 response for UpdateReportV2Alpha1
+type UpdateReportV2Alpha1Response428Headers struct {
+	XRequestId openapi_types.UUID
+}
+
+// UpdateReportV2Alpha1Response500Headers the declared response headers of an HTTP 500 response for UpdateReportV2Alpha1
+type UpdateReportV2Alpha1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type UpdateReportV2Alpha1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReportResponseV2Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFoundV2
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *ConflictV2
+	// JSON412 the response for an HTTP 412 `application/json` response
+	JSON412 *PreconditionFailedV2Alpha1
+	// JSON415 the response for an HTTP 415 `application/json` response
+	JSON415 *UnsupportedMediaTypeV2
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *UnprocessableEntityV2
+	// JSON428 the response for an HTTP 428 `application/json` response
+	JSON428 *PreconditionRequiredV2Alpha1
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *UpdateReportV2Alpha1Response200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *UpdateReportV2Alpha1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *UpdateReportV2Alpha1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *UpdateReportV2Alpha1Response403Headers
+	// Headers404 the parsed response headers for an HTTP 404 response
+	Headers404 *UpdateReportV2Alpha1Response404Headers
+	// Headers409 the parsed response headers for an HTTP 409 response
+	Headers409 *UpdateReportV2Alpha1Response409Headers
+	// Headers412 the parsed response headers for an HTTP 412 response
+	Headers412 *UpdateReportV2Alpha1Response412Headers
+	// Headers415 the parsed response headers for an HTTP 415 response
+	Headers415 *UpdateReportV2Alpha1Response415Headers
+	// Headers422 the parsed response headers for an HTTP 422 response
+	Headers422 *UpdateReportV2Alpha1Response422Headers
+	// Headers428 the parsed response headers for an HTTP 428 response
+	Headers428 *UpdateReportV2Alpha1Response428Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *UpdateReportV2Alpha1Response500Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r UpdateReportV2Alpha1Response) GetJSON200() *ReportResponseV2Alpha1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r UpdateReportV2Alpha1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r UpdateReportV2Alpha1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r UpdateReportV2Alpha1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r UpdateReportV2Alpha1Response) GetJSON404() *NotFoundV2 {
+	return r.JSON404
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r UpdateReportV2Alpha1Response) GetJSON409() *ConflictV2 {
+	return r.JSON409
+}
+
+// GetJSON412 returns the response for an HTTP 412 `application/json` response
+func (r UpdateReportV2Alpha1Response) GetJSON412() *PreconditionFailedV2Alpha1 {
+	return r.JSON412
+}
+
+// GetJSON415 returns the response for an HTTP 415 `application/json` response
+func (r UpdateReportV2Alpha1Response) GetJSON415() *UnsupportedMediaTypeV2 {
+	return r.JSON415
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r UpdateReportV2Alpha1Response) GetJSON422() *UnprocessableEntityV2 {
+	return r.JSON422
+}
+
+// GetJSON428 returns the response for an HTTP 428 `application/json` response
+func (r UpdateReportV2Alpha1Response) GetJSON428() *PreconditionRequiredV2Alpha1 {
+	return r.JSON428
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r UpdateReportV2Alpha1Response) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r UpdateReportV2Alpha1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateReportV2Alpha1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateReportV2Alpha1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdateReportV2Alpha1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// ListRunsV2Alpha1Response200Headers the declared response headers of an HTTP 200 response for ListRunsV2Alpha1
+type ListRunsV2Alpha1Response200Headers struct {
+	XRequestId openapi_types.UUID
+}
+
+// ListRunsV2Alpha1Response400Headers the declared response headers of an HTTP 400 response for ListRunsV2Alpha1
+type ListRunsV2Alpha1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListRunsV2Alpha1Response401Headers the declared response headers of an HTTP 401 response for ListRunsV2Alpha1
+type ListRunsV2Alpha1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListRunsV2Alpha1Response403Headers the declared response headers of an HTTP 403 response for ListRunsV2Alpha1
+type ListRunsV2Alpha1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListRunsV2Alpha1Response500Headers the declared response headers of an HTTP 500 response for ListRunsV2Alpha1
+type ListRunsV2Alpha1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type ListRunsV2Alpha1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ListRunsV2Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *ListRunsV2Alpha1Response200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *ListRunsV2Alpha1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *ListRunsV2Alpha1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *ListRunsV2Alpha1Response403Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *ListRunsV2Alpha1Response500Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ListRunsV2Alpha1Response) GetJSON200() *ListRunsV2Alpha1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r ListRunsV2Alpha1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ListRunsV2Alpha1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r ListRunsV2Alpha1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ListRunsV2Alpha1Response) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ListRunsV2Alpha1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ListRunsV2Alpha1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListRunsV2Alpha1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListRunsV2Alpha1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// CreateRunV2Alpha1Response202Headers the declared response headers of an HTTP 202 response for CreateRunV2Alpha1
+type CreateRunV2Alpha1Response202Headers struct {
+	Location   string
+	RetryAfter int32
+	XRequestId openapi_types.UUID
+}
+
+// CreateRunV2Alpha1Response400Headers the declared response headers of an HTTP 400 response for CreateRunV2Alpha1
+type CreateRunV2Alpha1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateRunV2Alpha1Response401Headers the declared response headers of an HTTP 401 response for CreateRunV2Alpha1
+type CreateRunV2Alpha1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateRunV2Alpha1Response403Headers the declared response headers of an HTTP 403 response for CreateRunV2Alpha1
+type CreateRunV2Alpha1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateRunV2Alpha1Response404Headers the declared response headers of an HTTP 404 response for CreateRunV2Alpha1
+type CreateRunV2Alpha1Response404Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateRunV2Alpha1Response415Headers the declared response headers of an HTTP 415 response for CreateRunV2Alpha1
+type CreateRunV2Alpha1Response415Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateRunV2Alpha1Response422Headers the declared response headers of an HTTP 422 response for CreateRunV2Alpha1
+type CreateRunV2Alpha1Response422Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateRunV2Alpha1Response500Headers the declared response headers of an HTTP 500 response for CreateRunV2Alpha1
+type CreateRunV2Alpha1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type CreateRunV2Alpha1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON202 the response for an HTTP 202 `application/json` response
+	JSON202 *RunResponseV2Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFoundV2
+	// JSON415 the response for an HTTP 415 `application/json` response
+	JSON415 *UnsupportedMediaTypeV2
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *UnprocessableEntityV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers202 the parsed response headers for an HTTP 202 response
+	Headers202 *CreateRunV2Alpha1Response202Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *CreateRunV2Alpha1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *CreateRunV2Alpha1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *CreateRunV2Alpha1Response403Headers
+	// Headers404 the parsed response headers for an HTTP 404 response
+	Headers404 *CreateRunV2Alpha1Response404Headers
+	// Headers415 the parsed response headers for an HTTP 415 response
+	Headers415 *CreateRunV2Alpha1Response415Headers
+	// Headers422 the parsed response headers for an HTTP 422 response
+	Headers422 *CreateRunV2Alpha1Response422Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *CreateRunV2Alpha1Response500Headers
+}
+
+// GetJSON202 returns the response for an HTTP 202 `application/json` response
+func (r CreateRunV2Alpha1Response) GetJSON202() *RunResponseV2Alpha1 {
+	return r.JSON202
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r CreateRunV2Alpha1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r CreateRunV2Alpha1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r CreateRunV2Alpha1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r CreateRunV2Alpha1Response) GetJSON404() *NotFoundV2 {
+	return r.JSON404
+}
+
+// GetJSON415 returns the response for an HTTP 415 `application/json` response
+func (r CreateRunV2Alpha1Response) GetJSON415() *UnsupportedMediaTypeV2 {
+	return r.JSON415
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r CreateRunV2Alpha1Response) GetJSON422() *UnprocessableEntityV2 {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r CreateRunV2Alpha1Response) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r CreateRunV2Alpha1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateRunV2Alpha1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateRunV2Alpha1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateRunV2Alpha1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// GetRunV2Alpha1Response200Headers the declared response headers of an HTTP 200 response for GetRunV2Alpha1
+type GetRunV2Alpha1Response200Headers struct {
+	RetryAfter *int32
+	XRequestId openapi_types.UUID
+}
+
+// GetRunV2Alpha1Response400Headers the declared response headers of an HTTP 400 response for GetRunV2Alpha1
+type GetRunV2Alpha1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetRunV2Alpha1Response401Headers the declared response headers of an HTTP 401 response for GetRunV2Alpha1
+type GetRunV2Alpha1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetRunV2Alpha1Response403Headers the declared response headers of an HTTP 403 response for GetRunV2Alpha1
+type GetRunV2Alpha1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetRunV2Alpha1Response404Headers the declared response headers of an HTTP 404 response for GetRunV2Alpha1
+type GetRunV2Alpha1Response404Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetRunV2Alpha1Response500Headers the declared response headers of an HTTP 500 response for GetRunV2Alpha1
+type GetRunV2Alpha1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type GetRunV2Alpha1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *RunResponseV2Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFoundV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *GetRunV2Alpha1Response200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *GetRunV2Alpha1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *GetRunV2Alpha1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *GetRunV2Alpha1Response403Headers
+	// Headers404 the parsed response headers for an HTTP 404 response
+	Headers404 *GetRunV2Alpha1Response404Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *GetRunV2Alpha1Response500Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetRunV2Alpha1Response) GetJSON200() *RunResponseV2Alpha1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetRunV2Alpha1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GetRunV2Alpha1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetRunV2Alpha1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetRunV2Alpha1Response) GetJSON404() *NotFoundV2 {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetRunV2Alpha1Response) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetRunV2Alpha1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GetRunV2Alpha1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetRunV2Alpha1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetRunV2Alpha1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// ListSchedulesV2Alpha1Response200Headers the declared response headers of an HTTP 200 response for ListSchedulesV2Alpha1
+type ListSchedulesV2Alpha1Response200Headers struct {
+	XRequestId openapi_types.UUID
+}
+
+// ListSchedulesV2Alpha1Response400Headers the declared response headers of an HTTP 400 response for ListSchedulesV2Alpha1
+type ListSchedulesV2Alpha1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListSchedulesV2Alpha1Response401Headers the declared response headers of an HTTP 401 response for ListSchedulesV2Alpha1
+type ListSchedulesV2Alpha1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListSchedulesV2Alpha1Response403Headers the declared response headers of an HTTP 403 response for ListSchedulesV2Alpha1
+type ListSchedulesV2Alpha1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListSchedulesV2Alpha1Response500Headers the declared response headers of an HTTP 500 response for ListSchedulesV2Alpha1
+type ListSchedulesV2Alpha1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type ListSchedulesV2Alpha1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ListSchedulesV2Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *ListSchedulesV2Alpha1Response200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *ListSchedulesV2Alpha1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *ListSchedulesV2Alpha1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *ListSchedulesV2Alpha1Response403Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *ListSchedulesV2Alpha1Response500Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ListSchedulesV2Alpha1Response) GetJSON200() *ListSchedulesV2Alpha1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r ListSchedulesV2Alpha1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ListSchedulesV2Alpha1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r ListSchedulesV2Alpha1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ListSchedulesV2Alpha1Response) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ListSchedulesV2Alpha1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ListSchedulesV2Alpha1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListSchedulesV2Alpha1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListSchedulesV2Alpha1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// CreateScheduleV2Alpha1Response201Headers the declared response headers of an HTTP 201 response for CreateScheduleV2Alpha1
+type CreateScheduleV2Alpha1Response201Headers struct {
+	Location   string
+	XRequestId openapi_types.UUID
+}
+
+// CreateScheduleV2Alpha1Response400Headers the declared response headers of an HTTP 400 response for CreateScheduleV2Alpha1
+type CreateScheduleV2Alpha1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateScheduleV2Alpha1Response401Headers the declared response headers of an HTTP 401 response for CreateScheduleV2Alpha1
+type CreateScheduleV2Alpha1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateScheduleV2Alpha1Response403Headers the declared response headers of an HTTP 403 response for CreateScheduleV2Alpha1
+type CreateScheduleV2Alpha1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateScheduleV2Alpha1Response409Headers the declared response headers of an HTTP 409 response for CreateScheduleV2Alpha1
+type CreateScheduleV2Alpha1Response409Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateScheduleV2Alpha1Response415Headers the declared response headers of an HTTP 415 response for CreateScheduleV2Alpha1
+type CreateScheduleV2Alpha1Response415Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateScheduleV2Alpha1Response422Headers the declared response headers of an HTTP 422 response for CreateScheduleV2Alpha1
+type CreateScheduleV2Alpha1Response422Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// CreateScheduleV2Alpha1Response500Headers the declared response headers of an HTTP 500 response for CreateScheduleV2Alpha1
+type CreateScheduleV2Alpha1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type CreateScheduleV2Alpha1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON201 the response for an HTTP 201 `application/json` response
+	JSON201 *ScheduleResponseV2Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *ConflictV2
+	// JSON415 the response for an HTTP 415 `application/json` response
+	JSON415 *UnsupportedMediaTypeV2
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *UnprocessableEntityV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers201 the parsed response headers for an HTTP 201 response
+	Headers201 *CreateScheduleV2Alpha1Response201Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *CreateScheduleV2Alpha1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *CreateScheduleV2Alpha1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *CreateScheduleV2Alpha1Response403Headers
+	// Headers409 the parsed response headers for an HTTP 409 response
+	Headers409 *CreateScheduleV2Alpha1Response409Headers
+	// Headers415 the parsed response headers for an HTTP 415 response
+	Headers415 *CreateScheduleV2Alpha1Response415Headers
+	// Headers422 the parsed response headers for an HTTP 422 response
+	Headers422 *CreateScheduleV2Alpha1Response422Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *CreateScheduleV2Alpha1Response500Headers
+}
+
+// GetJSON201 returns the response for an HTTP 201 `application/json` response
+func (r CreateScheduleV2Alpha1Response) GetJSON201() *ScheduleResponseV2Alpha1 {
+	return r.JSON201
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r CreateScheduleV2Alpha1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r CreateScheduleV2Alpha1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r CreateScheduleV2Alpha1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r CreateScheduleV2Alpha1Response) GetJSON409() *ConflictV2 {
+	return r.JSON409
+}
+
+// GetJSON415 returns the response for an HTTP 415 `application/json` response
+func (r CreateScheduleV2Alpha1Response) GetJSON415() *UnsupportedMediaTypeV2 {
+	return r.JSON415
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r CreateScheduleV2Alpha1Response) GetJSON422() *UnprocessableEntityV2 {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r CreateScheduleV2Alpha1Response) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r CreateScheduleV2Alpha1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateScheduleV2Alpha1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateScheduleV2Alpha1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateScheduleV2Alpha1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// DeleteScheduleV2Alpha1Response204Headers the declared response headers of an HTTP 204 response for DeleteScheduleV2Alpha1
+type DeleteScheduleV2Alpha1Response204Headers struct {
+	XRequestId openapi_types.UUID
+}
+
+// DeleteScheduleV2Alpha1Response400Headers the declared response headers of an HTTP 400 response for DeleteScheduleV2Alpha1
+type DeleteScheduleV2Alpha1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// DeleteScheduleV2Alpha1Response401Headers the declared response headers of an HTTP 401 response for DeleteScheduleV2Alpha1
+type DeleteScheduleV2Alpha1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// DeleteScheduleV2Alpha1Response403Headers the declared response headers of an HTTP 403 response for DeleteScheduleV2Alpha1
+type DeleteScheduleV2Alpha1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// DeleteScheduleV2Alpha1Response404Headers the declared response headers of an HTTP 404 response for DeleteScheduleV2Alpha1
+type DeleteScheduleV2Alpha1Response404Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// DeleteScheduleV2Alpha1Response500Headers the declared response headers of an HTTP 500 response for DeleteScheduleV2Alpha1
+type DeleteScheduleV2Alpha1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type DeleteScheduleV2Alpha1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFoundV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers204 the parsed response headers for an HTTP 204 response
+	Headers204 *DeleteScheduleV2Alpha1Response204Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *DeleteScheduleV2Alpha1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *DeleteScheduleV2Alpha1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *DeleteScheduleV2Alpha1Response403Headers
+	// Headers404 the parsed response headers for an HTTP 404 response
+	Headers404 *DeleteScheduleV2Alpha1Response404Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *DeleteScheduleV2Alpha1Response500Headers
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r DeleteScheduleV2Alpha1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DeleteScheduleV2Alpha1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r DeleteScheduleV2Alpha1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r DeleteScheduleV2Alpha1Response) GetJSON404() *NotFoundV2 {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DeleteScheduleV2Alpha1Response) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DeleteScheduleV2Alpha1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteScheduleV2Alpha1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteScheduleV2Alpha1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DeleteScheduleV2Alpha1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// GetScheduleV2Alpha1Response200Headers the declared response headers of an HTTP 200 response for GetScheduleV2Alpha1
+type GetScheduleV2Alpha1Response200Headers struct {
+	XRequestId openapi_types.UUID
+}
+
+// GetScheduleV2Alpha1Response400Headers the declared response headers of an HTTP 400 response for GetScheduleV2Alpha1
+type GetScheduleV2Alpha1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetScheduleV2Alpha1Response401Headers the declared response headers of an HTTP 401 response for GetScheduleV2Alpha1
+type GetScheduleV2Alpha1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetScheduleV2Alpha1Response403Headers the declared response headers of an HTTP 403 response for GetScheduleV2Alpha1
+type GetScheduleV2Alpha1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetScheduleV2Alpha1Response404Headers the declared response headers of an HTTP 404 response for GetScheduleV2Alpha1
+type GetScheduleV2Alpha1Response404Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetScheduleV2Alpha1Response500Headers the declared response headers of an HTTP 500 response for GetScheduleV2Alpha1
+type GetScheduleV2Alpha1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type GetScheduleV2Alpha1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ScheduleResponseV2Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFoundV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *GetScheduleV2Alpha1Response200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *GetScheduleV2Alpha1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *GetScheduleV2Alpha1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *GetScheduleV2Alpha1Response403Headers
+	// Headers404 the parsed response headers for an HTTP 404 response
+	Headers404 *GetScheduleV2Alpha1Response404Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *GetScheduleV2Alpha1Response500Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetScheduleV2Alpha1Response) GetJSON200() *ScheduleResponseV2Alpha1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetScheduleV2Alpha1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GetScheduleV2Alpha1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetScheduleV2Alpha1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetScheduleV2Alpha1Response) GetJSON404() *NotFoundV2 {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetScheduleV2Alpha1Response) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetScheduleV2Alpha1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GetScheduleV2Alpha1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetScheduleV2Alpha1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetScheduleV2Alpha1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// PatchScheduleV2Alpha1Response200Headers the declared response headers of an HTTP 200 response for PatchScheduleV2Alpha1
+type PatchScheduleV2Alpha1Response200Headers struct {
+	XRequestId openapi_types.UUID
+}
+
+// PatchScheduleV2Alpha1Response400Headers the declared response headers of an HTTP 400 response for PatchScheduleV2Alpha1
+type PatchScheduleV2Alpha1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// PatchScheduleV2Alpha1Response401Headers the declared response headers of an HTTP 401 response for PatchScheduleV2Alpha1
+type PatchScheduleV2Alpha1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// PatchScheduleV2Alpha1Response403Headers the declared response headers of an HTTP 403 response for PatchScheduleV2Alpha1
+type PatchScheduleV2Alpha1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// PatchScheduleV2Alpha1Response404Headers the declared response headers of an HTTP 404 response for PatchScheduleV2Alpha1
+type PatchScheduleV2Alpha1Response404Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// PatchScheduleV2Alpha1Response409Headers the declared response headers of an HTTP 409 response for PatchScheduleV2Alpha1
+type PatchScheduleV2Alpha1Response409Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// PatchScheduleV2Alpha1Response415Headers the declared response headers of an HTTP 415 response for PatchScheduleV2Alpha1
+type PatchScheduleV2Alpha1Response415Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// PatchScheduleV2Alpha1Response422Headers the declared response headers of an HTTP 422 response for PatchScheduleV2Alpha1
+type PatchScheduleV2Alpha1Response422Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// PatchScheduleV2Alpha1Response500Headers the declared response headers of an HTTP 500 response for PatchScheduleV2Alpha1
+type PatchScheduleV2Alpha1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type PatchScheduleV2Alpha1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ScheduleResponseV2Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFoundV2
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *ConflictV2
+	// JSON415 the response for an HTTP 415 `application/json` response
+	JSON415 *UnsupportedMediaTypeV2
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *UnprocessableEntityV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *PatchScheduleV2Alpha1Response200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *PatchScheduleV2Alpha1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *PatchScheduleV2Alpha1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *PatchScheduleV2Alpha1Response403Headers
+	// Headers404 the parsed response headers for an HTTP 404 response
+	Headers404 *PatchScheduleV2Alpha1Response404Headers
+	// Headers409 the parsed response headers for an HTTP 409 response
+	Headers409 *PatchScheduleV2Alpha1Response409Headers
+	// Headers415 the parsed response headers for an HTTP 415 response
+	Headers415 *PatchScheduleV2Alpha1Response415Headers
+	// Headers422 the parsed response headers for an HTTP 422 response
+	Headers422 *PatchScheduleV2Alpha1Response422Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *PatchScheduleV2Alpha1Response500Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r PatchScheduleV2Alpha1Response) GetJSON200() *ScheduleResponseV2Alpha1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r PatchScheduleV2Alpha1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r PatchScheduleV2Alpha1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r PatchScheduleV2Alpha1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r PatchScheduleV2Alpha1Response) GetJSON404() *NotFoundV2 {
+	return r.JSON404
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r PatchScheduleV2Alpha1Response) GetJSON409() *ConflictV2 {
+	return r.JSON409
+}
+
+// GetJSON415 returns the response for an HTTP 415 `application/json` response
+func (r PatchScheduleV2Alpha1Response) GetJSON415() *UnsupportedMediaTypeV2 {
+	return r.JSON415
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r PatchScheduleV2Alpha1Response) GetJSON422() *UnprocessableEntityV2 {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r PatchScheduleV2Alpha1Response) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r PatchScheduleV2Alpha1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r PatchScheduleV2Alpha1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PatchScheduleV2Alpha1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r PatchScheduleV2Alpha1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// UpdateScheduleV2Alpha1Response200Headers the declared response headers of an HTTP 200 response for UpdateScheduleV2Alpha1
+type UpdateScheduleV2Alpha1Response200Headers struct {
+	XRequestId openapi_types.UUID
+}
+
+// UpdateScheduleV2Alpha1Response400Headers the declared response headers of an HTTP 400 response for UpdateScheduleV2Alpha1
+type UpdateScheduleV2Alpha1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateScheduleV2Alpha1Response401Headers the declared response headers of an HTTP 401 response for UpdateScheduleV2Alpha1
+type UpdateScheduleV2Alpha1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateScheduleV2Alpha1Response403Headers the declared response headers of an HTTP 403 response for UpdateScheduleV2Alpha1
+type UpdateScheduleV2Alpha1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateScheduleV2Alpha1Response404Headers the declared response headers of an HTTP 404 response for UpdateScheduleV2Alpha1
+type UpdateScheduleV2Alpha1Response404Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateScheduleV2Alpha1Response409Headers the declared response headers of an HTTP 409 response for UpdateScheduleV2Alpha1
+type UpdateScheduleV2Alpha1Response409Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateScheduleV2Alpha1Response415Headers the declared response headers of an HTTP 415 response for UpdateScheduleV2Alpha1
+type UpdateScheduleV2Alpha1Response415Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateScheduleV2Alpha1Response422Headers the declared response headers of an HTTP 422 response for UpdateScheduleV2Alpha1
+type UpdateScheduleV2Alpha1Response422Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// UpdateScheduleV2Alpha1Response500Headers the declared response headers of an HTTP 500 response for UpdateScheduleV2Alpha1
+type UpdateScheduleV2Alpha1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type UpdateScheduleV2Alpha1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ScheduleResponseV2Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFoundV2
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *ConflictV2
+	// JSON415 the response for an HTTP 415 `application/json` response
+	JSON415 *UnsupportedMediaTypeV2
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *UnprocessableEntityV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *UpdateScheduleV2Alpha1Response200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *UpdateScheduleV2Alpha1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *UpdateScheduleV2Alpha1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *UpdateScheduleV2Alpha1Response403Headers
+	// Headers404 the parsed response headers for an HTTP 404 response
+	Headers404 *UpdateScheduleV2Alpha1Response404Headers
+	// Headers409 the parsed response headers for an HTTP 409 response
+	Headers409 *UpdateScheduleV2Alpha1Response409Headers
+	// Headers415 the parsed response headers for an HTTP 415 response
+	Headers415 *UpdateScheduleV2Alpha1Response415Headers
+	// Headers422 the parsed response headers for an HTTP 422 response
+	Headers422 *UpdateScheduleV2Alpha1Response422Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *UpdateScheduleV2Alpha1Response500Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r UpdateScheduleV2Alpha1Response) GetJSON200() *ScheduleResponseV2Alpha1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r UpdateScheduleV2Alpha1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r UpdateScheduleV2Alpha1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r UpdateScheduleV2Alpha1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r UpdateScheduleV2Alpha1Response) GetJSON404() *NotFoundV2 {
+	return r.JSON404
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r UpdateScheduleV2Alpha1Response) GetJSON409() *ConflictV2 {
+	return r.JSON409
+}
+
+// GetJSON415 returns the response for an HTTP 415 `application/json` response
+func (r UpdateScheduleV2Alpha1Response) GetJSON415() *UnsupportedMediaTypeV2 {
+	return r.JSON415
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r UpdateScheduleV2Alpha1Response) GetJSON422() *UnprocessableEntityV2 {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r UpdateScheduleV2Alpha1Response) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r UpdateScheduleV2Alpha1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateScheduleV2Alpha1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateScheduleV2Alpha1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdateScheduleV2Alpha1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// ListReportTemplatesV2Alpha1Response200Headers the declared response headers of an HTTP 200 response for ListReportTemplatesV2Alpha1
+type ListReportTemplatesV2Alpha1Response200Headers struct {
+	XRequestId openapi_types.UUID
+}
+
+// ListReportTemplatesV2Alpha1Response400Headers the declared response headers of an HTTP 400 response for ListReportTemplatesV2Alpha1
+type ListReportTemplatesV2Alpha1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListReportTemplatesV2Alpha1Response401Headers the declared response headers of an HTTP 401 response for ListReportTemplatesV2Alpha1
+type ListReportTemplatesV2Alpha1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListReportTemplatesV2Alpha1Response403Headers the declared response headers of an HTTP 403 response for ListReportTemplatesV2Alpha1
+type ListReportTemplatesV2Alpha1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// ListReportTemplatesV2Alpha1Response500Headers the declared response headers of an HTTP 500 response for ListReportTemplatesV2Alpha1
+type ListReportTemplatesV2Alpha1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type ListReportTemplatesV2Alpha1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ListTemplatesV2Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *ListReportTemplatesV2Alpha1Response200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *ListReportTemplatesV2Alpha1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *ListReportTemplatesV2Alpha1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *ListReportTemplatesV2Alpha1Response403Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *ListReportTemplatesV2Alpha1Response500Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ListReportTemplatesV2Alpha1Response) GetJSON200() *ListTemplatesV2Alpha1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r ListReportTemplatesV2Alpha1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ListReportTemplatesV2Alpha1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r ListReportTemplatesV2Alpha1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ListReportTemplatesV2Alpha1Response) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ListReportTemplatesV2Alpha1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ListReportTemplatesV2Alpha1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListReportTemplatesV2Alpha1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListReportTemplatesV2Alpha1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// GetReportTemplateV2Alpha1Response200Headers the declared response headers of an HTTP 200 response for GetReportTemplateV2Alpha1
+type GetReportTemplateV2Alpha1Response200Headers struct {
+	XRequestId openapi_types.UUID
+}
+
+// GetReportTemplateV2Alpha1Response400Headers the declared response headers of an HTTP 400 response for GetReportTemplateV2Alpha1
+type GetReportTemplateV2Alpha1Response400Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetReportTemplateV2Alpha1Response401Headers the declared response headers of an HTTP 401 response for GetReportTemplateV2Alpha1
+type GetReportTemplateV2Alpha1Response401Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetReportTemplateV2Alpha1Response403Headers the declared response headers of an HTTP 403 response for GetReportTemplateV2Alpha1
+type GetReportTemplateV2Alpha1Response403Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetReportTemplateV2Alpha1Response404Headers the declared response headers of an HTTP 404 response for GetReportTemplateV2Alpha1
+type GetReportTemplateV2Alpha1Response404Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+// GetReportTemplateV2Alpha1Response500Headers the declared response headers of an HTTP 500 response for GetReportTemplateV2Alpha1
+type GetReportTemplateV2Alpha1Response500Headers struct {
+	XRateLimitLimit     *int32
+	XRateLimitRemaining *int32
+	XRateLimitReset     *int32
+	XRequestId          *openapi_types.UUID
+}
+
+type GetReportTemplateV2Alpha1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *TemplateV2Alpha1
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequestV2
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *UnauthorizedV2
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *ForbiddenV2
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFoundV2
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerErrorV2
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *GetReportTemplateV2Alpha1Response200Headers
+	// Headers400 the parsed response headers for an HTTP 400 response
+	Headers400 *GetReportTemplateV2Alpha1Response400Headers
+	// Headers401 the parsed response headers for an HTTP 401 response
+	Headers401 *GetReportTemplateV2Alpha1Response401Headers
+	// Headers403 the parsed response headers for an HTTP 403 response
+	Headers403 *GetReportTemplateV2Alpha1Response403Headers
+	// Headers404 the parsed response headers for an HTTP 404 response
+	Headers404 *GetReportTemplateV2Alpha1Response404Headers
+	// Headers500 the parsed response headers for an HTTP 500 response
+	Headers500 *GetReportTemplateV2Alpha1Response500Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetReportTemplateV2Alpha1Response) GetJSON200() *TemplateV2Alpha1 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetReportTemplateV2Alpha1Response) GetJSON400() *BadRequestV2 {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GetReportTemplateV2Alpha1Response) GetJSON401() *UnauthorizedV2 {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetReportTemplateV2Alpha1Response) GetJSON403() *ForbiddenV2 {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetReportTemplateV2Alpha1Response) GetJSON404() *NotFoundV2 {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetReportTemplateV2Alpha1Response) GetJSON500() *InternalServerErrorV2 {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetReportTemplateV2Alpha1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GetReportTemplateV2Alpha1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetReportTemplateV2Alpha1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetReportTemplateV2Alpha1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -86351,6 +94788,530 @@ func (c *ClientWithResponses) ListSchedulesV1WithResponse(ctx context.Context, r
 	return ParseListSchedulesV1Response(rsp)
 }
 
+// ListReportsV2Alpha1WithResponse List Reports
+//
+// Retrieve the list of reports.\
+// \
+// **Visibility scope:** returns reports belonging to the caller's team within the caller's
+// customer account, not the whole tenant.\
+// \
+// **Reports of a superseded kind are omitted.** A report created from a template of an earlier
+// resource-posture generation has no `kind` this API can express, so it is not listed here and
+// `GET /reports/{reportId}` returns `404` for it. Such reports still exist and stay readable through
+// the v1 API and the Sysdig UI — nothing is deleted — so a report visible in the UI may be absent
+// here.\
+// \
+// **Required permissions:** platform.reporting.reports.read
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /platform/reporting/v2alpha1/reports (the `ListReportsV2Alpha1` operationId).
+func (c *ClientWithResponses) ListReportsV2Alpha1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ListReportsV2Alpha1Response, error) {
+	rsp, err := c.ListReportsV2Alpha1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListReportsV2Alpha1Response(rsp)
+}
+
+// CreateReportV2Alpha1WithBodyWithResponse Create Report
+//
+// Create a report from a template. Optionally create a schedule in the same request by including
+// a `schedule` object.\
+// \
+// **Atomicity:** when a `schedule` is included the call is all-or-nothing — if the schedule is
+// invalid or cannot be created, the report is not created either and nothing is left behind.
+// Creating a report and its schedule separately (`POST /reports` then `POST /schedules`) remains
+// supported.\
+// \
+// The `201` body's `scheduleIds` holds the id of the schedule created alongside the report, and
+// `Location` points at the report.\
+// \
+// **Required permissions:** platform.reporting.reports.edit, plus
+// `platform.reporting.schedules.edit` when the body includes a `schedule` — that request creates a
+// schedule as well, and is refused as a whole if either permission is missing.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /platform/reporting/v2alpha1/reports (the `CreateReportV2Alpha1` operationId).
+func (c *ClientWithResponses) CreateReportV2Alpha1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateReportV2Alpha1Response, error) {
+	rsp, err := c.CreateReportV2Alpha1WithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateReportV2Alpha1Response(rsp)
+}
+
+// CreateReportV2Alpha1WithResponse Create Report
+//
+// Create a report from a template. Optionally create a schedule in the same request by including
+// a `schedule` object.\
+// \
+// **Atomicity:** when a `schedule` is included the call is all-or-nothing — if the schedule is
+// invalid or cannot be created, the report is not created either and nothing is left behind.
+// Creating a report and its schedule separately (`POST /reports` then `POST /schedules`) remains
+// supported.\
+// \
+// The `201` body's `scheduleIds` holds the id of the schedule created alongside the report, and
+// `Location` points at the report.\
+// \
+// **Required permissions:** platform.reporting.reports.edit, plus
+// `platform.reporting.schedules.edit` when the body includes a `schedule` — that request creates a
+// schedule as well, and is refused as a whole if either permission is missing.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /platform/reporting/v2alpha1/reports (the `CreateReportV2Alpha1` operationId).
+func (c *ClientWithResponses) CreateReportV2Alpha1WithResponse(ctx context.Context, body CreateReportV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*CreateReportV2Alpha1Response, error) {
+	rsp, err := c.CreateReportV2Alpha1(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateReportV2Alpha1Response(rsp)
+}
+
+// DeleteReportV2Alpha1WithResponse Delete Report
+//
+// Delete a report. Cascades to its schedules and run history.\
+// \
+// `If-Match` is **optional** here, unlike on `PUT` and `PATCH`: an unconditional delete is accepted.
+// Supply the report's `ETag` to abort the delete if the report has changed since you read it.\
+// \
+// **Required permissions:** platform.reporting.reports.edit
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /platform/reporting/v2alpha1/reports/{reportId} (the `DeleteReportV2Alpha1` operationId).
+func (c *ClientWithResponses) DeleteReportV2Alpha1WithResponse(ctx context.Context, reportID ReportID, params *DeleteReportV2Alpha1Params, reqEditors ...RequestEditorFn) (*DeleteReportV2Alpha1Response, error) {
+	rsp, err := c.DeleteReportV2Alpha1(ctx, reportID, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteReportV2Alpha1Response(rsp)
+}
+
+// GetReportV2Alpha1WithResponse Get Report
+//
+// Retrieve a report by its identifier.\
+// \
+// **Required permissions:** platform.reporting.reports.read
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /platform/reporting/v2alpha1/reports/{reportId} (the `GetReportV2Alpha1` operationId).
+func (c *ClientWithResponses) GetReportV2Alpha1WithResponse(ctx context.Context, reportID ReportID, reqEditors ...RequestEditorFn) (*GetReportV2Alpha1Response, error) {
+	rsp, err := c.GetReportV2Alpha1(ctx, reportID, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetReportV2Alpha1Response(rsp)
+}
+
+// PatchReportV2Alpha1WithBodyWithResponse Patch Report
+//
+// Partially update a report using JSON Merge Patch ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)).
+// Send only the fields you want to change; omitted fields keep their current values. `templateId` and
+// `kind` are immutable.\
+// \
+// Array-valued fields (`filters`, `panels`) are **replaced wholesale**, not merged element-wise — that
+// is what Merge Patch specifies. To clear a report's filters send `"filters": null`.\
+// \
+// `If-Match` is **required** — supply the report's current `ETag` so a concurrent change cannot be silently overwritten.\
+// \
+// **Required permissions:** platform.reporting.reports.edit
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /platform/reporting/v2alpha1/reports/{reportId} (the `PatchReportV2Alpha1` operationId).
+func (c *ClientWithResponses) PatchReportV2Alpha1WithBodyWithResponse(ctx context.Context, reportID ReportID, params *PatchReportV2Alpha1Params, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchReportV2Alpha1Response, error) {
+	rsp, err := c.PatchReportV2Alpha1WithBody(ctx, reportID, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePatchReportV2Alpha1Response(rsp)
+}
+
+// PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse Patch Report
+//
+// Partially update a report using JSON Merge Patch ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)).
+// Send only the fields you want to change; omitted fields keep their current values. `templateId` and
+// `kind` are immutable.\
+// \
+// Array-valued fields (`filters`, `panels`) are **replaced wholesale**, not merged element-wise — that
+// is what Merge Patch specifies. To clear a report's filters send `"filters": null`.\
+// \
+// `If-Match` is **required** — supply the report's current `ETag` so a concurrent change cannot be silently overwritten.\
+// \
+// **Required permissions:** platform.reporting.reports.edit
+//
+// Takes a body of the `application/merge-patch+json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /platform/reporting/v2alpha1/reports/{reportId} (the `PatchReportV2Alpha1` operationId).
+func (c *ClientWithResponses) PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse(ctx context.Context, reportID ReportID, params *PatchReportV2Alpha1Params, body PatchReportV2Alpha1ApplicationMergePatchPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchReportV2Alpha1Response, error) {
+	rsp, err := c.PatchReportV2Alpha1WithApplicationMergePatchPlusJSONBody(ctx, reportID, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePatchReportV2Alpha1Response(rsp)
+}
+
+// UpdateReportV2Alpha1WithBodyWithResponse Update Report
+//
+// Replace a report's mutable fields — `name`, `description`, `filters`, and per-panel `filters`.
+// `templateId` and `kind` are immutable. Omitted mutable fields are reset to their defaults; use
+// `PATCH` to change a subset.\
+// \
+// `If-Match` is **required** — supply the report's current `ETag` so a concurrent change cannot be silently overwritten.\
+// \
+// **Required permissions:** platform.reporting.reports.edit
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /platform/reporting/v2alpha1/reports/{reportId} (the `UpdateReportV2Alpha1` operationId).
+func (c *ClientWithResponses) UpdateReportV2Alpha1WithBodyWithResponse(ctx context.Context, reportID ReportID, params *UpdateReportV2Alpha1Params, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateReportV2Alpha1Response, error) {
+	rsp, err := c.UpdateReportV2Alpha1WithBody(ctx, reportID, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateReportV2Alpha1Response(rsp)
+}
+
+// UpdateReportV2Alpha1WithResponse Update Report
+//
+// Replace a report's mutable fields — `name`, `description`, `filters`, and per-panel `filters`.
+// `templateId` and `kind` are immutable. Omitted mutable fields are reset to their defaults; use
+// `PATCH` to change a subset.\
+// \
+// `If-Match` is **required** — supply the report's current `ETag` so a concurrent change cannot be silently overwritten.\
+// \
+// **Required permissions:** platform.reporting.reports.edit
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /platform/reporting/v2alpha1/reports/{reportId} (the `UpdateReportV2Alpha1` operationId).
+func (c *ClientWithResponses) UpdateReportV2Alpha1WithResponse(ctx context.Context, reportID ReportID, params *UpdateReportV2Alpha1Params, body UpdateReportV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateReportV2Alpha1Response, error) {
+	rsp, err := c.UpdateReportV2Alpha1(ctx, reportID, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateReportV2Alpha1Response(rsp)
+}
+
+// ListRunsV2Alpha1WithResponse List Report Runs
+//
+// Retrieve report runs, optionally filtered by report, schedule, how they were triggered, status,
+// or activity time.\
+// \
+// **`reportId` and `scheduleId` are mutually exclusive** — supply at most one. Sending both is
+// rejected with `400`.\
+// \
+// To count or list a report's ad-hoc downloads — for instance to warn a user how many produced files
+// deleting the report would destroy — combine `reportId` with `trigger=on_demand`.\
+// \
+// **Incremental polling:** use `sinceAt` to fetch only runs with activity at or after a given
+// instant. Because this listing is unpaginated, `sinceAt` is the recommended way to avoid
+// re-reading the whole retained history on every poll. `sinceAt` cannot be combined with
+// `status=pending` or `status=running` (`400`).\
+// \
+// **Retention:** this listing is not a complete history. Completed runs — including truncated
+// ones — are returned only while their produced file is still retrievable (a fixed retention
+// window, currently expressed in days); older completed runs are omitted. Runs in any other
+// state, including failed runs, are not subject to this window. Treat
+// the listing as "runs whose output is still available", not "everything that ever ran".\
+// \
+// **Downloadable files:** to list the files currently available for download, filter with
+// `status=completed` — each such run carries its `resultUri` until its file expires.\
+// \
+// **Visibility scope:** returns runs belonging to the caller's team within the caller's customer
+// account, not the whole tenant.\
+// \
+// **Required permissions:** platform.reporting.report-downloads.read
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /platform/reporting/v2alpha1/runs (the `ListRunsV2Alpha1` operationId).
+func (c *ClientWithResponses) ListRunsV2Alpha1WithResponse(ctx context.Context, params *ListRunsV2Alpha1Params, reqEditors ...RequestEditorFn) (*ListRunsV2Alpha1Response, error) {
+	rsp, err := c.ListRunsV2Alpha1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListRunsV2Alpha1Response(rsp)
+}
+
+// CreateRunV2Alpha1WithBodyWithResponse Generate Report Run
+//
+// Generate a report on demand (asynchronous). Poll `GET /runs/{runId}` until the run completes, then
+// download the file from its `resultUri`.\
+// \
+// **Required permissions:** platform.reporting.report-downloads.read
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /platform/reporting/v2alpha1/runs (the `CreateRunV2Alpha1` operationId).
+func (c *ClientWithResponses) CreateRunV2Alpha1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRunV2Alpha1Response, error) {
+	rsp, err := c.CreateRunV2Alpha1WithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateRunV2Alpha1Response(rsp)
+}
+
+// CreateRunV2Alpha1WithResponse Generate Report Run
+//
+// Generate a report on demand (asynchronous). Poll `GET /runs/{runId}` until the run completes, then
+// download the file from its `resultUri`.\
+// \
+// **Required permissions:** platform.reporting.report-downloads.read
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /platform/reporting/v2alpha1/runs (the `CreateRunV2Alpha1` operationId).
+func (c *ClientWithResponses) CreateRunV2Alpha1WithResponse(ctx context.Context, body CreateRunV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRunV2Alpha1Response, error) {
+	rsp, err := c.CreateRunV2Alpha1(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateRunV2Alpha1Response(rsp)
+}
+
+// GetRunV2Alpha1WithResponse Get Report Run
+//
+// Retrieve a report run by its identifier (poll for status).\
+// \
+// **Required permissions:** platform.reporting.report-downloads.read
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /platform/reporting/v2alpha1/runs/{runId} (the `GetRunV2Alpha1` operationId).
+func (c *ClientWithResponses) GetRunV2Alpha1WithResponse(ctx context.Context, runID RunID, reqEditors ...RequestEditorFn) (*GetRunV2Alpha1Response, error) {
+	rsp, err := c.GetRunV2Alpha1(ctx, runID, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetRunV2Alpha1Response(rsp)
+}
+
+// ListSchedulesV2Alpha1WithResponse List Report Schedules
+//
+// Retrieve the list of report schedules, optionally filtered by report.\
+// \
+// **Visibility scope:** returns schedules belonging to the caller's team within the caller's customer
+// account, and only schedules attached to a **report**. The reporting service also stores schedules of
+// other kinds — ones attached directly to a template, and data-export schedules — which have no
+// representation in this API and are never returned here. A schedule visible in the Sysdig UI may
+// therefore be absent from this listing.\
+// \
+// **Required permissions:** platform.reporting.schedules.read
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /platform/reporting/v2alpha1/schedules (the `ListSchedulesV2Alpha1` operationId).
+func (c *ClientWithResponses) ListSchedulesV2Alpha1WithResponse(ctx context.Context, params *ListSchedulesV2Alpha1Params, reqEditors ...RequestEditorFn) (*ListSchedulesV2Alpha1Response, error) {
+	rsp, err := c.ListSchedulesV2Alpha1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListSchedulesV2Alpha1Response(rsp)
+}
+
+// CreateScheduleV2Alpha1WithBodyWithResponse Create Report Schedule
+//
+// Create a schedule for an existing report.\
+// \
+// **Required permissions:** platform.reporting.schedules.edit
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /platform/reporting/v2alpha1/schedules (the `CreateScheduleV2Alpha1` operationId).
+func (c *ClientWithResponses) CreateScheduleV2Alpha1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScheduleV2Alpha1Response, error) {
+	rsp, err := c.CreateScheduleV2Alpha1WithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateScheduleV2Alpha1Response(rsp)
+}
+
+// CreateScheduleV2Alpha1WithResponse Create Report Schedule
+//
+// Create a schedule for an existing report.\
+// \
+// **Required permissions:** platform.reporting.schedules.edit
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /platform/reporting/v2alpha1/schedules (the `CreateScheduleV2Alpha1` operationId).
+func (c *ClientWithResponses) CreateScheduleV2Alpha1WithResponse(ctx context.Context, body CreateScheduleV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScheduleV2Alpha1Response, error) {
+	rsp, err := c.CreateScheduleV2Alpha1(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateScheduleV2Alpha1Response(rsp)
+}
+
+// DeleteScheduleV2Alpha1WithResponse Delete Report Schedule
+//
+// Delete a schedule. Cascades to its run history.\
+// \
+// **Required permissions:** platform.reporting.schedules.edit
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /platform/reporting/v2alpha1/schedules/{scheduleId} (the `DeleteScheduleV2Alpha1` operationId).
+func (c *ClientWithResponses) DeleteScheduleV2Alpha1WithResponse(ctx context.Context, scheduleID ScheduleID, reqEditors ...RequestEditorFn) (*DeleteScheduleV2Alpha1Response, error) {
+	rsp, err := c.DeleteScheduleV2Alpha1(ctx, scheduleID, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteScheduleV2Alpha1Response(rsp)
+}
+
+// GetScheduleV2Alpha1WithResponse Get Report Schedule
+//
+// Retrieve a schedule by its identifier.\
+// \
+// **Required permissions:** platform.reporting.schedules.read
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /platform/reporting/v2alpha1/schedules/{scheduleId} (the `GetScheduleV2Alpha1` operationId).
+func (c *ClientWithResponses) GetScheduleV2Alpha1WithResponse(ctx context.Context, scheduleID ScheduleID, reqEditors ...RequestEditorFn) (*GetScheduleV2Alpha1Response, error) {
+	rsp, err := c.GetScheduleV2Alpha1(ctx, scheduleID, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetScheduleV2Alpha1Response(rsp)
+}
+
+// PatchScheduleV2Alpha1WithBodyWithResponse Patch Report Schedule
+//
+// Partially update a schedule using JSON Merge Patch ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)).
+// Send only the fields you want to change; omitted fields keep their current values. `reportId` is
+// immutable and `status` is server-computed.\
+// \
+// Typical use is pausing or resuming without resending the whole definition: `{"enabled": false}`.\
+// \
+// Objects and arrays are replaced wholesale rather than merged, so `delivery` and `timeframe` overwrite
+// the current value entirely. Schedules are not versioned and carry no `ETag`, so writes are
+// unconditional.\
+// \
+// **Required permissions:** platform.reporting.schedules.edit
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /platform/reporting/v2alpha1/schedules/{scheduleId} (the `PatchScheduleV2Alpha1` operationId).
+func (c *ClientWithResponses) PatchScheduleV2Alpha1WithBodyWithResponse(ctx context.Context, scheduleID ScheduleID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchScheduleV2Alpha1Response, error) {
+	rsp, err := c.PatchScheduleV2Alpha1WithBody(ctx, scheduleID, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePatchScheduleV2Alpha1Response(rsp)
+}
+
+// PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse Patch Report Schedule
+//
+// Partially update a schedule using JSON Merge Patch ([RFC 7386](https://www.rfc-editor.org/rfc/rfc7386)).
+// Send only the fields you want to change; omitted fields keep their current values. `reportId` is
+// immutable and `status` is server-computed.\
+// \
+// Typical use is pausing or resuming without resending the whole definition: `{"enabled": false}`.\
+// \
+// Objects and arrays are replaced wholesale rather than merged, so `delivery` and `timeframe` overwrite
+// the current value entirely. Schedules are not versioned and carry no `ETag`, so writes are
+// unconditional.\
+// \
+// **Required permissions:** platform.reporting.schedules.edit
+//
+// Takes a body of the `application/merge-patch+json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /platform/reporting/v2alpha1/schedules/{scheduleId} (the `PatchScheduleV2Alpha1` operationId).
+func (c *ClientWithResponses) PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBodyWithResponse(ctx context.Context, scheduleID ScheduleID, body PatchScheduleV2Alpha1ApplicationMergePatchPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchScheduleV2Alpha1Response, error) {
+	rsp, err := c.PatchScheduleV2Alpha1WithApplicationMergePatchPlusJSONBody(ctx, scheduleID, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePatchScheduleV2Alpha1Response(rsp)
+}
+
+// UpdateScheduleV2Alpha1WithBodyWithResponse Update Report Schedule
+//
+// Update a schedule. `reportId` is immutable; `status` is server-computed (read-only).\
+// \
+// **Required permissions:** platform.reporting.schedules.edit
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /platform/reporting/v2alpha1/schedules/{scheduleId} (the `UpdateScheduleV2Alpha1` operationId).
+func (c *ClientWithResponses) UpdateScheduleV2Alpha1WithBodyWithResponse(ctx context.Context, scheduleID ScheduleID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateScheduleV2Alpha1Response, error) {
+	rsp, err := c.UpdateScheduleV2Alpha1WithBody(ctx, scheduleID, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateScheduleV2Alpha1Response(rsp)
+}
+
+// UpdateScheduleV2Alpha1WithResponse Update Report Schedule
+//
+// Update a schedule. `reportId` is immutable; `status` is server-computed (read-only).\
+// \
+// **Required permissions:** platform.reporting.schedules.edit
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /platform/reporting/v2alpha1/schedules/{scheduleId} (the `UpdateScheduleV2Alpha1` operationId).
+func (c *ClientWithResponses) UpdateScheduleV2Alpha1WithResponse(ctx context.Context, scheduleID ScheduleID, body UpdateScheduleV2Alpha1JSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScheduleV2Alpha1Response, error) {
+	rsp, err := c.UpdateScheduleV2Alpha1(ctx, scheduleID, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateScheduleV2Alpha1Response(rsp)
+}
+
+// ListReportTemplatesV2Alpha1WithResponse List Report Templates
+//
+// Retrieve the catalog of available report templates.\
+// \
+// **The catalog is not the same for every customer.** Templates gated by controlled availability
+// or by product entitlement are omitted for customers that do not have them enabled, so this
+// listing is the authoritative set of templates the caller may create reports from. Do not
+// hard-code template ids — read them from here. A template absent from this listing also cannot be
+// fetched by id (`404`).\
+// \
+// **Superseded templates are omitted for everyone.** The reporting service still stores templates of
+// an earlier resource-posture generation that the Sysdig UI no longer offers; those have no `kind` in
+// this API and never appear here. Their replacements are the `posture_v2` templates. Reports created
+// from a superseded template before it was retired remain readable through the v1 API and the UI, but
+// are not exposed here — see `GET /reports`.\
+// \
+// **Required permissions:** platform.reporting.reports.read
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /platform/reporting/v2alpha1/templates (the `ListReportTemplatesV2Alpha1` operationId).
+func (c *ClientWithResponses) ListReportTemplatesV2Alpha1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ListReportTemplatesV2Alpha1Response, error) {
+	rsp, err := c.ListReportTemplatesV2Alpha1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListReportTemplatesV2Alpha1Response(rsp)
+}
+
+// GetReportTemplateV2Alpha1WithResponse Get Report Template
+//
+// Retrieve a single report template by its identifier.\
+// \
+// **Required permissions:** platform.reporting.reports.read
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /platform/reporting/v2alpha1/templates/{templateId} (the `GetReportTemplateV2Alpha1` operationId).
+func (c *ClientWithResponses) GetReportTemplateV2Alpha1WithResponse(ctx context.Context, templateID TemplateID, reqEditors ...RequestEditorFn) (*GetReportTemplateV2Alpha1Response, error) {
+	rsp, err := c.GetReportTemplateV2Alpha1(ctx, templateID, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetReportTemplateV2Alpha1Response(rsp)
+}
+
 // GetAccessKeysV1WithResponse List Access Keys
 //
 // Retrieve a paginated list of access keys.\
@@ -97550,6 +106511,4571 @@ func ParseListSchedulesV1Response(rsp *http.Response) (*ListSchedulesV1Response,
 		response.Headers429 = &headers
 	case rsp.StatusCode == 500:
 		var headers ListSchedulesV1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseListReportsV2Alpha1Response parses an HTTP response from a ListReportsV2Alpha1WithResponse call
+func ParseListReportsV2Alpha1Response(rsp *http.Response) (*ListReportsV2Alpha1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListReportsV2Alpha1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListReportsV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers ListReportsV2Alpha1Response200Headers
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers ListReportsV2Alpha1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers ListReportsV2Alpha1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers ListReportsV2Alpha1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 500:
+		var headers ListReportsV2Alpha1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseCreateReportV2Alpha1Response parses an HTTP response from a CreateReportV2Alpha1WithResponse call
+func ParseCreateReportV2Alpha1Response(rsp *http.Response) (*CreateReportV2Alpha1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateReportV2Alpha1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest ReportResponseV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ConflictV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 415:
+		var dest UnsupportedMediaTypeV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON415 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntityV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 201:
+		var headers CreateReportV2Alpha1Response201Headers
+		if values := rsp.Header.Values("ETag"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "ETag", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.ETag = value
+		}
+		if values := rsp.Header.Values("Location"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "Location", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uri-reference"}); err != nil {
+				return nil, err
+			}
+			headers.Location = value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers201 = &headers
+	case rsp.StatusCode == 400:
+		var headers CreateReportV2Alpha1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers CreateReportV2Alpha1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers CreateReportV2Alpha1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 409:
+		var headers CreateReportV2Alpha1Response409Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers409 = &headers
+	case rsp.StatusCode == 415:
+		var headers CreateReportV2Alpha1Response415Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers415 = &headers
+	case rsp.StatusCode == 422:
+		var headers CreateReportV2Alpha1Response422Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers422 = &headers
+	case rsp.StatusCode == 500:
+		var headers CreateReportV2Alpha1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseDeleteReportV2Alpha1Response parses an HTTP response from a DeleteReportV2Alpha1WithResponse call
+func ParseDeleteReportV2Alpha1Response(rsp *http.Response) (*DeleteReportV2Alpha1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteReportV2Alpha1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case rsp.StatusCode == 204:
+		break // No content-type
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 412:
+		var dest PreconditionFailedV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON412 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 204:
+		var headers DeleteReportV2Alpha1Response204Headers
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers204 = &headers
+	case rsp.StatusCode == 400:
+		var headers DeleteReportV2Alpha1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers DeleteReportV2Alpha1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers DeleteReportV2Alpha1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 404:
+		var headers DeleteReportV2Alpha1Response404Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers404 = &headers
+	case rsp.StatusCode == 412:
+		var headers DeleteReportV2Alpha1Response412Headers
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers412 = &headers
+	case rsp.StatusCode == 500:
+		var headers DeleteReportV2Alpha1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseGetReportV2Alpha1Response parses an HTTP response from a GetReportV2Alpha1WithResponse call
+func ParseGetReportV2Alpha1Response(rsp *http.Response) (*GetReportV2Alpha1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetReportV2Alpha1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReportResponseV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers GetReportV2Alpha1Response200Headers
+		if values := rsp.Header.Values("ETag"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "ETag", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.ETag = value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers GetReportV2Alpha1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers GetReportV2Alpha1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers GetReportV2Alpha1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 404:
+		var headers GetReportV2Alpha1Response404Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers404 = &headers
+	case rsp.StatusCode == 500:
+		var headers GetReportV2Alpha1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParsePatchReportV2Alpha1Response parses an HTTP response from a PatchReportV2Alpha1WithResponse call
+func ParsePatchReportV2Alpha1Response(rsp *http.Response) (*PatchReportV2Alpha1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PatchReportV2Alpha1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReportResponseV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ConflictV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 412:
+		var dest PreconditionFailedV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON412 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 415:
+		var dest UnsupportedMediaTypeV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON415 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntityV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 428:
+		var dest PreconditionRequiredV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON428 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers PatchReportV2Alpha1Response200Headers
+		if values := rsp.Header.Values("ETag"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "ETag", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.ETag = value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers PatchReportV2Alpha1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers PatchReportV2Alpha1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers PatchReportV2Alpha1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 404:
+		var headers PatchReportV2Alpha1Response404Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers404 = &headers
+	case rsp.StatusCode == 409:
+		var headers PatchReportV2Alpha1Response409Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers409 = &headers
+	case rsp.StatusCode == 412:
+		var headers PatchReportV2Alpha1Response412Headers
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers412 = &headers
+	case rsp.StatusCode == 415:
+		var headers PatchReportV2Alpha1Response415Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers415 = &headers
+	case rsp.StatusCode == 422:
+		var headers PatchReportV2Alpha1Response422Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers422 = &headers
+	case rsp.StatusCode == 428:
+		var headers PatchReportV2Alpha1Response428Headers
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers428 = &headers
+	case rsp.StatusCode == 500:
+		var headers PatchReportV2Alpha1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseUpdateReportV2Alpha1Response parses an HTTP response from a UpdateReportV2Alpha1WithResponse call
+func ParseUpdateReportV2Alpha1Response(rsp *http.Response) (*UpdateReportV2Alpha1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateReportV2Alpha1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReportResponseV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ConflictV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 412:
+		var dest PreconditionFailedV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON412 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 415:
+		var dest UnsupportedMediaTypeV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON415 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntityV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 428:
+		var dest PreconditionRequiredV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON428 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers UpdateReportV2Alpha1Response200Headers
+		if values := rsp.Header.Values("ETag"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "ETag", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.ETag = value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers UpdateReportV2Alpha1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers UpdateReportV2Alpha1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers UpdateReportV2Alpha1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 404:
+		var headers UpdateReportV2Alpha1Response404Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers404 = &headers
+	case rsp.StatusCode == 409:
+		var headers UpdateReportV2Alpha1Response409Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers409 = &headers
+	case rsp.StatusCode == 412:
+		var headers UpdateReportV2Alpha1Response412Headers
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers412 = &headers
+	case rsp.StatusCode == 415:
+		var headers UpdateReportV2Alpha1Response415Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers415 = &headers
+	case rsp.StatusCode == 422:
+		var headers UpdateReportV2Alpha1Response422Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers422 = &headers
+	case rsp.StatusCode == 428:
+		var headers UpdateReportV2Alpha1Response428Headers
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers428 = &headers
+	case rsp.StatusCode == 500:
+		var headers UpdateReportV2Alpha1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseListRunsV2Alpha1Response parses an HTTP response from a ListRunsV2Alpha1WithResponse call
+func ParseListRunsV2Alpha1Response(rsp *http.Response) (*ListRunsV2Alpha1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListRunsV2Alpha1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListRunsV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers ListRunsV2Alpha1Response200Headers
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers ListRunsV2Alpha1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers ListRunsV2Alpha1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers ListRunsV2Alpha1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 500:
+		var headers ListRunsV2Alpha1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseCreateRunV2Alpha1Response parses an HTTP response from a CreateRunV2Alpha1WithResponse call
+func ParseCreateRunV2Alpha1Response(rsp *http.Response) (*CreateRunV2Alpha1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateRunV2Alpha1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 202:
+		var dest RunResponseV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON202 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 415:
+		var dest UnsupportedMediaTypeV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON415 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntityV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 202:
+		var headers CreateRunV2Alpha1Response202Headers
+		if values := rsp.Header.Values("Location"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "Location", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uri-reference"}); err != nil {
+				return nil, err
+			}
+			headers.Location = value
+		}
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers202 = &headers
+	case rsp.StatusCode == 400:
+		var headers CreateRunV2Alpha1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers CreateRunV2Alpha1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers CreateRunV2Alpha1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 404:
+		var headers CreateRunV2Alpha1Response404Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers404 = &headers
+	case rsp.StatusCode == 415:
+		var headers CreateRunV2Alpha1Response415Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers415 = &headers
+	case rsp.StatusCode == 422:
+		var headers CreateRunV2Alpha1Response422Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers422 = &headers
+	case rsp.StatusCode == 500:
+		var headers CreateRunV2Alpha1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseGetRunV2Alpha1Response parses an HTTP response from a GetRunV2Alpha1WithResponse call
+func ParseGetRunV2Alpha1Response(rsp *http.Response) (*GetRunV2Alpha1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetRunV2Alpha1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RunResponseV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers GetRunV2Alpha1Response200Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers GetRunV2Alpha1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers GetRunV2Alpha1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers GetRunV2Alpha1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 404:
+		var headers GetRunV2Alpha1Response404Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers404 = &headers
+	case rsp.StatusCode == 500:
+		var headers GetRunV2Alpha1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseListSchedulesV2Alpha1Response parses an HTTP response from a ListSchedulesV2Alpha1WithResponse call
+func ParseListSchedulesV2Alpha1Response(rsp *http.Response) (*ListSchedulesV2Alpha1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListSchedulesV2Alpha1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListSchedulesV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers ListSchedulesV2Alpha1Response200Headers
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers ListSchedulesV2Alpha1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers ListSchedulesV2Alpha1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers ListSchedulesV2Alpha1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 500:
+		var headers ListSchedulesV2Alpha1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseCreateScheduleV2Alpha1Response parses an HTTP response from a CreateScheduleV2Alpha1WithResponse call
+func ParseCreateScheduleV2Alpha1Response(rsp *http.Response) (*CreateScheduleV2Alpha1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateScheduleV2Alpha1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest ScheduleResponseV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ConflictV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 415:
+		var dest UnsupportedMediaTypeV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON415 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntityV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 201:
+		var headers CreateScheduleV2Alpha1Response201Headers
+		if values := rsp.Header.Values("Location"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "Location", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uri-reference"}); err != nil {
+				return nil, err
+			}
+			headers.Location = value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers201 = &headers
+	case rsp.StatusCode == 400:
+		var headers CreateScheduleV2Alpha1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers CreateScheduleV2Alpha1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers CreateScheduleV2Alpha1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 409:
+		var headers CreateScheduleV2Alpha1Response409Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers409 = &headers
+	case rsp.StatusCode == 415:
+		var headers CreateScheduleV2Alpha1Response415Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers415 = &headers
+	case rsp.StatusCode == 422:
+		var headers CreateScheduleV2Alpha1Response422Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers422 = &headers
+	case rsp.StatusCode == 500:
+		var headers CreateScheduleV2Alpha1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseDeleteScheduleV2Alpha1Response parses an HTTP response from a DeleteScheduleV2Alpha1WithResponse call
+func ParseDeleteScheduleV2Alpha1Response(rsp *http.Response) (*DeleteScheduleV2Alpha1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteScheduleV2Alpha1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case rsp.StatusCode == 204:
+		break // No content-type
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 204:
+		var headers DeleteScheduleV2Alpha1Response204Headers
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers204 = &headers
+	case rsp.StatusCode == 400:
+		var headers DeleteScheduleV2Alpha1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers DeleteScheduleV2Alpha1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers DeleteScheduleV2Alpha1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 404:
+		var headers DeleteScheduleV2Alpha1Response404Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers404 = &headers
+	case rsp.StatusCode == 500:
+		var headers DeleteScheduleV2Alpha1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseGetScheduleV2Alpha1Response parses an HTTP response from a GetScheduleV2Alpha1WithResponse call
+func ParseGetScheduleV2Alpha1Response(rsp *http.Response) (*GetScheduleV2Alpha1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetScheduleV2Alpha1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleResponseV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers GetScheduleV2Alpha1Response200Headers
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers GetScheduleV2Alpha1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers GetScheduleV2Alpha1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers GetScheduleV2Alpha1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 404:
+		var headers GetScheduleV2Alpha1Response404Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers404 = &headers
+	case rsp.StatusCode == 500:
+		var headers GetScheduleV2Alpha1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParsePatchScheduleV2Alpha1Response parses an HTTP response from a PatchScheduleV2Alpha1WithResponse call
+func ParsePatchScheduleV2Alpha1Response(rsp *http.Response) (*PatchScheduleV2Alpha1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PatchScheduleV2Alpha1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleResponseV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ConflictV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 415:
+		var dest UnsupportedMediaTypeV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON415 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntityV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers PatchScheduleV2Alpha1Response200Headers
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers PatchScheduleV2Alpha1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers PatchScheduleV2Alpha1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers PatchScheduleV2Alpha1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 404:
+		var headers PatchScheduleV2Alpha1Response404Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers404 = &headers
+	case rsp.StatusCode == 409:
+		var headers PatchScheduleV2Alpha1Response409Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers409 = &headers
+	case rsp.StatusCode == 415:
+		var headers PatchScheduleV2Alpha1Response415Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers415 = &headers
+	case rsp.StatusCode == 422:
+		var headers PatchScheduleV2Alpha1Response422Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers422 = &headers
+	case rsp.StatusCode == 500:
+		var headers PatchScheduleV2Alpha1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseUpdateScheduleV2Alpha1Response parses an HTTP response from a UpdateScheduleV2Alpha1WithResponse call
+func ParseUpdateScheduleV2Alpha1Response(rsp *http.Response) (*UpdateScheduleV2Alpha1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateScheduleV2Alpha1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleResponseV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ConflictV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 415:
+		var dest UnsupportedMediaTypeV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON415 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntityV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers UpdateScheduleV2Alpha1Response200Headers
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers UpdateScheduleV2Alpha1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers UpdateScheduleV2Alpha1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers UpdateScheduleV2Alpha1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 404:
+		var headers UpdateScheduleV2Alpha1Response404Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers404 = &headers
+	case rsp.StatusCode == 409:
+		var headers UpdateScheduleV2Alpha1Response409Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers409 = &headers
+	case rsp.StatusCode == 415:
+		var headers UpdateScheduleV2Alpha1Response415Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers415 = &headers
+	case rsp.StatusCode == 422:
+		var headers UpdateScheduleV2Alpha1Response422Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers422 = &headers
+	case rsp.StatusCode == 500:
+		var headers UpdateScheduleV2Alpha1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseListReportTemplatesV2Alpha1Response parses an HTTP response from a ListReportTemplatesV2Alpha1WithResponse call
+func ParseListReportTemplatesV2Alpha1Response(rsp *http.Response) (*ListReportTemplatesV2Alpha1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListReportTemplatesV2Alpha1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListTemplatesV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers ListReportTemplatesV2Alpha1Response200Headers
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers ListReportTemplatesV2Alpha1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers ListReportTemplatesV2Alpha1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers ListReportTemplatesV2Alpha1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 500:
+		var headers ListReportTemplatesV2Alpha1Response500Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers500 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseGetReportTemplateV2Alpha1Response parses an HTTP response from a GetReportTemplateV2Alpha1WithResponse call
+func ParseGetReportTemplateV2Alpha1Response(rsp *http.Response) (*GetReportTemplateV2Alpha1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetReportTemplateV2Alpha1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest TemplateV2Alpha1
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequestV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest UnauthorizedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ForbiddenV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFoundV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerErrorV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers GetReportTemplateV2Alpha1Response200Headers
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: true, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = value
+		}
+		response.Headers200 = &headers
+	case rsp.StatusCode == 400:
+		var headers GetReportTemplateV2Alpha1Response400Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers400 = &headers
+	case rsp.StatusCode == 401:
+		var headers GetReportTemplateV2Alpha1Response401Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers401 = &headers
+	case rsp.StatusCode == 403:
+		var headers GetReportTemplateV2Alpha1Response403Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers403 = &headers
+	case rsp.StatusCode == 404:
+		var headers GetReportTemplateV2Alpha1Response404Headers
+		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitLimit = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Remaining"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Remaining", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitRemaining = &value
+		}
+		if values := rsp.Header.Values("X-RateLimit-Reset"); len(values) > 0 {
+			var value int32
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Reset", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			}
+			headers.XRateLimitReset = &value
+		}
+		if values := rsp.Header.Values("X-Request-Id"); len(values) > 0 {
+			var value openapi_types.UUID
+			if err := runtime.BindStyledParameterWithOptions("simple", "X-Request-Id", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			}
+			headers.XRequestId = &value
+		}
+		response.Headers404 = &headers
+	case rsp.StatusCode == 500:
+		var headers GetReportTemplateV2Alpha1Response500Headers
 		if values := rsp.Header.Values("X-RateLimit-Limit"); len(values) > 0 {
 			var value int32
 			if err := runtime.BindStyledParameterWithOptions("simple", "X-RateLimit-Limit", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: "int32"}); err != nil {
