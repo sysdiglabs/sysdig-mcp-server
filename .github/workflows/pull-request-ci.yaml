@@ -98,7 +98,7 @@ jobs:
         run: docker run --rm "${{ steps.load.outputs.image_tag }}" --help | grep "Sysdig MCP Server"
 
       - name: Scan Docker image
-        uses: sysdiglabs/scan-action@0f80e86c1276ece376cfadb8e90ec297000f9655 # v6.3.7
+        uses: sysdiglabs/scan-action@bfdbce73f3d70d492f9ae1e30f488bb007d0fbbb # v6.4.0
         with:
           image-tag: ${{ steps.load.outputs.image_tag }}
           sysdig-secure-token: ${{ secrets.SECURE_ENV_MON_API_KEY }}
@@ -115,7 +115,7 @@ jobs:
         uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
 
       - name: Log in to GitHub Container Registry
-        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4.7.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -168,7 +168,7 @@ jobs:
         uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
 
       - name: Log in to GitHub Container Registry
-        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4.7.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
